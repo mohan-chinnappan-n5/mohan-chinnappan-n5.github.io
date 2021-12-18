@@ -1,0 +1,9 @@
+[book]
+authors = ["mohan-chinnappan-n"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Machine Learning for Everyone!"
+[output.html]
+mathjax-support = true
+
