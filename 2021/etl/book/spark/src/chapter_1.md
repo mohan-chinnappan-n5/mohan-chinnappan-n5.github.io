@@ -219,7 +219,9 @@ VectorAssembler is a transformer that combines a **given list of columns** into 
   -  all numeric types, boolean type, and vector type. 
   - In each row, the values of the input columns will be concatenated into a vector in the specified order.
 
-   id | hour | mobile | userFeatures     | clicked
+
+
+id | hour | mobile | userFeatures     | clicked
 ----|------|--------|------------------|---------
  0  | 18   | 1.0    | [0.0, 10.0, 0.5] | 1.0
 
@@ -252,6 +254,36 @@ output.select("features", "clicked").show(false)
 
 ### VectorIndexer
 
+
+### Linear Regression
+
+```scala
+import org.apache.spark.ml.regression.LinearRegression
+
+// Load training data
+val training = spark.read.format("libsvm")
+  .load("data/mllib/sample_linear_regression_data.txt")
+
+val lr = new LinearRegression()
+  .setMaxIter(10)
+  .setRegParam(0.3)
+  .setElasticNetParam(0.8)
+
+// Fit the model
+val lrModel = lr.fit(training)
+
+// Print the coefficients and intercept for linear regression
+println(s"Coefficients: ${lrModel.coefficients} Intercept: ${lrModel.intercept}")
+
+// Summarize the model over the training set and print out some metrics
+val trainingSummary = lrModel.summary
+println(s"numIterations: ${trainingSummary.totalIterations}")
+println(s"objectiveHistory: [${trainingSummary.objectiveHistory.mkString(",")}]")
+trainingSummary.residuals.show()
+println(s"RMSE: ${trainingSummary.rootMeanSquaredError}")
+println(s"r2: ${trainingSummary.r2}")
+
+```
 
 ### ML Pipelines
 ML Pipelines provide a uniform set of high-level APIs built on top of DataFrames that help users create and tune practical machine learning pipelines.
