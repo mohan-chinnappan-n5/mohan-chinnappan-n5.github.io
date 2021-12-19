@@ -1,6 +1,6 @@
 # Scala
 
-```
+```scala
 Loading...
 Welcome to the Ammonite Repl 2.5.0 (Scala 2.13.7 Java 11.0.9)
 @ java.lang.Integer.MAX_VALUE 
@@ -112,7 +112,7 @@ Hello mr. Chinnappan
 
 ## Loops
 
-```
+```scala
 @ var total = 0 
 total: Int = 0
 
@@ -128,7 +128,7 @@ Looping 4
 ```
 
 
-```
+```scala
 @ var sum = 0 
 sum: Int = 0
 
@@ -142,7 +142,7 @@ qtys: Array[Int] = Array(10, 20, 30)
 res24: Int = 60
 ```
 
-```
+```scala
 val multi = Array(Array(1, 2, 3), Array(4, 5, 6))
 
 for (arr <- multi; i <- arr) println(i)
@@ -159,7 +159,7 @@ for (arr <- multi; i <- arr) println(i)
 
 ## Yield
 
-```
+```scala
 @ val a = Array(1, 2, 3, 4) 
 a: Array[Int] = Array(1, 2, 3, 4)
 
@@ -168,7 +168,7 @@ a2: Array[Int] = Array(1, 4, 9, 16)
 
 ```
 
-```
+```scala
 @ val a = Array(1, 2); val b = Array("hello", "world") 
 a: Array[Int] = Array(1, 2)
 b: Array[String] = Array("hello", "world")
@@ -182,7 +182,7 @@ flattened: Array[String] = Array("hello1", "world1", "hello2", "world2")
 
 ## Methods and Functions
 
-```
+```scala
 
 @ def printHello(times: Int) = {
       println("hello " + times)
@@ -197,7 +197,7 @@ hello 10
 
 ### Method returning values
 
-```
+```scala
 @ def hello(i: Int = 0) = {
       "hello " + i
     } 
@@ -213,7 +213,7 @@ Functions values are similar to methods, in that you call them with arguments an
 
 Unlike methods, functions themselves are values: you can pass them around, store them in variables, and call them later.
 
-```
+```scala
 @ var g: Int => Int = i => i + 1 
 g: Int => Int = ammonite.$sess.cmd35$$$Lambda$2056/0x00000008009d7040@7f14bdd1
 
@@ -231,7 +231,7 @@ res38: Int = 20
 ## Method taking Function Value as argument
     - higher order methods
 
-```
+```scala
   class Box(var x: Int) {
       def update(f: Int => Int) = x = f(x)
       def printMsg(msg: String) = {
@@ -267,7 +267,7 @@ Great1005
 
  ### Method with Multiple Parameter Lists
 
- ```
+ ```scala
  @ def myLoop(start: Int, end: Int) (callback: Int => Unit) = {
   for (i <- Range(start, end)) {
   callback(i)
@@ -395,7 +395,7 @@ traits are similar to **interfaces** in traditional object-oriented languages: a
 
 - Instances of these classes (which extends the trait) can then be used interchangeably.
 
-```
+```scala
 
 @ trait Point{ def hypotenuse: Double } 
 defined trait Point
