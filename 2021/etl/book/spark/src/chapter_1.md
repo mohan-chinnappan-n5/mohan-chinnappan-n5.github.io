@@ -128,6 +128,8 @@ val parkSQL = spark.sql("SELECT * FROM FruitsParquetTable WHERE qty >= 10 ")
 ## Spark MLlib
 -  MLlib is Apache Spark's scalable machine learning library. 
 
+<iframe width="800" height="420" src="https://www.youtube.com/embed/DqihOzZl5jM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 
 ## Transformers and Estimators
 
