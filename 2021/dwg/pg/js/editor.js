@@ -1,7 +1,7 @@
 // editor.js
 // author: mohan chinnappan
 
-const title = 'Diagram Editor Playground';
+const title = 'Diagram Editor Playground - mermaid based';
 const version =  'v1.0';
 
 getEle = id => document.getElementById(id);
