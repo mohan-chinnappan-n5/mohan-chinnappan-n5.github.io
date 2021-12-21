@@ -31,45 +31,39 @@
                     <a href="#" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Lessons</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Examples</a>
                     <div class="dropdown-menu">
-                        <a target="new" href="./slides/js-1.html" class="dropdown-item">Learning Javascript</a>
+                        <a target="new" href="#" data-dwg="flowchart" class="dropdown-item examples">Flow Chart</a>
                         <div class="dropdown-divider"></div>
-                          <a target="new" href="https://webcomponents.dev/edit/DtwWthPN5POQO7wPpoCO/www/index.html"class="dropdown-item">Lesson-1 - JS</a>
-                          <a target="new" href="lwc-class/js/l2/l2.html"class="dropdown-item">Lesson-2 - JS</a>
+                          <a target="new" data-dwg='gantt' href="#"class="dropdown-item examples">Gantt</a>
+                          <a target="new" href="#"class="dropdown-item examples" data-dwg="userjourney">Use Journey</a>
                           <div class="dropdown-divider"></div>
-                          <a target="new" href="lwc-class/wc/hw.html"class="dropdown-item">Hello World - Web Components</a>
-                          <a target="new" href="https://webcomponents.dev/edit/xQga5LoLNOZEWJpxhVH6/src/index.js"class="dropdown-item">Counter - Web Components</a>
-
+                          <a target="new" href="#"class="dropdown-item examples" data-dwg="piechart">Pie Chart</a>
+ 
                           <div class="dropdown-divider"></div>
-			  <a target="new" href="https://mohan-chinnappan-n.medium.com/a-gentle-introduction-to-web-components-a9dc948b79f6" class="dropdown-item">Intro to LWC</a>
-                          <a target="new" href="https://webcomponents.dev/edit/9jZzL2g3QRRlLMUBSLZG/src/app.html"class="dropdown-item">Quotes - LWC</a>
-                          <a target="new" href="https://webcomponents.dev/edit/Ba1Rz2l5QAVmciXdBTLs/src/app.html"class="dropdown-item">Quotes - LWC - Cards</a>
-                           <a target="new" href="https://webcomponents.dev/edit/5K0O2GvgdgRJ4c8eg0Vg/src/app.html"class="dropdown-item">Quotes - LWC - Carousel</a>
-                          <a target="new" href="https://webcomponents.dev/edit/jbMtcVLV11DOGzY9A5MA/src/app.html"class="dropdown-item">REST service - LWC</a>
-                          <div class="dropdown-divider"></div>
-                          <a target="new" 
-                          href="https://trailhead.salesforce.com/en/content/learn/superbadges/superbadge_lwc_specialist"class="dropdown-item">Lightning Web Components Specialist
-                          </a>
-                       
-
-
+			  <a target="new" href="#" class="dropdown-item examples" data-dwg="erd">Entity Relationship (ER)</a>
+                          <a target="new" href="#" class="dropdown-item examples" data-dwg="seq">Sequence Diagram</a>
+                          <a target="new" href="#" class="dropdown-item examples" data-dwg="state">State Diagram</a>
+                           <a target="new" href="#" class="dropdown-item examples" data-dwg='req'>Requirement Diagram</a>
+                          <a target="new" href="#"class="dropdown-item examples" data-dwg='classd'>Class Diagram</a>
  
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Resources</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Setup</a>
                     <div class="dropdown-menu">
                          <a href="?t=vs"class="dropdown-item">Light Theme</a>
                          <a href="?t=vs-dark"class="dropdown-item">Dark Theme</a>
-                          <div class="dropdown-divider"></div>
-                          <a href="https://code.visualstudio.com/download"class="dropdown-item">VS Code</a>
-                          <a href="https://nodejs.org/en/"class="dropdown-item">NodeJS</a>
-                         
-                          <div class="dropdown-divider"></div>
-                        <a href="./slides/help.html"class="dropdown-item">Help</a>
                     </div>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Help</a>
+                    <div class="dropdown-menu">
+                         <a href="https://mermaid-js.github.io/mermaid/#/" target="__new" class="dropdown-item">Mermaid Help    </a>
+                    </div>
+                </li>
+
                
             </ul>
         </div>
@@ -82,6 +76,7 @@
             </div>
             <div class="split split-horizontal" id='content'>
                 <div class="graphDiv"></div>
+                <hr>
                 <button id="saveBtn" class='btn btn-success' style="display: none">Save</button>
             </div>
         </div>
@@ -91,8 +86,8 @@
         <div class="col-lg">
             <button class="btn btn-danger"  id="run">Draw</button>
             <button class="btn btn-warning" style="display: none;"  id="clean">Clean</button>
-            <input class='btn btn-info' type="file" id='inputfile' accept="*.txt"/>
-            <input  type="text" id='savefilename' value="myDwg.txt"  placeholder="file name to save the file to"/>
+            <input class='btn btn-info' type="file" id='inputfile' accept="*.dwg"/>
+            <input  type="text" id='savefilename' value="myDwg.dwg"  placeholder="file name to save the file to"/>
             <button  class='btn btn-info' type="button" value="save" id="save" title="Download the file in the editor">
             Save Source</button>
         </div>

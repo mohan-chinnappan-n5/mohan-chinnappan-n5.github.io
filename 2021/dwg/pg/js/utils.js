@@ -2,7 +2,7 @@
 // author: mohan chinnappan
 
 Split(["#code", "#content"], {
-            sizes: [55, 40]
+            sizes: [40, 60]
 });
 
 

@@ -220,7 +220,10 @@ getEle('run').onclick = () => {
 }
 
 // SVG Save functions
-const fileName = 'drawing.svg';
+let svgFileName = 'drawing.svg';
+
+const savefilenameEle = document.getElementById('savefilename');
+
 
 saveBtn.addEventListener("click", (event) => {
   save(graphDivEle);
@@ -229,7 +232,7 @@ saveBtn.addEventListener("click", (event) => {
 const triggerDownload = (imgURI, fileName) => {
   let a = document.createElement("a");
 
-  a.setAttribute("download", fileName);
+  a.setAttribute("download", `${svgFileName}`);
   a.setAttribute("href", imgURI);
   a.setAttribute("target", "_blank");
 
@@ -241,15 +244,168 @@ let save = (ele) => {
   let data = new XMLSerializer().serializeToString(ele);
   let svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" });
   let url = URL.createObjectURL(svgBlob);
-  triggerDownload(url, fileName);
+  triggerDownload(url, svgFileName);
 };
 
 
+// examples handling
+
+const flowchart = `
+flowchart LR
+    A[Hard edge] -->|Link text| B(Round edge)
+    B --> C{Decision}
+    C -->|One| D[Result one]
+    C -->|Two| E[Result two]
+
+`;
+
+const gantt = 
+`gantt 
+dateFormat HH:mm
+axisFormat %H:%M
+Initial milestone : milestone, m1, 17:49,2min
+taska2 : 10min
+taska3 : 5min 
+Final milestone : milestone, m2, 18:14, 2min
+
+`;
+
+const userjourney =
+`journey
+title My working day
+section Go to work
+  Make tea: 5: Me
+  Go upstairs: 3: Me
+  Do work: 1: Me, Cat
+section Go home
+  Go downstairs: 5: Me
+  Sit down: 5: Me
+`;
+
+const piechart = 
+`pie
+title Key elements in Product X
+"Calcium" : 42.96
+"Potassium" : 50.05
+"Magnesium" : 10.01
+"Iron" :  5`;
+
+const erd = 
+`erDiagram
+CUSTOMER ||--o{ ORDER : places
+CUSTOMER {
+    string name
+    string custNumber
+    string sector
+}
+ORDER ||--|{ LINE-ITEM : contains
+ORDER {
+    int orderNumber
+    string deliveryAddress
+}
+LINE-ITEM {
+    string productCode
+    int quantity
+    float pricePerUnit
+}`;
+
+const seq =
+`sequenceDiagram
+autonumber
+Alice->>John: Hello John, how are you?
+loop Healthcheck
+    John->>John: Fight against hypochondria
+end
+Note right of John: Rational thoughts!
+John-->>Alice: Great!
+John->>Bob: How about you?
+Bob-->>John: Jolly good!`;
+
+const state = 
+`stateDiagram
+direction LR
+[*] --> A
+A --> B
+B --> C
+state B {
+  direction LR
+  a --> b
+}
+B --> D`;
+
+const req =
+`requirementDiagram
+
+requirement test_req {
+id: 1
+text: the test text.
+risk: high
+verifymethod: test
+}
+
+element test_entity {
+type: simulation
+}
+
+test_entity - satisfies -> test_req`;
+
+const classd = 
+`classDiagram
+Animal <|-- Duck
+Animal <|-- Fish
+Animal <|-- Zebra
+Animal : +int age
+Animal : +String gender
+Animal: +isMammal()
+Animal: +mate()
+class Duck{
+    +String beakColor
+    +swim()
+    +quack()
+}
+class Fish{
+    -int sizeInFeet
+    -canEat()
+}
+class Zebra{
+    +bool is_wild
+    +run()
+}`;
+
+const examples = {
+  flowchart,
+  gantt,
+  userjourney,
+  piechart,
+  erd,
+  seq,
+  state,
+  req,
+  classd,
+
+
+};
+
+const fillExample = data => {
+  editor.setValue(data);
+  getEle('run').click();
+}
+
+document.querySelectorAll('.examples').forEach(item => {
+  item.addEventListener('click', event => {
+  const target = event.target;
+  const exampleDwg = target.dataset.dwg;
+  svgFileName =`${exampleDwg}.svg`;
+  fillExample(examples[exampleDwg]);
+  savefilenameEle.value = `${exampleDwg}.dwg`;
+  });
+});
   
 
 // on ready
 (() => {
     updateIFrame();
+    getEle('run').click();
 })();
 
 
