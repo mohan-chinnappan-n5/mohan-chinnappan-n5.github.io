@@ -419,6 +419,50 @@ points: Array[Point] = Array(ammonite.$sess.cmd63$Point2D@2a336787, ammonite.$se
 
 
 ```
+## Collections
 
+```scala
+@ def stdDev(a: Array[Double]): Double = {
+      val mean = a.sum / a.length
+      val squareErrors = a.map(x => x - mean).map(x => x * x)
+      math.sqrt(squareErrors.sum / a.length)
+    } 
+defined function stdDev
+
+@ val input = new Array(10,20,30,40,11,44) 
+cmd68.sc:1: too many arguments (found 6, expected 1) for constructor Array: (_length: Int): Array[T]
+val input = new Array(10,20,30,40,11,44)
+                         ^
+Compilation Failed
+
+@ val input = Array(10,20,30,40,11,44) 
+input: Array[Int] = Array(10, 20, 30, 40, 11, 44)
+
+@ stdD 
+stdDev
+@ stdDev(input) 
+cmd69.sc:1: type mismatch;
+ found   : Array[Int]
+ required: Array[Double]
+val res69 = stdDev(input)
+                   ^
+Compilation Failed
+
+@ val input2 = Array(10.0,20.0,30.0,40.0,11.0,44.0) 
+input2: Array[Double] = Array(10.0, 20.0, 30.0, 40.0, 11.0, 44.0)
+
+@ stdDev(input2) 
+res70: Double = 13.246592853342412
+
+// FUN
+
+@ input.map(x => x*x) 
+res71: Array[Int] = Array(100, 400, 900, 1600, 121, 1936)
+
+@ input.map(x => x*x).map(x => x-2) 
+res72: Array[Int] = Array(98, 398, 898, 1598, 119, 1934)
+
+
+```
 
 
