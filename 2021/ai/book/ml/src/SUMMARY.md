@@ -74,8 +74,11 @@
 - [16. Building ML for Industries](industry/ml-industry.md)
     - [Lost-Found Item Management](industry/lfitem-magmt.md)
 
-- [17.Hardware](hardware/hardware.md)
+- [17. Hardware](hardware/hardware.md)
     - [Raspberry Pi](hardware/raspi.md)
+
+- [18. Conversational-AI](conversational-ai.md)
+    - [Chat bots](chatbots.md)
 
 - [20. Tools](tools.md)
 
