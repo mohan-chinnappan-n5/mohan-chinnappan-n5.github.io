@@ -1,4 +1,4 @@
-# Chapter 1 - What is Block Chain
+# Chapter 1 - What is Blockchain
 
 A blockchain is a growing list of records, called **blocks**, that are linked together using **cryptography**
 
@@ -37,6 +37,19 @@ This de-centralized database managed by **multiple participants** is known as Di
         - Anonymous or PseudoAnonymous
 - Unanimous
     - All the participants agree to the validity of the each records
+
+## Actors in Blockchain
+
+Actors|Purpose|
+------|-----|
+Datastore|Stores the data|
+Processing Platform|Provides access to logic|
+Blockchain Network Operator|Operates the blockchain network|
+Blockchain Developer|Creates Applications|
+Blockchain Architect|Designs the system|
+Regulator|Perform oversight|
+Blockchain User|Performs B2B transactions|
+Membership Services|Access to security certificates|d
 
 
         

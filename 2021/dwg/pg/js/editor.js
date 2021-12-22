@@ -241,7 +241,7 @@ const triggerDownload = (imgURI, fileName) => {
 
 
 let save = (ele) => {
-  let data = new XMLSerializer().serializeToString(ele);
+  let data = new XMLSerializer().serializeToString(ele.childNodes[0]);
   let svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" });
   let url = URL.createObjectURL(svgBlob);
   triggerDownload(url, svgFileName);

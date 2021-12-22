@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Blockchain</a></li><li class="chapter-item expanded "><a href="bitcoin.html" class="active"><strong aria-hidden="true">2.</strong> Bitcoin</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Blockchain</a></li><li class="chapter-item expanded "><a href="bitcoin.html" class="active"><strong aria-hidden="true">2.</strong> Bitcoin</a></li><li class="chapter-item expanded "><a href="smart-contract.html"><strong aria-hidden="true">3.</strong> Smart Contracts</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -297,6 +297,9 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next" href="smart-contract.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -308,13 +311,16 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next" href="smart-contract.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
 
         <!-- Livereload script (if served using the cli tool) -->
         <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3020/__livereload");
+            var socket = new WebSocket("ws://localhost:3030/__livereload");
             socket.onmessage = function (event) {
                 if (event.data === "reload") {
                     socket.close();
