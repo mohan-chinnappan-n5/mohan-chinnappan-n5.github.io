@@ -55,7 +55,7 @@ Membership Services|Access to security certificates|d
         
 
 
-![blockchain](img/blockchain.svg)
+![blockchain](img/blockchain-1.svg)
 
 [Demo of Blockchain concepts](https://andersbrownworth.com/blockchain/hash")
 [Demo of Public/Private Key](https://andersbrownworth.com/blockchain/public-private-keys/)

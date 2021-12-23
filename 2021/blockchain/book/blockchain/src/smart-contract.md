@@ -14,6 +14,18 @@ Events|Emits notifications of of the operations on the network|
 System Management|Enables us to create/monitor components of blockchain|
 Wallet|Securely manages user's credentials|
 System Integration|Integrate block with external systems|
-![blockchain](img/blockchain.svg)
-![SmartContract-1](img/smartContract-1.svg)
+
+## Word State
+- Keeps the snapshot of the blockchain for each point in time
+- Similar to Database redo logs
+
+![SmartContract-1](img/smartContract-4.svg)
+
+### IBM HyperLedger
+
+![IBM Hyper Ledger](img/ibm-hyperledger-1.png)
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7pcTE5M0fAs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 

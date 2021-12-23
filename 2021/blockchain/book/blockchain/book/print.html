@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Blockchain</a></li><li class="chapter-item expanded "><a href="bitcoin.html"><strong aria-hidden="true">2.</strong> Bitcoin</a></li><li class="chapter-item expanded "><a href="smart-contract.html"><strong aria-hidden="true">3.</strong> Smart Contracts</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Blockchain</a></li><li class="chapter-item expanded "><a href="bitcoin.html"><strong aria-hidden="true">2.</strong> Bitcoin</a></li><li class="chapter-item expanded "><a href="smart-contract.html"><strong aria-hidden="true">3.</strong> Smart Contracts</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ethereum.html"><strong aria-hidden="true">3.1.</strong> Ethereum</a></li><li class="chapter-item expanded "><a href="solidity.html"><strong aria-hidden="true">3.2.</strong> Solidity</a></li></ol></li><li class="chapter-item expanded "><a href="web3.html"><strong aria-hidden="true">4.</strong> Web3</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -219,7 +219,7 @@ across the entire network of computer systems on the blockchain.</li>
 <tr><td>Blockchain User</td><td>Performs B2B transactions</td></tr>
 <tr><td>Membership Services</td><td>Access to security certificates</td></tr>
 </tbody></table>
-<p><img src="img/blockchain.svg" alt="blockchain" /></p>
+<p><img src="img/blockchain-1.svg" alt="blockchain" /></p>
 <p><a href="https://andersbrownworth.com/blockchain/hash%22">Demo of Blockchain concepts</a>
 <a href="https://andersbrownworth.com/blockchain/public-private-keys/">Demo of Public/Private Key</a></p>
 <iframe width="800" height="420" src="https://www.youtube.com/embed/_160oMzblY8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -385,9 +385,296 @@ across the entire network of computer systems on the blockchain.</li>
 <tr><td>System Management</td><td>Enables us to create/monitor components of blockchain</td></tr>
 <tr><td>Wallet</td><td>Securely manages user's credentials</td></tr>
 <tr><td>System Integration</td><td>Integrate block with external systems</td></tr>
-<tr><td><img src="img/blockchain.svg" alt="blockchain" /></td><td></td></tr>
-<tr><td><img src="img/smartContract-1.svg" alt="SmartContract-1" /></td><td></td></tr>
 </tbody></table>
+<h2 id="word-state"><a class="header" href="#word-state">Word State</a></h2>
+<ul>
+<li>Keeps the snapshot of the blockchain for each point in time</li>
+<li>Similar to Database redo logs</li>
+</ul>
+<p><img src="img/smartContract-4.svg" alt="SmartContract-1" /></p>
+<h3 id="ibm-hyperledger"><a class="header" href="#ibm-hyperledger">IBM HyperLedger</a></h3>
+<p><img src="img/ibm-hyperledger-1.png" alt="IBM Hyper Ledger" /></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7pcTE5M0fAs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ethereum"><a class="header" href="#ethereum">Ethereum</a></h1>
+<ul>
+<li>
+<p>As we know the blockchain is a public database that is updated and shared across many computers in a network.</p>
+</li>
+<li>
+<p><em>Block</em> refers to data and state being stored in consecutive groups known as &quot;blocks&quot;. </p>
+</li>
+<li>
+<p>If you send ETH to someone else, the transaction data needs to be added to a block to be successful.</p>
+</li>
+<li>
+<p><strong>Chain</strong> refers to the fact that each block cryptographically references its parent. </p>
+<ul>
+<li>In other words, blocks get chained together. The data in a block cannot change without changing all subsequent blocks, which would require the <strong>consensus</strong> of the entire network.</li>
+</ul>
+</li>
+<li>
+<p>Every computer in the network must agree upon <strong>each new block and the chain as a whole</strong>. </p>
+<ul>
+<li>These computers are known as &quot;nodes&quot;. Nodes ensure everyone interacting with the blockchain has the <strong>same data</strong>. </li>
+<li>To accomplish this <strong>distributed agreement</strong>, blockchains need a <strong>consensus mechanism</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Ethereum currently uses a <strong>proof-of-work consensus mechanism</strong>. </p>
+<ul>
+<li>This means that anyone who wants to add new blocks to the chain:
+<ul>
+<li>must solve a difficult puzzle that requires a lot of computing power. </li>
+<li>Solving the puzzle <strong>proves</strong> that you have done the <strong>work</strong> by using computational resources. </li>
+<li>Doing this is known as <strong>mining</strong>. </li>
+<li>Mining is typically brute force trial and error, but successfully adding a block is rewarded in ETH.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>New blocks are broadcasted to all the nodes in the network, checked and verified, thus updating the state of the blockchain for everyone.</p>
+</li>
+<li>
+<p><strong>Summary</strong></p>
+<ul>
+<li>When you send ETH to someone, the transaction must be <strong>mined and included in a new block</strong>. </li>
+<li>The updated state is then shared with the entire network.</li>
+</ul>
+</li>
+</ul>
+<h3 id="hash-function"><a class="header" href="#hash-function">Hash Function</a></h3>
+<p>A hash function is like a deterministic fingerprint of a piece of arbitrary data. It is also single-directional; It is very easy to compute and very hard to reverse.</p>
+<h2 id="references-2"><a class="header" href="#references-2">References</a></h2>
+<ul>
+<li><a href="https://ethereum.org/en/developers/docs/intro-to-ethereum/">INTRO TO ETHEREUM</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="solidity"><a class="header" href="#solidity">Solidity</a></h1>
+<p>Solidity is an object-oriented, high-level language for implementing <strong>smart contracts</strong>. </p>
+<ul>
+<li>
+<p>Smart contracts are programs which govern the behavior of accounts within the <strong>Ethereum</strong> state.</p>
+</li>
+<li>
+<p>The objectives of smart contracts are the <strong>reduction of need</strong> in</p>
+<ul>
+<li>trusted intermediatories,</li>
+<li>arbitrations</li>
+<li>enforcement costs</li>
+<li>fraud losses</li>
+<li>reduction of malicious and accidental exceptions</li>
+</ul>
+</li>
+<li>
+<p>A contract in the sense of Solidity is a collection of code (its functions) and data (its state) that resides at a specific address on the Ethereum blockchain</p>
+</li>
+</ul>
+<pre><code class="language-java">
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity &gt;=0.4.16 &lt;0.9.0;
+
+// sets the value of a variable and exposes it for other contracts to access. 
+contract SimpleStorage {
+    uint storedData; // unsigned integer of 256 bit
+
+    // does not  impose access restriction
+    function set(uint x) public {
+        storedData = x;
+    }
+
+    function get() public view returns (uint) {
+        return storedData;
+    }
+}
+</code></pre>
+<pre><code class="language-java">// SPDX-License-Identifier: GPL-3.0
+pragma solidity ^0.8.4;
+
+contract Coin {
+    // The keyword &quot;public&quot; makes variables
+    // accessible from other contracts
+    address public minter;
+    mapping (address =&gt; uint) public balances;
+
+    // Events allow clients to react to specific
+    // contract changes you declare
+    event Sent(address from, address to, uint amount);
+
+    // Constructor code is only run when the contract
+    // is created
+    constructor() {
+        minter = msg.sender;
+    }
+
+    // Sends an amount of newly created coins to an address
+    // Can only be called by the contract creator
+    function mint(address receiver, uint amount) public {
+        require(msg.sender == minter);
+        balances[receiver] += amount;
+    }
+
+    // Errors allow you to provide information about
+    // why an operation failed. They are returned
+    // to the caller of the function.
+    error InsufficientBalance(uint requested, uint available);
+
+    // Sends an amount of existing coins
+    // from any caller to an address
+    function send(address receiver, uint amount) public {
+        if (amount &gt; balances[msg.sender])
+            revert InsufficientBalance({
+                requested: amount,
+                available: balances[msg.sender]
+            });
+
+        balances[msg.sender] -= amount;
+        balances[receiver] += amount;
+        emit Sent(msg.sender, receiver, amount);
+    }
+}
+</code></pre>
+<h2 id="references-3"><a class="header" href="#references-3">References</a></h2>
+<p><a href="https://docs.soliditylang.org/en/v0.8.11/">Solidity</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="web3"><a class="header" href="#web3">Web3</a></h1>
+<p><img src="https://miro.medium.com/max/2000/1*tsGHBQcFD6GzgprvV4a01A.jpeg" alt="Evolution of Web" /></p>
+<ul>
+<li>
+<p><strong>Web2</strong> refers to the version of the internet most of us know today. An internet dominated by companies that provide services in exchange for your personal data. </p>
+</li>
+<li>
+<p><strong>Web3</strong> refers to decentralized apps that run on the <strong>blockchain</strong>. These are apps that allow <strong>anyone to participate</strong> without monetizing their personal data.</p>
+</li>
+</ul>
+<h2 id="dapps"><a class="header" href="#dapps">DApps</a></h2>
+<ul>
+<li>Web3 applications are called <strong>DApps</strong>.</li>
+<li>Web3 leverages blockchain to build apps on a decentralized state machine that’s maintained by anonymous nodes on the internet.</li>
+<li>Web3 we can write <strong>smart contracts</strong> that define the logic of our applications and deploy them onto that decentralized state machine.</li>
+</ul>
+<p><img src="img/web3-arch-2.png" alt="Web3 Arch" /></p>
+<table><thead><tr><th>Web2</th><th>Web3</th></tr></thead><tbody>
+<tr><td>Web2 (say Twitter) can censor any account or tweet</td><td>Web3 tweets would be not-censorable because control is decentralized</td></tr>
+<tr><td>Payment service may decide to not allow payments for certain types of work</td><td>Web3 payment apps require no personal data and can't prevent payments</td></tr>
+<tr><td>Servers for gig-economy apps could go down and affect worker income</td><td>Web3 servers can't go down because they use a decentralized network of 1000s of computers as their backend</td></tr>
+</tbody></table>
+<iframe width="800" height="480" src="https://www.youtube.com/embed/pSTNhBlfV_s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 id="web3-limitations"><a class="header" href="#web3-limitations">Web3 limitations</a></h2>
+<ul>
+<li>
+<p><strong>Scalability</strong> </p>
+<ul>
+<li>transactions are slower on web3 because they're decentralized. Changes to state, like a payment, need to be processed by a miner and propagated throughout the network.</li>
+</ul>
+</li>
+<li>
+<p><strong>UX</strong> </p>
+<ul>
+<li>interacting with web3 applications can require extra steps, software, and education. This can be a hurdle to adoption.</li>
+</ul>
+</li>
+<li>
+<p><strong>Accessibility</strong> </p>
+<ul>
+<li>the lack of integration in modern web browsers makes web3 less accessible to most users.</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://miro.medium.com/max/1368/1*WG5_xDDwHv0lMaVUYLNbVA.png" alt="centralized vs decentralized" /></p>
+<table><thead><tr><th>Centralized Systems</th><th>Decentralized Systems</th></tr></thead><tbody>
+<tr><td>Low network diameter (all participants are connected to a central authority); information propagates <strong>quickly</strong>, as propagation is handled by a central authority with lots of computational resources.</td><td>The furthest participants on the network may potentially be many edges away from each other. Information broadcast from one side of the network may take a <strong>long time</strong> to reach the other side.</td></tr>
+<tr><td>Usually <strong>higher performance</strong> (higher throughput, fewer total computational resources expended) and easier to implement.</td><td>Usually <strong>lower performance</strong>(lower throughput, more total computational resources expended) and more complex to implement.</td></tr>
+<tr><td>In the event of conflicting data, <strong>resolution is clear</strong> and easy: the ultimate source of truth is the central authority.</td><td>A protocol (often <strong>complex</strong>) is needed for dispute resolution, if peers make conflicting claims about the state of data which participants are meant to be synchronized on.</td></tr>
+<tr><td><strong>Single point of failure</strong>: malicious actors may be able to take down the network by targeting the central authority.</td><td><strong>No single point of failure</strong>: network can still function even if a large proportion of participants are attacked/taken out.</td></tr>
+<tr><td><strong>Coordination</strong> among network participants is <strong>much easier</strong>, and is handled by a central authority. Central authority can compel network participants to adopt upgrades, protocol updates, etc., with very little friction.</td><td>Coordination is often <strong>difficult</strong>, as no single agent has the final say in network-level decisions, protocol upgrades, etc. In the worst case, network is prone to fracturing when there are disagreements about protocol changes.</td></tr>
+<tr><td>Central authority <strong>can censor data</strong>, potentially cutting off parts of the network from interacting with the rest of the network.</td><td><strong>Censorship is much harder</strong>, as information has many ways to propagate across the network.</td></tr>
+<tr><td>Participation in the network is controlled by the <strong>central authority</strong>.</td><td>Anyone can participate in the network; there are **no “gatekeepers.”</td></tr>
+<tr><td>** Ideally, the cost of participation is very low.</td><td></td></tr>
+</tbody></table>
+<h3 id="world-computer"><a class="header" href="#world-computer">World computer</a></h3>
+<h4 id="blockchain"><a class="header" href="#blockchain">Blockchain</a></h4>
+<ul>
+<li>
+<p>The Ethereum blockchain</p>
+</li>
+<li>
+<p>Globally accessible, deterministic state machine maintained by a peer-to-peer network of nodes. </p>
+</li>
+<li>
+<p>State changes on this state machine are governed by the rules of <strong>consensus that the peers in the network follow</strong>.</p>
+</li>
+<li>
+<p>Anyone in the world can access and write into this state machine, which is collectively owned by everyone in the network.</p>
+</li>
+</ul>
+<h4 id="smart-contracts-1"><a class="header" href="#smart-contracts-1">Smart Contracts</a></h4>
+<ul>
+<li>Programs that run on the Ethereum blockchain and defines the logic behind the state changes happening on the blockchain</li>
+<li>Written high level languages like <strong>Solidity or Vyper</strong>.</li>
+<li>Anyone can inspect the application logic of all smart contracts on the network.</li>
+</ul>
+<pre><code class="language-java">// SPDX-License-Identifier: GPL-3.0
+pragma solidity &gt;=0.4.16 &lt;0.9.0;
+
+// sets the value of a variable and exposes it for other contracts to access. 
+contract SimpleStorage {
+    uint storedData; // unsigned integer of 256 bit
+
+    // does not  impose access restriction
+    function set(uint x) public {
+        storedData = x;
+    }
+
+    function get() public view returns (uint) {
+        return storedData;
+    }
+}
+</code></pre>
+<h4 id="ethereum-virtual-machine-evm"><a class="header" href="#ethereum-virtual-machine-evm">Ethereum Virtual Machine (EVM)</a></h4>
+<ul>
+<li>
+<p>Executes the logic defined in the <strong>smart contracts</strong> and processes the state changes that happen on this globally accessible state machine.</p>
+</li>
+<li>
+<p>Smart Contracts written in high level languages like solidity are compiled into byte code which EVM can execute.</p>
+</li>
+<li>
+<p>When we want to interact with the data and code on a blockchain</p>
+<ul>
+<li>We need to interact with one of these nodes. </li>
+<li>Any node can broadcast a request for a transaction to be executed on the EVM.</li>
+<li>A <strong>miner</strong> will then execute the transaction and propagate the resulting state change to the rest of the network.</li>
+</ul>
+</li>
+<li>
+<p>There are two ways to broadcast a new transaction:</p>
+<ol>
+<li>Set up your own node which runs the Ethereum blockchain software</li>
+<li>Use nodes provided by third-party services like Infura, Alchemy, and Quicknode
+<ul>
+<li>Once you connect to the blockchain through a provider, you can <strong>read</strong> the state stored on the blockchain</li>
+<li>To <strong>write</strong> to the state
+<ul>
+<li>Submit the transaction to the blockchain</li>
+<li><em>Sign</em> the transaction using the private key (sk).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="references-4"><a class="header" href="#references-4">References</a></h3>
+<ul>
+<li>
+<p><a href="https://medium.com/@VitalikButerin/the-meaning-of-decentralization-a0c92b76a274">The Meaning of Decentralization</a></p>
+</li>
+<li>
+<p><a href="https://www.preethikasireddy.com/post/the-architecture-of-a-web-3-0-application#Story">The Architecture of a Web 3.0 application</a></p>
+</li>
+<li>
+<p><a href="https://medium.com/fabric-ventures/what-is-web-3-0-why-it-matters-934eb07f3d2b">What Is Web 3.0 &amp; Why It Matters</a></p>
+</li>
+</ul>
 
                     </main>
 
