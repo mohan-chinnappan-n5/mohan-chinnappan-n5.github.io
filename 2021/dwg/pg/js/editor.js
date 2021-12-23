@@ -262,7 +262,11 @@ parseParams = () => {
 const params = parseParams();
 let lang = params['l'] || 'html';
 let theme = params['t'] || 'vs-dark';
-let dwgData = atob(params['d']) || contentHtml;
+
+let dwgData =  contentHtml;
+if (params['d']) {
+  dwgData = atob(params['d']);
+}
 
  
 
