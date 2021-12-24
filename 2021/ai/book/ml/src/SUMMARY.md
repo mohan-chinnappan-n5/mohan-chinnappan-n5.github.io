@@ -79,6 +79,7 @@
 
 - [18. Conversational-AI](conversational-ai.md)
     - [Chat bots](chatbots.md)
+    - [DeepPavlov](DeepPavlov.md)
 
 - [20. Tools](tools.md)
 

@@ -13,6 +13,19 @@
 - Web3 leverages blockchain to build apps on a decentralized state machine that’s maintained by anonymous nodes on the internet.
 - Web3 we can write **smart contracts** that define the logic of our applications and deploy them onto that decentralized state machine.
 
+<iframe width="800" height="480" src="https://www.youtube.com/embed/F50OrwV6Uk8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+i
+
+### Example: Ethlance
+- Ethlance is running on the Ethereum public blockchain, therefore you'll need the MetaMask browser extension to be able to make changes into the blockchain.
+
+### Metamask
+- [Metamask](https://metamask.io/) is a [Chrome extension](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn)
+- An Ethereum Wallet in your Browser
+
+
+[Ethlance](https://ethlance.com/)
+
 ![Web3 Arch](img/web3-arch-2.png)
 
 
