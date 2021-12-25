@@ -54,6 +54,28 @@ rent_price("Boston")
 
 ![chatbot components](img/chatbots/chatbot-1.svg)
 
+## Let us build a chatbot
+
+The smallest building block of the library is **Component**. 
+Component stands for any kind of function in an NLP pipeline. 
+It can be implemented as: 
+- a neural network
+- a non-neural ML model 
+- a rule-based system. 
+Besides that, Component can have a nested structure, i.e. Component can include other Components.
+
+Components can be joined into **Skill**. 
+- Skill solves a larger NLP task compared to Component. However, in terms of implementation Skills are not different from Components. 
+
+**Agent** is supposed to be a multi-purpose dialogue system that comprises several Skills and can switch between them. It can be a dialogue system that contains a goal-oriented and chatbot skills and chooses which one to use for generating the answer depending on an user input.
+
+
+
+
+- [DeepPavlov: Hello bot! ](https://colab.research.google.com/github/deepmipt/dp_notebooks/blob/master/DP_hello_bot.ipynb)
+
+
+
 ## openAI Chat
 ![OpenAI chat](https://raw.githubusercontent.com/mohan-chinnappan-n/ml-book-assets/master/openAI/openAI-chat-1.webm.gif)
 

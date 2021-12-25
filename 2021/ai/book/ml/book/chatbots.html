@@ -223,6 +223,24 @@
 
 </code></pre>
 <p><img src="img/chatbots/chatbot-1.svg" alt="chatbot components" /></p>
+<h2 id="let-us-build-a-chatbot"><a class="header" href="#let-us-build-a-chatbot">Let us build a chatbot</a></h2>
+<p>The smallest building block of the library is <strong>Component</strong>. 
+Component stands for any kind of function in an NLP pipeline. 
+It can be implemented as: </p>
+<ul>
+<li>a neural network</li>
+<li>a non-neural ML model </li>
+<li>a rule-based system. 
+Besides that, Component can have a nested structure, i.e. Component can include other Components.</li>
+</ul>
+<p>Components can be joined into <strong>Skill</strong>. </p>
+<ul>
+<li>Skill solves a larger NLP task compared to Component. However, in terms of implementation Skills are not different from Components. </li>
+</ul>
+<p><strong>Agent</strong> is supposed to be a multi-purpose dialogue system that comprises several Skills and can switch between them. It can be a dialogue system that contains a goal-oriented and chatbot skills and chooses which one to use for generating the answer depending on an user input.</p>
+<ul>
+<li><a href="https://colab.research.google.com/github/deepmipt/dp_notebooks/blob/master/DP_hello_bot.ipynb">DeepPavlov: Hello bot! </a></li>
+</ul>
 <h2 id="openai-chat"><a class="header" href="#openai-chat">openAI Chat</a></h2>
 <p><img src="https://raw.githubusercontent.com/mohan-chinnappan-n/ml-book-assets/master/openAI/openAI-chat-1.webm.gif" alt="OpenAI chat" /></p>
 <h2 id="references"><a class="header" href="#references">References</a></h2>
