@@ -9,6 +9,7 @@
 
 - [3. ML Models](ml_models.md)
     - [Word2Vec](word2vec.md)
+    - [GloVe](glove.md)
 
 - [4. Deep Learning](dl.md)
     - [Neural Network](nn.md)

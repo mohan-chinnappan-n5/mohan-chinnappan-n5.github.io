@@ -22,6 +22,9 @@ i
 ### Metamask
 - [Metamask](https://metamask.io/) is a [Chrome extension](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn)
 - An Ethereum Wallet in your Browser
+- MetaMask is an extension for accessing Ethereum enabled distributed applications, or "Dapps" in your browser!
+- This extension injects the **Ethereum web3 API** into every website's javascript context, so that dapps can read from the blockchain.
+- MetaMask also lets the user create and manage their own identities (via private keys, local client wallet and hardware wallets like Trezor™), so when a Dapp wants to perform a transaction and write to the blockchain, the user gets a secure interface to review the transaction, before approving or rejecting it.
 
 
 [Ethlance](https://ethlance.com/)
