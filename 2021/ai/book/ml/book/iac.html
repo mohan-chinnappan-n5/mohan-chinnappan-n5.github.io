@@ -203,11 +203,64 @@ resource &quot;aws_instance&quot; &quot;example&quot; {
 
 </code></pre>
 <ul>
-<li>remembers the state of the already provisioned resources - <a href="https://en.wikipedia.org/wiki/Idempotence">Idempotence</a> - certain operations can be applied <strong>multiple times</strong> without changing the result beyond the initial application.</li>
+<li>remembers the state of the already provisioned resources - [Idempotence](https://en.wikipedia.org/wiki/
+Idempotence) - certain operations can be applied <strong>multiple times</strong> without changing the result beyond the initial application.</li>
 </ul>
-<p><video controls loop=""><source src="https://www.terraform.io/videos/oss-cli-demo.mp4" type="video/mp4"></video></p>
+<h3 id="installing-terraform-cli"><a class="header" href="#installing-terraform-cli">Installing Terraform CLI</a></h3>
+<pre><code class="language-bash">brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+
+</code></pre>
+<ul>
+<li>Usage</li>
+</ul>
+<pre><code>% terraform
+Usage: terraform [global options] &lt;subcommand&gt; [args]
+
+The available commands for execution are listed below.
+The primary workflow commands are given first, followed by
+less common or more advanced commands.
+
+Main commands:
+  init          Prepare your working directory for other commands
+  validate      Check whether the configuration is valid
+  plan          Show changes required by the current configuration
+  apply         Create or update infrastructure
+  destroy       Destroy previously-created infrastructure
+
+All other commands:
+  console       Try Terraform expressions at an interactive command prompt
+  fmt           Reformat your configuration in the standard style
+  force-unlock  Release a stuck lock on the current workspace
+  get           Install or upgrade remote Terraform modules
+  graph         Generate a Graphviz graph of the steps in an operation
+  import        Associate existing infrastructure with a Terraform resource
+  login         Obtain and save credentials for a remote host
+  logout        Remove locally-stored credentials for a remote host
+  output        Show output values from your root module
+  providers     Show the providers required for this configuration
+  refresh       Update the state to match remote systems
+  show          Show the current state or a saved plan
+  state         Advanced state management
+  taint         Mark a resource instance as not fully functional
+  test          Experimental support for module integration testing
+  untaint       Remove the 'tainted' state from a resource instance
+  version       Show the current Terraform version
+  workspace     Workspace management
+
+Global options (use these before the subcommand, if any):
+  -chdir=DIR    Switch to a different working directory before executing the
+                given subcommand.
+  -help         Show this help output, or the help for a specified subcommand.
+  -version      An alias for the &quot;version&quot; subcommand.
+
+</code></pre>
+<ul>
+<li>Demo
+<video controls loop=""><source src="https://www.terraform.io/videos/oss-cli-demo.mp4" type="video/mp4"></video></li>
+</ul>
 <h2 id="videos"><a class="header" href="#videos">Videos</a></h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Tkv49sTvKZY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="800" height="420" src="https://www.youtube.com/embed/Tkv49sTvKZY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
                     </main>
 
