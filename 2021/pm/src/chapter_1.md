@@ -244,10 +244,19 @@ Once you have a vision, you have to spread the word in your business.
 ## References
 - [ Product Manager: The role and best practices for beginners ](https://www.atlassian.com/agile/product-management/product-manager)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yUOC-Y0f5ZQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-- [Good Product Manager and Bad Product Manager -  Ben Horowitz and David Weiden](https://sriramk.com/memos/Ben_Horowitz_Good_Product_Manager_Bad_Product_Manager.pdf)
+
+- [Good Product Manager and Bad Product Manager -  Ben Horowitzm(a16z) and David Weiden](https://sriramk.com/memos/Ben_Horowitz_Good_Product_Manager_Bad_Product_Manager.pdf)
+
+- [Good Product Manager/Bad Product Manager](https://a16z.com/2012/06/15/good-product-managerbad-product-manager/)
 
 - [What is a Product Manager? - Martin Eriksson](https://medium.com/@bfgmartin/what-is-a-product-manager-ce0efdcf114c)
+
+### Videos
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/F2e3RqL4VWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yUOC-Y0f5ZQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 
 
