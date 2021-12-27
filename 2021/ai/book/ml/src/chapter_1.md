@@ -1,5 +1,8 @@
 # Chapter 1 : Quick Introduction
 
+![Valley](industry/img/valley.jpg)
+<sup>Image credit: Chromecast</sup>
+
 - In traditional programming we start with **data** and **hard-coded rules** to apply on the data to get **answers**. 
 - This style of programming can't bring  answers **easily** for problems like:
     -  predicting a **type of a cat** in the given animal picture

@@ -1,4 +1,8 @@
-# Chapter 1 - What is Blockchain
+# Chapter 1 - What is Blockchain?
+
+
+![falls](img/falls-2.jpg)
+<sup>image credit: Chromecast</sup>
 
 A blockchain is a growing list of records, called **blocks**, that are linked together using **cryptography**
 
