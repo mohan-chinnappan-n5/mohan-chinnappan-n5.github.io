@@ -1,29 +1,36 @@
-# Chapter 1
+# What is Product Management?
 
-> Job of the product manager is to discover a product that is **valuable, usable and feasible** -  Marty Cagan
-
-Solving the great customer problem with the balancing the needs of:
+> Job of the product manager is to **discover** a product that is **valuable, usable and feasible** -  *Marty Cagan*
 
 
+![greatwall](img/greatwall.jpg)
+<sup>image credit: Chromecast</sup>
 
 
-- UX
+
+Solving the great **customer problem** with the balancing the needs of:
+
+
+
+
+- **UX - usable**
     - Product Manager is the **voice of the user inside the business** and must be passionate about the user experience.
     - Not being a pixel pusher or a designer 
     - Need to be out there testing the product, talking to users and getting that feedback first hand
 
-- Biz - meeting needs 
+- **Biz - meeting needs - valuable** 
     - focused on maximizing business value from a product
-    - should be obsessed with optimizing a product to achieve the business goals while **maximizing return on investment**
+    - should be obsessed with optimizing a product to achieve the business goals while **maximizing return on investment (ROI)**
 
-- Tech - feasible
+- **Tech - feasible**
     - There’s no point defining what to build if you don’t know **how it will get built**.
-    - Understanding the level of effort (LOE) involved is crucial to making the right decisions
+    - Understanding the **level of effort (LOE)** involved is crucial to making the right decisions
 
 
 A good product manager must be experienced in at least one, **passionate about all three**, and conversant with practitioners in all.
 
 
+##  Martin Eriksson's Venn Diagram
 
 ![PM Venn](img/pm-venn.png)
 
@@ -31,9 +38,10 @@ A good product manager must be experienced in at least one, **passionate about a
 - Trade-off decision maker
 
 
-A Good Product Manager plays critical role in a successful product.
-    - A successful product is the highest impact contribution that anyone can make in the PD organization
-    - Track record of successful products that become profitable businesses for their company.
+A Good Product Manager plays critical role in a successful product
+
+- A **successful product** is the highest impact contribution that anyone can make in the Product Development organization
+- Track record of **successful products** that become **profitable businesses** for their company.
 
 
 ### CEO of the product (influencing without any authority)
@@ -136,6 +144,6 @@ Once you have a vision, you have to spread the word in your business.
 
 - [Good Product Manager and Bad Product Manager](https://sriramk.com/memos/Ben_Horowitz_Good_Product_Manager_Bad_Product_Manager.pdf)
 
-- [What is a Product Manager? - Martin Eri](https://medium.com/@bfgmartin/what-is-a-product-manager-ce0efdcf114c)
+- [What is a Product Manager? - Martin Eriksson](https://medium.com/@bfgmartin/what-is-a-product-manager-ce0efdcf114c)
 
 
