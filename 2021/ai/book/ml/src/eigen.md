@@ -69,7 +69,20 @@ plot(np.array( [ [2,4], [2,3], [-2, 5] ] ) )
     - It is special case of a matrix with  just **one row or one column**
     - So the rules that work for matrices also work for vectors.
 
+- We can add and subtract matrices of the same size, 
+- multiply one matrix with another as long as the sizes are compatible :
+    - \\( (n × m) × (m × p) = n × p) \\)
+- multiply an entire matrix by a constant:
 
+
+### Tensor
+
+Tensor is a generalized matrix. 
+- 1-D matrix (a vector is actually such a tensor), 
+- 3-D matrix (something like a cube of numbers), 
+- 0-D matrix (a single number)
+- a higher dimensional structure that is harder to visualize.
+- The dimension of the tensor is called its **rank**.
 
 
 ### Liner Transformation described by a matrix
