@@ -1,5 +1,13 @@
 # Chapter 2 - Basic Linear Algebra needed for ML 
 
+
+
+> “Last time I asked: 'What does mathematics mean to you?', and some people answered: "The manipulation of numbers, the manipulation of structures.' And if I had asked what music means to you, would you have answered: 'The manipulation of notes?”
+― [Serge Lang](https://en.wikipedia.org/wiki/Serge_Lang), The Beauty of Doing Mathematics 
+
+
+
+
  As we know computer are comfortable in dealing with numbers and perform fast operations on those numbers to provide us the results we are interested in. But in our real world we deal with **things** like *words, sentences and images*. This creates an *impedance mismatch*. So obvious solution will be to solve this mismatch is by representing our **things** in numbers, let us call this as **Data Representations**.
  
 **Linear Algebra** what we learned in our high school math class comes to save us here!

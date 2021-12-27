@@ -5,6 +5,7 @@
     - [Unsupervised Learning](unsup.md)
 
 - [2. Basic Linear Algebra needed](./chapter_2.md)
+    - [Eigenvectors ](./eigen.md)
     - [References](chapter_2-ref.md)
 
 - [3. ML Models](ml_models.md)
@@ -54,6 +55,7 @@
         - [Apache Beam](apache_beam.md)
         - [Kubeflow](kubeflow.md)
     - [AutoML](automl.md)
+    - [Kubernetes](kubernetes.md)
 
 - [12. Speedup](speedup.md)
     - [JAX](jax.md)
