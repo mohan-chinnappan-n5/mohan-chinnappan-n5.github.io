@@ -36,7 +36,7 @@ A good product manager must be experienced in at least one, **passionate about a
 
 ##  Martin Eriksson's Venn Diagram
 
-![PM Venn](img/pm-venn.png)
+![PM Venn](img/pm-venn-1.svg)
 
 - **Empowering the team** by providing product owner like responsibilities 
 - Trade-off decision maker
