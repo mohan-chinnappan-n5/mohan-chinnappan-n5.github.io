@@ -2,6 +2,10 @@
 
 > Job of the product manager is to **discover** a product that is **valuable, usable and feasible** -  *Marty Cagan*
 
+> Management is learned skill. Nobody was born a great manger - *Ben Horowitz*
+
+> It is easy to teach an innovator to become a CEO than teach a CEO to become an innovator - *Ben Horowitz*
+
 
 ![greatwall](img/greatwall.jpg)
 <sup>image credit: Chromecast</sup>
@@ -257,6 +261,9 @@ Once you have a vision, you have to spread the word in your business.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/F2e3RqL4VWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/yUOC-Y0f5ZQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/F2e3RqL4VWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 
 
 

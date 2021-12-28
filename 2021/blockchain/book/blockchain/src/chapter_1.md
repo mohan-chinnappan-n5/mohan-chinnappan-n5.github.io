@@ -1,4 +1,5 @@
 # Chapter 1 - What is Blockchain?
+> We have a strong belief that ledger that nobody owns is going to be thing that draws all the developers and best payment facility, wire transfer, currency exchange - Ben Horowitz
 
 
 ![falls](img/falls-2.jpg)
@@ -70,7 +71,15 @@ Membership Services|Access to security certificates|d
 
 
 ## References
-[ Gary Gensler: How blockchain can solve the payments riddle](https://www.thebanker.com/Comment-Profiles/Viewpoint/Gary-Gensler-How-blockchain-can-solve-the-payments-riddle?ct=true)
+- [ Gary Gensler: How blockchain can solve the payments riddle](https://www.thebanker.com/Comment-Profiles/Viewpoint/Gary-Gensler-How-blockchain-can-solve-the-payments-riddle?ct=true)
+- [Byzantine fault](https://en.wikipedia.org/wiki/Byzantine_fault)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VWG9xcwjxUg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- [Dining philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FYUi-u7UWgw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 
 
 <iframe width="800" height="420" src="https://www.youtube.com/embed/EH6vE97qIP4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
