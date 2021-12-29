@@ -56,7 +56,39 @@ const compareData = {
     }
 
 
+  ],
+
+  "Competition": [
+    {
+      good:` understand the architectural and business capabilities of the competition and know where the competitors can go easily and can't go at all. Also know they must be better or different (integration/distribution) or they're dead`,
+      bad:`react only to the moves of their competitors and forget to develop their own product's identity, letting it be just a hodge podge of what the competition is not doing`
+    },
+  ],
+
+  "Know what you know and what you do not know": [
+    {
+      good:`acutely aware of what they know and why they know it, as well as what they don't know`,
+      bad:``
+    },
+    {
+      good:`understands the difference between opinions, hunches, and objective facts`,
+      bad:``
+    },
+    {
+      good:`knows that their job is to fill in these gaps in knowledge, not to defend or obfuscate them`,
+      bad:``
+
+    },
+    {
+      good:`doesn't ruin their credibility by over-stating their knowledge`,
+      bad:`try to defend their lack of knowledge rather than gain the knowledge`
+    },
+
+
   ]
+
+
+
 };
 
 const tce = document.getElementById("table-content");
