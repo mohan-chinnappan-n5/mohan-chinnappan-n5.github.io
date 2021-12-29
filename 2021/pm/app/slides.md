@@ -26,7 +26,7 @@ Product Manager is the CEO of the product
 
 Good|Bad|
 ---|---|
-drives vision and are ultimately responsible for the product's success or failure.|think of themselves as marketing resources|
+drives vision and ultimately responsible for the product's success or failure.|think of themselves as marketing resources|
 have a realistic vision of what success of their product means and they ensure that this vision becomes reality - **whatever it takes**|have lots of excuses, like blaming Engineering manager...|
 viewed as the *leader of the product* by the entire product team| when they fail, they point out that: they predicted they would fail|
 
@@ -160,6 +160,6 @@ Use whatever intensity is required to close critical issues.||
 
 # Generation
 ```
-sfdx mohanc:slides:gen  -i slides.md -o pmnotes.html -t 'Notes on Project Management'
+sfdx mohanc:slides:gen  -i slides.md -o pmnotes.html -t 'Notes on Product Management'
 
 ```
