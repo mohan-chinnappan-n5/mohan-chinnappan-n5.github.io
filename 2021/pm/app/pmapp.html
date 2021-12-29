@@ -1,88 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Management App</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Management App</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
-    <style>
-       .popover-header {
-           background-color: aqua;
-       }
-    </style>
+  <style>
+    .popover-header {
+      background-color: aqua;
+    }
+  </style>
+
+  <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+  <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css" />
 </head>
+
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Project Management</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-             
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <blockquote class="blockquote text-center text-success" style="background-color: #eef;">
-        <i>Job of the product manager is to discover a product that is valuable, usable and feasible -  Marty Cagan
-       <br> Product Manager is the CEO of the product - Ben Horowitz</i>
-    </blockquote>
-
-
-<div class="row">
- 
-
-    <div class="col-lg">
-        <img src="../book/img/pm-venn-1.svg" width="100%" usemap="#image-map"/>
-
-        <map name="image-map">
-            <area target="" alt="ux" title="ux" id='uxmap' href="#" coords="185,245,112" shape="circle">
-            <area target="" alt="tech" title="tech" id='techmap' href="#" coords="565,251,252" shape="circle">
-            <area target="" alt="biz" title="biz"   id='bizmap'  href="#" coords="406,548,224" shape="circle">
-
-        </map>
-
-
+  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Project Management</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="col-lg">
+  </nav>
 
-         <div id='btn-group' style='padding:10px;display:none;'>
-          <button type="button" id='UX' class="btn btn-lg btn-danger" data-bs-toggle="popover" title="UX" 
-          data-html="true"   >UX</button>
-          <button type="button" id='Tech' class="btn btn-lg btn-success" data-bs-toggle="popover" title="Tech" 
-          data-html="true"   >Tech</button>
-          <button type="button" id='Biz' class="btn btn-lg btn-primary" data-bs-toggle="popover" title="Biz" 
-          data-html="true"   >Biz</button>
-          </div>
-          <table class="table">
-            <tr>
-              <th>Good</th><th>Bad</th>
-            </tr>
-          </table>
-
-        
+  <div class="m-4" style="display: none;">
+    <p>
+      <!-- Trigger Buttons HTML -->
+      <button type="button" class="btn btn-info ms-4" data-bs-toggle="collapse" data-bs-target="#toggleQuotes">
+        Quotes
+      </button>
+    </p>
+    <!-- Collapsible Element HTML -->
+    <div class="collapse hide" id="toggleQuotes">
+      <div class="card card-body">
+        <blockquote class="blockquote  text-success" style="background-color: #eef">
+          <i>Job of the product manager is to discover a product that is
+            valuable, usable and feasible - Marty Cagan <hr />
+            Product Manager is the CEO of the product - Ben Horowitz</i>
+        </blockquote>
+      </div>
     </div>
+  </div>
+
+  <div class="split split-horizontal" id="dwg">
+    <img src="../book/img/pm-venn-1.svg" width="100%" usemap="#image-map" />
+
+    <map name="image-map">
+      <area target="" alt="ux" title="ux" id="uxmap" href="#" coords="185,245,112" shape="circle" />
+      <area target="" alt="tech" title="tech" id="techmap" href="#" coords="565,251,252" shape="circle" />
+      <area target="" alt="biz" title="biz" id="bizmap" href="#" coords="406,548,224" shape="circle" />
+    </map>
+  </div>
+  <div class="split split-horizontal" id="content">
+    <div id="btn-group" style="padding: 10px; display: none">
+      <button type="button" id="UX" class="btn btn-lg btn-info" data-bs-toggle="popover" title="UX" data-html="true">
+        UX
+      </button>
+      <button type="button" id="Tech" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Tech"
+        data-html="true">
+        Tech
+      </button>
+      <button type="button" id="Biz" class="btn btn-lg btn-warning" data-bs-toggle="popover" title="Biz"
+        data-html="true">
+        Biz
+      </button>
+    </div>
+
     
-</div>
+    <table class="table table-striped table-hover">
+      <tr>
+        <td colspan="2">
+          <button type="button" class="btn btn-primary ms-4" data-bs-toggle="collapse" data-bs-target="#ceop">
+            CEO of the product
+          </button>
+        </td>
+      </tr>
+    </table>
 
+    <div class="collapse hide" id="ceop">
+      <div class="card card-body">
+        <table class="table table-striped table-hover">
+          <tr>
+            <td>
+              drives <b>vision</b> and are ultimately responsible for the
+              product's success or failure
+            </td>
+            <td>think of themselves as marketing resources</td>
+          </tr>
+          <tr>
+            <td>
+              have a <b>realistic vision</b> of what <b>success</b> of their
+              product means and they ensure that this vision becomes reality -
+              whatever it takes
+            </td>
+            <td>have lots of excuses, like blaming Engineering manager...</td>
+          </tr>
+          <tr>
+            <td>
+              viewed as the <b>leader of the product</b> by the entire product
+              team
+            </td>
+            <td>
+              when they fail, they point out that: they predicted they would
+              fail
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <table>
+      <tr>
+        <td colspan="2">
+          <button type="button" class="btn btn-primary ms-4" data-bs-toggle="collapse" data-bs-target="#cgoals">
+            Meets company goals & capabilities
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <div class="collapse hide" id="cgoals">
+      <div class="card card-body">
+        <table class="table table-striped table-hover">
+          <tr>
+            <td>Take all important factors into consideration</td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>
+              understand the capabilities and limitations of their overall
+              company
+            </td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>
+              knows approximately how much and what kind of marketing
+              resources the company will spend on these products
+            </td>
+            <td>build a product that will take too long to pay off</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <script>
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="popover"]')
+    );
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-      return new bootstrap.Popover(popoverTriggerEl, {html: true})
-    })
-
+      return new bootstrap.Popover(popoverTriggerEl, { html: true });
+    });
 
     const ux = `
           <div class='row'>
@@ -109,7 +198,7 @@
   
 </div>
 `;
-const tech = `
+    const tech = `
 <div class='row'>
   <div class='col-lg'>
   
@@ -122,45 +211,40 @@ const tech = `
 </div>
 `;
 
-   const uxEle =  document.getElementById('UX');
-   const techEle =  document.getElementById('Tech');
-   const bizEle =  document.getElementById('Biz');
-   const btnGroupEle = document.getElementById('btn-group');
+    const uxEle = document.getElementById("UX");
+    const techEle = document.getElementById("Tech");
+    const bizEle = document.getElementById("Biz");
+    const btnGroupEle = document.getElementById("btn-group");
 
+    uxEle.dataset.bsContent = ux;
 
+    techEle.dataset.bsContent = tech;
+    bizEle.dataset.bsContent = biz;
 
-   uxEle.dataset.bsContent = ux;
  
-   techEle.dataset.bsContent = tech; 
-   bizEle.dataset.bsContent = biz; 
 
-   /*
-   bizEle.click();
-   techEle.click();
-   uxEle.click();
-   */
+    const techMapEle = document.getElementById("techmap");
+    techMapEle.addEventListener("click", (event) => {
+      techEle.click();
+      btnGroupEle.style.display = "block";
+    });
 
-   const techMapEle = document.getElementById('techmap');
-   techMapEle.addEventListener('click', event => {
-    techEle.click();
-    btnGroupEle.style.display = 'block';
-   })
+    const bizMapEle = document.getElementById("bizmap");
+    bizMapEle.addEventListener("click", (event) => {
+      bizEle.click();
+      btnGroupEle.style.display = "block";
+    });
 
-   const bizMapEle = document.getElementById('bizmap');
-   bizMapEle.addEventListener('click', event => {
-    bizEle.click();
-    btnGroupEle.style.display = 'block';
+    const uxMapEle = document.getElementById("uxmap");
+    uxMapEle.addEventListener("click", (event) => {
+      uxEle.click();
+      btnGroupEle.style.display = "block";
+    });
 
-   })
-
-   const uxMapEle = document.getElementById('uxmap');
-   uxMapEle.addEventListener('click', event => {
-    uxEle.click();
-    btnGroupEle.style.display = 'block';
-
-   })
-
-
-  </script>   
+    Split(["#dwg", "#content"], {
+      sizes: [30, 70],
+    });
+  </script>
 </body>
+
 </html>
