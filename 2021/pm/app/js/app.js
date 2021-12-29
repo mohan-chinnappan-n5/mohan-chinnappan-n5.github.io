@@ -35,6 +35,28 @@ const compareData = {
       bad: `build a product that will take too long to pay off`,
     },
   ],
+
+  "Customer demand": [
+    {
+      good:`listen to customers but they probe deeper into the underlying problems to get at the compelling value proposition for the customer. <i>If you had a noisy car you might ask for a louder stereo, but you would probably be a lot happier with a quieter car</i> `,
+      bad:`ask customers leading questions and get biased answers. Go on their instinct and "confirm" it with two unusual customers`
+    },
+    {
+      good:`also know what customers can & will pay for`,
+      bad:`build a good product for a market their company isn't in`
+    },
+    {
+      good:`certain that if they build a certain product, customers will buy it`,
+      bad:`build a product that's too complex for their company to sell. Aren't savvy or confident enough to distinguish between interest. Blindly listen to the loudest customers, and define a product that addresses yesterday's needs of a handful of companies.and commitment to buy. Compare future products to today's competition, or cite advantages
+      customers don't care about. `
+    },
+    {
+      good:`go the extra mile to make sure they get this right`,
+      bad:``
+    }
+
+
+  ]
 };
 
 const tce = document.getElementById("table-content");
@@ -48,14 +70,14 @@ const fillContent = (ele) => {
     htmlContent += ` <table class="table  table-bordered table-striped table-hover">
       <tr>
         <td colspan="2">
-          <button type="button" id="${id}_" class="btn btn-primary ms-4" data-bs-toggle="collapse" data-bs-target="${id}">
+          <button type="button" title='click to show/hide' id="${id}_" class="btn btn-primary ms-4" data-bs-toggle="collapse" data-bs-target="${id}">
            ${key}
           </button>
         </td>
       </tr>
     </table>
 
-    <div class="collapse show" id="${id}">
+    <div class="collapse hide" id="${id}">
       <div class="card card-body">
         <table class="table table-bordered table-striped table-hover">
       
