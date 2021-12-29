@@ -13,11 +13,7 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
-  <style>
-    .popover-header {
-      background-color: aqua;
-    }
-  </style>
+   <link rel="stylesheet" href="css/app.css">
 
   <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
   <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css" />
@@ -41,7 +37,7 @@
     </div>
   </nav>
 
-  <div class="m-4" style="display: none;">
+  <div class="m-4" style="display: none2;">
     <p>
       <!-- Trigger Buttons HTML -->
       <button type="button" class="btn btn-info ms-4" data-bs-toggle="collapse" data-bs-target="#toggleQuotes">
@@ -53,8 +49,10 @@
       <div class="card card-body">
         <blockquote class="blockquote  text-success" style="background-color: #eef">
           <i>Job of the product manager is to discover a product that is
-            valuable, usable and feasible - Marty Cagan <hr />
-            Product Manager is the CEO of the product - Ben Horowitz</i>
+            valuable, usable and feasible - Marty Cagan
+            <hr />
+            Product Manager is the CEO of the product - Ben Horowitz
+          </i>
         </blockquote>
       </div>
     </div>
@@ -84,167 +82,17 @@
       </button>
     </div>
 
-    
-    <table class="table table-striped table-hover">
+    <table class="table table-bordered table-striped table-hover">
       <tr>
-        <td colspan="2">
-          <button type="button" class="btn btn-primary ms-4" data-bs-toggle="collapse" data-bs-target="#ceop">
-            CEO of the product
-          </button>
-        </td>
+        <th>Good</th>
+        <th>Bad</th>
       </tr>
     </table>
 
-    <div class="collapse hide" id="ceop">
-      <div class="card card-body">
-        <table class="table table-striped table-hover">
-          <tr>
-            <td>
-              drives <b>vision</b> and are ultimately responsible for the
-              product's success or failure
-            </td>
-            <td>think of themselves as marketing resources</td>
-          </tr>
-          <tr>
-            <td>
-              have a <b>realistic vision</b> of what <b>success</b> of their
-              product means and they ensure that this vision becomes reality -
-              whatever it takes
-            </td>
-            <td>have lots of excuses, like blaming Engineering manager...</td>
-          </tr>
-          <tr>
-            <td>
-              viewed as the <b>leader of the product</b> by the entire product
-              team
-            </td>
-            <td>
-              when they fail, they point out that: they predicted they would
-              fail
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <table>
-      <tr>
-        <td colspan="2">
-          <button type="button" class="btn btn-primary ms-4" data-bs-toggle="collapse" data-bs-target="#cgoals">
-            Meets company goals & capabilities
-          </button>
-        </td>
-      </tr>
-    </table>
-
-    <div class="collapse hide" id="cgoals">
-      <div class="card card-body">
-        <table class="table table-striped table-hover">
-          <tr>
-            <td>Take all important factors into consideration</td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>
-              understand the capabilities and limitations of their overall
-              company
-            </td>
-            <td></td>
-          </tr>
-
-          <tr>
-            <td>
-              knows approximately how much and what kind of marketing
-              resources the company will spend on these products
-            </td>
-            <td>build a product that will take too long to pay off</td>
-          </tr>
-        </table>
-      </div>
-    </div>
+    <div id='table-content'> </div>
   </div>
 
-  <script>
-    var popoverTriggerList = [].slice.call(
-      document.querySelectorAll('[data-bs-toggle="popover"]')
-    );
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-      return new bootstrap.Popover(popoverTriggerEl, { html: true });
-    });
-
-    const ux = `
-          <div class='row'>
-            <div class='col-lg'>
-            
-          <ul class="group-list">
-              <li class="group-list-item">be the voice of the user inside the business</li>
-                  <li class="group-list-item"> get user feedback first hand</li>
-          </ul>
-        </div>
-        
-    </div>
-    `;
-
-    const biz = `
-    <div class='row'>
-      <div class='col-lg'>
-      
-    <ul class="group-list">
-        <li class="group-list-item">focus on maximizing business value from the product</li>
-            <li class="group-list-item">obsessed with optimizing the product to achieve the business goals while maximizing return on investment (ROI)</li>
-    </ul>
-  </div>
-  
-</div>
-`;
-    const tech = `
-<div class='row'>
-  <div class='col-lg'>
-  
-<ul class="group-list">
-    <li class="group-list-item">there’s no point defining what to build if you don’t know how it will get built</li>
-        <li class="group-list-item">understanding the level of effort (LOE) involved is crucial to making the right decisions</li>
-</ul>
-</div>
-
-</div>
-`;
-
-    const uxEle = document.getElementById("UX");
-    const techEle = document.getElementById("Tech");
-    const bizEle = document.getElementById("Biz");
-    const btnGroupEle = document.getElementById("btn-group");
-
-    uxEle.dataset.bsContent = ux;
-
-    techEle.dataset.bsContent = tech;
-    bizEle.dataset.bsContent = biz;
-
- 
-
-    const techMapEle = document.getElementById("techmap");
-    techMapEle.addEventListener("click", (event) => {
-      techEle.click();
-      btnGroupEle.style.display = "block";
-    });
-
-    const bizMapEle = document.getElementById("bizmap");
-    bizMapEle.addEventListener("click", (event) => {
-      bizEle.click();
-      btnGroupEle.style.display = "block";
-    });
-
-    const uxMapEle = document.getElementById("uxmap");
-    uxMapEle.addEventListener("click", (event) => {
-      uxEle.click();
-      btnGroupEle.style.display = "block";
-    });
-
-    Split(["#dwg", "#content"], {
-      sizes: [30, 70],
-    });
-  </script>
+ <script src='js/app.js'></script> 
 </body>
 
 </html>
