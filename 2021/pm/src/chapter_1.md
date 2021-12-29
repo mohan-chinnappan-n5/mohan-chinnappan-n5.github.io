@@ -89,8 +89,7 @@ product's identity, letting it be just a hodge podge of what the competition is 
 #### Know what you know and what you do not know
 Good|Bad|
 ---|---|
- acutely aware of what they know and why they know it, as well as what they don't
-know.| |
+ acutely aware of what they know and why they know it, as well as what they don't know.| |
 understands the difference between opinions, hunches, and objective facts.||
 knows that their job is to fill in these gaps in knowledge, not to defend or obfuscate them.||
 doesn't ruin their credibility by over-stating their knowledge. |try to defend their lack of knowledge
