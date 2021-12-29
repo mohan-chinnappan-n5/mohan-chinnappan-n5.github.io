@@ -78,7 +78,7 @@ customers don't care about. |
 go the extra mile to make sure they get this right||
 
 
-#### Competition
+#### Understanding competition
 
 Good|Bad|
 ---|---|
@@ -86,7 +86,7 @@ Good|Bad|
 product's identity, letting it be just a hodge podge of what the competition is not doing|
  
 
-#### Know what you know and what you don't know
+#### Know what you know and what you do not know
 Good|Bad|
 ---|---|
  acutely aware of what they know and why they know it, as well as what they don't
@@ -107,7 +107,7 @@ actively confirm their understanding with their managers and others on their tea
 
 
 
-### Clear, written communication with product development
+### Clear written communication 
 
 Good|Bad|
 ---|---|

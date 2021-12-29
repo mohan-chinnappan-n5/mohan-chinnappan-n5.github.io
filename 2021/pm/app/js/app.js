@@ -85,6 +85,30 @@ const compareData = {
     },
 
 
+  ],
+
+  "Think ahead and monitor assumptions": [
+
+    { good: `know what their important assumptions are and they monitor them from time to time to make sure they still hold`,
+      bad: `have blinders on and don't notice when things change and notice only when their product fails `
+  
+    },
+    {
+      good:`re-evaluate the assumption as soon that assumption is threatened`,
+      bad: ``
+    },
+    {
+      good: `actively confirm the understanding with their managers and others on their team`,
+      bad:``
+    }
+
+  ],
+
+  "Clear written communication": [
+    {
+      good:`define clearly and in as much detail as is necessary what the product should do, how fast it should be`,
+      bad: `cut corners on communication with engineering or misunderstand their role`
+    }
   ]
 
 
