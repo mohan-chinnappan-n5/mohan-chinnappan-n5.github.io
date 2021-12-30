@@ -1,5 +1,8 @@
 # Chapter 1 : Quick Introduction
 
+> Select few pilots (say 2) in parallel, not in mission-critical areas but in smaller ones, in your specific industry, where a win is likely in a few months time, and where *successes will win over
+skeptics*.  - **Andrew Ng** in How to Choose Your First AI Project
+
 ![Valley](industry/img/valley.jpg)
 <sup>Image credit: Chromecast</sup>
 
@@ -142,6 +145,10 @@ Power here is we can predict the values for the given input with our Model
 
 <iframe width="780" height="420" src="https://www.youtube.com/embed/h0e2HAPTGF4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+## References
+- [How to Choose Your First AI Project ](https://hbr.org/2019/02/how-to-choose-your-first-ai-project)
+- [A Very Quick Primer for Curious Executives](https://drive.google.com/file/d/13j4E5pDyygeK7f9cDz4VmGtuxQ2YN1Cc/view)
+ 
 
 
 
