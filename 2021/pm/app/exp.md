@@ -161,7 +161,7 @@ even Google does in all of its services combined.
     - Scalability
     - Availability
 
-# Roadmap, Epics - JIRA based
+# Roadmap, Epics, Issues - JIRA based
 
 ![project goals](img/project-goals.svg)
 
