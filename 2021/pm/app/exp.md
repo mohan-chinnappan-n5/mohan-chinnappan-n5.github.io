@@ -73,7 +73,7 @@ entertainment industry world!
 
 ```
 How we designed CID (Component ID) in component information system to identify
-any component in the world,  MusicID will identify any music in the world!
+any component in the world,  MusicID (32-bit number) will identify any music in the world!
 
 ```
 
@@ -125,6 +125,9 @@ even Google does in all of its services combined.
 
 ![Steve on Design](https://mohan-chinnappan-n2.github.io/2021/wp/design/img/jobs1.png)
 
+
+[![Gracenote on tv](img/gracenote_data_tv.jpg)](https://techcrunch.com/2017/02/23/nielsen-unified-tv-music-sports/)
+
 ## MusicID CD
 - When a driver pops a CD into their car audio system ([Discoverability and Feedback](https://mohan-chinnappan-n2.github.io/2021/wp/design/design.md.html#2))
 - Gracenote MusicID CD recognizes the disc and delivers the correct artist, album and track names, as well as **Album Cover Art** to the dashboard display
@@ -145,8 +148,9 @@ even Google does in all of its services combined.
 
 ```
 
-- Core ingredient is solid music metadata store
+- Core ingredient is solid music metadata store - [CDDB](https://en.wikipedia.org/wiki/CDDB)
     - Complete and up-to-date
+    - Info about complete album, not just the tracks
     - Versioned
     - API support
     - Easy to integrate
@@ -157,3 +161,17 @@ even Google does in all of its services combined.
     - Scalability
     - Availability
 
+
+# CDDB1 example 
+- [code](https://github.com/gekowa/node-discid/blob/master/src/index.js)
+
+```
+32 bit id 
+8 hexadecimal
+    2 digits - (sum of starting time of all the track) mod 255
+    4 digits - total time of the CD in secs from start of the first track to
+      end of the last track
+    2 digits - number of tracks on the CD
+
+
+```
