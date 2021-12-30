@@ -161,6 +161,44 @@ even Google does in all of its services combined.
     - Scalability
     - Availability
 
+# Roadmap, Epics - JIRA based
+
+![project goals](img/project-goals.svg)
+
+
+Big Goals
+-   Roadmap
+    - Project Goals (Epics ![epic](img/epic.svg))
+        - Issues (user stories, bugs, tasks)
+ 
+- Turn the big goals into achievable outcomes so our team can get more done, more often. 
+- The roadmap helps us to plan, track, and visualize our project goals, which we call epics. 
+- The epics are then broken down into small, actionable chunks of work.
+    - Breakdown a goal so you can categorize, assign and move work forward, bit by bit. 
+    - In Jira Software, *chunks of work* are called *issues*. 
+    ![chucks](img/small-chuncks.svg)
+    ![epic-2-work](img/epic-2-work.gif)
+    - There are different types of issues, like 
+        - user stories
+        - bugs
+        - tasks
+
+
+
+![smartcontract](img/smart-contract-2.png)
+```
+
+Map out your project goals
+Identify small chunks of work
+Monitor and manage risk
+Create an issue
+```
+
+- Images credit: Jira
+
+## References
+- [Atlassian Agile Coach](https://www.atlassian.com/agile/tutorials/epics#new-epics)
+
 
 # CDDB1 example 
 - [code](https://github.com/gekowa/node-discid/blob/master/src/index.js)
@@ -175,3 +213,4 @@ even Google does in all of its services combined.
 
 
 ```
+
