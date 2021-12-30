@@ -50,23 +50,51 @@
 - Nielsen Holdings Group
 - Companies using:
     - Microsoft
-    - Apple
+    - Apple (iTunes)
     - Samsung 
     - Pandora
+    - Comcast
 - Used in vehicles: (120 Million cars)
     - Tesla
     - BMW
     - Toyota Entune
     - Ford
+    - Mercedes
 
-# Gracenote - UX
+# Valuable, Usable and Feasible 
+![VUF](https://mohan-chinnappan-n5.github.io/2021/pm/src/img/pm-venn-1.svg)
 
-- Gracenote Global Music Data is the most comprehensive collection of factual and descriptive metadata for the most popular music worldwide.
+# Gracenote - Biz (Valuable)
+
+```
+We need an awesome "Global Music Data" to become major player in 
+entertainment industry world! 
+```
+
+```
+How we designed CID (Component ID) in component information system to identify
+any component in the world,  MusicID will identify any music in the world!
+
+```
+
+- [US Patent US7555447B2 - System and method for identifying a product - Mohanasundaram Chinnappan, Manoel Tenorio ](https://patents.google.com/patent/US7555447B2/en?inventor=Mohanasundaram+Chinnappan&oq=inventor:(Mohanasundaram+Chinnappan))
+
+```
+The Gracenote search engine answers more queries per day than any other search engine, 
+save Google (even more than Yahoo!, MSN, AOL and all the others). 
+When you consider all types of user queries, 
+the Gracenote service handles far more queries on any given day than 
+even Google does in all of its services combined.
+- Steve Scherf , Co-founder of Gracenote
+
+```
+
+- **Gracenote Global Music Data** is the most comprehensive collection of factual and descriptive metadata for the most popular music worldwide.
 
 - With deep, clean data and standardized artist and recording IDs, Gracenote enables entertainment services to simplify how fans *find, discover, and connect* with more of the music they love.
 
 
-- Gracenote MusicID is the standard for music recognition in the car, powering the music experience in **120 million vehicles and counting**. 
+- Gracenote **MusicID** is the standard for music recognition in the car, powering the music experience in **120 million vehicles and counting**. 
 
 - With MusicID, drivers and passengers can easily identify and navigate all of their favorite jams, from any device, while keeping their eyes on the road.
 
@@ -85,9 +113,47 @@
 - Once music is identified by MusicID CD or MusicID File, Gracenote algorithms can transform music stored on mobile phones into killer playlists organized by similar Genres, Moods and Tempos.
 
 
+## Integration
+ - Help 3rd party companies to integrate **Gracenote metadata** into their applications and systems leveraged by the biggest entertainment brands around the globe. 
+
 ## Gracenote Sports
 ## Gracenote Video
 
-# Gracenote - Biz
+# Gracenote -  UX (Usable)
 
-# Gracenote - Tech
+[Guiding Principles](https://mohan-chinnappan-n2.github.io/2021/wp/design/design.md.html#0)
+
+![Steve on Design](https://mohan-chinnappan-n2.github.io/2021/wp/design/img/jobs1.png)
+
+## MusicID CD
+- When a driver pops a CD into their car audio system ([Discoverability and Feedback](https://mohan-chinnappan-n2.github.io/2021/wp/design/design.md.html#2))
+- Gracenote MusicID CD recognizes the disc and delivers the correct artist, album and track names, as well as **Album Cover Art** to the dashboard display
+
+## Future
+- As soon as the driver enters the car, system should find out the mood (using including Facial Recognition) of the driver and crew to offer the right playlist for the travel
+
+ 
+# Gracenote - Tech (Feasible)
+
+```
+The Gracenote search engine answers more queries per day than any other search engine, 
+save Google (even more than Yahoo!, MSN, AOL and all the others). 
+When you consider all types of user queries, 
+the Gracenote service handles far more queries on any given day than 
+even Google does in all of its services combined.
+- Steve Scherf , Co-founder of Gracenote
+
+```
+
+- Core ingredient is solid music metadata store
+    - Complete and up-to-date
+    - Versioned
+    - API support
+    - Easy to integrate
+- Search engine 
+    - Accuracy
+    - Performance
+    - Reliability
+    - Scalability
+    - Availability
+
