@@ -255,7 +255,8 @@ metadata search engine response within 150 milliseconds|Y|-|N|NA|v 1.0|
 
 ## 5. MVP Prototype
 
-- Use Click and Touch prototyping tools like Figma, In-vision
+- Use Click and Touch prototyping tools like Figma, In-vision without writing code
+
 ![Prototyping tools](img/prototyping-tools.png)
 
 ## 6. Test MVP with the customers
@@ -389,3 +390,5 @@ its behavior accordingly.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m_c-B_MrxQU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
+# Figma
+![Figma - smartcontracts](img/figma-sc-2.png)
