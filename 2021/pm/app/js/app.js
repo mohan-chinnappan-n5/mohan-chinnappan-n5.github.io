@@ -58,7 +58,7 @@ const compareData = {
 
   ],
 
-  "Competition": [
+  "Understanding competition": [
     {
       good:` understand the architectural and business capabilities of the competition and know where the competitors can go easily and can't go at all. Also know they must be better or different (integration/distribution) or they're dead`,
       bad:`react only to the moves of their competitors and forget to develop their own product's identity, letting it be just a hodge podge of what the competition is not doing`

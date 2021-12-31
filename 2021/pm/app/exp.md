@@ -1,5 +1,7 @@
 # Products involved
 
+  <link rel="stylesheet" href="css/exp.css">
+
 ## CEO of these products!
 
 - 1. ERP for Telephone Industry (ITI)
@@ -31,7 +33,7 @@
 - 7. Web Center Content integration for Siebel CRM
 - 8. Bootstrapped Salesforce Consumer Goods Field Sales Application
 - 9. CLI for Tableau CRM
-- 10 Tableau CRM Workbench
+- 10. Tableau CRM Workbench
 
 
 # Frameworks followed
@@ -161,12 +163,54 @@ even Google does in all of its services combined.
     - Scalability
     - Availability
 
+
+# Process
+
+
+- 1. Find Target Customer 
+- 2. Customer needs (not served or under-served)
+- 3. Value Proposition 
+- 4. MVP Feature Set
+- 5. MVP Prototype
+- 6. Test MVP with the customers 
+
+- **High-level need**
+- When a user/driver pops a CD into their car/home audio system 
+- Gracenote MusicID CD recognizes the disc and delivers the correct artist, album and track names, as well as **Album Cover Art** to the dashboard display
+
+- **Importance vs Satisfaction with current alternatives**
+
+![amzn customer obsession](img/jeff-bezos-quote-2.jpg)
+
+Importance |  Satisfaction  | Comments|
+---|---|---|
+**High**|**Low**|**Opportunity**|
+High|High|Competitive Market|
+Low|High|Not worth going after|
+Low|Low|Not worth going after|
+
+
+- **Value Proposition** - Iterations
+
+Item|Must-to-have|Perf benefits|Wow|Competitor|Ours|
+---|---|---|---|---|
+metadata search engine response within 150 milliseconds|Y|-|N|NA|v 1.0|
+metadata search engine response within 100 milliseconds|N|Y|N|NA|v 1.2|
+search based on nicknames|N|N|Y|NA|v 1.3|
+user mood based auto search|N|N|Y|NA|v 2.0|
+---|---|---|---|---|
+
+
+
+## Playbook
+- [The Lean Product Playbook - Dan Olsen](https://www.slideshare.net/productschool/the-lean-product-playbook-with-dan-olsen)
+
+
 # Roadmap, Epics, Issues - JIRA based
 
 ![project goals](img/project-goals.svg)
 
 
-Big Goals
 -   Roadmap
     - Project Goals (Epics ![epic](img/epic.svg))
         - Issues (user stories, bugs, tasks)
@@ -199,6 +243,12 @@ Create an issue
 ## References
 - [Atlassian Agile Coach](https://www.atlassian.com/agile/tutorials/epics#new-epics)
 
+# Automation in PM tool
+-   Automate the processes and workflows
+    - Rule based (example: [Jira Automation](https://www.atlassian.com/software/jira/guides/expand-jira/automation))
+
+- ![Jira Trigger](img/Jira-Automation-triggers.png)
+- ![Jira automation rules](img/jira-Rule-details.png)
 
 # CDDB1 example 
 - [code](https://github.com/gekowa/node-discid/blob/master/src/index.js)
@@ -213,4 +263,60 @@ Create an issue
 
 
 ```
+
+# Agile Manifesto
+
+- [Agile Manifesto](https://agilemanifesto.org/principles.html)
+```
+Our highest priority is to satisfy the customer
+through early and continuous delivery
+of valuable software.
+
+Welcome changing requirements, even late in
+development. Agile processes harness change for
+the customer's competitive advantage.
+
+Deliver working software frequently, from a
+couple of weeks to a couple of months, with a
+preference to the shorter timescale.
+
+Business people and developers must work
+together daily throughout the project.
+
+Build projects around motivated individuals.
+Give them the environment and support they need,
+and trust them to get the job done.
+
+The most efficient and effective method of
+conveying information to and within a development
+team is face-to-face conversation.
+
+Working software is the primary measure of progress.
+
+Agile processes promote sustainable development.
+The sponsors, developers, and users should be able
+to maintain a constant pace indefinitely.
+
+Continuous attention to technical excellence
+and good design enhances agility.
+
+Simplicity--the art of maximizing the amount
+of work not done--is essential.
+
+The best architectures, requirements, and designs
+emerge from self-organizing teams.
+
+At regular intervals, the team reflects on how
+to become more effective, then tunes and adjusts
+its behavior accordingly.
+```
+
+# Lean Product Playbook
+
+- Get your idea from your head into paper
+- Figure out the fastest way to test
+- 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/m_c-B_MrxQU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 
