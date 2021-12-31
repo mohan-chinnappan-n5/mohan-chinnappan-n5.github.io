@@ -1,6 +1,5 @@
 # Products involved
 
-  <link rel="stylesheet" href="css/exp.css">
 
 ## CEO of these products!
 
@@ -178,9 +177,23 @@ even Google does in all of its services combined.
 - When a user/driver pops a CD into their car/home audio system 
 - Gracenote MusicID CD recognizes the disc and delivers the correct artist, album and track names, as well as **Album Cover Art** to the dashboard display
 
-- **Importance vs Satisfaction with current alternatives**
+- **Product-Market-Fit**
+
+```
+Product-market fit means finding a good market with a product 
+capable of satisfying that market - Marc Andreesen 
+```
+
+
+
+
+![product-market-fit](img/product-market-fit-dan.png)
 
 ![amzn customer obsession](img/jeff-bezos-quote-2.jpg)
+
+
+- **Importance vs Satisfaction with current alternatives**
+
 
 Importance |  Satisfaction  | Comments|
 ---|---|---|
