@@ -196,9 +196,13 @@ Item|Must-to-have|Perf benefits|Wow|Competitor|Ours|
 ---|---|---|---|---|
 metadata search engine response within 150 milliseconds|Y|-|N|NA|v 1.0|
 metadata search engine response within 100 milliseconds|N|Y|N|NA|v 1.2|
-search based on nicknames|N|N|Y|NA|v 1.3|
+search based on nicknames and aliases|N|N|Y|NA|v 1.3|
+voice based on search|N|N|Y|NA|v 1.4|
 user mood based auto search|N|N|Y|NA|v 2.0|
----|---|---|---|---|
+
+- **User Benefits**
+- Hands free operation for the vehicle drivers
+- Enable drivers to browse and play music using **voice and touch** commands.
 
 
 
