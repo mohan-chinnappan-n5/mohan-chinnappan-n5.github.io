@@ -24,6 +24,11 @@ Product Manager is the CEO of the product
 
 # CEO of the product
 
+```
+Ensure the success of the product vision becomes reality - whatever it takes!
+
+```
+
 Good|Bad|
 ---|---|
 drives vision and ultimately responsible for the product's success or failure.|think of themselves as marketing resources|
@@ -32,6 +37,11 @@ viewed as the *leader of the product* by the entire product team| when they fail
 
 
 # Meets company goals and capabilities
+
+```
+How much and what kind of marketing resources the company will spend on my product?
+
+```
 
 Good|Bad|
 ---|---|
@@ -42,6 +52,12 @@ knows approximately how much and what kind of marketing resources the company wi
 
 
 # Customer demand
+
+```
+Get the compelling value proposition for the customer!
+
+```
+
 Good|Bad|
 ---|---|
  **listen to customers** but probe deeper into the underlying problems to get at the **compelling value proposition** for the customer. *If you had a noisy car you might ask for a louder stereo, but you would probably be a lot happier with a quieter car* |ask customers leading questions and get biased answers. Go on their instinct and "confirm" it with two unusual customers|
@@ -56,6 +72,11 @@ go the extra mile to make sure they get this right||
 
 # Understanding competition
 
+```
+Knowing where the competitors can go easily and can't go at all is the key!
+
+```
+
 Good|Bad|
 ---|---|
  understand the architectural and business capabilities of the competition and know where the competitors can go easily and can't go at all. Also know the product must be better or different (integration/distribution). |react only to the moves of their competitors and forget to develop their own|
@@ -69,6 +90,16 @@ Good|Bad|
  
 
 # Know what you know and what you do not know
+
+```
+A fact is a statement that can be proven true or false. 
+An opinion is an expression of a person’s feelings that cannot be proven. 
+Opinions can be based on facts or emotions and
+sometimes they are meant to deliberately mislead others. 
+
+- The Center for Humanities, Inc. (1977).  Making judgments and Drawing Conclusions. 
+
+```
 Good|Bad|
 ---|---|
 acutely aware of what they know and why they know it, as well as what they don't know.| |
@@ -85,6 +116,16 @@ gain the knowledge all the time and be paranoid!|
 
 # Think ahead and monitor your assumptions
 
+```
+It is impossible to plan a project without making a few assumptions. 
+The key is knowing how to spot those assumptions and putting safeguards 
+in place so that if any assumption is proven false, 
+the impact on project delivery will be minimal.
+
+- Project Management Institute (PMI)
+
+```
+
 Good|Bad|
 ---|---|
 know what their important assumptions are and they monitor them from time to time to make sure they still hold| have blinders on and don't notice when things change and notice only when their product fails. |
@@ -98,22 +139,32 @@ actively confirm their understanding with their managers and others on their tea
 
 # Clear written communication 
 
+```
+1. Know Your Goal and State It Clearly
+2. Use the Correct Tone for Your Purpose
+3. Keep Language Simple
+4. Stay on Topic and Keep It Concise
+
+```
+
 Good|Bad|
 ---|---|
 define clearly and in as much detail as is necessary what the product should do, how fast it should be, etc.| cut corners on communication with engineering or misunderstand their role.  |
 don't forget to specify critical information.||
 willing to explain the obvious to make sure it's understood.||
 specify the whole product, including release criteria, platforms, etc., not only the new features||
-sense and tackle hard issues - in writing - early in the development process. ||
+sense and tackle hard issues - **in writing - early in the development process** ||
 production information  based on research, information and a logical, transparent
 thought process that the entire team buys into||
-know that engineers are scientists by nature and value data much more than opinion. other
+know that engineers are scientists by nature and **value data much more than opinion**. other
 parts of PD (QA, Doc, etc.) should be involved in that process. ||
 define a clear product vision and target that empowers engineering to fill in the details that are difficult to specify or anticipate.||
 explain why engineering should build a particular product a particular way.|They want light and ask for a candle when their engineers could have built a light bulb.|
 respected by their engineering teams. Engineering teams involve good product managers in difficult decisions. ||
 Written communication to engineering is superior because it is more consistent across an entire product team, it is more lasting, it raises accountability. | put off hard decisions until the end of the product cycle|
 attend product team meetings regularly and make sure they're around when engineering is making tradeoffs. |change engineering priorities based on the latest customer feedback or latest hot sales situation without going through the defined process|
+
+## Action Items
 
 |Area|Key Points|Comments|
 |---|---|---|
@@ -122,7 +173,7 @@ attend product team meetings regularly and make sure they're around when enginee
 |Dependencies|Provide  technical dependency diagrams|New feature is depending on this|
 |Dependencies|Provide  team dependency diagrams|Can’t be completed until  team Y has completed theirs|
 
-- Org Structure
+## Org Structure
 |Who|Responsible for|Team Members|
 |---|---|---|
 |Team - A|Mobile Development||
@@ -139,8 +190,90 @@ attend product team meetings regularly and make sure they're around when enginee
 # Product Requirements Document (PRD) 
 Good|Bad|
 ---|---|
-keep PRDs up-to-date daily or weekly at a minimum.  Good product managers view the entire PRD process as a living ongoing process, because it is (engineering has new questions, market conditions change, etc.). If anything changes in the PRD, a good product manager communicates the change clearly to the entire product team| write a PRD and assume engineering understands it.
-don't rest until they are sure that the product vision is consistent across product management, engineering, QA, tech pubs, and support and is reflected in the PRD. They don't rest, because they know that no great product ever emerged from a broad set of conflicting visions|managers don't have time to update their PRD. update the PRD and don't tell anyone, or don't tell enough people, or don't explain why.|
+keep PRDs up-to-date daily or weekly at a minimum.  Good product managers **view the entire PRD process as a living ongoing process**, because it is (engineering has new questions, market conditions change, etc.). If anything changes in the PRD, a good product manager **communicates the change clearly to the entire product team**| write a PRD and assume engineering understands it.
+don't rest until they are sure that the **product vision is consistent across** product management, engineering, QA, tech pubs, and support and is reflected in the PRD. They don't rest, because they know that **no great product ever emerged from a broad set of conflicting visions**|managers don't have time to update their PRD. update the PRD and don't tell anyone, or don't tell enough people, or don't explain why.|
+
+
+## Sample PRD (Confluence based)
+
+
+-----
+
+Item|Value
+---|---|
+Target release|| 
+Epic|Jira epics and issues|
+Doc Status|Draft|
+Doc Owner||
+Designer||
+Tech Lead||
+Tech Writers||
+QA||
+
+----
+
+### Objectives
+
+![obj](img/obj.png)
+
+|Objective|Comments|
+|---|---|
+|State the objective here...||
+
+----
+
+### Success metrics
+![metrics](img/metrics.png)
+
+Goal|Metric|
+---|---|
+Goal-1|80% completed|
+
+----
+
+### Assumptions
+
+![Assumptions](img/assumptions.png)
+
+|Assumption|Valid now?|Comments|
+|--|--|--|
+|Call deflection is number one priority for the customer|Yes||
+|Customer is ok with Basic Auth until we provide OAuth2|No|We need to support OAuth2 ASAP|
+
+----
+
+### Milestones 
+![Milestones](img/milestones.png)
+![Milestones-2](img/milestones-2.png)
+
+### Requirements
+
+![req](img/req.png)
+Requirement|User Story|Importance|Jira Issue|Notes|
+---|---|---|---|---|
+OAuth2 support|US134|HIGH|I345|Customer needs this feature ASAP|
+
+### User interaction and design
+![ui](img/ui.png)
+UI Needs|Comments|
+---|---|
+Discoverability|Should be easy for the user to know about this feature|
+Feedback|UI should provide feedback for every action performed by the user|
+
+### Open Questions
+![oq](img/question_mark_64.png)
+
+Question|Answer|Date Answered|
+---|---|---|
+Required REST API performance|100 ms average|Dec-10-2021|
+
+### Out of Scope
+![oos](img/oos.png)
+
+Item|Notes
+---|---|
+User mood based auto search|May be in version 2.0|
+
 
 # Clear goals and advantages
 
@@ -150,10 +283,21 @@ Good product managers have clear goals| have mushy goals and mushy product advan
 re-evaluate the assumption as soon that assumption is threatened.||
 define success as achieving explicit goals. Goals that are important are written down.||
 have written goals for their product and for their own personal objectives|have inconsistent product positioning and advantages change from time to time|
-know how their product will be better / different than the competition - a key part of the overall product vision from day one and is reflected in most things the product manager does|hesitate when asked for the advantages of their product.|
+know how their **product will be better / different than the competition** - a key part of the overall product vision from day one and is reflected in most things the product manager does|hesitate when asked for the advantages of their product.|
 
 
-# Focus on the sales force and customers
+# Focus on the salesforce and customers
+
+```
+Knowing the current status of the salesforce will make you a winner!
+
+```
+
+```
+Knowing a handful of current and potential customers personally will be a great asset!
+
+```
+
 Good|Bad|
 ---|---|
 good product manager will be known personally or by reputation by at least half the sales force.||
