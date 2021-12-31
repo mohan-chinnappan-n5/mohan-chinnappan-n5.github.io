@@ -376,12 +376,6 @@ to become more effective, then tunes and adjusts
 its behavior accordingly.
 ```
 
-# Lean Product Playbook
-
-- Get your idea from your head into paper
-- Figure out the fastest way to test
-- 
-
 
 # Lessons from Figma vs InVision
 - [The precipitous rise of Figma and fall of InVision](https://uxdesign.cc/the-precipitous-rise-of-figma-and-fall-of-invision-435f07e8d1b6)
