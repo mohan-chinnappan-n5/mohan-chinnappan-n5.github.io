@@ -48,19 +48,26 @@
 - MusicID
 - Fingerprint digital music for statistical and analytical purposes
 
-- Nielsen Holdings Group
-- Companies using:
-    - Microsoft
-    - Apple (iTunes)
-    - Samsung 
-    - Pandora
-    - Comcast
-- Used in vehicles: (120 Million cars)
-    - Tesla
-    - BMW
-    - Toyota Entune
-    - Ford
-    - Mercedes
+
+## Companies
+
+|Companies using Gracenote|
+|---|
+|Microsoft|
+|Apple (iTunes)|
+|Samsung|
+|Pandora|
+|Comcast|
+
+
+## Vehicles
+|Used in vehicles: (120 Million cars)|
+|---|
+| BMW|
+| Tesla|
+| Toyota Entune|
+| Ford|
+| Mercedes|
 
 # Valuable, Usable and Feasible 
 ![VUF](https://mohan-chinnappan-n5.github.io/2021/pm/src/img/pm-venn-1.svg)
@@ -86,7 +93,7 @@ save Google (even more than Yahoo!, MSN, AOL and all the others).
 When you consider all types of user queries, 
 the Gracenote service handles far more queries on any given day than 
 even Google does in all of its services combined.
-- Steve Scherf , Co-founder of Gracenote
+- Steve Scherf -  Co-founder of Gracenote
 
 ```
 
@@ -145,7 +152,7 @@ save Google (even more than Yahoo!, MSN, AOL and all the others).
 When you consider all types of user queries, 
 the Gracenote service handles far more queries on any given day than 
 even Google does in all of its services combined.
-- Steve Scherf , Co-founder of Gracenote
+- Steve Scherf - Co-founder of Gracenote
 
 ```
 
