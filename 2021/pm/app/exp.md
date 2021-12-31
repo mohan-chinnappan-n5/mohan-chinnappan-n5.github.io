@@ -224,6 +224,18 @@ user mood based auto search|N|N|Y|NA|v 2.0|
 - Enable drivers to browse and play music using **voice and touch** commands.
 
 
+- **Feature Set**
+- Do not over build before we realize we are going in wrong direction!
+- Plan for the MVP
+Item|Must-to-have|Perf benefits|Wow|Competitor|Ours|
+---|---|---|---|---|
+metadata search engine response within 150 milliseconds|Y|-|N|NA|v 1.0|
+
+- MVP to have v1.0 features
+
+- **UX**
+- Brings the functionality and Product to *LIFE*
+
 
 ## Playbook
 - [The Lean Product Playbook - Dan Olsen](https://www.slideshare.net/productschool/the-lean-product-playbook-with-dan-olsen)
