@@ -189,6 +189,12 @@ capable of satisfying that market - Marc Andreesen
 
 ![product-market-fit](img/product-market-fit-dan.png)
 
+```
+My background is Engineering, if I want to try achieve something, 
+I like have a rigorous framework I can use and rely on. 
+- Dan Olsen
+```
+
 ![amzn customer obsession](img/jeff-bezos-quote-2.jpg)
 
 
