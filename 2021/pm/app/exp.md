@@ -191,7 +191,7 @@ capable of satisfying that market - Marc Andreesen
 
 ```
 My background is in Engineering, if I want to try achieve something, 
-I like have a rigorous framework I can use and rely on. 
+I like to have a rigorous framework I can use and rely on. 
 - Dan Olsen
 ```
 
@@ -235,6 +235,11 @@ metadata search engine response within 150 milliseconds|Y|-|N|NA|v 1.0|
 
 - **UX**
 - Brings the functionality and Product to *LIFE*
+
+- **MVP** Prototyping
+
+- Use Click and Touch prototyping tools like Figma, In-vision
+![Prototyping tools](img/prototyping-tools.png)
 
 
 ## Playbook
@@ -352,6 +357,9 @@ its behavior accordingly.
 - Figure out the fastest way to test
 - 
 
+
+# Lessons from Figma vs InVision
+- [The precipitous rise of Figma and fall of InVision](https://uxdesign.cc/the-precipitous-rise-of-figma-and-fall-of-invision-435f07e8d1b6)
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m_c-B_MrxQU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
