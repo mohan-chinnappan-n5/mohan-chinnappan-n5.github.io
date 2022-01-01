@@ -291,16 +291,32 @@ set an appointment on Tuesday at 9 am
 User|Bot|Intent|Action|Sentiment|Comments
 ---|---|---|---|--|---|
 set an appointment on Tuesday at 9 am|You all set for the appointment at 2022-01-04T09:00:00|Schedule Appointment|Not Available, Parameter:```date-time```, Value:```{ "date_time": "2022-01-04T09:00:00-05:00" }```|Query Score: 0.0||
-set an appointment|Not Available|Schedule Appointment|Not Available, Parameter:```date-time```, Value:``` ```|Query Score: 0.0|missing date-time, requires **slot filling**|
+set an appointment|Not Available|Schedule Appointment|Not Available, Parameter:```date-time```, Value:``` ```|Query Score: 0.0|missing ```date-time```, requires **slot filling**|
 
 
 
-
+### Slot filling
+- Make the entities as **required**
+    - Dialog flow will make sure it ask both date and time before it can respond back
  
 
 
- 
+User|Bot|Intent|Action|Sentiment|Comments
+---|---|---|---|--|---|
+set an appointment|What time and date you like to come in for the appointment?|Schedule Appointment|Not Available, Parameter:```date-time```, Value:``` ```|Query Score: 0.0|missing ```date-time```, requires **slot filling prompt is asked**| 
+Monday 10 am|You all set for the appointment at 2022-01-03T10:00:00|Schedule Appointment|Not Available, Parameter:```date-time```, Value:```{ "date_time": "2022-01-04T09:00:00-05:00" }```|Query Score: 0.0| ```date-time``` is provided by the user| 
 
+
+### Testing in our app
+
+- Create a sample webapp using SFDX CLI
+```
+sfdx mohanc:app:webapp:gen -i /tmp/app.md -o df-appt.html \ 
+                           -t 'Dialogflow Appointment testing app'
+```
+
+- Demo
+![testing Dialog flow Demo](img/chatbots/df-app-test.webm.gif)
 
 
 

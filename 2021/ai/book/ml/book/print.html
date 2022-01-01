@@ -3352,8 +3352,31 @@ weather in Boston now|Sorry, what was that?|Default Fallback Intent|input.unknow
 </code></pre>
 <table><thead><tr><th>User</th><th>Bot</th><th>Intent</th><th>Action</th><th>Sentiment</th><th>Comments</th></tr></thead><tbody>
 <tr><td>set an appointment on Tuesday at 9 am</td><td>You all set for the appointment at 2022-01-04T09:00:00</td><td>Schedule Appointment</td><td>Not Available, Parameter:<code>date-time</code>, Value:<code>{ &quot;date_time&quot;: &quot;2022-01-04T09:00:00-05:00&quot; }</code></td><td>Query Score: 0.0</td><td></td></tr>
-<tr><td>set an appointment</td><td>Not Available</td><td>Schedule Appointment</td><td>Not Available, Parameter:<code>date-time</code>, Value:<code> </code></td><td>Query Score: 0.0</td><td>missing date-time, requires <strong>slot filling</strong></td></tr>
+<tr><td>set an appointment</td><td>Not Available</td><td>Schedule Appointment</td><td>Not Available, Parameter:<code>date-time</code>, Value:<code> </code></td><td>Query Score: 0.0</td><td>missing <code>date-time</code>, requires <strong>slot filling</strong></td></tr>
 </tbody></table>
+<h3 id="slot-filling"><a class="header" href="#slot-filling">Slot filling</a></h3>
+<ul>
+<li>Make the entities as <strong>required</strong>
+<ul>
+<li>Dialog flow will make sure it ask both date and time before it can respond back</li>
+</ul>
+</li>
+</ul>
+<table><thead><tr><th>User</th><th>Bot</th><th>Intent</th><th>Action</th><th>Sentiment</th><th>Comments</th></tr></thead><tbody>
+<tr><td>set an appointment</td><td>What time and date you like to come in for the appointment?</td><td>Schedule Appointment</td><td>Not Available, Parameter:<code>date-time</code>, Value:<code> </code></td><td>Query Score: 0.0</td><td>missing <code>date-time</code>, requires <strong>slot filling prompt is asked</strong></td></tr>
+<tr><td>Monday 10 am</td><td>You all set for the appointment at 2022-01-03T10:00:00</td><td>Schedule Appointment</td><td>Not Available, Parameter:<code>date-time</code>, Value:<code>{ &quot;date_time&quot;: &quot;2022-01-04T09:00:00-05:00&quot; }</code></td><td>Query Score: 0.0</td><td><code>date-time</code> is provided by the user</td></tr>
+</tbody></table>
+<h3 id="testing-in-our-app"><a class="header" href="#testing-in-our-app">Testing in our app</a></h3>
+<ul>
+<li>Create a sample webapp using SFDX CLI</li>
+</ul>
+<pre><code>sfdx mohanc:app:webapp:gen -i /tmp/app.md -o df-appt.html \ 
+                           -t 'Dialogflow Appointment testing app'
+</code></pre>
+<ul>
+<li>Demo
+<img src="img/chatbots/df-app-test.webm.gif" alt="testing Dialog flow Demo" /></li>
+</ul>
 <h2 id="references-9"><a class="header" href="#references-9">References</a></h2>
 <ul>
 <li><a href="https://cloud.google.com/dialogflow/docs/">Dialogflow</a></li>
