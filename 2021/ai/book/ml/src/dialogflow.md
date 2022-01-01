@@ -319,6 +319,74 @@ sfdx mohanc:app:webapp:gen -i /tmp/app.md -o df-appt.html \
 ![testing Dialog flow Demo](img/chatbots/df-app-test.webm.gif)
 
 
+## Dialog flow Integration with Dialogflow Messenger
+```
+
+<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="AppointmentScheduler"
+  agent-id="d6e07c45-1523-4102-bf80-8fea7caf3caa"
+  language-code="en"
+></df-messenger>
+
+```
+
+- Demo
+
+![testing with Dialogflow Messenger flow Demo](img/chatbots/df-appt-messenger-1.webm.gif)
+
+
+
+## Entities
+- System 
+```
+@sys.date
+@sys.time
+@sys.number
+@sys.unit-currency
+@sys.percentage
+@sys.address
+@sys.phone-number
+@sys.email
+@sys.color
+
+```
+- Developer
+- Session
+
+### Adding Entity
+
+Entity Name|Value|Synonyms|
+---|---|---|
+AppointmentType|Car Inspection|State Inspection, Vehicle Inspection|
+AppointmentType|Scheduled Maintenance|6 months Maintenance, Yearly Maintenance|
+
+
+![setting up appointment type](img/chatbots/df-setting-up-appt-type-0.png)
+![setting up appointment type](img/chatbots/df-setting-up-appt-type-1.png)
+![setting up appointment type](img/chatbots/df-setting-up-appt-type-2.png)
+
+
+- Demo - slot filling
+
+![Demo appointment type](img/chatbots/df-appt-type-1.png)
+
+![Demo appointment type-2](img/chatbots/df-appt-type-2.png)
+
+
+## Dialogflow Integration with Google Assistant Actions
+
+- Actions in Google
+    - Way to extend the functionality of Google Assistant
+    - We can reach 500 million devices that support Google Assistant
+        - Smart speakers
+        - Phones
+        - Cars
+        - TVs
+        - Watches
+
+
 
 
 ## References

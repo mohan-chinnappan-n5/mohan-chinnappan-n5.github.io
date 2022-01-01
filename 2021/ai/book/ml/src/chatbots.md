@@ -2,6 +2,9 @@
 
 ![chatbot](img/chatbots/chatbot-1.png)
 
+![Demo appointment type-2](img/chatbots/df-appt-type-2.png)
+
+
 - A chatbot is a **conversational AI system** that is able to communicate with a human in a natural language.
 - It can be integrated into websites, messaging platforms, and devices.
 

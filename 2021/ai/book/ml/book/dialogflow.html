@@ -463,6 +463,70 @@ weather in Boston now|Sorry, what was that?|Default Fallback Intent|input.unknow
 <li>Demo
 <img src="img/chatbots/df-app-test.webm.gif" alt="testing Dialog flow Demo" /></li>
 </ul>
+<h2 id="dialog-flow-integration-with-dialogflow-messenger"><a class="header" href="#dialog-flow-integration-with-dialogflow-messenger">Dialog flow Integration with Dialogflow Messenger</a></h2>
+<pre><code>
+&lt;script src=&quot;https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1&quot;&gt;&lt;/script&gt;
+&lt;df-messenger
+  intent=&quot;WELCOME&quot;
+  chat-title=&quot;AppointmentScheduler&quot;
+  agent-id=&quot;d6e07c45-1523-4102-bf80-8fea7caf3caa&quot;
+  language-code=&quot;en&quot;
+&gt;&lt;/df-messenger&gt;
+
+</code></pre>
+<ul>
+<li>Demo</li>
+</ul>
+<p><img src="img/chatbots/df-appt-messenger-1.webm.gif" alt="testing with Dialogflow Messenger flow Demo" /></p>
+<h2 id="entities"><a class="header" href="#entities">Entities</a></h2>
+<ul>
+<li>System </li>
+</ul>
+<pre><code>@sys.date
+@sys.time
+@sys.number
+@sys.unit-currency
+@sys.percentage
+@sys.address
+@sys.phone-number
+@sys.email
+@sys.color
+
+</code></pre>
+<ul>
+<li>Developer</li>
+<li>Session</li>
+</ul>
+<h3 id="adding-entity"><a class="header" href="#adding-entity">Adding Entity</a></h3>
+<table><thead><tr><th>Entity Name</th><th>Value</th><th>Synonyms</th></tr></thead><tbody>
+<tr><td>AppointmentType</td><td>Car Inspection</td><td>State Inspection, Vehicle Inspection</td></tr>
+<tr><td>AppointmentType</td><td>Scheduled Maintenance</td><td>6 months Maintenance, Yearly Maintenance</td></tr>
+</tbody></table>
+<p><img src="img/chatbots/df-setting-up-appt-type-0.png" alt="setting up appointment type" />
+<img src="img/chatbots/df-setting-up-appt-type-1.png" alt="setting up appointment type" />
+<img src="img/chatbots/df-setting-up-appt-type-2.png" alt="setting up appointment type" /></p>
+<ul>
+<li>Demo - slot filling</li>
+</ul>
+<p><img src="img/chatbots/df-appt-type-1.png" alt="Demo appointment type" /></p>
+<p><img src="img/chatbots/df-appt-type-2.png" alt="Demo appointment type-2" /></p>
+<h2 id="dialogflow-integration-with-google-assistant-actions"><a class="header" href="#dialogflow-integration-with-google-assistant-actions">Dialogflow Integration with Google Assistant Actions</a></h2>
+<ul>
+<li>Actions in Google
+<ul>
+<li>Way to extend the functionality of Google Assistant</li>
+<li>We can reach 500 million devices that support Google Assistant
+<ul>
+<li>Smart speakers</li>
+<li>Phones</li>
+<li>Cars</li>
+<li>TVs</li>
+<li>Watches</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="references"><a class="header" href="#references">References</a></h2>
 <ul>
 <li><a href="https://cloud.google.com/dialogflow/docs/">Dialogflow</a></li>
