@@ -1,4 +1,6 @@
-# Chat bots
+# Chatbots
+
+![chatbot](img/chatbots/chatbot-1.png)
 
 - A chatbot is a **conversational AI system** that is able to communicate with a human in a natural language.
 - It can be integrated into websites, messaging platforms, and devices.

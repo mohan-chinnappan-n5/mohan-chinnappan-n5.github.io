@@ -31,7 +31,7 @@ Ensure the success of the product vision becomes reality - whatever it takes!
 
 Good|Bad|
 ---|---|
-drives vision and ultimately responsible for the product's success or failure.|think of themselves as marketing resources|
+drives **vision** and ultimately responsible for the product's success or failure.|think of themselves as marketing resources|
 have a realistic vision of what success of their product means and they ensure that this vision becomes reality - **whatever it takes**|have lots of excuses, like blaming Engineering manager...|
 viewed as the *leader of the product* by the entire product team| when they fail, they point out that: they predicted they would fail|
 
@@ -138,6 +138,12 @@ actively confirm their understanding with their managers and others on their tea
 |Customer is ok with Basic Auth until we provide OAuth2|No|We need to support OAuth2 ASAP|
 
 # Clear written communication 
+
+```
+ If you can't explain it simply, you don't understand it well enough
+ - Albert Einstein
+
+```
 
 ```
 1. Know Your Goal and State It Clearly

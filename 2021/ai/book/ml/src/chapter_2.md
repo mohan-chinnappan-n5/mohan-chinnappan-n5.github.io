@@ -1,6 +1,6 @@
 # Chapter 2 - Basic Linear Algebra needed for ML 
 
-
+> DO NOT WORRY ABOUT YOUR DIFFICULTIES IN MATHEMATICS. I CAN ASSURE YOU MINE ARE STILL GREATER - Alert Einstein
 
 > “Last time I asked: 'What does mathematics mean to you?', and some people answered: "The manipulation of numbers, the manipulation of structures.' And if I had asked what music means to you, would you have answered: 'The manipulation of notes?”
 ― [Serge Lang](https://en.wikipedia.org/wiki/Serge_Lang), The Beauty of Doing Mathematics 
