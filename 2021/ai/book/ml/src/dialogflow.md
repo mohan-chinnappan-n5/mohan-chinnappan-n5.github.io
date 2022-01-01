@@ -327,4 +327,9 @@ sfdx mohanc:app:webapp:gen -i /tmp/app.md -o df-appt.html \
 
 ## Videos
 
+- What is Dialog flow
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Ov3CDTxZRQc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+- Intents, Prompts, Appointment Builder
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oU88sHd6ilE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
