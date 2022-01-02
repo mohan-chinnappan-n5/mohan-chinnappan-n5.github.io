@@ -497,7 +497,7 @@ weather in Boston now|Sorry, what was that?|Default Fallback Intent|input.unknow
 <li>Developer</li>
 <li>Session</li>
 </ul>
-<h3 id="adding-entity"><a class="header" href="#adding-entity">Adding Entity</a></h3>
+<h3 id="adding-developer-entity"><a class="header" href="#adding-developer-entity">Adding Developer Entity</a></h3>
 <table><thead><tr><th>Entity Name</th><th>Value</th><th>Synonyms</th></tr></thead><tbody>
 <tr><td>AppointmentType</td><td>Car Inspection</td><td>State Inspection, Vehicle Inspection</td></tr>
 <tr><td>AppointmentType</td><td>Scheduled Maintenance</td><td>6 months Maintenance, Yearly Maintenance</td></tr>
@@ -510,6 +510,196 @@ weather in Boston now|Sorry, what was that?|Default Fallback Intent|input.unknow
 </ul>
 <p><img src="img/chatbots/df-appt-type-1.png" alt="Demo appointment type" /></p>
 <p><img src="img/chatbots/df-appt-type-2.png" alt="Demo appointment type-2" /></p>
+<ul>
+<li>Session Entity
+<ul>
+<li>Session ID</li>
+<li>Have the information collected from the user from the rest of the conversion</li>
+<li>Say, we can ask the user for the Vehicle Type  and get Toyota Camry, this value will be kept in the rest of the conversion</li>
+</ul>
+</li>
+</ul>
+<h2 id="integration-options"><a class="header" href="#integration-options">Integration options</a></h2>
+<ul>
+<li>One-click telephony BETA
+<ul>
+<li>Dialogflow Phone Gateway BETA</li>
+<li>Avaya</li>
+<li>SignalWire</li>
+<li>Voximplant</li>
+<li>AudioCodes</li>
+<li>Twilio</li>
+</ul>
+</li>
+</ul>
+<p><img src="img/chatbots/df-twilio-1.png" alt="Twilio Messaging Service" /></p>
+<ul>
+<li>
+<p>Telephony</p>
+<ul>
+<li>Genesys</li>
+<li>Twilio</li>
+</ul>
+</li>
+<li>
+<p>Text Based</p>
+<ul>
+<li>Web Demo</li>
+<li>Dialogflow Messenger BETA</li>
+<li>Messenger from Facebook</li>
+<li>Workplace from Facebook BETA</li>
+<li>Slack</li>
+<li>Telegram</li>
+<li>LINE</li>
+</ul>
+</li>
+</ul>
+<h2 id="fulfillment---integration-with-google-calendar"><a class="header" href="#fulfillment---integration-with-google-calendar">Fulfillment - Integration with Google Calendar</a></h2>
+<table><thead><tr><th>Intent</th><th>Fulfillment</th><th>Comments</th></tr></thead><tbody>
+<tr><td>Intent-1</td><td>BizLogic-1</td><td></td></tr>
+<tr><td>Intent-2</td><td>BizLogic-2</td><td></td></tr>
+</tbody></table>
+<p><img src="img/chatbots/df-fulfillment-1.png" alt="fulfillment" /></p>
+<ul>
+<li>webhook into Google Calendar</li>
+</ul>
+<blockquote>
+<p>The web service (in our case Google Calendar) will receive a POST request from Dialogflow in the form of the response to a user query matched by intents with webhook enabled. </p>
+</blockquote>
+<pre><code class="language-json">
+{
+  &quot;type&quot;: &quot;service_account&quot;,
+  &quot;project_id&quot;: &quot;projectid&quot;,
+  &quot;private_key_id&quot;: &quot;sk id here&quot;,
+  &quot;private_key&quot;: &quot;sk here&quot;,
+  &quot;client_email&quot;: &quot;appointmentscheduler-kjsl@appspot.gserviceaccount.com&quot;,
+  &quot;client_id&quot;: &quot;102792484459978676466&quot;,
+  &quot;auth_uri&quot;: &quot;https://accounts.google.com/o/oauth2/auth&quot;,
+  &quot;token_uri&quot;: &quot;https://oauth2.googleapis.com/token&quot;,
+  &quot;auth_provider_x509_cert_url&quot;: &quot;https://www.googleapis.com/oauth2/v1/certs&quot;,
+  &quot;client_x509_cert_url&quot;: &quot;https://www.googleapis.com/robot/v1/metadata/x509/xyz-kjsl%40appspot.gserviceaccount.com&quot;
+}
+
+
+</code></pre>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;dialogflowFirebaseFulfillment&quot;,
+  &quot;description&quot;: &quot;This is the default fulfillment for a Dialogflow agents using Cloud Functions for Firebase&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;private&quot;: true,
+  &quot;license&quot;: &quot;Apache Version 2.0&quot;,
+  &quot;author&quot;: &quot;Google Inc.&quot;,
+  &quot;engines&quot;: {
+    &quot;node&quot;: &quot;10&quot;
+  },
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;firebase serve --only functions:dialogflowFirebaseFulfillment&quot;,
+    &quot;deploy&quot;: &quot;firebase deploy --only functions:dialogflowFirebaseFulfillment&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;actions-on-google&quot;: &quot;^2.2.0&quot;,
+    &quot;firebase-admin&quot;: &quot;^5.13.1&quot;,
+    &quot;firebase-functions&quot;: &quot;^2.0.2&quot;,
+    &quot;dialogflow&quot;: &quot;^0.6.0&quot;,
+    &quot;dialogflow-fulfillment&quot;: &quot;^0.5.0&quot;
+  }
+}
+</code></pre>
+<pre><code class="language-js">/**
+ * Copyright 2017 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ 'use strict';
+
+ const functions = require('firebase-functions');
+ const {google} = require('googleapis');
+ const {WebhookClient} = require('dialogflow-fulfillment');
+ 
+ // Enter your calendar ID below and service account JSON below
+ const calendarId = &quot;xyx@group.calendar.google.com&quot;;
+ const serviceAccount = &quot;xyx-kjsl@appspot.gserviceaccount.com&quot;; // Starts with {&quot;type&quot;: &quot;service_account&quot;,...
+ 
+ // Set up Google Calendar Service account credentials
+ const serviceAccountAuth = new google.auth.JWT({
+   email: serviceAccount.client_email,
+   key: serviceAccount.private_key,
+   scopes: 'https://www.googleapis.com/auth/calendar'
+ });
+ 
+ const calendar = google.calendar('v3');
+ process.env.DEBUG = 'dialogflow:*'; // enables lib debugging statements
+ 
+ const timeZone = 'America/New_York';
+ const timeZoneOffset = '-05:00';
+ 
+ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) =&gt; {
+   const agent = new WebhookClient({ request, response });
+   console.log(&quot;Parameters&quot;, agent.parameters);
+   const appointment_type = agent.parameters.AppointmentType
+   function makeAppointment (agent) {
+     // Calculate appointment start and end datetimes (end = +1hr from start)
+     //console.log(&quot;Parameters&quot;, agent.parameters.date);
+     const dateTimeStart = new Date(Date.parse(agent.parameters.date.split('T')[0] + 'T' + agent.parameters.time.split('T')[1].split('-')[0] + timeZoneOffset));
+     const dateTimeEnd = new Date(new Date(dateTimeStart).setHours(dateTimeStart.getHours() + 1));
+     const appointmentTimeString = dateTimeStart.toLocaleString(
+       'en-US',
+       { month: 'long', day: 'numeric', hour: 'numeric', timeZone: timeZone }
+     );
+ 
+     // Check the availibility of the time, and make an appointment if there is time on the calendar
+     return createCalendarEvent(dateTimeStart, dateTimeEnd, appointment_type).then(() =&gt; {
+       agent.add(`Ok, let me see if we can fit you in. ${appointmentTimeString} is fine!.`);
+     }).catch(() =&gt; {
+       agent.add(`I'm sorry, there are no slots available for ${appointmentTimeString}.`);
+     });
+   }
+ 
+   let intentMap = new Map();
+   intentMap.set('Schedule Appointment', makeAppointment);
+   agent.handleRequest(intentMap);
+ });
+ 
+ 
+ 
+ function createCalendarEvent (dateTimeStart, dateTimeEnd, appointment_type) {
+   return new Promise((resolve, reject) =&gt; {
+     calendar.events.list({
+       auth: serviceAccountAuth, // List events for time period
+       calendarId: calendarId,
+       timeMin: dateTimeStart.toISOString(),
+       timeMax: dateTimeEnd.toISOString()
+     }, (err, calendarResponse) =&gt; {
+       // Check if there is a event already on the Calendar
+       if (err || calendarResponse.data.items.length &gt; 0) {
+         reject(err || new Error('Requested time conflicts with another appointment'));
+       } else {
+         // Create event for the requested time period
+         calendar.events.insert({ auth: serviceAccountAuth,
+           calendarId: calendarId,
+           resource: {summary: appointment_type +' Appointment', description: appointment_type,
+             start: {dateTime: dateTimeStart},
+             end: {dateTime: dateTimeEnd}}
+         }, (err, event) =&gt; {
+           err ? reject(err) : resolve(event);
+         }
+         );
+       }
+     });
+   });
+ }
+</code></pre>
 <h2 id="dialogflow-integration-with-google-assistant-actions"><a class="header" href="#dialogflow-integration-with-google-assistant-actions">Dialogflow Integration with Google Assistant Actions</a></h2>
 <ul>
 <li>Actions in Google
@@ -527,6 +717,19 @@ weather in Boston now|Sorry, what was that?|Default Fallback Intent|input.unknow
 </ul>
 </li>
 </ul>
+<h2 id="knowledge-base-support-in-dialogflow-chatbots"><a class="header" href="#knowledge-base-support-in-dialogflow-chatbots">Knowledge Base Support in Dialogflow chatbots</a></h2>
+<ul>
+<li>Demo
+-<img src="img/chatbots/dialog-kb-test.webm.gif" alt="Demo of KB with Dialogflow" /></li>
+</ul>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J8ttQ1Veo_I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 id="django-frontend"><a class="header" href="#django-frontend">Django frontend</a></h2>
+<p><img src="https://github.com/priyankavergadia/Django-Dialogflow-Appointment-Scheduler/raw/master/Architecture-image.png" alt="Django Dialogflow Appointment Scheduler" /></p>
+<ul>
+<li><a href="https://github.com/priyankavergadia/Django-Dialogflow-Appointment-Scheduler">Django Dialogflow Appointment Scheduler</a></li>
+</ul>
+<h2 id="integration-with-google-cloud-ml"><a class="header" href="#integration-with-google-cloud-ml">Integration with Google Cloud ML</a></h2>
+<p><img src="img/chatbots/df-ml-1.png" alt="DF integration with ML" /></p>
 <h2 id="references"><a class="header" href="#references">References</a></h2>
 <ul>
 <li><a href="https://cloud.google.com/dialogflow/docs/">Dialogflow</a></li>

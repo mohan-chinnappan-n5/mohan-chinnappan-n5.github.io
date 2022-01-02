@@ -355,7 +355,7 @@ sfdx mohanc:app:webapp:gen -i /tmp/app.md -o df-appt.html \
 - Developer
 - Session
 
-### Adding Entity
+### Adding Developer Entity
 
 Entity Name|Value|Synonyms|
 ---|---|---|
@@ -375,6 +375,192 @@ AppointmentType|Scheduled Maintenance|6 months Maintenance, Yearly Maintenance|
 ![Demo appointment type-2](img/chatbots/df-appt-type-2.png)
 
 
+- Session Entity
+    - Session ID
+    - Have the information collected from the user from the rest of the conversion
+    - Say, we can ask the user for the Vehicle Type  and get Toyota Camry, this value will be kept in the rest of the conversion
+
+
+## Integration options
+
+- One-click telephony BETA
+    - Dialogflow Phone Gateway BETA
+    - Avaya
+    - SignalWire
+    - Voximplant
+    - AudioCodes
+    - Twilio
+
+![Twilio Messaging Service](img/chatbots/df-twilio-1.png)
+- Telephony
+    - Genesys
+    - Twilio
+
+- Text Based
+    - Web Demo
+    -  Dialogflow Messenger BETA
+    - Messenger from Facebook
+    - Workplace from Facebook BETA
+    - Slack
+    - Telegram
+    - LINE
+
+
+
+## Fulfillment - Integration with Google Calendar
+Intent|Fulfillment|Comments|
+---|---|---|
+Intent-1|BizLogic-1|
+Intent-2|BizLogic-2|
+
+![fulfillment](img/chatbots/df-fulfillment-1.png)
+
+- webhook into Google Calendar
+
+> The web service (in our case Google Calendar) will receive a POST request from Dialogflow in the form of the response to a user query matched by intents with webhook enabled. 
+
+
+```json
+
+{
+  "type": "service_account",
+  "project_id": "projectid",
+  "private_key_id": "sk id here",
+  "private_key": "sk here",
+  "client_email": "appointmentscheduler-kjsl@appspot.gserviceaccount.com",
+  "client_id": "102792484459978676466",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/xyz-kjsl%40appspot.gserviceaccount.com"
+}
+
+
+```
+
+```json
+{
+  "name": "dialogflowFirebaseFulfillment",
+  "description": "This is the default fulfillment for a Dialogflow agents using Cloud Functions for Firebase",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache Version 2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": "10"
+  },
+  "scripts": {
+    "start": "firebase serve --only functions:dialogflowFirebaseFulfillment",
+    "deploy": "firebase deploy --only functions:dialogflowFirebaseFulfillment"
+  },
+  "dependencies": {
+    "actions-on-google": "^2.2.0",
+    "firebase-admin": "^5.13.1",
+    "firebase-functions": "^2.0.2",
+    "dialogflow": "^0.6.0",
+    "dialogflow-fulfillment": "^0.5.0"
+  }
+}
+```
+
+```js
+/**
+ * Copyright 2017 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ 'use strict';
+
+ const functions = require('firebase-functions');
+ const {google} = require('googleapis');
+ const {WebhookClient} = require('dialogflow-fulfillment');
+ 
+ // Enter your calendar ID below and service account JSON below
+ const calendarId = "xyx@group.calendar.google.com";
+ const serviceAccount = "xyx-kjsl@appspot.gserviceaccount.com"; // Starts with {"type": "service_account",...
+ 
+ // Set up Google Calendar Service account credentials
+ const serviceAccountAuth = new google.auth.JWT({
+   email: serviceAccount.client_email,
+   key: serviceAccount.private_key,
+   scopes: 'https://www.googleapis.com/auth/calendar'
+ });
+ 
+ const calendar = google.calendar('v3');
+ process.env.DEBUG = 'dialogflow:*'; // enables lib debugging statements
+ 
+ const timeZone = 'America/New_York';
+ const timeZoneOffset = '-05:00';
+ 
+ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
+   const agent = new WebhookClient({ request, response });
+   console.log("Parameters", agent.parameters);
+   const appointment_type = agent.parameters.AppointmentType
+   function makeAppointment (agent) {
+     // Calculate appointment start and end datetimes (end = +1hr from start)
+     //console.log("Parameters", agent.parameters.date);
+     const dateTimeStart = new Date(Date.parse(agent.parameters.date.split('T')[0] + 'T' + agent.parameters.time.split('T')[1].split('-')[0] + timeZoneOffset));
+     const dateTimeEnd = new Date(new Date(dateTimeStart).setHours(dateTimeStart.getHours() + 1));
+     const appointmentTimeString = dateTimeStart.toLocaleString(
+       'en-US',
+       { month: 'long', day: 'numeric', hour: 'numeric', timeZone: timeZone }
+     );
+ 
+     // Check the availibility of the time, and make an appointment if there is time on the calendar
+     return createCalendarEvent(dateTimeStart, dateTimeEnd, appointment_type).then(() => {
+       agent.add(`Ok, let me see if we can fit you in. ${appointmentTimeString} is fine!.`);
+     }).catch(() => {
+       agent.add(`I'm sorry, there are no slots available for ${appointmentTimeString}.`);
+     });
+   }
+ 
+   let intentMap = new Map();
+   intentMap.set('Schedule Appointment', makeAppointment);
+   agent.handleRequest(intentMap);
+ });
+ 
+ 
+ 
+ function createCalendarEvent (dateTimeStart, dateTimeEnd, appointment_type) {
+   return new Promise((resolve, reject) => {
+     calendar.events.list({
+       auth: serviceAccountAuth, // List events for time period
+       calendarId: calendarId,
+       timeMin: dateTimeStart.toISOString(),
+       timeMax: dateTimeEnd.toISOString()
+     }, (err, calendarResponse) => {
+       // Check if there is a event already on the Calendar
+       if (err || calendarResponse.data.items.length > 0) {
+         reject(err || new Error('Requested time conflicts with another appointment'));
+       } else {
+         // Create event for the requested time period
+         calendar.events.insert({ auth: serviceAccountAuth,
+           calendarId: calendarId,
+           resource: {summary: appointment_type +' Appointment', description: appointment_type,
+             start: {dateTime: dateTimeStart},
+             end: {dateTime: dateTimeEnd}}
+         }, (err, event) => {
+           err ? reject(err) : resolve(event);
+         }
+         );
+       }
+     });
+   });
+ }
+ ```
+
+
 ## Dialogflow Integration with Google Assistant Actions
 
 - Actions in Google
@@ -388,6 +574,23 @@ AppointmentType|Scheduled Maintenance|6 months Maintenance, Yearly Maintenance|
 
 
 
+## Knowledge Base Support in Dialogflow chatbots
+
+- Demo
+-![Demo of KB with Dialogflow](img/chatbots/dialog-kb-test.webm.gif)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J8ttQ1Veo_I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Django frontend
+
+![Django Dialogflow Appointment Scheduler](https://github.com/priyankavergadia/Django-Dialogflow-Appointment-Scheduler/raw/master/Architecture-image.png)
+
+- [Django Dialogflow Appointment Scheduler](https://github.com/priyankavergadia/Django-Dialogflow-Appointment-Scheduler)
+
+
+## Integration with Google Cloud ML 
+
+![DF integration with ML](img/chatbots/df-ml-1.png)
 
 ## References
 - [Dialogflow](https://cloud.google.com/dialogflow/docs/)
