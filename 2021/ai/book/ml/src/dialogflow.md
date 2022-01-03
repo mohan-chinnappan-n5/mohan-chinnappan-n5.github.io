@@ -576,8 +576,10 @@ Intent-2|BizLogic-2|
 
 ## Knowledge Base Support in Dialogflow chatbots
 
+![Df knowledge setup](img/chatbots/df-kb-1.png)
+
 - Demo
--![Demo of KB with Dialogflow](img/chatbots/dialog-kb-test.webm.gif)
+![Demo of KB with Dialogflow](img/chatbots/dialog-kb-test.webm.gif)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/J8ttQ1Veo_I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -592,6 +594,12 @@ Intent-2|BizLogic-2|
 
 ![DF integration with ML](img/chatbots/df-ml-1.png)
 
+
+## Dialogflow (CX](https://dialogflow.cloud.google.com/cx/projects)
+
+![Visual Flow Builder](img/chatbots/dfcx-vb-1.png)
+![CX arch](img/chatbots/dfcx-arch-1.png)
+
 ## References
 - [Dialogflow](https://cloud.google.com/dialogflow/docs/)
 
@@ -604,3 +612,7 @@ Intent-2|BizLogic-2|
 - Intents, Prompts, Appointment Builder
 <iframe width="560" height="315" src="https://www.youtube.com/embed/oU88sHd6ilE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+
+## References
+- [Dialogflow](https://cloud.google.com/dialogflow/docs/)
+- [Integration with Sheets API](https://github.com/asrivas/SmartAccountsBot)

@@ -81,7 +81,8 @@
     - [Raspberry Pi](hardware/raspi.md)
 
 - [18. Conversational-AI](conversational-ai.md)
-    - [Chat bots](chatbots.md)
+    - [Chatbots](chatbots.md)
+    - [Einstein Bots](ebot.md)
     - [DeepPavlov](DeepPavlov.md)
     - [Dialogflow](dialogflow.md)
 
