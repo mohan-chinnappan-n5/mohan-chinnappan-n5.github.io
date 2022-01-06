@@ -42,6 +42,50 @@ flowchart TB
 
 ```
 
+## Proposed Bot Def
+```yaml
+
+name: Kovai
+ver: 1.0.0
+description: Bot able to provide appointment management and take actions at the CRM system
+menus:
+  mainMenu: 
+    - Appointment Booking
+    - Transfer to an Agent
+  AppointMenu:
+    - question: What time and date you like to book the appointment?
+        answer: 
+          - Tomorrow 10 am
+          - Tuesday 11 am
+          - Next week Wednesday 12 noon
+        entities:
+           type:  sys.DateTime
+           name: $AppointmentDateTime
+
+    - question: What type of appointment type you need?
+        menu:
+          - Car Inspection
+          - Car Maintenance
+        entities:
+          type: String
+          name: $AppointmentType 
+    - question: What type of car you have?
+        menu:
+          - Ford F-150
+          - Ford Explorer
+          - Toyota Camry
+          - Toyota Corolla
+        entities:
+          type: String
+          name :$CarType
+
+    - response: |-
+                 You are all set with your appointment on $AppointmentDateTime
+                for $AppointmentType  for your $CarType
+
+
+```
+
 ![Flow](img/chatbots/eb-appointment-sched.svg)
 ### Setup
 ![Einstein bot appointment scheduler setup](img/chatbots/eb-appt-setup-1.webm.gif)
@@ -51,6 +95,17 @@ flowchart TB
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3wDpNNMu6Y0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## Channels supported
+
+Einstein Bots support the following channels: 
+- Chat (In-App and Web) 
+- Messaging 
+    - SMS
+    - Facebook Messenger
+    - WhatsApp channels 
+
 
 ## Bot [metadata](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/metadata/Bot/bot.md)
 

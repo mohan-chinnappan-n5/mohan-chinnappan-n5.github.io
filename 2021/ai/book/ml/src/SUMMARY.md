@@ -85,6 +85,7 @@
     - [Einstein Bots](ebot.md)
     - [DeepPavlov](DeepPavlov.md)
     - [Dialogflow](dialogflow.md)
+    - [Rasa](rasa.md)
 
 - [20. Tools](tools.md)
     - [Infrastructure as code](iac.md)
