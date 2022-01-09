@@ -225,9 +225,20 @@ const html2Content =
 
 </div>
 <h5 style='text-align:center;background-color:#eee;padding:10px;'>Platform Services</h5>
+  <ul class="list-group list-group-horizontal-lg justify-content-center">
+  <li class="list-group-item">Automation</li>
+  <li class="list-group-item">AI</li>
+  <li class="list-group-item">Low Code</li>
+  <li class="list-group-item">Pro Code</li>
+  <li class="list-group-item">Privacy</li>
+  <li class="list-group-item">Reports & Dashboards</li>
 
 
-`
+
+
+</ul>
+ 
+`;
 
  
 
