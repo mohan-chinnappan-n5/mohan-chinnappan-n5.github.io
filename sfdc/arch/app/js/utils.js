@@ -127,7 +127,7 @@ const html2Content =
 `
 <div class='row'>
 
-<div class='col-lg'>
+<div class='col-lg' style='border:1px solid #99ccff; border-radius:10px;margin:10px;'>
   <h4>Salesforce Single Org Architecture</h4>
   <p>This diagram details the architecture of a single Salesforce 
     instance deployed centrally with business apps configured locally by each business unit.
@@ -135,16 +135,16 @@ const html2Content =
 </div>
 
 <div class='col-lg'  >
- <ul class='list-group' style='height:300px;'>
-  <li  class='list-group-item'> Automation</li>
-  <li class='list-group-item'> AI </li>
-  <li class='list-group-item'> Apps </li>
-  <li class='list-group-item'> Low Code </li>
-  <li class='list-group-item'> Data </li>
-  <li class='list-group-item'> Bots </li>
-  <li class='list-group-item'> Privacy </li>
-  <li class='list-group-item'> Pro Code </li>
-  <li class='list-group-item'> Reports & Dashboards </li>
+ <ul class="list-unstyled row border" style='height:150px;'>
+  <li  class='list-item col-4   p-2'> Automation</li>
+  <li class='list-item col-4   p-2'> AI </li>
+  <li class='list-item col-4   p-2'> Apps </li>
+  <li class='list-item col-4   p-2'> Low Code </li>
+  <li class='list-item col-4   p-2'> Pro Code </li>
+  <li class='list-item col-4   p-2'> Data </li>
+  <li class='list-item col-4   p-2'> Bots </li>
+  <li class='list-item col-4   p-2'> Privacy </li>
+  <li class='list-item col-4   p-2'> Reports & Dashboards </li>
  </ul>
 </div>
 
@@ -152,23 +152,81 @@ const html2Content =
  
 </div>
 
-<div class='row'>
-<div class='col-lg'  >
- <ul class='list-group' style='height:100px;'>
-  <li  class='list-group-item'> Automation</li>
-  <li class='list-group-item'> AI </li>
-  <li class='list-group-item'> Apps </li>
-  <li class='list-group-item'> Low Code </li>
-  <li class='list-group-item'> Data </li>
-  <li class='list-group-item'> Bots </li>
-  <li class='list-group-item'> Privacy </li>
-  <li class='list-group-item'> Pro Code </li>
-  <li class='list-group-item'> Reports & Dashboards </li>
+<h4>Business Units</h4>
+<div class='row' style='background-color:#eff'>
+
+<div class='col-lg'> <div class="card"> <div class="card-body"> Marketing  </div> </div></div>
+
+<div class='col-lg'> <div class="card"> <div class="card-body"> B2C Sales  </div> </div></div>
+<div class='col-lg'>  <div class="card"> <div class="card-body"> B2B Sales  </div> </div></div>
+<div class='col-lg'> <div class="card"> <div class="card-body"> Customer Service  </div> </div></div>
+<div class='col-lg'>  <div class="card"> <div class="card-body"> Channel Management  </div> </div></div>
+
+
+
+</div>
+
+<h4>Salesforce</h4>
+<div class='row' style='background-color:#ffe'>
+
+<div class='col-lg'> <div class="card"> <div class="card-body" style='background-color:#efe'>
+ <ul>
+ <li>Global NTO customer data</li>
+ <li>Standardized NTO processes </li>
+ <li>Single sign on</li>
+ <li>NTO shared apps</li>
+ <li>Business Unit custom apps</li>
+
  </ul>
-</div>
+</div> </div></div>
+
+<div class='col-lg'> <div class="card"> <div class="card-body">
+<h5> Experience</h5>
+ <ul>
+ <li>Templates</li>
+ <li>Themes & Branding </li>
+ <li>CMS </li>
+ <li>Personalization</li>
+ </ul>
+</div> </div></div>
+
+<div class='col-lg'> <div class="card"> <div class="card-body">
+<h5> Sales</h5>
+ <ul>
+ <li>Contacts</li>
+ <li>Leads & Opportunities</li>
+ <li>Activities </li>
+ <li>Pipeline & Forecasts</li>
+ </ul>
+</div> </div></div>
+
+<div class='col-lg'> <div class="card"> <div class="card-body">
+<h5> Service</h5>
+ <ul>
+ <li>Agent Workspace</li>
+ <li>Cases</li>
+ <li>Knowledge </li>
+ <li>Telephony, Omni-Channel</li>
+ </ul>
+</div> </div></div>
+
+<div class='col-lg'> <div class="card"> <div class="card-body">
+<h5> Customer Data Platform</h5>
+ <ul>
+ <li>Unified Profile</li>
+ <li>Segmentation </li>
+ <li>Channel Data</li>
+ </ul>
+</div> </div></div>
+
+
+ 
 
 
 </div>
+<h5 style='text-align:center;background-color:#eee;padding:10px;'>Platform Services</h5>
+
+
 `
 
  
