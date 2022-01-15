@@ -109,7 +109,7 @@ const graphDivEle = document.getElementById('arch');
 const saveBtn = document.getElementById("saveBtn");
 
 // SVG Save functions
-let svgFileName = 'df.svg';
+let svgFileName = 'arc.svg';
 const savefilenameEle = document.getElementById('savefilename');
 
 saveBtn.addEventListener("click", (event) => {
@@ -133,9 +133,30 @@ let save = (ele) => {
   // console.log(data);
   let svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" });
   let url = URL.createObjectURL(svgBlob);
+/*
+  let image = new Image();
+  image.onload = () => {
+
+   let canvas = document.createElement('canvas');
+   const div = document.getElementById("arch");
+   div.append(canvas)
+
+   
+   
+   canvas.width = 800;
+   
+   canvas.height = 600;
+   let context = canvas.getContext('2d');
+   // draw image in canvas starting left-0 , top - 0  
+   context.drawImage(image, 0, 0, 800, 600 );
+  //  downloadImage(canvas); need to implement
+  }
+   image.src = url;
+*/
+
   triggerDownload(url, svgFileName);
 };
 
 
 
-}, 10);
+}, 100);
