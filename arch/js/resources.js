@@ -1,6 +1,6 @@
 // resources.js
 
-const AWS_LB = "img/aws/network/elastic-load-balancing.png";
+const AWS_LB = "http://localhost:7010/github/githubpages/mohan-chinnappan-n5.github.io/arch/img/aws/network/elastic-load-balancing.png";
 const AWS_EC2 = "img/aws/compute/ec2-rounded.png";
 const AWS_DB =  "img/aws/db/database.png";
 
