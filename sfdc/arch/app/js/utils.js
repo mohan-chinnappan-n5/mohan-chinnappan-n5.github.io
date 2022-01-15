@@ -125,6 +125,8 @@ const contentMD =
 
 const html2Content = 
 `
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <div class='row'>
 
 <div class='col-lg' style='border:1px solid #99ccff; border-radius:10px;margin:10px;'>
@@ -262,12 +264,26 @@ let lang = params['l'] || 'json';
 let theme = params['t'] || 'vs-dark';
 let _showDot = params['g'] || '0';
 
+const htmlEle = getEle('html');
+const html2Ele = getEle('html2');
 
+
+const printEle = (ele, delay) => {
+
+  const  win = window.open('', 'PRINT', 'height=800,width=800');
+  const contentEle = getEle(ele);
+
+  win.document.write(contentEle.innerHTML);
+  win.document.close();
+  win.focus();
+
+  setTimeout(function(){win.print();win.close();  }, delay);
+  return true;
+
+}
  
 
 
-const htmlEle = getEle('html');
-const html2Ele = getEle('html2');
 
 switch (lang) {
     case 'json':
@@ -278,6 +294,19 @@ switch (lang) {
          lang  ='markdown';
           
           htmlEle.innerHTML = marked.parse(contentMD);
+          const options = {};
+
+          const tokens = marked.lexer(contentMD, options);
+
+          for (const token of tokens) {
+            for (const key in token ) {
+              if (token[key] === 'heading') {
+                console.log(token)
+              }
+             }
+
+           }
+
           html2Ele.innerHTML = html2Content; 
 
          break;
@@ -297,7 +326,8 @@ let svgFileName = 'df.svg';
 const savefilenameEle = document.getElementById('savefilename');
 
 saveBtn.addEventListener("click", (event) => {
-  save(graphDivEle);
+  // save(graphDivEle);
+  printEle('html2', 1000);
 });
 
 const triggerDownload = (imgURI, fileName) => {
