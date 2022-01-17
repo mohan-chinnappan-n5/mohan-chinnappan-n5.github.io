@@ -1,11 +1,15 @@
 # I have a dream
 
-![mlk](img/mlk-1.jpg)
-- Was an American Baptist minister and activist who was a leader in the African-American Civil Rights Movement
+ 
+<img src="img/mlk-1.jpg">
+
+<p>Was an American Baptist minister and activist who was a leader in the African-American Civil Rights Movement
+  </p>
 
 <audio controls>
   <source src="img/MLKDreamSpeech.mp3" type="audio/mpeg">
 </audio>
+
 
 # Dr. MLK quotes
 
@@ -30,5 +34,8 @@ Life's most persistent and urgent question is, 'What are you doing for others?
 ```
 We must accept finite disappointment, but never lose infinite hope.
 ```
+
+# Formula for success
+![life](img/life-1.png)
 
 
