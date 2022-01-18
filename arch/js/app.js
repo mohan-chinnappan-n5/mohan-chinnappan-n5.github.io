@@ -97,7 +97,7 @@ const renderDwg = (dotStr) => {
 };
 
 drawBtn.addEventListener('click', event => {
-    renderDwg(getEditorContent(editor));
+    renderDwg(getEditorContent(editor)  );
 });
 
 drawBtn.click(); // bootstrap
