@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css" />
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/editor.css">
-    <script src='js/resources.js'></script>
 </head>
 
 <body>
@@ -42,28 +41,39 @@
     <div class="split split-horizontal" id='left'>
         <div id="editor"></div>
 
+        <input class="btn btn-primary" type="file" id="inputfile" accept="*.json" />
+
+
          <button id='draw' class="btn btn-danger">Draw</button>
          <input
          type="text"
          id="savefilename"
-         value="arch.txt"
-         placeholder="file name to save the file to"
+         value="arch.json"
+         placeholder="file name to save the json to"
        />
-       <button
-         class="btn btn-info"
-         type="button"
-         value="save"
-         id="save"
-         title="Download the file in the editor"
-       >
-         Save Source
-       </button>
-       <button id="saveBtn" class="btn btn-danger" style="display:none2;float:right"> Save Visualization </button>
 
+       <button
+       class="btn btn-primary"
+       type="button"
+       value="save"
+       id="save"
+       title="Download the file in the editor"
+     >
+       Save Source
+     </button>
 
     </div>
     <div class="split split-horizontal" id='right'>
         <div id="arch"></div>
+
+        <input
+        type="text"
+        id="svgFilename"
+        value="arch.svg"
+        placeholder="file name to save the svg to"
+      />
+        <button id="saveBtn" class="btn btn-danger" style="display:none2;float:right2"> Save Visualization </button>
+ 
     </div>
 
     <script> var require = { paths: { vs: "package/dev/vs" } }; </script>

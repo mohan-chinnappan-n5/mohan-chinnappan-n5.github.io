@@ -1,7 +1,28 @@
 // app.js
+// mohan chinnappan
 
 const getEle = (id) => document.getElementById(id);
 
+
+// param parsing
+parseParams = () => {
+  const query = location.search.substr(1);
+  let qResult = {};
+  query.split("&").forEach(function(part) {
+      const item = part.split("=");
+      qResult[item[0]] = decodeURIComponent(item[1]);
+  });
+  return qResult;
+}
+
+// get the language (l) param
+const params = parseParams();
+let lang = params['l'] || 'json';
+let theme = params['t'] || 'vs-dark';
+let timeout = params['o'] || 100;
+
+
+const TIMEOUT = 100;
 
 // init the editor
 initEditor = (id, value, language, theme) => {
@@ -14,7 +35,7 @@ initEditor = (id, value, language, theme) => {
 Split(["#left", "#right "], { sizes: [50, 50] });
 const hpccWasm = window["@hpcc-js/wasm"];
 
-const label = "Web Server Architecture";
+let label = "Web Server Architecture";
 const dir = "LR"; // LR RL TB BT
 
 const rankSep = 0.75;
@@ -27,7 +48,77 @@ const nodeHeight = 1.2;
 const labelLoc = "b";
 const labelFontsize = 10;
 
-const archDotPrefix = `
+
+
+const defaultDef = {
+  "title": "AWS Web Server Architecture",
+  "images": [
+      {
+          "name": "LoadBalancer",
+          "url": "https://mohan-chinnappan-n5.github.io/arch/img/aws/network/elastic-load-balancing.png"
+      },
+      {
+          "name": "WebServer1",
+          "url": "https://mohan-chinnappan-n5.github.io/arch/img/aws/compute/ec2-rounded.png"
+      },
+      {
+          "name": "WebServer2",
+          "url": "https://mohan-chinnappan-n5.github.io/arch/img/aws/compute/ec2-rounded.png"
+      },
+      {
+          "name": "Database",
+          "url": "https://mohan-chinnappan-n5.github.io/arch/img/aws/db/database.png"
+      }
+  ],
+  "connections": [
+      "LoadBalancer -> WebServer1 -> Database;",
+      "LoadBalancer -> WebServer2 -> Database;"
+  ]
+}
+
+let editor;
+const drawBtn = getEle("draw");
+
+setTimeout(function() {
+
+  try {
+
+  editor = initEditor('editor', JSON.stringify(defaultDef, null, 4), lang, theme );
+  const getEditorContent = (editor) => editor.getValue();
+
+
+
+
+const getDrawStr  = definition => {
+  let imageSet = [];
+  let dotStr = "";
+  for (const image of definition.images) {
+      dotStr += String.raw`${image.name}[image="${image.url}"];` + "\n";
+      if (imageSet.indexOf(image.url) === -1) {
+          imageSet.push(image.url)
+      }
+  }
+
+  for (const connection of definition.connections) {
+      dotStr += connection + "\n";
+
+  }
+  return { dotStr, imageSet };
+}
+
+
+const renderDwg = (definition) => {
+
+  const { dotStr, imageSet } = getDrawStr(definition);
+  label = definition.title;
+
+  const images = [];
+  for (const image of imageSet ){
+    const item = { path: `${image}`, width: "515px", height: "600px" }
+    images.push(item);
+  }
+
+  const archDotPrefix = `
     digraph { 
         graph [ fontcolor="#2D3436" 
             fontname="Sans-Serif" 
@@ -52,44 +143,9 @@ const archDotPrefix = `
         edge [color="#7B8894"]
 `;
 
-const fillImages = (str) => str;
 
-const dotStr = `
-LoadBalancer[image="${AWS_LB}"];
-
-WebServer1[image="${AWS_EC2}"];
-WebServer2[image="${AWS_EC2}"];
-WebServer3[image="${AWS_EC2}"];
- 
-Database[image="${AWS_DB}"];  
-
-
-LoadBalancer -> WebServer1 -> Database;
-LoadBalancer -> WebServer2 -> Database;
-LoadBalancer -> WebServer3 -> Database;
-
-            `;
- 
-
-
- 
-let editor;
-setTimeout(function() {
-     editor = initEditor('editor', dotStr, "text", 'vs-dark' );
-
-
-
-const getEditorContent = (editor) => editor.getValue();
-
-
-
-
-const drawBtn = getEle("draw");
-
-
-const renderDwg = (dotStr) => {
   hpccWasm.graphviz
-  .layout(`${archDotPrefix} ${dotStr} }`, "svg", "dot", { images: imagesUsed })
+  .layout(`${archDotPrefix} ${dotStr} }`, "svg", "dot", { images })
   .then((svg) => {
     const div = document.getElementById("arch");
     div.innerHTML = svg;
@@ -97,7 +153,7 @@ const renderDwg = (dotStr) => {
 };
 
 drawBtn.addEventListener('click', event => {
-    renderDwg(getEditorContent(editor)  );
+    renderDwg(JSON.parse( getEditorContent(editor))  );
 });
 
 drawBtn.click(); // bootstrap
@@ -109,15 +165,17 @@ const graphDivEle = document.getElementById('arch');
 const saveBtn = document.getElementById("saveBtn");
 
 // SVG Save functions
-let svgFileName = 'arc.svg';
-const savefilenameEle = document.getElementById('savefilename');
+const saveFilenameEle = document.getElementById('svgFilename');
 
 saveBtn.addEventListener("click", (event) => {
   save(graphDivEle);
 });
 
+let svgFileName = 'arch.svg';
+
 const triggerDownload = (imgURI, fileName) => {
   let a = document.createElement("a");
+  const svgFileName = saveFilenameEle.value || 'arch.svg';
 
   a.setAttribute("download", `${svgFileName}`);
   a.setAttribute("href", imgURI);
@@ -133,33 +191,77 @@ let save = (ele) => {
   // console.log(data);
   let svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" });
   let url = URL.createObjectURL(svgBlob);
-/*
-  let image = new Image();
-  image.onload = () => {
-
-   let canvas = document.createElement('canvas');
-   const div = document.getElementById("arch");
-   div.append(canvas)
-
-   
-   
-   canvas.width = 800;
-   
-   canvas.height = 600;
-   let context = canvas.getContext('2d');
-   // draw image in canvas starting left-0 , top - 0  
-   context.drawImage(image, 0, 0, 800, 600 );
-  //  downloadImage(canvas); need to implement
-  }
-   image.src = url;
-*/
-
+  
   triggerDownload(url, svgFileName);
 };
 
 
 
-}, 100);
+
+// file management
+let getUploadedFile = (event) => {
+  const input = event.target;
+  if ("files" in input && input.files.length > 0) {
+    // console.log(input.files[0]);
+    placeFileContent( input.files[0]);
+  }
+};
+let placeFileContent = ( file) => {
+  readFileContent(file)
+    .then((content) => {
+      editor.setValue(content);
+    })
+    .catch((error) => { console.log(error); alert(error)});
+};
+
+let readFileContent = (file) => {
+  const reader = new FileReader();
+  return new Promise((resolve, reject) => {
+    reader.onload = (event) => resolve(event.target.result);
+    reader.onerror = (error) => reject(error);
+    reader.readAsText(file);
+  });
+};
+
+document
+  .getElementById("inputfile")
+  .addEventListener("change", getUploadedFile);
+
+// saving source
+
+// save to file
+saveSourceToFile = () => {
+  //var textToWrite = document.getElementById('textArea').innerHTML;
+
+  var fileContent = editor.getValue();
+  var textFileAsBlob = new Blob([fileContent], { type: "application/json" });
+  var fileNameToSaveAsInput = document.getElementById("savefilename").value;
+  //console.log('fileNameToSaveAsInput:' , fileNameToSaveAsInput)
+  var fileNameToSaveAs = fileNameToSaveAsInput || "myPage.html";
+
+  var downloadLink = document.createElement("a");
+  downloadLink.download = fileNameToSaveAs;
+  downloadLink.innerHTML = "Download File";
+  if (window.webkitURL != null) {
+    // Chrome allows the link to be clicked without actually adding it to the DOM.
+    downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+  } else {
+    // Firefox requires the link to be added to the DOM before it can be clicked.
+    downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+  }
+
+  downloadLink.click();
+};
+document.getElementById("save").addEventListener("click", saveSourceToFile)
+
+  } catch (e) {
+    alert (e);
+  }
+
+}, timeout);
 
 // https://cdn.jsdelivr.net/npm/@hpcc-js/wasm/dist/index.min.js
 // wasm: https://cdn.jsdelivr.net/npm/@hpcc-js/wasm/dist/graphvizlib.wasm
