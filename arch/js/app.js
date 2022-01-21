@@ -121,11 +121,11 @@ const renderDwg = (definition) => {
   const archDotPrefix = `
     digraph { 
         graph [ fontcolor="#2D3436" 
-            fontname="Sans-Serif" 
+            fontname="Times" 
             fontsize=15 label="${label}" 
             nodesep=${nodeSep} 
             pad=${pad} rankdir=${dir} ranksep=${rankSep} 
-            splines=curved
+            
             ];
 
         node [fixedsize=true 
@@ -143,7 +143,8 @@ const renderDwg = (definition) => {
         edge [color="#7B8894"]
 `;
 
-
+const dotOutput = `${archDotPrefix} ${dotStr} ;`
+console.log(dotOutput);
   hpccWasm.graphviz
   .layout(`${archDotPrefix} ${dotStr} }`, "svg", "dot", { images })
   .then((svg) => {
