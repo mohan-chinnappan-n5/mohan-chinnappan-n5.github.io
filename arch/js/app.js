@@ -68,11 +68,31 @@ const defaultDef = {
       {
           "name": "Database",
           "url": "https://mohan-chinnappan-n5.github.io/arch/img/aws/db/database.png"
-      }
+      },
+      {
+        "name": "a0",
+        "url": "https://mohan-chinnappan-n5.github.io/arch/img/aws/db/database.png"
+      },
+      {
+      "name": "a1",
+      "url": "https://mohan-chinnappan-n5.github.io/arch/img/aws/db/database.png"
+     },
+     {
+      "name": "a2",
+      "url": "https://mohan-chinnappan-n5.github.io/arch/img/aws/db/database.png"
+     },
+     {
+     "name": "a3",
+     "url": "https://mohan-chinnappan-n5.github.io/arch/img/aws/db/database.png"
+    }
+
   ],
   "connections": [
       "LoadBalancer -> WebServer1 -> Database;",
-      "LoadBalancer -> WebServer2 -> Database;"
+      "LoadBalancer -> WebServer2 -> Database;",
+
+      "subgraph cluster_0 { style=filled; shape=box color=lightblue; node [style=filled, color=salmon];a0 -> a1 -> a2 -> a3; label=\" OnPrem\"}",
+      "WebServer1 -> a0;"
   ]
 }
 
@@ -118,8 +138,10 @@ const renderDwg = (definition) => {
     images.push(item);
   }
 
+  // refer: https://github.com/magjac/d3-graphviz#images
+
   const archDotPrefix = `
-    digraph { 
+    digraph arch { 
         graph [ fontcolor="#2D3436" 
             fontname="Times" 
             fontsize=15 label="${label}" 
@@ -130,7 +152,7 @@ const renderDwg = (definition) => {
 
         node [fixedsize=true 
               fontcolor="#2D3436" 
-              fontname="Sans-Serif" 
+              fontname="Times" 
               fontsize=${labelFontsize} 
               height=${nodeHeight}
               imagescale=true 
@@ -143,8 +165,10 @@ const renderDwg = (definition) => {
         edge [color="#7B8894"]
 `;
 
-const dotOutput = `${archDotPrefix} ${dotStr} ;`
-console.log(dotOutput);
+ const dotOutput = `${archDotPrefix} ${dotStr} } ;`;
+ const dotEle = getEle('dotOutput');
+ dotEle.value = dotOutput;
+
   hpccWasm.graphviz
   .layout(`${archDotPrefix} ${dotStr} }`, "svg", "dot", { images })
   .then((svg) => {
