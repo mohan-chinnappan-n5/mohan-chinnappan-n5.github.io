@@ -34,12 +34,21 @@ deliver digital-first and industry-specific experiences across multiple devices 
 ### Digital Experience Layer
 - FlexCards
     - components of these 360° views
+    - the Beginning and Ending Points for Customer Transactions
+    - ![Flexcard-1](img/os/flexCard-1.png)
     - display contextual information and actions in an at-a-glance format for customer account data
     - summarize basic information at a glance, display **detailed information on demand**
     - provide quick access to common tasks (actions) that are context-relevant
-    - OmniStudio **Interaction Console** shows a holistic view of a customer’s account and information. 
+    - OmniStudio **Interaction Console** shows a holistic view of a customer’s account and information.
 
-- OmniScripts
+- Interaction console
+- ![Interaction Console](img/os/interaction-console-1.png) 
+- Provides a holistic view of the customer's information
+- FlexCards are important components of these **360-degree views**. 
+- The FlexCards we see on the console are Lightning web components (LWC) based on FlexCards
+- The console itself is a Salesforce Lightning console
+
+- OmniScripts (/lightning/n/vlocity_ins__OmniScriptHome)
     - Provides a guided path to complete a business process
     - Serves as a **configurable way** of creating a seamless customer experience  
 
