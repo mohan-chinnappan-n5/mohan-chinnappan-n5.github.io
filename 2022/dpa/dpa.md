@@ -91,7 +91,7 @@ deliver digital-first and industry-specific experiences across multiple devices 
 
 ```
 
-# SObject - vlocity_ins__OmniScript__c 
+# vlocity_ins__OmniScript__c 
 
 ## ERD
 - ![sobject for omniscripts](img/os/vlocity_ins__OmniScript__c-erd.svg)
