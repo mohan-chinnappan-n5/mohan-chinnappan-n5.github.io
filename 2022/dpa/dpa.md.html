@@ -1,0 +1,171 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Digital Process Automation</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
+</head>
+<body>
+<google-codelab id="Digital Process Automation" title="Digital Process Automation" environment="web" >
+
+<google-codelab-step label=' About Digital Process Automation (DPA)'>
+<div id='s0-md' class='md' data-trim='false'>
+  - Automates Processes which requires human interactions
+- Improves the User Experience with the help of automation
+- Creates more responsive, customer focused interactions
+
+![RPA vs BPA vs DPA](img/cio-rpa_vs_bpa_vs_dpa-f.png)
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Benefits of DPA'>
+<div id='s1-md' class='md' data-trim='false'>
+  
+- ![DPA benefits](img/DPA-Benefits-1.png)
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' DPA in Salesforce'>
+<div id='s2-md' class='md' data-trim='false'>
+  - Powered by OmniStudio
+- Automated work orchestration
+- Has process automation and integration tools
+    - Decision Tables
+    - Calculation Matrices and Procedures
+    - Intelligent Document Automation
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' OmniStudio'>
+<div id='s3-md' class='md' data-trim='false'>
+  - Drives Digital Engagement
+- Provides Guided UX
+- suite of task-based components and services that enable businesses to rapidly
+deliver digital-first and industry-specific experiences across multiple devices and channels. 
+- Empowers companies to craft 
+    - **branded, dynamic** customer and employee **interactions fast**, and connect them with **enterprise data and applications, without code**.
+
+
+## Architecture
+![OS arch](img/os-arch-1.png)
+
+### Digital Experience Layer
+- FlexCards
+    - components of these 360° views
+    - display contextual information and actions in an at-a-glance format for customer account data
+    - summarize basic information at a glance, display **detailed information on demand**
+    - provide quick access to common tasks (actions) that are context-relevant
+    - OmniStudio **Interaction Console** shows a holistic view of a customer’s account and information. 
+
+- OmniScripts
+    - Provides a guided path to complete a business process
+    - Serves as a **configurable way** of creating a seamless customer experience  
+
+- LWC
+    - When **activated**, FlexCards and OmniScripts become Lightning web components. 
+    - With this the users launch LWC-enabled OmniScripts as flyouts to display additional information when they click an action on a FlexCard. 
+
+
+
+### Service Management Layer
+
+- OmniStudio Integration Procedures (IP)
+    - Provides declarative, server-side processes that execute multiple actions in **a single server call**
+
+- DataRaptors:  a mapping tool provides
+    - Configurable services for 
+        - retrieving 
+            - Turbo Extract - Getting data from Single SObject
+            - Extract - Getting data from one or more SObjects)
+        - transforming (Transform)
+        - updating data (Load) 
+            - Manipulate any data that comes from inside or outside Salesforce
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Using OmniStudio'>
+<div id='s4-md' class='md' data-trim='false'>
+  
+- ![os-demo-1](./videos/omnistudio-1.webm.gif)
+- [YouTube Video](https://www.youtube.com/watch?v=6whgHo-CLTw)
+
+- ![OS-2](img/os/os-2.png)
+
+## Exporting to off-platform LWC
+```
+.
+└── src
+    └── modules
+        └── vlocityomniscript
+            └── sampleEditAccountEnglish
+                ├── sampleEditAccountEnglish.css
+                ├── sampleEditAccountEnglish.html
+                ├── sampleEditAccountEnglish.js
+                ├── sampleEditAccountEnglish.js-meta.xml
+                ├── sampleEditAccountEnglish.svg
+                ├── sampleEditAccountEnglish_def.js
+                ├── sampleEditAccountEnglish_nds.css
+                └── sampleEditAccountEnglish_nds.html
+
+4 directories, 8 files
+
+```
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Resources'>
+<div id='s5-md' class='md' data-trim='false'>
+  - [digital process automation - TechTarget](https://www.techtarget.com/searchcio/definition/digital-process-automation)
+
+- [7 Benefits with DPA](https://www.cetrixcloudservices.com/blog/7-benefits-realized-through-digital-process-automation)
+
+## OmniStudio
+- [Learn OmniStudio on Trailhead](https://trailhead.salesforce.com/en/promo/orgs/omnistudiotrails)
+
+- [Using Digital Process Automation To Improve Customer & Employee Experiences | Salesforce](https://www.youtube.com/watch?v=B-7Z-wMRm0A)
+
+
+- [Build digital-first experiences tailored to your industry](https://www.salesforce.com/products/omnistudio/overview/)
+
+- [OmniStudio Datasheet](https://www.salesforce.com/content/dam/web/en_us/www/documents/industries/omnistudio-datasheet.pdf)
+
+- [OmniStudio Architecture](https://trailhead.salesforce.com/content/learn/modules/omnistudio-architecture?trail_id=build-guided-experiences-with-omnistudio)
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Creation '>
+<div id='s6-md' class='md' data-trim='false'>
+  ```
+sfdx mohanc:slides:gen -i dpa.md -o dpa.md.html -t 'Digital Process Automation'
+```
+
+
+
+</div>
+</google-codelab-step>
+</google-codelab>
+
+  <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/native-shim.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
+
+</body>
+</html>

@@ -1492,6 +1492,49 @@ width="860" height="400">
 <li><a href="https://mohan-chinnappan-n2.github.io/2021/ai/mnist/minst.html">MNIST App - brain.js based</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="5-tensorflow"><a class="header" href="#5-tensorflow">5. Tensorflow</a></h1>
+<h2 id="distributed-training-with-tensorflow"><a class="header" href="#distributed-training-with-tensorflow">Distributed Training with Tensorflow</a></h2>
+<p>Deep Learning involves very large datasets.</p>
+<p>Faster model training time helps to provide faster iterations to reach model goals faster and trying new ideas.</p>
+<p>Distribution is not automatic.</p>
+<p>In case of a 4 GPU hardware:</p>
+<table><thead><tr><th>GPU#</th><th>Name</th><th>Temp</th><th>PowerUsage</th><th>GPU Util</th></tr></thead><tbody>
+<tr><td>0</td><td>Tesla</td><td>59C</td><td>113/250W</td><td>72%</td></tr>
+<tr><td>1</td><td>Tesla</td><td>52C</td><td>113/250W</td><td>0%</td></tr>
+<tr><td>2</td><td>Tesla</td><td>50C</td><td>113/250W</td><td>0%</td></tr>
+<tr><td>3</td><td>Tesla</td><td>59C</td><td>113/250W</td><td>0%</td></tr>
+</tbody></table>
+<p>To enable to use of all GPUs, modeling code needs to be modified to make TensorFlow to coordinate across the GPUs at runtime.</p>
+<h3 id="model-parallelism"><a class="header" href="#model-parallelism">Model Parallelism</a></h3>
+<ul>
+<li>Running independent parts of the computations which we can run in parallel.
+<code>WX</code>  (matrix multpicaton) is done at gpu-0 which adding (add op) with <code>b</code> bias is done at gpu-1</li>
+</ul>
+<h3 id="data-parallelism"><a class="header" href="#data-parallelism">Data Parallelism</a></h3>
+<ul>
+<li>Works with any model architecture, so widely adopted.</li>
+</ul>
+<pre><code class="language-py">
+# Linear Model, W: Weights, b: Bias
+y_pred =  WX + b
+
+# Equivalent to a keras Dense single unit
+tf.keras.layers.Dense(units=1)
+
+model.fit(x,y, batch_size=32)
+
+
+</code></pre>
+<p>For <strong>each step</strong> of the model training, <strong>a batch of data</strong> is used to calculate gradients. Thus obtained gradients are used to update the weights of the model.
+<strong>Larger</strong> the batch size, the <strong>more accurate</strong> the gradients are.
+Making batch size <strong>too large</strong> will make us to run out of <strong>GPU memory</strong>.</p>
+<pre><code class="language-py"># with data parallelism we can add NUM_GPUS in the batch_size
+model.fit(x,y, batch_size=32 * NUM_GPUS)
+
+
+</code></pre>
+<p>Each GPU gets a separate slice of the data, calculate the gradients, and those gradients are <strong>averaged</strong>. So the model is able to <strong>see more data</strong> during <strong>each training step</strong>. So less time is taken to finish an epoch (a full pass to the training data)</p>
+<h4 id="synchronous-data-parallelism"><a class="header" href="#synchronous-data-parallelism">Synchronous Data Parallelism</a></h4>
+<h4 id="asynchronous-data-parallelism"><a class="header" href="#asynchronous-data-parallelism">Asynchronous Data Parallelism</a></h4>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tensorflowjs"><a class="header" href="#tensorflowjs">TensorFlow.js</a></h1>
 <p>TensorFlow.js (TFJS) is a library for machine learning in JavaScript.
 Using TFJS you can develop ML models in JavaScript, and use ML directly in the browser or in Node.js.</p>
@@ -4749,7 +4792,7 @@ Global options (use these before the subcommand, if any):
 
         <!-- Livereload script (if served using the cli tool) -->
         <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:5000/__livereload");
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
             socket.onmessage = function (event) {
                 if (event.data === "reload") {
                     socket.close();
