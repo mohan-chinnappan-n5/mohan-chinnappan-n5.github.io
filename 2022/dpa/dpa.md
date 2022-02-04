@@ -71,6 +71,9 @@ deliver digital-first and industry-specific experiences across multiple devices 
 
 - ![OS-2](img/os/os-2.png)
 
+# Vlocity Data Model
+![Vlocity data model](https://mohan-chinnappan-n5.github.io/2022/dpa/vmodel.html?f=vlocity_ins_small)
+
 ## Exporting to off-platform LWC
 ```
 .
