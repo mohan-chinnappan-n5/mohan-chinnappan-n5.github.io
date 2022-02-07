@@ -88,7 +88,7 @@ class FormBuilder {
               Authorization: `Bearer ${formDef.sfdcAccessToken}`,
             },
           };
-          this.fetchSFDCRest(field.field.url, opts).then((result) => {
+          this.fetchSFDCRest(`${field.field.url}/query?q=${field.field.soql}`, opts).then((result) => {
             console.log(result);
             const value = jsonPath(result, field.field.jsonPath);
             fieldHtml = `
