@@ -16,8 +16,28 @@
 <body>
 <google-codelab id="Digital Process Automation" title="Digital Process Automation" environment="web" >
 
-<google-codelab-step label=' About Digital Process Automation (DPA)'>
+<google-codelab-step label=' Salesforce Automation Suite'>
 <div id='s0-md' class='md' data-trim='false'>
+  - Fully Declarative (no/low code)
+    - Workflow Rules
+    - Process Builder
+    - Flow
+- Digital Process Automation (DPA) (no code)
+    - OmniScript
+    - FlexCards
+    - Data Tools
+    - Rule Engine
+    - Document Generation
+- Full Programming (code)
+    - Apex
+    - LWC
+    - AppExchange
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' About Digital Process Automation (DPA)'>
+<div id='s1-md' class='md' data-trim='false'>
   - Automates Processes which requires human interactions
 - Improves the User Experience with the help of automation
 - Creates more responsive, customer focused interactions
@@ -29,7 +49,7 @@
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Benefits of DPA'>
-<div id='s1-md' class='md' data-trim='false'>
+<div id='s2-md' class='md' data-trim='false'>
   
 - ![DPA benefits](img/DPA-Benefits-1.png)
 
@@ -38,7 +58,7 @@
 </div>
 </google-codelab-step>
 <google-codelab-step label=' DPA in Salesforce'>
-<div id='s2-md' class='md' data-trim='false'>
+<div id='s3-md' class='md' data-trim='false'>
   - Powered by OmniStudio
 - Automated work orchestration
 - Has process automation and integration tools
@@ -50,7 +70,7 @@
 </div>
 </google-codelab-step>
 <google-codelab-step label=' OmniStudio'>
-<div id='s3-md' class='md' data-trim='false'>
+<div id='s4-md' class='md' data-trim='false'>
   - Drives Digital Engagement
 - Provides Guided UX
 - suite of task-based components and services that enable businesses to rapidly
@@ -62,6 +82,30 @@ deliver digital-first and industry-specific experiences across multiple devices 
 ## Architecture
 ![OS arch](img/os-arch-1.png)
 
+- Experience
+    - FlexCards
+        - UI Component with excellent Customer Experience
+    - OmniScript
+        - Design Multi-person omni-channel processes
+
+    - Bots
+        - AI powered interactions
+
+
+- Workflow
+    - Decision Tables
+        - Rules to support complex  process
+    - Data Processing Engine
+        - Process Rules and Perform calculations within a process
+
+    - Intelligent Document Automation (IDA)
+        - Generate Documents and automate workflow
+
+- Integration
+    - Data Raptor
+        - Native no-code data **transformation**
+    - Integration Procures (IPs)
+        - Ingest data from multiple data sources
 ### Digital Experience Layer
 - FlexCards
     - components of these 360° views
@@ -79,7 +123,7 @@ deliver digital-first and industry-specific experiences across multiple devices 
 - The FlexCards we see on the console are Lightning web components (LWC) based on FlexCards
 - The console itself is a Salesforce Lightning console
 
-- OmniScripts
+- OmniScripts (/lightning/n/vlocity_ins__OmniScriptHome)
     - Provides a guided path to complete a business process
     - Serves as a **configurable way** of creating a seamless customer experience  
 
@@ -94,6 +138,7 @@ deliver digital-first and industry-specific experiences across multiple devices 
 - OmniStudio Integration Procedures (IP)
     - Provides declarative, server-side processes that execute multiple actions in **a single server call**
 
+- ![dataraptor-1](img/os/dataraptor-1.png)
 - DataRaptors:  a mapping tool provides
     - Configurable services for 
         - retrieving 
@@ -102,13 +147,32 @@ deliver digital-first and industry-specific experiences across multiple devices 
         - transforming (Transform)
         - updating data (Load) 
             - Manipulate any data that comes from inside or outside Salesforce
+    - Can read/write sObjects
+    - xml2json 
+    - Access any REST service
+- API Calls
+- ![api calls](img/os/os-api-calls-1.png)
 
+- FlexCard Actions
+    - have link to
+        - FlexCard 
+        - Pages
+        - URLs
+        - OmniScripts
+        - OmniStudio Actions
+    - Launch in context (e.g. %AccountId%)from one screen
+
+- ![Action items](img/os/action-items-1.png)
+
+- States 
+    - Single FlexCard is rendered differently based a value of a certain field
+- ![FlexCard States](img/os/flexCard-states-1.png)
 
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Using OmniStudio'>
-<div id='s4-md' class='md' data-trim='false'>
+<div id='s5-md' class='md' data-trim='false'>
   
 - ![os-demo-1](./videos/omnistudio-1.webm.gif)
 - [YouTube Video](https://www.youtube.com/watch?v=6whgHo-CLTw)
@@ -119,7 +183,7 @@ deliver digital-first and industry-specific experiences across multiple devices 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Vlocity Data Model'>
-<div id='s5-md' class='md' data-trim='false'>
+<div id='s6-md' class='md' data-trim='false'>
   ![Vlocity data model](https://mohan-chinnappan-n5.github.io/2022/dpa/vmodel.html?f=vlocity_ins_small)
 
 ## Exporting to off-platform LWC
@@ -146,7 +210,7 @@ deliver digital-first and industry-specific experiences across multiple devices 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' vlocity_ins__OmniScript__c '>
-<div id='s6-md' class='md' data-trim='false'>
+<div id='s7-md' class='md' data-trim='false'>
   
 ## ERD
 - ![sobject for omniscripts](img/os/vlocity_ins__OmniScript__c-erd.svg)
@@ -155,30 +219,54 @@ deliver digital-first and industry-specific experiences across multiple devices 
 - ![Querying ](img/os/query-omscript-1.png)
 
 
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Remote Site URLS'>
+<div id='s8-md' class='md' data-trim='false'>
+  - [Docs](https://docs-vlocity-help-center.s3.amazonaws.com/)
+- [IPcommmunity](https://omnistudiotraining-developer-edition.na162.force.com/s/)
+
+
+
+
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Resources'>
-<div id='s7-md' class='md' data-trim='false'>
+<div id='s9-md' class='md' data-trim='false'>
   - [digital process automation - TechTarget](https://www.techtarget.com/searchcio/definition/digital-process-automation)
 
 - [7 Benefits with DPA](https://www.cetrixcloudservices.com/blog/7-benefits-realized-through-digital-process-automation)
 
 ## OmniStudio
+
+### Trailhead
 - [Learn OmniStudio on Trailhead](https://trailhead.salesforce.com/en/promo/orgs/omnistudiotrails)
 
-- [Using Digital Process Automation To Improve Customer & Employee Experiences | Salesforce](https://www.youtube.com/watch?v=B-7Z-wMRm0A)
+- [OmniStudio Architecture](https://trailhead.salesforce.com/content/learn/modules/omnistudio-architecture?trail_id=build-guided-experiences-with-omnistudio)
 
-
+### Data sheets
 - [Build digital-first experiences tailored to your industry](https://www.salesforce.com/products/omnistudio/overview/)
 
 - [OmniStudio Datasheet](https://www.salesforce.com/content/dam/web/en_us/www/documents/industries/omnistudio-datasheet.pdf)
 
-- [OmniStudio Architecture](https://trailhead.salesforce.com/content/learn/modules/omnistudio-architecture?trail_id=build-guided-experiences-with-omnistudio)
+
+
+
+### Videos
+
+
+- [Using Digital Process Automation To Improve Customer & Employee Experiences | Salesforce](https://www.youtube.com/watch?v=B-7Z-wMRm0A)
+
+- [Omnistudio Development Tools, Tips and Tricks of passing Data | OmniStudio Best Practices
+](https://www.youtube.com/watch?v=2ftoYvazRlg)
+
+
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Creation '>
-<div id='s8-md' class='md' data-trim='false'>
+<div id='s10-md' class='md' data-trim='false'>
   ```
 sfdx mohanc:slides:gen -i dpa.md -o dpa.md.html -t 'Digital Process Automation'
 ```
