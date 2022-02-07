@@ -80,15 +80,19 @@ class FormBuilder {
           break;
 
         case "SOQL":
+          // ref: https://help.salesforce.com/s/articleView?id=sf.extend_code_cors.htm&type=5
           const opts = {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              "mode" : "no-cors",
+              mode: "no-cors",
               Authorization: `Bearer ${formDef.sfdcAccessToken}`,
             },
           };
-          this.fetchSFDCRest(`${field.field.url}/query?q=${field.field.soql}`, opts).then((result) => {
+          this.fetchSFDCRest(
+            `${field.field.url}/query?q=${field.field.soql}`,
+            opts
+          ).then((result) => {
             console.log(result);
             const value = jsonPath(result, field.field.jsonPath);
             fieldHtml = `
