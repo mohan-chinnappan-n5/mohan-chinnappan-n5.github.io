@@ -96,7 +96,7 @@ const programInfo = {
                 "soql": "SELECT COUNT(Id) OpptyCount FROM Opportunity",
                 "jsonPath": "$.records[0].OpptyCount",
                 "default": "",
-                "url":  "https://d8c000003tgutea0-dev-ed.my.salesforce.com/services/data/v54.0"
+                "url":  "https://d8c000003tgutea0-dev-ed.my.salesforce.com/services/data/v51.0"
             }
         },
 
