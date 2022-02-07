@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>dmn-js viewer example</title>
+    <title>DMN model viewer</title>
 
     <!-- required viewer styles -->
     <link rel="stylesheet" href="https://unpkg.com/dmn-js@11.1.2/dist/assets/dmn-js-shared.css">
@@ -21,13 +21,16 @@
         padding: 0;
         margin: 0;
       }
+      .bjs-powered-by {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <div id="canvas"></div>
 
     <script>
-      const diagramUrl = 'https://cdn.staticaly.com/gh/bpmn-io/dmn-js-examples/a71e16/starter/diagram.dmn';
+      const diagramUrl = './diagram.dmn';
 
       // viewer instance
       const dmnViewer = new DmnJS({
