@@ -13,7 +13,7 @@
     </authorityRequirement>
   </knowledgeSource>
   <businessKnowledgeModel id="elMenu" name="El menú" />
-  <decision id="dish-decision" name="Dish Decision">
+  <decision id="dish-decision" name="Dish Decision2">
     <informationRequirement id="InformationRequirement_05tgz9d">
       <requiredDecision href="#guestCount" />
     </informationRequirement>
