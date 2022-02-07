@@ -89,6 +89,7 @@ class FormBuilder {
             },
           };
           this.fetchSFDCRest(field.field.url, opts).then((result) => {
+            console.log(result);
             const value = jsonPath(result, field.field.jsonPath);
             fieldHtml = `
             <label for="${field.id}"> ${requiredStar} ${field.label}</label>
