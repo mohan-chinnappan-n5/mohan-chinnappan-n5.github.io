@@ -11,6 +11,7 @@
       </input>
       <output id="OutputClause_1v2xnm9" label="Gift" name="Gift" typeRef="integer" />
       <rule id="DecisionRule_1s5x5yt">
+        <description>gift when briing-in amount is between 5k and 10k</description>
         <inputEntry id="UnaryTests_01ag0gu">
           <text>5000..10000</text>
         </inputEntry>
@@ -19,6 +20,7 @@
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1h35rts">
+        <description>gift when briing-in amount is more than 10k</description>
         <inputEntry id="UnaryTests_0i5mx1i">
           <text>&gt; 10000</text>
         </inputEntry>
@@ -31,10 +33,10 @@
   <dmndi:DMNDI>
     <dmndi:DMNDiagram id="DMNDiagram_1ejukud">
       <dmndi:DMNShape id="DMNShape_0e14zqq" dmnElementRef="InputData_0v9rmh1">
-        <dc:Bounds height="45" width="125" x="127" y="417" />
+        <dc:Bounds height="45" width="125" x="117" y="287" />
       </dmndi:DMNShape>
       <dmndi:DMNEdge id="DMNEdge_0e6vabd" dmnElementRef="InformationRequirement_19kseq3">
-        <di:waypoint x="190" y="417" />
+        <di:waypoint x="180" y="287" />
         <di:waypoint x="180" y="240" />
         <di:waypoint x="180" y="220" />
       </dmndi:DMNEdge>
