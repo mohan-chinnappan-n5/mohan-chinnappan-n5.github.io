@@ -1,0 +1,28 @@
+/* editor.css */
+body {
+    padding:5px;
+}
+iframe {
+    width: 100%;
+    height: 600px;
+    border-radius: 10px;
+}
+#editor {
+    border-radius: 30px;
+    height: 800px;
+    width: 1200px;
+}
+
+#dot {
+    background-color: black;
+    color:beige;
+    font-family: Consolas, Monaco, 'Courier New', Courier, monospace;
+    border-radius: 5px;
+    margin-top: 5px;
+    display:none;
+}
+
+#svg {
+    border-radius: 5px;
+    display: none;
+}
