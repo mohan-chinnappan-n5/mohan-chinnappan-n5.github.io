@@ -18,7 +18,9 @@
         font-family: Monaco;
       }
     </style>
-   <textarea name="" id="data" cols="100" rows="10"></textarea>
+
+   <textarea name="" id="data" cols="100" rows="20"></textarea>
+   <textarea name="" id="output" cols="100" rows="20"></textarea>
     <script>
          // param parsing
     // https://mohan-chinnappan-n5.github.io/2022/dpa/oauth2/callback/#access_token=00D8c000003TgUT%21AR4AQL02tm9nBlDnFopnaMx7F25b9QPKh_UhDBD1wHolRCRXoYVSdYRN6ps.InopuJ.vD37qwDZdvF95F75B6ox52xXbIdyl&instance_url=https%3A%2F%2Fd8c000003tgutea0-dev-ed.my.salesforce.com&id=https%3A%2F%2Flogin.salesforce.com%2Fid%2F00D8c000003TgUTEA0%2F0058c0000093MbZAAU&issued_at=1644327915360&signature=DimunxY%2Bxz6ThS0ND119Nio6zSb7sEmQAqxx0g45Vd4%3D&state=jsforce0.popup.c03kvakct4m&scope=api&token_type=Bearer 
@@ -38,6 +40,9 @@
 
       const dataEle = document.getElementById('data');
       dataEle.value = JSON.stringify(params, null, 4);
+
+      const outputEle = document.getElementById('output');
+
 
 
       async function fetchSFDCRest(url, opts) {
@@ -59,6 +64,7 @@
 
       fetchSFDCRest( url, opts).then((result) => {
             console.log(result);
+            outputEle.value = JSON.stringify(result, null, 4);
       });
 
   
