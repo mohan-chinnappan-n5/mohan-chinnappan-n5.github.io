@@ -25,7 +25,7 @@
       const params  = parseParams();
 
       const dataEle = document.getElementById('data');
-      dataEle.value = params;
+      dataEle.value = JSON.stringify(params, null, 4);
 
   
     </script>
