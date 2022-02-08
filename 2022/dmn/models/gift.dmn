@@ -20,12 +20,21 @@
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1h35rts">
-        <description>gift when briing-in amount is more than 10k</description>
+        <description>gift when briing-in amount is between 10k and 15k</description>
         <inputEntry id="UnaryTests_0i5mx1i">
-          <text>&gt; 10000</text>
+          <text>[10001..15000]</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_15keqh1">
           <text>400</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0e1ryjb">
+        <description>gift when briing-in amount is more than 15k</description>
+        <inputEntry id="UnaryTests_0x2foms">
+          <text>&gt; 15000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ua6pfv">
+          <text>501</text>
         </outputEntry>
       </rule>
     </decisionTable>
