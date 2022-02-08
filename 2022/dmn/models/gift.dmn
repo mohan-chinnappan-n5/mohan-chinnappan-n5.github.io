@@ -13,7 +13,7 @@
       <rule id="DecisionRule_1s5x5yt">
         <description>gift when briing-in amount is between 5k and 10k</description>
         <inputEntry id="UnaryTests_01ag0gu">
-          <text>5000..10000</text>
+          <text>[5000..1000]</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_0r7xwvk">
           <text>300</text>
