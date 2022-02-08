@@ -49,8 +49,10 @@
     .powered-by__logo {
       display: none;
     }
+
     #input {
-      display: none;;
+      display: none;
+      ;
     }
 
     textarea {
@@ -89,12 +91,11 @@
   </nav>
 
   <div class="split split-horizontal" id="left">
-    <textarea id="input" cols="80" rows="30"></textarea>
     <div id="editor"></div>
-    <hr/>
+    <hr />
 
     <button id='renderBtn' class="btn btn-info">Render</button>
-    <button id="save-button" class="btn btn-primary">Sync</button>
+    <button id="syncBtn" class="btn btn-primary">Sync</button>
 
   </div>
   <div class="split split-horizontal" id="right">
@@ -113,30 +114,30 @@
 
     getEle = id => document.getElementById(id);
 
-// init the editor
-initEditor = (id, value, language, theme) => {
-    const editorEle = getEle(id);
-    const editor = monaco.editor.create(editorEle, { value, language, theme });
-    return editor;
-};
+    // init the editor
+    initEditor = (id, value, language, theme) => {
+      const editorEle = getEle(id);
+      const editor = monaco.editor.create(editorEle, { value, language, theme });
+      return editor;
+    };
 
 
-// param parsing
-parseParams = () => {
-    const query = location.search.substr(1);
-    let qResult = {};
-    query.split("&").forEach(function(part) {
+    // param parsing
+    parseParams = () => {
+      const query = location.search.substr(1);
+      let qResult = {};
+      query.split("&").forEach(function (part) {
         const item = part.split("=");
         qResult[item[0]] = decodeURIComponent(item[1]);
-    });
-    return qResult;
-}
+      });
+      return qResult;
+    }
 
-// get the language (l) param
-const params = parseParams();
-let lang = params['l'] || 'xml';
-let theme = params['t'] || 'vs-dark';
-const content = `
+    // get the language (l) param
+    const params = parseParams();
+    let lang = params['l'] || 'xml';
+    let theme = params['t'] || 'vs-dark';
+    const content = `
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" id="gift" name="Credit gift" namespace="http://camunda.org/schema/1.0/dmn">
   <dmndi:DMNDI>
@@ -144,8 +145,9 @@ const content = `
   </dmndi:DMNDI>
 </definitions>
 `
-const editor = initEditor('editor', content, lang, theme );
-const getEditorContent = (editor) => editor.getValue();
+    const editor = initEditor('editor', content, lang, theme);
+    const renderBtn = document.getElementById('renderBtn');
+
 
     // refer: Vlocity DT:
     //    https://help.salesforce.com/s/articleView?id=sf.task_decision_table_create.htm&type=5
@@ -162,8 +164,6 @@ const getEditorContent = (editor) => editor.getValue();
       }
     });
 
-    const inputEle = document.getElementById('input');
-
     /**
      * Save diagram contents and print them to the console.
      */
@@ -174,11 +174,7 @@ const getEditorContent = (editor) => editor.getValue();
         if (err) {
           return console.error('could not save DMN 1.1 diagram', err);
         }
-
-        inputEle.value = xml;
         editor.setValue(xml);
-
-
         // console.log('DIAGRAM', xml);
       });
     }
@@ -209,30 +205,26 @@ const getEditorContent = (editor) => editor.getValue();
 
           // zoom to fit full viewport
           canvas.zoom('fit-viewport');
-          document.getElementById('save-button').click();
+          document.getElementById('syncBtn').click();
 
         }
       });
     }
 
-
     // load external diagram file via AJAX and open it
     $.get(diagramUrl, openDiagram, 'text');
 
-    // wire save button
-    $('#save-button').click(exportDiagram);
-
-
+    // wire save button 
+    $('#syncBtn').click(exportDiagram);
 
     // update diagram
     async function updateDiagram() {
-      const dmlXML = inputEle.value;
+      const dmlXML = editor.getValue();
       //console.log(dmlXML);    
 
       // import diagram
       try {
         const { warnings } = await dmnViewer.importXML(dmnXML);
-
         // fetch currently active view
         const activeView = dmnViewer.getActiveView();
 
@@ -251,13 +243,10 @@ const getEditorContent = (editor) => editor.getValue();
       }
     }
 
-
-    const renderBtn = document.getElementById('renderBtn');
+    // render the changes in the editor to the diagram
     renderBtn.addEventListener('click', event => {
-      const dmlXML = inputEle.value;
+      const dmlXML = editor.getValue();
       openDiagram(dmlXML);
-
-
     })
 
 
