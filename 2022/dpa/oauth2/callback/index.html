@@ -22,6 +22,8 @@
     <script>
          // param parsing
     // https://mohan-chinnappan-n5.github.io/2022/dpa/oauth2/callback/#access_token=00D8c000003TgUT%21AR4AQL02tm9nBlDnFopnaMx7F25b9QPKh_UhDBD1wHolRCRXoYVSdYRN6ps.InopuJ.vD37qwDZdvF95F75B6ox52xXbIdyl&instance_url=https%3A%2F%2Fd8c000003tgutea0-dev-ed.my.salesforce.com&id=https%3A%2F%2Flogin.salesforce.com%2Fid%2F00D8c000003TgUTEA0%2F0058c0000093MbZAAU&issued_at=1644327915360&signature=DimunxY%2Bxz6ThS0ND119Nio6zSb7sEmQAqxx0g45Vd4%3D&state=jsforce0.popup.c03kvakct4m&scope=api&token_type=Bearer 
+ 
+
 
     parseParams = () => {
         const query = location.href.split('#')[1];
@@ -36,6 +38,28 @@
 
       const dataEle = document.getElementById('data');
       dataEle.value = JSON.stringify(params, null, 4);
+
+
+      async function fetchSFDCRest(url, opts) {
+        const response = await fetch(url, opts);
+        const result = await response.json();
+        return result;
+    }
+    const opts = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          mode: "no-cors",
+          Authorization: `Bearer ${params.access_token}`,
+        },
+      };
+      const APIVersion = 'v51.0';
+      const soql = `SELECT  Id, Name FROM Account`;
+      const url = `${params.instance_url}/services/data/${APIVersion}/query?q=${soql}`;
+
+      fetchSFDCRest( url, opts).then((result) => {
+            console.log(result);
+      });
 
   
     </script>

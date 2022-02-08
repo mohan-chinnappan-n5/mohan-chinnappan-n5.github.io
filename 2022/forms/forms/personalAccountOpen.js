@@ -1,4 +1,4 @@
-const programInfo = {
+const formDef = {
     "title": "Personal Account Opening ",
     "id": "PersonAccountOpeningForm",
     "sfdcAccessToken": "00D8c000003TgUT!AR4AQLbZGtIxlCEiDHqC2.xs.zxkFfm0MbhOb7JRbK0tXn5EwYU2FYOPTxMkQv3WZczVOT.0irCx.9WM1pYwyXTD83A54Zmt",
