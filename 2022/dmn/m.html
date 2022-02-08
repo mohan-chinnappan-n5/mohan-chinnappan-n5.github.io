@@ -88,6 +88,10 @@
 
 
     <script>
+      
+      // refer: Vlocity DT:
+      //    https://help.salesforce.com/s/articleView?id=sf.task_decision_table_create.htm&type=5
+      // Redhat: https://access.redhat.com/documentation/en-us/red_hat_process_automation_manager/7.8/html/designing_a_decision_service_using_dmn_models/dmn-con_dmn-models
 
       Split(["#left", "#right"], { sizes: [50, 50] });
       const diagramUrl = './models/gift.dmn';
@@ -155,6 +159,45 @@
 
       // wire save button
       $('#save-button').click(exportDiagram);
+
+
+      // update diagram
+      async function  updateDiagram() {
+        const dmlXML = inputEle.value; 
+        //console.log(dmlXML);    
+
+        // import diagram
+        try {
+            const { warnings } = await dmnViewer.importXML(dmnXML);
+
+            // fetch currently active view
+            const activeView = dmnViewer.getActiveView();
+
+            // apply initial logic in DRD view
+            if (activeView.type === 'drd') {
+                const activeEditor = dmnViewer.getActiveViewer();
+
+                // access active editor components
+                const canvas = activeEditor.get('canvas');
+
+                // zoom to fit full viewport
+                canvas.zoom('fit-viewport');
+            }
+        } catch (err) {
+            console.error('could not import DMN 1.3 diagram', err);
+        }
+    }
+
+
+      const renderBtn = document.getElementById('renderBtn');
+      renderBtn.addEventListener('click', event => {
+        const dmlXML = inputEle.value;
+        openDiagram(dmlXML); 
+
+
+      })
+
+
     </script>
   </body>
 </html>
