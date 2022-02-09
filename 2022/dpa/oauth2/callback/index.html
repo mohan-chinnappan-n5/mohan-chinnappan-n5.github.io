@@ -50,15 +50,17 @@
 
     <div class="split split-horizontal" id="left">
         <label for="data">Credentials:</label>
-        <textarea name="data" id="data" cols="100" rows="10"></textarea>
+        <textarea class='form-control' name="data" id="data" cols="100" rows="10"></textarea>
         <label for="query">SOQL:</label>
-        <textarea name="query" id="query" cols="100" rows="5"></textarea>
+        <textarea class="form-control" name="query" id="query" cols="100" rows="5">
+            SELECT Id, Name FROM Account
+        </textarea>
         <hr />
         <button id="runQuery" class="btn btn-success">Query</button>
     </div>
     <div class="split split-horizontal" id="right">
         <label for="output">Results:</label>
-        <textarea name="output" id="output" cols="100" rows="20"></textarea>
+        <textarea class="form-control" name="output" id="output" cols="100" rows="20"></textarea>
     </div>
 
 
