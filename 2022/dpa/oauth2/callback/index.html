@@ -19,8 +19,11 @@
       }
     </style>
 
-   <textarea name="" id="data" cols="100" rows="20"></textarea>
-   <textarea name="" id="output" cols="100" rows="20"></textarea>
+   <textarea name="data" id="data" cols="100" rows="20"></textarea>
+   <textarea name="query" id="query" cols="100" rows="20"></textarea>
+   <button id="runQuery" class="btn btn-success">Query</button>
+
+   <textarea name="output" id="output" cols="100" rows="20"></textarea>
     <script>
          // param parsing
     // https://mohan-chinnappan-n5.github.io/2022/dpa/oauth2/callback/#access_token=00D8c000003TgUT%21AR4AQL02tm9nBlDnFopnaMx7F25b9QPKh_UhDBD1wHolRCRXoYVSdYRN6ps.InopuJ.vD37qwDZdvF95F75B6ox52xXbIdyl&instance_url=https%3A%2F%2Fd8c000003tgutea0-dev-ed.my.salesforce.com&id=https%3A%2F%2Flogin.salesforce.com%2Fid%2F00D8c000003TgUTEA0%2F0058c0000093MbZAAU&issued_at=1644327915360&signature=DimunxY%2Bxz6ThS0ND119Nio6zSb7sEmQAqxx0g45Vd4%3D&state=jsforce0.popup.c03kvakct4m&scope=api&token_type=Bearer 
@@ -43,6 +46,9 @@
 
       const outputEle = document.getElementById('output');
 
+      const queryEle = document.getElementById('query');
+
+
 
 
       async function fetchSFDCRest(url, opts) {
@@ -59,13 +65,19 @@
         },
       };
       const APIVersion = 'v51.0';
-      const soql = `SELECT  Id, Name FROM Account`;
-      const url = `${params.instance_url}/services/data/${APIVersion}/query?q=${soql}`;
 
-      fetchSFDCRest( url, opts).then((result) => {
-            console.log(result);
-            outputEle.value = JSON.stringify(result, null, 4);
+      const runQueryEle = document.getElementById('runQuery');
+      runQueryEle.addEventListener('click', event => {
+        const soql = queryEle.value;
+        const url = `${params.instance_url}/services/data/${APIVersion}/query?q=${soql}`;
+  
+        fetchSFDCRest( url, opts).then((result) => {
+              console.log(result);
+              outputEle.value = JSON.stringify(result, null, 4);
+        });
+
       });
+     
 
   
     </script>
