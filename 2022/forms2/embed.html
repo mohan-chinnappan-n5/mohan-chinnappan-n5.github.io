@@ -32,6 +32,9 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://mohan-chinnappan-n5.github.io/2022/dmn/package/dev/vs/editor/editor.main.css" />
+  <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/2022/dmn/css/editor.css" />
+
 
 </head>
 
@@ -49,6 +52,12 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Setup</a>
+                        <div class="dropdown-menu">
+                          <a href="?t=vs" class="dropdown-item">Light Theme</a>
+                          <a href="?t=vs-dark" class="dropdown-item">Dark Theme</a>
+                        </div>
 
                 </ul>
             </div>
@@ -59,13 +68,7 @@
     <link rel="stylesheet" href="https://unpkg.com/@bpmn-io/form-js@0.2.4/dist/assets/form-js.css">
 
     <div class="split split-horizontal" id="left">
-        <label for="data">Form Schema</label>
-
-        <textarea name="schema" id="schema" cols="80" rows="20"></textarea>
-
-        <label for="data">Data</label>
-        <textarea name="data" id="data" cols="80" rows="12"></textarea>
-        <hr />
+        <div id="editor"></div>
         <button id='renderBtn' class="btn btn-info">Render</button>
         <button id="syncBtn" class="btn btn-primary">Sync</button>
         <hr />
@@ -73,9 +76,14 @@
     <div class="split split-horizontal" id="right">
         <!-- container to render the form into -->
         <div class="fjs-pgl-form-container"></div>
-        <label for="output">Output</label>
+        <hr />
+
+        <label for="data">Data:</label><hr/>
+        <textarea name="data" id="data" cols="60" rows="12"></textarea>
+        <br/>
+        <label for="output">Output:</label><hr/>
         <textarea name="output" id="output" cols="80" rows="20"></textarea>
-        <label for="error">Error</label>
+        <label for="error">Error:</label><hr/>
         <textarea name="error" id="error" cols="80" rows="5"></textarea>
     </div>
 
@@ -84,11 +92,49 @@
     <script src="https://unpkg.com/@bpmn-io/form-js@0.2.4/dist/form-viewer.umd.js"></script>
 
     <!-- actual script to instantiate the form and load form schema + data -->
+
+
+    <script>
+        var require = { paths: { vs: "https://mohan-chinnappan-n5.github.io/2022/dmn/package/dev/vs" } };
+      </script>
+      <script src="https://mohan-chinnappan-n5.github.io/2022/dmn/package/dev/vs/loader.js"></script>
+      <script src="https://mohan-chinnappan-n5.github.io/2022/dmn/package/dev/vs/editor/editor.main.nls.js"></script>
+      <script src="https://mohan-chinnappan-n5.github.io/2022/dmn/package/dev/vs/editor/editor.main.js"></script>
+    
+
+      
     <script>
 
         Split(["#left", "#right"], { sizes: [50, 50] });
+        
 
         const getEle = id => document.getElementById(id);
+
+
+           // init the editor
+    initEditor = (id, value, language, theme) => {
+        const editorEle = getEle(id);
+        const editor = monaco.editor.create(editorEle, { value, language, theme });
+        return editor;
+      };
+
+       // param parsing
+    parseParams = () => {
+        const query = location.search.substr(1);
+        let qResult = {};
+        query.split("&").forEach(function (part) {
+          const item = part.split("=");
+          qResult[item[0]] = decodeURIComponent(item[1]);
+        });
+        return qResult;
+      }
+  
+      // get the language (l) param
+      const params = parseParams();
+      let lang = params['l'] || 'json';
+      let theme = params['t'] || 'vs-dark';
+
+
         const dataEle = getEle('data');
         const dataStr =
             `
@@ -241,8 +287,10 @@
 } 
   `;
 
-        const schemaEle = getEle('schema');
-        schemaEle.value = schemaStr;
+  const editor = initEditor('editor', schemaStr, lang, theme);
+
+
+
         // const schema = JSON.parse("{\"components\":[{\"text\":\"# Invoice\\nLorem _ipsum_ __dolor__ `sit`.\\n  \\n  \\nA list of BPMN symbols:\\n* Start Event\\n* Task\\nLearn more about [forms](https://bpmn.io).\\n  \\n  \\nThis [malicious link](javascript:throw onerror=alert,'some string',123,'haha') __should not work__.\",\"type\":\"text\",\"id\":\"Field_1b50w5m\"},{\"key\":\"creditor\",\"label\":\"Creditor\",\"type\":\"textfield\",\"validate\":{\"required\":true},\"id\":\"Field_0n7173p\"},{\"description\":\"An invoice number in the format: C-123.\",\"key\":\"invoiceNumber\",\"label\":\"Invoice Number\",\"type\":\"textfield\",\"validate\":{\"pattern\":\"^C-[0-9]+$\"},\"id\":\"Field_1rheapf\"},{\"key\":\"amount\",\"label\":\"Amount\",\"type\":\"number\",\"validate\":{\"min\":0,\"max\":1000},\"id\":\"Field_0a4bhsq\"},{\"key\":\"approved\",\"label\":\"Approved\",\"type\":\"checkbox\",\"id\":\"Field_0o69a8s\"},{\"key\":\"approvedBy\",\"label\":\"Approved By\",\"type\":\"textfield\",\"id\":\"Field_1ae51q0\"},{\"values\":[{\"label\":\"Camunda Platform\",\"value\":\"camunda-platform\"},{\"label\":\"Camunda Cloud\",\"value\":\"camunda-cloud\"},{\"label\":\"Salesforce\",\"value\":\"Salesforce\"}],\"key\":\"product\",\"label\":\"Product\",\"type\":\"radio\",\"id\":\"Field_0dh2ej3\",\"validate\":{\"required\":true}},{\"values\":[{\"label\":\"German\",\"value\":\"german\"},{\"label\":\"English\",\"value\":\"english\"}],\"key\":\"language\",\"label\":\"Language\",\"type\":\"select\",\"id\":\"Field_12c8vlt\"},{\"values\":[{\"value\":\"Flight\",\"label\":\"Flight\"},{\"value\":\"Car\",\"label\":\"Car\"}],\"label\":\"Travel\",\"type\":\"select\",\"id\":\"Field_0wn00bo\",\"key\":\"field_0zg61sp\",\"description\":\"Your mode of travel\",\"validate\":{\"required\":true}},{\"action\":\"submit\",\"key\":\"submit\",\"label\":\"Submit\",\"type\":\"button\",\"id\":\"Field_00wv8u2\"},{\"action\":\"reset\",\"key\":\"reset\",\"label\":\"Reset\",\"type\":\"button\",\"id\":\"Field_0c19ezc\"}],\"type\":\"default\",\"id\":\"Form_02zezt2\",\"schemaVersion\":3}");
 
         const form = new FormViewer.Form({ container: document.querySelector(".fjs-pgl-form-container") });
@@ -268,7 +316,7 @@
         const renderBtn = getEle('renderBtn');
         renderBtn.addEventListener('click', event => {
             const data = JSON.parse(dataEle.value);
-            const schema = JSON.parse(schemaEle.value);
+            const schema = JSON.parse(editor.getValue());
             importSchema(form, schema, data);
         });
  
