@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="form"></div>
+
+    <script>
+
+        const formSchema = `
+      {
+        "components": [
+          {
+            "key": "creditor",
+            "label": "Creditor",
+            "type": "textfield",
+            "validate": {
+              "required": true
+            }
+          },
+          {
+            "key": "amount",
+            "label": "Amount",
+            "type": "number",
+            "validate": {
+              "required": true
+            }
+          },
+          {
+            "description": "An invoice number in the format: C-123.",
+            "key": "invoiceNumber",
+            "label": "Invoice Number",
+            "type": "textfield",
+            "validate": {
+              "pattern": "^C-[0-9]+$"
+            }
+          },
+          {
+            "key": "approved",
+            "label": "Approved",
+            "type": "checkbox"
+          },
+          {
+            "key": "approvedBy",
+            "label": "Approved By",
+            "type": "textfield"
+          },
+          {
+            "key": "submit",
+            "label": "Submit",
+            "type": "button"
+          },
+          {
+            "action": "reset",
+            "key": "reset",
+            "label": "Reset",
+            "type": "button"
+          }
+        ],
+        "type": "default"
+      }
+      `;
+      const schema = JSON.parse( formSchema);
+        
+        import { createForm } from '@bpmn-io/form-js';
+      
+        const form = createForm({
+          schema,
+          data,
+          container: document.querySelector('#form')
+        });
+      
+        form.on('submit', (event) => {
+          console.log(event.data, event.errors);
+        });
+      </script>
+</body>
+</html>

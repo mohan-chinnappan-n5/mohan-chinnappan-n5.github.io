@@ -52,6 +52,7 @@ deliver digital-first and industry-specific experiences across multiple devices 
         - UI Component with excellent Customer Experience
     - OmniScript
         - Design Multi-person omni-channel processes
+        - Declarative scripting tool
 
     - Bots
         - AI powered interactions

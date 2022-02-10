@@ -50,61 +50,9 @@
     <script src="https://unpkg.com/@bpmn-io/form-js@0.6.1/dist/form-editor.umd.js"></script>
 
     <script>
-
-      const formSchema = `
-      {
-        "components": [
-          {
-            "key": "creditor",
-            "label": "Creditor",
-            "type": "textfield",
-            "validate": {
-              "required": true
-            }
-          },
-          {
-            "key": "amount",
-            "label": "Amount",
-            "type": "number",
-            "validate": {
-              "required": true
-            }
-          },
-          {
-            "description": "An invoice number in the format: C-123.",
-            "key": "invoiceNumber",
-            "label": "Invoice Number",
-            "type": "textfield",
-            "validate": {
-              "pattern": "^C-[0-9]+$"
-            }
-          },
-          {
-            "key": "approved",
-            "label": "Approved",
-            "type": "checkbox"
-          },
-          {
-            "key": "approvedBy",
-            "label": "Approved By",
-            "type": "textfield"
-          },
-          {
-            "key": "submit",
-            "label": "Submit",
-            "type": "button"
-          },
-          {
-            "action": "reset",
-            "key": "reset",
-            "label": "Reset",
-            "type": "button"
-          }
-        ],
-        "type": "default"
-      }
-      `;
-      const schema = JSON.parse( formSchema);
+      const schema = JSON.parse(
+        document.querySelector('[type="application/form-schema"]').textContent
+      );
 
       const container = document.querySelector('#form');
 
@@ -112,8 +60,6 @@
         container,
         schema
       });
-
-     console.log( FormEditor.formSchema());
     </script>
   </body>
 </html>
