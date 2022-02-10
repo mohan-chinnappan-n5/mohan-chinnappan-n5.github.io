@@ -1,7 +1,7 @@
 const formDef = {
     "title": "Personal Account Opening ",
     "id": "PersonAccountOpeningForm",
-    "sfdcAccessToken": "00D8c000003TgUT!AR4AQLbZGtIxlCEiDHqC2.xs.zxkFfm0MbhOb7JRbK0tXn5EwYU2FYOPTxMkQv3WZczVOT.0irCx.9WM1pYwyXTD83A54Zmt",
+    "sfdcAccessToken": "OAuth2 access_token here",
     "fields": [
         {
             "id": "FirstName",
@@ -13,7 +13,7 @@ const formDef = {
             },
             "field": {
                 "type": "text",
-                "default": ""
+                "default": "Dennis"
             }
         },
         {
@@ -26,7 +26,7 @@ const formDef = {
             },
             "field": {
                 "type": "text",
-                "default": ""
+                "default": "Ritchie"
             }
         },
         {
@@ -90,7 +90,7 @@ const formDef = {
                 "url": "https://d8c000003tgutea0-dev-ed.my.salesforce.com/services/data/v51.0"
             }
         },
-{
+        {
             "id": "AccountCount",
             "label": "Account Count",
             "type": "field",
@@ -116,7 +116,7 @@ const formDef = {
             },
             "field": {
                 "type": "date",
-                "default": ""
+                "default": "1952-04-09"
             }
         },
         {
@@ -146,7 +146,7 @@ const formDef = {
             },
             "field": {
                 "type": "select",
-                "default": "",
+                "default": "Yes",
                 "options": [
                     "Yes",
                     "No"
@@ -163,7 +163,7 @@ const formDef = {
             },
             "field": {
                 "type": "select",
-                "default": "",
+                "default": "No",
                 "options": [
                     "Employed",
                     "Retired",
@@ -183,7 +183,7 @@ const formDef = {
             },
             "field": {
                 "type": "select",
-                "default": "",
+                "default": "Employment Income",
                 "options": [
                     "Employment Income",
                     "Inheritance or Trust",
