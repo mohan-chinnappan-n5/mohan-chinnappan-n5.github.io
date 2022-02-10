@@ -129,7 +129,7 @@ const formDef = {
             },
             "field": {
                 "type": "select",
-                "default": "",
+                "default": "Yes",
                 "options": [
                     "Yes",
                     "No"
@@ -146,7 +146,7 @@ const formDef = {
             },
             "field": {
                 "type": "select",
-                "default": "Yes",
+                "default": "No",
                 "options": [
                     "Yes",
                     "No"

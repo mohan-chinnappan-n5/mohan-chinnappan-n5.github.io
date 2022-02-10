@@ -56,6 +56,7 @@ class FormBuilder {
                           field.field.options,
                           field.field.default,
                           required
+                          
                         )}
                   <small id="${field.id}Help" class="form-text text-muted">${
             field.help.msg
