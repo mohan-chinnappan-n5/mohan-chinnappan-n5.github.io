@@ -66,6 +66,9 @@
                     </li>
 
                 </ul>
+                <button id='renderBtn' class="btn btn-success">Render</button>
+                <button id="syncBtn" class="btn btn-success">Sync</button>
+              
             </div>
         </div>
     </nav>
@@ -74,13 +77,12 @@
     <link rel="stylesheet" href="https://unpkg.com/@bpmn-io/form-js@0.2.4/dist/assets/form-js.css">
 
     <div class="split split-horizontal" id="left">
-        <button id='renderBtn' class="btn btn-primary">Render</button>
-        <button id="syncBtn" class="btn btn-primary">Sync</button>
-        <div id="editor"></div>
+         <div id="editor"></div>
 
         <hr />
     </div>
     <div class="split split-horizontal" id="right">
+       
         <!-- container to render the form into -->
         <div class="fjs-pgl-form-container"></div>
         <hr />
