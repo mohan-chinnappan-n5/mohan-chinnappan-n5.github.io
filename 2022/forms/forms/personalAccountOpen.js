@@ -163,7 +163,7 @@ const formDef = {
             },
             "field": {
                 "type": "select",
-                "default": "No",
+                "default": "Employed",
                 "options": [
                     "Employed",
                     "Retired",
