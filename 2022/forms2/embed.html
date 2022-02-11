@@ -67,9 +67,16 @@
                     </li>
 
                 </ul>
+
+                <input type="file" name="inputFile" class="btn btn-success" id="inputFile" accept="*.json">
                 <button id='renderBtn' class="btn btn-primary">Render</button> &nbsp;
                 <button id="syncBtn" class="btn btn-primary">Sync</button>
-              
+
+
+                <button class="btn btn-success" type="button" value="save" id="save" title="Download"> Download
+                </button>
+
+
             </div>
         </div>
     </nav>
@@ -78,12 +85,12 @@
     <link rel="stylesheet" href="https://unpkg.com/@bpmn-io/form-js@0.2.4/dist/assets/form-js.css">
 
     <div class="split split-horizontal" id="left">
-         <div id="editor"></div>
+        <div id="editor"></div>
 
         <hr />
     </div>
     <div class="split split-horizontal" id="right">
-       
+
         <!-- container to render the form into -->
         <div class="fjs-pgl-form-container"></div>
         <hr />
@@ -115,7 +122,7 @@
 
             </div>
         </div>
- 
+
 
     </div>
 
@@ -136,11 +143,6 @@
 
 
     <script>
-
-
-    document
-    .getElementById("inputFile")
-    .addEventListener("change", getUploadedFile);
 
 
 
@@ -367,6 +369,70 @@
         syncBtn.addEventListener('click', event => {
             renderBtn.click();
         });
+
+
+
+        //  file management //
+        let getUploadedFile = (event) => {
+            const input = event.target;
+            if ("files" in input && input.files.length > 0) {
+                console.log(input.files[0]);
+                placeFileContent(input.files[0]);
+            }
+        };
+
+        let readFileContent = (file) => {
+            const reader = new FileReader();
+            return new Promise((resolve, reject) => {
+                reader.onload = (event) => resolve(event.target.result);
+                reader.onerror = (error) => reject(error);
+                reader.readAsText(file);
+            });
+        };
+
+        let placeFileContent = (file) => {
+            readFileContent(file)
+                .then((content) => {
+                    editor.setValue(content);
+                })
+                .catch((error) => console.log(error));
+        };
+
+        document
+            .getElementById("inputFile")
+            .addEventListener("change", getUploadedFile);
+
+
+        // SAVING
+        // save to file
+        saveSourceToFile = () => {
+            //var textToWrite = document.getElementById('textArea').innerHTML;
+
+            var fileContent = editor.getValue();
+            var textFileAsBlob = new Blob([fileContent], { type: "text/plain" });
+            var fileNameToSaveAsInput = "MyForm.json";
+            //console.log('fileNameToSaveAsInput:' , fileNameToSaveAsInput)
+            var fileNameToSaveAs = fileNameToSaveAsInput || "myPage.html";
+
+            var downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.innerHTML = "Download File";
+            if (window.webkitURL != null) {
+                // Chrome allows the link to be clicked without actually adding it to the DOM.
+                downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+            } else {
+                // Firefox requires the link to be added to the DOM before it can be clicked.
+                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+                downloadLink.onclick = destroyClickedElement;
+                downloadLink.style.display = "none";
+                document.body.appendChild(downloadLink);
+            }
+
+            downloadLink.click();
+        };
+        document.getElementById("save").addEventListener("click", saveSourceToFile);
+
+
 
 
 
