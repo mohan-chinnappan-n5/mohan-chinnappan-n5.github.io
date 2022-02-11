@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Software Architecture</title>
+  <title>Software Architecture and Design</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
@@ -14,7 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
 </head>
 <body>
-<google-codelab id="Software Architecture" title="Software Architecture" environment="web" >
+<google-codelab id="Software Architecture and Design" title="Software Architecture and Design" environment="web" >
 
 <google-codelab-step label=' What is Software Architecture?'>
 <div id='s0-md' class='md' data-trim='false'>
@@ -121,13 +121,90 @@ document
 - [The Many Meanings of Event-Driven Architecture • Martin Fowler • GOTO 2017](https://www.youtube.com/watch?v=STKCRSUsyP0)
 
 
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Software Design'>
+<div id='s5-md' class='md' data-trim='false'>
+  
+## A few (somewhat vague) overall concepts:
+- **Working code isn't enough: must minimize complexity**
+- Complexity comes from dependencies and obscurity
+- **Strategic vs. tactical programming**
+- **Classes should be deep**
+- ![deep class](img/deep-classes.png)
+- General-purpose classes are deeper
+- New layer, new abstraction
+- Comments should describe things that are not obvious from the cods
+- **Define errors out of existence**
+- Pull complexity downwards
+
+
+## Define Errors Out of Existence
+
+- Exceptions: a huge source of complexity
+- Common wisdom: detect and throw as many errors as possible
+- Better approach: define semantics to eliminate exceptions
+- Example mistakes:
+	- Tcl unset command (throws exception if variable doesn’t exist)
+	-  Windows OS: can't delete file if open
+ 	- Java substring range exceptions
+- Overall goal: minimize the number of places where exceptions must
+be handled . 
+
+## Working code is not enough - Tactical vs. Strategic Programming
+- Tactical programming
+	- Goal: get next feature/bug fix working ASAP
+	-  A few shortcuts and kludges are OK?
+	- Result: bad design, high complexity
+	-  Extreme: tactical tornadoes
+- Complexity is incremental
+
+## How much  to invest
+- Most startups are totally tactical
+- Pressure to get first products out quickly
+ 	- “We can clean this up later”
+	-  Code base quickly turns to spaghetti
+ 	- Extremely difficult/expensive to repair damage
+
+- Facebook: “Move quickly and break things”
+	- Empowered developers
+	- Code base notoriously incomprehensible/unstable
+	- Eventually changed to "Move quickly with solid infrastructure”
+- Can succeed with strong design culture: Google and VMware
+	-  Attracted best engineers
+
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Resource for Software Design'>
+<div id='s6-md' class='md' data-trim='false'>
+  - [A Philosophy of Software Design | John Ousterhout | Talks at Google](https://www.youtube.com/watch?v=bmSAYlu0NcY)
+- [On the Criteria To Be Used in Decomposing Systems into Modules - D.L. Parnas Carnegie-Mellon University](img/criteria_for_modularization.pdf )
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Patterns'>
+<div id='s7-md' class='md' data-trim='false'>
+  
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Resources for patterns'>
+<div id='s8-md' class='md' data-trim='false'>
+  - [5 Design Patterns Every Engineer Should Know ](https://www.youtube.com/watch?v=FLmBqI3IKMA)
+
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Generation '>
-<div id='s5-md' class='md' data-trim='false'>
+<div id='s9-md' class='md' data-trim='false'>
   ```
-sfdx mohanc:slides:gen -i sarch.md -o sarch.md.html -t "Software Architecture"
+sfdx mohanc:slides:gen -i sarch.md -o sarch.md.html -t "Software Architecture and Design"
 ```
 
 </div>

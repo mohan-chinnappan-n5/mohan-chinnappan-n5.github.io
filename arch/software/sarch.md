@@ -85,8 +85,69 @@ document
 - [What do you mean by “Event-Driven”?](https://martinfowler.com/articles/201701-event-driven.html)
 - [The Many Meanings of Event-Driven Architecture • Martin Fowler • GOTO 2017](https://www.youtube.com/watch?v=STKCRSUsyP0)
 
+# Software Design
+
+## A few (somewhat vague) overall concepts:
+- **Working code isn't enough: must minimize complexity**
+- Complexity comes from dependencies and obscurity
+- **Strategic vs. tactical programming**
+- **Classes should be deep**
+- ![deep class](img/deep-classes.png)
+- General-purpose classes are deeper
+- New layer, new abstraction
+- Comments should describe things that are not obvious from the cods
+- **Define errors out of existence**
+- Pull complexity downwards
+
+
+## Define Errors Out of Existence
+
+- Exceptions: a huge source of complexity
+- Common wisdom: detect and throw as many errors as possible
+- Better approach: define semantics to eliminate exceptions
+- Example mistakes:
+	- Tcl unset command (throws exception if variable doesn’t exist)
+	-  Windows OS: can't delete file if open
+ 	- Java substring range exceptions
+- Overall goal: minimize the number of places where exceptions must
+be handled . 
+
+## Working code is not enough - Tactical vs. Strategic Programming
+- Tactical programming
+	- Goal: get next feature/bug fix working ASAP
+	-  A few shortcuts and kludges are OK?
+	- Result: bad design, high complexity
+	-  Extreme: tactical tornadoes
+- Complexity is incremental
+
+## How much  to invest
+- Most startups are totally tactical
+- Pressure to get first products out quickly
+ 	- “We can clean this up later”
+	-  Code base quickly turns to spaghetti
+ 	- Extremely difficult/expensive to repair damage
+
+- Facebook: “Move quickly and break things”
+	- Empowered developers
+	- Code base notoriously incomprehensible/unstable
+	- Eventually changed to "Move quickly with solid infrastructure”
+- Can succeed with strong design culture: Google and VMware
+	-  Attracted best engineers
+
+
+
+# Resource for Software Design
+- [A Philosophy of Software Design | John Ousterhout | Talks at Google](https://www.youtube.com/watch?v=bmSAYlu0NcY)
+- [On the Criteria To Be Used in Decomposing Systems into Modules - D.L. Parnas Carnegie-Mellon University](img/criteria_for_modularization.pdf )
+
+
+# Patterns
+
+
+# Resources for patterns
+- [5 Design Patterns Every Engineer Should Know ](https://www.youtube.com/watch?v=FLmBqI3IKMA)
 
 # Generation 
 ```
-sfdx mohanc:slides:gen -i sarch.md -o sarch.md.html -t "Software Architecture"
+sfdx mohanc:slides:gen -i sarch.md -o sarch.md.html -t "Software Architecture and Design"
 ```
