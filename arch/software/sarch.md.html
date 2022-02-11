@@ -159,6 +159,27 @@ be handled .
 	-  Extreme: tactical tornadoes
 - Complexity is incremental
 
+## Deep Interface - Example - Unix file I/O
+
+```c
+int open(const char* path, int flags, mode_t permissions);
+
+int close(int fd);
+
+ssize_t read(int fd, void* buffer, size_t count);
+
+ssize_t write(int fd, const void* buffer, size_t count);
+
+off_t Iseek(int fd, off_t offset, int referencePosition);
+```
+- Hidden below the interface:
+	- On-disk representation, disk block allocation
+	- Directory management, path lookup
+	- Permission management
+	- Disk scheduling
+	- Block caching
+	- Device independence
+
 ## How much  to invest
 - Most startups are totally tactical
 - Pressure to get first products out quickly
