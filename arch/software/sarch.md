@@ -121,6 +121,7 @@ be handled .
 - Complexity is incremental
 
 ## Deep Interface - Example - Unix file I/O
+- Amazingly beautiful interface design!
 
 ```c
 int open(const char* path, int flags, mode_t permissions);
@@ -140,6 +141,10 @@ off_t Iseek(int fd, off_t offset, int referencePosition);
 	- Disk scheduling
 	- Block caching
 	- Device independence
+
+## Tactical vs Strategic programming
+![Tactical vs Strat](img/tactical-vs-strategic-programming.png)
+
 
 ## How much  to invest
 - Most startups are totally tactical
@@ -167,6 +172,40 @@ off_t Iseek(int fd, off_t offset, int referencePosition);
 
 # Resources for patterns
 - [5 Design Patterns Every Engineer Should Know ](https://www.youtube.com/watch?v=FLmBqI3IKMA)
+
+
+# Refactoring
+
+
+# Resources for Refactoring
+- [The Second Edition of "Refactoring"](https://martinfowler.com/articles/refactoring-2nd-ed.html)
+
+
+# Null Reference was a bad idea!
+
+- [Null References The Billion Dollar Mistake - Tony Hoare](https://www.youtube.com/watch?v=YYkOWzrO3xg)
+- [C++: No more nulls! (Fixing the billion dollar mistake) - Anders Schau Knatten ](https://www.youtube.com/watch?v=FTfLLB4kboQ)
+
+- Algol
+	- compiler was written in Machine Code
+	- Advantages
+		- if you made a mistake you can follow through and find out what the results of your mistake so you can fix it
+	- In high-level languages that capacity is taken out - details of the underlying architecture was protected from the user
+	- In case of arrays, subscript bounds (upper and lower) are checked - this added more code to do these tests  (1960)
+	- Extension for Algol 60 - successor
+		- record handling (Simula ) - concept of Object - reference can made to the Object by pointer	
+		- Every variable going to hold the address as its value of the location where value is stored - the programmer must declare the type of location store that pointer is going to point to. - what kind of thing it points to?
+		- This can be checked at the compile time
+		- Record handling does not need subscript bounds checking
+		- Subscript checking can be turned off after all the checking done?
+
+		- Vehicles
+			- Car - Capacity of the trunk
+			- Bus - # passengers
+			- Discrimination clause
+			- Disjoint between Car and Bus
+			- Null -> class which has any objects in it. Only one pointer which did not point to any object
+				- initializing pointers to null
 
 # Generation 
 ```
