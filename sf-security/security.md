@@ -159,6 +159,9 @@ Tricking a user into clicking on something different from what the user perceive
 - [How to get Apex Classes and checking the sharing using DX ?](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/apex.md)
 - [Sharing Data model interactive](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/model-sfdc.html)
 
+---
+- [Viewing and Visualizing Event Log files using DX](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/monitoring/em.md)
+
 ## Community Cloud
 - [Community (Experience Cloud) Related Resources ](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/cc.md)
 - [Community Cloud Security](https://mohan-chinnappan-n2.github.io/2020/cc/security/security.html)
