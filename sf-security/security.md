@@ -45,6 +45,97 @@ Tricking a user into clicking on something different from what the user perceive
 ## Malware 
 - is a software designed to infiltrate or damage a computer system **without the owner's informed consent**.
 
+# Cross site scripting (XSS)
+-  Attacker can insert unauthorized JavaScript, VBScript, HTML, or other **active content** into a web page viewed by other users. 
+- A malicious script inserted into a page in this manner can hijack the **user’s session, submit unauthorized transactions as the user**, steal confidential information, or simply deface the page.
+
+- Cross-site scripting works by manipulating a vulnerable web site so that it returns malicious JavaScript to users. When the **malicious code executes inside a victim's browser**, the attacker can fully compromise their interaction with the application.
+
+
+```
+https://insecure-website.com/status?message=All+is+well.
+- Renders:
+<p>Status: All is well.</p>
+
+```
+
+- Attacker passes script code via message parameter here:
+```
+https://insecure-website.com/status?message=<script>/*+Bad+stuff+here...+*/</script>
+
+- Renders the script doing bad stuff:
+<p>Status: <script>/* Bad stuff here... */</script></p>
+
+```
+
+## DOM based XSS
+```
+// get search data entered by the user via search input field
+const search = document.getElementById('search').value;
+
+const results = document.getElementById('results');
+// whatever user put in the search element is render here in results element
+results.innerHTML = `You searched for: ${search}`; 
+
+// if the attacker entered bad stuff in the search box, it will render
+//  the bad stuff in the result element
+ You searched for: <img src=1 onerror='/* Bad stuff here... */'>
+
+ // PREVENT it by encoding it
+
+
+```
+- ![prevent XSS](img/encode-2.png)
+
+## Node.js
+```
+const xssFilters = require('xss-filters');
+const unsafeFirstNname = req.query.firstName;
+const safeFirstName = xssFilters.inHTMLData(unsafeFirstName);
+
+```
+
+- [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/)
+
+## Prevention
+- Filter input on arrival. At the point where user input is received, filter as strictly as possible based on what is expected or valid input.
+
+- Encode data on output
+    -  If your page is processing GET parameter say userInput make sure that parameter is html encoded  before using in your page.
+
+
+# SQL Injection
+
+- Exploiting query parameters to execute arbitrary SQL instructions is called SQL Injection 
+
+```
+
+// code with possible SQL Injection attack 
+router.get('/email', (req, res) => {
+  db.query('SELECT email FROM users WHERE id = ' + req.query.id);
+    .then((record) => {
+      // do stuff
+      res.send(record[0]);
+    })
+});
+
+```
+
+```
+//  parameterized queries would suffice to prevent the SQL Injection
+router.get('/email', (req, res) => {
+  db.query('SELECT email FROM users WHERE id = $1', req.query.id);
+    .then((record) => {
+      // do stuff
+      res.send(record[0]);
+    })
+})
+
+// refer: https://checkmarx.gitbooks.io/js-scp/content/
+
+```
+
+
 # Browser fingerprint
 - A browser fingerprint is a **collection of features that together identify a device**.
 - Salesforce uses these features to build a model of the user’s original browser fingerprint when they logged in. 
@@ -151,7 +242,8 @@ Tricking a user into clicking on something different from what the user perceive
 - [Salesforce Security Guide](https://resources.docs.salesforce.com/236/latest/en-us/sfdc/pdf/salesforce_security_impl_guide.pdf)
 
 - [Trust | Security](https://security.salesforce.com/)
-- [Security for Administrators]()
+- [Security for Administrators](https://security.salesforce.com/security-for-administrators)
+- [Security for Developers](https://security.salesforce.com/security-for-developers)
 ----
 
 - [Sharing Model](https://mohan-chinnappan-n2.github.io/2020/sharing/sharing.html)

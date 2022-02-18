@@ -79,8 +79,107 @@ Tricking a user into clicking on something different from what the user perceive
 
 </div>
 </google-codelab-step>
-<google-codelab-step label=' Browser fingerprint'>
+<google-codelab-step label=' Cross site scripting (XSS)'>
 <div id='s4-md' class='md' data-trim='false'>
+  -  Attacker can insert unauthorized JavaScript, VBScript, HTML, or other **active content** into a web page viewed by other users. 
+- A malicious script inserted into a page in this manner can hijack the **user’s session, submit unauthorized transactions as the user**, steal confidential information, or simply deface the page.
+
+- Cross-site scripting works by manipulating a vulnerable web site so that it returns malicious JavaScript to users. When the **malicious code executes inside a victim's browser**, the attacker can fully compromise their interaction with the application.
+
+
+```
+https://insecure-website.com/status?message=All+is+well.
+- Renders:
+<p>Status: All is well.</p>
+
+```
+
+- Attacker passes script code via message parameter here:
+```
+https://insecure-website.com/status?message=<script>/*+Bad+stuff+here...+*/</script>
+
+- Renders the script doing bad stuff:
+<p>Status: <script>/* Bad stuff here... */</script></p>
+
+```
+
+## DOM based XSS
+```
+// get search data entered by the user via search input field
+const search = document.getElementById('search').value;
+
+const results = document.getElementById('results');
+// whatever user put in the search element is render here in results element
+results.innerHTML = `You searched for: ${search}`; 
+
+// if the attacker entered bad stuff in the search box, it will render
+//  the bad stuff in the result element
+ You searched for: <img src=1 onerror='/* Bad stuff here... */'>
+
+ // PREVENT it by encoding it
+
+
+```
+- ![prevent XSS](img/encode-2.png)
+
+## Node.js
+```
+const xssFilters = require('xss-filters');
+const unsafeFirstNname = req.query.firstName;
+const safeFirstName = xssFilters.inHTMLData(unsafeFirstName);
+
+```
+
+- [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/)
+
+## Prevention
+- Filter input on arrival. At the point where user input is received, filter as strictly as possible based on what is expected or valid input.
+
+- Encode data on output
+    -  If your page is processing GET parameter say userInput make sure that parameter is html encoded  before using in your page.
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' SQL Injection'>
+<div id='s5-md' class='md' data-trim='false'>
+  
+- Exploiting query parameters to execute arbitrary SQL instructions is called SQL Injection 
+
+```
+
+// code with possible SQL Injection attack 
+router.get('/email', (req, res) => {
+  db.query('SELECT email FROM users WHERE id = ' + req.query.id);
+    .then((record) => {
+      // do stuff
+      res.send(record[0]);
+    })
+});
+
+```
+
+```
+//  parameterized queries would suffice to prevent the SQL Injection
+router.get('/email', (req, res) => {
+  db.query('SELECT email FROM users WHERE id = $1', req.query.id);
+    .then((record) => {
+      // do stuff
+      res.send(record[0]);
+    })
+})
+
+// refer: https://checkmarx.gitbooks.io/js-scp/content/
+
+```
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Browser fingerprint'>
+<div id='s6-md' class='md' data-trim='false'>
   - A browser fingerprint is a **collection of features that together identify a device**.
 - Salesforce uses these features to build a model of the user’s original browser fingerprint when they logged in. 
 - Salesforce uses this model to detect whether a user’s session was hijacked.
@@ -103,7 +202,7 @@ Tricking a user into clicking on something different from what the user perceive
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Session Hijacking Event Store '>
-<div id='s5-md' class='md' data-trim='false'>
+<div id='s7-md' class='md' data-trim='false'>
   
  
 - SessionHijackingEvent and its storage equivalent SessionHijackingEventStore track **when unauthorized users gain ownership of a Salesforce user’s session with a stolen session identifier**. 
@@ -117,7 +216,7 @@ Tricking a user into clicking on something different from what the user perceive
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Health Check'>
-<div id='s6-md' class='md' data-trim='false'>
+<div id='s8-md' class='md' data-trim='false'>
   
 - [Use Health Check to Scan Your Security Configurations](https://trailhead.salesforce.com/en/content/learn/modules/security_basics/security_basics_healthcheck)
 - [Video: Learn About Security Health Check (Lightning Experience) | Salesforce](https://www.youtube.com/watch?v=jC0ciHZrkh0)
@@ -126,7 +225,7 @@ Tricking a user into clicking on something different from what the user perceive
 </div>
 </google-codelab-step>
 <google-codelab-step label=' User Audit'>
-<div id='s7-md' class='md' data-trim='false'>
+<div id='s9-md' class='md' data-trim='false'>
   - [Admin Best Practices: Remove Security Risks From Your Org With a User Audit](https://trailhead.salesforce.com/live/videos/a2r3k000001n2jh/admin-best-practices-remove-security-risks-from-your-org-with-a-user-audit/)
 
 
@@ -185,21 +284,21 @@ Tricking a user into clicking on something different from what the user perceive
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Optimizer '>
-<div id='s8-md' class='md' data-trim='false'>
+<div id='s10-md' class='md' data-trim='false'>
   ![Optimizer ](img/optimizer-report-1.png)
 
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Real-Time Event Monitoring'>
-<div id='s9-md' class='md' data-trim='false'>
+<div id='s11-md' class='md' data-trim='false'>
   - Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
 
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Field Audit Trail'>
-<div id='s10-md' class='md' data-trim='false'>
+<div id='s12-md' class='md' data-trim='false'>
   - Lets you know the state and value of your data for any date, at any time
 - Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
 - You can also set triggers for when data is deleted. 
@@ -208,13 +307,14 @@ Tricking a user into clicking on something different from what the user perceive
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Resources'>
-<div id='s11-md' class='md' data-trim='false'>
+<div id='s13-md' class='md' data-trim='false'>
   
 ## Platform
 - [Salesforce Security Guide](https://resources.docs.salesforce.com/236/latest/en-us/sfdc/pdf/salesforce_security_impl_guide.pdf)
 
 - [Trust | Security](https://security.salesforce.com/)
-- [Security for Administrators]()
+- [Security for Administrators](https://security.salesforce.com/security-for-administrators)
+- [Security for Developers](https://security.salesforce.com/security-for-developers)
 ----
 
 - [Sharing Model](https://mohan-chinnappan-n2.github.io/2020/sharing/sharing.html)
@@ -237,7 +337,7 @@ Tricking a user into clicking on something different from what the user perceive
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Creation '>
-<div id='s12-md' class='md' data-trim='false'>
+<div id='s14-md' class='md' data-trim='false'>
   ```sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security"sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security" ```
 
 </div>
