@@ -256,14 +256,12 @@ router.get('/email', (req, res) => {
 - [Trust | Security](https://security.salesforce.com/)
 - [Security for Administrators](https://security.salesforce.com/security-for-administrators)
 - [Security for Developers](https://security.salesforce.com/security-for-developers)
-----
 
 - [Sharing Model](https://mohan-chinnappan-n2.github.io/2020/sharing/sharing.html)
 - [Sharing Debugger](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
 - [How to get Apex Classes and checking the sharing using DX ?](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/apex.md)
 - [Sharing Data model interactive](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/model-sfdc.html)
 
----
 - [Viewing and Visualizing Event Log files using DX](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/monitoring/em.md)
 
 ## Community Cloud
@@ -271,7 +269,6 @@ router.get('/email', (req, res) => {
 - [Community Cloud Security](https://mohan-chinnappan-n2.github.io/2020/cc/security/security.html)
 - [Community Cloud Tips](https://mohan-chinnappan-n2.github.io/2020/cc/cc.html#0)
 
----
 - [Enable Clickjack Protection in Experience Cloud Sites](https://help.salesforce.com/s/articleView?id=sf.networks_clickjack_protection.htm&type=5)
 
 # Creation 
