@@ -77,11 +77,47 @@ Tricking a user into clicking on something different from what the user perceive
 - is a software designed to infiltrate or damage a computer system **without the owner's informed consent**.
 
 
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Browser fingerprint'>
+<div id='s4-md' class='md' data-trim='false'>
+  - A browser fingerprint is a **collection of features that together identify a device**.
+- Salesforce uses these features to build a model of the user’s original browser fingerprint when they logged in. 
+- Salesforce uses this model to detect whether a user’s session was hijacked.
+
+|Feature|
+|---|
+|window|
+|userAgent|
+|timestamp|
+|screen|
+|plugins|
+|originApp|
+|webSockets|
+|sessionStorage|
+|platform|
+|indexedDb|
+|ipAddress|
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Session Hijacking Event Store '>
+<div id='s5-md' class='md' data-trim='false'>
+  
+ 
+- SessionHijackingEvent and its storage equivalent SessionHijackingEventStore track **when unauthorized users gain ownership of a Salesforce user’s session with a stolen session identifier**. 
+- To detect such an event, Salesforce evaluates how significantly a user’s current browser **fingerprint diverges from the previously known fingerprint**. 
+- Salesforce uses a probabilistically inferred **significance of change**.
+
+![Session Hijacking](img/SessionHijackingEventStore.png)
+
+
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Health Check'>
-<div id='s4-md' class='md' data-trim='false'>
+<div id='s6-md' class='md' data-trim='false'>
   
 - [Use Health Check to Scan Your Security Configurations](https://trailhead.salesforce.com/en/content/learn/modules/security_basics/security_basics_healthcheck)
 - [Video: Learn About Security Health Check (Lightning Experience) | Salesforce](https://www.youtube.com/watch?v=jC0ciHZrkh0)
@@ -90,7 +126,7 @@ Tricking a user into clicking on something different from what the user perceive
 </div>
 </google-codelab-step>
 <google-codelab-step label=' User Audit'>
-<div id='s5-md' class='md' data-trim='false'>
+<div id='s7-md' class='md' data-trim='false'>
   - [Admin Best Practices: Remove Security Risks From Your Org With a User Audit](https://trailhead.salesforce.com/live/videos/a2r3k000001n2jh/admin-best-practices-remove-security-risks-from-your-org-with-a-user-audit/)
 
 
@@ -149,14 +185,30 @@ Tricking a user into clicking on something different from what the user perceive
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Optimizer '>
-<div id='s6-md' class='md' data-trim='false'>
+<div id='s8-md' class='md' data-trim='false'>
   ![Optimizer ](img/optimizer-report-1.png)
 
 
 </div>
 </google-codelab-step>
+<google-codelab-step label=' Real-Time Event Monitoring'>
+<div id='s9-md' class='md' data-trim='false'>
+  - Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Field Audit Trail'>
+<div id='s10-md' class='md' data-trim='false'>
+  - Lets you know the state and value of your data for any date, at any time
+- Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
+- You can also set triggers for when data is deleted. 
+
+
+</div>
+</google-codelab-step>
 <google-codelab-step label=' Resources'>
-<div id='s7-md' class='md' data-trim='false'>
+<div id='s11-md' class='md' data-trim='false'>
   
 ## Platform
 - [Salesforce Security Guide](https://resources.docs.salesforce.com/236/latest/en-us/sfdc/pdf/salesforce_security_impl_guide.pdf)
@@ -182,7 +234,7 @@ Tricking a user into clicking on something different from what the user perceive
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Creation '>
-<div id='s8-md' class='md' data-trim='false'>
+<div id='s12-md' class='md' data-trim='false'>
   ```sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security"sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security" ```
 
 </div>

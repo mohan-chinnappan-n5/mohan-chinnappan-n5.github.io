@@ -45,6 +45,34 @@ Tricking a user into clicking on something different from what the user perceive
 ## Malware 
 - is a software designed to infiltrate or damage a computer system **without the owner's informed consent**.
 
+# Browser fingerprint
+- A browser fingerprint is a **collection of features that together identify a device**.
+- Salesforce uses these features to build a model of the user’s original browser fingerprint when they logged in. 
+- Salesforce uses this model to detect whether a user’s session was hijacked.
+
+|Feature|
+|---|
+|window|
+|userAgent|
+|timestamp|
+|screen|
+|plugins|
+|originApp|
+|webSockets|
+|sessionStorage|
+|platform|
+|indexedDb|
+|ipAddress|
+
+# Session Hijacking Event Store 
+
+ 
+- SessionHijackingEvent and its storage equivalent SessionHijackingEventStore track **when unauthorized users gain ownership of a Salesforce user’s session with a stolen session identifier**. 
+- To detect such an event, Salesforce evaluates how significantly a user’s current browser **fingerprint diverges from the previously known fingerprint**. 
+- Salesforce uses a probabilistically inferred **significance of change**.
+
+![Session Hijacking](img/SessionHijackingEventStore.png)
+
 
 # Health Check
 
@@ -108,6 +136,14 @@ Tricking a user into clicking on something different from what the user perceive
 
 # Optimizer 
 ![Optimizer ](img/optimizer-report-1.png)
+
+# Real-Time Event Monitoring
+- Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
+
+# Field Audit Trail
+- Lets you know the state and value of your data for any date, at any time
+- Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
+- You can also set triggers for when data is deleted. 
 
 # Resources
 
