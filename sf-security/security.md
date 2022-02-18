@@ -241,6 +241,8 @@ router.get('/email', (req, res) => {
 # Real-Time Event Monitoring
 - Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
 
+- [Viewing and Visualizing Event Log files using DX](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/monitoring/em.md)
+
 # Field Audit Trail
 - Lets you know the state and value of your data for any date, at any time
 - Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
