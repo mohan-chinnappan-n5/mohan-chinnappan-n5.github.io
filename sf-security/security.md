@@ -36,6 +36,8 @@ Tricking a user into clicking on something different from what the user perceive
 ![Clickjaking](img/clickjacking-2.png)
 
 ## 4 levels in community cloud
+
+- ![4 Levels](img/ec-security-privacy.png)
 - 1. Allow framing by any page (**no protection**)
 - 2. Allows framing of your Visualforce site pages by pages on your external domains that are added to the *Trusted Domains for Inline Frames list*. 
 - **3.** Allow framing by the **same origin** only (**recommended**): The default level for Experience Cloud sites. 
@@ -93,7 +95,7 @@ results.innerHTML = `You searched for: ${search}`;
 
 
 ```
-- ![prevent XSS](img/encode-2.png)
+- ![prevent XSS](img/enocde-2.png)
 
 ## Node.js
 ```
@@ -271,4 +273,6 @@ router.get('/email', (req, res) => {
 - [Enable Clickjack Protection in Experience Cloud Sites](https://help.salesforce.com/s/articleView?id=sf.networks_clickjack_protection.htm&type=5)
 
 # Creation 
-```sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security"sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security" ```
+```
+sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security
+```
