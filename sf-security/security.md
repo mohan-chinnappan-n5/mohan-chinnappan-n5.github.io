@@ -235,6 +235,74 @@ router.get('/email', (req, res) => {
     - [5 Security Habits That Will Help Your Admin Career](https://admin.salesforce.com/blog/2021/5-security-habits-that-will-help-your-admin-career)
     - [Admin Best Practices: Security ](https://trailhead.salesforce.com/live/videos/a2r3k000001WFIi/admin-best-practices-security/)
 
+
+# Apex sharing check
+
+- Use the following CLI command to find out the Apex Class with and without sharing 
+```
+sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com 
+
+{
+    "withSharing": [
+        {
+            "name": "ClassDiagramCreatorCtrl",
+            "withSharing": true
+        },
+        {
+            "name": "MultiselectController",
+            "withSharing": true
+        },
+        {
+            "name": "ERDCreatorCtrl",
+            "withSharing": true
+        },
+        ...
+    ],
+    "withoutSharing": [
+        {
+            "name": "PlantUMLClassDiagram",
+            "withSharing": false
+        },
+        {
+            "name": "PlantUMLERDiagram",
+            "withSharing": false
+        },
+        {
+            "name": "SelectOptionSorter",
+            "withSharing": false
+        },
+        {
+            "name": "CodeMetrics",
+            "withSharing": false
+        },
+        {
+            "name": "ApexClassForTests",
+            "withSharing": false
+        },
+        {
+            "name": "ApexParser",
+            "withSharing": false
+        },
+        {
+            "name": "ClassDiagramCreatorCtrl",
+            "withSharing": false
+        },
+        {
+            "name": "CommunitiesSelfRegController",
+            "withSharing": false
+        },
+        {
+            "name": "AsyncExecutionExample",
+            "withSharing": false
+        },
+        
+        ...
+         
+         
+    ]
+}
+
+```
 # Optimizer 
 ![Optimizer ](img/optimizer-report-1.png)
 

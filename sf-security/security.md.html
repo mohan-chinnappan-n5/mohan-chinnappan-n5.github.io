@@ -291,17 +291,89 @@ router.get('/email', (req, res) => {
     - [Admin Best Practices: Security ](https://trailhead.salesforce.com/live/videos/a2r3k000001WFIi/admin-best-practices-security/)
 
 
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Apex sharing check'>
+<div id='s10-md' class='md' data-trim='false'>
+  
+- Use the following CLI command to find out the Apex Class with and without sharing 
+```
+sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com 
+
+{
+    "withSharing": [
+        {
+            "name": "ClassDiagramCreatorCtrl",
+            "withSharing": true
+        },
+        {
+            "name": "MultiselectController",
+            "withSharing": true
+        },
+        {
+            "name": "ERDCreatorCtrl",
+            "withSharing": true
+        },
+        ...
+    ],
+    "withoutSharing": [
+        {
+            "name": "PlantUMLClassDiagram",
+            "withSharing": false
+        },
+        {
+            "name": "PlantUMLERDiagram",
+            "withSharing": false
+        },
+        {
+            "name": "SelectOptionSorter",
+            "withSharing": false
+        },
+        {
+            "name": "CodeMetrics",
+            "withSharing": false
+        },
+        {
+            "name": "ApexClassForTests",
+            "withSharing": false
+        },
+        {
+            "name": "ApexParser",
+            "withSharing": false
+        },
+        {
+            "name": "ClassDiagramCreatorCtrl",
+            "withSharing": false
+        },
+        {
+            "name": "CommunitiesSelfRegController",
+            "withSharing": false
+        },
+        {
+            "name": "AsyncExecutionExample",
+            "withSharing": false
+        },
+        
+        ...
+         
+         
+    ]
+}
+
+```
+
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Optimizer '>
-<div id='s10-md' class='md' data-trim='false'>
+<div id='s11-md' class='md' data-trim='false'>
   ![Optimizer ](img/optimizer-report-1.png)
 
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Real-Time Event Monitoring'>
-<div id='s11-md' class='md' data-trim='false'>
+<div id='s12-md' class='md' data-trim='false'>
   - Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
 
 - [Viewing and Visualizing Event Log files using DX](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/monitoring/em.md)
@@ -310,7 +382,7 @@ router.get('/email', (req, res) => {
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Field Audit Trail'>
-<div id='s12-md' class='md' data-trim='false'>
+<div id='s13-md' class='md' data-trim='false'>
   - Lets you know the state and value of your data for any date, at any time
 - Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
 - You can also set triggers for when data is deleted. 
@@ -319,7 +391,7 @@ router.get('/email', (req, res) => {
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Resources'>
-<div id='s13-md' class='md' data-trim='false'>
+<div id='s14-md' class='md' data-trim='false'>
   
 ## Platform
 - [Salesforce Security Guide](https://resources.docs.salesforce.com/236/latest/en-us/sfdc/pdf/salesforce_security_impl_guide.pdf)
@@ -346,7 +418,7 @@ router.get('/email', (req, res) => {
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Creation '>
-<div id='s14-md' class='md' data-trim='false'>
+<div id='s15-md' class='md' data-trim='false'>
   ```
 sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security
 ```
