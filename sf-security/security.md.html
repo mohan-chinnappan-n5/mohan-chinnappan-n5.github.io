@@ -300,7 +300,9 @@ router.get('/email', (req, res) => {
 - Use the following CLI command to find out the Apex Class with and without sharing 
 ```
 sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com 
+```
 
+```json
 {
     "withSharing": [
         {
@@ -361,19 +363,79 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
     ]
 }
 
+
 ```
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Guest Profile permission'>
+<div id='s11-md' class='md' data-trim='false'>
+  
+- Check Guest Profile permissions using CLI
+
+```
+sfdx mohanc:security:userLicenseProfile -u  mohan.chinnappan.n_ea2@gmail.com -l 'Guest'
+```
+
+```json
+{
+    "totalSize": 2,
+    "done": true,
+    "records": [
+        {
+            "attributes": {
+                "type": "Profile",
+                "url": "/services/data/v54.0/sobjects/Profile/00e3h000001AxZmAAK"
+            },
+            "Id": "00e3h000001AxZmAAK",
+            "Name": "Standard Guest",
+            "PermissionsEmailSingle": false,
+            "PermissionsEmailMass": false,
+            "PermissionsEditTask": false,
+            "PermissionsEditEvent": false,
+            "PermissionsExportReport": false,
+            "PermissionsImportPersonal": false,
+            "PermissionsDataExport": false,
+            "PermissionsManageUsers": false,
+            "PermissionsEditPublicFilters": false,
+            "PermissionsEditPublicTemplates": false,
+            "PermissionsModifyAllData": false,
+            "PermissionsManageCases": false,
+            "PermissionsMassInlineEdit": false,
+            "PermissionsManageSolutions": false,
+            "PermissionsCustomizeApplication": false,
+            "PermissionsEditReadonlyFields": false,
+            "PermissionsRunReports": false,
+            ...
+            "UserLicenseId": "1003h000000sGNCAA2",
+            "UserType": "Guest",
+            "CreatedDate": "2020-07-25T10:44:13.000+0000",
+            "CreatedById": "0053h000002xQ5sAAE",
+            "LastModifiedDate": "2021-10-09T11:19:17.000+0000",
+            "LastModifiedById": "0053h000003de6eAAA",
+            "SystemModstamp": "2021-10-09T11:19:17.000+0000",
+            "Description": null,
+            "LastViewedDate": null,
+            "LastReferencedDate": null
+        }
+    ]
+}
+```
+
+
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Optimizer '>
-<div id='s11-md' class='md' data-trim='false'>
+<div id='s12-md' class='md' data-trim='false'>
   ![Optimizer ](img/optimizer-report-1.png)
 
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Real-Time Event Monitoring'>
-<div id='s12-md' class='md' data-trim='false'>
+<div id='s13-md' class='md' data-trim='false'>
   - Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
 
 - [Viewing and Visualizing Event Log files using DX](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/monitoring/em.md)
@@ -382,7 +444,7 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Field Audit Trail'>
-<div id='s13-md' class='md' data-trim='false'>
+<div id='s14-md' class='md' data-trim='false'>
   - Lets you know the state and value of your data for any date, at any time
 - Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
 - You can also set triggers for when data is deleted. 
@@ -391,7 +453,7 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Resources'>
-<div id='s14-md' class='md' data-trim='false'>
+<div id='s15-md' class='md' data-trim='false'>
   
 ## Platform
 - [Salesforce Security Guide](https://resources.docs.salesforce.com/236/latest/en-us/sfdc/pdf/salesforce_security_impl_guide.pdf)
@@ -418,7 +480,7 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Creation '>
-<div id='s15-md' class='md' data-trim='false'>
+<div id='s16-md' class='md' data-trim='false'>
   ```
 sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security
 ```

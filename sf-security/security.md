@@ -241,7 +241,9 @@ router.get('/email', (req, res) => {
 - Use the following CLI command to find out the Apex Class with and without sharing 
 ```
 sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com 
+```
 
+```json
 {
     "withSharing": [
         {
@@ -302,7 +304,63 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
     ]
 }
 
+
 ```
+
+# Guest Profile permission
+
+- Check Guest Profile permissions using CLI
+
+```
+sfdx mohanc:security:userLicenseProfile -u  mohan.chinnappan.n_ea2@gmail.com -l 'Guest'
+```
+
+```json
+{
+    "totalSize": 2,
+    "done": true,
+    "records": [
+        {
+            "attributes": {
+                "type": "Profile",
+                "url": "/services/data/v54.0/sobjects/Profile/00e3h000001AxZmAAK"
+            },
+            "Id": "00e3h000001AxZmAAK",
+            "Name": "Standard Guest",
+            "PermissionsEmailSingle": false,
+            "PermissionsEmailMass": false,
+            "PermissionsEditTask": false,
+            "PermissionsEditEvent": false,
+            "PermissionsExportReport": false,
+            "PermissionsImportPersonal": false,
+            "PermissionsDataExport": false,
+            "PermissionsManageUsers": false,
+            "PermissionsEditPublicFilters": false,
+            "PermissionsEditPublicTemplates": false,
+            "PermissionsModifyAllData": false,
+            "PermissionsManageCases": false,
+            "PermissionsMassInlineEdit": false,
+            "PermissionsManageSolutions": false,
+            "PermissionsCustomizeApplication": false,
+            "PermissionsEditReadonlyFields": false,
+            "PermissionsRunReports": false,
+            ...
+            "UserLicenseId": "1003h000000sGNCAA2",
+            "UserType": "Guest",
+            "CreatedDate": "2020-07-25T10:44:13.000+0000",
+            "CreatedById": "0053h000002xQ5sAAE",
+            "LastModifiedDate": "2021-10-09T11:19:17.000+0000",
+            "LastModifiedById": "0053h000003de6eAAA",
+            "SystemModstamp": "2021-10-09T11:19:17.000+0000",
+            "Description": null,
+            "LastViewedDate": null,
+            "LastReferencedDate": null
+        }
+    ]
+}
+```
+
+
 # Optimizer 
 ![Optimizer ](img/optimizer-report-1.png)
 
