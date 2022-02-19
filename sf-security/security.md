@@ -193,6 +193,7 @@ sfdx-mohanc-plugins % sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail
 ```
 
 ```json
+[
 {
     name: 'SoftphoneContactSearchController',
     SOQLInject: true,
