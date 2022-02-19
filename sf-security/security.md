@@ -247,6 +247,9 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 - [Video: Learn About Security Health Check (Lightning Experience) | Salesforce](https://www.youtube.com/watch?v=jC0ciHZrkh0)
 
 # User Audit
+
+![User ERD](img/User-erd.svg)
+
 - [Admin Best Practices: Remove Security Risks From Your Org With a User Audit](https://trailhead.salesforce.com/live/videos/a2r3k000001n2jh/admin-best-practices-remove-security-risks-from-your-org-with-a-user-audit/)
 
 
@@ -273,6 +276,22 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 |Remove unused profiles and permission sets/permission set groups per Optimizer results|
 |Align Salesforce access levels and job functions, do not align directly to the org chart|
 
+- Active users who haven't logged in within 60 days
+
+```
+SELECT Name,
+Username,
+IsActive,
+UserRole.Name,
+Profile.Name,
+LastLoginDate
+FROM User
+WHERE 
+  IsActive = true AND
+  LastLoginDate < LAST_N_DAYS:60 
+```
+![not logged in last 90 days](img/userNotloggedIn-90-days.png)
+
 |User Audit Action Items|
 |---|
 |Custom profiles that have system admin privileges|
@@ -281,6 +300,56 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 |Setup Audit Trail|
 |A large number (5+) of system admin users or users utilizing admin permissions|
 |Re-run Salesforce Optimizer for a fresh report to track progress|
+
+- Unused Profiles
+```
+SELECT 
+Id,
+Name 
+FROM Profile
+ WHERE Id NOT IN (SELECT ProfileId FROM User)
+
+
+```
+![Unused Profile](img/UnUsedProfile.png)
+
+- Unused PermissionSets
+```sql
+SELECT 
+Id,
+Name,
+ProfileId,
+Profile.Name
+FROM PermissionSet
+ WHERE ProfileId NOT IN (SELECT Id FROM Profile)
+
+
+```
+![unused Permset](img/unusedPermSet.png)
+
+- Used PermissionSets
+```
+SELECT 
+Id,
+Name,
+ProfileId,
+Profile.Name
+FROM PermissionSet
+ WHERE ProfileId  IN (SELECT Id FROM Profile)
+
+
+```
+![Used Permset](img/usedPermSet.png)
+
+- Unused Roles
+
+![UserRole ERD](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/img/UserRole.svg)
+
+```sql
+SELECT Name 
+FROM UserRole
+WHERE Id NOT IN (SELECT UserRoleId FROM User)
+```
 
 
 |Preparing for, Communicating and Managing Security Changes|
@@ -303,6 +372,8 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 
 
 # Apex sharing check
+
+![ApexClass ERD](img/ApexClass-erd.svg)
 
 - Use the following CLI command to find out the Apex Classes ```with and without sharing ```
 ```
@@ -636,6 +707,266 @@ sfdx mohanc:security:profile -p 'Customer Community Login User' -u  mohan.chinna
 }
 ```
 
+## System Admin Profile
+```
+sfdx mohanc:security:profile -u  mohan.chinnappan.n_ea2@gmail.com -p 'System Administrator'
+```
+
+```
+{
+    "totalSize": 1,
+    "done": true,
+    "records": [
+        {
+            "attributes": {
+                "type": "Profile",
+                "url": "/services/data/v54.0/sobjects/Profile/00e3h000001kqJMAAY"
+            },
+            "Id": "00e3h000001kqJMAAY",
+            "Name": "System Administrator",
+            "UserLicense": {
+                "attributes": {
+                    "type": "UserLicense",
+                    "url": "/services/data/v54.0/sobjects/UserLicense/1003h000001GeewAAC"
+                },
+                "Name": "Salesforce"
+            },
+            "PermissionsEmailSingle": true,
+            "PermissionsEmailMass": true,
+            "PermissionsEditTask": true,
+            "PermissionsEditEvent": true,
+            "PermissionsExportReport": true,
+            "PermissionsImportPersonal": true,
+            "PermissionsDataExport": true,
+            "PermissionsManageUsers": true,
+            "PermissionsEditPublicFilters": true,
+            "PermissionsEditPublicTemplates": true,
+            "PermissionsModifyAllData": true,
+            "PermissionsManageCases": true,
+            "PermissionsMassInlineEdit": true,
+            "PermissionsManageSolutions": true,
+            "PermissionsCustomizeApplication": true,
+            "PermissionsEditReadonlyFields": true,
+            "PermissionsRunReports": true,
+            "PermissionsViewSetup": true,
+            "PermissionsTransferAnyEntity": true,
+            "PermissionsNewReportBuilder": true,
+            "PermissionsActivateContract": true,
+            "PermissionsActivateOrder": true,
+            "PermissionsImportLeads": true,
+            "PermissionsManageLeads": true,
+            "PermissionsTransferAnyLead": true,
+            "PermissionsViewAllData": true,
+            "PermissionsEditPublicDocuments": true,
+            "PermissionsViewEncryptedData": false,
+            "PermissionsEditBrandTemplates": true,
+            "PermissionsEditHtmlTemplates": true,
+            "PermissionsChatterInternalUser": true,
+            "PermissionsDeleteActivatedContract": true,
+            "PermissionsChatterInviteExternalUsers": true,
+            "PermissionsSendSitRequests": true,
+            "PermissionsManageRemoteAccess": true,
+            "PermissionsCanUseNewDashboardBuilder": true,
+            "PermissionsManageCategories": true,
+            "PermissionsConvertLeads": true,
+            "PermissionsPasswordNeverExpires": false,
+            "PermissionsUseTeamReassignWizards": true,
+            "PermissionsEditActivatedOrders": true,
+            "PermissionsInstallMultiforce": true,
+            "PermissionsPublishMultiforce": true,
+            "PermissionsChatterOwnGroups": true,
+            "PermissionsEditOppLineItemUnitPrice": true,
+            "PermissionsCreateMultiforce": true,
+            "PermissionsBulkApiHardDelete": false,
+            "PermissionsSolutionImport": true,
+            "PermissionsManageCallCenters": true,
+            "PermissionsManageSynonyms": true,
+            "PermissionsViewContent": false,
+            "PermissionsManageEmailClientConfig": true,
+            "PermissionsEnableNotifications": true,
+            "PermissionsManageDataIntegrations": true,
+            "PermissionsDistributeFromPersWksp": true,
+            "PermissionsViewDataCategories": true,
+            "PermissionsManageDataCategories": true,
+            "PermissionsAuthorApex": true,
+            "PermissionsManageMobile": true,
+            "PermissionsApiEnabled": true,
+            "PermissionsManageCustomReportTypes": true,
+            "PermissionsEditCaseComments": true,
+            "PermissionsTransferAnyCase": true,
+            "PermissionsContentAdministrator": true,
+            "PermissionsCreateWorkspaces": true,
+            "PermissionsManageContentPermissions": true,
+            "PermissionsManageContentProperties": true,
+            "PermissionsManageContentTypes": true,
+            "PermissionsManageExchangeConfig": true,
+            "PermissionsManageAnalyticSnapshots": true,
+            "PermissionsScheduleReports": true,
+            "PermissionsManageBusinessHourHolidays": true,
+            "PermissionsManageDynamicDashboards": true,
+            "PermissionsCustomSidebarOnAllPages": false,
+            "PermissionsManageInteraction": true,
+            "PermissionsViewMyTeamsDashboards": true,
+            "PermissionsModerateChatter": true,
+            "PermissionsResetPasswords": true,
+            "PermissionsFlowUFLRequired": true,
+            "PermissionsCanInsertFeedSystemFields": true,
+            "PermissionsActivitiesAccess": true,
+            "PermissionsEmailTemplateManagement": true,
+            "PermissionsEmailAdministration": true,
+            "PermissionsManageChatterMessages": false,
+            "PermissionsAllowEmailIC": false,
+            "PermissionsChatterFileLink": true,
+            "PermissionsForceTwoFactor": false,
+            "PermissionsViewEventLogFiles": true,
+            "PermissionsManageNetworks": true,
+            "PermissionsManageAuthProviders": true,
+            "PermissionsRunFlow": false,
+            "PermissionsCreateCustomizeDashboards": true,
+            "PermissionsCreateDashboardFolders": true,
+            "PermissionsViewPublicDashboards": true,
+            "PermissionsManageDashbdsInPubFolders": true,
+            "PermissionsCreateCustomizeReports": true,
+            "PermissionsCreateReportFolders": true,
+            "PermissionsViewPublicReports": true,
+            "PermissionsManageReportsInPubFolders": true,
+            "PermissionsEditMyDashboards": true,
+            "PermissionsEditMyReports": true,
+            "PermissionsViewAllUsers": true,
+            "PermissionsConnectOrgToEnvironmentHub": true,
+            "PermissionsCreateCustomizeFilters": true,
+            "PermissionsContentHubUser": false,
+            "PermissionsGovernNetworks": false,
+            "PermissionsSalesConsole": false,
+            "PermissionsTwoFactorApi": false,
+            "PermissionsDeleteTopics": true,
+            "PermissionsEditTopics": true,
+            "PermissionsCreateTopics": true,
+            "PermissionsAssignTopics": true,
+            "PermissionsIdentityEnabled": false,
+            "PermissionsIdentityConnect": false,
+            "PermissionsContentWorkspaces": true,
+            "PermissionsCustomMobileAppsAccess": false,
+            "PermissionsViewHelpLink": true,
+            "PermissionsManageProfilesPermissionsets": true,
+            "PermissionsAssignPermissionSets": true,
+            "PermissionsManageRoles": true,
+            "PermissionsManageIpAddresses": true,
+            "PermissionsManageSharing": true,
+            "PermissionsManageInternalUsers": true,
+            "PermissionsManagePasswordPolicies": true,
+            "PermissionsManageLoginAccessPolicies": true,
+            "PermissionsManageCustomPermissions": true,
+            "PermissionsCanVerifyComment": true,
+            "PermissionsManageUnlistedGroups": true,
+            "PermissionsInsightsAppDashboardEditor": false,
+            "PermissionsManageTwoFactor": false,
+            "PermissionsInsightsAppUser": false,
+            "PermissionsInsightsAppAdmin": false,
+            "PermissionsInsightsAppEltEditor": false,
+            "PermissionsInsightsAppUploadUser": false,
+            "PermissionsInsightsCreateApplication": false,
+            "PermissionsLightningExperienceUser": true,
+            "PermissionsConfigCustomRecs": false,
+            "PermissionsSubmitMacrosAllowed": true,
+            "PermissionsBulkMacrosAllowed": true,
+            "PermissionsManageSessionPermissionSets": false,
+            "PermissionsManageTemplatedApp": false,
+            "PermissionsUseTemplatedApp": false,
+            "PermissionsSendAnnouncementEmails": false,
+            "PermissionsChatterEditOwnPost": true,
+            "PermissionsChatterEditOwnRecordPost": true,
+            "PermissionsWaveTabularDownload": false,
+            "PermissionsImportCustomObjects": true,
+            "PermissionsDelegatedTwoFactor": true,
+            "PermissionsChatterComposeUiCodesnippet": false,
+            "PermissionsSelectFilesFromSalesforce": true,
+            "PermissionsModerateNetworkUsers": false,
+            "PermissionsMergeTopics": true,
+            "PermissionsSubscribeToLightningReports": true,
+            "PermissionsManagePvtRptsAndDashbds": true,
+            "PermissionsAllowLightningLogin": false,
+            "PermissionsCampaignInfluence2": false,
+            "PermissionsViewDataAssessment": true,
+            "PermissionsRemoveDirectMessageMembers": true,
+            "PermissionsCanApproveFeedPost": false,
+            "PermissionsAddDirectMessageMembers": true,
+            "PermissionsAllowViewEditConvertedLeads": false,
+            "PermissionsShowCompanyNameAsUserBadge": true,
+            "PermissionsAccessCMC": false,
+            "PermissionsViewHealthCheck": true,
+            "PermissionsManageHealthCheck": true,
+            "PermissionsPackaging2": true,
+            "PermissionsManageCertificates": true,
+            "PermissionsCreateReportInLightning": false,
+            "PermissionsPreventClassicExperience": false,
+            "PermissionsHideReadByList": false,
+            "PermissionsListEmailSend": true,
+            "PermissionsFeedPinning": false,
+            "PermissionsChangeDashboardColors": true,
+            "PermissionsManageRecommendationStrategies": true,
+            "PermissionsManagePropositions": true,
+            "PermissionsCloseConversations": false,
+            "PermissionsSubscribeReportRolesGrps": true,
+            "PermissionsSubscribeDashboardRolesGrps": true,
+            "PermissionsUseWebLink": true,
+            "PermissionsHasUnlimitedNBAExecutions": false,
+            "PermissionsViewOnlyEmbeddedAppUser": false,
+            "PermissionsViewAllActivities": false,
+            "PermissionsSubscribeReportToOtherUsers": true,
+            "PermissionsLightningConsoleAllowedForUser": true,
+            "PermissionsSubscribeReportsRunAsUser": true,
+            "PermissionsSubscribeToLightningDashboards": true,
+            "PermissionsSubscribeDashboardToOtherUsers": true,
+            "PermissionsCreateLtngTempInPub": false,
+            "PermissionsTransactionalEmailSend": true,
+            "PermissionsViewPrivateStaticResources": false,
+            "PermissionsCreateLtngTempFolder": true,
+            "PermissionsApexRestServices": true,
+            "PermissionsEnableCommunityAppLauncher": true,
+            "PermissionsGiveRecognitionBadge": true,
+            "PermissionsLtngPromoReserved01UserPerm": false,
+            "PermissionsManageSubscriptions": true,
+            "PermissionsWaveManagePrivateAssetsUser": false,
+            "PermissionsCanEditDataPrepRecipe": false,
+            "PermissionsAddAnalyticsRemoteConnections": false,
+            "PermissionsManageSurveys": false,
+            "PermissionsRecordVisibilityAPI": false,
+            "PermissionsViewRoles": true,
+            "PermissionsCanManageMaps": false,
+            "PermissionsLMOutboundMessagingUserPerm": false,
+            "PermissionsModifyDataClassification": true,
+            "PermissionsPrivacyDataAccess": true,
+            "PermissionsQueryAllFiles": false,
+            "PermissionsModifyMetadata": true,
+            "PermissionsManageCMS": true,
+            "PermissionsSandboxTestingInCommunityApp": false,
+            "PermissionsViewFlowUsageAndFlowEventData": true,
+            "PermissionsCanEditPrompts": false,
+            "PermissionsViewUserPII": true,
+            "PermissionsManageHubConnections": true,
+            "PermissionsB2BMarketingAnalyticsUser": false,
+            "PermissionsTraceXdsQueries": false,
+            "PermissionsViewAllCustomSettings": false,
+            "PermissionsViewAllForeignKeyNames": false,
+            "PermissionsAddWaveNotificationRecipients": false,
+            "PermissionsHeadlessCMSAccess": false,
+            "PermissionsConsentApiUpdate": true,
+            "UserLicenseId": "1003h000001GeewAAC",
+            "UserType": "Standard",
+            "CreatedDate": "2020-07-13T19:30:57.000+0000",
+            "CreatedById": "0053h000002xQ5sAAE",
+            "LastModifiedDate": "2021-10-09T11:19:17.000+0000",
+            "LastModifiedById": "0053h000003de6eAAA",
+            "SystemModstamp": "2021-10-09T11:19:17.000+0000",
+            "Description": null,
+            "LastViewedDate": null,
+            "LastReferencedDate": null
+        }
+    ]
+}
+```
+
 # Check PermissionSet Permissions
 
 ![PermissionSetERD](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/img/PermissionSet.svg)
@@ -942,6 +1273,11 @@ sfdx mohanc:security:userLicenseProfile -u  mohan.chinnappan.n_ea2@gmail.com -l 
 }
 ```
 
+## Profile information for UserLicense **Salesforce**
+```
+sfdx mohanc:security:userLicenseProfile -u  mohan.chinnappan.n_ea2@gmail.com -l 'Salesforce'
+
+```
 
 # Optimizer 
 ![Optimizer ](img/optimizer-report-1.png)
