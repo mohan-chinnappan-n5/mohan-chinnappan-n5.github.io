@@ -298,7 +298,7 @@ WHERE
 |Active users who haven't logged in within 60 days|
 |Unused roles, profiles, permission sets|
 |Setup Audit Trail|
-|A large number (5+) of system admin users or users utilizing admin permissions|
+|A large number (5+) of system admin users or users utilizing admin permissions?|
 |Re-run Salesforce Optimizer for a fresh report to track progress|
 
 - Unused Profiles
@@ -350,6 +350,13 @@ SELECT Name
 FROM UserRole
 WHERE Id NOT IN (SELECT UserRoleId FROM User)
 ```
+
+- Users with System Admin Profile
+```sql
+SELECT Id FROM User 
+WHERE Profile.Name = 'System Administrator'
+```
+![sys admin profile users](img/sysAdmin-Users.png)
 
 
 |Preparing for, Communicating and Managing Security Changes|
