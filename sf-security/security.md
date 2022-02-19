@@ -114,7 +114,7 @@ const safeFirstName = xssFilters.inHTMLData(unsafeFirstName);
     -  If your page is processing GET parameter say userInput make sure that parameter is html encoded  before using in your page.
 
 
-# SQL Injection
+# SQL and SOQL Injection
 
 - Exploiting query parameters to execute arbitrary SQL instructions is called SQL Injection 
 
@@ -144,6 +144,72 @@ router.get('/email', (req, res) => {
 // refer: https://checkmarx.gitbooks.io/js-scp/content/
 
 ```
+
+- Following code is vulnerable to SOQL Injection: if we get value of name from Visualforce page
+
+```java
+public class SOQLController {
+    public String name {
+        get { return name;}
+        set { name = value;}
+    } 
+    public PageReference query() {
+        String qryString = 'SELECT Id FROM Contact WHERE ' +
+            '(IsDeleted = false and Name like \'%' + name + '%\')'; // <--------
+        List<Contact> queryResult = Database.query(qryString);
+        System.debug('query result is ' + queryResult);
+        return null;
+    }
+}
+```
+
+- Used binding to take care of the SOQL inject as shown below:
+
+```java
+public class SOQLController { 
+    public String name { 
+        get { return name;} 
+        set { name = value;} 
+    } 
+    public PageReference query() { 
+        String queryName = '%' + name + '%';
+        List<Contact> queryResult = [SELECT Id FROM Contact WHERE 
+           (IsDeleted = false and Name like :queryName)]; //<---- binding variable is used here
+        System.debug('query result is ' + queryResult);
+        return null; 
+    } 
+}
+```
+
+- Use the following CLI command for checking possible SOQL injection
+```
+
+sfdx-mohanc-plugins % sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
+
+```
+```
+=== Possible SOQL Injections ===
+ 
+```
+
+```json
+{
+    name: 'SoftphoneContactSearchController',
+    SOQLInject: true,
+    match: [
+      "SELECT Id, Phone, Name, Title, Account.Name FROM Contact WHERE (id = :name OR Name LIKE :('%' + name + '%') OR firstname LIKE :('%' + name + '%') OR lastname LIKE :('%' + name + '%') OR phone LIKE :('%' + name + '%')) LIMIT 10]){              contactList.add(contact);          }          return JSON.serialize(contactList);      }  }"
+    ]
+  },
+  {
+    name: 'SOQLControllerInjection',
+    SOQLInject: true,
+    match: [
+      "SELECT Id FROM Contact WHERE ' +              '(IsDeleted = false and Name like \\'%' + name + '%\\')';          List<Contact> queryResult = Database.query(qryString);          System.debug('query result is ' + queryResult);          return null;      }  }"
+    ]
+  }
+]
+```
+
 
 
 # Browser fingerprint
