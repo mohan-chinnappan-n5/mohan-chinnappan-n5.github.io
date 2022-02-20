@@ -248,7 +248,9 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 
 # User Audit
 
-- [Sharing Data Model Interactive](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/model-sfdc.html)
+- Sharing Data Model Interactive 
+[![Sharing Data Model Interactive](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/img/sharing.png))](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/model-sfdc.html)
+
 
 ![User ERD](img/User-erd.svg)
 
