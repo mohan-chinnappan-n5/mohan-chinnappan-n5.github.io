@@ -44,7 +44,7 @@ Tricking a user into clicking on something different from what the user perceive
 - 4. Don’t allow framing by any page (**most protection**): The most secure level
     - But for Salesforce Tabs + Visualforce sites, it can cause certain pages to appear **as blank pages**. 
     - To avoid this issue, **use the default setting instead**.
-
+![Exp cloud settings](img/ec-clickjack-1.png)
 
 # Phishing
 - Technique that attempts to acquire sensitive information, such as usernames, passwords, and credit card details, by masquerading (pretend to be someone one is not) as a trustworthy person or entity. 
@@ -1331,8 +1331,47 @@ FROM EntityDefinition  LIMIT 2000
 
 
 
+# Experience Cloud
+
+- Site ERD
+![Site ERD](img/Site-erd.svg)
+
+```
+SELECT Id ,Name ,Subdomain,UrlPathPrefix,GuestUserId 
+
+,Status
+,AdminId
+,OptionsEnableFeeds
+,OptionsRequireHttps
+,OptionsAllowGuestPaymentsApi
+,OptionsHasStoredPathPrefix
+,OptionsAllowHomePage
+,OptionsAllowStandardIdeasPages
+,OptionsAllowStandardSearch
+,OptionsAllowStandardLookups
+,OptionsAllowStandardAnswersPages
+,OptionsAllowGuestSupportApi
+,OptionsAllowStandardPortalPages
+,OptionsCspUpgradeInsecureRequests
+,OptionsContentSniffingProtection
+,OptionsBrowserXssProtection
+,OptionsReferrerPolicyOriginWhenCrossOrigin
+,Description
+,MasterLabel
+,AnalyticsTrackingCode
+,SiteType
+,ClickjackProtectionLevel
+,DailyBandwidthLimit
+,DailyBandwidthUsed
+,DailyRequestTimeLimit
+,DailyRequestTimeUsed
+,MonthlyPageViewsEntitlement
+,GuestRecordDefaultOwnerId
 
 
+FROM Site
+```
+![EC-1](img/ec-1.png)
 
 # Sharing Debugger
 - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
@@ -1340,7 +1379,10 @@ FROM EntityDefinition  LIMIT 2000
 - Chrome Extension
 ![SD Chrome Extension](https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/img/sd-2.gif)
 
-- [CLI version]
+- CLI version
+  - Visualization
+![Viz sharing debugger](img/userInfo.svg)
+
 ```
 $ sfdx mohanc:sharing:debug -h
 Run Sharing Debugger on the given org for the given user
@@ -1516,7 +1558,6 @@ Writing visualization in file userInfo.svg ...
 Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualization.
 
 ```
-![Viz sharing debugger](img/userInfo.svg)
 
 
 # Optimizer 
@@ -1557,7 +1598,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 
 # Creation 
 ```
-sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security
+sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security"
 ```
 
 # Single page view

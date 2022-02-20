@@ -71,7 +71,7 @@ Tricking a user into clicking on something different from what the user perceive
 - 4. Don’t allow framing by any page (**most protection**): The most secure level
     - But for Salesforce Tabs + Visualforce sites, it can cause certain pages to appear **as blank pages**. 
     - To avoid this issue, **use the default setting instead**.
-
+![Exp cloud settings](img/ec-clickjack-1.png)
 
 
 </div>
@@ -1411,19 +1411,65 @@ FROM EntityDefinition  LIMIT 2000
 
 
 
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Experience Cloud'>
+<div id='s16-md' class='md' data-trim='false'>
+  
+- Site ERD
+![Site ERD](img/Site-erd.svg)
 
+```
+SELECT Id ,Name ,Subdomain,UrlPathPrefix,GuestUserId 
+
+,Status
+,AdminId
+,OptionsEnableFeeds
+,OptionsRequireHttps
+,OptionsAllowGuestPaymentsApi
+,OptionsHasStoredPathPrefix
+,OptionsAllowHomePage
+,OptionsAllowStandardIdeasPages
+,OptionsAllowStandardSearch
+,OptionsAllowStandardLookups
+,OptionsAllowStandardAnswersPages
+,OptionsAllowGuestSupportApi
+,OptionsAllowStandardPortalPages
+,OptionsCspUpgradeInsecureRequests
+,OptionsContentSniffingProtection
+,OptionsBrowserXssProtection
+,OptionsReferrerPolicyOriginWhenCrossOrigin
+,Description
+,MasterLabel
+,AnalyticsTrackingCode
+,SiteType
+,ClickjackProtectionLevel
+,DailyBandwidthLimit
+,DailyBandwidthUsed
+,DailyRequestTimeLimit
+,DailyRequestTimeUsed
+,MonthlyPageViewsEntitlement
+,GuestRecordDefaultOwnerId
+
+
+FROM Site
+```
+![EC-1](img/ec-1.png)
 
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Sharing Debugger'>
-<div id='s16-md' class='md' data-trim='false'>
+<div id='s17-md' class='md' data-trim='false'>
   - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
 
 - Chrome Extension
 ![SD Chrome Extension](https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/img/sd-2.gif)
 
-- [CLI version]
+- CLI version
+  - Visualization
+![Viz sharing debugger](img/userInfo.svg)
+
 ```
 $ sfdx mohanc:sharing:debug -h
 Run Sharing Debugger on the given org for the given user
@@ -1599,21 +1645,20 @@ Writing visualization in file userInfo.svg ...
 Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualization.
 
 ```
-![Viz sharing debugger](img/userInfo.svg)
 
 
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Optimizer '>
-<div id='s17-md' class='md' data-trim='false'>
+<div id='s18-md' class='md' data-trim='false'>
   ![Optimizer ](img/optimizer-report-1.png)
 
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Real-Time Event Monitoring'>
-<div id='s18-md' class='md' data-trim='false'>
+<div id='s19-md' class='md' data-trim='false'>
   - Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
 
 - [Viewing and Visualizing Event Log files using DX](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/monitoring/em.md)
@@ -1622,7 +1667,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Field Audit Trail'>
-<div id='s19-md' class='md' data-trim='false'>
+<div id='s20-md' class='md' data-trim='false'>
   - Lets you know the state and value of your data for any date, at any time
 - Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
 - You can also set triggers for when data is deleted. 
@@ -1631,7 +1676,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Resources'>
-<div id='s20-md' class='md' data-trim='false'>
+<div id='s21-md' class='md' data-trim='false'>
   
 ## Platform
 - [Salesforce Security Guide](https://resources.docs.salesforce.com/236/latest/en-us/sfdc/pdf/salesforce_security_impl_guide.pdf)
@@ -1658,16 +1703,16 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Creation '>
-<div id='s21-md' class='md' data-trim='false'>
+<div id='s22-md' class='md' data-trim='false'>
   ```
-sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security
+sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security"
 ```
 
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Single page view'>
-<div id='s22-md' class='md' data-trim='false'>
+<div id='s23-md' class='md' data-trim='false'>
   - [View it as a single page](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/sf-security/security.md)
 
 
