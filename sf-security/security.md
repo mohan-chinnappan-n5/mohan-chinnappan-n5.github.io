@@ -1523,3 +1523,6 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 ```
 sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security
 ```
+
+# Single page view
+- [View it as a single page](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/sf-security/security.md)
