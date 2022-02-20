@@ -1299,7 +1299,7 @@ Writing visualization in file __RH__.svg ...
 Visualization done. "open  __RH__.svg" in Chrome Browser to view the Visualization.
 ```
 
-![RH](img/__RH__.svg)
+![RH](img/rh.svg)
 
 # Sharing Debugger
 - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
