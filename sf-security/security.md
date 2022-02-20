@@ -1288,6 +1288,8 @@ sfdx mohanc:security:userLicenseProfile -u  mohan.chinnappan.n_ea2@gmail.com -l 
 
 # Role Hierarchy
 
+- Using CLI to view Role Hierarchy
+
 ```
 sfdx mohanc:security:rh  -u  mohan.chinnappan.n_ea2@gmail.com
 ```
