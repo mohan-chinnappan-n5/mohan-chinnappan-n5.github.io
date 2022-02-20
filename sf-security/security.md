@@ -1337,8 +1337,10 @@ FROM EntityDefinition  LIMIT 2000
 # Sharing Debugger
 - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
 
+- Chrome Extension
 ![SD Chrome Extension](https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/img/sd-2.gif)
 
+- [CLI version]
 ```
 $ sfdx mohanc:sharing:debug -h
 Run Sharing Debugger on the given org for the given user
