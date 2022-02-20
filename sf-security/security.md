@@ -1323,7 +1323,7 @@ FROM EntityDefinition  LIMIT 2000
 
 ![Entity Def](img/entityDef-1.png)
 
-- [Sample output in JSON for the above the query ](img/entity.soql.json)
+- [Sample output in JSON for the above the query ](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/sf-security/img/entity.soql.json)
 
 
 
