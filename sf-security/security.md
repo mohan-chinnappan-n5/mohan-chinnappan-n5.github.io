@@ -1286,6 +1286,201 @@ sfdx mohanc:security:userLicenseProfile -u  mohan.chinnappan.n_ea2@gmail.com -l 
 
 ```
 
+# Role Hierarchy
+
+```
+sfdx mohanc:security:rh  -u  mohan.chinnappan.n_ea2@gmail.com
+```
+
+```
+Writing visualization in file __RH__.svg ...
+Visualization done. "open  __RH__.svg" in Chrome Browser to view the Visualization.
+```
+
+![RH](img/__RH__.svg)
+
+# Sharing Debugger
+- [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
+
+
+```
+$ sfdx mohanc:sharing:debug -h
+Run Sharing Debugger on the given org for the given user
+
+USAGE
+  $ sfdx mohanc:sharing:debug
+
+Run Sharing Debugger on the given org for the given user
+
+USAGE
+  $ sfdx mohanc:sharing:debug
+
+OPTIONS
+  -n, --username=username                          User Name to Debug
+  -u, --targetusername=targetusername              username or alias for the target org; overrides default target org
+  -v, --targetdevhubusername=targetdevhubusername  username or alias for the dev hub org; overrides default dev hub org
+  --apiversion=apiversion                          override the api version used for api requests made by this command
+  --json                                           format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)   logging level for this command invocation
+
+EXAMPLE
+
+       ** Run Sharing Debugger on the given org for the given user **
+
+       USAGE
+       sfdx mohanc:sharing:debug -u <username>  -n <userNameToDebug>
+
+       writes userInfo.json and userInfo.svg files in the current directory
+
+       -----------
+    
+
+```
+
+
+```
+sfdx mohanc:sharing:debug -u mohan.chinnappan.n_ea2@gmail.com -n mohan.chinnappan.n_ea2@gmail.com
+```
+```
+____________User Info____________
+"Id","Name","UserRoleId"
+"0053h000002xQ5sAAE","Mohan Chinnappan","00E3h000001JaqUEAS"
+userRoleId : 00E3h000001JaqUEAS
+____________Role____________
+"Id","Name","ParentRoleId","RollupDescription","OpportunityAccessForAccountOwner","CaseAccessForAccountOwner","ForecastUserId","MayForecastManagerShare","DeveloperName","PortalAccountId","PortalType","PortalAccountOwnerId"
+"00E3h000001JaqUEAS","CEO",,"CEO","Edit","Edit",,false,"CEO",,"None",
+____________Profile____________
+profileId : 00e3h000001kqJMAAY
+____________Permissions____________
+"Id","Name","PermissionsViewAllData","PermissionsModifyAllData","PermissionsManageDataIntegrations"
+"00e3h000001kqJMAAY","System Administrator",true,true,true
+____________PermSets____________
+"Id","Label","PermissionsViewAllData","PermissionsModifyAllData","PermissionsManageDataIntegrations"
+"0PS3h000002PwNZGA0","00ex00000018ozh_128_09_04_12_1",true,true,true
+____________AccountShare____________
+"Id","AccountId","UserOrGroupId","AccountAccessLevel","OpportunityAccessLevel","CaseAccessLevel","ContactAccessLevel","RowCause"
+"00r3h000033f9xzAAA","0013h00000FfgCMAAZ","0053h000002xQ5sAAE","All","Edit","Edit","Edit","Owner"
+"00r3h000033fA4bAAE","0013h00000FfgCNAAZ","0053h000002xQ5sAAE","All","Edit","Edit","Edit","Owner"
+"00r3h000033fAe4AAE","0013h00000Ffg4aAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h00004R4gqfAAB","0013h000018ziseAAA","0053h000002xQ5sAAE","All","Edit","Edit","Edit","Owner"
+"00r3h00004luUr9AAE","0013h00001C1KE0AAN","0053h000002xQ5sAAE","All","Edit","Edit","Edit","Owner"
+"00r3h000033fAIGAA2","0013h00000FffwFAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAHvAAM","0013h00000FffyGAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAHZAA2","0013h00000FffzCAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAINAA2","0013h00000FffwLAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAJEAA2","0013h00000Ffg0jAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAOaAAM","0013h00000FffwXAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAOmAAM","0013h00000FffyeAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fADhAAM","0013h00000FffwqAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAhqAAE","0013h00000FffwrAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAhyAAE","0013h00000FffxbAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAUgAAM","0013h00000Fffx0AAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAUzAAM","0013h00000FffxAAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAUmAAM","0013h00000FffzYAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAUKAA2","0013h00000Ffg2DAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAJXAA2","0013h00000FffxGAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAJeAAM","0013h00000FffzPAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAK3AAM","0013h00000Ffg4KAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAeBAAU","0013h00000FffxuAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAdzAAE","0013h00000FffyrAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAdNAAU","0013h00000Fffz7AAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAe6AAE","0013h00000Ffg1EAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAd8AAE","0013h00000Ffg37AAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAe8AAE","0013h00000Ffg3wAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAbkAAE","0013h00000FffxzAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAbTAAU","0013h00000FffzOAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fALRAA2","0013h00000Fffy2AAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAeZAAU","0013h00000FffyCAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAgzAAE","0013h00000FffyLAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAgaAAE","0013h00000FffyZAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAh7AAE","0013h00000Ffg0HAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAZXAA2","0013h00000FffyQAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAa2AAE","0013h00000Ffg2gAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAZMAA2","0013h00000Ffg3RAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fASpAAM","0013h00000FffylAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fASNAA2","0013h00000Ffg1fAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fASxAAM","0013h00000Ffg1kAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAXnAAM","0013h00000FffzXAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAXmAAM","0013h00000Ffg1BAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAXwAAM","0013h00000Ffg3pAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAMgAAM","0013h00000FffzqAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAZ7AAM","0013h00000FffzuAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAC9AAM","0013h00000Ffg0JAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAC4AAM","0013h00000Ffg4WAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAL4AAM","0013h00000Ffg0aAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAKtAAM","0013h00000Ffg0hAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAKiAAM","0013h00000Ffg3eAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAKwAAM","0013h00000Ffg44AAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fACcAAM","0013h00000Ffg0cAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAFDAA2","0013h00000Ffg0oAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fABFAA2","0013h00000Ffg0wAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fATIAA2","0013h00000Ffg1AAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAbEAAU","0013h00000Ffg1CAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAanAAE","0013h00000Ffg2rAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAR7AAM","0013h00000Ffg2TAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fARJAA2","0013h00000Ffg46AAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAVMAA2","0013h00000Ffg2vAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAW0AAM","0013h00000Ffg35AAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAfmAAE","0013h00000Ffg4JAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAE2AAM","0013h00000Ffg4bAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAOJAA2","0013h00000Ffg54AAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fARAAA2","0013h00000Ffg5CAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fASFAA2","0013h00000Ffg5DAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fABKAA2","0013h00000Ffg5FAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAJwAAM","0013h00000Ffg5MAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAf3AAE","0013h00000Ffg5OAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAFGAA2","0013h00000Ffg5hAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAS7AAM","0013h00000Ffg5mAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fATDAA2","0013h00000Ffg5nAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fARBAA2","0013h00000Ffg6VAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAakAAE","0013h00000Ffg6aAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAXxAAM","0013h00000Ffg7dAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAbaAAE","0013h00000Ffg7eAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fALyAAM","0013h00000Ffg8AAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAIEAA2","0013h00000Ffg8PAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAeMAAU","0013h00000Ffg8aAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fARRAA2","0013h00000Ffg9BAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAYtAAM","0013h00000Ffg9WAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAIIAA2","0013h00000Ffg9ZAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAasAAE","0013h00000FfgA6AAJ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAdwAAE","0013h00000FfgAcAAJ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fASgAAM","0013h00000FfgAdAAJ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAaSAAU","0013h00000FfgAkAAJ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAdYAAU","0013h00000FfgApAAJ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAKpAAM","0013h00000FfgBGAAZ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAY1AAM","0013h00000FfgBLAAZ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAMGAA2","0013h00000FfgBhAAJ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAXYAA2","0013h00000FfgBmAAJ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAVpAAM","0013h00000FfgBuAAJ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAafAAE","0013h00000FfgC1AAJ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fALVAA2","0013h00000FfgC5AAJ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAG5AAM","0013h00000Ffg8mAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fANXAA2","0013h00000Ffg4dAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAcrAAE","0013h00000Ffg5aAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033wF3RAAU","0013h00000Ffg6kAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAQlAAM","0013h00000Ffg7TAAR","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAWIAA2","0013h00000Ffg8bAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAWOAA2","0013h00000Ffg9bAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAPIAA2","0013h00000Ffg8kAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAPJAA2","0013h00000Ffg9mAAB","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+"00r3h000033fAPVAA2","0013h00000FfgA0AAJ","0053h000002xQ5sAAE","Read","None","None","None","ImplicitParent"
+____________OpportunityShare____________
+"Id","OpportunityId","UserOrGroupId","RowCause"
+"00t3h00001VnMzVAAV","0063h000008wq3kAAA","0053h000002xQ5sAAE","Team"
+____________AccountTeams____________
+=== None found ===
+____________OpportunityTeams____________
+"Id","Name","OpportunityAccessLevel","OpportunityId","TeamMemberRole","Title"
+"00q3h000000FMRdAAO","Mohan Chinnappan","Read","0063h000008wq3kAAA","Account Manager",
+Writing userInfo JSON  in file userInfo.json ...
+open  userInfo.json
+Writing visualization in file userInfo.svg ...
+Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualization.
+
+```
+![Viz sharing debugger](img/userInfo.svg)
+
+
 # Optimizer 
 ![Optimizer ](img/optimizer-report-1.png)
 
