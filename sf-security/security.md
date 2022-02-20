@@ -1301,6 +1301,35 @@ Visualization done. "open  __RH__.svg" in Chrome Browser to view the Visualizati
 
 ![RH](img/rh2.svg)
 
+
+# Org wide settings
+![Org](img/Organization-erd.svg)
+
+```
+SELECT Id ,Name ,PreferencesRequireOpportunityProducts,PreferencesTransactionSecurityPolicy,
+PreferencesTerminateOldestSession,PreferencesConsentManagementEnabled,PreferencesAutoSelectIndividualOnMerge,PreferencesLightningLoginEnabled,PreferencesOnlyLLPermUserAllowed,DefaultAccountAccess,DefaultContactAccess,DefaultOpportunityAccess,DefaultLeadAccess,DefaultCaseAccess,DefaultCalendarAccess,DefaultPricebookAccess,DefaultCampaignAccess,OrganizationType,IsReadOnly FROM Organization
+```
+
+-![Org1](img/org-1.png)
+
+## Entity Definition
+
+![Entity Def ERD](img/EntityDefinition-erd.svg)
+
+```sql
+SELECT NamespacePrefix, DeveloperName, ExternalSharingModel, InternalSharingModel 
+FROM EntityDefinition  LIMIT 2000
+```
+
+![Entity Def](img/entityDef-1.png)
+
+- [Sample output in JSON for the above the query ](img/entity.soql.json)
+
+
+
+
+
+
 # Sharing Debugger
 - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
 

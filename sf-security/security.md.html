@@ -1377,10 +1377,43 @@ Visualization done. "open  __RH__.svg" in Chrome Browser to view the Visualizati
 ![RH](img/rh2.svg)
 
 
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Org wide settings'>
+<div id='s15-md' class='md' data-trim='false'>
+  ![Org](img/Organization-erd.svg)
+
+```
+SELECT Id ,Name ,PreferencesRequireOpportunityProducts,PreferencesTransactionSecurityPolicy,
+PreferencesTerminateOldestSession,PreferencesConsentManagementEnabled,PreferencesAutoSelectIndividualOnMerge,PreferencesLightningLoginEnabled,PreferencesOnlyLLPermUserAllowed,DefaultAccountAccess,DefaultContactAccess,DefaultOpportunityAccess,DefaultLeadAccess,DefaultCaseAccess,DefaultCalendarAccess,DefaultPricebookAccess,DefaultCampaignAccess,OrganizationType,IsReadOnly FROM Organization
+```
+
+-![Org1](img/org-1.png)
+
+## Entity Definition
+
+![Entity Def ERD](img/EntityDefinition-erd.svg)
+
+```sql
+SELECT NamespacePrefix, DeveloperName, ExternalSharingModel, InternalSharingModel 
+FROM EntityDefinition  LIMIT 2000
+```
+
+![Entity Def](img/entityDef-1.png)
+
+- [Sample output in JSON for the above the query ](img/entity.soql.json)
+
+
+
+
+
+
+
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Sharing Debugger'>
-<div id='s15-md' class='md' data-trim='false'>
+<div id='s16-md' class='md' data-trim='false'>
   - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
 
 
@@ -1566,14 +1599,14 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Optimizer '>
-<div id='s16-md' class='md' data-trim='false'>
+<div id='s17-md' class='md' data-trim='false'>
   ![Optimizer ](img/optimizer-report-1.png)
 
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Real-Time Event Monitoring'>
-<div id='s17-md' class='md' data-trim='false'>
+<div id='s18-md' class='md' data-trim='false'>
   - Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
 
 - [Viewing and Visualizing Event Log files using DX](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/monitoring/em.md)
@@ -1582,7 +1615,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Field Audit Trail'>
-<div id='s18-md' class='md' data-trim='false'>
+<div id='s19-md' class='md' data-trim='false'>
   - Lets you know the state and value of your data for any date, at any time
 - Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
 - You can also set triggers for when data is deleted. 
@@ -1591,7 +1624,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Resources'>
-<div id='s19-md' class='md' data-trim='false'>
+<div id='s20-md' class='md' data-trim='false'>
   
 ## Platform
 - [Salesforce Security Guide](https://resources.docs.salesforce.com/236/latest/en-us/sfdc/pdf/salesforce_security_impl_guide.pdf)
@@ -1618,7 +1651,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Creation '>
-<div id='s20-md' class='md' data-trim='false'>
+<div id='s21-md' class='md' data-trim='false'>
   ```
 sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security
 ```
@@ -1627,7 +1660,7 @@ sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Securit
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Single page view'>
-<div id='s21-md' class='md' data-trim='false'>
+<div id='s22-md' class='md' data-trim='false'>
   - [View it as a single page](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/sf-security/security.md)
 
 
