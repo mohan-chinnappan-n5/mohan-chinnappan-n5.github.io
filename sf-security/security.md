@@ -248,6 +248,8 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 
 # User Audit
 
+- [Sharing Data Model Interactive](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/model-sfdc.html)
+
 ![User ERD](img/User-erd.svg)
 
 - [Admin Best Practices: Remove Security Risks From Your Org With a User Audit](https://trailhead.salesforce.com/live/videos/a2r3k000001n2jh/admin-best-practices-remove-security-risks-from-your-org-with-a-user-audit/)
@@ -1333,6 +1335,7 @@ FROM EntityDefinition  LIMIT 2000
 # Sharing Debugger
 - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
 
+![SD Chrome Extension](https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/img/sd-2.gif)
 
 ```
 $ sfdx mohanc:sharing:debug -h
