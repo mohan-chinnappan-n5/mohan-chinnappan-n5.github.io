@@ -1,3 +1,8 @@
+[Goals](#Goals)
+
+- <a name="Goals"></a>
+- <a name="Resource"></a>
+
 # Goals
 - The Salesforce security features enable you to empower your users to do their jobs safely and efficiently
 
@@ -1494,6 +1499,8 @@ FROM Site
 
 ![SharingSet ERD](img/sharingSet.dot.svg)
 - [Refer metadata doc](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_sharingset.htm)
+- [Community Cloud Security](https://mohan-chinnappan-n2.github.io/2020/cc/security/security.html)
+
 - A sharing set defines **an access mapping** that grants portal or community users access to **objects** that are associated with their **accounts or contacts**.
 
 - Example: You can grant portal or community users access to **all cases** related to their **account record**. 
@@ -1501,6 +1508,8 @@ FROM Site
 - [Video: How to Create a Sharing Set for Customer Community Users ](https://www.youtube.com/watch?v=rurWMbjJ26k)
     - Granting access to cases not available using sharing rules or manual sharing is not available
         - Since customer community users **do not have roles**
+![Role not in Community users](https://mohan-chinnappan-n2.github.io/2020/cc/security/img/cc-role-3.png)
+
     - Sharing set setup
         - Case Object is set to **private** in OWD
             - This will make Case object will be available for sharing set 
@@ -1735,6 +1744,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 - Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
 - You can also set triggers for when data is deleted. 
 
+<a name="Resources></a>
 # Resources
 
 ## Platform
