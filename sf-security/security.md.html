@@ -28,6 +28,15 @@
 - [User Audit](#User_Audit)
 - [Apex sharing check](#Apex_sharing_check)
 - [Check Profile Permissions](#Check_Profile_Permissions)
+- [Check PermissionSet Permissions](#Check_PermissionSet_Permissions)
+- [Guest Profile permissions](#Guest_Profile_permissions)
+- [Role Hierarchy](Role_Hierarchy)
+- [Org wide settings](#owd)
+- [Experience Cloud](#ec)
+- [Sharing Debugger](#sd)
+- [Optimizer](#Optimizer)
+- [Real-Time Event Monitoring ](#em)
+- [Field Audit Trail](#fat)
 
 - [Resources](#resources)
 
@@ -339,7 +348,7 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 |Analyze|Gain visibility into the security of an org using tools like: **Health Check, Optimizer, Security Center**|
 
 
-|Bad Practice|Best Pratice|
+|Bad Practice|Best Practice|
 |---|---|
 |Allowing users (or admins) to share logins| Give each user their own login|
 |Users have permissions to see and do more than they need to do their jobs |Ensure the correct level of access as org changes happen, or when employees join/leave the company|
@@ -1061,6 +1070,7 @@ sfdx mohanc:security:profile -u  mohan.chinnappan.n_ea2@gmail.com -p 'System Adm
 }
 ```
 
+<a name="Check_PermissionSet_Permissions"></a>
 
 </div>
 </google-codelab-step>
@@ -1317,7 +1327,7 @@ sfdx mohanc:security:permissionSet -p 'Sales_Ops' -u  mohan.chinnappan.n_ea2@gma
 ```
 
 
-
+<a name="Guest_Profile_permissions"></a>
 
 </div>
 </google-codelab-step>
@@ -1381,6 +1391,7 @@ sfdx mohanc:security:userLicenseProfile -u  mohan.chinnappan.n_ea2@gmail.com -l 
 
 ```
 
+<a name="Role_Hierarchy"></a>
 
 </div>
 </google-codelab-step>
@@ -1401,6 +1412,7 @@ Visualization done. "open  __RH__.svg" in Chrome Browser to view the Visualizati
 ![RH](img/rh2.svg)
 
 
+<a name="owd"></a>
 
 </div>
 </google-codelab-step>
@@ -1429,7 +1441,7 @@ FROM EntityDefinition  LIMIT 2000
 - [Sample output in JSON for the above the query ](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/sf-security/img/entity.soql.json)
 
 
-
+<a name="ec"></a>
 
 </div>
 </google-codelab-step>
@@ -1641,7 +1653,7 @@ Access Level: Read Only
 ```
 
 
-
+<a name="sd"></a>
 
 </div>
 </google-codelab-step>
@@ -1840,6 +1852,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 <div id='s18-md' class='md' data-trim='false'>
   ![Optimizer ](img/optimizer-report-1.png)
 
+<a name="em"></a>
 
 </div>
 </google-codelab-step>
@@ -1849,6 +1862,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 
 - [Viewing and Visualizing Event Log files using DX](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/monitoring/em.md)
 
+<a name="fat"></a>
 
 </div>
 </google-codelab-step>

@@ -11,6 +11,15 @@
 - [User Audit](#User_Audit)
 - [Apex sharing check](#Apex_sharing_check)
 - [Check Profile Permissions](#Check_Profile_Permissions)
+- [Check PermissionSet Permissions](#Check_PermissionSet_Permissions)
+- [Guest Profile permissions](#Guest_Profile_permissions)
+- [Role Hierarchy](Role_Hierarchy)
+- [Org wide settings](#owd)
+- [Experience Cloud](#ec)
+- [Sharing Debugger](#sd)
+- [Optimizer](#Optimizer)
+- [Real-Time Event Monitoring ](#em)
+- [Field Audit Trail](#fat)
 
 - [Resources](#resources)
 
@@ -284,7 +293,7 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 |Analyze|Gain visibility into the security of an org using tools like: **Health Check, Optimizer, Security Center**|
 
 
-|Bad Practice|Best Pratice|
+|Bad Practice|Best Practice|
 |---|---|
 |Allowing users (or admins) to share logins| Give each user their own login|
 |Users have permissions to see and do more than they need to do their jobs |Ensure the correct level of access as org changes happen, or when employees join/leave the company|
@@ -998,6 +1007,7 @@ sfdx mohanc:security:profile -u  mohan.chinnappan.n_ea2@gmail.com -p 'System Adm
 }
 ```
 
+<a name="Check_PermissionSet_Permissions"></a>
 # Check PermissionSet Permissions
 
 ![PermissionSetERD](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/img/PermissionSet.svg)
@@ -1250,7 +1260,7 @@ sfdx mohanc:security:permissionSet -p 'Sales_Ops' -u  mohan.chinnappan.n_ea2@gma
 ```
 
 
-
+<a name="Guest_Profile_permissions"></a>
 # Guest Profile permissions
 
 - Check Guest Profile permissions using CLI
@@ -1310,6 +1320,7 @@ sfdx mohanc:security:userLicenseProfile -u  mohan.chinnappan.n_ea2@gmail.com -l 
 
 ```
 
+<a name="Role_Hierarchy"></a>
 # Role Hierarchy
 
 - Using CLI to view Role Hierarchy
@@ -1326,6 +1337,7 @@ Visualization done. "open  __RH__.svg" in Chrome Browser to view the Visualizati
 ![RH](img/rh2.svg)
 
 
+<a name="owd"></a>
 # Org wide settings
 ![Org](img/Organization-erd.svg)
 
@@ -1350,7 +1362,7 @@ FROM EntityDefinition  LIMIT 2000
 - [Sample output in JSON for the above the query ](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/sf-security/img/entity.soql.json)
 
 
-
+<a name="ec"></a>
 # Experience Cloud
 
 - Network represents an Experience Cloud site. Salesforce Experience Cloud lets you create branded spaces for your employees, customers, and partners.
@@ -1558,7 +1570,7 @@ Access Level: Read Only
 ```
 
 
-
+<a name="sd"></a>
 # Sharing Debugger
 - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
 
@@ -1749,11 +1761,13 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 # Optimizer 
 ![Optimizer ](img/optimizer-report-1.png)
 
+<a name="em"></a>
 # Real-Time Event Monitoring
 - Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
 
 - [Viewing and Visualizing Event Log files using DX](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/monitoring/em.md)
 
+<a name="fat"></a>
 # Field Audit Trail
 - Lets you know the state and value of your data for any date, at any time
 - Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
