@@ -1489,6 +1489,13 @@ FROM Site
 
 - [Community Cloud Tips](https://mohan-chinnappan-n2.github.io/2020/cc/cc.html#0)
 
+
+## Sharing Set
+- A sharing set defines an access mapping that grants portal or community users access to objects that are associated with their accounts or contacts.
+- You can grant portal or community users access to **all cases** related to their **account record**. 
+    - Similarly, you can grant portal or community users access to **all cases** related to a parent account that is identified on the user’s account record.
+
+
 # Sharing Debugger
 - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
 
@@ -1711,6 +1718,15 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 - [Community Cloud Tips](https://mohan-chinnappan-n2.github.io/2020/cc/cc.html#0)
 
 - [Enable Clickjack Protection in Experience Cloud Sites](https://help.salesforce.com/s/articleView?id=sf.networks_clickjack_protection.htm&type=5)
+
+## Data Models
+- ![Sales Cloud](https://architect.salesforce.com/1/asset/immutable/s/fda8cbf/assets/images/data-models/sales-cloud-overview-data-model.png)
+- ![Service Cloud](https://architect.salesforce.com/1/asset/immutable/s/395d3ea/assets/images/data-models/service-cloud-support-overview-data-model.png)
+- ![Task and Events](https://architect.salesforce.com/1/asset/immutable/s/cb88450/assets/images/data-models/platform-tasks-events-data-model.png)
+- ![Product and Price Book](https://architect.salesforce.com/1/asset/immutable/s/694cdeb/assets/images/data-models/sales-cloud-product-price-book-data-model.png)
+- [Reference Architecture Gallery](https://architect.salesforce.com/design/#architecture-gallery)
+
+- [Model Notation](https://architect.salesforce.com/design/diagram-templates/data-model-notation/)
 
 # Creation 
 ```
