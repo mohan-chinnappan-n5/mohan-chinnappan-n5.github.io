@@ -1,5 +1,11 @@
+### Topics
 - [Goals](#Goals)
+- [Security Health Check](#Security Health Check)
 - [Resources](#resources)
+- [Clickjacking](#Clickjacking)
+- [Phishing](#Phishing)
+- [Browser fingerprint](#Browser fingerprint) 
+
 
 # Goals
 - The Salesforce security features enable you to empower your users to do their jobs safely and efficiently
@@ -8,7 +14,7 @@
 
 - Protect your data from unauthorized access from outside your company and from inappropriate usage by your users.
 
-
+<a name="Security Health Check"></a>
 # Security Health Check
 |Item|Section|Standard Value|
 |---|---|---|
@@ -21,7 +27,7 @@
 
 ![Fixing security issues](img/fix-Security-risks-1.png)
 
-
+<a name="Clickjacking"></a>
 # Clickjacking (click + hijacking)
 ```
 Tricking a user into clicking on something different from what the user perceives,
@@ -49,6 +55,7 @@ Tricking a user into clicking on something different from what the user perceive
     - To avoid this issue, **use the default setting instead**.
 ![Exp cloud settings](img/ec-clickjack-1.png)
 
+<a name="Phishing"></a>
 # Phishing
 - Technique that attempts to acquire sensitive information, such as usernames, passwords, and credit card details, by masquerading (pretend to be someone one is not) as a trustworthy person or entity. 
 - Can occur via:
@@ -214,7 +221,7 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 ```
 
 
-
+<a name="Browser fingerprint"></a>
 # Browser fingerprint
 - A browser fingerprint is a **collection of features that together identify a device**.
 - Salesforce uses these features to build a model of the user’s original browser fingerprint when they logged in. 
