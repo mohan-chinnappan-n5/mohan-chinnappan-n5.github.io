@@ -1,5 +1,5 @@
-[Goals](#Goals)
-[Resources](#resources)
+- [Goals](#Goals)
+- [Resources](#resources)
 
 # Goals
 - The Salesforce security features enable you to empower your users to do their jobs safely and efficiently
