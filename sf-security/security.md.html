@@ -631,7 +631,7 @@ sfdx mohanc:security:profile -p 'Customer Community Login User' -u  mohan.chinna
             "PermissionsManageChatterMessages": false,
             "PermissionsAllowEmailIC": false,
             "PermissionsChatterFileLink": false,
-            "PermissionsForceTwoFactor": false,
+            "PermissionsForceTwoFactor": false,     
             "PermissionsViewEventLogFiles": false,
             "PermissionsManageNetworks": false,
             "PermissionsManageAuthProviders": false,
@@ -1574,9 +1574,48 @@ FROM Site
 
 
 ## Sharing Set
-- A sharing set defines an access mapping that grants portal or community users access to objects that are associated with their accounts or contacts.
-- You can grant portal or community users access to **all cases** related to their **account record**. 
+
+![SharingSet ERD](img/sharingSet.dot.svg)
+- [Refer metadata doc](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_sharingset.htm)
+- A sharing set defines **an access mapping** that grants portal or community users access to **objects** that are associated with their **accounts or contacts**.
+
+- Example: You can grant portal or community users access to **all cases** related to their **account record**. 
     - Similarly, you can grant portal or community users access to **all cases** related to a parent account that is identified on the user’s account record.
+- [Video: How to Create a Sharing Set for Customer Community Users ](https://www.youtube.com/watch?v=rurWMbjJ26k)
+    - Granting access to cases not available using sharing rules or manual sharing is not available
+        - Since customer community users **do not have roles**
+    - Sharing set setup
+        - Case Object is set to **private** in OWD
+            - This will make Case object will be available for sharing set 
+            - Setup a **Profile** that wil be used in the sharing set setup, that has at least **read access to the Case object**
+        - Review the Case record we like to grant access and verify  the user is not able view the Case record.
+        - Go that Case Record
+            - Click on **Contact** on the Case Record
+                - Click on **Login in to Community as User** for this contact
+                - In the Community, select *Cases* in the navigation menu
+                    - You will not able to see that Case record
+                    - Log out
+                - Setup Sharing Set
+                    - Setup > Communities Settings :: **Sharing Sets**
+                    - **Sharing Set** :: New
+                    - Provide Label and Name for the Sharing Set
+                    - Select a **Profile** under **Select Profiles**
+                        - select **Custom Customer Profile** and add
+                    - Select Object under Select Objects
+                        - select **Case** under Available Objects for this sharing set
+                    - Configure Access
+                        - Click **Setup** to get **Access Mapping for Cases** dialog
+                            - **Where** - Grant Access :: User (userField) = Contact
+                            - **Matches** - Target Case = Contact (Case's Contact is this Contact)
+                            - **Access Level** = Read Only
+- ![SharingSet setup](img/sharingSet-setup.png)
+```
+Object: Case
+Access Determined By: User:Contact = Case:Contact	
+Access Level: Read Only
+
+```
+
 
 
 
