@@ -1,10 +1,10 @@
 ### Topics
 - [Goals](#Goals)
-- [Security Health Check](#Security Health Check)
+- [Security Health Check](#Security_Health_Check)
 - [Resources](#resources)
 - [Clickjacking](#Clickjacking)
 - [Phishing](#Phishing)
-- [Browser fingerprint](#Browser fingerprint) 
+- [Browser fingerprint](#Browser_fingerprint) 
 
 
 # Goals
@@ -221,7 +221,7 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 ```
 
 
-<a name="Browser fingerprint"></a>
+<a name="Browser_fingerprint"></a>
 # Browser fingerprint
 - A browser fingerprint is a **collection of features that together identify a device**.
 - Salesforce uses these features to build a model of the user’s original browser fingerprint when they logged in. 
