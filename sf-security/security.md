@@ -7,6 +7,7 @@
 - [Browser fingerprint](#Browser_fingerprint) 
 - [Session Hijacking Event Store](#Session_Hijacking_Event_Store)
 - [XSS](#XSS)
+---
 - **Tools**
     - [Health Check](#Health_Check)
     - [User Audit](#User_Audit)
@@ -14,6 +15,7 @@
     - [Check Profile Permissions](#Check_Profile_Permissions)
     - [Check PermissionSet Permissions](#Check_PermissionSet_Permissions)
     - [Guest Profile permissions](#Guest_Profile_permissions)
+---
     - [Role Hierarchy](Role_Hierarchy)
     - [Org wide settings](#owd)
     - [Experience Cloud](#ec)
@@ -21,7 +23,7 @@
     - [Optimizer](#Optimizer)
     - [Real-Time Event Monitoring ](#em)
     - [Field Audit Trail](#fat)
-
+---
 - [Resources](#resources)
 
 # Goals
@@ -31,7 +33,9 @@
 
 - Protect your data from unauthorized access from outside your company and from inappropriate usage by your users.
 
+---
 <a name="Security Health Check"></a>
+
 # Security Health Check
 |Item|Section|Standard Value|
 |---|---|---|

@@ -1,21 +1,27 @@
 
-<!doctype html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <meta name="theme-color" content="#4F7DC9">
-  <meta charset="UTF-8">
-  <title>Salesforce Security</title>
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
-  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
-  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico">
-  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
-</head>
-<body>
-<google-codelab id="Salesforce Security" title="Salesforce Security" environment="web" >
-### **Topics**
+    <!doctype html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+            <title>Salesforce Security</title>
+    
+            <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/reveal/dist/reset.css">
+            <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/reveal/dist/reveal.css">
+            <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/reveal/dist/theme/black.css">
+    
+            <!-- Theme used for syntax highlighted code -->
+            <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/reveal/plugin/highlight/monokai.css">
+        </head>
+        <body>
+            <div class="reveal">
+                <div class="slides">
+                
+    
+            <section data-markdown data-separator="---">
+            <textarea data-template>
+            ### **Topics**
 
 - [Goals](#Goals)
 - [Security Health Check](#Security_Health_Check)
@@ -43,10 +49,8 @@
 ---
 - [Resources](#resources)
 
-
-<google-codelab-step label=' Goals'>
-<div id='s0-md' class='md' data-trim='false'>
-  - The Salesforce security features enable you to empower your users to do their jobs safely and efficiently
+# Goals
+- The Salesforce security features enable you to empower your users to do their jobs safely and efficiently
 
 - Implement security controls that you think are appropriate for the sensitivity of your data. 
 
@@ -55,12 +59,8 @@
 ---
 <a name="Security Health Check"></a>
 
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Security Health Check'>
-<div id='s1-md' class='md' data-trim='false'>
-  |Item|Section|Standard Value|
+# Security Health Check
+|Item|Section|Standard Value|
 |---|---|---|
 |Enable clickjack protection for customer Visualforce pages with standard headers|Session settings|Enabled|
 |Enable clickjack protection for customer Visualforce pages with headers disabled|Session setting|Enabled|
@@ -72,12 +72,8 @@
 ![Fixing security issues](img/fix-Security-risks-1.png)
 
 <a name="Clickjacking"></a>
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Clickjacking (click + hijacking)'>
-<div id='s2-md' class='md' data-trim='false'>
-  ```
+# Clickjacking (click + hijacking)
+```
 Tricking a user into clicking on something different from what the user perceives,
  thus potentially revealing confidential information or allowing others 
  to take control of their computer while clicking on seemingly innocuous objects, 
@@ -104,12 +100,8 @@ Tricking a user into clicking on something different from what the user perceive
 ![Exp cloud settings](img/ec-clickjack-1.png)
 
 <a name="Phishing"></a>
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Phishing'>
-<div id='s3-md' class='md' data-trim='false'>
-  - Technique that attempts to acquire sensitive information, such as usernames, passwords, and credit card details, by masquerading (pretend to be someone one is not) as a trustworthy person or entity. 
+# Phishing
+- Technique that attempts to acquire sensitive information, such as usernames, passwords, and credit card details, by masquerading (pretend to be someone one is not) as a trustworthy person or entity. 
 - Can occur via:
     - email, text messaging, voice calls, and other avenues.
 - With a goal to:
@@ -117,12 +109,8 @@ Tricking a user into clicking on something different from what the user perceive
 ## Malware 
 - is a software designed to infiltrate or damage a computer system **without the owner's informed consent**.
 
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Cross site scripting (XSS)'>
-<div id='s4-md' class='md' data-trim='false'>
-  -  Attacker can insert unauthorized JavaScript, VBScript, HTML, or other **active content** into a web page viewed by other users. 
+# Cross site scripting (XSS)
+-  Attacker can insert unauthorized JavaScript, VBScript, HTML, or other **active content** into a web page viewed by other users. 
 - A malicious script inserted into a page in this manner can hijack the **user’s session, submit unauthorized transactions as the user**, steal confidential information, or simply deface the page.
 
 - Cross-site scripting works by manipulating a vulnerable web site so that it returns malicious JavaScript to users. When the **malicious code executes inside a victim's browser**, the attacker can fully compromise their interaction with the application.
@@ -180,12 +168,8 @@ const safeFirstName = xssFilters.inHTMLData(unsafeFirstName);
     -  If your page is processing GET parameter say userInput make sure that parameter is html encoded  before using in your page.
 
 
+# SQL and SOQL Injection
 
-</div>
-</google-codelab-step>
-<google-codelab-step label=' SQL and SOQL Injection'>
-<div id='s5-md' class='md' data-trim='false'>
-  
 - Exploiting query parameters to execute arbitrary SQL instructions is called SQL Injection 
 
 ```
@@ -282,12 +266,8 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 
 
 <a name="Browser_fingerprint"></a>
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Browser fingerprint'>
-<div id='s6-md' class='md' data-trim='false'>
-  - A browser fingerprint is a **collection of features that together identify a device**.
+# Browser fingerprint
+- A browser fingerprint is a **collection of features that together identify a device**.
 - Salesforce uses these features to build a model of the user’s original browser fingerprint when they logged in. 
 - Salesforce uses this model to detect whether a user’s session was hijacked.
 
@@ -306,12 +286,8 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 |ipAddress|
 
 <a name="Session_Hijacking_Event_Store"></a>
+# Session Hijacking Event Store 
 
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Session Hijacking Event Store '>
-<div id='s7-md' class='md' data-trim='false'>
-  
  
 - SessionHijackingEvent and its storage equivalent SessionHijackingEventStore track **when unauthorized users gain ownership of a Salesforce user’s session with a stolen session identifier**. 
 - To detect such an event, Salesforce evaluates how significantly a user’s current browser **fingerprint diverges from the previously known fingerprint**. 
@@ -320,22 +296,14 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 ![Session Hijacking](img/SessionHijackingEventStore.png)
 
 <a name="Health_Check"></a>
+# Health Check
 
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Health Check'>
-<div id='s8-md' class='md' data-trim='false'>
-  
 - [Use Health Check to Scan Your Security Configurations](https://trailhead.salesforce.com/en/content/learn/modules/security_basics/security_basics_healthcheck)
 - [Video: Learn About Security Health Check (Lightning Experience) | Salesforce](https://www.youtube.com/watch?v=jC0ciHZrkh0)
 
 <a name="User_Audit"></a>
+# User Audit
 
-</div>
-</google-codelab-step>
-<google-codelab-step label=' User Audit'>
-<div id='s9-md' class='md' data-trim='false'>
-  
 - Sharing Data Model Interactive 
 [![Sharing Data Model Interactive](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/img/sharing.png))](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/model-sfdc.html)
 
@@ -470,12 +438,8 @@ WHERE Profile.Name = 'System Administrator'
     - [Admin Best Practices: Security ](https://trailhead.salesforce.com/live/videos/a2r3k000001WFIi/admin-best-practices-security/)
 
 <a name="Apex_sharing_check"></a>
+# Apex sharing check
 
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Apex sharing check'>
-<div id='s10-md' class='md' data-trim='false'>
-  
 ![ApexClass ERD](img/ApexClass-erd.svg)
 
 - Use the following CLI command to find out the Apex Classes ```with and without sharing ```
@@ -548,12 +512,8 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 ```
 
 <a name="Check_Profile_Permissions"></a>
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Check Profile Permissions'>
-<div id='s11-md' class='md' data-trim='false'>
-  ![Permission ERD](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/img/Profile.svg)
+# Check Profile Permissions
+![Permission ERD](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/img/Profile.svg)
 
 
 ```
@@ -1076,12 +1036,8 @@ sfdx mohanc:security:profile -u  mohan.chinnappan.n_ea2@gmail.com -p 'System Adm
 ```
 
 <a name="Check_PermissionSet_Permissions"></a>
+# Check PermissionSet Permissions
 
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Check PermissionSet Permissions'>
-<div id='s12-md' class='md' data-trim='false'>
-  
 ![PermissionSetERD](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/img/PermissionSet.svg)
 
 ```
@@ -1333,12 +1289,8 @@ sfdx mohanc:security:permissionSet -p 'Sales_Ops' -u  mohan.chinnappan.n_ea2@gma
 
 
 <a name="Guest_Profile_permissions"></a>
+# Guest Profile permissions
 
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Guest Profile permissions'>
-<div id='s13-md' class='md' data-trim='false'>
-  
 - Check Guest Profile permissions using CLI
 
 ```
@@ -1397,12 +1349,8 @@ sfdx mohanc:security:userLicenseProfile -u  mohan.chinnappan.n_ea2@gmail.com -l 
 ```
 
 <a name="Role_Hierarchy"></a>
+# Role Hierarchy
 
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Role Hierarchy'>
-<div id='s14-md' class='md' data-trim='false'>
-  
 - Using CLI to view Role Hierarchy
 
 ```
@@ -1418,12 +1366,8 @@ Visualization done. "open  __RH__.svg" in Chrome Browser to view the Visualizati
 
 
 <a name="owd"></a>
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Org wide settings'>
-<div id='s15-md' class='md' data-trim='false'>
-  ![Org](img/Organization-erd.svg)
+# Org wide settings
+![Org](img/Organization-erd.svg)
 
 ```
 SELECT Id ,Name ,PreferencesRequireOpportunityProducts,PreferencesTransactionSecurityPolicy,
@@ -1447,12 +1391,8 @@ FROM EntityDefinition  LIMIT 2000
 
 
 <a name="ec"></a>
+# Experience Cloud
 
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Experience Cloud'>
-<div id='s16-md' class='md' data-trim='false'>
-  
 - Network represents an Experience Cloud site. Salesforce Experience Cloud lets you create branded spaces for your employees, customers, and partners.
 -  You can customize and create experiences, whether they’re 
     - communities
@@ -1659,12 +1599,8 @@ Access Level: Read Only
 
 
 <a name="sd"></a>
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Sharing Debugger'>
-<div id='s17-md' class='md' data-trim='false'>
-  - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
+# Sharing Debugger
+- [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
 
 - Chrome Extension
 ![SD Chrome Extension](https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/img/sd-2.gif)
@@ -1850,40 +1786,24 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 ```
 
 
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Optimizer '>
-<div id='s18-md' class='md' data-trim='false'>
-  ![Optimizer ](img/optimizer-report-1.png)
+# Optimizer 
+![Optimizer ](img/optimizer-report-1.png)
 
 <a name="em"></a>
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Real-Time Event Monitoring'>
-<div id='s19-md' class='md' data-trim='false'>
-  - Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
+# Real-Time Event Monitoring
+- Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
 
 - [Viewing and Visualizing Event Log files using DX](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/monitoring/em.md)
 
 <a name="fat"></a>
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Field Audit Trail'>
-<div id='s20-md' class='md' data-trim='false'>
-  - Lets you know the state and value of your data for any date, at any time
+# Field Audit Trail
+- Lets you know the state and value of your data for any date, at any time
 - Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
 - You can also set triggers for when data is deleted. 
 
 <a name="Resources></a>
+# Resources
 
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Resources'>
-<div id='s21-md' class='md' data-trim='false'>
-  
 ## Platform
 - [Salesforce Security Guide](https://resources.docs.salesforce.com/236/latest/en-us/sfdc/pdf/salesforce_security_impl_guide.pdf)
 
@@ -1914,32 +1834,35 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 
 - [Model Notation](https://architect.salesforce.com/design/diagram-templates/data-model-notation/)
 
-
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Creation '>
-<div id='s22-md' class='md' data-trim='false'>
-  ```
+# Creation 
+```
 sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security"
 ```
 
+# Single page view
+- [View it as a single page](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/sf-security/security.md)
 
-</div>
-</google-codelab-step>
-<google-codelab-step label=' Single page view'>
-<div id='s23-md' class='md' data-trim='false'>
-  - [View it as a single page](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/sf-security/security.md)
+            </textarea>
+            </section>
+            
+                </div>
+            </div>
+    
+            <script src="https://mohan-chinnappan-n5.github.io/reveal/dist/reveal.js"></script>
+            <script src="https://mohan-chinnappan-n5.github.io/reveal/plugin/notes/notes.js"></script>
+            <script src="https://mohan-chinnappan-n5.github.io/reveal/plugin/markdown/markdown.js"></script>
+            <script src="https://mohan-chinnappan-n5.github.io/reveal/plugin/highlight/highlight.js"></script>
 
+            <script src="https://mohan-chinnappan-n5.github.io/reveal/plugin/math/math.js"></script>
 
-</div>
-</google-codelab-step>
-</google-codelab>
-
-  <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
-  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/native-shim.js"></script>
-  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
-  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
-  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
-
-</body>
-</html>
+            <script>
+                Reveal.initialize({
+                    hash: true,
+                    slideNumber: true,
+                    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX  ]
+                });
+            </script>
+        </body>
+    </html>
+    
+    
