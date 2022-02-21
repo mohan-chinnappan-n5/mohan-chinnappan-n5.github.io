@@ -1,11 +1,18 @@
 ### Topics
 - [Goals](#Goals)
 - [Security Health Check](#Security_Health_Check)
-- [Resources](#resources)
 - [Clickjacking](#Clickjacking)
 - [Phishing](#Phishing)
 - [Browser fingerprint](#Browser_fingerprint) 
+- [Session Hijacking Event Store](#Session_Hijacking_Event_Store)
+- [XSS](#XSS)
 
+- [Health Check](#Health_Check)
+- [User Audit](#User_Audit)
+- [Apex sharing check](#Apex_sharing_check)
+- [Check Profile Permissions](#Check_Profile_Permissions)
+
+- [Resources](#resources)
 
 # Goals
 - The Salesforce security features enable you to empower your users to do their jobs safely and efficiently
@@ -241,6 +248,7 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 |indexedDb|
 |ipAddress|
 
+<a name="Session_Hijacking_Event_Store"></a>
 # Session Hijacking Event Store 
 
  
@@ -250,12 +258,13 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 
 ![Session Hijacking](img/SessionHijackingEventStore.png)
 
-
+<a name="Health_Check"></a>
 # Health Check
 
 - [Use Health Check to Scan Your Security Configurations](https://trailhead.salesforce.com/en/content/learn/modules/security_basics/security_basics_healthcheck)
 - [Video: Learn About Security Health Check (Lightning Experience) | Salesforce](https://www.youtube.com/watch?v=jC0ciHZrkh0)
 
+<a name="User_Audit"></a>
 # User Audit
 
 - Sharing Data Model Interactive 
@@ -391,7 +400,7 @@ WHERE Profile.Name = 'System Administrator'
     - [5 Security Habits That Will Help Your Admin Career](https://admin.salesforce.com/blog/2021/5-security-habits-that-will-help-your-admin-career)
     - [Admin Best Practices: Security ](https://trailhead.salesforce.com/live/videos/a2r3k000001WFIi/admin-best-practices-security/)
 
-
+<a name="Apex_sharing_check"></a>
 # Apex sharing check
 
 ![ApexClass ERD](img/ApexClass-erd.svg)
@@ -465,6 +474,7 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 
 ```
 
+<a name="Check_Profile_Permissions"></a>
 # Check Profile Permissions
 ![Permission ERD](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/img/Profile.svg)
 
