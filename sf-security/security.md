@@ -1,4 +1,4 @@
-### Topics
+### **Topics**
 
 - [Goals](#Goals)
 - [Security Health Check](#Security_Health_Check)
@@ -7,7 +7,7 @@
 - [Browser fingerprint](#Browser_fingerprint) 
 - [Session Hijacking Event Store](#Session_Hijacking_Event_Store)
 - [XSS](#XSS)
-- Tools
+- **Tools**
     - [Health Check](#Health_Check)
     - [User Audit](#User_Audit)
     - [Apex sharing check](#Apex_sharing_check)
