@@ -1333,6 +1333,120 @@ FROM EntityDefinition  LIMIT 2000
 
 # Experience Cloud
 
+- Network represents an Experience Cloud site. Salesforce Experience Cloud lets you create branded spaces for your employees, customers, and partners.
+-  You can customize and create experiences, whether they’re 
+    - communities
+    - sites
+    - portals
+- to meet your business needs, then transition seamlessly between them. 
+
+- Network ERD
+![Network ERD](img/Network-erd.svg)
+
+- NetworkMember ERD
+![NetworkMember ERD](img/NetworkMember-erd.svg)
+
+- Combined ERD
+![Network and NetworkMember ERD](img/network-networkmember.svg)
+
+- NetworkMemberGroup
+-![NetworkGroupMember ERD](img/network-networkmember-group.dot.svg)
+
+- [ERD fields info](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing/network-networkmember-group.csv)
+
+- Querying NetworkMember
+```sql
+SELECT 
+Network.Name
+,Network.Description
+,Network.Status
+,Network.UrlPathPrefix
+
+,Member.Name 
+
+,Network.SelfRegProfileId
+,Network.MaxFileSizeKb	
+,Network.AllowedExtensions
+
+,DigestFrequency
+,ReputationPoints
+
+
+FROM NetworkMember
+
+```
+
+![Query NetworkMember](img/networkMember-query.png)
+
+- Querying Site
+```sql
+SELECT
+Id
+,SystemModstamp
+,CreatedDate
+,CreatedById
+,LastModifiedDate
+,LastModifiedById
+,Name
+,Description
+,Status
+,OptionsInvitationsEnabled
+,OptionsSendWelcomeEmail
+,OptionsSelfRegistrationEnabled
+,OptionsAllowMembersToFlag
+,OptionsSiteAsContainerEnabled
+,OptionsPrivateMessagesEnabled
+,OptionsKnowledgeableEnabled
+,OptionsReputationEnabled
+,OptionsEinsteinAnswersSnippetEnabled
+,OptionsGuestChatterEnabled
+,OptionsNicknameDisplayEnabled
+,OptionsShowAllNetworkSettings
+,OptionsAllowInternalUserLogin
+,OptionsDirectMessagesEnabled
+,OptionsReputationRecordConversationsDisabled
+,OptionsGuestFileAccessEnabled
+,OptionsGatherCustomerSentimentData
+,OptionsNetworkSentimentAnalysis
+,OptionsEnableTopicAssignmentRules
+,OptionsEinsteinAnswersEnabled
+,OptionsCWBannerState
+,OptionsTopicSuggestionsEnabled
+,OptionsEnableTalkingAboutStats
+,OptionsUpDownVoteEnabled
+,OptionsDisableWorkspaceInfo
+,OptionsEinsteinAnswersQAEnabled
+,OptionsEinsteinAnswersKAEnabled
+,OptionsRecognitionBadgingEnabled
+,OptionsThreadedDiscussionsEnabled
+,OptionsMemberVisibility
+,OptionsMobileImageOptimizationEnabled
+,OptionsGuestMemberVisibility
+,OptionsActionOverrideEnabled
+,OptionsProfileBasedLayoutsForKnowledgeSearchEnabled
+,WelcomeEmailTemplateId
+,ChangePasswordEmailTemplateId
+,ForgotPasswordEmailTemplateId
+,LockoutEmailTemplateId
+,VerificationEmailTemplateId
+,ChgEmailVerOldEmailTemplateId
+,ChgEmailVerNewEmailTemplateId
+,EmailSenderName
+,EmailSenderAddress
+,NewSenderAddress
+,EmailFooterLogoId
+,EmailFooterText
+,UrlPathPrefix
+,CaseCommentEmailTemplateId
+,SelfRegProfileId
+,FirstActivationDate
+,MaxFileSizeKb
+,AllowedExtensions
+FROM Network
+```
+
+- Site represents a public website that is integrated with an org. This object is available in API version 16.0 and later.
+
 - Site ERD
 ![Site ERD](img/Site-erd.svg)
 
@@ -1372,6 +1486,8 @@ SELECT Id ,Name ,Subdomain,UrlPathPrefix,GuestUserId
 FROM Site
 ```
 ![EC-1](img/ec-1.png)
+
+- [Community Cloud Tips](https://mohan-chinnappan-n2.github.io/2020/cc/cc.html#0)
 
 # Sharing Debugger
 - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
