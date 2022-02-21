@@ -1,7 +1,5 @@
 [Goals](#Goals)
-
-- <a name="Goals"></a>
-- <a name="Resource"></a>
+[Resources](#resources)
 
 # Goals
 - The Salesforce security features enable you to empower your users to do their jobs safely and efficiently
