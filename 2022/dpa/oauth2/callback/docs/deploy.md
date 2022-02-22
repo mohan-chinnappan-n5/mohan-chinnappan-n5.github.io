@@ -92,4 +92,11 @@ FROM Account
 }
 ```
 
+- REST service available at for example:
+
+```
+https://instance_url/services/apexrest/Accounts/0018c000029c0vLAAQ
+
+```
+
 ![ApexREST Test](img/accountsRestAPI-Test.png)
