@@ -116,6 +116,6 @@ getEle('tcrm').addEventListener('click', event => {
 });
 
 // bootstrap
-getEle('apexWire').click();
+getEle('uiAPI').click();
 
 
