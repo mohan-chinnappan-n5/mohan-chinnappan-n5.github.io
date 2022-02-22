@@ -26,11 +26,11 @@ const getLWCuiRecordApi =  (object, fields) => {
     var getters = "";
     var fieldCode = "";
     fields.forEach(function (field) {
-        markupFields += "<p>{" + field.toLowerCase() + "}</p>";
+        markupFields +=  `<p class="slds-p-horizontal_small"><b> ${field.toLowerCase()} </b> : ` +  "{" + field.toLowerCase() + "}</p>";
         fieldCode += "'" + object + "." + field + "',";
         getters += "\n    get " + field.toLowerCase() + "() {\n        return this." + object.toLowerCase() + ".data.fields." + field + ".value;\n    }\n";
     });
-    const markup = "\n\n<template>\n    <lightning-card title=\"" + object + " Record\" icon-name=\"standard:" + object.toLowerCase() + "\">\n        <template if:true={" + object.toLowerCase() + ".data}>\n\n                <template for:each={" + object.toLowerCase() + ".data} for:item=\"" + object.toLowerCase() + "\">\n                     " + markupFields + "\n                </template>\n\n            <div class=\"slds-m-around_medium\">\n            </div>\n        </template>\n    </lightning-card>\n</template>\n\n    ";
+    const markup = "\n\n<template>\n    <lightning-card title=\"" + object + " Record\" icon-name=\"standard:" + object.toLowerCase() + "\">\n        <template if:true={" + object.toLowerCase() + ".data}>\n\t\t   " + markupFields + "\n\t\t</template>\n\t</lightning-card>\n</template>\n\n    ";
     const compMetadata = "\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<LightningComponentBundle xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <apiVersion>51.0</apiVersion>\n    <isExposed>true</isExposed>\n\n    <targets>\n        <target>lightning__RecordPage</target>\n        <target>lightning__AppPage</target>\n        <target>lightning__HomePage</target>\n    </targets>\n\n</LightningComponentBundle>\n   \n   ";
     const compJS = "\n    \nimport { LightningElement, api, wire } from 'lwc';\nimport { getRecord } from 'lightning/uiRecordApi';\n\nconst FIELDS = [ " + fieldCode + " ];\n\nexport default class WireGetRecord" + object + " extends LightningElement {\n    @api recordId;\n\n    // Let\u2019s use the wire service to get record data and display some field names.\n\n    @wire(getRecord, { recordId: '$recordId', fields: FIELDS })\n    " + object.toLowerCase() + ";\n     \n    " + getters + "\n    \n}\n    ";
     markDown = "\n### Component Markup " + object + ".html\n```html\n" + markup + "\n```\n\n### Component Javascript: " + object + ".js\n```js\n    " + compJS + "\n```\n\n### Component metadata " + object + ".js-meta-xml\n```xml\n    " + compMetadata + "\n```\n";
