@@ -1,0 +1,20 @@
+/* app.css */
+
+textarea {
+    background-color: black;
+    color: wheat;
+    font-family: Monaco;
+}
+
+input[id=regex] {
+    background-color: rgb(23, 19, 46);
+    color: wheat;
+    font-family: Monaco;
+}
+
+label {
+    font-weight: bold;
+}
+.stuff {
+    margin-left: 20px;
+}
