@@ -5,6 +5,9 @@ textarea {
     color: wheat;
     font-family: Monaco;
 }
+.code {
+    background-color:rgb(243, 243, 231);
+}
 
 input[id=regex] {
     background-color: rgb(23, 19, 46);
