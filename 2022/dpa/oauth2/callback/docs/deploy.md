@@ -40,7 +40,14 @@ sfdx force:org:open  -u   mohan.chinnappan.n_os@gmail.com
 ![apex wire example](img/apex-wire-app-builder.png)
 
 
-# Create command
+# Create commands
+
+- SFDX Project
+```
+sfdx force:project:create -n MyProject
+cd MyProject
+
+```
 
 - LWC
 ```
