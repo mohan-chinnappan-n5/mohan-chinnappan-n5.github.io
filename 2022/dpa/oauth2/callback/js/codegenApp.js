@@ -59,6 +59,14 @@ const getLWCWireApex =  (object, fields, query) => {
     return converter.makeHtml(markDown);
 };
 
+const getApexREST =  (object, query) => {
+    var apex = "\n    \n// ".concat(object, "RESTController.cls\n@RestResource(urlMapping='/").concat(object, "s/*')\nglobal with sharing class ").concat(object, "RESTController {\n    @HttpGet\n    global static ").concat(object, " get").concat(object, "ById() {\n        RestRequest request = RestContext.request;\n        // grab the ").concat(object.toLowerCase(), "Id from the end of the URL\n        String ").concat(object.toLowerCase(), "Id = request.requestURI.substring(\n          request.requestURI.lastIndexOf('/')+1);\n          ").concat(object, " result =  [").concat(query, "\n            WHERE Id = :").concat(object.toLowerCase(), "Id];\n          return result;\n\n \n    }\n}\n");
+    var markDown = "\n### Apex Controller ".concat(object, "RESTController.cls\n```java\n").concat(apex, "\n```\n");
+    // convert to html
+    var converter = new showdown.Converter();
+    return converter.makeHtml(markDown);
+};
+
 
 const getLWCTCRM = (object, fields, query) => {
     var markDown = '';
@@ -107,6 +115,18 @@ getEle('apexWire').addEventListener('click', event => {
     getEle('code').innerHTML = getLWCWireApex(object, fields.split(','), query.trim()) ;
 });
 
+getEle('apexREST').addEventListener('click', event => {
+    const input =  getEle('md').value;
+    const reSOQL = new RegExp(getEle('regex').value, 'gmi'); 
+    const reResults = reSOQL.exec(input);
+    const [query, fields, object] = reResults;
+    const fieldsList =  fields.split(',');
+    const cleanedFields = fieldsList.map(field => field.trim())
+    
+    getEle('code').innerHTML = getApexREST(object, query.trim()) ;
+});
+
+
 getEle('tcrm').addEventListener('click', event => {
     const input =  getEle('md').value;
     const reSOQL = new RegExp(getEle('regex').value, 'gmi'); 
@@ -114,6 +134,11 @@ getEle('tcrm').addEventListener('click', event => {
     const [query, fields, object] = reResults;
     getEle('code').innerHTML = getLWCTCRM(object, fields.split(','), query.trim()) ;
 });
+
+
+
+
+
 
 // bootstrap
 getEle('uiAPI').click();
