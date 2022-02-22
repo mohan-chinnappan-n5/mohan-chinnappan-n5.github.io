@@ -4,9 +4,12 @@ textarea {
     background-color: black;
     color: wheat;
     font-family: Monaco;
+    border-radius: 10px;
 }
 .code {
-    background-color:rgb(243, 243, 231);
+    background-color:rgb(238, 231, 243);
+    border-radius: 10px;
+
 }
 
 input[id=regex] {
