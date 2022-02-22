@@ -40,3 +40,18 @@ sfdx force:org:open  -u   mohan.chinnappan.n_os@gmail.com
 ![apex wire example](img/apex-wire-app-builder.png)
 
 
+# Create command
+
+- LWC
+```
+# sfdx force:lightning:component:create -n UIRecordAPICodeGenTest -d force-app/main/default/lwc --type lwc
+sfdx force:lightning:component:create -n $1 -d force-app/main/default/lwc --type lwc
+```
+- Apex Class
+
+```
+# sfdx force:apex:class:create -n AccountController -d force-app/main/default/classes
+sfdx force:apex:class:create -n $1 -d force-app/main/default/classes
+```
+
+
