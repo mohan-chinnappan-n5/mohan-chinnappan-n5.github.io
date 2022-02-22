@@ -1,6 +1,9 @@
 // codegenApp.js 
 // mohan chinnappan
 
+Split(["#left", "#right"], { sizes: [40, 60] });
+
+
 const getEle = id => document.getElementById(id);
 const soql = `
 SELECT Id, Name 
@@ -44,7 +47,7 @@ const getLWCWireApex =  (object, fields, query) => {
     var fieldCode = "";
     fields.forEach(function (field) {
         markupFields += "<p>{" + field.toLowerCase() + "}</p>";
-        colmuns += "{  label: '" + field + "', fieldName: '" + field + "' },\n";
+        colmuns += "{  label: '" + field.trim() + "', fieldName: '" + field.trim() + "' },\n";
     });
     const markup = "\n\n<template>\n    <lightning-card title=\"" + object + " Datatable\" icon-name=\"standard:" + object.toLowerCase() + "\">\n        <template if:true={" + object.toLowerCase() + "s.data}>\n            <lightning-datatable\n            key-field=\"id\"\n            data={" + object.toLowerCase() + "s.data}\n            columns={columns}>\n        </lightning-datatable>\n\n        </template>\n    </lightning-card>\n</template>\n\n    ";
     const compMetadata = "\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<LightningComponentBundle xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <apiVersion>51.0</apiVersion>\n    <isExposed>true</isExposed>\n\n    <targets>\n        <target>lightning__RecordPage</target>\n        <target>lightning__AppPage</target>\n        <target>lightning__HomePage</target>\n    </targets>\n\n</LightningComponentBundle>\n   \n   ";
@@ -85,9 +88,11 @@ const getCleanedFields = fields => {
 getEle('uiAPI').addEventListener('click', event => {
     const input =  getEle('md').value;
     const reSOQL = new RegExp(getEle('regex').value, 'gmi'); 
+    
     const reResults = reSOQL.exec(input);
     const [query, fields, object] = reResults;
     console.log(reResults);
+    getEle('exec').value = JSON.stringify(reResults, null, 4);
     getEle('code').innerHTML = getLWCuiRecordApi(object, getCleanedFields(fields)) ;
 });
 
@@ -109,5 +114,8 @@ getEle('tcrm').addEventListener('click', event => {
     const [query, fields, object] = reResults;
     getEle('code').innerHTML = getLWCTCRM(object, fields.split(','), query.trim()) ;
 });
+
+// bootstrap
+getEle('apexWire').click();
 
 

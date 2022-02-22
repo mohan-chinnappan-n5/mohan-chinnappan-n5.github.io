@@ -13,7 +13,9 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="css/app.css">
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
 
+    <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css" />
 
 </head>
 
@@ -37,21 +39,24 @@
         </div>
     </nav>
 
-    <div class="stuff">
-        <label for="regex">Regex for SOQL Parsing</label>
-        <input type="text" id="regex" class="form-control" value="SELECT\s+(.*?)\s*FROM\s*(.*)">
+        <div class="split split-horizontal" id="left">
+            <label for="regex">RegEx for SOQL Parsing</label>
+            <input type="text" id="regex" class="form-control" value="SELECT\s+(.*?)\s*FROM\s*([a-zA-Z_$0-9]*)">
 
-        <label for="md">SOQL</label>
-        <textarea name="md" id="md" class="form-control" cols="80" rows="10"></textarea>
-        <button class="btn btn-info" id="md2html" style="display: none;">md2html</button>
-        <button class='btn btn-primary' id="uiAPI">uiAPI</button>
-        <button class='btn btn-success' id="apexWire">ApexWire</button>
-        <button class='btn btn-info' id="tcrm">TCRM</button>
+            <label for="md">SOQL</label>
+            <textarea name="md" id="md" class="form-control" cols="80" rows="5"></textarea>
+            <button class="btn btn-info" id="md2html" style="display: none;">md2html</button>
+            <button class='btn btn-primary' id="uiAPI">uiAPI</button>
+            <button class='btn btn-success' id="apexWire">ApexWire</button>
+            <button class='btn btn-info' id="tcrm">TCRM</button>
+            <br>
+            <label for="exec">RegEx results</label>
+            <textarea name="exec" id="exec" class="form-control" cols="80" rows="5"></textarea>
+        </div>
+        <div class="split split-horizontal" id="right">
+            <div class="code" id="code"> </div>
+        </div>
 
-
-
-        <div class="code" id="code"> </div>
-    </div>
 
     <script src="js/codegenApp.js"></script>
 
