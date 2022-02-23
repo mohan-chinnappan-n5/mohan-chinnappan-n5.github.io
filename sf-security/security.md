@@ -21,6 +21,7 @@
     - [Optimizer](#Optimizer)
     - [Real-Time Event Monitoring ](#em)
     - [Field Audit Trail](#fat)
+    - [Org Metric](#orgmetric)
 - [Resources](#resources)
 
 # Goals
@@ -1773,6 +1774,12 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 - Lets you know the state and value of your data for any date, at any time
 - Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
 - You can also set triggers for when data is deleted. 
+
+<a name="orgmetric"></a>
+# Org Metric
+
+- Org Metric ERD
+![Org metric ERD](img/orgmetric.svg)
 
 <a name="Resources></a>
 # Resources
