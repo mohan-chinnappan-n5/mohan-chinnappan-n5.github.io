@@ -8,7 +8,7 @@
 <body class="container">
   <h3>Oauth2 Connection</h3>
   <label for="clientId">ClientId:</label>
-  <input type="text" class="form-control" required name="clientId" id="clientId">
+  <input type="text" class="form-control"  value='3MVG9riCAn8HHkYWKZMrSG6ge.fBzihzKx0ueO.sNWTzVJt_LrIErHvRFu5hPiPGwqXt36ZpmgpxSZoDYZ4kQ' required name="clientId" id="clientId">
 
   <label for="callback">Callback URL</label>
   <input type="text" value="https://mohan-chinnappan-n5.github.io/2022/dpa/oauth2/callback" class="form-control" required name="callback" id="callback">
@@ -28,10 +28,14 @@
     loginBtn.addEventListener('click', event => {
       const clientId = clientIdEle.value;
       const redirectUri = callbackEle.value;
+      const proxyUrl = 'https://node-salesforce-proxy.herokuapp.com/proxy/';
+
 
       jsforce.browser.init({
         clientId,
-        redirectUri 
+        redirectUri,
+        proxyUrl
+
       });
       /* jsforce.browser.on('connect', function(conn) {
         conn.query('SELECT Id, Name FROM Account', function(err, res) {

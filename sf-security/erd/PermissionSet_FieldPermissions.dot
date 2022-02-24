@@ -1,0 +1,1045 @@
+
+        digraph "Salesforce+ ERD" {  
+            graph [  
+              rankdir="RL"  
+              bgcolor="#efeffd"  
+              label="Salesforce ERD "  
+              labeljust="r"  
+              nodesep="0.18"  
+              ranksep="0.46"        
+              fontname="Courier"  
+              fontsize="9"  
+            ];  
+            node [  
+              fontname="Courier"  
+              fontsize="11"  
+              shape="plaintext"  
+              color="#99ccff"  
+            ];  
+            edge [ arrowsize="0.8"   ];
+        
+            PermissionSet [shape=none, margin=0, label=<
+                <table border="1" cellborder="1" cellspacing="0" bgcolor="#ffeeff" >   
+                  <tr><td colspan="3" bgcolor="lightblue"><b>PermissionSet</b></td></tr>
+             <tr>
+                                        <td  bgcolor="#99ccff" port="Id" align="left">
+                                           <b>Id</b>
+                                        </td><td>id(18)</td></tr> <tr>
+                                         <td port="Name" align="left">
+                                         Name
+                                       </td><td>string(80)</td></tr> <tr>
+                                         <td port="Label" align="left">
+                                         Label
+                                       </td><td>string(80)</td></tr> <tr>
+                                         <td port="LicenseId" align="left">
+                                         LicenseId
+                                       </td><td>reference(18)</td></tr> <tr>
+                                         <td port="ProfileId" align="left">
+                                         ProfileId
+                                       </td><td>reference(18)</td></tr> <tr>
+                                         <td port="IsOwnedByProfile" align="left">
+                                         IsOwnedByProfile
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="IsCustom" align="left">
+                                         IsCustom
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEmailSingle" align="left">
+                                         PermissionsEmailSingle
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEmailMass" align="left">
+                                         PermissionsEmailMass
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditTask" align="left">
+                                         PermissionsEditTask
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditEvent" align="left">
+                                         PermissionsEditEvent
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsExportReport" align="left">
+                                         PermissionsExportReport
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsImportPersonal" align="left">
+                                         PermissionsImportPersonal
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsDataExport" align="left">
+                                         PermissionsDataExport
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageUsers" align="left">
+                                         PermissionsManageUsers
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditPublicFilters" align="left">
+                                         PermissionsEditPublicFilters
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditPublicTemplates" align="left">
+                                         PermissionsEditPublicTemplates
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsModifyAllData" align="left">
+                                         PermissionsModifyAllData
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageCases" align="left">
+                                         PermissionsManageCases
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsMassInlineEdit" align="left">
+                                         PermissionsMassInlineEdit
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditKnowledge" align="left">
+                                         PermissionsEditKnowledge
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageKnowledge" align="left">
+                                         PermissionsManageKnowledge
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageSolutions" align="left">
+                                         PermissionsManageSolutions
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCustomizeApplication" align="left">
+                                         PermissionsCustomizeApplication
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditReadonlyFields" align="left">
+                                         PermissionsEditReadonlyFields
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsRunReports" align="left">
+                                         PermissionsRunReports
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewSetup" align="left">
+                                         PermissionsViewSetup
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsTransferAnyEntity" align="left">
+                                         PermissionsTransferAnyEntity
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsNewReportBuilder" align="left">
+                                         PermissionsNewReportBuilder
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageCssUsers" align="left">
+                                         PermissionsManageCssUsers
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsActivateContract" align="left">
+                                         PermissionsActivateContract
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsActivateOrder" align="left">
+                                         PermissionsActivateOrder
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsImportLeads" align="left">
+                                         PermissionsImportLeads
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageLeads" align="left">
+                                         PermissionsManageLeads
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsTransferAnyLead" align="left">
+                                         PermissionsTransferAnyLead
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewAllData" align="left">
+                                         PermissionsViewAllData
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditPublicDocuments" align="left">
+                                         PermissionsEditPublicDocuments
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewEncryptedData" align="left">
+                                         PermissionsViewEncryptedData
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditBrandTemplates" align="left">
+                                         PermissionsEditBrandTemplates
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditHtmlTemplates" align="left">
+                                         PermissionsEditHtmlTemplates
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsChatterInternalUser" align="left">
+                                         PermissionsChatterInternalUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageEncryptionKeys" align="left">
+                                         PermissionsManageEncryptionKeys
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsDeleteActivatedContract" align="left">
+                                         PermissionsDeleteActivatedContract
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsChatterInviteExternalUsers" align="left">
+                                         PermissionsChatterInviteExternalUsers
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSendSitRequests" align="left">
+                                         PermissionsSendSitRequests
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageRemoteAccess" align="left">
+                                         PermissionsManageRemoteAccess
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCanUseNewDashboardBuilder" align="left">
+                                         PermissionsCanUseNewDashboardBuilder
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageCategories" align="left">
+                                         PermissionsManageCategories
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsConvertLeads" align="left">
+                                         PermissionsConvertLeads
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsPasswordNeverExpires" align="left">
+                                         PermissionsPasswordNeverExpires
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsUseTeamReassignWizards" align="left">
+                                         PermissionsUseTeamReassignWizards
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditActivatedOrders" align="left">
+                                         PermissionsEditActivatedOrders
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsInstallPackaging" align="left">
+                                         PermissionsInstallPackaging
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsPublishPackaging" align="left">
+                                         PermissionsPublishPackaging
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManagePartners" align="left">
+                                         PermissionsManagePartners
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsChatterOwnGroups" align="left">
+                                         PermissionsChatterOwnGroups
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditOppLineItemUnitPrice" align="left">
+                                         PermissionsEditOppLineItemUnitPrice
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreatePackaging" align="left">
+                                         PermissionsCreatePackaging
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsBulkApiHardDelete" align="left">
+                                         PermissionsBulkApiHardDelete
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSolutionImport" align="left">
+                                         PermissionsSolutionImport
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageCallCenters" align="left">
+                                         PermissionsManageCallCenters
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsPortalSuperUser" align="left">
+                                         PermissionsPortalSuperUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageSynonyms" align="left">
+                                         PermissionsManageSynonyms
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsDelegatedPortalUserAdmin" align="left">
+                                         PermissionsDelegatedPortalUserAdmin
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewContent" align="left">
+                                         PermissionsViewContent
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageEmailClientConfig" align="left">
+                                         PermissionsManageEmailClientConfig
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEnableNotifications" align="left">
+                                         PermissionsEnableNotifications
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageDataIntegrations" align="left">
+                                         PermissionsManageDataIntegrations
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsDistributeFromPersWksp" align="left">
+                                         PermissionsDistributeFromPersWksp
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewDataCategories" align="left">
+                                         PermissionsViewDataCategories
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageDataCategories" align="left">
+                                         PermissionsManageDataCategories
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAuthorApex" align="left">
+                                         PermissionsAuthorApex
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageMobile" align="left">
+                                         PermissionsManageMobile
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsApiEnabled" align="left">
+                                         PermissionsApiEnabled
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageCustomReportTypes" align="left">
+                                         PermissionsManageCustomReportTypes
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditCaseComments" align="left">
+                                         PermissionsEditCaseComments
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsTransferAnyCase" align="left">
+                                         PermissionsTransferAnyCase
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsContentAdministrator" align="left">
+                                         PermissionsContentAdministrator
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateWorkspaces" align="left">
+                                         PermissionsCreateWorkspaces
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageContentPermissions" align="left">
+                                         PermissionsManageContentPermissions
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageContentProperties" align="left">
+                                         PermissionsManageContentProperties
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageContentTypes" align="left">
+                                         PermissionsManageContentTypes
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageExchangeConfig" align="left">
+                                         PermissionsManageExchangeConfig
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageAnalyticSnapshots" align="left">
+                                         PermissionsManageAnalyticSnapshots
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsScheduleReports" align="left">
+                                         PermissionsScheduleReports
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageBusinessHourHolidays" align="left">
+                                         PermissionsManageBusinessHourHolidays
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageDynamicDashboards" align="left">
+                                         PermissionsManageDynamicDashboards
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCustomSidebarOnAllPages" align="left">
+                                         PermissionsCustomSidebarOnAllPages
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageInteraction" align="left">
+                                         PermissionsManageInteraction
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewMyTeamsDashboards" align="left">
+                                         PermissionsViewMyTeamsDashboards
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsModerateChatter" align="left">
+                                         PermissionsModerateChatter
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsResetPasswords" align="left">
+                                         PermissionsResetPasswords
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsFlowUFLRequired" align="left">
+                                         PermissionsFlowUFLRequired
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCanInsertFeedSystemFields" align="left">
+                                         PermissionsCanInsertFeedSystemFields
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsActivitiesAccess" align="left">
+                                         PermissionsActivitiesAccess
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageKnowledgeImportExport" align="left">
+                                         PermissionsManageKnowledgeImportExport
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEmailTemplateManagement" align="left">
+                                         PermissionsEmailTemplateManagement
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEmailAdministration" align="left">
+                                         PermissionsEmailAdministration
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageChatterMessages" align="left">
+                                         PermissionsManageChatterMessages
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAllowEmailIC" align="left">
+                                         PermissionsAllowEmailIC
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsChatterFileLink" align="left">
+                                         PermissionsChatterFileLink
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsForceTwoFactor" align="left">
+                                         PermissionsForceTwoFactor
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewEventLogFiles" align="left">
+                                         PermissionsViewEventLogFiles
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageNetworks" align="left">
+                                         PermissionsManageNetworks
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageAuthProviders" align="left">
+                                         PermissionsManageAuthProviders
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsRunFlow" align="left">
+                                         PermissionsRunFlow
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewGlobalHeader" align="left">
+                                         PermissionsViewGlobalHeader
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateCustomizeDashboards" align="left">
+                                         PermissionsCreateCustomizeDashboards
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateDashboardFolders" align="left">
+                                         PermissionsCreateDashboardFolders
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewPublicDashboards" align="left">
+                                         PermissionsViewPublicDashboards
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageDashbdsInPubFolders" align="left">
+                                         PermissionsManageDashbdsInPubFolders
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateCustomizeReports" align="left">
+                                         PermissionsCreateCustomizeReports
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateReportFolders" align="left">
+                                         PermissionsCreateReportFolders
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewPublicReports" align="left">
+                                         PermissionsViewPublicReports
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageReportsInPubFolders" align="left">
+                                         PermissionsManageReportsInPubFolders
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditMyDashboards" align="left">
+                                         PermissionsEditMyDashboards
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditMyReports" align="left">
+                                         PermissionsEditMyReports
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewAllUsers" align="left">
+                                         PermissionsViewAllUsers
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAllowUniversalSearch" align="left">
+                                         PermissionsAllowUniversalSearch
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsConnectOrgToEnvironmentHub" align="left">
+                                         PermissionsConnectOrgToEnvironmentHub
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsWorkCalibrationUser" align="left">
+                                         PermissionsWorkCalibrationUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateCustomizeFilters" align="left">
+                                         PermissionsCreateCustomizeFilters
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsWorkDotComUserPerm" align="left">
+                                         PermissionsWorkDotComUserPerm
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsContentHubUser" align="left">
+                                         PermissionsContentHubUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsModerateNetworkFeeds" align="left">
+                                         PermissionsModerateNetworkFeeds
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsModerateNetworkFiles" align="left">
+                                         PermissionsModerateNetworkFiles
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsGovernNetworks" align="left">
+                                         PermissionsGovernNetworks
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSalesConsole" align="left">
+                                         PermissionsSalesConsole
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsTwoFactorApi" align="left">
+                                         PermissionsTwoFactorApi
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsDeleteTopics" align="left">
+                                         PermissionsDeleteTopics
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEditTopics" align="left">
+                                         PermissionsEditTopics
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateTopics" align="left">
+                                         PermissionsCreateTopics
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAssignTopics" align="left">
+                                         PermissionsAssignTopics
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsIdentityEnabled" align="left">
+                                         PermissionsIdentityEnabled
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsIdentityConnect" align="left">
+                                         PermissionsIdentityConnect
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAllowViewKnowledge" align="left">
+                                         PermissionsAllowViewKnowledge
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsContentWorkspaces" align="left">
+                                         PermissionsContentWorkspaces
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageSearchPromotionRules" align="left">
+                                         PermissionsManageSearchPromotionRules
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCustomMobileAppsAccess" align="left">
+                                         PermissionsCustomMobileAppsAccess
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewHelpLink" align="left">
+                                         PermissionsViewHelpLink
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageProfilesPermissionsets" align="left">
+                                         PermissionsManageProfilesPermissionsets
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAssignPermissionSets" align="left">
+                                         PermissionsAssignPermissionSets
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageRoles" align="left">
+                                         PermissionsManageRoles
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageIpAddresses" align="left">
+                                         PermissionsManageIpAddresses
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageSharing" align="left">
+                                         PermissionsManageSharing
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageInternalUsers" align="left">
+                                         PermissionsManageInternalUsers
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManagePasswordPolicies" align="left">
+                                         PermissionsManagePasswordPolicies
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageLoginAccessPolicies" align="left">
+                                         PermissionsManageLoginAccessPolicies
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewPlatformEvents" align="left">
+                                         PermissionsViewPlatformEvents
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageCustomPermissions" align="left">
+                                         PermissionsManageCustomPermissions
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCanVerifyComment" align="left">
+                                         PermissionsCanVerifyComment
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageUnlistedGroups" align="left">
+                                         PermissionsManageUnlistedGroups
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsInsightsAppDashboardEditor" align="left">
+                                         PermissionsInsightsAppDashboardEditor
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageTwoFactor" align="left">
+                                         PermissionsManageTwoFactor
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsInsightsAppUser" align="left">
+                                         PermissionsInsightsAppUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsInsightsAppAdmin" align="left">
+                                         PermissionsInsightsAppAdmin
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsInsightsAppEltEditor" align="left">
+                                         PermissionsInsightsAppEltEditor
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsInsightsAppUploadUser" align="left">
+                                         PermissionsInsightsAppUploadUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsInsightsCreateApplication" align="left">
+                                         PermissionsInsightsCreateApplication
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsLightningExperienceUser" align="left">
+                                         PermissionsLightningExperienceUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewDataLeakageEvents" align="left">
+                                         PermissionsViewDataLeakageEvents
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsConfigCustomRecs" align="left">
+                                         PermissionsConfigCustomRecs
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSubmitMacrosAllowed" align="left">
+                                         PermissionsSubmitMacrosAllowed
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsBulkMacrosAllowed" align="left">
+                                         PermissionsBulkMacrosAllowed
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsShareInternalArticles" align="left">
+                                         PermissionsShareInternalArticles
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsModerateNetworkMessages" align="left">
+                                         PermissionsModerateNetworkMessages
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageSessionPermissionSets" align="left">
+                                         PermissionsManageSessionPermissionSets
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageTemplatedApp" align="left">
+                                         PermissionsManageTemplatedApp
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsUseTemplatedApp" align="left">
+                                         PermissionsUseTemplatedApp
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSendAnnouncementEmails" align="left">
+                                         PermissionsSendAnnouncementEmails
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsChatterEditOwnPost" align="left">
+                                         PermissionsChatterEditOwnPost
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsChatterEditOwnRecordPost" align="left">
+                                         PermissionsChatterEditOwnRecordPost
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAdminAnalyticsUser" align="left">
+                                         PermissionsAdminAnalyticsUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateAuditFields" align="left">
+                                         PermissionsCreateAuditFields
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsUpdateWithInactiveOwner" align="left">
+                                         PermissionsUpdateWithInactiveOwner
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAssignUserToSkill" align="left">
+                                         PermissionsAssignUserToSkill
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsWaveTabularDownload" align="left">
+                                         PermissionsWaveTabularDownload
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsImportCustomObjects" align="left">
+                                         PermissionsImportCustomObjects
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsDelegatedTwoFactor" align="left">
+                                         PermissionsDelegatedTwoFactor
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsChatterComposeUiCodesnippet" align="left">
+                                         PermissionsChatterComposeUiCodesnippet
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSelectFilesFromSalesforce" align="left">
+                                         PermissionsSelectFilesFromSalesforce
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsModerateNetworkUsers" align="left">
+                                         PermissionsModerateNetworkUsers
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsMergeTopics" align="left">
+                                         PermissionsMergeTopics
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSubscribeToLightningReports" align="left">
+                                         PermissionsSubscribeToLightningReports
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManagePvtRptsAndDashbds" align="left">
+                                         PermissionsManagePvtRptsAndDashbds
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAllowLightningLogin" align="left">
+                                         PermissionsAllowLightningLogin
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCampaignInfluence2" align="left">
+                                         PermissionsCampaignInfluence2
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewDataAssessment" align="left">
+                                         PermissionsViewDataAssessment
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsRemoveDirectMessageMembers" align="left">
+                                         PermissionsRemoveDirectMessageMembers
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCanApproveFeedPost" align="left">
+                                         PermissionsCanApproveFeedPost
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAddDirectMessageMembers" align="left">
+                                         PermissionsAddDirectMessageMembers
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAllowViewEditConvertedLeads" align="left">
+                                         PermissionsAllowViewEditConvertedLeads
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsShowCompanyNameAsUserBadge" align="left">
+                                         PermissionsShowCompanyNameAsUserBadge
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAccessCMC" align="left">
+                                         PermissionsAccessCMC
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewHealthCheck" align="left">
+                                         PermissionsViewHealthCheck
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageHealthCheck" align="left">
+                                         PermissionsManageHealthCheck
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsPackaging2" align="left">
+                                         PermissionsPackaging2
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageCertificates" align="left">
+                                         PermissionsManageCertificates
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateReportInLightning" align="left">
+                                         PermissionsCreateReportInLightning
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsPreventClassicExperience" align="left">
+                                         PermissionsPreventClassicExperience
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsHideReadByList" align="left">
+                                         PermissionsHideReadByList
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsUseSmartDataDiscovery" align="left">
+                                         PermissionsUseSmartDataDiscovery
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsGetSmartDataDiscovery" align="left">
+                                         PermissionsGetSmartDataDiscovery
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateUpdateSDDDataset" align="left">
+                                         PermissionsCreateUpdateSDDDataset
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateUpdateSDDStory" align="left">
+                                         PermissionsCreateUpdateSDDStory
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageSmartDataDiscovery" align="left">
+                                         PermissionsManageSmartDataDiscovery
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsShareSmartDataDiscoveryStory" align="left">
+                                         PermissionsShareSmartDataDiscoveryStory
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageSmartDataDiscoveryModel" align="left">
+                                         PermissionsManageSmartDataDiscoveryModel
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsListEmailSend" align="left">
+                                         PermissionsListEmailSend
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsFeedPinning" align="left">
+                                         PermissionsFeedPinning
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsChangeDashboardColors" align="left">
+                                         PermissionsChangeDashboardColors
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageRecommendationStrategies" align="left">
+                                         PermissionsManageRecommendationStrategies
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManagePropositions" align="left">
+                                         PermissionsManagePropositions
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCloseConversations" align="left">
+                                         PermissionsCloseConversations
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSubscribeReportRolesGrps" align="left">
+                                         PermissionsSubscribeReportRolesGrps
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSubscribeDashboardRolesGrps" align="left">
+                                         PermissionsSubscribeDashboardRolesGrps
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsUseWebLink" align="left">
+                                         PermissionsUseWebLink
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsHasUnlimitedNBAExecutions" align="left">
+                                         PermissionsHasUnlimitedNBAExecutions
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewOnlyEmbeddedAppUser" align="left">
+                                         PermissionsViewOnlyEmbeddedAppUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewAllActivities" align="left">
+                                         PermissionsViewAllActivities
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSubscribeReportToOtherUsers" align="left">
+                                         PermissionsSubscribeReportToOtherUsers
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsLightningConsoleAllowedForUser" align="left">
+                                         PermissionsLightningConsoleAllowedForUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSubscribeReportsRunAsUser" align="left">
+                                         PermissionsSubscribeReportsRunAsUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSubscribeToLightningDashboards" align="left">
+                                         PermissionsSubscribeToLightningDashboards
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSubscribeDashboardToOtherUsers" align="left">
+                                         PermissionsSubscribeDashboardToOtherUsers
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateLtngTempInPub" align="left">
+                                         PermissionsCreateLtngTempInPub
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsTransactionalEmailSend" align="left">
+                                         PermissionsTransactionalEmailSend
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewPrivateStaticResources" align="left">
+                                         PermissionsViewPrivateStaticResources
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewCustomerSentiment" align="left">
+                                         PermissionsViewCustomerSentiment
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCreateLtngTempFolder" align="left">
+                                         PermissionsCreateLtngTempFolder
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsApexRestServices" align="left">
+                                         PermissionsApexRestServices
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsEnableCommunityAppLauncher" align="left">
+                                         PermissionsEnableCommunityAppLauncher
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsGiveRecognitionBadge" align="left">
+                                         PermissionsGiveRecognitionBadge
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCanRunAnalysis" align="left">
+                                         PermissionsCanRunAnalysis
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsLtngPromoReserved01UserPerm" align="left">
+                                         PermissionsLtngPromoReserved01UserPerm
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageSubscriptions" align="left">
+                                         PermissionsManageSubscriptions
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsWaveManagePrivateAssetsUser" align="left">
+                                         PermissionsWaveManagePrivateAssetsUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCanEditDataPrepRecipe" align="left">
+                                         PermissionsCanEditDataPrepRecipe
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAddAnalyticsRemoteConnections" align="left">
+                                         PermissionsAddAnalyticsRemoteConnections
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageSurveys" align="left">
+                                         PermissionsManageSurveys
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsPackaging2PromoteVersion" align="left">
+                                         PermissionsPackaging2PromoteVersion
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsRecordVisibilityAPI" align="left">
+                                         PermissionsRecordVisibilityAPI
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewRoles" align="left">
+                                         PermissionsViewRoles
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSmartDataDiscoveryForCommunity" align="left">
+                                         PermissionsSmartDataDiscoveryForCommunity
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCanManageMaps" align="left">
+                                         PermissionsCanManageMaps
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsStoryOnDSWithPredicate" align="left">
+                                         PermissionsStoryOnDSWithPredicate
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsLMOutboundMessagingUserPerm" align="left">
+                                         PermissionsLMOutboundMessagingUserPerm
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsModifyDataClassification" align="left">
+                                         PermissionsModifyDataClassification
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsPrivacyDataAccess" align="left">
+                                         PermissionsPrivacyDataAccess
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsQueryAllFiles" align="left">
+                                         PermissionsQueryAllFiles
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsModifyMetadata" align="left">
+                                         PermissionsModifyMetadata
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageCMS" align="left">
+                                         PermissionsManageCMS
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSandboxTestingInCommunityApp" align="left">
+                                         PermissionsSandboxTestingInCommunityApp
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsCanEditPrompts" align="left">
+                                         PermissionsCanEditPrompts
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewUserPII" align="left">
+                                         PermissionsViewUserPII
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageHubConnections" align="left">
+                                         PermissionsManageHubConnections
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsB2BMarketingAnalyticsUser" align="left">
+                                         PermissionsB2BMarketingAnalyticsUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsTraceXdsQueries" align="left">
+                                         PermissionsTraceXdsQueries
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewSecurityCommandCenter" align="left">
+                                         PermissionsViewSecurityCommandCenter
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageSecurityCommandCenter" align="left">
+                                         PermissionsManageSecurityCommandCenter
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewAllCustomSettings" align="left">
+                                         PermissionsViewAllCustomSettings
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewAllForeignKeyNames" align="left">
+                                         PermissionsViewAllForeignKeyNames
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAddWaveNotificationRecipients" align="left">
+                                         PermissionsAddWaveNotificationRecipients
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsHeadlessCMSAccess" align="left">
+                                         PermissionsHeadlessCMSAccess
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsLMEndMessagingSessionUserPerm" align="left">
+                                         PermissionsLMEndMessagingSessionUserPerm
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsConsentApiUpdate" align="left">
+                                         PermissionsConsentApiUpdate
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsPaymentsAPIUser" align="left">
+                                         PermissionsPaymentsAPIUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAccessContentBuilder" align="left">
+                                         PermissionsAccessContentBuilder
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAccountSwitcherUser" align="left">
+                                         PermissionsAccountSwitcherUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewAnomalyEvents" align="left">
+                                         PermissionsViewAnomalyEvents
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageC360AConnections" align="left">
+                                         PermissionsManageC360AConnections
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageReleaseUpdates" align="left">
+                                         PermissionsManageReleaseUpdates
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewAllProfiles" align="left">
+                                         PermissionsViewAllProfiles
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSkipIdentityConfirmation" align="left">
+                                         PermissionsSkipIdentityConfirmation
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsLearningManager" align="left">
+                                         PermissionsLearningManager
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsSendCustomNotifications" align="left">
+                                         PermissionsSendCustomNotifications
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsPackaging2Delete" align="left">
+                                         PermissionsPackaging2Delete
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAutonomousAnalyticsPrivacy" align="left">
+                                         PermissionsAutonomousAnalyticsPrivacy
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsUseOmnichannelInventoryAPIs" align="left">
+                                         PermissionsUseOmnichannelInventoryAPIs
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewRestrictionAndScopingRules" align="left">
+                                         PermissionsViewRestrictionAndScopingRules
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsFSCComprehensiveUserAccess" align="left">
+                                         PermissionsFSCComprehensiveUserAccess
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsBotManageBots" align="left">
+                                         PermissionsBotManageBots
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsBotManageBotsTrainingData" align="left">
+                                         PermissionsBotManageBotsTrainingData
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsOmnichannelInventorySync" align="left">
+                                         PermissionsOmnichannelInventorySync
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageLearningReporting" align="left">
+                                         PermissionsManageLearningReporting
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsIsotopeCToCUser" align="left">
+                                         PermissionsIsotopeCToCUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsIsotopeAccess" align="left">
+                                         PermissionsIsotopeAccess
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsIsotopeLEX" align="left">
+                                         PermissionsIsotopeLEX
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsGetSmartDataDiscoveryExternal" align="left">
+                                         PermissionsGetSmartDataDiscoveryExternal
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsQuipMetricsAccess" align="left">
+                                         PermissionsQuipMetricsAccess
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsQuipUserEngagementMetrics" align="left">
+                                         PermissionsQuipUserEngagementMetrics
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsManageExternalConnections" align="left">
+                                         PermissionsManageExternalConnections
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsUseSubscriptionEmails" align="left">
+                                         PermissionsUseSubscriptionEmails
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAIViewInsightObjects" align="left">
+                                         PermissionsAIViewInsightObjects
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsAICreateInsightObjects" align="left">
+                                         PermissionsAICreateInsightObjects
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewMLModels" align="left">
+                                         PermissionsViewMLModels
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsLifecycleManagementAPIUser" align="left">
+                                         PermissionsLifecycleManagementAPIUser
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsNativeWebviewScrolling" align="left">
+                                         PermissionsNativeWebviewScrolling
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsViewDeveloperName" align="left">
+                                         PermissionsViewDeveloperName
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="Description" align="left">
+                                         Description
+                                       </td><td>string(255)</td></tr> <tr>
+                                         <td port="LastModifiedById" align="left">
+                                         LastModifiedById
+                                       </td><td>reference(18)</td></tr> <tr>
+                                         <td port="NamespacePrefix" align="left">
+                                         NamespacePrefix
+                                       </td><td>string(15)</td></tr> <tr>
+                                         <td port="HasActivationRequired" align="left">
+                                         HasActivationRequired
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionSetGroupId" align="left">
+                                         PermissionSetGroupId
+                                       </td><td>reference(18)</td></tr> <tr>
+                                         <td port="Type" align="left">
+                                         Type
+                                       </td><td>picklist(255)</td></tr>            
+                </table>
+                >
+                  URL="#"
+                  tooltip=" PermissionSet "
+                ];
+            
+                            "PermissionSet" : "LicenseId": w -> 
+                                  "PermissionSetLicense" : "Id" 
+                                           : e 
+                                          [arrowhead=none 
+                                           dir=back 
+                                           arrowtail=crowodot 
+                                           color="#ff99cc"
+                                           label="License"
+                                           fontname="Monaco"
+                                           fontsize="9"
+                                          ];
+                      
+                            "PermissionSet" : "LicenseId": w -> 
+                                  "UserLicense" : "Id" 
+                                           : e 
+                                          [arrowhead=none 
+                                           dir=back 
+                                           arrowtail=crowodot 
+                                           color="#ff99cc"
+                                           label="License"
+                                           fontname="Monaco"
+                                           fontsize="9"
+                                          ];
+                      
+                            "PermissionSet" : "ProfileId": w -> 
+                                  "Profile" : "Id" 
+                                           : e 
+                                          [arrowhead=none 
+                                           dir=back 
+                                           arrowtail=crowodot 
+                                           color="#ff99cc"
+                                           label="Profile"
+                                           fontname="Monaco"
+                                           fontsize="9"
+                                          ];
+                      
+                            "PermissionSet" : "LastModifiedById": w -> 
+                                  "User" : "Id" 
+                                           : e 
+                                          [arrowhead=none 
+                                           dir=back 
+                                           arrowtail=crowodot 
+                                           color="#ff99cc"
+                                           label="LastModifiedBy"
+                                           fontname="Monaco"
+                                           fontsize="9"
+                                          ];
+                      
+                            "PermissionSet" : "PermissionSetGroupId": w -> 
+                                  "PermissionSetGroup" : "Id" 
+                                           : e 
+                                          [arrowhead=none 
+                                           dir=back 
+                                           arrowtail=crowodot 
+                                           color="#ff99cc"
+                                           label="PermissionSetGroup"
+                                           fontname="Monaco"
+                                           fontsize="9"
+                                          ];
+                      
+            FieldPermissions [shape=none, margin=0, label=<
+                <table border="1" cellborder="1" cellspacing="0" bgcolor="#ffeeff" >   
+                  <tr><td colspan="3" bgcolor="lightblue"><b>FieldPermissions</b></td></tr>
+             <tr>
+                                        <td  bgcolor="#99ccff" port="Id" align="left">
+                                           <b>Id</b>
+                                        </td><td>id(18)</td></tr> <tr>
+                                         <td port="ParentId" align="left">
+                                         ParentId
+                                       </td><td>reference(18)</td></tr> <tr>
+                                         <td port="SobjectType" align="left">
+                                         SobjectType
+                                       </td><td>picklist(40)</td></tr> <tr>
+                                         <td port="Field" align="left">
+                                         Field
+                                       </td><td>picklist(40)</td></tr> <tr>
+                                         <td port="PermissionsEdit" align="left">
+                                         PermissionsEdit
+                                       </td><td>boolean</td></tr> <tr>
+                                         <td port="PermissionsRead" align="left">
+                                         PermissionsRead
+                                       </td><td>boolean</td></tr>            
+                </table>
+                >
+                  URL="#"
+                  tooltip=" FieldPermissions "
+                ];
+            
+                            "FieldPermissions" : "ParentId": w -> 
+                                  "PermissionSet" : "Id" 
+                                           : e 
+                                          [arrowhead=none 
+                                           dir=back 
+                                           arrowtail=crowodot 
+                                           color="#ff99cc"
+                                           label="Parent"
+                                           fontname="Monaco"
+                                           fontsize="9"
+                                          ];
+                      }
