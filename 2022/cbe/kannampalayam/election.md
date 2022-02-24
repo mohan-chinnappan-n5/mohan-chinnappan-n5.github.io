@@ -1,6 +1,8 @@
 # Coimbatore Kannampalayam
 
+
 ![Poster](img/pushphi-ele.jpeg)
+![Poster2](img/pushpi-2.png)
 
 # Election Results
 - [Results](./results.html)
