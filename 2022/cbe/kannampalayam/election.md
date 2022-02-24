@@ -9,7 +9,7 @@
 # Meeting CM of Tamil Nadu
 
 - Video
-![Pushpi with CM video](img/pushpi-with-CM.mp4.gif)
+![Pushpi with CM video](img/pushpi-with-CM.mp4.webm.gif)
 
 # Meeting CM of Tamil Nadu photo
 ![Pushpi with CM](img/pushpi.png)
