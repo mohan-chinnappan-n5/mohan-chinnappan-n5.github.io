@@ -4,7 +4,7 @@
 
 # Election Results
 - [Results](./results.html)
-- [Searchable Results](img/TN-PanchayatElectionResults.csv)
+- [Searchable Results](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/2022/cbe/kannampalayam/img/TN-PanchayatElectionResults.csv)
 
 # Meeting CM of Tamil Nadu
 
