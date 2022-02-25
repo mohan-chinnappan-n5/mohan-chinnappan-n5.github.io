@@ -27,6 +27,7 @@
 - **Tools**
     - [Health Check](#Health_Check)
     - [User Audit](#User_Audit)
+    - [Org Viz](#org_viz)
     - [Apex sharing check](#Apex_sharing_check)
     - [Check Profile Permissions](#Check_Profile_Permissions)
     - [Check PermissionSet Permissions](#Check_PermissionSet_Permissions)
@@ -466,12 +467,128 @@ WHERE Profile.Name = 'System Administrator'
     - [5 Security Habits That Will Help Your Admin Career](https://admin.salesforce.com/blog/2021/5-security-habits-that-will-help-your-admin-career)
     - [Admin Best Practices: Security ](https://trailhead.salesforce.com/live/videos/a2r3k000001WFIi/admin-best-practices-security/)
 
+
+<a name="org_viz"></a>
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Org visualization tool'>
+<div id='s10-md' class='md' data-trim='false'>
+  ```
+Visualize the Org
+
+USAGE
+  $ sfdx mohanc:org:viz
+
+OPTIONS
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target 
+                                                  org
+
+  --apiversion=apiversion                         override the api version used for api requests made by this 
+                                                  command
+
+  --json                                          format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+
+EXAMPLE
+
+              Visualize the org
+              sfdx mohanc:org:viz
+
+      
+
+```
+
+## Example Usage
+```
+sfdx mohanc:org:viz -u  mohan.chinnappan.n_ea2@gmail.com 
+
+=== Working on getOrgData
+=== Working on getOrgLimits
+=== Working on getCount:ApexClass
+=== Working on getCount:ApexPage
+=== Working on getCount:ConnectedApplication
+=== Working on getCount:CustomPermission
+=== Working on getCount:ExternalDataSource
+=== Working on getCount:FieldPermissions
+=== Working on getCount:FieldSecurityClassification
+=== Working on getCount:Group
+=== Working on getCount:GroupMember
+=== Working on getCount:NamedCredential
+=== Working on getCount:ObjectPermissions
+=== Working on getCount:PackageLicense
+=== Working on getCount:PermissionSet
+=== Working on getCount:PermissionSetAssignment
+=== Working on getCount:PermissionSetGroup
+=== Working on getCount:PermissionSetLicense
+=== Working on getCount:Profile
+=== Working on getCount:QueueSobject
+=== Working on getCount:SetupAssistantStep
+=== Working on getCount:SetupEntityAccess
+=== Working on getCount:User
+=== Working on getCount:UserLicense
+=== Working on getCount:UserPackageLicense
+=== Working on getCount:UserRole
+=== Working on getCount:Account
+=== Working on getCount:AccountContactRole
+=== Working on getCount:Asset
+=== Working on getCount:Campaign
+=== Working on getCount:CampaignMember
+=== Working on getCount:Case
+=== Working on getCount:CaseStatus
+=== Working on getCount:Contact
+=== Working on getCount:Contract
+=== Working on getCount:ContractContactRole
+=== Working on getCount:Lead
+=== Working on getCount:Opportunity
+=== Working on getCount:OpportunityCompetitor
+=== Working on getCount:OpportunityContactRole
+=== Working on getCount:OpportunityStage
+=== Working on getCount:Order
+=== Working on getCount:Partner
+=== Working on getCount:PartnerRole
+=== Working on getCount:Account
+=== Working on getCount:Case
+=== Working on getCount:CaseComment
+=== Working on getCount:CaseHistory
+=== Working on getCount:CaseSolution
+=== Working on getCount:Contact
+=== Working on getCount:Solution
+=== Working on getPackageInfo
+=== Working on EntityDefinitionSummary:Account
+=== Working on EntityDefinitionSummary:Contact
+=== Working on EntityDefinitionSummary:AccountContactRole
+=== Working on EntityDefinitionSummary:Opportunity
+=== Working on EntityDefinitionSummary:OpportunityContactRole
+=== Working on EntityDefinitionSummary:OpportunityCompetitor
+=== Working on EntityDefinitionSummary:Lead
+=== Working on EntityDefinitionSummary:Case
+=== Working on EntityDefinitionSummary:Campaign
+=== Working on EntityDefinitionSummary:CampaignMember
+=== Working on EntityDefinitionSummary:Asset
+=== Working on EntityDefinitionSummary:Contract
+=== Working on EntityDefinitionSummary:ContractContactRole
+=== Working on EntityDefinitionSummary:Order
+=== Working on getApexCodeCoverage
+=== Working on getBusinessProcess
+=== Working on getCertificate
+=== Working on CspTrustedSite
+=== Writing Org JSON in file Org.json ...
+=== Writing visualization in file Org.svg ...
+Visualization done. "open  Org.svg" in Chrome Browser to view the Visualization.
+
+```
+
+![Sample Viz](img/Org.svg)
+
+
 <a name="Apex_sharing_check"></a>
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Apex sharing check'>
-<div id='s10-md' class='md' data-trim='false'>
+<div id='s11-md' class='md' data-trim='false'>
   
 ![ApexClass ERD](img/ApexClass-erd.svg)
 
@@ -549,7 +666,7 @@ sfdx mohanc:security:apex -u  mohan.chinnappan.n_ea2@gmail.com
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Check Profile Permissions'>
-<div id='s11-md' class='md' data-trim='false'>
+<div id='s12-md' class='md' data-trim='false'>
   ![Permission ERD](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/img/Profile.svg)
 
 
@@ -1077,7 +1194,7 @@ sfdx mohanc:security:profile -u  mohan.chinnappan.n_ea2@gmail.com -p 'System Adm
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Check PermissionSet Permissions'>
-<div id='s12-md' class='md' data-trim='false'>
+<div id='s13-md' class='md' data-trim='false'>
   
 ![PermissionSetERD](https://mohan-chinnappan-n.github.io/sfdc/fs-cloud/img/PermissionSet.svg)
 
@@ -1334,7 +1451,7 @@ sfdx mohanc:security:permissionSet -p 'Sales_Ops' -u  mohan.chinnappan.n_ea2@gma
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Guest Profile permissions'>
-<div id='s13-md' class='md' data-trim='false'>
+<div id='s14-md' class='md' data-trim='false'>
   
 - Check Guest Profile permissions using CLI
 
@@ -1398,7 +1515,7 @@ sfdx mohanc:security:userLicenseProfile -u  mohan.chinnappan.n_ea2@gmail.com -l 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Role Hierarchy'>
-<div id='s14-md' class='md' data-trim='false'>
+<div id='s15-md' class='md' data-trim='false'>
   
 - Using CLI to view Role Hierarchy
 
@@ -1419,7 +1536,7 @@ Visualization done. "open  __RH__.svg" in Chrome Browser to view the Visualizati
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Org wide settings'>
-<div id='s15-md' class='md' data-trim='false'>
+<div id='s16-md' class='md' data-trim='false'>
   ![Org](img/Organization-erd.svg)
 
 ```
@@ -1448,7 +1565,7 @@ FROM EntityDefinition  LIMIT 2000
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Experience Cloud'>
-<div id='s16-md' class='md' data-trim='false'>
+<div id='s17-md' class='md' data-trim='false'>
   
 - Network represents an Experience Cloud site. Salesforce Experience Cloud lets you create branded spaces for your employees, customers, and partners.
 -  You can customize and create experiences, whether they’re 
@@ -1660,7 +1777,7 @@ Access Level: Read Only
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Sharing Debugger'>
-<div id='s17-md' class='md' data-trim='false'>
+<div id='s18-md' class='md' data-trim='false'>
   - [Documentation](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/sharing.md)
 
 - Chrome Extension
@@ -1851,7 +1968,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Optimizer '>
-<div id='s18-md' class='md' data-trim='false'>
+<div id='s19-md' class='md' data-trim='false'>
   ![Optimizer ](img/optimizer-report-1.png)
 
 <a name="em"></a>
@@ -1859,7 +1976,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Real-Time Event Monitoring'>
-<div id='s19-md' class='md' data-trim='false'>
+<div id='s20-md' class='md' data-trim='false'>
   - Gives you access to detailed performance, security, and usage data on all your Salesforce apps. See who is accessing critical business data when, and from where. 
 
 - [Viewing and Visualizing Event Log files using DX](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/monitoring/em.md)
@@ -1869,7 +1986,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Field Audit Trail'>
-<div id='s20-md' class='md' data-trim='false'>
+<div id='s21-md' class='md' data-trim='false'>
   - Lets you know the state and value of your data for any date, at any time
 - Built on a **big data backend** for massive scalability, Field Audit Trail helps companies create a forensic data-level audit trail with up to 10 years of history. 
 - You can also set triggers for when data is deleted. 
@@ -1879,7 +1996,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Org Metric'>
-<div id='s21-md' class='md' data-trim='false'>
+<div id='s22-md' class='md' data-trim='false'>
   
 - Org Metric ERD
 ![Org metric ERD](img/orgmetric.svg)
@@ -1889,7 +2006,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Resources'>
-<div id='s22-md' class='md' data-trim='false'>
+<div id='s23-md' class='md' data-trim='false'>
   
 ## Platform
 - [Salesforce Security Guide](https://resources.docs.salesforce.com/236/latest/en-us/sfdc/pdf/salesforce_security_impl_guide.pdf)
@@ -1925,7 +2042,7 @@ Visualization done. "open  userInfo.svg" in Chrome Browser to view the Visualiza
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Creation '>
-<div id='s23-md' class='md' data-trim='false'>
+<div id='s24-md' class='md' data-trim='false'>
   ```
 sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Security"
 ```
@@ -1934,7 +2051,7 @@ sfdx mohanc:slides:gen -i security.md -o security.md.html -t "Salesforce Securit
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Single page view'>
-<div id='s24-md' class='md' data-trim='false'>
+<div id='s25-md' class='md' data-trim='false'>
   - [View it as a single page](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/sf-security/security.md)
 
 

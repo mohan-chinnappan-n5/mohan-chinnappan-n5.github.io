@@ -10,6 +10,7 @@
 - **Tools**
     - [Health Check](#Health_Check)
     - [User Audit](#User_Audit)
+    - [Org Viz](#org_viz)
     - [Apex sharing check](#Apex_sharing_check)
     - [Check Profile Permissions](#Check_Profile_Permissions)
     - [Check PermissionSet Permissions](#Check_PermissionSet_Permissions)
@@ -410,6 +411,118 @@ WHERE Profile.Name = 'System Administrator'
 - [Admins SECURITY ](https://admin.salesforce.com/security)
     - [5 Security Habits That Will Help Your Admin Career](https://admin.salesforce.com/blog/2021/5-security-habits-that-will-help-your-admin-career)
     - [Admin Best Practices: Security ](https://trailhead.salesforce.com/live/videos/a2r3k000001WFIi/admin-best-practices-security/)
+
+
+<a name="org_viz"></a>
+# Org visualization tool
+```
+Visualize the Org
+
+USAGE
+  $ sfdx mohanc:org:viz
+
+OPTIONS
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target 
+                                                  org
+
+  --apiversion=apiversion                         override the api version used for api requests made by this 
+                                                  command
+
+  --json                                          format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+
+EXAMPLE
+
+              Visualize the org
+              sfdx mohanc:org:viz
+
+      
+
+```
+
+## Example Usage
+```
+sfdx mohanc:org:viz -u  mohan.chinnappan.n_ea2@gmail.com 
+
+=== Working on getOrgData
+=== Working on getOrgLimits
+=== Working on getCount:ApexClass
+=== Working on getCount:ApexPage
+=== Working on getCount:ConnectedApplication
+=== Working on getCount:CustomPermission
+=== Working on getCount:ExternalDataSource
+=== Working on getCount:FieldPermissions
+=== Working on getCount:FieldSecurityClassification
+=== Working on getCount:Group
+=== Working on getCount:GroupMember
+=== Working on getCount:NamedCredential
+=== Working on getCount:ObjectPermissions
+=== Working on getCount:PackageLicense
+=== Working on getCount:PermissionSet
+=== Working on getCount:PermissionSetAssignment
+=== Working on getCount:PermissionSetGroup
+=== Working on getCount:PermissionSetLicense
+=== Working on getCount:Profile
+=== Working on getCount:QueueSobject
+=== Working on getCount:SetupAssistantStep
+=== Working on getCount:SetupEntityAccess
+=== Working on getCount:User
+=== Working on getCount:UserLicense
+=== Working on getCount:UserPackageLicense
+=== Working on getCount:UserRole
+=== Working on getCount:Account
+=== Working on getCount:AccountContactRole
+=== Working on getCount:Asset
+=== Working on getCount:Campaign
+=== Working on getCount:CampaignMember
+=== Working on getCount:Case
+=== Working on getCount:CaseStatus
+=== Working on getCount:Contact
+=== Working on getCount:Contract
+=== Working on getCount:ContractContactRole
+=== Working on getCount:Lead
+=== Working on getCount:Opportunity
+=== Working on getCount:OpportunityCompetitor
+=== Working on getCount:OpportunityContactRole
+=== Working on getCount:OpportunityStage
+=== Working on getCount:Order
+=== Working on getCount:Partner
+=== Working on getCount:PartnerRole
+=== Working on getCount:Account
+=== Working on getCount:Case
+=== Working on getCount:CaseComment
+=== Working on getCount:CaseHistory
+=== Working on getCount:CaseSolution
+=== Working on getCount:Contact
+=== Working on getCount:Solution
+=== Working on getPackageInfo
+=== Working on EntityDefinitionSummary:Account
+=== Working on EntityDefinitionSummary:Contact
+=== Working on EntityDefinitionSummary:AccountContactRole
+=== Working on EntityDefinitionSummary:Opportunity
+=== Working on EntityDefinitionSummary:OpportunityContactRole
+=== Working on EntityDefinitionSummary:OpportunityCompetitor
+=== Working on EntityDefinitionSummary:Lead
+=== Working on EntityDefinitionSummary:Case
+=== Working on EntityDefinitionSummary:Campaign
+=== Working on EntityDefinitionSummary:CampaignMember
+=== Working on EntityDefinitionSummary:Asset
+=== Working on EntityDefinitionSummary:Contract
+=== Working on EntityDefinitionSummary:ContractContactRole
+=== Working on EntityDefinitionSummary:Order
+=== Working on getApexCodeCoverage
+=== Working on getBusinessProcess
+=== Working on getCertificate
+=== Working on CspTrustedSite
+=== Writing Org JSON in file Org.json ...
+=== Writing visualization in file Org.svg ...
+Visualization done. "open  Org.svg" in Chrome Browser to view the Visualization.
+
+```
+
+![Sample Viz](img/Org.svg)
+
 
 <a name="Apex_sharing_check"></a>
 # Apex sharing check
