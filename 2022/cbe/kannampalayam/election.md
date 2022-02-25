@@ -2,7 +2,7 @@
 
 
 ![Poster](img/pushphi-ele.jpeg)
-![Poster2](img/pushpi-2.png)
+![Poster2](img/pushpi-3.jpeg)
 
 # Election Results
 - [Results](./results.html)
