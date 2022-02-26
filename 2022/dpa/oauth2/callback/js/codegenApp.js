@@ -93,13 +93,20 @@ const getCleanedFields = fields => {
     return fieldsList.map(field => field.trim())
 }
 
+getEle('exec').addEventListener('change', event => {
+    const input =  getEle('md').value;
+    const reSOQL = new RegExp(getEle('regex').value, 'gmi'); 
+    const reResults = reSOQL.exec(input);
+    event.target.value = JSON.stringify(reResults, null, 4); 
+})
+
 getEle('uiAPI').addEventListener('click', event => {
     const input =  getEle('md').value;
     const reSOQL = new RegExp(getEle('regex').value, 'gmi'); 
     
     const reResults = reSOQL.exec(input);
     const [query, fields, object] = reResults;
-    console.log(reResults);
+    // console.log(reResults);
     getEle('exec').value = JSON.stringify(reResults, null, 4);
     getEle('code').innerHTML = getLWCuiRecordApi(object, getCleanedFields(fields)) ;
 });
