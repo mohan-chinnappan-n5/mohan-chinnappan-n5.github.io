@@ -107,6 +107,9 @@ https://insecure-website.com/status?message=<script>/*+Bad+stuff+here...+*/</scr
 
 ```
 
+- Refer
+[WEBSITE SECURITY](https://mohan-chinnappan-n.github.io/sfdc/website-security.html#/home)
+
 ## DOM based XSS
 ```
 // get search data entered by the user via search input field
