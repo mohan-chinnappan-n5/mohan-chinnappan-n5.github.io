@@ -24,3 +24,9 @@ label {
 .stuff {
     margin-left: 20px;
 }
+.regex {
+        background-color: black; 
+        color:wheat; 
+        font-family:Monaco;
+        border-radius: 10px; 
+}
