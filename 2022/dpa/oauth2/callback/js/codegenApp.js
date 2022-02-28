@@ -93,6 +93,14 @@ const getCleanedFields = fields => {
     return fieldsList.map(field => field.trim())
 }
 
+
+getEle('regex').addEventListener('change', event => {
+    const reSOQL = new RegExp(event.target.value, 'gmi');
+    const input =  getEle('md').value; 
+    const reResults = reSOQL.exec(input);
+    getEle('exec').value = JSON.stringify(reResults, null, 4); 
+})
+
 getEle('md').addEventListener('change', event => {
     const input =  event.target.value; 
     const reSOQL = new RegExp(getEle('regex').value, 'gmi'); 
