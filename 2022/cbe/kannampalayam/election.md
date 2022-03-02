@@ -8,23 +8,27 @@
 - [Results](./results.html)
 - [Searchable Results](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/2022/cbe/kannampalayam/img/TN-PanchayatElectionResults.csv)
 
-# Meeting CM of Tamil Nadu
+# Meeting CM of Tamil Nadu - Video
 
 - Video
 ![Pushpi with CM video](img/pushpi-with-CM.mp4.webm.gif)
 
-# Meeting CM of Tamil Nadu photo
+# Meeting CM of Tamil Nadu - photo
 ![Pushpi with CM](img/pushpi.png)
 
-# Taking oath as member
+# Taking oath as member - Video
  <video width="720" height="600" controls>
     <source src="img/oath-1.mp4" type="video/mp4">
  </video>
 
 <a href="img/oath-1.mp4">Oath Video</a>
 
-# Oath day photo
+# Oath day photos
 - ![Oath Day photo](img/oath-day-1.jpeg)
+- ![Oath Day photo](img/oath-photo-2.jpeg)
+- ![Oath Day photo](img/oath-photo-3.jpeg)
+- ![Oath Day photo](img/oath-photo-4.jpeg)
+- ![Oath Day photo](img/oauth-photo-5.jpeg)
 
 # Creation
 ```
