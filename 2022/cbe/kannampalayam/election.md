@@ -15,3 +15,19 @@
 
 # Meeting CM of Tamil Nadu photo
 ![Pushpi with CM](img/pushpi.png)
+
+# Taking oath as member
+ <video width="720" height="600" controls>
+    <source src="img/oath-1.mp4" type="video/mp4">
+ </video>
+
+<a href="img/oath-1.mp4">Oath Video</a>
+
+# Oath day photo
+- ![Oath Day photo](img/oath-day-1.jpeg)
+
+# Creation
+```
+sfdx mohanc:slides:gen -i election.md -o election.md.html -t "Tamil Nadu Town Panchayat Elections 2022 - கண்ணம்பாளையம்"
+
+```
