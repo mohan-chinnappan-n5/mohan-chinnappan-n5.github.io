@@ -23,12 +23,18 @@
 
 <a href="img/oath-1.mp4">Oath Video</a>
 
-# Oath day photos
+# Oath day - Photos
 - ![Oath Day photo](img/oath-day-1.jpeg)
 - ![Oath Day photo](img/oath-photo-2.jpeg)
 - ![Oath Day photo](img/oath-photo-3.jpeg)
 - ![Oath Day photo](img/oath-photo-4.jpeg)
 - ![Oath Day photo](img/oauth-photo-5.jpeg)
+
+# Elected as President - photo
+
+-![Elected as president](img/pushpi-as-president-1.jpeg)
+-![Elected as president](img/pushpi-as-president-2.jpeg)
+-![Elected as president](img/pushpi-as-president-3.jpeg)
 
 # Creation
 ```
