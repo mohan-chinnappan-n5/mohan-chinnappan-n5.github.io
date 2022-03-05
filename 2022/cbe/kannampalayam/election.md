@@ -36,6 +36,22 @@
 -![Elected as president](img/pushpi-as-president-2.jpeg)
 -![Elected as president](img/pushpi-as-president-3.jpeg)
 
+
+# Meeting CM after elected as President - Video
+
+ <video width="720" height="600" controls>
+    <source src="img/chennai-meeting-ap-1.mp4" type="video/mp4">
+ </video>
+
+# Chennai visit after elected as President - photos 
+
+-![Chennai meeting after elected as president](img/chennai-meeting-ap-1.jpeg)
+-![Chennai meeting after elected as president](img/chennai-meeting-ap-2.jpeg)
+
+
+
+
+
 # Creation
 ```
 sfdx mohanc:slides:gen -i election.md -o election.md.html -t "Tamil Nadu Town Panchayat Elections 2022 - கண்ணம்பாளையம்"
