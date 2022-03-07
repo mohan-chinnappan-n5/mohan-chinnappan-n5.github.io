@@ -49,6 +49,13 @@
 -![Chennai meeting after elected as president](img/chennai-meeting-ap-2.jpeg)
 
 
+# First Day in Office - photo 
+
+-![First Day in Office](img/first-day-in-office.jpeg)
+
+
+
+
 
 
 
