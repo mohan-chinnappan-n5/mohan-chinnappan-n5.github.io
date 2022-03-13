@@ -84,7 +84,7 @@ docker build  -t mohanchinnappan/sfdx-devops  .
 
 Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
 ```
-- ![docker app images list](img/dokcke-app-1.png)
+- ![docker app images list](img/docker-app-2.png)
 
 
 ## List
