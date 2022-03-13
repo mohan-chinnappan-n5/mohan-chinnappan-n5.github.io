@@ -128,3 +128,16 @@ RUN echo 'y' | sfdx plugins:install sfdx-browserforce-plugin@${SF_BROWSERFORCE_V
 ##  want the container to execute at docker run this command
 CMD /bin/bash
 
+
+### build with
+## docker build . -t mohanchinnappan/sfdx-devops
+
+### Run with
+# -i interactive
+# -t allocate a pseudo-TTY
+## docker run -it mohanchinnappan/sfdx-devops /bin/bash
+
+### Push to docker hub
+# docker push mohanchinnappan/sfdx-devops
+
+
