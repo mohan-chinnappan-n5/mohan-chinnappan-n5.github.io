@@ -1,13 +1,6 @@
 FROM ubuntu:21.04
 
-##---------------------
 
-### Build it with
-## docker build  -t sfpowerscript_v1  .
-### Build with no-cache
-##  docker build  --no-cache -t sfpowerscript_v1  .
-
-##---------------------
 
 ## https://github.com/salesforcecli/sfdx-cli
 ARG SALESFORCE_CLI_VER=latest
