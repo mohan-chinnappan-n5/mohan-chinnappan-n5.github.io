@@ -39,6 +39,10 @@ Run a command in a new container
 
 # Inside a container
 
+# Docker cheat sheet
+- ![Docker Cheat Sheet](img/docker-cheat-sheet-0.png)
+- [Docker Cheat Sheet PDF](img/docker-cheat-sheet.pdf)
+
 
 # SFDX - DevOps - Docker
 
@@ -84,7 +88,7 @@ docker build  -t mohanchinnappan/sfdx-devops  .
 
 Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
 ```
-- ![docker app images list](img/docker-app-2.png)
+- ![docker app images list](img/docker-app-3.png)
 
 
 ## List
