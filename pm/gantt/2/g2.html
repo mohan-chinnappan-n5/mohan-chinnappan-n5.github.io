@@ -34,9 +34,79 @@
       </div>
     </div>
   </nav>
-    <div id="chart"></div>
+ <select id="view-mode">
+     <option value="Day">Day</option>
+     <option selected value="Week">Week</option>
+     <option value="Month">Month</option>
+ </select>
+
+    <div class="chart"></div>
     <script>
+
+        const getEle = id => document.getElementById(id);
+        const getEleByClass = cls => document.querySelector(cls);
+
+        const viewModeEle = getEle('view-mode');
+        let view_mode = 'Week';
+       
+
+
         var tasks = [
+
+        {
+            id: 'Spot Trade-in Base Management Kick off',
+            name: 'Spot Trade-in Base Management Kick off',
+            start: '2022-03-01',
+            end: '2022-03-03',
+            progress: 100,
+            dependencies: '',
+            custom_class: 'bar-milestone' // optional
+        },
+        {
+            id: 'Spot Trade-in Operation Technical Evaluation',
+            name: 'Spot Trade-in Operation Technical Evaluation',
+            start: '2022-06-20',
+            end: '2022-08-31',
+            progress: 100,
+            dependencies: '',
+            custom_class: 'bar-milestone' // optional
+        },
+
+       
+        {
+            id: 'Credit card Financing IT work & Target Live date',
+            name: 'Credit card Financing IT work & Target Live date',
+            start: '2022-04-07',
+            end: '2022-07-29',
+            progress: 100,
+            dependencies: '',
+            custom_class: 'bar-milestone' // optional
+        },
+        {
+            id: 'BPNL Pitch sell in',
+            name: 'BPNL Pitch sell in',
+            start: '2022-09-05',
+            end: '2022-09-05',
+            progress: 100,
+            dependencies: '',
+            custom_class: 'bar-milestone' // optional
+        },
+
+        {
+            id: 'BPNL Evaluation and Launch',
+            name: 'BPNL Evaluation and Launch',
+            start: '2022-09-12',
+            end: '2023-01-20',
+            progress: 100,
+            dependencies: '',
+            custom_class: 'bar-milestone' // optional
+        },
+
+
+
+        ]
+
+        var tasks2 = [
             {
                 id: 'Task Deliver',
                 name: 'Deliver',
@@ -78,8 +148,11 @@
             },
 
 
-        ]
-        var gantt = new Gantt("#chart", tasks, {
+        ];
+
+        console.log(getEleByClass('.chart'));
+
+        var gantt = new Gantt('.' + getEleByClass('.chart').className, tasks, {
             header_height: 50,
             column_width: 30,
             step: 24,
@@ -95,6 +168,10 @@
 
         gantt.change_view_mode('Week') // Quarter Day, Half Day, Day, Week, Month 
 
+        viewModeEle.addEventListener('change', event => {
+            view_mode = event.target.value;
+            gantt.change_view_mode(view_mode) // Quarter Day, Half Day, Day, Week, Month 
+        });
     </script>
 </body>
 
