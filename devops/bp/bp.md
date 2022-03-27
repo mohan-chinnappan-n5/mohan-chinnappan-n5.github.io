@@ -43,7 +43,14 @@
 
 - [Salesforce Lightning Code Scanner App](https://mohansun-slds-lint.herokuapp.com/)
 
+
+
 ![Demo](img/slds-scanner-1.webm.gif)
+- Note **MFA** (Multi-factor Authentication in Action in above app)
+
+- You can paste your code for scanning
+- ![code scan slds](https://mohan-chinnappan-n.github.io/sfdc/img/dx/lx-linter-2.png)
+
 
 # Code Scan in the deployment pipeline
 - Sonar-scanner in the pipeline
@@ -93,8 +100,37 @@ sonar-scanner \
 
 ![running](img/sq-scanner-1.webm.gif)
 
+# CI
+
+- ![CI-1](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-elements.png)
+
+- Core Principles
+    - ![CI Core principles](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-principles.png)
+
+- Before DX
+    - ![Before DX](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-auto-before-dx-0.png)
+    - ![Before DX-2](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-auto-before-dx.png)
+- With DX
+    - ![With DX-1](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-auto-dx-2.png)
+    - ![pipeline](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-del-pipeline-2.png)
+
+- More Testing - better product
+    - ![More testing](https://mohan-chinnappan-n.github.io/sfdc/img/dx/moretesting.png)
+
+
+
 
 # Branching
+```
+SUGGESTION!
+Lineup Branch for every env
+2 developers (my and yer)
+develop branch is team's feature branch
+integrate branch is lined with what is deployed to UAT
+master branch is lined with Staging and Prod
+```
+
+
 
 - ![git-b0](img/git/gitb-0.png)
 

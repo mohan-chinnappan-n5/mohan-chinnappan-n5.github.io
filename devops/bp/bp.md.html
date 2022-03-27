@@ -70,7 +70,14 @@
   
 - [Salesforce Lightning Code Scanner App](https://mohansun-slds-lint.herokuapp.com/)
 
+
+
 ![Demo](img/slds-scanner-1.webm.gif)
+- Note **MFA** (Multi-factor Authentication in Action in above app)
+
+- You can paste your code for scanning
+- ![code scan slds](https://mohan-chinnappan-n.github.io/sfdc/img/dx/lx-linter-2.png)
+
 
 
 </div>
@@ -129,12 +136,45 @@ sonar-scanner \
 ![running](img/sq-scanner-1.webm.gif)
 
 
+</div>
+</google-codelab-step>
+<google-codelab-step label=' CI'>
+<div id='s5-md' class='md' data-trim='false'>
+  
+- ![CI-1](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-elements.png)
+
+- Core Principles
+    - ![CI Core principles](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-principles.png)
+
+- Before DX
+    - ![Before DX](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-auto-before-dx-0.png)
+    - ![Before DX-2](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-auto-before-dx.png)
+- With DX
+    - ![With DX-1](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-auto-dx-2.png)
+    - ![pipeline](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-del-pipeline-2.png)
+
+- More Testing - better product
+    - ![More testing](https://mohan-chinnappan-n.github.io/sfdc/img/dx/moretesting.png)
+
+
+
+
 
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Branching'>
-<div id='s5-md' class='md' data-trim='false'>
-  
+<div id='s6-md' class='md' data-trim='false'>
+  ```
+SUGGESTION!
+Lineup Branch for every env
+2 developers (my and yer)
+develop branch is team's feature branch
+integrate branch is lined with what is deployed to UAT
+master branch is lined with Staging and Prod
+```
+
+
+
 - ![git-b0](img/git/gitb-0.png)
 
 - ![git-b1](img/git/gitb-1.png)
@@ -150,7 +190,7 @@ sonar-scanner \
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Performance Measurements'>
-<div id='s6-md' class='md' data-trim='false'>
+<div id='s7-md' class='md' data-trim='false'>
   
 - speedtest.js 
     - [Lightning Performance tips](https://mohan-chinnappan-n2.github.io/2019/lex/perf.html)
@@ -165,7 +205,7 @@ sonar-scanner \
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Integration with Slack'>
-<div id='s7-md' class='md' data-trim='false'>
+<div id='s8-md' class='md' data-trim='false'>
   
 ![Jenkins - slack](img/jenkins-slack-1.png)
 
@@ -193,7 +233,7 @@ sonar-scanner \
 </div>
 </google-codelab-step>
 <google-codelab-step label=' References'>
-<div id='s8-md' class='md' data-trim='false'>
+<div id='s9-md' class='md' data-trim='false'>
   
 ## SFDX
 - [SFDX Slides](https://mohan-chinnappan-n.github.io/sfdc/dx.html#/home)
@@ -214,7 +254,7 @@ sonar-scanner \
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Creation'>
-<div id='s9-md' class='md' data-trim='false'>
+<div id='s10-md' class='md' data-trim='false'>
   
 ```
 sfdx mohanc:slides:gen -i bp.md  -o bp.md.html -t 'DevOps Best Practices'
