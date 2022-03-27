@@ -117,8 +117,12 @@ sonar-scanner \
 - More Testing - better product
     - ![More testing](https://mohan-chinnappan-n.github.io/sfdc/img/dx/moretesting.png)
 
+# CI - Jenkins
+
+- ![Demo](https://mohan-chinnappan-n.github.io/dx/img/dx-jenkins-0.gif)
 
 
+- [Docker Notes](https://mohan-chinnappan-n5.github.io/devops/docker.md.html#0)
 
 # Branching
 ```
