@@ -2,7 +2,14 @@
 <head>
 <script src="https://cdn.anychart.com/releases/8.6.0/js/anychart-core.min.js"> </script> 
 <script src ="https://cdn.anychart.com/releases/8.6.0/js/anychart-gantt.min.js"></script>
-</head><body><div id = "container" > </div><script>anychart.onDocumentReady(function () {
+</head><body>
+<div id = "container" class='chart' > </div>
+  <style>
+	  body {
+		  zoom:130%;
+	  }
+  </style>
+<script>anychart.onDocumentReady(function () {
 	// create data
 // https://towardsdatascience.com/create-javascript-gantt-chart-55ff8ec08886
 // https://salesforcecodex.com/salesforce/heatmap-chart-in-lwc/a
@@ -82,10 +89,12 @@
 	// create a chart
 	var chart = anychart.ganttProject();
 
+        const ele = document.querySelector('.chart');
+
 	// set the data
 	chart.data(treeData);	// configure the scale
 	chart.getTimeline().scale().maximum(Date.UTC(2018, 06, 30));	// set the container id
-	chart.container("container");	// initiate drawing the chart
+	chart.container(ele);	// initiate drawing the chart
 	chart.draw();	// fit elements to the width of the timeline
 	chart.fitAll();
 });</script>

@@ -1,0 +1,240 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>DevOps Best Practices</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
+</head>
+<body>
+<google-codelab id="DevOps Best Practices" title="DevOps Best Practices" environment="web" >
+
+<google-codelab-step label=' Goals'>
+<div id='s0-md' class='md' data-trim='false'>
+  1. Clean data/metadata (automated)
+2. Clean Scratch orgs (automated)
+3. Code scan integration, (automated)
+
+
+    - codescan : ```catch them young```
+    - ![sonarlint](img/sq-lint-0.png)
+        - [**At Developer Side**](#1)
+         - [PMD Scan at IDE VS Code](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner) 
+         - [Sonar Lint at IDE VS Code](https://www.sonarlint.org/vscode))
+       
+        - **In the pipeline**
+            -  [Sonar-scanner in the pipeline](#2)
+
+4. Integrating tools like [org.viz](https://mohan-chinnappan-n5.github.io/sf-security/security.md.html#10) 
+
+5. Performance measurements
+    - speedtest.js [Lightning Performance tips](https://mohan-chinnappan-n2.github.io/2019/lex/perf.html)
+    - [Lighthouse](https://developers.google.com/web/tools/lighthouse)
+
+6. Integration with Slack
+
+7. Test-Automation
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Code Scan at Developer side'>
+<div id='s1-md' class='md' data-trim='false'>
+  
+- ![code-scan at dev](img/sq-lint-0.png)
+
+- [PMD at developer side (VS code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner)
+
+- ![PMD VS Code](img/pmd-vscode-1.png)
+
+- ![PMD VS Code demo](https://github.com/mohan-chinnappan-n/vscode-apex-pmd/raw/master/images/code-scan-vscode-6.gif)
+
+## SonarLint
+- [SonarLint](https://www.sonarqube.org/sonarlint/?referrer=sonarqube-welcome)
+    - [VS Code SonarLint](https://www.sonarlint.org/vscode)
+- ![SonarLint Demo](img/sonarLint-1.webm.gif)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Salesforce Lightning Code Scanner'>
+<div id='s2-md' class='md' data-trim='false'>
+  
+- [Salesforce Lightning Code Scanner App](https://mohansun-slds-lint.herokuapp.com/)
+
+![Demo](img/slds-scanner-1.webm.gif)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Code Scan in the deployment pipeline'>
+<div id='s3-md' class='md' data-trim='false'>
+  - Sonar-scanner in the pipeline
+
+- [Download SonarQube](https://www.sonarqube.org/success-download-community-edition/)
+
+## Start SonarQube Server
+```
+cd codescan/sonarqube/sonarqube-9.3.0.51899
+
+./bin/macosx-universal-64/sonar.sh console
+
+```
+
+![allow sq](img/sq-allow-1.png)
+
+![sq server starting](img/sq-server-start.png)
+
+## Install sonar-scanner on mac
+```
+brew install sonar-scanner
+
+```
+
+## Setting up the project
+![setting up sonar project](img/sq-create-project.webm.gif)
+
+
+- Running
+```
+sonar-scanner \
+  -Dsonar.projectKey=pythontest \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=c0fbb7cac9403c341a51307a69ad9f1104e9744c
+
+```
+
+- Note: ``` -Dsonar.login=c0fbb7cac9403c341a51307a69ad9f1104e9744c``` is the project key
+
+- Viewing scanner output
+
+- ![scanner output](img/sq-output-1.webm.gif)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' SonarLint'>
+<div id='s4-md' class='md' data-trim='false'>
+  ![sonarlint](img/sq-lint-0.png)
+
+![running](img/sq-scanner-1.webm.gif)
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Branching'>
+<div id='s5-md' class='md' data-trim='false'>
+  
+- ![git-b0](img/git/gitb-0.png)
+
+- ![git-b1](img/git/gitb-1.png)
+
+
+- ![git-b2](img/git/gitb-2.png)
+
+- ![git-b3](img/git/gitb-3.png)
+
+- ![git-b4](img/git/gitb-4.png)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Performance Measurements'>
+<div id='s6-md' class='md' data-trim='false'>
+  
+- speedtest.js 
+    - [Lightning Performance tips](https://mohan-chinnappan-n2.github.io/2019/lex/perf.html)
+
+- ![speedtest](https://mohan-chinnappan-n2.github.io/2019/lex/img/octane-score.png)
+
+- [Lighthouse](https://developers.google.com/web/tools/lighthouse)
+    - ![Lighthouse](img/lighthouse.png)
+ 
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Integration with Slack'>
+<div id='s7-md' class='md' data-trim='false'>
+  
+![Jenkins - slack](img/jenkins-slack-1.png)
+
+- Slack Notifcations Plugin
+- ![Slack Notifications](img/slack-notification.png)
+- ![Slack Notifications2](img/slack-notification-2.png)
+
+
+- Will be based on TCRM (Tableau CRM slack integration work)
+- Demos of Tableau CRM slack integration work 
+## Desktop
+
+![Demo1](img/slack/image6.gif)
+
+![Demo2](img/slack/image7.gif)
+
+## Mobile
+
+![Demo3](img/slack/image8.gif)
+
+
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' References'>
+<div id='s8-md' class='md' data-trim='false'>
+  
+## SFDX
+- [SFDX Slides](https://mohan-chinnappan-n.github.io/sfdc/dx.html#/home)
+
+## Code Scan
+
+### SonarQube
+- [SonarQube download](https://www.sonarqube.org/success-download-community-edition/)
+- [SonalQube install](https://docs.sonarqube.org/latest/setup/get-started-2-minutes/)
+- [Security and Preferences - SonarQube](https://community.sonarsource.com/t/sonar-cannot-start-once-updated-to-macos-catalina-error-as-wrapper-cannot-be-opened-because-the-developer-cannot-be-verified/16439/2)
+- [SonarQube install on Mac](https://techblost.com/how-to-setup-sonarqube-locally-on-mac/)
+
+- [SonarLint](https://www.sonarqube.org/sonarlint/?referrer=sonarqube-welcome)
+    - [VS Code SonarLint](https://www.sonarlint.org/vscode)
+- [SonarQube - Apex Rules](https://rules.sonarsource.com/apex)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Creation'>
+<div id='s9-md' class='md' data-trim='false'>
+  
+```
+sfdx mohanc:slides:gen -i bp.md  -o bp.md.html -t 'DevOps Best Practices'
+
+```
+
+
+
+
+
+
+</div>
+</google-codelab-step>
+</google-codelab>
+
+  <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/native-shim.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
+
+</body>
+</html>
