@@ -143,7 +143,7 @@ sonar-scanner \
 
 ## Sample docker build
 
-- [Dockerfile](./docker/Dockerfile)
+- [Dockerfile](https://mohan-chinnappan-n5.github.io/devops/docker/Dockerfile)
 
 
 
