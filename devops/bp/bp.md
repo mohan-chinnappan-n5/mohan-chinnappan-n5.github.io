@@ -206,6 +206,9 @@ sfdx mohanc:slides:gen -i bp.md  -o bp.md.html -t 'DevOps Best Practices'
 
 ```
 
+# Single Page view
+[DevOps Best Practices](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/devops/bp/bp.md)
+
 
 
 
