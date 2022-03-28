@@ -283,8 +283,9 @@ Minimum access required (on the DevHub org)  to create a scratch org is
 
 ```
 Read, Create on ScratchOrgInfos
-
+```
 Read on [ActiveScratchOrgs](https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_objects_activescratchorg.htm) 
+```
 
 To delete a scratch org you need:
 - Read, Create, Edit on ScratchOrgInfos
