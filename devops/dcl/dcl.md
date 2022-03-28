@@ -1,8 +1,8 @@
 # Before Deployment
 
 
-Action|Description|
----|---|
+Action|Description|Completed DateTime|
+---|---|---|
 **Agree on time of deployment**|Set a time in advance and let everyone using the org know:  Out of hours is usually best if possible to avoid user impact and give you time to fix any issues, which means evenings/weekends for most businesses|
 **Create deployment Support Case**|Create a support ticket with Salesforce support team on the support for the deployment|
 **Check the audit trail**|Check the audit trail in production to ensure no changes have been made that will be overwritten by your deployment|
@@ -17,13 +17,13 @@ Action|Description|
 
 
  
-## Checklist 
-- [Checklist form](https://mohan-chinnappan-n.github.io/sfdc/deploy-checklist.html#/1)
+## Checklist Form
 
+- [Form to fill up](https://mohan-chinnappan-n.github.io/sfdc/deploy-checklist.html#/1)
 
 # Post Deployment
-Action|Description|
----|---|
+Action|Description|Completed DateTime|
+---|---|---|
 **Manual changes and data updates**|Make sure workflow rules, process builders and validation rules remain deactivated for this|
 **Reactivate Anything Paused**|if you paused your workflows and validation rules during deployment, now is the time to reactivate them|
 **Activate Workflows**|Activate your new validation rules/ Process Builders/ workflows– anything that might not be active on deployment|
