@@ -277,6 +277,21 @@ master branch is lined with Staging and Prod
 ![Demo3](img/slack/image8.gif)
 
 
+# Scratch Org
+
+Minimum access required (on the DevHub org)  to create a scratch org is
+
+```
+Read, Create on ScratchOrgInfos
+Read on ActiveScratchOrgsTo delete a scratch org you need:
+Read, Create, Edit on ScratchOrgInfos
+Read, Create, Edit, Delete on ActiveScratchOrgs
+
+```
+
+## ScratchOrgInfo object 
+![scratch org info](img/ScratchOrgInfo-erd.svg)
+
 
 
 # References
