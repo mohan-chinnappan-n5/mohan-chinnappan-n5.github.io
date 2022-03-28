@@ -298,7 +298,12 @@ To delete a scratch org you need:
 ## ScratchOrgInfo object 
 ![scratch org info](img/ScratchOrgInfo-erd.svg)
 
+# Security - vulnerability scanning tools
 
+- Scanning  vulnerability scanning tools will be part of the pipeline
+    - Scanning on scripts used in deployment
+    - Scanning on the application code
+    
 
 # References
 
