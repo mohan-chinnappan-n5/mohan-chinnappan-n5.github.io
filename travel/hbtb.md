@@ -1,5 +1,9 @@
-# Introduction
-![Meeting](img/meeting-1453895__340-INTRODUCTION.webp)#
+# Healthbase Travel Benefit Overview - Training
+
+<hr>
+
+## Introduction
+![Meeting](img/meeting-1453895__340-INTRODUCTION.webp)
 
 - Do you know travel benefit is available for Members going for certain medical
 procedures away from home?
@@ -10,7 +14,7 @@ and travel benefit referral process.
 - **Important Note:**
     - For your Group's travel benefit details, please check your Benefit Plan document.
 
-# Description
+## Description
 
 - ![](img/laptop-3196481__340-DESCRIPTION.webp)
 
@@ -26,8 +30,8 @@ and travel benefit referral process.
 
 - Personal expenses such as meals, laundry, phone, internet, tv, movies, minibar, room services, gps are not included in the travel benefit.
 
-# Highlights
-- ![Hightlights](img/highlights.png)
+## Highlights
+- ![Hightlights](img/highlights2.png)
 
 - When you identify travel benefit eligible member, please refer to Healthbase. Referral process details on the next page.
 
@@ -37,7 +41,7 @@ and travel benefit referral process.
 
 - Healthbase also takes care of any travel reimbursement.
 
-# Referral - email
+## Referral - email
 
 - ![Referral email](img/email-3249062__340-EXIT.webp)
 
@@ -67,7 +71,7 @@ Contact Member after 3PM local time
 
 - For any questions or updates about Member's travel logistics, please contact **ct27@healthbase.com**
 
-# Travel Logistics
+## Travel Logistics
 - ![airport](img/airport-4120835_960_720-LOGISTICS.jpg)
 - When Healthbase receives the referral, Healthbase will reach out to Member, explain travel benefit, and will assist in the logistics.
 - Healthbase takes care of the travel logistics: Making the reservation, paying for flight, hotel, etc as per the benefit, and also any reimbursement.
