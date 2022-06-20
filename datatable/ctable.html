@@ -58,9 +58,13 @@
     <script>
 
         const highlights = [
-            { city: "Tokyo", color: '#99ccff', msg: 'LIVING THE FUTURE!' },
-            { city: "New York", color: '#ff99cc', msg: 'I Love NY!' },
-            { city: "London", color: '#ccff99', msg: 'There is nowhere else like London!' }
+            { city: "Tokyo", color: '#99ccff', msg: 'LIVING THE FUTURE!',
+                link:'<a href="https://twitter.com/I_LOVE_NY">I Love NY!</a>'},
+            { city: "New York", color: '#ff99cc', msg: 'I Love NY!',
+                link: '<a href="https://twitter.com/I_LOVE_NY">I Love NY!</a>' },
+            { city: "London", color: '#ccff99', msg: 'There is nowhere else like London!',
+             link: '<a href="https://twitter.com/I_LOVE_NY">I Love NY!</a>'
+         }
 
         ];
 
@@ -101,6 +105,16 @@
             $('#myTable').DataTable(options);
         });
     </script>
+
+
+<hr/>
+<h4>How to use JQuery Datatable in Lightning Web Components (LWC) - Part-1</h4>
+
+<iframe width="800" height="400" src="https://www.youtube.com/embed/lp5PG_r6nO4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h4>How to use JQuery Datatable in Lightning Web Components (LWC) - Part-2</h4>
+
+<iframe width="800" height="400" src="https://www.youtube.com/embed/XcNY_5ap8Bc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 </body>
