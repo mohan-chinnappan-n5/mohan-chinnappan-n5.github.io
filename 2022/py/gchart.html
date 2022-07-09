@@ -1,0 +1,61 @@
+<html lang="en">
+  <head>
+    <title>Google Chart Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  </head>
+<body>
+
+<py-script>
+#https://www.jhanley.com/pyscript-third-party-criticism-of-pyscript/
+import js
+import asyncio
+from js import document, Object
+from js import google
+from pyodide import create_proxy, to_js
+
+def drawChart(_):
+	data = google.visualization.arrayToDataTable(to_js(
+		[
+			["Fruit", "Fruit Counts", Object.fromEntries(to_js({ "role": "style" })) ],
+			["Apples", 5, "blue"],
+			["Pears", 3, "blue"],
+			["Nectarines", 4, "blue"],
+			["Plums", 2, "blue"],
+			["Grapes", 4, "blue"],
+			["Strawberries", 6, "blue"]
+		]
+	))
+
+	view = google.visualization.DataView.new(data)
+
+	view.setColumns(to_js([0, 1,
+			Object.fromEntries(to_js(
+				{ "calc": "stringify",
+				"sourceColumn": 1,
+				"type": "string",
+				"role": "annotation" })),
+                       2]))
+
+	options = Object.fromEntries(to_js({
+		"title": "Fruit Counts",
+		"width": 800,
+		"height": 400,
+		"bar": Object.fromEntries(to_js({"groupWidth": "95%"})),
+		"legend": Object.fromEntries(to_js( { "position": "none" } ))
+	}))
+
+	chart = google.visualization.ColumnChart.new(document.getElementById("columnchart_values"))
+	chart.draw(view, options)
+
+google.charts.load("current", Object.fromEntries(to_js({"packages":["corechart"]})))
+google.charts.setOnLoadCallback(create_proxy(drawChart))
+</py-script>
+
+<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+
+</body>
+</html>
