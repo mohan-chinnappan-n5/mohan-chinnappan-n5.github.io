@@ -136,6 +136,37 @@ salesforce.com.		120	IN	A	184.31.3.130
 
 ```
 
+# SPF - Sender Policy Framework
+
+## Need for SPF:
+- The Simple Mail Transfer Protocol (SMTP) permits any computer to send email claiming to be from **any source address**. This is exploited by spammers and scammers who often use forged email addresses, making it more difficult to **trace a message back to its source**, and easy for spammers to hide their identity in order to avoid responsibility.
+
+- SPF allows the owner of an Internet domain (say example.com) to specify which computers(IPs) are authorized to send mail with **envelope-from** addresses in that domain, using Domain Name System (DNS) records.
+
+-  Receivers verifying the SPF information in TXT records may reject messages from unauthorized sources **before receiving the body of the message**.
+
+- SPF provides a process to verify which **providers** can send emails on behalf of your domain (example.com).
+- Use case
+    - You like to send email from Salesforce 
+    - You need to authorize Salesforce.com mail servers as allowed for the example.com domain.
+
+
+```
+example.com     TXT     "v=spf1 include:_spf.salesforce.com ~all"
+
+```
+-  The "~all" at the end specifies that, if the previous mechanisms did not match, the message should be rejected.
+
+
+- You can see how Salesforce has this SPF record:
+```
+salesforce.com  text = "v=spf1 include:_spf.google.com include:_spf.salesforce.com exists:%{i}._spf.corp.salesforce.com ~all"
+```
+## RFC 
+- [RFC 7208 - Sender Policy Framework (SPF) for Authorizing Use of Domains in Email, Version 1](https://datatracker.ietf.org/doc/html/rfc7208)
+
+
+
 # Resources
 - [Emails sent from Salesforce are classified as spoofing or SPAM messages. Why is this?](https://help.salesforce.com/s/articleView?id=000336142&type=1)
 - [Enable Email Relay](https://help.salesforce.com/s/articleView?id=000324260&type=1)
@@ -144,6 +175,7 @@ salesforce.com.		120	IN	A	184.31.3.130
 
 # Creation
 ```
-sfdx mohanc:slides:gen -i dkim.in.md -o dkim.in.md.html -t "DKIM Notes"; open  dkim.in.md.html 
+sfdx mohanc:slides:gen -i dkim.in.md -o dkim.in.md.html -t "DKIM and SPF Notes"; open  dkim.in.md.html 
 
 ```
+- [Single Page View](./dkim.in.md)
