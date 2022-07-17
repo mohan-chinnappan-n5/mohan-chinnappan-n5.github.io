@@ -12,13 +12,13 @@
 
 - You will get this message:
 
-``` 
-Salesforce has published the TXT records for this DKIM key to DNS. Before **activating** this key, add the CNAME and Alternate CNAME records in the DNS for your domain.
-```
+- "Salesforce has published the TXT records for this DKIM key to DNS. Before **activating** this key, add the CNAME and Alternate CNAME records in the DNS for your domain."
+
 - The CNAME or “canonical name” DNS record type is used to alias or redirect one DNS name to another DNS name.
 
 
 ![DKIM Seq](img/dkim-1.png)
+- Source for the seq diagram
 ```
 Title: DomainKeys Identified Mail - DKIM
 
@@ -65,9 +65,9 @@ google.com.             42      IN      SOA     ns1.google.com. dns-admin.google
 ;; WHEN: Sat Jul 16 08:54:32 EDT 2022
 ;; MSG SIZE  rcvd: 89
 ```
-```
 
 - Example DKIM in Salesforce
+
 ```
 Key Size	1024
 Selector	mydkim1
