@@ -141,6 +141,8 @@ salesforce.com.		120	IN	A	184.31.3.130
 ## Need for SPF:
 - The Simple Mail Transfer Protocol (SMTP) permits any computer to send email claiming to be from **any source address**. This is exploited by spammers and scammers who often use forged email addresses, making it more difficult to **trace a message back to its source**, and easy for spammers to hide their identity in order to avoid responsibility.
 
+
+
 - SPF allows the owner of an Internet domain (say example.com) to specify which computers(IPs) are authorized to send mail with **envelope-from** addresses in that domain, using Domain Name System (DNS) records.
 
 -  Receivers verifying the SPF information in TXT records may reject messages from unauthorized sources **before receiving the body of the message**.
@@ -166,6 +168,18 @@ salesforce.com  text = "v=spf1 include:_spf.google.com include:_spf.salesforce.c
 - [RFC 7208 - Sender Policy Framework (SPF) for Authorizing Use of Domains in Email, Version 1](https://datatracker.ietf.org/doc/html/rfc7208)
 
 
+# DMARC 
+- Domain-based Message Authentication, Reporting, and Conformance (DMARC) is an email authentication, policy, and reporting protocol. It’s built on top of Sender Policy Framework (SPF) and DomainKeys Identified Mail (DKIM) protocols.
+- If neither of those authentication methods passes, the DMARC policy determines what to do with the message.
+- DMARC is a **second layer of authentication** after DKIM and SPF. If an email doesn't pass DKIM and SPF authentication, DMARC policy tells the receiver **what to do with** the message. For example, it can reject some email messages and quarantine others.
+
+- With DMARC, the receiver can report back to the sender when emails fail their DKIM and SPF checks, even if the messages aren’t rejected. 
+
+- Example
+```
+Google has announced that they will implement a strict email authentication Domain-based Message Authentication, Reporting & Conformance (DMARC) policy in June 2016. This policy advises DMARC-compliant email servers to reject emails with **@gmail.com in the “from” address**, when such emails do not originate from Google’s mail servers.
+```
+- [Guidelines for Configuring Deliverability Settings for Emails Sent from Salesforce](https://help.salesforce.com/s/articleView?id=sf.emailadmin_deliverability.htm&type=5)
 
 # Resources
 - [Emails sent from Salesforce are classified as spoofing or SPAM messages. Why is this?](https://help.salesforce.com/s/articleView?id=000336142&type=1)
@@ -173,6 +187,7 @@ salesforce.com  text = "v=spf1 include:_spf.google.com include:_spf.salesforce.c
 - [Sender Policy Framework (SPF)](https://help.salesforce.com/s/articleView?id=sf.emailadmin_spf_overview.htm&type=5)
 - [Include Salesforce in Your SPF Record ](https://help.salesforce.com/s/articleView?id=sf.emailadmin_spf_include_salesforce.htm&type=5)
 - [Twilio sendGrid](https://docs.sendgrid.com/ui/sending-email/dmarc)
+- [What is DMARC](https://help.salesforce.com/s/articleView?id=sf.emailadmin_dmarc.htm&type=5)
 
 # Creation
 ```
