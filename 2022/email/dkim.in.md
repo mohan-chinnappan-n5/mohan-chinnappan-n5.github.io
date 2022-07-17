@@ -3,6 +3,7 @@
 - Verification technique that allows the **receiver** to check if that email was **actually** sent and **authorized** by the owner of that domain (say: biz.com) which sent that email.
 - Thus providing **assurance** to that email's authenticity.
 
+
 ## How it is done?
 - Providing that email a **digital signature** called DKIM signature
 - DKIM Signature is an encrypted string embedded in that email (invisibly)
