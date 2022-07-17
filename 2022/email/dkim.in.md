@@ -195,4 +195,4 @@ Google has announced that they will implement a strict email authentication Doma
 sfdx mohanc:slides:gen -i dkim.in.md -o dkim.in.md.html -t "DKIM and SPF Notes"; open  dkim.in.md.html 
 
 ```
-- [Single Page View](./dkim.in.md)
+- [Single Page View](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/2022/email/dkim.in.md)
