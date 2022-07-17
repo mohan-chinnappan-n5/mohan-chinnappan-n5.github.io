@@ -171,6 +171,7 @@ salesforce.com  text = "v=spf1 include:_spf.google.com include:_spf.salesforce.c
 - [Emails sent from Salesforce are classified as spoofing or SPAM messages. Why is this?](https://help.salesforce.com/s/articleView?id=000336142&type=1)
 - [Enable Email Relay](https://help.salesforce.com/s/articleView?id=000324260&type=1)
 - [Sender Policy Framework (SPF)](https://help.salesforce.com/s/articleView?id=sf.emailadmin_spf_overview.htm&type=5)
+- [Include Salesforce in Your SPF Record ](https://help.salesforce.com/s/articleView?id=sf.emailadmin_spf_include_salesforce.htm&type=5)
 - [Twilio sendGrid](https://docs.sendgrid.com/ui/sending-email/dmarc)
 
 # Creation
