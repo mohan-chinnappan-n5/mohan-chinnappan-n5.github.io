@@ -3,10 +3,6 @@
 
 Split(["#menu", "#content"], { sizes: [60, 40] });
 
-const code = `
-
-`
-//=============
 
 
 /// read file
@@ -19,7 +15,8 @@ const readSingleFile = (e) => {
   const reader = new FileReader();
   reader.onload = function (e) {
     contents = e.target.result;
-    editor.setValue(contents)
+    editor.setValue(contents);
+    editor.setLanguage('markdown'); 
   };
   reader.readAsText(file);
 };

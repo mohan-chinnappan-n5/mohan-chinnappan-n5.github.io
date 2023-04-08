@@ -43,10 +43,41 @@
     <div id="editor"></div>
   </div>
   <div class="split split-horizontal" id="content">
-    <input type="file" class='btn btn-primary' id="file-input" class="open" title="open a md file" accept=".md,.yaml" />
+    <input type="file" class='btn btn-primary' id="file-input" class="open" title="open a md file" />
   </div>
 
   <script src="https://unpkg.com/monaco-editor@0.27.0/min/vs/loader.js"></script>
+  <script>
+
+    const code = `
+function hello() {\n\talert("Hello, world!");\n}
+`;
+    //=============
+
+    let editor;
+    let model;
+    require.config({
+      paths: { vs: "https://unpkg.com/monaco-editor@0.27.0/min/vs" },
+    });
+
+
+
+    
+    require(["vs/editor/editor.main"], function () {
+      editor = monaco.editor.create(document.getElementById("editor"), {
+        value: code,
+
+        theme: "vs-dark",
+      });
+      model = editor.getModel(); // we'll create a model for you if the editor created from string value.
+      monaco.editor.setModelLanguage(model, "javascript")
+
+    });
+
+
+
+  </script>
+
   <script type="module" src="js/medit.js">
   </script>
 </body>
