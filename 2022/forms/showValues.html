@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>From Values</title>
+
+    <link rel="stylesheet" href="css/form2.css">
+
+  </head>
+  <body>
+    <textarea name="" id="formValues" cols="80" rows="20"></textarea>
+    <script>
+      // param parsing
+      parseParams = () => {
+        const query = location.search.substr(1);
+        let qResult = {};
+        query.split("&").forEach(function (part) {
+          const item = part.split("=");
+          qResult[item[0]] = decodeURIComponent(item[1]);
+        });
+        return qResult;
+      };
+
+      // get the language (l) param
+      const params = parseParams();
+
+      const formValuesEle = document.getElementById('formValues');
+      formValuesEle.value = JSON.stringify(params, null, 4);
+
+    </script>
+  </body>
+</html>

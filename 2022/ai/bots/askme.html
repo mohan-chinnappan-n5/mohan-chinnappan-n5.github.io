@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dialogflow Knowledge Feature Testing App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
+
+  <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+  <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css" />
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico">
+
+  <style>
+    h1 {
+      border-bottom: 1px solid #99ccff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Dialogflow Knowledge Feature Testing App</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Glossary
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="https://mohan-chinnappan-n.github.io/sfdc/data/sfdc-glossary.html?f=SFDC:Lightning%20Platform#/home">SFDC Glossary</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Videos
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=RCbgP1pAep0">Playing with Ask Me! chatbot
+              </a></li>
+              <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=7TntEs4rTDQ">Glossary app</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <div class="split split-horizontal" id="left">
+
+
+    <div id='s1-md' class='md2' data-trim='true'>
+      <iframe allow="microphone;" width="1200" height="800" name="df"
+        src="https://console.dialogflow.com/api-client/demo/embedded/d6e07c45-1523-4102-bf80-8fea7caf3caa">
+      </iframe>
+
+  
+    </div>
+  </div>
+
+
+  <div class="split split-horizontal" id="right">
+    <h3>Trained with Knowledge on</h3>
+    <ul class="list-group">
+      <li class="list-group-item">Salesforce, Shield, FSC, TCRM(EA) </li>
+      <li class="list-group-item">DBMS </li>
+      <li class="list-group-item">Farming </li>
+      <li class="list-group-item">Plumbing </li>
+      <li class="list-group-item">Plants </li>
+
+
+
+
+    </ul>
+
+  </div>
+
+
+
+
+  <script>
+    // read params
+    const query = location.search.substr(1);
+    var qresult = {};
+    query.split("&").forEach(function (part) {
+      var item = part.split("=");
+      qresult[item[0]] = decodeURIComponent(item[1]);
+    });
+
+
+    const url = qresult.f || 'default.md'
+    console.log(url);
+    Split(["#left", "#right"], { sizes: [70, 30] })
+
+  </script>
+
+  <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script>
+
+</body>
+
+</html>

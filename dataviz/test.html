@@ -1,0 +1,43 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChartJS</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+    <script src="lib/chartJSUtil.js"></script>
+</head>
+
+<body>
+
+    <div id="chart">
+        <canvas id="myChart" width="400" height="400"></canvas>
+
+        <script>
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            const data =   {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            }
+          
+            const myChart = new Chart(ctx, { "type": "bar", data}); 
+        </script>
+
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>

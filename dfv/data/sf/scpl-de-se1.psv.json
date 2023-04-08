@@ -1,0 +1,2774 @@
+[
+    {
+        "countryISO": "AU",
+        "Country": "Australia",
+        "stateISO": "AU-ACT",
+        "stateCode": "ACT",
+        "stateName": "Australian Capital Territory"
+    },
+    {
+        "countryISO": "AU",
+        "Country": "Australia",
+        "stateISO": "AU-NSW",
+        "stateCode": "NSW",
+        "stateName": "New South Wales"
+    },
+    {
+        "countryISO": "AU",
+        "Country": "Australia",
+        "stateISO": "AU-NT",
+        "stateCode": "NT",
+        "stateName": "Northern Territory"
+    },
+    {
+        "countryISO": "AU",
+        "Country": "Australia",
+        "stateISO": "AU-QLD",
+        "stateCode": "QLD",
+        "stateName": "Queensland"
+    },
+    {
+        "countryISO": "AU",
+        "Country": "Australia",
+        "stateISO": "AU-SA",
+        "stateCode": "SA",
+        "stateName": "South Australia"
+    },
+    {
+        "countryISO": "AU",
+        "Country": "Australia",
+        "stateISO": "AU-TAS",
+        "stateCode": "TAS",
+        "stateName": "Tasmania"
+    },
+    {
+        "countryISO": "AU",
+        "Country": "Australia",
+        "stateISO": "AU-VIC",
+        "stateCode": "VIC",
+        "stateName": "Victoria"
+    },
+    {
+        "countryISO": "AU",
+        "Country": "Australia",
+        "stateISO": "AU-WA",
+        "stateCode": "WA",
+        "stateName": "Western Australia"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-AC",
+        "stateCode": "AC",
+        "stateName": "Acre"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-AL",
+        "stateCode": "AL",
+        "stateName": "Alagoas"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-AM",
+        "stateCode": "AM",
+        "stateName": "Amazonas"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-AP",
+        "stateCode": "AP",
+        "stateName": "Amap\u00e1"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-BA",
+        "stateCode": "BA",
+        "stateName": "Bahia"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-CE",
+        "stateCode": "CE",
+        "stateName": "Cear\u00e1"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-DF",
+        "stateCode": "DF",
+        "stateName": "Distrito Federal"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-ES",
+        "stateCode": "ES",
+        "stateName": "Esp\u00edrito Santo"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-GO",
+        "stateCode": "GO",
+        "stateName": "Goi\u00e1s"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-MA",
+        "stateCode": "MA",
+        "stateName": "Maranh\u00e3o"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-MG",
+        "stateCode": "MG",
+        "stateName": "Minas Gerais"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-MS",
+        "stateCode": "MS",
+        "stateName": "Mato Grosso do Sul"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-MT",
+        "stateCode": "MT",
+        "stateName": "Mato Grosso"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-PA",
+        "stateCode": "PA",
+        "stateName": "Par\u00e1"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-PB",
+        "stateCode": "PB",
+        "stateName": "Para\u00edba"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-PE",
+        "stateCode": "PE",
+        "stateName": "Pernambuco"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-PI",
+        "stateCode": "PI",
+        "stateName": "Piau\u00ed"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-PR",
+        "stateCode": "PR",
+        "stateName": "Paran\u00e1"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-RJ",
+        "stateCode": "RJ",
+        "stateName": "Rio de Janeiro"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-RN",
+        "stateCode": "RN",
+        "stateName": "Rio Grande do Norte"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-RO",
+        "stateCode": "RO",
+        "stateName": "Rond\u00f4nia"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-RR",
+        "stateCode": "RR",
+        "stateName": "Roraima"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-RS",
+        "stateCode": "RS",
+        "stateName": "Rio Grande do Sul"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-SC",
+        "stateCode": "SC",
+        "stateName": "Santa Catarina"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-SE",
+        "stateCode": "SE",
+        "stateName": "Sergipe"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-SP",
+        "stateCode": "SP",
+        "stateName": "S\u00e3o Paulo"
+    },
+    {
+        "countryISO": "BR",
+        "Country": "Brazil",
+        "stateISO": "BR-TO",
+        "stateCode": "TO",
+        "stateName": "Tocantins"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-AB",
+        "stateCode": "AB",
+        "stateName": "Alberta"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-BC",
+        "stateCode": "BC",
+        "stateName": "British Columbia"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-MB",
+        "stateCode": "MB",
+        "stateName": "Manitoba"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-NB",
+        "stateCode": "NB",
+        "stateName": "New Brunswick"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-NL",
+        "stateCode": "NL",
+        "stateName": "Newfoundland and Labrador"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-NS",
+        "stateCode": "NS",
+        "stateName": "Nova Scotia"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-NT",
+        "stateCode": "NT",
+        "stateName": "Northwest Territories"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-NU",
+        "stateCode": "NU",
+        "stateName": "Nunavut"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-ON",
+        "stateCode": "ON",
+        "stateName": "Ontario"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-PE",
+        "stateCode": "PE",
+        "stateName": "Prince Edward Island"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-QC",
+        "stateCode": "QC",
+        "stateName": "Quebec"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-SK",
+        "stateCode": "SK",
+        "stateName": "Saskatchewan"
+    },
+    {
+        "countryISO": "CA",
+        "Country": "Canada",
+        "stateISO": "CA-YT",
+        "stateCode": "YT",
+        "stateName": "Yukon Territories"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-11",
+        "stateCode": "11",
+        "stateName": "Beijing"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-12",
+        "stateCode": "12",
+        "stateName": "Tianjin"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-13",
+        "stateCode": "13",
+        "stateName": "Hebei"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-14",
+        "stateCode": "14",
+        "stateName": "Shanxi"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-15",
+        "stateCode": "15",
+        "stateName": "Nei Mongol"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-21",
+        "stateCode": "21",
+        "stateName": "Liaoning"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-22",
+        "stateCode": "22",
+        "stateName": "Jilin"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-23",
+        "stateCode": "23",
+        "stateName": "Heilongjiang"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-31",
+        "stateCode": "31",
+        "stateName": "Shanghai"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-32",
+        "stateCode": "32",
+        "stateName": "Jiangsu"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-33",
+        "stateCode": "33",
+        "stateName": "Zhejiang"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-34",
+        "stateCode": "34",
+        "stateName": "Anhui"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-35",
+        "stateCode": "35",
+        "stateName": "Fujian"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-36",
+        "stateCode": "36",
+        "stateName": "Jiangxi"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-37",
+        "stateCode": "37",
+        "stateName": "Shandong"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-41",
+        "stateCode": "41",
+        "stateName": "Henan"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-42",
+        "stateCode": "42",
+        "stateName": "Hubei"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-43",
+        "stateCode": "43",
+        "stateName": "Hunan"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-44",
+        "stateCode": "44",
+        "stateName": "Guangdong"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-45",
+        "stateCode": "45",
+        "stateName": "Guangxi"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-46",
+        "stateCode": "46",
+        "stateName": "Hainan"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-50",
+        "stateCode": "50",
+        "stateName": "Chongqing"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-51",
+        "stateCode": "51",
+        "stateName": "Sichuan"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-52",
+        "stateCode": "52",
+        "stateName": "Guizhou"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-53",
+        "stateCode": "53",
+        "stateName": "Yunnan"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-54",
+        "stateCode": "54",
+        "stateName": "Xizang"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-61",
+        "stateCode": "61",
+        "stateName": "Shaanxi"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-62",
+        "stateCode": "62",
+        "stateName": "Gansu"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-63",
+        "stateCode": "63",
+        "stateName": "Qinghai"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-64",
+        "stateCode": "64",
+        "stateName": "Ningxia"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-65",
+        "stateCode": "65",
+        "stateName": "Xinjiang"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-71",
+        "stateCode": "71",
+        "stateName": "Taiwan"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-91",
+        "stateCode": "91",
+        "stateName": "Hong Kong"
+    },
+    {
+        "countryISO": "CN",
+        "Country": "China",
+        "stateISO": "CN-92",
+        "stateCode": "92",
+        "stateName": "Macao"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-CE",
+        "stateCode": "CE",
+        "stateName": "Clare"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-CN",
+        "stateCode": "CN",
+        "stateName": "Cavan"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-CO",
+        "stateCode": "CO",
+        "stateName": "Cork"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-CW",
+        "stateCode": "CW",
+        "stateName": "Carlow"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-D",
+        "stateCode": "D",
+        "stateName": "Dublin"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-DL",
+        "stateCode": "DL",
+        "stateName": "Donegal"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-G",
+        "stateCode": "G",
+        "stateName": "Galway"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-KE",
+        "stateCode": "KE",
+        "stateName": "Kildare"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-KK",
+        "stateCode": "KK",
+        "stateName": "Kilkenny"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-KY",
+        "stateCode": "KY",
+        "stateName": "Kerry"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-LD",
+        "stateCode": "LD",
+        "stateName": "Longford"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-LH",
+        "stateCode": "LH",
+        "stateName": "Louth"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-LK",
+        "stateCode": "LK",
+        "stateName": "Limerick"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-LM",
+        "stateCode": "LM",
+        "stateName": "Leitrim"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-LS",
+        "stateCode": "LS",
+        "stateName": "Laois"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-MH",
+        "stateCode": "MH",
+        "stateName": "Meath"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-MN",
+        "stateCode": "MN",
+        "stateName": "Monaghan"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-MO",
+        "stateCode": "MO",
+        "stateName": "Mayo"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-OY",
+        "stateCode": "OY",
+        "stateName": "Offaly"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-RN",
+        "stateCode": "RN",
+        "stateName": "Roscommon"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-SO",
+        "stateCode": "SO",
+        "stateName": "Sligo"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-TA",
+        "stateCode": "TA",
+        "stateName": "Tipperary"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-WD",
+        "stateCode": "WD",
+        "stateName": "Waterford"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-WH",
+        "stateCode": "WH",
+        "stateName": "Westmeath"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-WW",
+        "stateCode": "WW",
+        "stateName": "Wicklow"
+    },
+    {
+        "countryISO": "IE",
+        "Country": "Ireland",
+        "stateISO": "IE-WX",
+        "stateCode": "WX",
+        "stateName": "Wexford"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-AN",
+        "stateCode": "AN",
+        "stateName": "Andaman and Nicobar Islands"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-AP",
+        "stateCode": "AP",
+        "stateName": "Andhra Pradesh"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-AR",
+        "stateCode": "AR",
+        "stateName": "Arunachal Pradesh"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-AS",
+        "stateCode": "AS",
+        "stateName": "Assam"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-BR",
+        "stateCode": "BR",
+        "stateName": "Bihar"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-CH",
+        "stateCode": "CH",
+        "stateName": "Chandigarh"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-CT",
+        "stateCode": "CT",
+        "stateName": "Chhattisgarh"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-DD",
+        "stateCode": "DD",
+        "stateName": "Daman and Diu"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-DL",
+        "stateCode": "DL",
+        "stateName": "Delhi"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-DN",
+        "stateCode": "DN",
+        "stateName": "Dadra and Nagar Haveli"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-GA",
+        "stateCode": "GA",
+        "stateName": "Goa"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-GJ",
+        "stateCode": "GJ",
+        "stateName": "Gujarat"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-HP",
+        "stateCode": "HP",
+        "stateName": "Himachal Pradesh"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-HR",
+        "stateCode": "HR",
+        "stateName": "Haryana"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-JH",
+        "stateCode": "JH",
+        "stateName": "Jharkhand"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-JK",
+        "stateCode": "JK",
+        "stateName": "Jammu and Kashmir"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-KA",
+        "stateCode": "KA",
+        "stateName": "Karnataka"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-KL",
+        "stateCode": "KL",
+        "stateName": "Kerala"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-LD",
+        "stateCode": "LD",
+        "stateName": "Lakshadweep"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-MH",
+        "stateCode": "MH",
+        "stateName": "Maharashtra"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-ML",
+        "stateCode": "ML",
+        "stateName": "Meghalaya"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-MN",
+        "stateCode": "MN",
+        "stateName": "Manipur"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-MP",
+        "stateCode": "MP",
+        "stateName": "Madhya Pradesh"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-MZ",
+        "stateCode": "MZ",
+        "stateName": "Mizoram"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-NL",
+        "stateCode": "NL",
+        "stateName": "Nagaland"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-OR",
+        "stateCode": "OR",
+        "stateName": "Odisha"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-PB",
+        "stateCode": "PB",
+        "stateName": "Punjab"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-PY",
+        "stateCode": "PY",
+        "stateName": "Puducherry"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-RJ",
+        "stateCode": "RJ",
+        "stateName": "Rajasthan"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-SK",
+        "stateCode": "SK",
+        "stateName": "Sikkim"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-TG",
+        "stateCode": "TG",
+        "stateName": "Telangana"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-TN",
+        "stateCode": "TN",
+        "stateName": "Tamil Nadu"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-TR",
+        "stateCode": "TR",
+        "stateName": "Tripura"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-UP",
+        "stateCode": "UP",
+        "stateName": "Uttar Pradesh"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-UT",
+        "stateCode": "UT",
+        "stateName": "Uttarakhand"
+    },
+    {
+        "countryISO": "IN",
+        "Country": "India",
+        "stateISO": "IN-WB",
+        "stateCode": "WB",
+        "stateName": "West Bengal"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-AG",
+        "stateCode": "AG",
+        "stateName": "Agrigento"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-AL",
+        "stateCode": "AL",
+        "stateName": "Alessandria"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-AN",
+        "stateCode": "AN",
+        "stateName": "Ancona"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-AO",
+        "stateCode": "AO",
+        "stateName": "Aosta"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-AP",
+        "stateCode": "AP",
+        "stateName": "Ascoli Piceno"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-AQ",
+        "stateCode": "AQ",
+        "stateName": "L&apos;Aquila"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-AR",
+        "stateCode": "AR",
+        "stateName": "Arezzo"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-AT",
+        "stateCode": "AT",
+        "stateName": "Asti"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-AV",
+        "stateCode": "AV",
+        "stateName": "Avellino"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-BA",
+        "stateCode": "BA",
+        "stateName": "Bari"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-BG",
+        "stateCode": "BG",
+        "stateName": "Bergamo"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-BI",
+        "stateCode": "BI",
+        "stateName": "Biella"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-BL",
+        "stateCode": "BL",
+        "stateName": "Belluno"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-BN",
+        "stateCode": "BN",
+        "stateName": "Benevento"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-BO",
+        "stateCode": "BO",
+        "stateName": "Bologna"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-BR",
+        "stateCode": "BR",
+        "stateName": "Brindisi"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-BS",
+        "stateCode": "BS",
+        "stateName": "Brescia"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-BT",
+        "stateCode": "BT",
+        "stateName": "Barletta-Andria-Trani"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-BZ",
+        "stateCode": "BZ",
+        "stateName": "Bolzano"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CA",
+        "stateCode": "CA",
+        "stateName": "Cagliari"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CB",
+        "stateCode": "CB",
+        "stateName": "Campobasso"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CE",
+        "stateCode": "CE",
+        "stateName": "Caserta"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CH",
+        "stateCode": "CH",
+        "stateName": "Chieti"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CI",
+        "stateCode": "CI",
+        "stateName": "Carbonia-Iglesias"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CL",
+        "stateCode": "CL",
+        "stateName": "Caltanissetta"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CN",
+        "stateCode": "CN",
+        "stateName": "Cuneo"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CO",
+        "stateCode": "CO",
+        "stateName": "Como"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CR",
+        "stateCode": "CR",
+        "stateName": "Cremona"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CS",
+        "stateCode": "CS",
+        "stateName": "Cosenza"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CT",
+        "stateCode": "CT",
+        "stateName": "Catania"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-CZ",
+        "stateCode": "CZ",
+        "stateName": "Catanzaro"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-EN",
+        "stateCode": "EN",
+        "stateName": "Enna"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-FC",
+        "stateCode": "FC",
+        "stateName": "Forl\u00ec-Cesena"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-FE",
+        "stateCode": "FE",
+        "stateName": "Ferrara"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-FG",
+        "stateCode": "FG",
+        "stateName": "Foggia"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-FI",
+        "stateCode": "FI",
+        "stateName": "Florence"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-FM",
+        "stateCode": "FM",
+        "stateName": "Fermo"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-FR",
+        "stateCode": "FR",
+        "stateName": "Frosinone"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-GE",
+        "stateCode": "GE",
+        "stateName": "Genoa"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-GO",
+        "stateCode": "GO",
+        "stateName": "Gorizia"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-GR",
+        "stateCode": "GR",
+        "stateName": "Grosseto"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-IM",
+        "stateCode": "IM",
+        "stateName": "Imperia"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-IS",
+        "stateCode": "IS",
+        "stateName": "Isernia"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-KR",
+        "stateCode": "KR",
+        "stateName": "Crotone"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-LC",
+        "stateCode": "LC",
+        "stateName": "Lecco"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-LE",
+        "stateCode": "LE",
+        "stateName": "Lecce"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-LI",
+        "stateCode": "LI",
+        "stateName": "Livorno"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-LO",
+        "stateCode": "LO",
+        "stateName": "Lodi"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-LT",
+        "stateCode": "LT",
+        "stateName": "Latina"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-LU",
+        "stateCode": "LU",
+        "stateName": "Lucca"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-MB",
+        "stateCode": "MB",
+        "stateName": "Monza and Brianza"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-MC",
+        "stateCode": "MC",
+        "stateName": "Macerata"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-ME",
+        "stateCode": "ME",
+        "stateName": "Messina"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-MI",
+        "stateCode": "MI",
+        "stateName": "Milan"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-MN",
+        "stateCode": "MN",
+        "stateName": "Mantua"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-MO",
+        "stateCode": "MO",
+        "stateName": "Modena"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-MS",
+        "stateCode": "MS",
+        "stateName": "Massa and Carrara"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-MT",
+        "stateCode": "MT",
+        "stateName": "Matera"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-NA",
+        "stateCode": "NA",
+        "stateName": "Naples"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-NO",
+        "stateCode": "NO",
+        "stateName": "Novara"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-NU",
+        "stateCode": "NU",
+        "stateName": "Nuoro"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-OG",
+        "stateCode": "OG",
+        "stateName": "Ogliastra"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-OR",
+        "stateCode": "OR",
+        "stateName": "Oristano"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-OT",
+        "stateCode": "OT",
+        "stateName": "Olbia-Tempio"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PA",
+        "stateCode": "PA",
+        "stateName": "Palermo"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PC",
+        "stateCode": "PC",
+        "stateName": "Piacenza"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PD",
+        "stateCode": "PD",
+        "stateName": "Padua"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PE",
+        "stateCode": "PE",
+        "stateName": "Pescara"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PG",
+        "stateCode": "PG",
+        "stateName": "Perugia"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PI",
+        "stateCode": "PI",
+        "stateName": "Pisa"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PN",
+        "stateCode": "PN",
+        "stateName": "Pordenone"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PO",
+        "stateCode": "PO",
+        "stateName": "Prato"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PR",
+        "stateCode": "PR",
+        "stateName": "Parma"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PT",
+        "stateCode": "PT",
+        "stateName": "Pistoia"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PU",
+        "stateCode": "PU",
+        "stateName": "Pesaro and Urbino"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PV",
+        "stateCode": "PV",
+        "stateName": "Pavia"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-PZ",
+        "stateCode": "PZ",
+        "stateName": "Potenza"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-RA",
+        "stateCode": "RA",
+        "stateName": "Ravenna"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-RC",
+        "stateCode": "RC",
+        "stateName": "Reggio Calabria"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-RE",
+        "stateCode": "RE",
+        "stateName": "Reggio Emilia"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-RG",
+        "stateCode": "RG",
+        "stateName": "Ragusa"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-RI",
+        "stateCode": "RI",
+        "stateName": "Rieti"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-RM",
+        "stateCode": "RM",
+        "stateName": "Rome"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-RN",
+        "stateCode": "RN",
+        "stateName": "Rimini"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-RO",
+        "stateCode": "RO",
+        "stateName": "Rovigo"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-SA",
+        "stateCode": "SA",
+        "stateName": "Salerno"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-SI",
+        "stateCode": "SI",
+        "stateName": "Siena"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-SO",
+        "stateCode": "SO",
+        "stateName": "Sondrio"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-SP",
+        "stateCode": "SP",
+        "stateName": "La Spezia"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-SR",
+        "stateCode": "SR",
+        "stateName": "Syracuse"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-SS",
+        "stateCode": "SS",
+        "stateName": "Sassari"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-SV",
+        "stateCode": "SV",
+        "stateName": "Savona"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-TA",
+        "stateCode": "TA",
+        "stateName": "Taranto"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-TE",
+        "stateCode": "TE",
+        "stateName": "Teramo"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-TN",
+        "stateCode": "TN",
+        "stateName": "Trento"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-TO",
+        "stateCode": "TO",
+        "stateName": "Turin"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-TP",
+        "stateCode": "TP",
+        "stateName": "Trapani"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-TR",
+        "stateCode": "TR",
+        "stateName": "Terni"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-TS",
+        "stateCode": "TS",
+        "stateName": "Trieste"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-TV",
+        "stateCode": "TV",
+        "stateName": "Treviso"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-UD",
+        "stateCode": "UD",
+        "stateName": "Udine"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-VA",
+        "stateCode": "VA",
+        "stateName": "Varese"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-VB",
+        "stateCode": "VB",
+        "stateName": "Verbano-Cusio-Ossola"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-VC",
+        "stateCode": "VC",
+        "stateName": "Vercelli"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-VE",
+        "stateCode": "VE",
+        "stateName": "Venice"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-VI",
+        "stateCode": "VI",
+        "stateName": "Vicenza"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-VR",
+        "stateCode": "VR",
+        "stateName": "Verona"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-VS",
+        "stateCode": "VS",
+        "stateName": "Medio Campidano"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-VT",
+        "stateCode": "VT",
+        "stateName": "Viterbo"
+    },
+    {
+        "countryISO": "IT",
+        "Country": "Italy",
+        "stateISO": "IT-VV",
+        "stateCode": "VV",
+        "stateName": "Vibo Valentia"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-01",
+        "stateCode": "01",
+        "stateName": "Hokkaido"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-02",
+        "stateCode": "02",
+        "stateName": "Akita"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-03",
+        "stateCode": "03",
+        "stateName": "Iwate"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-04",
+        "stateCode": "04",
+        "stateName": "Miyagi"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-05",
+        "stateCode": "05",
+        "stateName": "Aichi"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-06",
+        "stateCode": "06",
+        "stateName": "Yamagata"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-07",
+        "stateCode": "07",
+        "stateName": "Fukushima"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-08",
+        "stateCode": "08",
+        "stateName": "Ibaraki"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-09",
+        "stateCode": "09",
+        "stateName": "Tochigi"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-10",
+        "stateCode": "10",
+        "stateName": "Gunma"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-11",
+        "stateCode": "11",
+        "stateName": "Saitama"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-12",
+        "stateCode": "12",
+        "stateName": "Chiba"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-13",
+        "stateCode": "13",
+        "stateName": "Tokyo"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-14",
+        "stateCode": "14",
+        "stateName": "Kanagawa"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-15",
+        "stateCode": "15",
+        "stateName": "Niigata"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-16",
+        "stateCode": "16",
+        "stateName": "Toyama"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-17",
+        "stateCode": "17",
+        "stateName": "Ishikawa"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-18",
+        "stateCode": "18",
+        "stateName": "Fukui"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-19",
+        "stateCode": "19",
+        "stateName": "Yamanashi"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-20",
+        "stateCode": "20",
+        "stateName": "Nagano"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-21",
+        "stateCode": "21",
+        "stateName": "Gifu"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-22",
+        "stateCode": "22",
+        "stateName": "Shizuoka"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-23",
+        "stateCode": "23",
+        "stateName": "Aomori"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-24",
+        "stateCode": "24",
+        "stateName": "Mie"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-25",
+        "stateCode": "25",
+        "stateName": "Shiga"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-26",
+        "stateCode": "26",
+        "stateName": "Kyoto"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-27",
+        "stateCode": "27",
+        "stateName": "Osaka"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-28",
+        "stateCode": "28",
+        "stateName": "Hyogo"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-29",
+        "stateCode": "29",
+        "stateName": "Nara"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-30",
+        "stateCode": "30",
+        "stateName": "Wakayama"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-31",
+        "stateCode": "31",
+        "stateName": "Tottori"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-32",
+        "stateCode": "32",
+        "stateName": "Shimane"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-33",
+        "stateCode": "33",
+        "stateName": "Okayama"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-34",
+        "stateCode": "34",
+        "stateName": "Hiroshima"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-35",
+        "stateCode": "35",
+        "stateName": "Yamaguchi"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-36",
+        "stateCode": "36",
+        "stateName": "Tokushima"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-37",
+        "stateCode": "37",
+        "stateName": "Kagawa"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-38",
+        "stateCode": "38",
+        "stateName": "Ehime"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-39",
+        "stateCode": "39",
+        "stateName": "Kochi"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-40",
+        "stateCode": "40",
+        "stateName": "Fukuoka"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-41",
+        "stateCode": "41",
+        "stateName": "Saga"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-42",
+        "stateCode": "42",
+        "stateName": "Nagasaki"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-43",
+        "stateCode": "43",
+        "stateName": "Kumamoto"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-44",
+        "stateCode": "44",
+        "stateName": "Oita"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-45",
+        "stateCode": "45",
+        "stateName": "Miyazaki"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-46",
+        "stateCode": "46",
+        "stateName": "Kagoshima"
+    },
+    {
+        "countryISO": "JP",
+        "Country": "Japan",
+        "stateISO": "JP-47",
+        "stateCode": "47",
+        "stateName": "Okinawa"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-AG",
+        "stateCode": "AG",
+        "stateName": "Aguascalientes"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-BC",
+        "stateCode": "BC",
+        "stateName": "Baja California"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-BS",
+        "stateCode": "BS",
+        "stateName": "Baja California Sur"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-CH",
+        "stateCode": "CH",
+        "stateName": "Chihuahua"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-CL",
+        "stateCode": "CL",
+        "stateName": "Colima"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-CM",
+        "stateCode": "CM",
+        "stateName": "Campeche"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-CO",
+        "stateCode": "CO",
+        "stateName": "Coahuila"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-CS",
+        "stateCode": "CS",
+        "stateName": "Chiapas"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-DF",
+        "stateCode": "DF",
+        "stateName": "Federal District"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-DG",
+        "stateCode": "DG",
+        "stateName": "Durango"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-GR",
+        "stateCode": "GR",
+        "stateName": "Guerrero"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-GT",
+        "stateCode": "GT",
+        "stateName": "Guanajuato"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-HG",
+        "stateCode": "HG",
+        "stateName": "Hidalgo"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-JA",
+        "stateCode": "JA",
+        "stateName": "Jalisco"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-ME",
+        "stateCode": "ME",
+        "stateName": "Mexico State"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-MI",
+        "stateCode": "MI",
+        "stateName": "Michoac\u00e1n"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-MO",
+        "stateCode": "MO",
+        "stateName": "Morelos"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-NA",
+        "stateCode": "NA",
+        "stateName": "Nayarit"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-NL",
+        "stateCode": "NL",
+        "stateName": "Nuevo Le\u00f3n"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-OA",
+        "stateCode": "OA",
+        "stateName": "Oaxaca"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-PB",
+        "stateCode": "PB",
+        "stateName": "Puebla"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-QE",
+        "stateCode": "QE",
+        "stateName": "Quer\u00e9taro"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-QR",
+        "stateCode": "QR",
+        "stateName": "Quintana Roo"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-SI",
+        "stateCode": "SI",
+        "stateName": "Sinaloa"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-SL",
+        "stateCode": "SL",
+        "stateName": "San Luis Potos\u00ed"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-SO",
+        "stateCode": "SO",
+        "stateName": "Sonora"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-TB",
+        "stateCode": "TB",
+        "stateName": "Tabasco"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-TL",
+        "stateCode": "TL",
+        "stateName": "Tlaxcala"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-TM",
+        "stateCode": "TM",
+        "stateName": "Tamaulipas"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-VE",
+        "stateCode": "VE",
+        "stateName": "Veracruz"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-YU",
+        "stateCode": "YU",
+        "stateName": "Yucat\u00e1n"
+    },
+    {
+        "countryISO": "MX",
+        "Country": "Mexico",
+        "stateISO": "MX-ZA",
+        "stateCode": "ZA",
+        "stateName": "Zacatecas"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-AA",
+        "stateCode": "AA",
+        "stateName": "Armed Forces Americas"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-AE",
+        "stateCode": "AE",
+        "stateName": "Armed Forces Europe"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-AK",
+        "stateCode": "AK",
+        "stateName": "Alaska"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-AL",
+        "stateCode": "AL",
+        "stateName": "Alabama"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-AP",
+        "stateCode": "AP",
+        "stateName": "Armed Forces Pacific"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-AR",
+        "stateCode": "AR",
+        "stateName": "Arkansas"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-AS",
+        "stateCode": "AS",
+        "stateName": "American Samoa"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-AZ",
+        "stateCode": "AZ",
+        "stateName": "Arizona"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-CA",
+        "stateCode": "CA",
+        "stateName": "California"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-CO",
+        "stateCode": "CO",
+        "stateName": "Colorado"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-CT",
+        "stateCode": "CT",
+        "stateName": "Connecticut"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-DC",
+        "stateCode": "DC",
+        "stateName": "District of Columbia"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-DE",
+        "stateCode": "DE",
+        "stateName": "Delaware"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-FL",
+        "stateCode": "FL",
+        "stateName": "Florida"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-FM",
+        "stateCode": "FM",
+        "stateName": "Federated Micronesia"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-GA",
+        "stateCode": "GA",
+        "stateName": "Georgia"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-GU",
+        "stateCode": "GU",
+        "stateName": "Guam"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-HI",
+        "stateCode": "HI",
+        "stateName": "Hawaii"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-IA",
+        "stateCode": "IA",
+        "stateName": "Iowa"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-ID",
+        "stateCode": "ID",
+        "stateName": "Idaho"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-IL",
+        "stateCode": "IL",
+        "stateName": "Illinois"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-IN",
+        "stateCode": "IN",
+        "stateName": "Indiana"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-KS",
+        "stateCode": "KS",
+        "stateName": "Kansas"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-KY",
+        "stateCode": "KY",
+        "stateName": "Kentucky"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-LA",
+        "stateCode": "LA",
+        "stateName": "Louisiana"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-MA",
+        "stateCode": "MA",
+        "stateName": "Massachusetts"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-MD",
+        "stateCode": "MD",
+        "stateName": "Maryland"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-ME",
+        "stateCode": "ME",
+        "stateName": "Maine"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-MH",
+        "stateCode": "MH",
+        "stateName": "Marshall Islands"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-MI",
+        "stateCode": "MI",
+        "stateName": "Michigan"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-MN",
+        "stateCode": "MN",
+        "stateName": "Minnesota"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-MO",
+        "stateCode": "MO",
+        "stateName": "Missouri"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-MP",
+        "stateCode": "MP",
+        "stateName": "Northern Mariana Islands"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-MS",
+        "stateCode": "MS",
+        "stateName": "Mississippi"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-MT",
+        "stateCode": "MT",
+        "stateName": "Montana"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-NC",
+        "stateCode": "NC",
+        "stateName": "North Carolina"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-ND",
+        "stateCode": "ND",
+        "stateName": "North Dakota"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-NE",
+        "stateCode": "NE",
+        "stateName": "Nebraska"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-NH",
+        "stateCode": "NH",
+        "stateName": "New Hampshire"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-NJ",
+        "stateCode": "NJ",
+        "stateName": "New Jersey"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-NM",
+        "stateCode": "NM",
+        "stateName": "New Mexico"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-NV",
+        "stateCode": "NV",
+        "stateName": "Nevada"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-NY",
+        "stateCode": "NY",
+        "stateName": "New York"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-OH",
+        "stateCode": "OH",
+        "stateName": "Ohio"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-OK",
+        "stateCode": "OK",
+        "stateName": "Oklahoma"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-OR",
+        "stateCode": "OR",
+        "stateName": "Oregon"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-PA",
+        "stateCode": "PA",
+        "stateName": "Pennsylvania"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-PR",
+        "stateCode": "PR",
+        "stateName": "Puerto Rico"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-PW",
+        "stateCode": "PW",
+        "stateName": "Palau"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-RI",
+        "stateCode": "RI",
+        "stateName": "Rhode Island"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-SC",
+        "stateCode": "SC",
+        "stateName": "South Carolina"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-SD",
+        "stateCode": "SD",
+        "stateName": "South Dakota"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-TN",
+        "stateCode": "TN",
+        "stateName": "Tennessee"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-TX",
+        "stateCode": "TX",
+        "stateName": "Texas"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-UM",
+        "stateCode": "UM",
+        "stateName": "United States Minor Outlying Islands"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-UT",
+        "stateCode": "UT",
+        "stateName": "Utah"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-VA",
+        "stateCode": "VA",
+        "stateName": "Virginia"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-VI",
+        "stateCode": "VI",
+        "stateName": "US Virgin Islands"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-VT",
+        "stateCode": "VT",
+        "stateName": "Vermont"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-WA",
+        "stateCode": "WA",
+        "stateName": "Washington"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-WI",
+        "stateCode": "WI",
+        "stateName": "Wisconsin"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-WV",
+        "stateCode": "WV",
+        "stateName": "West Virginia"
+    },
+    {
+        "countryISO": "US",
+        "Country": "United States",
+        "stateISO": "US-WY",
+        "stateCode": "WY",
+        "stateName": "Wyoming"
+    }
+]

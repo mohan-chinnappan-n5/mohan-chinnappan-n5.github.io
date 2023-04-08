@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://unpkg.com/@faker-js/faker"></script>
+
+</head>
+<body>
+
+
+    <script>
+        // https://fakerjs.dev/guide/#installation
+
+          // Caitlyn Kerluke
+  const randomName = faker.name.findName();
+
+  // Rusty@arne.info
+  const randomEmail = faker.internet.email();
+
+  // An object representing a random contact card
+  // containing many properties
+  const randomCard = faker.helpers.createCard();
+   const spec =
+        {
+            "columns": [
+              "name.firstName",
+              "name.lastName",
+              "name.jobArea",
+              "phone.phoneNumber",
+              "date.weekday",
+              "internet.email",
+              "random.number",
+              "random.uuid",
+              "random.word"
+            ]
+          };
+
+
+        const genRec = (spec, count) => {
+            const recs = [];
+            const header = [];
+            const columns = spec['columns']
+            columns.forEach(col => {
+              header.push(`"${col}"`);
+            });
+            console.log(header.join(','));
+        
+            for (let  i = 0; i < count; i++) {
+                const rec = {};
+                for (const key of columns) {
+                         const items = key.split('.');
+                         if (!rec[key]) { rec[key] = []; }
+                        rec [key] =  faker[items[0]][items[1]]() ;
+                    };
+        
+                const line = [];
+                for (const key of columns) {
+                  line.push( `"${rec[key]}"`);
+                };
+                console.log(line.join(','));
+                recs.push(rec);
+            }
+            return recs;
+          }
+
+        genRec(spec, 10);
+        
+    </script>
+    
+</body>
+</html>

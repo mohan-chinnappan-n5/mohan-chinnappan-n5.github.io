@@ -1,0 +1,1 @@
+sed -n -e '/^"vlocity_ins/p' data/vlocity_ins.csv  > data/vlocity_ins_small.csv

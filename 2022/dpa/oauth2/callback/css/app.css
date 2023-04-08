@@ -1,0 +1,32 @@
+/* app.css */
+
+textarea {
+    background-color: black;
+    color: wheat;
+    font-family: Monaco;
+    border-radius: 10px;
+}
+.code {
+    background-color:rgb(238, 231, 243);
+    border-radius: 10px;
+
+}
+
+input[id=regex] {
+    background-color: rgb(23, 19, 46);
+    color: wheat;
+    font-family: Monaco;
+}
+
+label {
+    font-weight: bold;
+}
+.stuff {
+    margin-left: 20px;
+}
+.regex {
+        background-color: black; 
+        color:wheat; 
+        font-family:Monaco;
+        border-radius: 10px; 
+}

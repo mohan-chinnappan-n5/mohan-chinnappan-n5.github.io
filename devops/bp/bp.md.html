@@ -1,0 +1,442 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>DevOps Best Practices</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
+</head>
+<body>
+
+   <script>
+
+        void ((function () 
+        { 
+            andiScript = document.createElement('script'); 
+            andiScript.setAttribute('src', 'https://www.ssa.gov/accessibility/andi/andi.js'); 
+            document.body.appendChild(andiScript) })());
+
+    </script>
+<google-codelab id="DevOps Best Practices" title="DevOps Best Practices" environment="web" >
+
+<google-codelab-step label=' Goals'>
+<div id='s0-md' class='md' data-trim='false'>
+  
+- Continuous development
+    - planning and coding phases of the DevOps lifecycle with version-control 
+- Continuous testing
+    -  automated, pre-scheduled, continued code tests as application code is being written or updated.
+- Continuous integration (CI)
+    - rapid feedback between testing and development to quickly identify and resolve code issues.
+- Continuous delivery 
+    - automates the delivery of code changes, after testing, to a pre-production or staging environment.
+- Continuous deployment (CD)
+    - automates the release of new or changed code into production.
+- Continuous monitoring
+    - monitoring of both the code in operation and the underlying infrastructure that supports it. A feedback loop that reports on bugs or issues then makes its way back to development.
+ 
+
+## Salesforce Specific
+
+1. Clean data/metadata (automated)
+2. Clean Scratch orgs (automated)
+3. Code scan integration, (automated)
+
+
+    - codescan : ```catch them young```
+    - ![sonarlint](img/sq-lint-0.png)
+        - [**At Developer Side**](#1)
+         - [PMD Scan at IDE VS Code](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner) 
+         - [Sonar Lint at IDE VS Code](https://www.sonarlint.org/vscode))
+       
+        - **In the pipeline**
+            -  [Sonar-scanner in the pipeline](#2)
+
+4. Integrating tools like [org.viz](https://mohan-chinnappan-n5.github.io/sf-security/security.md.html#10) 
+
+5. Performance measurements
+    - speedtest.js [Lightning Performance tips](https://mohan-chinnappan-n2.github.io/2019/lex/perf.html)
+    - [Lighthouse](https://developers.google.com/web/tools/lighthouse)
+
+6. Integration with Slack
+
+7. Test-Automation
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Code Scan at Developer side'>
+<div id='s1-md' class='md' data-trim='false'>
+  
+- ![code-scan at dev](img/sq-lint-0.png)
+
+- [PMD at developer side (VS code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner)
+
+- ![PMD VS Code](img/pmd-vscode-1.png)
+
+- ![PMD VS Code demo](https://github.com/mohan-chinnappan-n/vscode-apex-pmd/raw/master/images/code-scan-vscode-6.gif)
+
+## SonarLint
+- [SonarLint](https://www.sonarqube.org/sonarlint/?referrer=sonarqube-welcome)
+    - [VS Code SonarLint](https://www.sonarlint.org/vscode)
+- ![SonarLint Demo](img/sonarLint-1.webm.gif)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Salesforce Lightning Code Scanner'>
+<div id='s2-md' class='md' data-trim='false'>
+  
+- [Salesforce Lightning Code Scanner App](https://mohansun-slds-lint.herokuapp.com/)
+
+
+
+![Demo](img/slds-scanner-1.webm.gif)
+- Note **MFA** (Multi-factor Authentication in Action in above app)
+
+- You can paste your code for scanning
+- ![code scan slds](https://mohan-chinnappan-n.github.io/sfdc/img/dx/lx-linter-2.png)
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Code Scan in the deployment pipeline'>
+<div id='s3-md' class='md' data-trim='false'>
+  - Sonar-scanner in the pipeline
+
+- [Download SonarQube](https://www.sonarqube.org/success-download-community-edition/)
+
+## Start SonarQube Server
+```
+cd codescan/sonarqube/sonarqube-9.3.0.51899
+
+./bin/macosx-universal-64/sonar.sh console
+
+```
+
+![allow sq](img/sq-allow-1.png)
+
+![sq server starting](img/sq-server-start.png)
+
+## Install sonar-scanner on mac
+```
+brew install sonar-scanner
+
+```
+
+## Setting up the project
+![setting up sonar project](img/sq-create-project.webm.gif)
+
+
+- Running
+```
+sonar-scanner \
+  -Dsonar.projectKey=pythontest \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://localhost:9000 \
+  -Dsonar.login=c0fbb7cac9403c341a51307a69ad9f1104e9744c
+
+```
+
+- Note: ``` -Dsonar.login=c0fbb7cac9403c341a51307a69ad9f1104e9744c``` is the project key
+
+- Viewing scanner output
+
+- ![scanner output](img/sq-output-1.webm.gif)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' SonarLint'>
+<div id='s4-md' class='md' data-trim='false'>
+  ![sonarlint](img/sq-lint-0.png)
+
+![running](img/sq-scanner-1.webm.gif)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' CI'>
+<div id='s5-md' class='md' data-trim='false'>
+  
+- ![CI-1](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-elements.png)
+
+- Core Principles
+    - ![CI Core principles](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-principles.png)
+
+- Before DX
+    - ![Before DX](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-auto-before-dx-0.png)
+    - ![Before DX-2](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-auto-before-dx.png)
+- With DX
+    - ![With DX-1](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-auto-dx-2.png)
+    - ![pipeline](https://mohan-chinnappan-n.github.io/sfdc/img/dx/CI-del-pipeline-2.png)
+
+- More Testing - better product
+    - ![More testing](https://mohan-chinnappan-n.github.io/sfdc/img/dx/moretesting.png)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' CI - Jenkins'>
+<div id='s6-md' class='md' data-trim='false'>
+  
+- ![Demo](https://mohan-chinnappan-n.github.io/dx/img/dx-jenkins-0.gif)
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Docker - SFDX - DevOps '>
+<div id='s7-md' class='md' data-trim='false'>
+  
+## Sample docker build
+
+- [Dockerfile](https://mohan-chinnappan-n5.github.io/devops/docker/Dockerfile)
+
+
+
+```
+docker build  -t mohanchinnappan/sfdx-devops  .
+
+```
+
+
+```
+
++] Building 0.4s (19/19) FINISHED                                                                                                                                
+ => [internal] load build definition from Dockerfile                                                                                                         0.0s
+ => => transferring dockerfile: 37B                                                                                                                          0.0s
+ => [internal] load .dockerignore                                                                                                                            0.0s
+ => => transferring context: 2B                                                                                                                              0.0s
+ => [internal] load metadata for docker.io/library/ubuntu:21.04                                                                                              0.3s
+ => [ 1/15] FROM docker.io/library/ubuntu:21.04@sha256:ba394fabd516b39ccf8597ec656a9ddd7d0a2688ed8cb373ca7ac9b6fe67848f                                      0.0s
+ => CACHED [ 2/15] RUN apt-get update                                                                                                                        0.0s
+ => CACHED [ 3/15] RUN DEBIAN_FRONTEND=noninteractive apt-get install -qq         curl         sudo         git         jq         zip         vim           0.0s
+ => CACHED [ 4/15] RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -     && sudo apt-get install -qq nodejs                                0.0s
+ => CACHED [ 5/15] RUN apt-get update -qq &&     DEBIAN_FRONTEND=noninteractive     apt-get install -qq openjdk-8-jdk &&     apt-get clean -qq &&  rm -rf /  0.0s
+ => CACHED [ 6/15] RUN export JAVA_HOME                                                                                                                      0.0s
+ => CACHED [ 7/15] RUN apt-get update     && apt-get install -y wget gnupg     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-  0.0s
+ => CACHED [ 8/15] RUN mkdir -p /sfdx_plugins/.local/share &&     mkdir -p /sfdx_plugins/.config &&     mkdir -p /sfdx_plugins/.cache &&     chmod -R 777 s  0.0s
+ => CACHED [ 9/15] RUN export XDG_DATA_HOME &&     export XDG_CONFIG_HOME &&     export XDG_CACHE_HOME                                                       0.0s
+ => CACHED [10/15] RUN npm install --global sfdx-cli@latest                                                                                                  0.0s
+ => CACHED [11/15] RUN groupadd -r devops && useradd -r -ms /bin/bash -g devops douser1                                                                      0.0s
+ => CACHED [12/15] RUN echo 'y' | sfdx plugins:install sfdmu@4.11.1                                                                                          0.0s
+ => CACHED [13/15] RUN echo 'y' | sfdx plugins:install sfpowerkit@4.1.5                                                                                      0.0s
+ => CACHED [14/15] RUN echo 'y' | sfdx plugins:install @dxatscale/sfpowerscripts@10.2.15                                                                     0.0s
+ => CACHED [15/15] RUN echo 'y' | sfdx plugins:install sfdx-browserforce-plugin@2.8.0                                                                        0.0s
+ => exporting to image                                                                                                                                       0.0s
+ => => exporting layers                                                                                                                                      0.0s
+ => => writing image sha256:497b2858bb6c585683d5dfc3c015e1a0209890c6e5bc261e6d3aa932ab284cf4                                                                 0.0s
+ => => naming to docker.io/mohanchinnappan/sfdx-devops                                                                                                       0.0s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+```
+- ![docker app images list](https://mohan-chinnappan-n5.github.io/devops/img/docker-app-3.png)
+
+
+## List
+```
+
+docker image ls                       
+
+REPOSITORY                    TAG       IMAGE ID       CREATED          SIZE
+mohanchinnappan/sfdx-devops   latest    497b2858bb6c   51 minutes ago   3.7GB
+chevdor/jupyter-rust          latest    adbad4228be3   14 months ago    1.8GB
+
+```
+
+## Run
+```
+docker run -it 497b2858bb6c /bin/bash
+
+```
+
+```
+douser1@ccc4fea347e5:/$ sfdx plugins
+
+You acknowledge and agree that the CLI tool may collect usage information, user environment, and crash reports for the purposes of providing services or functions that are relevant to use of the CLI tool and product improvements.
+
+@dxatscale/sfpowerscripts 10.2.15 (10.2.15)
+sfdx-browserforce-plugin 2.8.0 (2.8.0)
+sfpowerkit 4.1.5 (4.1.5)
+
+douser1@ccc4fea347e5:/$ uname
+Linux
+
+douser1@ccc4fea347e5:/$ whoami 
+douser1
+
+```
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Branching'>
+<div id='s8-md' class='md' data-trim='false'>
+  ```
+SUGGESTION!
+Lineup Branch for every env
+2 developers (my and yer)
+develop branch is team's feature branch
+integrate branch is lined with what is deployed to UAT
+master branch is lined with Staging and Prod
+```
+
+
+
+- ![git-b0](img/git/gitb-0.png)
+
+- ![git-b1](img/git/gitb-1.png)
+
+
+- ![git-b2](img/git/gitb-2.png)
+
+- ![git-b3](img/git/gitb-3.png)
+
+- ![git-b4](img/git/gitb-4.png)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Performance Measurements'>
+<div id='s9-md' class='md' data-trim='false'>
+  
+- speedtest.js 
+    - [Lightning Performance tips](https://mohan-chinnappan-n2.github.io/2019/lex/perf.html)
+
+- ![speedtest](https://mohan-chinnappan-n2.github.io/2019/lex/img/octane-score.png)
+
+- [Lighthouse](https://developers.google.com/web/tools/lighthouse)
+    - ![Lighthouse](img/lighthouse.png)
+ 
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Integration with Slack'>
+<div id='s10-md' class='md' data-trim='false'>
+  
+![Jenkins - slack](img/jenkins-slack-1.png)
+
+- Slack Notifcations Plugin
+- ![Slack Notifications](img/slack-notification.png)
+- ![Slack Notifications2](img/slack-notification-2.png)
+
+
+- Will be based on TCRM (Tableau CRM slack integration work)
+- Demos of Tableau CRM slack integration work 
+## Desktop
+
+![Demo1](img/slack/image6.gif)
+
+![Demo2](img/slack/image7.gif)
+
+## Mobile
+
+![Demo3](img/slack/image8.gif)
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Scratch Org'>
+<div id='s11-md' class='md' data-trim='false'>
+  
+Minimum access required (on the DevHub org)  to create a scratch org is
+
+```
+Read, Create on ScratchOrgInfos
+```
+Read on [ActiveScratchOrgs](https://developer.salesforce.com/docs/atlas.en-us.api.meta/api/sforce_api_objects_activescratchorg.htm) 
+```
+
+To delete a scratch org you need:
+- Read, Create, Edit on ScratchOrgInfos
+- Read, Create, Edit, Delete on ActiveScratchOrgs
+
+```
+
+[Manage Scratch Orgs from Dev Hub](https://help.salesforce.com/s/articleView?id=sf.sfdx_dev_scratch_orgs_view_lex.htm&type=5)
+
+## ScratchOrgInfo object 
+![scratch org info](img/ScratchOrgInfo-erd.svg)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Security - vulnerability scanning tools'>
+<div id='s12-md' class='md' data-trim='false'>
+  
+- Scanning  vulnerability scanning tools will be part of the pipeline
+    - Scanning on scripts used in deployment
+    - Scanning on the application code
+    
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' References'>
+<div id='s13-md' class='md' data-trim='false'>
+  
+- [What is DevOps? ](https://www.netapp.com/devops-solutions/what-is-devops/)
+
+## SFDX
+- [SFDX Slides](https://mohan-chinnappan-n.github.io/sfdc/dx.html#/home)
+
+## Code Scan
+
+### SonarQube
+- [SonarQube download](https://www.sonarqube.org/success-download-community-edition/)
+- [SonalQube install](https://docs.sonarqube.org/latest/setup/get-started-2-minutes/)
+- [Security and Preferences - SonarQube](https://community.sonarsource.com/t/sonar-cannot-start-once-updated-to-macos-catalina-error-as-wrapper-cannot-be-opened-because-the-developer-cannot-be-verified/16439/2)
+- [SonarQube install on Mac](https://techblost.com/how-to-setup-sonarqube-locally-on-mac/)
+
+- [SonarLint](https://www.sonarqube.org/sonarlint/?referrer=sonarqube-welcome)
+    - [VS Code SonarLint](https://www.sonarlint.org/vscode)
+- [SonarQube - Apex Rules](https://rules.sonarsource.com/apex)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Creation'>
+<div id='s14-md' class='md' data-trim='false'>
+  
+```
+sfdx mohanc:slides:gen -i bp.md  -o bp.md.html -t 'DevOps Best Practices'
+
+```
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Single Page view'>
+<div id='s15-md' class='md' data-trim='false'>
+  [DevOps Best Practices](https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/master/devops/bp/bp.md)
+
+
+
+
+
+
+</div>
+</google-codelab-step>
+</google-codelab>
+
+  <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/native-shim.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
+
+</body>
+</html>

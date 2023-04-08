@@ -1,0 +1,24 @@
+
+/* form2.css */
+/*
+input:invalid:required {
+    background-image: linear-gradient(to right, pink, lightgreen);
+  }
+
+  input:invalid {
+    border: 2px dashed red;
+  }
+*/
+
+textarea {
+    background-color: rgba(0, 0, 0, 0.76);
+    color: white; 
+    border-radius: 5px;
+    font-family: Monaco;
+}
+
+label {
+    font-weight: bold;
+}
+
+/* .text-muted { display: none; } */

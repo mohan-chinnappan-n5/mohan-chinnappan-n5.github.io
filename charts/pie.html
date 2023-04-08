@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charts</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.js"></script>
+    <script src="https://mohan-chinnappan-n5.github.io/charts/theme/macarons.js"></script>
+    <script src="https://mohan-chinnappan-n5.github.io/charts/theme/infographic.js"></script>
+    <script src="https://mohan-chinnappan-n5.github.io/charts/theme/roma.js"></script>
+    <script src="https://mohan-chinnappan-n5.github.io/charts/theme/shine.js"></script>
+    <script src="https://mohan-chinnappan-n5.github.io/charts/theme/vintage.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">&nbsp; Salesforce Land</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="viz"></div>
+        <a href="#" class='btn btn-dark' id="download">  Download as SVG</a>
+        <a href="https://echarts.apache.org/en/theme-builder.html" class='btn btn-dark' id="themebuilder"> Theme Builder</a>
+    </div>
+    <style>
+        #viz {
+            width: 800px;
+            height: 600px;
+        }
+    </style>
+    <script>
+
+        let themeJS = null;
+        const query = location.search.substr(1);
+        const qresult = {};
+        query.split("&").forEach(function (part) {
+            var item = part.split("=");
+            qresult[item[0]] = decodeURIComponent(item[1]);
+        });
+        if (qresult.t === undefined && qresult.tf === undefined) { qresult.t = 'vintage'; }
+        if (qresult.r === undefined) { qresult.r = 'svg'; }
+
+        if (qresult.tf !== undefined) {
+            themeJS = atob(qresult.tf);
+        }
+        // console.log(themeJS);
+        if (themeJS ){
+            eval(themeJS);
+        }
+
+        
+
+        let input = {
+            title: 'Fruits Yield',
+            name: 'Yield',
+            data: [{ 'Mango': 40 },
+            { 'Peach': 10 },
+            { 'Pear': 5 },
+            { 'Plum': 8 },
+            { 'Apple': 20 }
+            ]
+        };
+
+        if (qresult.d) { input = JSON.parse(atob(qresult.d)); }
+
+        let theme = qresult.t;
+        const getEle = id => document.getElementById(id);
+        const renderer = qresult.r;
+        const assembleData = (rows) => {
+            const data = [];
+            for (const row of rows) {
+                const keys = Object.keys(row);
+                for (const key of keys) {
+                    data.push({ name: key, value: row[key] });
+                }
+            }
+            return data;
+        }
+
+        option = {
+            tooltip: {
+                trigger: 'item'
+            },
+
+            itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+
+            aria: {
+                show: true
+            },
+            title: {
+                text: input.title,
+                x: 'center'
+            },
+            series: [
+                {
+                    name: input.name,
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    data: assembleData(input.data)
+
+                }
+            ]
+        };
+
+        const chart = echarts.init(getEle('viz'), theme, { renderer });
+
+        const draw = (option, theme, renderer) => {
+            window.onresize = () => chart.resize();
+            chart.setOption(option);
+        }
+        // draw
+        draw(option, theme, renderer);
+
+        const download_link = document.getElementById('download');
+        download_link.onclick = function (ev) {
+            var svg = document.getElementsByTagName('svg')[0];
+            var width = parseInt(svg.getAttribute('width'));
+            var height = parseInt(svg.getAttribute('height'));
+            var data = '';
+            var xml =
+                '<?xml version="1.0" encoding="utf-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"><svg xmlns="http://www.w3.org/2000/svg" width="' +
+                width + '" height="' + height + '" xmlns:xlink="http://www.w3.org/1999/xlink"><source><![CDATA[' + data +
+                ']]></source>' + svg.innerHTML + '</svg>';
+
+            this.setAttribute("download", "chart.svg");
+            this.setAttribute("href", "data:image/svg+xml," + encodeURIComponent(xml));
+        };
+
+    </script>
+</body>
+
+</html>

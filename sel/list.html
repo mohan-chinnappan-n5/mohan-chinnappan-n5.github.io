@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+</head>
+<body>
+    <ul id="fruits">
+        <li>Apple</li>
+        <li>Mango</li>
+        <li>Peach</li>
+        <li>Pear</li>
+    </ul>
+
+    <input type="text" id="newItem"> 
+    <button id='add-btn' style="display:none;">Add</button>
+    
+<script>
+    const getEle = id => document.getElementById(id);
+    const fruits =  getEle('fruits');
+    const newItem = getEle('newItem');
+    const addBtn = getEle('add-btn');
+
+    const addFruits = () => {
+        const newListItem = document.createElement('li');
+        newListItem.innerHTML = newItem.value;
+        fruits.appendChild(newListItem)
+    }
+    addBtn.addEventListener('click', event => {
+        addFruits();
+    });
+
+    newItem.addEventListener('keypress', event => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            addBtn.click();
+        }
+     })
+
+
+</script>
+</body>
+</html>

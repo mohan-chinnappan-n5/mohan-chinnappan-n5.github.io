@@ -1,0 +1,350 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>LWC - JEST</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
+</head>
+<body>
+<google-codelab id="LWC - JEST" title="LWC - JEST" environment="web" >
+
+<google-codelab-step label=' Testing LWC'>
+<div id='s0-md' class='md' data-trim='false'>
+  
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Running Local Tests - Isolation'>
+<div id='s1-md' class='md' data-trim='false'>
+  - Not connected to the Platform
+- Use Mock values for the testing
+- Tests should be saved  in version control (git)
+    - Tests are not pushed into the Org (.forceignore takes care of it)
+- Currently we do not have code-coverage requirement
+    - Since it does not affect the backend - only front-end
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' JEST'>
+<div id='s2-md' class='md' data-trim='false'>
+  - From Facebook - open sourced
+- Popular framework (in use for ~12 years)
+- Well documented
+- We added an extension to work on LWC
+    - sfdx-lwc-jest
+        - Basic Lightning component mocks
+        - e.g Button, Icons... for which we do not have source code for these components. Framework provides mocks for them to simulate these base components. Mock takes are of all the events it sends/receives.
+        - @Wire mocking util
+        - Not connected to the org, we need to simulate the data being retrieved from the org. You can mock return value to simulate data from the Apex.
+- Use ESLint with LWC rules
+    - warns issues like using selectors not to be used in LWC - document.getElementById('id'), since ids in LWCs are dynamically generated
+
+
+- Simulates a webpage without a browser opened
+    - Replicates entire DOM tree (virtual DOM - JS DOM) of the web page in **memory**
+    - So no need for WebDriver
+    - You can perform operations on this JS DOM tree using Web API
+    -  You can call selectors, simulate events...
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Env'>
+<div id='s3-md' class='md' data-trim='false'>
+  - Node.js
+- DX Project
+```bash
+npm init
+npm install
+npm install @salesforce/sfdc-lwc-jest --save-dev
+```
+
+- add these in package.json
+
+```js
+"scripts": {
+    "test:unit": "lwc-jest",
+    "test:unit:watch": "lwc-jest watch",
+    "test:unit:coverage": "lwc-jest --coverage"
+}
+```
+
+- Example .forceignore
+```
+package.xml
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' LWC configuration files'>
+<div id='s4-md' class='md' data-trim='false'>
+  **/jsconfig.json
+**/.eslintrc.json
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' LWC Jest'>
+<div id='s5-md' class='md' data-trim='false'>
+  **/__tests__/**
+```
+
+- Example package.json
+```json
+{
+  "name": "salesforce-app",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Salesforce App",
+  "scripts": {
+    "lint": "eslint **/{aura,lwc}/**",
+    "test": "npm run test:unit",
+    "test:unit": "sfdx-lwc-jest",
+    "test:unit:watch": "sfdx-lwc-jest --watch",
+    "test:unit:debug": "sfdx-lwc-jest --debug",
+    "test:unit:coverage": "sfdx-lwc-jest --coverage",
+    "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
+    "prettier:verify": "prettier --list-different \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
+    "postinstall": "husky install",
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "@lwc/eslint-plugin-lwc": "^1.1.2",
+    "@prettier/plugin-xml": "^2.0.1",
+    "@salesforce/eslint-config-lwc": "^3.2.3",
+    "@salesforce/eslint-plugin-aura": "^2.0.0",
+    "@salesforce/eslint-plugin-lightning": "^1.0.0",
+    "@salesforce/sfdx-lwc-jest": "^1.1.0",
+    "eslint": "^8.11.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.1.2",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.7",
+    "prettier": "^2.6.0",
+    "prettier-plugin-apex": "^1.10.0"
+  },
+  "lint-staged": {
+    "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
+      "prettier --write"
+    ],
+    "**/{aura,lwc}/**": [
+      "eslint"
+    ]
+  }
+}
+
+```
+- Folder structure
+
+```
+tree
+.
+├── chart
+│   ├── chart.html
+│   ├── chart.js
+│   └── chart.js-meta.xml
+├── hello
+│   ├── hello.html
+│   ├── hello.js
+│   └── hello.js-meta.xml
+├── jsconfig.json
+└── uIRecordAPIAccount
+    ├── __tests__
+    │   └── uIRecordAPIAccount.test.js
+    ├── uIRecordAPIAccount.html
+    ├── uIRecordAPIAccount.js
+    └── uIRecordAPIAccount.js-meta.xml
+
+```
+
+## Sample test files
+```js
+import { createElement } from 'lwc';
+import UIRecordAPIAccount from 'c/uIRecordAPIAccount';
+
+// TEST SUITE - named after our component
+//  - can have group of tests - multiple tests
+describe('c-ui-record-api-account', () => {
+    // TEARDOWN instructions
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
+    // TEST - using fluent syntax
+    it('TODO: test case generated by CLI command, please fill in test logic', () => {
+        // Arrange
+        const element = createElement('c-ui-record-api-account', {
+            is: UIRecordAPIAccount
+        });
+
+        // Act
+        document.body.appendChild(element);
+
+        // Assert
+        // const div = element.shadowRoot.querySelector('div');
+        expect(1).toBe(1);
+    });
+});
+```
+
+- hello example __tests__/hello.test.js
+
+- component js
+```js
+import { LightningElement } from 'lwc';
+
+export default class Hello extends LightningElement {
+    greeting = 'World';
+}
+
+```
+- component markup
+```html
+<template>
+    <lightning-card title="Hello" icon-name="custom:custom14">
+        <div class="slds-var-m-around_medium">Hello, {greeting}!</div>
+    </lightning-card>
+</template>
+
+```
+```js
+import { createElement } from 'lwc';
+import Hello from 'c/hello';
+
+describe('c-hello', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
+    // TEST-1 - right text content?
+
+    it('displays greeting', () => {
+        // Create element
+        const element = createElement('c-hello', {
+            is: Hello
+        });
+        document.body.appendChild(element);
+
+        // Verify displayed greeting
+        const div = element.shadowRoot.querySelector('div');
+        expect(div.textContent).toBe('Hello, World!');
+    });
+
+    // TEST-2 - accessible
+    it('is accessible', async () => {
+        const element = createElement('c-hello', {
+            is: Hello
+        });
+
+        document.body.appendChild(element);
+
+        await expect(element).toBeAccessible();
+    });
+});
+```
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Best Practices'>
+<div id='s6-md' class='md' data-trim='false'>
+  - Brake down your test into
+    - Given - prepare test- setup env
+        - add component to JS DOM and set public props. Later we will inspect JS DOM to see we got the right elements in JS DOM
+
+    - When - Test Behavior - actual test - test only one Behavior in unit-testing - else it will become Integration test
+        - Execute test - click a button, enter input... call a wire (simulate)... Simulate events
+    - Then - Assert expected result - assertions  
+        - ```expect(infoElement).not.toBeNull();```  
+
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Running unit test'>
+<div id='s7-md' class='md' data-trim='false'>
+  
+## All the scripts in the project
+```
+npm run          
+Lifecycle scripts included in salesforce-app@1.0.0:
+  test
+    npm run test:unit
+  postinstall
+    husky install
+
+available via `npm run-script`:
+  lint
+    eslint **/{aura,lwc}/**
+  test:unit
+    sfdx-lwc-jest
+  test:unit:watch
+    sfdx-lwc-jest --watch
+  test:unit:debug
+    sfdx-lwc-jest --debug
+  test:unit:coverage
+    sfdx-lwc-jest --coverage
+  prettier
+    prettier --write "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}"
+  prettier:verify
+    prettier --list-different "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}"
+  precommit
+    lint-staged
+```
+
+
+
+```
+~/onnu-devops/mc2Project [develop] >npm run test:unit
+
+> salesforce-app@1.0.0 test:unit
+> sfdx-lwc-jest
+
+ PASS  force-app/main/default/lwc/uIRecordAPIAccount/__tests__/uIRecordAPIAccount.test.js
+  c-ui-record-api-account
+    ✓ TODO: test case generated by CLI command, please fill in test logic (27 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        3.77 s
+Ran all test suites.
+```
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Resources'>
+<div id='s8-md' class='md' data-trim='false'>
+  
+- [Testing LWC](https://www.youtube.com/watch?v=NH0YQKJMTKg)
+
+</div>
+</google-codelab-step>
+</google-codelab>
+
+  <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/native-shim.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<html>
+<head>
+
+<title>Word Cloud</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+
+</head>
+  
+  
+<body class='container2'>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<a class="navbar-brand" href="#">&nbsp; Word Cloud</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+    </li>
+  </ul>
+</div>
+</nav>
+  
+
+<div class='container'>
+
+<h3>Text</h3>
+
+<textarea cols='100' rows = '10' id='query' style='padding:10px;background-color:black; color:white; border-radius:10px;'> </textarea>
+<button  id='run' class='btn btn-primary'>Draw</button>
+<hr/>
+
+<div id="vizWC"></div>
+<script>
+
+const queryEle = document.getElementById('query');
+let input = 'Be the change you want to see in the world - Mahatma Gandhi';
+
+// read query params
+const query = location.search.substr(1);
+    let qresult = {};
+    query.split("&").forEach(function(part) {
+          const item = part.split("=");
+          qresult[item[0]] = decodeURIComponent(item[1]);
+    });
+
+    //------------ can be called with this parameter d 
+    if (qresult.d) { // got it via query param d
+      input  =  atob(qresult.d);
+      queryEle.value = input;
+    } else if (qresult.c) {
+      // editor.setValue(atob(qresult.c));   
+      
+      navigator.clipboard.readText().then((clipText) =>  {
+        input = clipText;
+       // alert(input);
+        drawWC(input);
+
+      })
+      // alert(atob(qresult.c));
+     }
+
+async function drawWC(text) {
+	queryEle.value = text;
+        const wcSpecUrl = 'https://raw.githubusercontent.com/mohan-chinnappan-n/sf-land-docs/master/vega/wc.json';
+	const getWCSpec = async (url) => {
+		const response = await fetch(url);
+		return response.json(); 
+	}
+
+	getWCSpec(wcSpecUrl).then( data => {
+	   data.data[0].values[0] = text;  
+	  vegaEmbed('#vizWC', data);
+	});
+
+}
+
+drawWC(input);
+
+document.getElementById('run').addEventListener('click', e => {
+   const queryEle =  document.getElementById('query');
+   drawWC(queryEle.value);
+})
+
+</script>
+<div>
+ 
+
+
+
+</div>
+</div>
+</div>
+</body>
+</html>
+
+

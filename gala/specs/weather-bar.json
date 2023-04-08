@@ -1,0 +1,10 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "data/weather.csv"},
+    "mark": { "type": "area", "tooltip": true},
+    "encoding": {
+      "x": {"timeUnit": "month", "field": "date", "type": "ordinal"},
+      "y": {"aggregate": "mean", "field": "precipitation"}
+    },
+    "config": {}
+  }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editor</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js?v=2"></script>
+  </head>
+
+  <style>
+    textarea {
+      background-color: black;
+      color: wheat;
+      font-family: Monaco, Arial, Helvetica, sans-serif;
+      border-radius: 20px;
+      padding: 10px;
+    }
+  </style>
+  <body>
+    <textarea name="" id="dwg" cols="80" rows="30">
+        gantt
+        dateFormat  YYYY-MM-DD
+        title Adding GANTT diagram to mermaid
+        excludes weekdays 2014-01-10
+        
+        section A section
+        Completed task            :done,    des1, 2014-01-06,2014-01-08
+        Active task               :active,  des2, 2014-01-09, 3d
+        Future task               :         des3, after des2, 5d
+        Future task2              :         des4, after des3, 5d
+        
+    </textarea>
+    <hr />
+
+    <button id="draw">Draw</button>
+    <button id="save" style="display: none">Save</button>
+
+    <div class="graphDiv"></div>
+
+    <script>
+      try {
+        mermaid.initialize({ startOnLoad: false });
+      } catch (e) {
+        alert(e);
+      }
+
+      const drawBtn = document.getElementById("draw");
+      const saveBtn = document.getElementById("saveBtn");
+
+      const graphDivClassName = "graphDiv";
+      const graphDivEle = document.getElementsByClassName(graphDivClassName)[0];
+
+      const dwg = document.getElementById("dwg");
+
+      const draw = (graphDefinition, ele, className) => {
+        const graph = mermaid.mermaidAPI.render(
+          className,
+          graphDefinition,
+          (svgCode, bindFunctions) => {
+            ele.innerHTML = svgCode;
+          }
+        );
+      };
+
+      drawBtn.addEventListener("click", (event) => {
+        draw(dwg.value, graphDivEle, graphDivClassName);
+        saveBtn.style.display = "block";
+      });
+
+      // SVG Save functions
+
+      const fileName = 'drawing.svg';
+
+
+      saveBtn.addEventListener("click", (event) => {
+        save(graphDivEle);
+      });
+
+      const triggerDownload = (imgURI, fileName) => {
+        let a = document.createElement("a");
+
+        a.setAttribute("download", fileName);
+        a.setAttribute("href", imgURI);
+        a.setAttribute("target", "_blank");
+
+        a.click();
+      };
+
+
+      let save = (ele) => {
+        let data = new XMLSerializer().serializeToString(ele);
+        let svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" });
+        let url = URL.createObjectURL(svgBlob);
+        triggerDownload(url, fileName);
+      };
+    </script>
+  </body>
+</html>

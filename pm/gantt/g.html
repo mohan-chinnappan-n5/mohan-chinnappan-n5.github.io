@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico" />
+
+  <title>Gantt chart </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+  <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css" />
+
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Gantt Chart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+           
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <hr>
+
+  <div class="row">
+    <div class="col-lg">
+      <div class="split split-horizontal" id="items">
+        <div id="items"></div>
+        <ul class="list-group">
+          <li class="list-group-item">milestone1</li>
+          <li class="list-group-item">milestone2</li>
+          <li class="list-group-item">milestone3</li>
+          <li class="list-group-item">milestone4</li>
+
+
+
+        </ul>
+      </div>
+      <div class="split split-horizontal" id="chart">
+
+        <div class="gantt-chart-container">
+          <div id="controls">
+            <button id="zoom-out">-</button>
+            <button id="zoom-in">+</button>
+          </div>
+      
+          <div id="gantt-chart"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <style>
+    html, body { height: 100%; margin: 0; padding: 0; }
+
+    #gantt-chart { display: grid; grid-template-rows: 10% auto 10%; grid-template-columns: 10% auto 10%; height: 100%; justify-content: center; align-content: center; }
+
+    #gantt-chart canvas { grid-column: 2 / 3; grid-row: 2 / 3; }
+
+    .gantt-chart-container #controls { grid-column: 2 / 3; grid-row: 1 / 3; display: flex; height: 1.2em; justify-content: center; align-content: center; }
+  </style>
+  <script>
+    Split(["#items", "#chart"], { sizes: [10, 90] });
+  </script>
+  <script src="js/gantt-chart.bundle.js"></script>
+</body>
+</html>
+

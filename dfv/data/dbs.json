@@ -1,0 +1,38 @@
+[
+  {
+    "db": "PostgreSQL",
+    "value": 72.08
+  },
+  {
+    "db": "Redis",
+    "value": 71.04
+  },
+  {
+    "db": "MongoDB",
+    "value": 60.51
+  },
+  {
+    "db": "SQLLite",
+    "value": 57.51
+  },
+  {
+    "db": "MSSQL",
+    "value": 54.95
+  },
+  {
+    "db": "MYSQL",
+    "value": 51.17
+  },
+  {
+    "db": "DynamoDB",
+    "value": 53.63
+  },
+  {
+    "db": "Oracle",
+    "value": 35.33
+  },
+  {
+    "db": "DB2",
+    "value": 26.0
+  }
+]

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xml2json</title>
+</head>
+
+<body>
+
+    <script src="js/lib//xml2json.js"></script>
+
+    <textarea name="json" id="json" cols="80" rows="10"></textarea>
+    <script>
+        const xml2json = xml => {
+            const x2js = new X2JS();
+            return x2js.xml_str2json(xml);
+        }
+        const xml = `<book><name>Art of computer programming</name></book>`;
+        document.getElementById('json').value = JSON.stringify(xml2json(xml), null, 4);
+
+    </script>
+
+</body>
+
+</html>

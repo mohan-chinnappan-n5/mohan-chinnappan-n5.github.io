@@ -1,0 +1,54 @@
+/* app.css */
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+  }
+
+.query {
+    font-family: Monaco, Arial;
+    padding: 10px;
+    background-color: black;
+    color: wheat;
+    border-radius: 10px;
+}
+
+.results {
+    font-family: Monaco, Arial;
+    padding: 10px;
+    background-color: black;
+    color: whitesmoke;
+    border-radius: 10px;
+    width: 100%;
+}
+
+#dt {
+    border-top: 2px solid steelblue;
+}
+/* editor */
+#editor {
+    border: radius 2px;
+    height: 600px;
+    width: 100%;
+    border: 5px solid steelblue;
+}
+
+#aceEditor { 
+    /** Setting height is also important, otherwise editor wont showup**/
+    height: 800px;
+    width: 100%;
+    z-index:0; /* important */
+    border-radius: 10px;
+    padding: 30px;
+}
+
+#q {
+    background-color: black;
+    color:wheat;
+    font-family: Monaco, Arial;
+    border-radius: 10px;
+}
+.features {
+    font-family: Monaco, Arial;
+    border-radius: 30px;
+    background-color: whitesmoke; 
+}

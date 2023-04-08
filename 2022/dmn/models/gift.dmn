@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="gift" name="Credit gift" namespace="http://camunda.org/schema/1.0/dmn">
+  <inputData id="InputData_0v9rmh1" name="Bring-in Amount" />
+  <decision id="Decision_15sytmj" name="Credit Gift Decision">
+    <informationRequirement id="InformationRequirement_19kseq3">
+      <requiredInput href="#InputData_0v9rmh1" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0nekqzl">
+      <input id="InputClause_1ukp3ka" label="Bring-in amount">
+        <inputExpression id="LiteralExpression_0pmg6js" typeRef="integer" />
+      </input>
+      <output id="OutputClause_1v2xnm9" label="Gift" name="Gift" typeRef="integer" />
+      <rule id="DecisionRule_1s5x5yt">
+        <description>gift when briing-in amount is between 5k and 10k</description>
+        <inputEntry id="UnaryTests_01ag0gu">
+          <text>[5000..1000]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0r7xwvk">
+          <text>300</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1h35rts">
+        <description>gift when briing-in amount is between 10k and 15k</description>
+        <inputEntry id="UnaryTests_0i5mx1i">
+          <text>[10001..15000]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_15keqh1">
+          <text>400</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0e1ryjb">
+        <description>gift when briing-in amount is more than 15k</description>
+        <inputEntry id="UnaryTests_0x2foms">
+          <text>&gt; 15000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ua6pfv">
+          <text>501</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1ejukud">
+      <dmndi:DMNShape id="DMNShape_0e14zqq" dmnElementRef="InputData_0v9rmh1">
+        <dc:Bounds height="45" width="125" x="117" y="287" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0e6vabd" dmnElementRef="InformationRequirement_19kseq3">
+        <di:waypoint x="180" y="287" />
+        <di:waypoint x="180" y="240" />
+        <di:waypoint x="180" y="220" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_06y620w" dmnElementRef="Decision_15sytmj">
+        <dc:Bounds height="80" width="180" x="90" y="140" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

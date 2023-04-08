@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html,
+body {
+   background: rgba(0, 0, 0, .075);
+   margin: 0;
+   padding: 0;
+   overflow: hidden;
+}
+
+.editor {
+   display: flex;
+   position: relative;
+   height: 100vh;
+}
+
+.editor__code {
+   flex-grow: 0;
+   flex-shrink: 0;
+   width: 32%;
+   height: calc(100vh - 28px);
+   border: 2px solid rgba(0, 0, 0, .225);
+   margin: 12px 6px 12px 12px;
+   background: white;
+}
+
+.editor__preview {
+   flex-grow: 0;
+   flex-shrink: 0;
+   width: 32%;
+   border: 2px solid rgba(0, 0, 0, .225);
+   margin: 12px 6px;
+   background: white;
+}
+
+.editor__original {
+   flex-grow: 0;
+   flex-shrink: 0;
+   width: 32%;
+   border: 2px solid rgba(0, 0, 0, .225);
+   margin: 12px 6px;
+   background: white;
+}
+
+[data-hidden] {
+   width: 33.333%;
+   height: 0;
+   overflow: hidden;
+}
+
+.editor__result {
+   position: absolute;
+   bottom: 12px;
+   right: 24px;
+   font-size: 90px;
+   font-weight: 600;
+   font-family: sans-serif;
+}
+
+.screenshot {
+   border: 1px solid blue;
+   display: block;
+}
+
+    </style>
+</head>
+<body>
+    <div class="editor">
+        <div class="editor__code" data-editor-code></div>
+        <iframe class="editor__preview" data-editor-preview></iframe>
+        <div class="editor__original" data-editor-original>
+           <!-- Original picture -->
+           <img src="https://i.ibb.co/YLJjmk8/original.png" style="width: 200px; height: 200px;">
+        </div>
+        <div class="editor__result" data-accuracy></div>
+     </div>
+     
+     <div data-hidden></div>
+
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/monaco-editor/min/vs/loader.js"></script>
+
+
+     <script>
+
+
+        const EDITOR_CODE = (
+`<style>
+.circle {
+   background: #ffd53d;/* FIX: background: red */
+   border-radius: 30%; /* FIX: border-radius: 50% */
+   width: 200px;
+   height: 200px;
+}
+</style>
+
+<div class="circle"></div>
+`);
+//https://codepen.io/nibach/pen/vYYjOwL
+// https://microsoft.github.io/monaco-editor/playground.html
+const EDITOR_CSS_CODE = "<style>html,body {margin: 0;padding:0}</style>";
+
+let editorCode = document.querySelector("[data-editor-code]");
+let editorPreview = document.querySelector("[data-editor-preview]");
+let original = document.querySelector("[data-editor-original] > img");
+let editorPreviewDoc =
+   editorPreview.contentDocument || editorPreview.contentWindow.document;
+const hiddenContainer = document.querySelector("[data-hidden]");
+const accuracyContainer = document.querySelector("[data-accuracy]");
+
+
+require.config({
+   paths: {
+      vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.18.0/min/vs"
+   }
+});
+
+window.MonacoEnvironment = {
+   getWorkerUrl: () => {
+      return `data:text/javascript;charset=utf-8,${encodeURIComponent(`
+        self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.18.0/min'
+        };
+        importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.18.0/min/vs/base/worker/workerMain.js');`)}`;
+   }
+};
+
+require(["vs/editor/editor.main"], () => {
+   let editor = monaco.editor.create(editorCode, {
+      value: EDITOR_CODE,
+      language: "html",
+      automaticLayout: true,
+      minimap: {
+         enabled: false
+      }
+   });
+
+   updateResult(editor);
+
+   editor.onDidChangeModelContent((event) => {
+      updateResult(editor);
+   });
+});
+
+async function updateResult(editor) {
+   const code = editor.getValue();
+   editorPreviewDoc.body.innerHTML = EDITOR_CSS_CODE + code;
+   const screenshotPreview = document.createElement("div");
+   screenshotPreview.innerHTML = code;
+   hiddenContainer.innerHTML = "";
+   hiddenContainer.appendChild(screenshotPreview);
+
+   const [originalImage, screenshotPreviewImage] = await Promise.all([
+      domtoimage.toPng(original),
+      domtoimage.toPng(screenshotPreview)
+   ]);
+   resemble(originalImage)
+      .compareTo(screenshotPreviewImage)
+      .onComplete(({ misMatchPercentage }) => {
+         accuracyContainer.innerHTML = Math.round(100 - misMatchPercentage) + "%";
+      });
+}
+
+
+     </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 250,
+   "width": 300,
+  
+
+  "data": {"url": "https://mohan-chinnappan-n5.github.io/dfv/data/sf/scpl-de-se1.psv.json"},
+  "mark": { "type": "bar", "tooltip":true},
+  "encoding": {
+    "x": {"field": "Country"},
+    "y": {"aggregate": "count", "title": "Number of States"}
+    
+  }
+}
+

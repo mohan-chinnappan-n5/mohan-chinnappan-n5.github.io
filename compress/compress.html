@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compress</title>
+
+    <!-- script src="js/lz-string.js"></script -->
+
+    <script src="js/base64-string.js"></script>
+</head>
+
+<body>
+
+    <script>
+
+        const string = `This is my compression test.
+        this is the time for all good men to go for the aid of the country
+        All truly great things are simple!
+        Best fruits are apple, mango, peach, plum 
+        `;
+        alert("Size of sample is: " + string.length);
+/*
+        const compressed = LZString.compress(string);
+        console.log(compressed)
+ 
+        alert("Size of compressed sample is: " + compressed.length);
+        const string2 = LZString.decompress(compressed);
+        alert("Sample is: " + string2);
+
+*/
+
+     
+
+
+        const compressedBase64 = Base64String.compress(btoa(string));
+        console.log(compressedBase64)
+ 
+        alert("Size of compressed sample is: " + compressedBase64.length);
+        const string3 = Base64String.decompress(compressedBase64);
+        alert("Sample is: " + atob(string3));
+    </script>
+
+</body>
+
+</html>

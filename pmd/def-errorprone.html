@@ -1,0 +1,39 @@
+<html><head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/></head><body style="min-height: 75rem; padding-top: 3.5rem;"><nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"><a class="navbar-brand" href="#">PMD Ruleset</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"/></button><div class="collapse navbar-collapse" id="navbarNav"><ul class="navbar-nav"><li class="nav-item active"><a class="nav-link" href="#">Home</a></li></ul></div></nav><h4>
+Rules to detect constructs that are either broken, extremely confusing or prone to runtime errors.
+    </h4><table style="width:640px" class="table table-light table-bordered table-striped table-hover"><tr><th>priority</th><th>message</th><th>ref</th><th>name_value</th></tr><tr><td>3<td>Avoid making DML operations in Apex class constructor or initializers</td><td></td></td><td><ul class="list-group"/></td></tr><tr><td>3<td>Avoid directly accessing Trigger.old and Trigger.new</td><td></td></td><td><ul class="list-group"><li class="list-group-item"><i>version</i>:
+           
+            <b>2.0</b></li><li class="list-group-item"><i>xpath</i>:
+           
+            <b></b></li></ul></td></tr><tr><td>3<td>Hardcoding Id's is bound to break when changing environments.</td><td></td></td><td><ul class="list-group"/></td></tr><tr><td>3<td>Use of non existent annotations will lead to broken Apex code which will not compile in the future.</td><td></td></td><td><ul class="list-group"/></td></tr><tr><td>3<td>Avoid empty catch blocks</td><td></td></td><td><ul class="list-group"><li class="list-group-item"><i>version</i>:
+           
+            <b>2.0</b></li><li class="list-group-item"><i>allowCommentedBlocks</i>:
+           
+            <b>false</b></li><li class="list-group-item"><i>allowExceptionNameRegex</i>:
+           
+            <b>^(ignored|expected)$</b></li><li class="list-group-item"><i>xpath</i>:
+           
+            <b></b></li></ul></td></tr><tr><td>3<td>Avoid empty 'if' statements</td><td></td></td><td><ul class="list-group"><li class="list-group-item"><i>version</i>:
+           
+            <b>2.0</b></li><li class="list-group-item"><i>xpath</i>:
+           
+            <b></b></li></ul></td></tr><tr><td>3<td>Avoid empty block statements.</td><td></td></td><td><ul class="list-group"><li class="list-group-item"><i>version</i>:
+           
+            <b>2.0</b></li><li class="list-group-item"><i>reportEmptyPrivateNoArgConstructor</i>:
+           
+            <b>true</b></li><li class="list-group-item"><i>reportEmptyVirtualMethod</i>:
+           
+            <b>true</b></li><li class="list-group-item"><i>xpath</i>:
+           
+            <b></b></li></ul></td></tr><tr><td>3<td>Avoid empty try or finally blocks</td><td></td></td><td><ul class="list-group"><li class="list-group-item"><i>version</i>:
+           
+            <b>2.0</b></li><li class="list-group-item"><i>xpath</i>:
+           
+            <b></b></li></ul></td></tr><tr><td>3<td>Avoid empty 'while' statements</td><td></td></td><td><ul class="list-group"><li class="list-group-item"><i>version</i>:
+           
+            <b>2.0</b></li><li class="list-group-item"><i>xpath</i>:
+           
+            <b></b></li></ul></td></tr><tr><td>3<td>AuraEnabled getter must be public or global if is referenced in Lightning components</td><td></td></td><td><ul class="list-group"/></td></tr><tr><td>3<td>Classes should not have non-constructor methods with the same name as the class</td><td></td></td><td><ul class="list-group"/></td></tr><tr><td>3<td>Ensure you override both equals() and hashCode()</td><td></td></td><td><ul class="list-group"/></td></tr><tr><td>3<td>Test methods must be in test classes</td><td></td></td><td><ul class="list-group"><li class="list-group-item"><i>version</i>:
+           
+            <b>2.0</b></li><li class="list-group-item"><i>xpath</i>:
+           
+            <b></b></li></ul></td></tr></table></body></html>

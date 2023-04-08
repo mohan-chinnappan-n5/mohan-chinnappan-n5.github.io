@@ -1,0 +1,1230 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Jenkins - Salesforce Development Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../custom.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../dg/dg.html"><strong aria-hidden="true">2.</strong> Data Governance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dg/changeManagement.html"><strong aria-hidden="true">2.1.</strong> Change Management</a></li></ol></li><li class="chapter-item expanded "><a href="../dm/datamodel.html"><strong aria-hidden="true">3.</strong> Data Model</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dm/fsc-dm.html"><strong aria-hidden="true">3.1.</strong> Financial Services Cloud</a></li><li class="chapter-item expanded "><a href="../dm/salescloud.html"><strong aria-hidden="true">3.2.</strong> Sales Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/aboutTools.html"><strong aria-hidden="true">4.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-org.html"><strong aria-hidden="true">4.1.</strong> Org Tools</a></li><li class="chapter-item expanded "><a href="../tools/tools-data-bulkapi2.html"><strong aria-hidden="true">4.2.</strong> Data Loading BulkAPI2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/userloading.html"><strong aria-hidden="true">4.2.1.</strong> User Loading</a></li><li class="chapter-item expanded "><a href="../tools/product2loading.html"><strong aria-hidden="true">4.2.2.</strong> Product2 Loading and Update</a></li><li class="chapter-item expanded "><a href="../tools/flowinterview.html"><strong aria-hidden="true">4.2.3.</strong> FlowInterview Query and Deletion</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/tools-scpl.html"><strong aria-hidden="true">4.3.</strong> Loading State and Country Picklist</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-scpl-update.html"><strong aria-hidden="true">4.3.1.</strong> Updating State and Country Picklist </a></li></ol></li><li class="chapter-item expanded "><a href="../tools/project-management/gantt.html"><strong aria-hidden="true">4.4.</strong> Project Management</a></li><li class="chapter-item expanded "><a href="../tools/em.html"><strong aria-hidden="true">4.5.</strong> Event Monitoring</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../monitoring/realtime-event-monitoring.html"><strong aria-hidden="true">4.5.1.</strong> Real-Time Event Monitoring</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/instance.html"><strong aria-hidden="true">4.6.</strong> Instance Related</a></li><li class="chapter-item expanded "><a href="../tools/oms.html"><strong aria-hidden="true">4.7.</strong> Org Metadata Snapshot</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/scripts.html"><strong aria-hidden="true">5.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="../cq/cq.html"><strong aria-hidden="true">6.</strong> Code Quality</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cq/pmd.html"><strong aria-hidden="true">6.1.</strong> Code Scan PMD</a></li><li class="chapter-item expanded "><a href="../cq/comments.html"><strong aria-hidden="true">6.2.</strong> Comments Checking</a></li><li class="chapter-item expanded "><a href="../cq/test-coverage.html"><strong aria-hidden="true">6.3.</strong> Apex Code Test Coverage</a></li><li class="chapter-item expanded "><a href="../cq/lwc-linting.html"><strong aria-hidden="true">6.4.</strong> LWC Linting</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/deployments.html"><strong aria-hidden="true">7.</strong> Deployments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/delta.html"><strong aria-hidden="true">7.1.</strong> Delta Deployments</a></li><li class="chapter-item expanded "><a href="../deployments/gha.html"><strong aria-hidden="true">7.2.</strong> Github Actions</a></li><li class="chapter-item expanded "><a href="../deployments/validate.html"><strong aria-hidden="true">7.3.</strong> Validating changes</a></li><li class="chapter-item expanded "><a href="../deployments/admin-changes.html"><strong aria-hidden="true">7.4.</strong> Taking care of Admin changes</a></li><li class="chapter-item expanded "><a href="../deployments/devOpsCenter.html"><strong aria-hidden="true">7.5.</strong> DevOps Center</a></li><li class="chapter-item expanded "><a href="../deployments/jenkins.html" class="active"><strong aria-hidden="true">7.6.</strong> Jenkins</a></li><li class="chapter-item expanded "><a href="../deployments/git.html"><strong aria-hidden="true">7.7.</strong> git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/git-internals.html"><strong aria-hidden="true">7.7.1.</strong> git internals</a></li><li class="chapter-item expanded "><a href="../deployments/git-hooks.html"><strong aria-hidden="true">7.7.2.</strong> git hooks</a></li><li class="chapter-item expanded "><a href="../deployments/git-ops.html"><strong aria-hidden="true">7.7.3.</strong> git operations</a></li><li class="chapter-item expanded "><a href="../deployments/pr-template.html"><strong aria-hidden="true">7.7.4.</strong> pull request template</a></li><li class="chapter-item expanded "><a href="../deployments/git-diff.html"><strong aria-hidden="true">7.7.5.</strong> git diff</a></li><li class="chapter-item expanded "><a href="../deployments/git-log.html"><strong aria-hidden="true">7.7.6.</strong> git log</a></li><li class="chapter-item expanded "><a href="../deployments/git-stash.html"><strong aria-hidden="true">7.7.7.</strong> git stash</a></li><li class="chapter-item expanded "><a href="../deployments/git-config.html"><strong aria-hidden="true">7.7.8.</strong> git config</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/sourceTracking.html"><strong aria-hidden="true">7.8.</strong> Source Tracking</a></li><li class="chapter-item expanded "><a href="../deployments/dangling.html"><strong aria-hidden="true">7.9.</strong> Dangling Fields Finder</a></li><li class="chapter-item expanded "><a href="../deployments/sbx.html"><strong aria-hidden="true">7.10.</strong> Sandbox Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/sandbox-preview-guide.html"><strong aria-hidden="true">7.10.1.</strong> Sandbox Preview Guide</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/MetadataComponentDependency.html"><strong aria-hidden="true">7.11.</strong> MetadataComponentDependency</a></li></ol></li><li class="chapter-item expanded "><a href="../crma/tools.html"><strong aria-hidden="true">8.</strong> CRMA tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crma/load-export.html"><strong aria-hidden="true">8.1.</strong> Dataset Load and Export</a></li><li class="chapter-item expanded "><a href="../crma/analysis.html"><strong aria-hidden="true">8.2.</strong> Analysis</a></li><li class="chapter-item expanded "><a href="../crma/binding.html"><strong aria-hidden="true">8.3.</strong> Binding</a></li><li class="chapter-item expanded "><a href="../crma/deployment.html"><strong aria-hidden="true">8.4.</strong> Deployment</a></li></ol></li><li class="chapter-item expanded "><a href="../perf/perf.html"><strong aria-hidden="true">9.</strong> Performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../perf/lex-perf.html"><strong aria-hidden="true">9.1.</strong> Lex Performance</a></li><li class="chapter-item expanded "><a href="../perf/perf-testing.html"><strong aria-hidden="true">9.2.</strong> Performance testing</a></li><li class="chapter-item expanded "><a href="../perf/perf-pw.html"><strong aria-hidden="true">9.3.</strong> Testing with Playwright</a></li><li class="chapter-item expanded "><a href="../perf/edge.html"><strong aria-hidden="true">9.4.</strong> Salesforce Edge Network</a></li><li class="chapter-item expanded "><a href="../perf/lex-query.html"><strong aria-hidden="true">9.5.</strong> Lightning Experience Queries</a></li><li class="chapter-item expanded "><a href="../perf/rum.html"><strong aria-hidden="true">9.6.</strong> Real User Monitoring (RUM)</a></li></ol></li><li class="chapter-item expanded "><a href="../dwg/dwg-tools.html"><strong aria-hidden="true">10.</strong> Diagram tools</a></li><li class="chapter-item expanded "><a href="../xml/xml-tools.html"><strong aria-hidden="true">11.</strong> XML tools</a></li><li class="chapter-item expanded "><a href="../dp/dp.html"><strong aria-hidden="true">12.</strong> Data Processing tools</a></li><li class="chapter-item expanded "><a href="../i18n/i18n.html"><strong aria-hidden="true">13.</strong> Translation Tools</a></li><li class="chapter-item expanded "><a href="../media/recording.html"><strong aria-hidden="true">14.</strong> Media - Recording tools</a></li><li class="chapter-item expanded "><a href="../media/image.html"><strong aria-hidden="true">15.</strong> Image Processing</a></li><li class="chapter-item expanded "><a href="../codegen/codegen.html"><strong aria-hidden="true">16.</strong> Code Generators</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../codegen/lwc.html"><strong aria-hidden="true">16.1.</strong> LWC Code Generators</a></li></ol></li><li class="chapter-item expanded "><a href="../ml/ml.html"><strong aria-hidden="true">17.</strong> Machine Learning</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ml/sdcg.html"><strong aria-hidden="true">17.1.</strong> Semantic Doc Compare and Group</a></li><li class="chapter-item expanded "><a href="../ml/datacatalog.html"><strong aria-hidden="true">17.2.</strong> Data Catalog for ML Work</a></li><li class="chapter-item expanded "><a href="../ml/chatgpt.html"><strong aria-hidden="true">17.3.</strong> openAI - ChatGPT</a></li><li class="chapter-item expanded "><a href="../ml/gpt3codex.html"><strong aria-hidden="true">17.4.</strong> openAI - GPT3 Codex</a></li><li class="chapter-item expanded "><a href="../ml/einsteinbot.html"><strong aria-hidden="true">17.5.</strong> Einstein Bot</a></li><li class="chapter-item expanded "><a href="../ml/dialogflow.html"><strong aria-hidden="true">17.6.</strong> Dialogflow - Knowledge Base</a></li></ol></li><li class="chapter-item expanded "><a href="../docmgmt/docmgmt.html"><strong aria-hidden="true">18.</strong> Document Management tools</a></li><li class="chapter-item expanded "><a href="../design/design-notes.html"><strong aria-hidden="true">19.</strong> Design Principles</a></li><li class="chapter-item expanded "><a href="../chromeext/ext.html"><strong aria-hidden="true">20.</strong> Chrome Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chromeext/onnu.html"><strong aria-hidden="true">20.1.</strong> ONNU</a></li></ol></li><li class="chapter-item expanded "><a href="../vscode/ext.html"><strong aria-hidden="true">21.</strong> VS Code Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../vscode/sfland.html"><strong aria-hidden="true">21.1.</strong> SF Land</a></li><li class="chapter-item expanded "><a href="../vscode/pmd.html"><strong aria-hidden="true">21.2.</strong> VSCode Apex PMD</a></li></ol></li><li class="chapter-item expanded "><a href="../dviz/dviz.html"><strong aria-hidden="true">22.</strong> Data Viz</a></li><li class="chapter-item expanded "><a href="../releases.html"><strong aria-hidden="true">23.</strong> Releases</a></li><li class="chapter-item expanded "><a href="../rest/rest_tester.html"><strong aria-hidden="true">24.</strong> REST Tester</a></li><li class="chapter-item expanded "><a href="../security/security.html"><strong aria-hidden="true">25.</strong> Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/sd.html"><strong aria-hidden="true">25.1.</strong> Sharing Debugger</a></li><li class="chapter-item expanded "><a href="../security/rh.html"><strong aria-hidden="true">25.2.</strong> Role Hierarchy</a></li><li class="chapter-item expanded "><a href="../security/shield.html"><strong aria-hidden="true">25.3.</strong> Shield</a></li><li class="chapter-item expanded "><a href="../security/profile-ps.html"><strong aria-hidden="true">25.4.</strong> Profile, PermissionSet</a></li><li class="chapter-item expanded "><a href="../security/setupAuditTrail.html"><strong aria-hidden="true">25.5.</strong> SetupAuditTrail</a></li><li class="chapter-item expanded "><a href="../security/datamask.html"><strong aria-hidden="true">25.6.</strong> Data Mask</a></li><li class="chapter-item expanded "><a href="../security/saml.html"><strong aria-hidden="true">25.7.</strong> SAML</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectConcepts.html"><strong aria-hidden="true">25.8.</strong> OpenID Connect</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/openIDConnect.html"><strong aria-hidden="true">25.8.1.</strong> OIDC Google</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectProvider.html"><strong aria-hidden="true">25.8.2.</strong> OIDC Provider</a></li><li class="chapter-item expanded "><a href="../security/jwt.html"><strong aria-hidden="true">25.8.3.</strong> JWT</a></li></ol></li><li class="chapter-item expanded "><a href="../security/openssl.html"><strong aria-hidden="true">25.9.</strong> OpenSSL</a></li></ol></li><li class="chapter-item expanded "><a href="../mobile/mobile.html"><strong aria-hidden="true">26.</strong> Mobile</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../mobile/ios-sim.html"><strong aria-hidden="true">26.1.</strong> Simulator</a></li></ol></li><li class="chapter-item expanded "><a href="../rd/rd.html"><strong aria-hidden="true">27.</strong> Reports and Dashboards</a></li><li class="chapter-item expanded "><a href="../customLabels/cl.html"><strong aria-hidden="true">28.</strong> Custom Labels</a></li><li class="chapter-item expanded "><a href="../accessibility/508.html"><strong aria-hidden="true">29.</strong> 508 - Accessibility</a></li><li class="chapter-item expanded "><a href="../process-automation/pa.html"><strong aria-hidden="true">30.</strong> Process Automation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../process-automation/flow.html"><strong aria-hidden="true">30.1.</strong> Flow</a></li></ol></li><li class="chapter-item expanded "><a href="../great/folks.html"><strong aria-hidden="true">31.</strong> Great Folks</a></li><li class="chapter-item expanded "><a href="../editor/editor-tips.html"><strong aria-hidden="true">32.</strong> Editor tips</a></li><li class="chapter-item expanded "><a href="../bash/tips.html"><strong aria-hidden="true">33.</strong> Bash tips</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Salesforce Development Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="jenkins"><a class="header" href="#jenkins">Jenkins</a></h1>
+<pre><code>The best part is no part.
+Physics is the law and everything else is a recommendation.
+The machine that makes the machine!
+
+- Elon Musk
+</code></pre>
+<h2 id="topics"><a class="header" href="#topics">Topics</a></h2>
+<ul>
+<li><a href="#usecase">Use Case</a></li>
+<li><a href="#master">Setting up Jenkins Master</a></li>
+<li><a href="#worker">Setting up Worker Nodes</a></li>
+</ul>
+<hr />
+<p><a name='usecase'></a></p>
+<h2 id="use-case"><a class="header" href="#use-case">Use Case</a></h2>
+<ul>
+<li>Setup Jenkins Master and Worker Nodes to run SFDX  for the given org</li>
+<li>Make use of JWT flow to login to a Salesforce org </li>
+</ul>
+<pre class="mermaid">graph TB;
+JenkinsMaster--&gt;socat;
+socat--&gt; Worker1--&gt;ORG;
+socat--&gt; Worker2--&gt;ORG;
+socat--&gt; Worker3--&gt;ORG;
+
+</pre>
+<p><a name='master'></a></p>
+<h2 id="setting-up-jenkins-master"><a class="header" href="#setting-up-jenkins-master">Setting up Jenkins Master</a></h2>
+<pre><code>docker network create jenkins
+</code></pre>
+<pre><code>37d113c8d79cd12a209822f0ccb12be7058b9c6ccdc62e2b298725537edd703d
+</code></pre>
+<pre><code>docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+f8ca68549edb   bridge    bridge    local
+145498352d20   host      host      local
+37d113c8d79c   jenkins   bridge    local
+3bdfaf921867   none      null      local
+</code></pre>
+<pre><code>docker run --name jenkins-docker --rm --detach \
+  --privileged --network jenkins --network-alias docker \
+  --env DOCKER_TLS_CERTDIR=/certs \
+  --volume jenkins-docker-certs:/certs/client \
+  --volume jenkins-data:/var/jenkins_home \
+  --publish 2376:2376 \
+  docker:dind --storage-driver overlay2
+</code></pre>
+<pre><code>Unable to find image 'docker:dind' locally
+dind: Pulling from library/docker
+63b65145d645: Pull complete 
+67fecbccebe0: Pull complete 
+2b3fda0e4f2a: Pull complete 
+30dc96e58339: Pull complete 
+8c007c9e333b: Pull complete 
+c31b9f3137a1: Pull complete 
+782206789a08: Pull complete 
+e415889ffe25: Pull complete 
+55134767123a: Pull complete 
+36af3abb7351: Pull complete 
+9e414f2e72f2: Pull complete 
+4ccabe0725ae: Pull complete 
+ca215d26ccb7: Pull complete 
+Digest: sha256:e4d776dd1e0580dfb670559d887300aa08b53b8a59f5df2d4eaace936ef4d0e9
+Status: Downloaded newer image for docker:dind
+58b1537f513652de9951efd03766a2c9ad853e45341a18584f39565bb4beae14
+</code></pre>
+<pre><code>cat Dockerfile
+</code></pre>
+<pre><code>
+FROM jenkins/jenkins:2.387.1
+USER root
+RUN apt-get update &amp;&amp; apt-get install -y lsb-release
+RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
+  https://download.docker.com/linux/debian/gpg
+RUN echo &quot;deb [arch=$(dpkg --print-architecture) \
+  signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
+  https://download.docker.com/linux/debian \
+  $(lsb_release -cs) stable&quot; &gt; /etc/apt/sources.list.d/docker.list
+RUN apt-get update &amp;&amp; apt-get install -y docker-ce-cli
+USER jenkins
+RUN jenkins-plugin-cli --plugins &quot;blueocean docker-workflow&quot;
+</code></pre>
+<pre><code>docker build -t myjenkins-blueocean:2.387.1-1 .
+[+] Building 42.9s (10/10) FINISHED                                                                                                                    
+ =&gt; [internal] load build definition from Dockerfile                                                                                              0.0s
+ =&gt; =&gt; transferring dockerfile: 602B                                                                                                              0.0s
+ =&gt; [internal] load .dockerignore                                                                                                                 0.0s
+ =&gt; =&gt; transferring context: 2B                                                                                                                   0.0s
+ =&gt; [internal] load metadata for docker.io/jenkins/jenkins:2.387.1                                                                                1.0s
+ =&gt; [1/6] FROM docker.io/jenkins/jenkins:2.387.1@sha256:0944e18261a6547e89b700cec432949281a7419a6165a3906e78c97efde3bc86                         11.1s
+ =&gt; =&gt; resolve docker.io/jenkins/jenkins:2.387.1@sha256:0944e18261a6547e89b700cec432949281a7419a6165a3906e78c97efde3bc86                          0.0s
+ =&gt; =&gt; sha256:a56533012712c1db623da3e5e9c2d0276301c82db0a2e7a82debfb57e5d916f2 8.93MB / 8.93MB                                                    0.3s
+ =&gt; =&gt; sha256:c09d5e9e1188f3fff7a4f8c3c7c330fde5184cba1c6f0c92526b8b7bd0ac7c26 51.63MB / 51.63MB                                                  3.4s
+ =&gt; =&gt; sha256:0944e18261a6547e89b700cec432949281a7419a6165a3906e78c97efde3bc86 2.36kB / 2.36kB                                                    0.0s
+ =&gt; =&gt; sha256:32fb02163b6bb519a30f909008e852354dae10bdfd6b34190dbdfe8f15403ea0 55.05MB / 55.05MB                                                  2.6s
+ =&gt; =&gt; sha256:005fcb5c3017ef120d0d9d8d8925e9248ff6e2cf2b5e18b527b01459c7b2b3f4 2.77kB / 2.77kB                                                    0.0s
+ =&gt; =&gt; sha256:d5ed2ceef0ec08e9044ebb39812f211d64dbcdfce775cc6b0460ca289193416f 13.13kB / 13.13kB                                                  0.0s
+ =&gt; =&gt; sha256:7936e107ffe73b406a0d02edf9bb02b983534d803bb06fd03dc38dac4b6cfe2a 1.24kB / 1.24kB                                                    0.4s
+ =&gt; =&gt; sha256:3ca683058265b99b65bbc69b9e8fa4c46e830db35aad614706200e6cf0c30d8a 189B / 189B                                                        0.5s
+ =&gt; =&gt; sha256:c2ecd304b4b84ef6154bd85e13360f0b015e39057a329698617ce0a53ed6cf32 98.12MB / 98.12MB                                                  4.7s
+ =&gt; =&gt; extracting sha256:32fb02163b6bb519a30f909008e852354dae10bdfd6b34190dbdfe8f15403ea0                                                         2.4s
+ =&gt; =&gt; sha256:be3512d810d65f00f28af0885e2f30833263ee061528e20c7fee21664f1572b8 202B / 202B                                                        2.8s
+ =&gt; =&gt; sha256:56b37d7c2a7a3c93fd013cb1ad5652f8cea3910ecc0274d73064bba27ab57864 5.84MB / 5.84MB                                                    3.4s
+ =&gt; =&gt; sha256:99ed1e723e52507ce2d615e1682d673c3ffcec5f5b68c266db70d829ef4be208 76.93MB / 76.93MB                                                  5.8s
+ =&gt; =&gt; sha256:256db5485b1399ecbd58c2558388fc9a4ff1caaaeacbdfe23127c7f13b1ee98b 1.93kB / 1.93kB                                                    3.5s
+ =&gt; =&gt; sha256:ee8c7eaf5e6bd8c45e503756da48e80137def6765017148ce9f2af66ce97244b 1.17kB / 1.17kB                                                    3.7s
+ =&gt; =&gt; sha256:509f66c2f3174642f0eb3e3b2e8a70da698f613042ec65f525c476afe0b6b7d5 374B / 374B                                                        3.9s
+ =&gt; =&gt; sha256:820296a845d636be13276fdf3bdae7fdf2ac00d401182632d1ab450e26353674 271B / 271B                                                        4.1s
+ =&gt; =&gt; extracting sha256:c09d5e9e1188f3fff7a4f8c3c7c330fde5184cba1c6f0c92526b8b7bd0ac7c26                                                         2.0s
+ =&gt; =&gt; extracting sha256:a56533012712c1db623da3e5e9c2d0276301c82db0a2e7a82debfb57e5d916f2                                                         0.2s
+ =&gt; =&gt; extracting sha256:7936e107ffe73b406a0d02edf9bb02b983534d803bb06fd03dc38dac4b6cfe2a                                                         0.0s
+ =&gt; =&gt; extracting sha256:3ca683058265b99b65bbc69b9e8fa4c46e830db35aad614706200e6cf0c30d8a                                                         0.0s
+ =&gt; =&gt; extracting sha256:c2ecd304b4b84ef6154bd85e13360f0b015e39057a329698617ce0a53ed6cf32                                                         0.6s
+ =&gt; =&gt; extracting sha256:be3512d810d65f00f28af0885e2f30833263ee061528e20c7fee21664f1572b8                                                         0.0s
+ =&gt; =&gt; extracting sha256:56b37d7c2a7a3c93fd013cb1ad5652f8cea3910ecc0274d73064bba27ab57864                                                         0.1s
+ =&gt; =&gt; extracting sha256:99ed1e723e52507ce2d615e1682d673c3ffcec5f5b68c266db70d829ef4be208                                                         1.6s
+ =&gt; =&gt; extracting sha256:256db5485b1399ecbd58c2558388fc9a4ff1caaaeacbdfe23127c7f13b1ee98b                                                         0.0s
+ =&gt; =&gt; extracting sha256:ee8c7eaf5e6bd8c45e503756da48e80137def6765017148ce9f2af66ce97244b                                                         0.0s
+ =&gt; =&gt; extracting sha256:509f66c2f3174642f0eb3e3b2e8a70da698f613042ec65f525c476afe0b6b7d5                                                         0.0s
+ =&gt; =&gt; extracting sha256:820296a845d636be13276fdf3bdae7fdf2ac00d401182632d1ab450e26353674                                                         0.0s
+ =&gt; [2/6] RUN apt-get update &amp;&amp; apt-get install -y lsb-release                                                                                    6.7s
+ =&gt; [3/6] RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc   https://download.docker.com/linux/debian/gpg                           0.7s
+ =&gt; [4/6] RUN echo &quot;deb [arch=$(dpkg --print-architecture)   signed-by=/usr/share/keyrings/docker-archive-keyring.asc]   https://download.docker  0.2s
+ =&gt; [5/6] RUN apt-get update &amp;&amp; apt-get install -y docker-ce-cli                                                                                  8.9s
+ =&gt; [6/6] RUN jenkins-plugin-cli --plugins &quot;blueocean docker-workflow&quot;                                                                           13.5s
+ =&gt; exporting to image                                                                                                                            0.8s
+ =&gt; =&gt; exporting layers                                                                                                                           0.8s
+ =&gt; =&gt; writing image sha256:fd428091db2d8149ed7ce13d7fe3ccd7d412e87a121f4a6850ec0cfd0ed91ce2                                                      0.0s
+ =&gt; =&gt; naming to docker.io/library/myjenkins-blueocean:2.387.1-1                                                                                  0.0s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+</code></pre>
+<pre><code>docker container ls
+</code></pre>
+<pre><code>CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS         PORTS                              NAMES
+58b1537f5136   docker:dind   &quot;dockerd-entrypoint.…&quot;   2 minutes ago   Up 2 minutes   2375/tcp, 0.0.0.0:2376-&gt;2376/tcp   jenkins-docker
+</code></pre>
+<pre><code>docker run --name jenkins-blueocean --restart=on-failure --detach \
+  --network jenkins --env DOCKER_HOST=tcp://docker:2376 \
+  --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 \
+  --publish 8080:8080 --publish 50000:50000 \
+  --volume jenkins-data:/var/jenkins_home \
+  --volume jenkins-docker-certs:/certs/client:ro \
+  myjenkins-blueocean:2.387.1-1
+</code></pre>
+<pre><code>docker ps
+</code></pre>
+<pre><code>CONTAINER ID   IMAGE                           COMMAND                  CREATED         STATUS         PORTS                                              NAMES
+c5ea234eee86   myjenkins-blueocean:2.387.1-1   &quot;/usr/bin/tini -- /u…&quot;   2 minutes ago   Up 2 minutes   0.0.0.0:8080-&gt;8080/tcp, 0.0.0.0:50000-&gt;50000/tcp   jenkins-blueocean
+58b1537f5136   docker:dind                     &quot;dockerd-entrypoint.…&quot;   4 minutes ago   Up 4 minutes   2375/tcp, 0.0.0.0:2376-&gt;2376/tcp                   jenkins-docker
+</code></pre>
+<h2 id="getting-initialadminpassword"><a class="header" href="#getting-initialadminpassword">Getting initialAdminPassword</a></h2>
+<pre><code>docker exec c5ea234eee86  cat /var/jenkins_home/secrets/initialAdminPassword
+</code></pre>
+<pre><code>600755197d9642a08d03aa294fb82344
+</code></pre>
+<h2 id="bash-into-docker-container"><a class="header" href="#bash-into-docker-container">bash into docker container</a></h2>
+<pre><code>docker exec -it c5ea234eee86   bash
+</code></pre>
+<pre><code>jenkins@c5ea234eee86:~$ ls -l
+total 112
+-rw-r--r--   1 jenkins jenkins  1663 Mar 12 13:29 config.xml
+-rw-r--r--   1 jenkins jenkins  5316 Mar 12 13:28 copy_reference_file.log
+-rw-r--r--   1 jenkins jenkins   156 Mar 12 13:28 hudson.model.UpdateCenter.xml
+-rw-r--r--   1 jenkins jenkins   370 Mar 12 13:28 hudson.plugins.git.GitTool.xml
+-rw-------   1 jenkins jenkins  1680 Mar 12 13:28 identity.key.enc
+-rw-r--r--   1 jenkins jenkins     7 Mar 12 13:34 jenkins.install.InstallUtil.lastExecVersion
+-rw-r--r--   1 jenkins jenkins     7 Mar 12 13:34 jenkins.install.UpgradeWizard.state
+-rw-r--r--   1 jenkins jenkins   179 Mar 12 13:34 jenkins.model.JenkinsLocationConfiguration.xml
+-rw-r--r--   1 jenkins jenkins   171 Mar 12 13:28 jenkins.telemetry.Correlator.xml
+drwxr-xr-x   3 jenkins jenkins  4096 Mar 12 13:51 jobs
+drwxr-xr-x   4 jenkins jenkins  4096 Mar 12 14:33 logs
+-rw-r--r--   1 jenkins jenkins   907 Mar 12 13:28 nodeMonitors.xml
+drwxr-xr-x   2 jenkins jenkins  4096 Mar 12 13:28 nodes
+drwxr-xr-x 114 jenkins jenkins 24576 Mar 12 13:33 plugins
+-rw-r--r--   1 jenkins jenkins   129 Mar 12 13:54 queue.xml
+-rw-r--r--   1 jenkins jenkins    64 Mar 12 13:28 secret.key
+-rw-r--r--   1 jenkins jenkins     0 Mar 12 13:28 secret.key.not-so-secret
+drwx------   2 jenkins jenkins  4096 Mar 12 13:53 secrets
+drwxr-xr-x   2 jenkins jenkins  4096 Mar 12 13:33 updates
+drwxr-xr-x   2 jenkins jenkins  4096 Mar 12 13:28 userContent
+drwxr-xr-x   3 jenkins jenkins  4096 Mar 12 13:33 users
+drwxr-xr-x  11 jenkins jenkins  4096 Mar 12 13:28 war
+drwxr-xr-x   3 jenkins jenkins  4096 Mar 12 13:53 workspace
+jenkins@c5ea234eee86:~$ pwd
+/var/jenkins_home
+jenkins@c5ea234eee86:~$ python3
+Python 3.9.2 (default, Feb 28 2021, 17:03:44) 
+[GCC 10.2.1 20210110] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; exit()
+</code></pre>
+<h2 id="socat-container"><a class="header" href="#socat-container">socat container</a></h2>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/alpine/socat/">socat</a> provides proxy the connection between Jenkins master container and localhost</p>
+</li>
+<li>
+<p>Steps</p>
+</li>
+</ul>
+<ol>
+<li>
+<p>If you are running jenkins as container, in the docker host uri field you have to enter unix or tcp address of the docker host. But since you are running jenkins as container, the container can't reach docker host unix port</p>
+</li>
+<li>
+<p>So we have to run another container that can mediate between docker host and jenkins container. It will publish docker host's unix port as its tcp port. Follow the instructions to create socat container https://hub.docker.com/r/alpine/socat/</p>
+</li>
+</ol>
+<p>3)After the creating socat container, you can go back the docker configuration in jenkins and enter tcp://socat-container-ip:2375</p>
+<ol start="4">
+<li>Test Connection should succeed now</li>
+</ol>
+<pre><code>docker run -d --restart=always -p 127.0.0.1:2400:2375 --network jenkins -v /var/run/docker.sock:/var/run/docker.sock alpine/socat tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
+</code></pre>
+<pre><code>b643f2a82b31e1f2ac9e5261badbb65d13447b94a92eaa0bb34202a9148f39b4
+
+
+</code></pre>
+<pre><code> docker container ls
+</code></pre>
+<pre><code>CONTAINER ID   IMAGE                           COMMAND                  CREATED              STATUS              PORTS                                              NAMES
+b643f2a82b31   alpine/socat                    &quot;socat tcp-listen:23…&quot;   About a minute ago   Up About a minute   127.0.0.1:2400-&gt;2375/tcp                           silly_hopper
+c5ea234eee86   myjenkins-blueocean:2.387.1-1   &quot;/usr/bin/tini -- /u…&quot;   3 hours ago          Up 12 minutes       0.0.0.0:8080-&gt;8080/tcp, 0.0.0.0:50000-&gt;50000/tcp   jenkins-blueocean
+58b1537f5136   docker:dind                     &quot;dockerd-entrypoint.…&quot;   3 hours ago          Up 3 hours          2375/tcp, 0.0.0.0:2376-&gt;2376/tcp                   jenkins-docker
+
+
+</code></pre>
+<pre><code>docker inspect b643f2a82b31e1f2ac9e5261badbb65d13447b94a92eaa0bb34202a9148f39b4 | grep IPAddress
+</code></pre>
+<pre><code>&quot;SecondaryIPAddresses&quot;: null,
+            &quot;IPAddress&quot;: &quot;&quot;,
+                    &quot;IPAddress&quot;: &quot;172.18.0.4&quot;,
+</code></pre>
+<pre><code>
+docker ps
+</code></pre>
+<pre><code>CONTAINER ID   IMAGE                           COMMAND                  CREATED         STATUS          PORTS                                              NAMES
+b643f2a82b31   alpine/socat                    &quot;socat tcp-listen:23…&quot;   2 minutes ago   Up 2 minutes    127.0.0.1:2400-&gt;2375/tcp                           silly_hopper
+c5ea234eee86   myjenkins-blueocean:2.387.1-1   &quot;/usr/bin/tini -- /u…&quot;   3 hours ago     Up 13 minutes   0.0.0.0:8080-&gt;8080/tcp, 0.0.0.0:50000-&gt;50000/tcp   jenkins-blueocean
+58b1537f5136   docker:dind                     &quot;dockerd-entrypoint.…&quot;   3 hours ago     Up 3 hours      2375/tcp, 0.0.0.0:2376-&gt;2376/tcp                   jenkins-docker
+</code></pre>
+<h3 id="inspect-socat"><a class="header" href="#inspect-socat">Inspect socat</a></h3>
+<pre><code>
+docker inspect  silly_hopper 
+</code></pre>
+<pre><code class="language-json">[
+    {
+        &quot;Id&quot;: &quot;b643f2a82b31e1f2ac9e5261badbb65d13447b94a92eaa0bb34202a9148f39b4&quot;,
+        &quot;Created&quot;: &quot;2023-03-12T16:08:27.933374909Z&quot;,
+        &quot;Path&quot;: &quot;socat&quot;,
+        &quot;Args&quot;: [
+            &quot;tcp-listen:2375,fork,reuseaddr&quot;,
+            &quot;unix-connect:/var/run/docker.sock&quot;
+        ],
+        &quot;State&quot;: {
+            &quot;Status&quot;: &quot;running&quot;,
+            &quot;Running&quot;: true,
+            &quot;Paused&quot;: false,
+            &quot;Restarting&quot;: false,
+            &quot;OOMKilled&quot;: false,
+            &quot;Dead&quot;: false,
+            &quot;Pid&quot;: 8609,
+            &quot;ExitCode&quot;: 0,
+            &quot;Error&quot;: &quot;&quot;,
+            &quot;StartedAt&quot;: &quot;2023-03-12T16:08:28.362760818Z&quot;,
+            &quot;FinishedAt&quot;: &quot;0001-01-01T00:00:00Z&quot;
+        },
+        &quot;Image&quot;: &quot;sha256:f0bbf8a4f6a0e25e06fe69c284e6e0494948e8de21ef933d72732b7858da3110&quot;,
+        &quot;ResolvConfPath&quot;: &quot;/var/lib/docker/containers/b643f2a82b31e1f2ac9e5261badbb65d13447b94a92eaa0bb34202a9148f39b4/resolv.conf&quot;,
+        &quot;HostnamePath&quot;: &quot;/var/lib/docker/containers/b643f2a82b31e1f2ac9e5261badbb65d13447b94a92eaa0bb34202a9148f39b4/hostname&quot;,
+        &quot;HostsPath&quot;: &quot;/var/lib/docker/containers/b643f2a82b31e1f2ac9e5261badbb65d13447b94a92eaa0bb34202a9148f39b4/hosts&quot;,
+        &quot;LogPath&quot;: &quot;/var/lib/docker/containers/b643f2a82b31e1f2ac9e5261badbb65d13447b94a92eaa0bb34202a9148f39b4/b643f2a82b31e1f2ac9e5261badbb65d13447b94a92eaa0bb34202a9148f39b4-json.log&quot;,
+        &quot;Name&quot;: &quot;/silly_hopper&quot;,
+        &quot;RestartCount&quot;: 0,
+        &quot;Driver&quot;: &quot;overlay2&quot;,
+        &quot;Platform&quot;: &quot;linux&quot;,
+        &quot;MountLabel&quot;: &quot;&quot;,
+        &quot;ProcessLabel&quot;: &quot;&quot;,
+        &quot;AppArmorProfile&quot;: &quot;&quot;,
+        &quot;ExecIDs&quot;: null,
+        &quot;HostConfig&quot;: {
+            &quot;Binds&quot;: [
+                &quot;/var/run/docker.sock:/var/run/docker.sock&quot;
+            ],
+            &quot;ContainerIDFile&quot;: &quot;&quot;,
+            &quot;LogConfig&quot;: {
+                &quot;Type&quot;: &quot;json-file&quot;,
+                &quot;Config&quot;: {}
+            },
+            &quot;NetworkMode&quot;: &quot;jenkins&quot;,
+            &quot;PortBindings&quot;: {
+                &quot;2375/tcp&quot;: [
+                    {
+                        &quot;HostIp&quot;: &quot;127.0.0.1&quot;,
+                        &quot;HostPort&quot;: &quot;2400&quot;
+                    }
+                ]
+            },
+            &quot;RestartPolicy&quot;: {
+                &quot;Name&quot;: &quot;always&quot;,
+                &quot;MaximumRetryCount&quot;: 0
+            },
+            &quot;AutoRemove&quot;: false,
+            &quot;VolumeDriver&quot;: &quot;&quot;,
+            &quot;VolumesFrom&quot;: null,
+            &quot;CapAdd&quot;: null,
+            &quot;CapDrop&quot;: null,
+            &quot;CgroupnsMode&quot;: &quot;private&quot;,
+            &quot;Dns&quot;: [],
+            &quot;DnsOptions&quot;: [],
+            &quot;DnsSearch&quot;: [],
+            &quot;ExtraHosts&quot;: null,
+            &quot;GroupAdd&quot;: null,
+            &quot;IpcMode&quot;: &quot;private&quot;,
+            &quot;Cgroup&quot;: &quot;&quot;,
+            &quot;Links&quot;: null,
+            &quot;OomScoreAdj&quot;: 0,
+            &quot;PidMode&quot;: &quot;&quot;,
+            &quot;Privileged&quot;: false,
+            &quot;PublishAllPorts&quot;: false,
+            &quot;ReadonlyRootfs&quot;: false,
+            &quot;SecurityOpt&quot;: null,
+            &quot;UTSMode&quot;: &quot;&quot;,
+            &quot;UsernsMode&quot;: &quot;&quot;,
+            &quot;ShmSize&quot;: 67108864,
+            &quot;Runtime&quot;: &quot;runc&quot;,
+            &quot;ConsoleSize&quot;: [
+                0,
+                0
+            ],
+            &quot;Isolation&quot;: &quot;&quot;,
+            &quot;CpuShares&quot;: 0,
+            &quot;Memory&quot;: 0,
+            &quot;NanoCpus&quot;: 0,
+            &quot;CgroupParent&quot;: &quot;&quot;,
+            &quot;BlkioWeight&quot;: 0,
+            &quot;BlkioWeightDevice&quot;: [],
+            &quot;BlkioDeviceReadBps&quot;: null,
+            &quot;BlkioDeviceWriteBps&quot;: null,
+            &quot;BlkioDeviceReadIOps&quot;: null,
+            &quot;BlkioDeviceWriteIOps&quot;: null,
+            &quot;CpuPeriod&quot;: 0,
+            &quot;CpuQuota&quot;: 0,
+            &quot;CpuRealtimePeriod&quot;: 0,
+            &quot;CpuRealtimeRuntime&quot;: 0,
+            &quot;CpusetCpus&quot;: &quot;&quot;,
+            &quot;CpusetMems&quot;: &quot;&quot;,
+            &quot;Devices&quot;: [],
+            &quot;DeviceCgroupRules&quot;: null,
+            &quot;DeviceRequests&quot;: null,
+            &quot;KernelMemory&quot;: 0,
+            &quot;KernelMemoryTCP&quot;: 0,
+            &quot;MemoryReservation&quot;: 0,
+            &quot;MemorySwap&quot;: 0,
+            &quot;MemorySwappiness&quot;: null,
+            &quot;OomKillDisable&quot;: null,
+            &quot;PidsLimit&quot;: null,
+            &quot;Ulimits&quot;: null,
+            &quot;CpuCount&quot;: 0,
+            &quot;CpuPercent&quot;: 0,
+            &quot;IOMaximumIOps&quot;: 0,
+            &quot;IOMaximumBandwidth&quot;: 0,
+            &quot;MaskedPaths&quot;: [
+                &quot;/proc/asound&quot;,
+                &quot;/proc/acpi&quot;,
+                &quot;/proc/kcore&quot;,
+                &quot;/proc/keys&quot;,
+                &quot;/proc/latency_stats&quot;,
+                &quot;/proc/timer_list&quot;,
+                &quot;/proc/timer_stats&quot;,
+                &quot;/proc/sched_debug&quot;,
+                &quot;/proc/scsi&quot;,
+                &quot;/sys/firmware&quot;
+            ],
+            &quot;ReadonlyPaths&quot;: [
+                &quot;/proc/bus&quot;,
+                &quot;/proc/fs&quot;,
+                &quot;/proc/irq&quot;,
+                &quot;/proc/sys&quot;,
+                &quot;/proc/sysrq-trigger&quot;
+            ]
+        },
+        &quot;GraphDriver&quot;: {
+            &quot;Data&quot;: {
+                &quot;LowerDir&quot;: &quot;/var/lib/docker/overlay2/ac59c4bb642c204d52676ea5a3f38ab123aa55c28e7c4d32885c29798685bf6c-init/diff:/var/lib/docker/overlay2/33c335c0d0c0267bc8a0de4b181fa6a67212ef993d5b23cc2d932eccd87da979/diff:/var/lib/docker/overlay2/0b76f458f2092bfa7d73629e242e320299fb159448bf52a18647959f1637387c/diff&quot;,
+                &quot;MergedDir&quot;: &quot;/var/lib/docker/overlay2/ac59c4bb642c204d52676ea5a3f38ab123aa55c28e7c4d32885c29798685bf6c/merged&quot;,
+                &quot;UpperDir&quot;: &quot;/var/lib/docker/overlay2/ac59c4bb642c204d52676ea5a3f38ab123aa55c28e7c4d32885c29798685bf6c/diff&quot;,
+                &quot;WorkDir&quot;: &quot;/var/lib/docker/overlay2/ac59c4bb642c204d52676ea5a3f38ab123aa55c28e7c4d32885c29798685bf6c/work&quot;
+            },
+            &quot;Name&quot;: &quot;overlay2&quot;
+        },
+        &quot;Mounts&quot;: [
+            {
+                &quot;Type&quot;: &quot;bind&quot;,
+                &quot;Source&quot;: &quot;/var/run/docker.sock&quot;,
+                &quot;Destination&quot;: &quot;/var/run/docker.sock&quot;,
+                &quot;Mode&quot;: &quot;&quot;,
+                &quot;RW&quot;: true,
+                &quot;Propagation&quot;: &quot;rprivate&quot;
+            }
+        ],
+        &quot;Config&quot;: {
+            &quot;Hostname&quot;: &quot;b643f2a82b31&quot;,
+            &quot;Domainname&quot;: &quot;&quot;,
+            &quot;User&quot;: &quot;&quot;,
+            &quot;AttachStdin&quot;: false,
+            &quot;AttachStdout&quot;: false,
+            &quot;AttachStderr&quot;: false,
+            &quot;ExposedPorts&quot;: {
+                &quot;2375/tcp&quot;: {}
+            },
+            &quot;Tty&quot;: false,
+            &quot;OpenStdin&quot;: false,
+            &quot;StdinOnce&quot;: false,
+            &quot;Env&quot;: [
+                &quot;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;
+            ],
+            &quot;Cmd&quot;: [
+                &quot;tcp-listen:2375,fork,reuseaddr&quot;,
+                &quot;unix-connect:/var/run/docker.sock&quot;
+            ],
+            &quot;Image&quot;: &quot;alpine/socat&quot;,
+            &quot;Volumes&quot;: null,
+            &quot;WorkingDir&quot;: &quot;&quot;,
+            &quot;Entrypoint&quot;: [
+                &quot;socat&quot;
+            ],
+            &quot;OnBuild&quot;: null,
+            &quot;Labels&quot;: {}
+        },
+        &quot;NetworkSettings&quot;: {
+            &quot;Bridge&quot;: &quot;&quot;,
+            &quot;SandboxID&quot;: &quot;a818d2616cbaced18798c777a02b95d53c16765842f392151d39272ed0e4be37&quot;,
+            &quot;HairpinMode&quot;: false,
+            &quot;LinkLocalIPv6Address&quot;: &quot;&quot;,
+            &quot;LinkLocalIPv6PrefixLen&quot;: 0,
+            &quot;Ports&quot;: {
+                &quot;2375/tcp&quot;: [
+                    {
+                        &quot;HostIp&quot;: &quot;127.0.0.1&quot;,
+                        &quot;HostPort&quot;: &quot;2400&quot;
+                    }
+                ]
+            },
+            &quot;SandboxKey&quot;: &quot;/var/run/docker/netns/a818d2616cba&quot;,
+            &quot;SecondaryIPAddresses&quot;: null,
+            &quot;SecondaryIPv6Addresses&quot;: null,
+            &quot;EndpointID&quot;: &quot;&quot;,
+            &quot;Gateway&quot;: &quot;&quot;,
+            &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+            &quot;GlobalIPv6PrefixLen&quot;: 0,
+            &quot;IPAddress&quot;: &quot;&quot;,
+            &quot;IPPrefixLen&quot;: 0,
+            &quot;IPv6Gateway&quot;: &quot;&quot;,
+            &quot;MacAddress&quot;: &quot;&quot;,
+            &quot;Networks&quot;: {
+                &quot;jenkins&quot;: {
+                    &quot;IPAMConfig&quot;: null,
+                    &quot;Links&quot;: null,
+                    &quot;Aliases&quot;: [
+                        &quot;b643f2a82b31&quot;
+                    ],
+                    &quot;NetworkID&quot;: &quot;37d113c8d79cd12a209822f0ccb12be7058b9c6ccdc62e2b298725537edd703d&quot;,
+                    &quot;EndpointID&quot;: &quot;08bc7021dd48b6993f51b08a0d0e9333276c64311b4487361b02c476a3a1e3f9&quot;,
+                    &quot;Gateway&quot;: &quot;172.18.0.1&quot;,
+                    &quot;IPAddress&quot;: &quot;172.18.0.4&quot;,
+                    &quot;IPPrefixLen&quot;: 16,
+                    &quot;IPv6Gateway&quot;: &quot;&quot;,
+                    &quot;GlobalIPv6Address&quot;: &quot;&quot;,
+                    &quot;GlobalIPv6PrefixLen&quot;: 0,
+                    &quot;MacAddress&quot;: &quot;02:42:ac:12:00:04&quot;,
+                    &quot;DriverOpts&quot;: null
+                }
+            }
+        }
+    }
+]
+</code></pre>
+<p><a name='worker'></a></p>
+<h2 id="worker-node-setup"><a class="header" href="#worker-node-setup">Worker node setup</a></h2>
+<h3 id="build-docker-image"><a class="header" href="#build-docker-image">Build Docker image</a></h3>
+<pre><code>cat Dockerfile
+</code></pre>
+<pre><code class="language-dockerfile">FROM jenkins/agent:alpine-jdk11
+# author: mchinnappan
+
+USER root
+# install python3
+RUN apk add python3
+RUN apk add py3-pip
+
+# install vim
+RUN apk add  vim
+
+
+
+
+# install nodejs and sfdx cli
+RUN apk add nodejs 
+RUN apk add npm 
+RUN apk add yarn 
+
+
+
+ARG SALESFORCE_CLI_VERSION=latest
+RUN npm install --global sfdx-cli@${SALESFORCE_CLI_VERSION}
+
+
+RUN apk add jq 
+
+USER jenkins
+
+# install required plugins
+RUN  echo 'y' |  sfdx plugins:install sfdx-mohanc-plugins
+RUN  echo 'y' |  sfdx plugins:install sfdx-git-delta
+
+
+
+</code></pre>
+<pre><code>docker build -t docker-agent-sfdx .
+</code></pre>
+<pre><code>[+] Building 160.6s (15/15) FINISHED                                                                                                                                                      
+ =&gt; [internal] load build definition from Dockerfile                                                                                                                                 0.0s
+ =&gt; =&gt; transferring dockerfile: 557B                                                                                                                                                 0.0s
+ =&gt; [internal] load .dockerignore                                                                                                                                                    0.0s
+ =&gt; =&gt; transferring context: 2B                                                                                                                                                      0.0s
+ =&gt; [internal] load metadata for docker.io/jenkins/agent:alpine-jdk11                                                                                                                0.9s
+ =&gt; [ 1/11] FROM docker.io/jenkins/agent:alpine-jdk11@sha256:fdf4d5e79b3645be5779130bf3239cf9344b5b1929d538b7d2980be8868550f6                                                        0.0s
+ =&gt; CACHED [ 2/11] RUN apk add python3                                                                                                                                               0.0s
+ =&gt; CACHED [ 3/11] RUN apk add py3-pip                                                                                                                                               0.0s
+ =&gt; [ 4/11] RUN apk add  vim                                                                                                                                                         1.4s
+ =&gt; [ 5/11] RUN apk add nodejs                                                                                                                                                       1.3s
+ =&gt; [ 6/11] RUN apk add npm                                                                                                                                                          1.0s 
+ =&gt; [ 7/11] RUN apk add yarn                                                                                                                                                         0.8s 
+ =&gt; [ 8/11] RUN npm install --global sfdx-cli@latest                                                                                                                                30.6s 
+ =&gt; [ 9/11] RUN apk add jq                                                                                                                                                           0.9s 
+ =&gt; [10/11] RUN  echo 'y' |  sfdx plugins:install sfdx-mohanc-plugins                                                                                                               63.6s 
+ =&gt; [11/11] RUN  echo 'y' |  sfdx plugins:install sfdx-git-delta                                                                                                                    38.8s 
+ =&gt; exporting to image                                                                                                                                                              21.2s 
+ =&gt; =&gt; exporting layers                                                                                                                                                             21.1s 
+ =&gt; =&gt; writing image sha256:5d988bfa62b447ffe80a0421417b9f6329656f4d78722ea65969d32cdc13b5d4                                                                                         0.0s 
+ =&gt; =&gt; naming to docker.io/library/docker-agent-sfdx 
+</code></pre>
+<h2 id="run-the-image"><a class="header" href="#run-the-image">run the image</a></h2>
+<pre><code>docker run -it --entrypoint bash   --name  docker-agent-sfdx-app docker-agent-sfdx 
+</code></pre>
+<pre><code> 17ded65a422c:~$ sfdx plugins
+sfdx-git-delta 5.13.3
+sfdx-mohanc-plugins 0.0.343
+
+</code></pre>
+<pre><code>exit
+</code></pre>
+<h2 id="publish-this-image--5d988bfa62b447ffe80a0421417b9f6329656f4d78722ea65969d32cdc13b5d4"><a class="header" href="#publish-this-image--5d988bfa62b447ffe80a0421417b9f6329656f4d78722ea65969d32cdc13b5d4">Publish this image : 5d988bfa62b447ffe80a0421417b9f6329656f4d78722ea65969d32cdc13b5d4</a></h2>
+<pre><code>docker tag 5d988bfa62b447ffe80a0421417b9f6329656f4d78722ea65969d32cdc13b5d4    mohanchinnappan/mc-sfdx 
+</code></pre>
+<pre><code>docker images
+</code></pre>
+<pre><code>REPOSITORY                       TAG            IMAGE ID       CREATED          SIZE
+mohanchinnappan/mc-sfdx          latest         5d988bfa62b4   24 minutes ago   1.51GB
+myjenkins-blueocean              2.387.1-1      fd428091db2d   4 hours ago      805MB
+docker                           dind           c365741dcfc2   4 days ago       311MB
+alpine/socat                     latest         f0bbf8a4f6a0   2 weeks ago      8.5MB
+</code></pre>
+<h3 id="push"><a class="header" href="#push">Push</a></h3>
+<pre><code>docker push   mohanchinnappan/mc-sfdx 
+</code></pre>
+<pre><code>Using default tag: latest
+The push refers to repository [docker.io/mohanchinnappan/mc-sfdx]
+3c3548e6efa9: Pushed 
+c991a1b7df1a: Pushed 
+018486e93789: Pushed 
+96d7750030cc: Pushed 
+17ec9d53bd65: Pushed 
+cc4f6cce9ed0: Pushed 
+e5fc35b10359: Pushed 
+26cde4efb06b: Pushed 
+a91d2cf08b0f: Pushed 
+0970af15e418: Pushed 
+5f70bf18a086: Mounted from mohanchinnappan/jupyter-rust 
+639d13e0e024: Mounted from jenkins/agent 
+b910852e976b: Mounted from jenkins/agent 
+bc4c636cd02f: Mounted from jenkins/agent 
+99b5df13238c: Mounted from jenkins/agent 
+10009e9661e3: Mounted from jenkins/agent 
+abc8eda4da3a: Mounted from jenkins/agent 
+591e5beaaae8: Mounted from jenkins/agent 
+a34e3a797aad: Mounted from jenkins/agent 
+7cd52847ad77: Mounted from jenkins/agent 
+latest: digest: sha256:cf4b1d93c8833298cec8fa5897d22ede339b53193a606c69448ac8ee76a0c90b size: 4532
+</code></pre>
+<h3 id="published-docker-image"><a class="header" href="#published-docker-image">Published Docker Image</a></h3>
+<ul>
+<li><a href="https://hub.docker.com/repository/docker/mohanchinnappan/mc-sfdx/general">mohanchinnappan/mc-sfdxDocker</a></li>
+</ul>
+<h2 id="run-it"><a class="header" href="#run-it">Run it</a></h2>
+<pre><code>docker run -it --entrypoint bash    mohanchinnappan/mc-sfdx  
+
+
+</code></pre>
+<pre><code>9900abaf79d2:~$ sfdx plugins
+sfdx-git-delta 5.13.3
+sfdx-mohanc-plugins 0.0.343
+
+python3 
+Python 3.10.10 (main, Feb  9 2023, 02:08:14) [GCC 12.2.1 20220924] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; exit()
+
+9900abaf79d2:~$ pwd
+/home/jenkins
+
+
+9900abaf79d2:~$ vim
+9900abaf79d2:~$ java --version
+openjdk 11.0.18 2023-01-17
+OpenJDK Runtime Environment Temurin-11.0.18+10 (build 11.0.18+10)
+OpenJDK 64-Bit Server VM Temurin-11.0.18+10 (build 11.0.18+10, mixed mode)
+
+
+
+</code></pre>
+<pre><code>docker ps       
+</code></pre>
+<pre><code>CONTAINER ID   IMAGE                           COMMAND                  CREATED          STATUS          PORTS                                              NAMES
+bd6b56f8666f   mohanchinnappan/mc-sfdx         &quot;bash&quot;                   36 seconds ago   Up 35 seconds                                                      reverent_beaver
+b643f2a82b31   alpine/socat                    &quot;socat tcp-listen:23…&quot;   2 hours ago      Up 2 hours      127.0.0.1:2400-&gt;2375/tcp                           silly_hopper
+c5ea234eee86   myjenkins-blueocean:2.387.1-1   &quot;/usr/bin/tini -- /u…&quot;   5 hours ago      Up 2 hours      0.0.0.0:8080-&gt;8080/tcp, 0.0.0.0:50000-&gt;50000/tcp   jenkins-blueocean
+58b1537f5136   docker:dind                     &quot;dockerd-entrypoint.…&quot;   5 hours ago      Up 5 hours      2375/tcp, 0.0.0.0:2376-&gt;2376/tcp                   jenkins-docker
+</code></pre>
+<h2 id="running-build-on-this"><a class="header" href="#running-build-on-this">Running build on this</a></h2>
+<pre><code> Started by user Mohan Chinnappan
+Running as SYSTEM
+Building remotely on docker-node-sfdx-00006mp66sdok on docker (docker-node-sfdx) in workspace /home/jenkins/workspace/HelloWorldPython
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/mohan-chinnappan-n/jenkins-cicd
+ &gt; git init /home/jenkins/workspace/HelloWorldPython # timeout=10
+Fetching upstream changes from https://github.com/mohan-chinnappan-n/jenkins-cicd
+ &gt; git --version # timeout=10
+ &gt; git --version # 'git version 2.38.4'
+ &gt; git fetch --tags --force --progress -- https://github.com/mohan-chinnappan-n/jenkins-cicd +refs/heads/*:refs/remotes/origin/* # timeout=10
+ &gt; git config remote.origin.url https://github.com/mohan-chinnappan-n/jenkins-cicd # timeout=10
+ &gt; git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ &gt; git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision b34f09b31c3cc64d716a6e9ff613e7b71de5fe4c (refs/remotes/origin/main)
+ &gt; git config core.sparsecheckout # timeout=10
+ &gt; git checkout -f b34f09b31c3cc64d716a6e9ff613e7b71de5fe4c # timeout=10
+Commit message: &quot;init&quot;
+ &gt; git rev-list --no-walk b34f09b31c3cc64d716a6e9ff613e7b71de5fe4c # timeout=10
+[HelloWorldPython] $ /bin/sh -xe /tmp/jenkins15310274698032643005.sh
++ python3 py/hw.py
+Hello World!
+Finished: SUCCESS
+
+</code></pre>
+<h2 id="sfdx-xml-project"><a class="header" href="#sfdx-xml-project">sfdx XML project</a></h2>
+<pre><code>Started by user Mohan Chinnappan
+Running as SYSTEM
+Building remotely on docker-node-sfdx-00006t9wamykj on docker (docker-node-sfdx) in workspace /home/jenkins/workspace/sfdc-project-xml
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/mohan-chinnappan-n/jenkins-cicd
+ &gt; git init /home/jenkins/workspace/sfdc-project-xml # timeout=10
+Fetching upstream changes from https://github.com/mohan-chinnappan-n/jenkins-cicd
+ &gt; git --version # timeout=10
+ &gt; git --version # 'git version 2.38.4'
+ &gt; git fetch --tags --force --progress -- https://github.com/mohan-chinnappan-n/jenkins-cicd +refs/heads/*:refs/remotes/origin/* # timeout=10
+ &gt; git config remote.origin.url https://github.com/mohan-chinnappan-n/jenkins-cicd # timeout=10
+ &gt; git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ &gt; git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 12763086762b99f46569a109d06c03a4e8cfd65d (refs/remotes/origin/main)
+ &gt; git config core.sparsecheckout # timeout=10
+ &gt; git checkout -f 12763086762b99f46569a109d06c03a4e8cfd65d # timeout=10
+Commit message: &quot;xml added&quot;
+First time build. Skipping changelog.
+[sfdc-project-xml] $ /bin/sh -xe /tmp/jenkins13699243142254465595.sh
++ sfdx mohanc:xml:transform -i xml/Admin.profile-meta.xml -m Profile
+=== Writing the output into file : xml/Admin.profile-meta.xml.html ===
+Finished: SUCCESS
+
+</code></pre>
+<h3 id="pipeline"><a class="header" href="#pipeline">Pipeline</a></h3>
+<p><img src="img/cron.png" alt="Cron" /></p>
+<table><thead><tr><th>Field</th><th>Format of valid values</th></tr></thead><tbody>
+<tr><td>Min</td><td>0-59</td></tr>
+<tr><td>Hour</td><td>0-23</td></tr>
+<tr><td>Day of the month</td><td>1-31</td></tr>
+<tr><td>Month</td><td>1-12 (or JAN to DEC)</td></tr>
+<tr><td>Day of the week</td><td>0-6 (or SUN to SAT; or 7 for Sunday)</td></tr>
+</tbody></table>
+<p><img src="img/jenkiins-cred-1.png" alt="server.key credential" /></p>
+<h4 id="script"><a class="header" href="#script">Script</a></h4>
+<pre><code class="language-groovy">pipeline {
+    agent { 
+        node { label 'docker-node-sfdx' }
+    }
+    triggers {
+            pollSCM '*/5 * * * *'
+    }
+
+     environment { 
+        SF_USERNAME = 'mohan.chinnappan.n.sel2@gmail.com'
+        SF_INSTANCE_URL = 'https://login.salesforce.com'
+        SF_CONSUMER_KEY = '3MVG9vp1McGXQBYGcnDR0UfAip.JjJVJUbccWajKPlMgbFIV.C9g3FdmKaKfOYlrJ6iY4QUQKnC1F8dzu8YAz'
+        SERVER_KEY_CREDENTALS_ID='cb689b37-ff89-490c-87b0-da6983e03854'
+         
+    }
+
+     
+    stages {
+
+
+        stage('Prepare') {
+
+            steps {
+                withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
+
+                echo &quot;pip install&quot;
+                sh '''
+                    cd py
+                    pip3 install -r requirements.txt
+                    echo ${SF_USERNAME}
+                    sfdx force:auth:jwt:grant -u  ${SF_USERNAME} -f ${server_key_file} -i ${SF_CONSUMER_KEY} 
+                    sfdx force:data:soql:query --query  &quot;SELECT Id, Name, Account.Name FROM Contact&quot; -u  ${SF_USERNAME} 
+
+                    sfdx mohanc:org:viz -u ${SF_USERNAME} 
+                    
+                    wc -l Org.json
+                '''
+             }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo &quot;Testing it&quot;
+                sh '''
+
+                cd py
+                python3 double.py double 27
+                
+                '''
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploy....'
+                sh '''
+                echo &quot;Deploying...&quot;
+                '''
+            }
+        }
+    }
+}
+
+
+</code></pre>
+<h4 id="setup"><a class="header" href="#setup">Setup</a></h4>
+<p><img src="img/jenkins-sfdx-setup-1.webm.gif" alt="Setup JWT" /></p>
+<h4 id="demo"><a class="header" href="#demo">Demo</a></h4>
+<p><img src="img/jenkins-sfdx-jwt-1.webm.gif" alt="Demo JWT" /></p>
+<pre><code>Started by user Mohan Chinnappan
+Obtained py/Jenkinsfile from git https://github.com/mohan-chinnappan-n/jenkins-cicd
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Still waiting to schedule task
+‘Jenkins’ doesn’t have label ‘docker-node-sfdx’
+Running on docker-node-sfdx-0000ejftdsk7i on docker in /home/jenkins/workspace/Pipeline-Python-CLI-Test
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/mohan-chinnappan-n/jenkins-cicd
+ &gt; git init /home/jenkins/workspace/Pipeline-Python-CLI-Test # timeout=10
+Fetching upstream changes from https://github.com/mohan-chinnappan-n/jenkins-cicd
+ &gt; git --version # timeout=10
+ &gt; git --version # 'git version 2.38.4'
+ &gt; git fetch --tags --force --progress -- https://github.com/mohan-chinnappan-n/jenkins-cicd +refs/heads/*:refs/remotes/origin/* # timeout=10
+ &gt; git config remote.origin.url https://github.com/mohan-chinnappan-n/jenkins-cicd # timeout=10
+ &gt; git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision a53c0b8dfdfa5617d000ee07a6b8e2172370a933 (refs/remotes/origin/main)
+Commit message: &quot;py fire test added&quot;
+ &gt; git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+ &gt; git config core.sparsecheckout # timeout=10
+ &gt; git checkout -f a53c0b8dfdfa5617d000ee07a6b8e2172370a933 # timeout=10
+ &gt; git rev-list --no-walk a53c0b8dfdfa5617d000ee07a6b8e2172370a933 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Prepare)
+[Pipeline] withCredentials
+Masking supported pattern matches of $server_key_file
+[Pipeline] {
+[Pipeline] echo
+pip install
+[Pipeline] sh
++ cd py
++ pip3 install -r requirements.txt
+Defaulting to user installation because normal site-packages is not writeable
+Collecting fire==0.5.0
+  Downloading fire-0.5.0.tar.gz (88 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 88.3/88.3 kB 2.2 MB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Requirement already satisfied: six in /usr/lib/python3.10/site-packages (from fire==0.5.0-&gt;-r requirements.txt (line 1)) (1.16.0)
+Collecting termcolor
+  Downloading termcolor-2.2.0-py3-none-any.whl (6.6 kB)
+Installing collected packages: termcolor, fire
+  DEPRECATION: fire is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
+  Running setup.py install for fire: started
+  Running setup.py install for fire: finished with status 'done'
+Successfully installed fire-0.5.0 termcolor-2.2.0
++ echo mohan.chinnappan.n.sel2@gmail.com
+mohan.chinnappan.n.sel2@gmail.com
++ sfdx force:auth:jwt:grant -u mohan.chinnappan.n.sel2@gmail.com -f **** -i 3MVG9vp1McGXQBYGcnDR0UfAip.JjJVJUbccWajKPlMgbFIV.C9g3FdmKaKfOYlrJ6iY4QUQKnC1F8dzu8YAz
+Warning: The &quot;-u&quot; flag has been deprecated. Use &quot;--username&quot; instead.
+Successfully authorized mohan.chinnappan.n.sel2@gmail.com with org ID 00D8W000004LymuUAC
++ sfdx force:data:soql:query --query 'SELECT Id, Name, Account.Name FROM Contact' -u mohan.chinnappan.n.sel2@gmail.com
+Warning: The &quot;force data soql query&quot; command has been deprecated. Use &quot;data query&quot; instead.
+Warning: The &quot;-u&quot; flag has been deprecated. Use &quot;--target-org&quot; instead.
+Querying Data...
+ ID                 NAME              ACCOUNT.NAME                        
+ ────────────────── ───────────────── ─────────────────────────────────── 
+ 0038W00001ulzMpQAI Rose Gonzalez     Edge Communications                 
+ 0038W00001ulzMqQAI Sean Forbes       Edge Communications                 
+ 0038W00001ulzMrQAI Jack Rogers       Burlington Textiles Corp of America 
+ 0038W00001ulzMsQAI Pat Stumuller     Pyramid Construction Inc.           
+ 0038W00001ulzMtQAI Andy Young        Dickenson plc                       
+ 0038W00001ulzMuQAI Tim Barr          Grand Hotels &amp; Resorts Ltd          
+ 0038W00001ulzMvQAI John Bond         Grand Hotels &amp; Resorts Ltd          
+ 0038W00001ulzMwQAI Stella Pavlova    United Oil &amp; Gas Corp.              
+ 0038W00001ulzMxQAI Lauren Boyle      United Oil &amp; Gas Corp.              
+ 0038W00001ulzMyQAI Josh Davis        Express Logistics and Transport     
+ 0038W00001ulzMzQAI Jane Grey         University of Arizona               
+ 0038W00001ulzN0QAI Arthur Song       United Oil &amp; Gas Corp.              
+ 0038W00001ulzN1QAI Avi Green         United Oil &amp; Gas Corp.              
+ 0038W00001ulzN2QAI Babara Levy       Express Logistics and Transport     
+ 0038W00001ulzN3QAI Ashley James      United Oil &amp; Gas, UK                
+ 0038W00001ulzN4QAI Tom Ripley        United Oil &amp; Gas, Singapore         
+ 0038W00001ulzN5QAI Liz D'Cruz        United Oil &amp; Gas, Singapore         
+ 0038W00001ulzN6QAI Edna Frank        GenePoint                           
+ 0038W00001ulzN7QAI Siddartha Nedaerk sForce                              
+ 0038W00001ulzN8QAI Jake Llorrac      sForce                              
+Total number of records retrieved: 20.
+Querying Data... done
++ sfdx mohanc:org:viz -u mohan.chinnappan.n.sel2@gmail.com
+=== Working on getOrgData ===
+=== Working on getOrgLimits ===
+=== Working on getCount:ApexClass ===
+=== Working on getCount:ApexPage ===
+=== Working on getCount:ConnectedApplication ===
+=== Working on getCount:CustomPermission ===
+=== Working on getCount:ExternalDataSource ===
+=== Working on getCount:FieldPermissions ===
+=== Working on getCount:FieldSecurityClassification ===
+=== Working on getCount:Group ===
+=== Working on getCount:GroupMember ===
+=== Working on getCount:NamedCredential ===
+=== Working on getCount:ObjectPermissions ===
+=== Working on getCount:PackageLicense ===
+=== Working on getCount:PermissionSet ===
+=== Working on getCount:PermissionSetAssignment ===
+=== Working on getCount:PermissionSetGroup ===
+=== Working on getCount:PermissionSetLicense ===
+=== Working on getCount:Profile ===
+=== Working on getCount:QueueSobject ===
+=== Working on getCount:SetupAssistantStep ===
+=== Working on getCount:SetupEntityAccess ===
+=== Working on getCount:User ===
+=== Working on getCount:UserLicense ===
+=== Working on getCount:UserPackageLicense ===
+=== Working on getCount:UserRole ===
+=== Working on getCount:Account ===
+=== Working on getCount:AccountContactRole ===
+=== Working on getCount:Asset ===
+=== Working on getCount:Campaign ===
+=== Working on getCount:CampaignMember ===
+=== Working on getCount:Case ===
+=== Working on getCount:CaseStatus ===
+=== Working on getCount:Contact ===
+=== Working on getCount:Contract ===
+=== Working on getCount:ContractContactRole ===
+=== Working on getCount:Lead ===
+=== Working on getCount:Opportunity ===
+=== Working on getCount:OpportunityCompetitor ===
+=== Working on getCount:OpportunityContactRole ===
+=== Working on getCount:OpportunityStage ===
+=== Working on getCount:Order ===
+=== Working on getCount:Partner ===
+=== Working on getCount:PartnerRole ===
+=== Working on getCount:Account ===
+=== Working on getCount:Case ===
+=== Working on getCount:CaseComment ===
+=== Working on getCount:CaseHistory ===
+=== Working on getCount:CaseSolution ===
+=== Working on getCount:Contact ===
+=== Working on getCount:Solution ===
+=== Working on getPackageInfo ===
+=== Working on EntityDefinitionSummary:Account ===
+=== Working on EntityDefinitionSummary:Contact ===
+=== Working on EntityDefinitionSummary:AccountContactRole ===
+=== Working on EntityDefinitionSummary:Opportunity ===
+=== Working on EntityDefinitionSummary:OpportunityContactRole ===
+=== Working on EntityDefinitionSummary:OpportunityCompetitor ===
+=== Working on EntityDefinitionSummary:Lead ===
+=== Working on EntityDefinitionSummary:Case ===
+=== Working on EntityDefinitionSummary:Campaign ===
+=== Working on EntityDefinitionSummary:CampaignMember ===
+=== Working on EntityDefinitionSummary:Asset ===
+=== Working on EntityDefinitionSummary:Contract ===
+=== Working on EntityDefinitionSummary:ContractContactRole ===
+=== Working on EntityDefinitionSummary:Order ===
+=== Working on getApexCodeCoverage ===
+=== Working on getBusinessProcess ===
+=== Working on getCertificate ===
+=== Working on CspTrustedSite ===
+=== Working on getOauthToken ===
+=== Working on getSetupAuditTrail ===
+=== Working on getInactiveUsers ===
+=== Working on getUnusedProfiles ===
+=== Working on getUsedProfiles ===
+=== Working on getUsedPermissionSets ===
+=== Working on getUnusedPermissionSets ===
+=== Working on getUsedProfiles ===
+=== Working on getUsedRoles ===
+=== Working on getSysAdminUsers ===
+=== Working on getProfileInfo:System Administrator ===
+Error: {
+    &quot;name&quot;: &quot;INVALID_FIELD&quot;,
+    &quot;errorCode&quot;: &quot;INVALID_FIELD&quot;
+}
+=== Working on getProfileInfo:Customer Community Login User ===
+Error: {
+    &quot;name&quot;: &quot;INVALID_FIELD&quot;,
+    &quot;errorCode&quot;: &quot;INVALID_FIELD&quot;
+}
+=== Working on getPermissionSetInfo:Sales_Ops ===
+Error: {
+    &quot;name&quot;: &quot;INVALID_FIELD&quot;,
+    &quot;errorCode&quot;: &quot;INVALID_FIELD&quot;
+}
+=== Working on getProfileForUserLicense:Guest ===
+Error: {
+    &quot;name&quot;: &quot;INVALID_FIELD&quot;,
+    &quot;errorCode&quot;: &quot;INVALID_FIELD&quot;
+}
+=== Working on getUserLicenseInfo ===
+=== Working on getNetworkMemberInfo ===
+Error: {
+    &quot;name&quot;: &quot;INVALID_TYPE&quot;,
+    &quot;errorCode&quot;: &quot;INVALID_TYPE&quot;
+}
+=== Working on getHasEinsteinDataDiscovery ===
+=== Working on getHasEDD ===
+=== Working on getHasEinsteinDataDiscovery ===
+=== Working on getCountTooling:flow ===
+=== Working on getFlows ===
+=== Working on getFlowMetadata ===
+=== Writing Org JSON in file Org.json ...
+=== Writing visualization in file Org.svg ...
+Visualization done. &quot;open  Org.svg&quot; in Chrome Browser to view the Visualization.
++ wc -l Org.json
+2726 Org.json
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] echo
+Testing it
+[Pipeline] sh
++ cd py
++ python3 double.py double 27
+54
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] echo
+Deploy....
+[Pipeline] sh
++ echo Deploying...
+Deploying...
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+
+</code></pre>
+<h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
+<ul>
+<li><a href="https://github.com/mohan-chinnappan-n/cli-dx/blob/master/jwt.md">How to use OAuth2.0 based JWT flow to login to a Salesforce org using DX</a></li>
+<li><a href="https://github.com/mohan-chinnappan-n/jenkins-cicd">Sample Pipelines</a></li>
+<li><a href="https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ci_jenkins_config_env.htm">Configure Your Environment for Jenkins</a></li>
+<li><a href="https://www.youtube.com/watch?v=6YZvp2GwT0A">Learn Jenkins! Complete Jenkins Course - Zero to Hero</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../deployments/devOpsCenter.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../deployments/git.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../deployments/devOpsCenter.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../deployments/git.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+
+
+    </body>
+</html>

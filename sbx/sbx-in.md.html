@@ -1,0 +1,186 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Sandbox Refesh</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
+</head>
+<body>
+<google-codelab id="Sandbox Refesh" title="Sandbox Refesh" environment="web" >
+
+<google-codelab-step label=' Create a Pre-refresh Checklist'>
+<div id='s0-md' class='md' data-trim='false'>
+- Since once the sandbox refresh is completed, all the configurations in that sandbox will be lost.
+- Document **all sandbox configurations** that need to be updated after the refresh. 
+ 
+|Item|Notes|
+|---|---|
+|Custom Settings|
+|Custom Metadata Types|
+|Named Credentials|
+|Connected Apps|
+|Scheduled jobs|
+|Deliverability|
+|Remote Site Settings|
+|Apex Exception Email|
+|User credentials used in the integrations|
+
+- Note about current integration configurations
+
+|Item|Notes|
+|---|---|
+|Connected App Details|
+|Certs used|
+|integration Endpoint in PROD and Sandbox|
+  
+
+
+  
+
+</div>
+</google-codelab-step>
+<google-codelab-step label='  Minimize Downtime '>
+<div id='s1-md' class='md' data-trim='false'>
+  - Right refresh window - taking care of developers developing new features, UAT and Training users
+- Makes sure that refresh window aligns with Salesforce release window
+  
+- For each sandbox
+    -  **Sandbox refreshes take time** - It is a function of amount of configuration and metadata it contains
+    - Determine a window for running sandbox refresh - this could [take  several days](https://help.salesforce.com/s/articleView?id=000386499&type=1)
+    - There is no service level agreement for sandbox refresh and time to completion may vary
+    - If **Suspended** and **Stopped** status remains unchanged for more than one hour, or processing percentage stuck for a week, contact Salesforce Support.
+    - During this window the **sandbox won’t be available**
+    - Type of sandbox determines **how often** it can be refreshed:
+        - Developer, Developer Pro - 1 day
+        - Partial Copy  - 5 days
+        - Full Copy - 29 days
+
+    -  **Refreshing the sandbox will delete all that metadata (that is not yet committed in to Production)**
+
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label='  Sandbox Refresh Communication'>
+<div id='s2-md' class='md' data-trim='false'>
+  - Communicate early and often about the Sandbox Refresh
+- Use custom metadata types (mdt) in production, so they’re easily modified 
+- Use custom settings and/or custom metadata types to specify email addresses, integration endpoints, etc. 
+    - modify these values post-refresh
+   -  Have 2 records per metadata type—one for production and one for sandboxes
+   -  Apex classes can then use the ```IsSandbox``` property to dynamically choose which metadata type to use at runtime. 
+   ```sql
+            SELECT IsSandbox FROM Organization LIMIT 1
+   ```
+   ![isSandbox](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/deployments/img/isSandbox.png)
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label='  Create a Post-refresh Checklist'>
+<div id='s3-md' class='md' data-trim='false'>
+  - After refreshing a sandbox take care of removing production endpoints
+- [SandboxPostCopy](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_interface_System_SandboxPostCopy.htm)  to extend this interface and add methods to perform post-copy tasks, then specify the class during sandbox creation.
+
+
+
+```java
+    global class PrepareMySandbox implements SandboxPostCopy {
+ 
+    global PrepareMySandbox() {
+        //Implementations of SandboxPostCopy must have a no-arg constructor.
+        //This constructor is used during the sandbox copy process.
+        //You can also implement constructors with arguments, but be aware that
+        //they won’t be used by the sandbox copy process (unless as part of the
+        //no-arg constructor).
+        this(some_args);
+    }
+ 
+    global PrepareMySandbox(String some_args) {
+        //Logic for constructor.
+    }
+    
+    global void runApexClass(SandboxContext context) {
+        System.debug('Org ID: ' + context.organizationId());
+        System.debug('Sandbox ID: ' + context.sandboxId());
+        System.debug('Sandbox Name: ' + context.sandboxName());
+ 
+        // Insert logic here to prepare the sandbox for use.
+    }
+}
+```
+
+- Take care of updating these items
+
+|Item|Notes|
+|---|---|
+|Custom Settings|
+|Custom Metadata Types|
+|Named Credentials|
+|Connected Apps|
+|Scheduled jobs|
+|Deliverability|
+|Remote Site Settings|
+|Apex Exception Email|
+|User credentials used in the integrations|
+
+- Take care of All scheduled jobs that got deactivated after the refresh
+- Take care of these integration items
+
+
+|Item|Notes|
+|---|---|
+|Connected App Details|
+|Certs used|
+|integration Endpoint in PROD and Sandbox|
+
+</div>
+</google-codelab-step>
+<google-codelab-step label='  Take care of configuration data '>
+<div id='s4-md' class='md' data-trim='false'>
+- This is not metadata
+- Import it using the Data Loader or Import Wizard.
+- Some AppExchange apps use custom object for the configuration. When we create a new sandbox that does not include data, these apps will not work after the sandbox refresh. 
+- For master-detail relationships - insert the parent records before any child records
+
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Sandbox types and use cases'>
+<div id='s5-md' class='md' data-trim='false'>
+  
+![Sbx type](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/img/devops/sbx-1.png)
+
+![SBx use cases](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/img/devops/sbx-2.png)
+
+
+</div>
+</google-codelab-step>
+
+
+<google-codelab-step label='Spring 23 release'>
+  <div id='s6-md' class='md' data-trim='false'>
+  ![Spring 23](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/deployments/img/releases/spring23-dates.png)
+  </div>
+  </google-codelab-step>
+
+ 
+  
+</google-codelab>
+
+  <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/native-shim.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
+
+</body>
+</html>

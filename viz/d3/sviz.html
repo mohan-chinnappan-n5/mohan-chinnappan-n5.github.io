@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Viz</title>
+  <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/viz/d3/css/app.css?v=4">
+</head>
+
+<body>
+
+  <div id="container">
+    <svg id="lang"></svg>
+  </div>
+
+  <div id="container2">
+    <svg id="db"></svg>
+  </div>
+  <script type="module">
+
+    import { D3Util } from "https://mohan-chinnappan-n5.github.io/viz/d3/js/D3Util.js";
+    // bar chart
+    const langs = await D3Util.getData(
+      "https://mohan-chinnappan-n5.github.io/dfv/data/plangs22.json"
+    );
+
+    const dbs = await D3Util.getData(
+      "https://mohan-chinnappan-n5.github.io/dfv/data/dbs.json"
+    );
+
+    D3Util.barChart(
+      "#lang",
+      langs,
+      "language",
+      "value",
+      "Most Loved Programming Languages 2022",
+      "Lover Meter (%)",
+      1200
+    );
+
+    D3Util.barChart(
+      "#db",
+      dbs,
+      "db",
+      "value",
+      "Most Loved Databases  2022",
+      "Lover Meter (%)",
+      1200
+    );
+  </script>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gantt</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+    <script src="js/frappe-gantt.min.js"></script>
+    <link rel="stylesheet" href="css/frappe-gantt.css">
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Gantt Chart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+           
+        </ul>
+      </div>
+    </div>
+  </nav>
+ <select id="view-mode">
+     <option value="Day">Day</option>
+     <option selected value="Week">Week</option>
+     <option value="Month">Month</option>
+ </select>
+
+    <div class="chart"></div>
+    <script>
+
+        const getEle = id => document.getElementById(id);
+        const getEleByClass = cls => document.querySelector(cls);
+
+        const viewModeEle = getEle('view-mode');
+        let view_mode = 'Week';
+       
+
+
+        var tasks = [
+
+        {
+            id: 'Spot Trade-in Base Management Kick off',
+            name: 'Spot Trade-in Base Management Kick off',
+            start: '2022-03-01',
+            end: '2022-03-03',
+            progress: 100,
+            dependencies: '',
+            custom_class: 'bar-milestone' // optional
+        },
+        {
+            id: 'Spot Trade-in Operation Technical Evaluation',
+            name: 'Spot Trade-in Operation Technical Evaluation',
+            start: '2022-06-20',
+            end: '2022-08-31',
+            progress: 100,
+            dependencies: '',
+            custom_class: 'bar-milestone' // optional
+        },
+
+       
+        {
+            id: 'Credit card Financing IT work & Target Live date',
+            name: 'Credit card Financing IT work & Target Live date',
+            start: '2022-04-07',
+            end: '2022-07-29',
+            progress: 100,
+            dependencies: '',
+            custom_class: 'bar-milestone' // optional
+        },
+        {
+            id: 'BPNL Pitch sell in',
+            name: 'BPNL Pitch sell in',
+            start: '2022-09-05',
+            end: '2022-09-05',
+            progress: 100,
+            dependencies: '',
+            custom_class: 'bar-milestone' // optional
+        },
+
+        {
+            id: 'BPNL Evaluation and Launch',
+            name: 'BPNL Evaluation and Launch',
+            start: '2022-09-12',
+            end: '2023-01-20',
+            progress: 100,
+            dependencies: '',
+            custom_class: 'bar-milestone' // optional
+        },
+
+
+
+        ]
+
+        var tasks2 = [
+            {
+                id: 'Task Deliver',
+                name: 'Deliver',
+                start: '2022-01-28',
+                end: '2022-01-31',
+                progress: 20,
+                dependencies: 'Task Discovery, Task Req, Task Develop',
+                custom_class: 'bar-milestone' // optional
+            },
+
+            {
+                id: 'Task Develop',
+                name: 'Develop',
+                start: '2022-01-10',
+                end: '2022-01-20',
+                progress: 20,
+                dependencies: 'Task Discovery, Task Req',
+                custom_class: 'bar-milestone' // optional
+            },
+
+            {
+                id: 'Task Discovery',
+                name: 'Discovery',
+                start: '2021-12-10',
+                end: '2021-12-20',
+                progress: 20,
+                dependencies: '',
+                custom_class: 'bar-milestone' // optional
+            },
+
+            {
+                id: 'Task Req',
+                name: 'Reqs',
+                start: '2021-12-25',
+                end: '2021-12-28',
+                progress: 100,
+                dependencies: 'Task Discovery',
+                custom_class: 'bar-milestone' // optional
+            },
+
+
+        ];
+
+        console.log(getEleByClass('.chart'));
+
+        var gantt = new Gantt('.' + getEleByClass('.chart').className, tasks, {
+            header_height: 50,
+            column_width: 30,
+            step: 24,
+            view_modes: ['Quarter Day', 'Half Day', 'Day', 'Week', 'Month'],
+            bar_height: 20,
+            bar_corner_radius: 3,
+            arrow_curve: 5,
+            padding: 18,
+            view_mode: 'Day',
+            date_format: 'YYYY-MM-DD',
+            custom_popup_html: null
+        });
+
+        gantt.change_view_mode('Week') // Quarter Day, Half Day, Day, Week, Month 
+
+        viewModeEle.addEventListener('change', event => {
+            view_mode = event.target.value;
+            gantt.change_view_mode(view_mode) // Quarter Day, Half Day, Day, Week, Month 
+        });
+    </script>
+</body>
+
+</html>

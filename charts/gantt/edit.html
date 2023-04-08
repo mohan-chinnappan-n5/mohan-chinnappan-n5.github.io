@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSV Editor</title>
+
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<table class="table table-bordered table-striped table-hovered">
+		<tr>
+			<td>
+				<textarea id="csv-data" style='display:none;' rows="10" cols="100">
+Task ID,Task Name,Resource,Start Date,End Date,Duration,Percent Completed,Dependencies
+"2023Spring","Spring 2023","spring23","2022-12-15","2023-2-13","",100,""
+"2023Summer","Summer 2023","summer23","2023-5-05","2023-6-10","",0,"2023Spring"
+"2024Winter","Winter 2024","winter24","2023-8-20","2024-2-20","",0,"2023Summer"
+                </textarea>
+			</td>
+            </tr>
+            <tr>
+			<td>
+				<div id="editor"></div>
+			</td>
+		</tr>
+	</table>
+    <button class='btn btn-primary' onclick="save()">Save</button>
+
+
+    <script>
+        // Get the CSV data
+const csvData = document.getElementById('csv-data').value;
+
+// Split the CSV data into rows
+const rows = csvData.split('\n');
+
+// Create the editor table
+const editorTable = document.createElement('table');
+
+// Loop through the rows and create the editor cells
+for (let i = 0; i < rows.length; i++) {
+	const row = document.createElement('tr');
+	const cells = rows[i].split(',');
+	for (let j = 0; j < cells.length; j++) {
+		const cell = document.createElement('td');
+		const input = document.createElement('input');
+        const regex = /"/g;
+
+		input.value = cells[j].replace(regex,"" );
+		cell.appendChild(input);
+		row.appendChild(cell);
+	}
+	editorTable.appendChild(row);
+}
+
+// Add the editor table to the editor div
+const editorDiv = document.getElementById('editor');
+editorDiv.appendChild(editorTable);
+
+
+
+
+// Save the edited CSV data
+function save() {
+	// Get the editor cells
+	const editorCells = document.querySelectorAll('#editor td input');
+
+	// Loop through the editor cells and create the CSV data
+	let csvData = '';
+	for (let i = 0; i < editorCells.length; i++) {
+		if (i % cells.length === 0 && i > 0) {
+			csvData += '\n';
+		}
+		if (i < editorCells.length - 1) {
+			csvData += editorCells[i].value + ',';
+		} else {
+			csvData += editorCells[i].value;
+		}
+	}
+
+	// Update the CSV data textarea
+	document.getElementById('csv-data').value = csvData;
+}
+
+
+
+    </script>
+</body>
+</html>

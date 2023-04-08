@@ -1,0 +1,42 @@
+[
+  {
+    "db": "AWS",
+    "value": 66.32
+  },
+  {
+    "db": "Azure",
+    "value": 59.42
+  },
+  {
+    "db": "Google Cloud",
+    "value": 58.18
+  },
+  {
+    "db": "Firebase",
+    "value": 57.45
+  },
+  {
+    "db": "DigitalOcean",
+    "value": 57.61
+  },
+  {
+    "db": "Oracle Cloud",
+    "value": 54.95
+  },
+  {
+    "db": "IBM Cloud",
+    "value": 36.69
+  },
+  {
+    "db": "Heroku",
+    "value": 43.65
+  },
+  {
+    "db": "OpenStack",
+    "value": 45.09
+  },
+  {
+    "db": "Linode",
+    "value": 56.47
+  }
+]

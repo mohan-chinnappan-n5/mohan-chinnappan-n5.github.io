@@ -1,0 +1,809 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Dashboard - Registered Cars in Portugal",
+    "color": "#253668",
+    "fontSize": 25,
+    "align": "center",
+    "anchor": "middle",
+    "dy": -20,
+    "subtitle": " ",
+    "subtitleColor": "#253668",
+    "subtitleFontSize": 16
+  },
+  "hconcat": [
+    {
+      "vconcat": [
+        {
+          "hconcat": [
+            {
+              "title": {"text": "Total Registrations per month/year"},
+              "width": 450,
+              "height": 200,
+              "data": {"url": "data/data_month_sales.json"},
+              "layer": [
+                {
+                  "params": [
+                    {
+                      "name": "line_year",
+                      "select": {
+                        "type": "point",
+                        "encodings": ["color"],
+                        "toggle": true
+                      },
+                      "value": [2019, 2020]
+                    }
+                  ],
+                  "mark": "line",
+                  "encoding": {
+                    "x": {
+                      "field": "month",
+                      "type": "ordinal",
+                      "sort": null,
+                      "axis": {"labelAngle": 0},
+                      "title": ""
+                    },
+                    "y": {
+                      "field": "monthly_sales",
+                      "type": "quantitative",
+                      "axis": {"labelAngle": 0, "tickCount": 5, "format": "s"},
+                      "title": ""
+                    },
+                    "color": {
+                      "condition": {
+                        "param": "line_year",
+                        "field": "year",
+                        "legend": false,
+                        "scale": {
+                          "domain": [2019, 2020, 2021],
+                          "range": ["#CD8578", "#006E6D", "#DBAF49"]
+                        }
+                      },
+                      "value": "#BABEBF"
+                    },
+                    "size": {"value": 3}
+                  }
+                },
+                {
+                  "mark": {"type": "point", "filled": true},
+                  "encoding": {
+                    "tooltip": {
+                      "field": "monthly_sales",
+                      "type": "quantitative"
+                    },
+                    "x": {"field": "month", "type": "ordinal", "sort": null},
+                    "y": {"field": "monthly_sales", "type": "quantitative"},
+                    "color": {
+                      "condition": {
+                        "param": "line_year",
+                        "field": "year",
+                        "legend": false,
+                        "scale": {
+                          "domain": [2019, 2020, 2021],
+                          "range": ["#CD8578", "#006E6D", "#DBAF49"]
+                        }
+                      },
+                      "value": "#BABEBF"
+                    },
+                    "size": {"value": 40},
+                    "strokeWidth": {"value": 2},
+                    "stroke": {
+                      "condition": {"param": "line_year", "value": "black"},
+                      "value": "#BABEBF"
+                    },
+                    "fill": {
+                      "condition": {
+                        "param": "line_year",
+                        "field": "year",
+                        "legend": false,
+                        "scale": {
+                          "domain": [2019, 2020, 2021],
+                          "range": ["#CD8578", "#006E6D", "#DBAF49"]
+                        }
+                      },
+                      "value": "#BABEBF"
+                    },
+                    "opacity": {"value": 1}
+                  }
+                },
+                {
+                  "data": {"url": "data/data_last_month.json"},
+                  "mark": {"type": "text", "dx": 30, "fontWeight": "bold"},
+                  "encoding": {
+                    "x": {"field": "month", "type": "ordinal", "sort": null},
+                    "y": {"field": "monthly_sales", "type": "quantitative"},
+                    "text": {"field": "year"},
+                    "color": {
+                      "condition": {
+                        "param": "line_year",
+                        "field": "year",
+                        "legend": false,
+                        "scale": {
+                          "domain": [2019, 2020, 2021],
+                          "range": ["#CD8578", "#006E6D", "#DBAF49"]
+                        }
+                      },
+                      "value": "#BABEBF"
+                    },
+                    "size": {"value": 16}
+                  }
+                }
+              ],
+              "resolve": {"scale": {"color": "independent"}}
+            },
+            {
+              "width": 625,
+              "height": 200,
+              "title": {"text": "Monthly Registrations per Brand"},
+              "data": {"url": "data/data_brand_sales.json"},
+              "transform": [
+                {"filter": {"param": "line_year"}},
+                {
+                  "joinaggregate": [
+                    {"op": "sum", "field": "monthly_sales", "as": "total_sales"}
+                  ],
+                  "groupby": ["Brand", "month"]
+                }
+              ],
+              "encoding": {
+                "x": {
+                  "field": "month",
+                  "type": "ordinal",
+                  "sort": [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec"
+                  ],
+                  "axis": {"labelAngle": 0, "labelFontSize": 10},
+                  "title": ""
+                },
+                "y": {
+                  "field": "total_sales",
+                  "type": "quantitative",
+                  "axis": {
+                    "labelAngle": 0,
+                    "labelFontSize": 10,
+                    "tickCount": 5,
+                    "format": "s"
+                  },
+                  "title": ""
+                },
+                "color": {"field": "Brand"}
+              },
+              "layer": [
+                {
+                  "mark": "line",
+                  "encoding": {
+                    "tooltip": {"field": "Brand", "title": "Registrations"},
+                    "size": {
+                      "condition": [
+                        {"param": "sel_brand", "empty": false, "value": "5"},
+                        {"param": "sel_brand_2", "empty": false, "value": "5"},
+                        {
+                          "param": "sel_brand_bullet",
+                          "empty": false,
+                          "value": "5"
+                        },
+                        {"param": "sel_brand_leg", "empty": false, "value": "5"}
+                      ],
+                      "value": "1.5",
+                      "legend": false
+                    },
+                    "opacity": {
+                      "condition": [
+                        {"param": "sel_brand", "empty": false, "value": "1"},
+                        {"param": "sel_brand_2", "empty": false, "value": "1"},
+                        {
+                          "param": "sel_brand_bullet",
+                          "empty": false,
+                          "value": "1"
+                        },
+                        {"param": "sel_brand_leg", "empty": false, "value": "1"}
+                      ],
+                      "value": "0.6",
+                      "legend": false
+                    },
+                    "color": {"field": "Brand", "legend": false}
+                  }
+                },
+                {
+                  "params": [
+                    {
+                      "name": "sel_brand_2",
+                      "select": {"type": "point", "fields": ["Brand"]},
+                      "value": "Toyota"
+                    }
+                  ],
+                  "mark": "point",
+                  "encoding": {
+                    "tooltip": [
+                      {"field": "Brand"},
+                      {"field": "total_sales", "title": "Registrations"}
+                    ],
+                    "size": {
+                      "condition": [
+                        {"param": "sel_brand", "empty": false, "value": "100"},
+                        {
+                          "param": "sel_brand_2",
+                          "empty": false,
+                          "value": "100"
+                        },
+                        {
+                          "param": "sel_brand_bullet",
+                          "empty": false,
+                          "value": "100"
+                        },
+                        {
+                          "param": "sel_brand_leg",
+                          "empty": false,
+                          "value": "100"
+                        }
+                      ],
+                      "value": "20",
+                      "legend": false
+                    },
+                    "strokeWidth": {
+                      "condition": [
+                        {"param": "sel_brand", "empty": false, "value": "2"},
+                        {"param": "sel_brand_2", "empty": false, "value": "2"},
+                        {
+                          "param": "sel_brand_bullet",
+                          "empty": false,
+                          "value": "2"
+                        },
+                        {"param": "sel_brand_leg", "empty": false, "value": "2"}
+                      ],
+                      "value": "1",
+                      "legend": false
+                    },
+                    "fill": {
+                      "condition": [
+                        {
+                          "param": "sel_brand",
+                          "empty": false,
+                          "value": "black"
+                        },
+                        {
+                          "param": "sel_brand_2",
+                          "empty": false,
+                          "value": "black"
+                        },
+                        {
+                          "param": "sel_brand_bullet",
+                          "empty": false,
+                          "value": "black"
+                        },
+                        {
+                          "param": "sel_brand_leg",
+                          "empty": false,
+                          "value": "black"
+                        }
+                      ],
+                      "field": "Brand",
+                      "legend": false
+                    },
+                    "opacity": {
+                      "condition": [
+                        {"param": "sel_brand", "empty": false, "value": "1"},
+                        {"param": "sel_brand_2", "empty": false, "value": "1"},
+                        {
+                          "param": "sel_brand_bullet",
+                          "empty": false,
+                          "value": "1"
+                        },
+                        {"param": "sel_brand_leg", "empty": false, "value": "1"}
+                      ],
+                      "value": "0.8",
+                      "legend": false
+                    },
+                    "color": {"field": "Brand"}
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "hconcat": [
+            {
+              "vconcat": [
+                {
+                  "data": {"url": "data/data_years.json"},
+                  "layer": [
+                    {
+                      "params": [
+                        {
+                          "name": "the_year_d1",
+                          "select": {
+                            "type": "point",
+                            "fields": ["year"],
+                            "toggle": false
+                          },
+                          "value": 2020
+                        }
+                      ],
+                      "mark": {"type": "bar"},
+                      "encoding": {
+                        "x": {"value": 0},
+                        "x2": {"value": 50},
+                        "y": {"field": "year", "axis": false},
+                        "opacity": {
+                          "condition": {
+                            "param": "the_year_d1",
+                            "empty": false,
+                            "value": 1
+                          },
+                          "field": "year",
+                          "legend": false
+                        },
+                        "strokeWidth": {
+                          "condition": {
+                            "param": "the_year_d1",
+                            "empty": false,
+                            "value": 1
+                          },
+                          "value": 0
+                        },
+                        "stroke": {
+                          "condition": {
+                            "param": "the_year_d1",
+                            "empty": false,
+                            "value": "black"
+                          },
+                          "value": "blue"
+                        }
+                      }
+                    },
+                    {
+                      "mark": {"type": "text"},
+                      "encoding": {
+                        "x": {"value": 25},
+                        "y": {"field": "year"},
+                        "text": {"field": "year"},
+                        "color": {"value": "black"},
+                        "size": {"value": 12}
+                      }
+                    }
+                  ]
+                },
+                {
+                  "data": {"url": "data/data_years.json"},
+                  "layer": [
+                    {
+                      "params": [
+                        {
+                          "name": "the_year_d2",
+                          "select": {
+                            "type": "point",
+                            "fields": ["year"],
+                            "toggle": false
+                          },
+                          "value": 2021
+                        }
+                      ],
+                      "mark": {"type": "bar"},
+                      "encoding": {
+                        "x": {"value": 0},
+                        "x2": {"value": 50},
+                        "y": {"field": "year", "axis": false},
+                        "opacity": {
+                          "condition": {
+                            "param": "the_year_d2",
+                            "empty": false,
+                            "value": 1
+                          },
+                          "field": "year",
+                          "legend": false
+                        },
+                        "strokeWidth": {
+                          "condition": {
+                            "param": "the_year_d2",
+                            "empty": false,
+                            "value": 1
+                          },
+                          "value": 0
+                        },
+                        "stroke": {
+                          "condition": {
+                            "param": "the_year_d2",
+                            "empty": false,
+                            "value": "black"
+                          },
+                          "value": "blue"
+                        }
+                      }
+                    },
+                    {
+                      "mark": {"type": "text"},
+                      "encoding": {
+                        "x": {"value": 25},
+                        "y": {"field": "year"},
+                        "text": {"field": "year"},
+                        "color": {"value": "black"},
+                        "size": {"value": 12}
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": {
+                "text": "Monthly Registrations per Brand (top 15)",
+                "align": "center",
+                "anchor": "middle",
+                "dy": -1,
+                "baseline": "middle"
+              },
+              "data": {"url": "data/data_brand_sales.json"},
+              "transform": [
+                {
+                  "joinaggregate": [
+                    {"op": "sum", "field": "monthly_sales", "as": "total_sales"}
+                  ],
+                  "groupby": ["Brand"]
+                },
+                {
+                  "sort": [{"field": "total_sales", "order": "descending"}],
+                  "window": [{"op": "dense_rank", "as": "rank"}]
+                },
+                {"filter": "datum.rank <= 15"}
+              ],
+              "facet": {
+                "column": {
+                  "field": "month",
+                  "title": "",
+                  "header": {
+                    "labelAngle": 0,
+                    "labelAlign": "left",
+                    "labelPadding": -5
+                  },
+                  "sort": [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec"
+                  ]
+                },
+                "row": {
+                  "field": "Brand",
+                  "title": false,
+                  "header": {
+                    "labelAngle": 0,
+                    "labelAlign": "left",
+                    "titleFontSize": 14
+                  },
+                  "sort": {"field": "total_sales", "order": "descending"}
+                }
+              },
+              "spec": {
+                "width": 42,
+                "height": 12,
+                "layer": [
+                  {
+                    "params": [
+                      {
+                        "name": "sel_brand_bullet",
+                        "select": {"type": "point", "fields": ["Brand"]}
+                      }
+                    ],
+                    "transform": [{"filter": {"param": "the_year_d1"}}],
+                    "mark": {"type": "bar", "size": 12},
+                    "encoding": {
+                      "tooltip": {"field": "monthly_sales"},
+                      "x": {
+                        "type": "quantitative",
+                        "field": "monthly_sales",
+                        "title": "",
+                        "scale": {"nice": false}
+                      },
+                      "y": {"axis": {"labelAngle": 0}},
+                      "color": {"field": "Brand", "legend": false},
+                      "stroke": {
+                        "condition": [
+                          {
+                            "param": "sel_brand",
+                            "empty": false,
+                            "value": "black"
+                          },
+                          {
+                            "param": "sel_brand_2",
+                            "empty": false,
+                            "value": "black"
+                          },
+                          {
+                            "param": "sel_brand_bullet",
+                            "empty": false,
+                            "value": "black"
+                          },
+                          {
+                            "param": "sel_brand_leg",
+                            "empty": false,
+                            "value": "black"
+                          }
+                        ],
+                        "field": "Brand",
+                        "legend": false
+                      },
+                      "strokeWidth": {
+                        "condition": [
+                          {"param": "sel_brand", "empty": false, "value": "3"},
+                          {
+                            "param": "sel_brand_2",
+                            "empty": false,
+                            "value": "3"
+                          },
+                          {
+                            "param": "sel_brand_bullet",
+                            "empty": false,
+                            "value": "3"
+                          },
+                          {
+                            "param": "sel_brand_leg",
+                            "empty": false,
+                            "value": "3"
+                          }
+                        ],
+                        "value": "0.2"
+                      }
+                    }
+                  },
+                  {
+                    "transform": [{"filter": {"param": "the_year_d2"}}],
+                    "mark": {"type": "bar", "size": 4.5},
+                    "encoding": {
+                      "tooltip": {"field": "monthly_sales"},
+                      "x": {
+                        "type": "quantitative",
+                        "field": "monthly_sales",
+                        "title": "",
+                        "scale": {"nice": false},
+                        "axis": {"format": "s", "gridColor": "#BBBCBC"}
+                      },
+                      "y": {"axis": {"labelAngle": 0}},
+                      "color": {"value": "black", "legend": false},
+                      "opacity": {"value": 0.75}
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "title": {
+                "text": "Brands Monthly Ranking",
+                "align": "center",
+                "anchor": "middle",
+                "dy": -1,
+                "baseline": "middle"
+              },
+              "width": 400,
+              "height": 255,
+              "data": {"url": "data/data_brand_sales.json"},
+              "transform": [
+                {"filter": {"param": "line_year"}},
+                {
+                  "joinaggregate": [
+                    {"op": "sum", "field": "monthly_sales", "as": "total_sales"}
+                  ],
+                  "groupby": ["Brand", "month"]
+                },
+                {
+                  "sort": [{"field": "total_sales", "order": "descending"}],
+                  "window": [{"op": "rank", "as": "rank"}],
+                  "groupby": ["year", "month"]
+                }
+              ],
+              "encoding": {
+                "x": {
+                  "field": "month",
+                  "type": "ordinal",
+                  "sort": [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec"
+                  ],
+                  "axis": {"labelAngle": 0},
+                  "title": ""
+                },
+                "y": {
+                  "field": "rank",
+                  "type": "quantitative",
+                  "scale": {"domain": [0.5, 41]},
+                  "sort": "descending",
+                  "axis": {"labelAngle": 0, "tickMinStep": 5},
+                  "title": false
+                }
+              },
+              "layer": [
+                {
+                  "mark": {"type": "line", "interpolate": "monotone"},
+                  "encoding": {
+                    "tooltip": [
+                      {"field": "Brand"},
+                      {"field": "rank", "title": "Rank"}
+                    ],
+                    "color": {"field": "Brand", "legend": false},
+                    "size": {
+                      "condition": [
+                        {"param": "sel_brand", "empty": false, "value": 6},
+                        {"param": "sel_brand_leg", "empty": false, "value": 6},
+                        {
+                          "param": "sel_brand_bullet",
+                          "empty": false,
+                          "value": 6
+                        },
+                        {"param": "sel_brand_2", "empty": false, "value": 6}
+                      ],
+                      "value": 1
+                    }
+                  }
+                },
+                {
+                  "params": [
+                    {
+                      "name": "sel_brand_leg",
+                      "select": {
+                        "type": "point",
+                        "on": "click",
+                        "nearest": true,
+                        "fields": ["Brand"]
+                      }
+                    }
+                  ],
+                  "mark": {"type": "tick", "thickness": 4},
+                  "encoding": {
+                    "tooltip": [
+                      {"field": "Brand"},
+                      {"field": "rank", "title": "Rank"}
+                    ],
+                    "color": {
+                      "condition": [
+                        {
+                          "param": "sel_brand",
+                          "empty": false,
+                          "value": "black"
+                        },
+                        {
+                          "param": "sel_brand_2",
+                          "empty": false,
+                          "value": "black"
+                        },
+                        {
+                          "param": "sel_brand_bullet",
+                          "empty": false,
+                          "value": "black"
+                        },
+                        {
+                          "param": "sel_brand_leg",
+                          "empty": false,
+                          "value": "black"
+                        }
+                      ],
+                      "field": "Brand"
+                    },
+                    "size": {
+                      "condition": [
+                        {"param": "sel_brand", "empty": false, "value": "12"},
+                        {"param": "sel_brand_2", "empty": false, "value": "12"},
+                        {
+                          "param": "sel_brand_bullet",
+                          "empty": false,
+                          "value": "12"
+                        },
+                        {
+                          "param": "sel_brand_leg",
+                          "empty": false,
+                          "value": "12"
+                        }
+                      ],
+                      "value": 8
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 200,
+      "height": 540,
+      "title": {"text": "Total Registrations per Brand"},
+      "data": {"url": "data/data_brand_sales.json"},
+      "layer": [
+        {
+          "params": [
+            {
+              "name": "sel_brand",
+              "select": {"type": "point", "fields": ["Brand"]}
+            }
+          ],
+          "transform": [{"filter": {"param": "line_year"}}],
+          "mark": {"type": "bar", "size": 10},
+          "encoding": {
+            "tooltip": {"field": "monthly_sales", "aggregate": "sum"},
+            "x": {
+              "field": "monthly_sales",
+              "type": "quantitative",
+              "aggregate": "sum",
+              "axis": {"labelAngle": 0, "tickCount": 5, "format": "s"},
+              "title": ""
+            },
+            "y": {
+              "field": "Brand",
+              "type": "nominal",
+              "sort": "-x",
+              "title": "",
+              "axis": {"labelFontSize": 10}
+            },
+            "color": {"field": "Brand"},
+            "opacity": {"field": "year", "scale": {"range": [0.8, 0.85, 0.9]}},
+            "strokeWidth": {
+              "condition": [
+                {"param": "sel_brand", "empty": false, "value": "2"},
+                {"param": "sel_brand_2", "empty": false, "value": "2"},
+                {"param": "sel_brand_bullet", "empty": false, "value": "2"},
+                {"param": "sel_brand_leg", "empty": false, "value": "2"}
+              ],
+              "value": "0.5"
+            },
+            "stroke": {"value": "black"}
+          }
+        }
+      ]
+    }
+  ],
+  "background": "white",
+  "config": {
+    "facet": {"spacing": 3},
+    "header": {
+      "titleFont": "Arial",
+      "labelFont": "Arial",
+      "labelFontSize": 10,
+      "labelAlign": "left",
+      "labelAnchor": "start"
+    },
+    "range": {"font": "times"},
+    "axis": {
+      "labelFont": "Calibri",
+      "labelFontSize": 10,
+      "titleFont": "Arial",
+      "titleFontSize": 14,
+      "titlePadding": 5
+    },
+    "title": {
+      "font": "Arial",
+      "subtitleFont": "Arial",
+      "color": "#253668",
+      "fontSize": 15
+    },
+    "bar": {"cornerRadius": 3}
+  }
+}

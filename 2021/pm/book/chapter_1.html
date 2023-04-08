@@ -1,0 +1,442 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>What is Product Management - Product Mangement</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">1.</strong> What is Product Management</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Product Mangement</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="what-is-product-management"><a class="header" href="#what-is-product-management">What is Product Management?</a></h1>
+<blockquote>
+<p>Job of the product manager is to <strong>discover</strong> a product that is <strong>valuable, usable and feasible</strong> -  <em>Marty Cagan</em></p>
+</blockquote>
+<blockquote>
+<p>Management is learned skill. Nobody was born a great manger - <em>Ben Horowitz</em></p>
+</blockquote>
+<blockquote>
+<p>It is easy to teach an innovator to become a CEO than teach a CEO to become an innovator - <em>Ben Horowitz</em></p>
+</blockquote>
+<p><img src="img/greatwall.jpg" alt="greatwall" />
+<sup>image credit: Chromecast</sup></p>
+<p>Solving the great <strong>customer problem</strong> with the balancing the needs of:</p>
+<ul>
+<li>
+<p><strong>UX - usable</strong></p>
+<ul>
+<li>Product Manager is the <strong>voice of the user inside the business</strong> and must be passionate about the user experience.</li>
+<li>Not being a pixel pusher or a designer </li>
+<li>Need to be out there testing the product, talking to users and getting that feedback first hand</li>
+</ul>
+</li>
+<li>
+<p><strong>Biz - meeting needs - valuable</strong> </p>
+<ul>
+<li>focused on maximizing business value from a product</li>
+<li>should be obsessed with optimizing a product to achieve the business goals while <strong>maximizing return on investment (ROI)</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Tech - feasible</strong></p>
+<ul>
+<li>There’s no point defining what to build if you don’t know <strong>how it will get built</strong>.</li>
+<li>Understanding the <strong>level of effort (LOE)</strong> involved is crucial to making the right decisions</li>
+</ul>
+</li>
+</ul>
+<p>A good product manager must be experienced in at least one, <strong>passionate about all three</strong>, and conversant with practitioners in all.</p>
+<h2 id="martin-erikssons-venn-diagram"><a class="header" href="#martin-erikssons-venn-diagram">Martin Eriksson's Venn Diagram</a></h2>
+<p><img src="img/pm-venn-1.svg" alt="PM Venn" /></p>
+<ul>
+<li><strong>Empowering the team</strong> by providing product owner like responsibilities </li>
+<li>Trade-off decision maker</li>
+</ul>
+<p>A Good Product Manager plays critical role in a successful product</p>
+<ul>
+<li>A <strong>successful product</strong> is the highest impact contribution that anyone can make in the Product Development organization</li>
+<li>Track record of <strong>successful products</strong> that become <strong>profitable businesses</strong> for their company.</li>
+</ul>
+<h3 id="ceo-of-the-product-influencing-without-any-authority"><a class="header" href="#ceo-of-the-product-influencing-without-any-authority">CEO of the product (influencing without any authority)</a></h3>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>drives vision and are ultimately responsible for the product's success or failure.</td><td>think of themselves as marketing resources</td></tr>
+<tr><td>have a realistic vision of what success of their product means and they ensure that this vision becomes reality - <strong>whatever it takes</strong></td><td>have lots of excuses, like blaming Engineering manager...</td></tr>
+<tr><td>viewed as the <em>leader of the product</em> by the entire product team</td><td>when they fail, they point out that: they predicted they would fail</td></tr>
+</tbody></table>
+<h3 id="balance-all-important-factors"><a class="header" href="#balance-all-important-factors">Balance all important factors</a></h3>
+<h4 id="company-goals--capabilities"><a class="header" href="#company-goals--capabilities">Company goals &amp; capabilities</a></h4>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>take all important factors into consideration</td><td></td></tr>
+<tr><td>understand and balance a wide variety of factors that affect product <strong>strategy and execution</strong></td><td></td></tr>
+<tr><td>understand the capabilities and limitations of their overall company</td><td></td></tr>
+<tr><td>knows approximately how much and what kind of marketing resources the company will spend on these products. Don't always know the answer to these questions, but they know enough to ask when they don't.</td><td>build a product that will take too long to pay off</td></tr>
+</tbody></table>
+<h4 id="customer-demand"><a class="header" href="#customer-demand">Customer demand</a></h4>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>listen to customers but they probe deeper into the underlying problems to get at the compelling value proposition for the customer. <em>If you had a noisy car you might ask for a louder stereo, but you would probably be a lot happier with a quieter car</em></td><td>ask customers leading questions and get biased answers. Go on their instinct and &quot;confirm&quot; it with two unusual customers</td></tr>
+<tr><td>also know what customers can &amp; will pay for</td><td>build a good product for a market their company isn't in</td></tr>
+<tr><td>certain that if they build a certain product, customers will buy it.</td><td>build a product that's too complex for their company to sell. Aren't savvy or confident enough to distinguish between interest. Blindly listen to the loudest customers, and define a product that addresses yesterday's needs of a handful of companies.and commitment to buy. Compare future products to today's competition, or cite advantages</td></tr>
+<tr><td>customers don't care about.</td><td></td></tr>
+<tr><td>go the extra mile to make sure they get this right</td><td></td></tr>
+</tbody></table>
+<h4 id="understanding-competition"><a class="header" href="#understanding-competition">Understanding competition</a></h4>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>understand the architectural and business capabilities of the competition and know where the competitors can go easily and can't go at all. Also know they must be better or different (integration/distribution) or they're dead.</td><td>react only to the moves of their competitors and forget to develop their own</td></tr>
+<tr><td>product's identity, letting it be just a hodge podge of what the competition is not doing</td><td></td></tr>
+</tbody></table>
+<h4 id="know-what-you-know-and-what-you-do-not-know"><a class="header" href="#know-what-you-know-and-what-you-do-not-know">Know what you know and what you do not know</a></h4>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>acutely aware of what they know and why they know it, as well as what they don't know.</td><td></td></tr>
+<tr><td>understands the difference between opinions, hunches, and objective facts.</td><td></td></tr>
+<tr><td>knows that their job is to fill in these gaps in knowledge, not to defend or obfuscate them.</td><td></td></tr>
+<tr><td>doesn't ruin their credibility by over-stating their knowledge.</td><td>try to defend their lack of knowledge</td></tr>
+<tr><td>rather than gain the knowledge</td><td></td></tr>
+</tbody></table>
+<h4 id="think-ahead-and-monitor-your-assumptions"><a class="header" href="#think-ahead-and-monitor-your-assumptions">Think ahead and monitor your assumptions</a></h4>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>know what their important assumptions are and they monitor them from time to time to make sure they still hold</td><td>have blinders on and don't notice when things change and notice only when their product fails.</td></tr>
+<tr><td>re-evaluate the assumption as soon that assumption is threatened.</td><td></td></tr>
+<tr><td>actively confirm their understanding with their managers and others on their team</td><td></td></tr>
+</tbody></table>
+<h3 id="clear-written-communication"><a class="header" href="#clear-written-communication">Clear written communication</a></h3>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>define clearly and in as much detail as is necessary what the product should do, how fast it should be, etc.</td><td>cut corners on communication with engineering or misunderstand their role.</td></tr>
+<tr><td>don't forget to specify critical information.</td><td></td></tr>
+<tr><td>willing to explain the obvious to make sure it's understood.</td><td></td></tr>
+<tr><td>specify the whole product, including release criteria, platforms, etc., not only the new features</td><td></td></tr>
+<tr><td>sense and tackle hard issues - in writing - early in the development process.</td><td></td></tr>
+<tr><td>production information  based on research, information and a logical, transparent</td><td></td></tr>
+<tr><td>thought process that the entire team buys into</td><td></td></tr>
+<tr><td>know that engineers are scientists by nature and value data much more than opinion. other</td><td></td></tr>
+<tr><td>parts of PD (QA, Doc, etc.) should be involved in that process.</td><td></td></tr>
+<tr><td>define a clear product vision and target that empowers engineering to fill in the details that are difficult to specify or anticipate.</td><td></td></tr>
+<tr><td>explain why engineering should build a particular product a particular way.</td><td>They want light and ask for a candle when their engineers could have built a light bulb.</td></tr>
+<tr><td>respected by their engineering teams. Engineering teams involve good product managers in difficult decisions.</td><td></td></tr>
+<tr><td>Written communication to engineering is superior because it is more consistent across an entire product team, it is more lasting, it raises accountability.</td><td>put off hard decisions until the end of the product cycle</td></tr>
+<tr><td>attend product team meetings regularly and make sure they're around when engineering is making tradeoffs.</td><td>change engineering priorities based on the latest customer feedback or latest hot sales situation without going through the defined process</td></tr>
+</tbody></table>
+<ul>
+<li>Good test for a good PM:
+<ul>
+<li>Someone outside the product team to ask 5 different people in engineering, QA, and doc what their
+product is supposed to do and why and get the same answer.</li>
+</ul>
+</li>
+</ul>
+<h4 id="product-requirements-document-prd-is-a-big-deal"><a class="header" href="#product-requirements-document-prd-is-a-big-deal">Product Requirements Document (PRD) is a big deal</a></h4>
+<ul>
+<li>The PRD is the single most important document the product manager maintains and in most cases should be the  <strong>definitive source of direction from marketing to engineering</strong></li>
+</ul>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>keep PRDs up-to-date daily or weekly at a minimum.  Good product managers view the entire PRD process as a living ongoing process, because it is (engineering has new questions, market conditions change, etc.). If anything changes in the PRD, a good product manager communicates the change clearly to the entire product team</td><td>write a PRD and assume engineering understands it.</td></tr>
+<tr><td>don't rest until they are sure that the product vision is consistent across product management, engineering, QA, tech pubs, and support and is reflected in the PRD. They don't rest, because they know that no great product ever emerged from a broad set of conflicting visions</td><td>managers don't have time to update their PRD. update the PRD and don't tell anyone, or don't tell enough people, or don't explain why.</td></tr>
+</tbody></table>
+<h3 id="clear-goals-and-advantages"><a class="header" href="#clear-goals-and-advantages">Clear goals and advantages</a></h3>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>Good product managers have clear goals</td><td>have mushy goals and mushy product advantages.</td></tr>
+<tr><td>re-evaluate the assumption as soon that assumption is threatened.</td><td></td></tr>
+<tr><td>define success as achieving explicit goals. Goals that are important are written down.</td><td></td></tr>
+<tr><td>have written goals for their product and for their own personal objectives</td><td>have inconsistent product positioning and advantages change from time to time</td></tr>
+<tr><td>know how their product will be better / different than the competition - a key part of the overall product vision from day one and is reflected in most things the product manager does</td><td>hesitate when asked for the advantages of their product.</td></tr>
+</tbody></table>
+<h3 id="focus-on-the-sales-force-and-customers"><a class="header" href="#focus-on-the-sales-force-and-customers">Focus on the sales force and customers</a></h3>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>good product manager will be known personally or by reputation by at least half the sales force.</td><td></td></tr>
+<tr><td>know that sales people have a choice of products to sell and, at a higher level, companies to work for, and selling a particular product manager's product is optional</td><td></td></tr>
+<tr><td>focus on and understand that sales people are under a lot of pressure to make their quota, this quarter</td><td></td></tr>
+<tr><td>Knowledgeable of what actually happens in the field. Does not rambles on about their product features that does not help sales person's current situation</td><td>don't have time for the salesforce or customers</td></tr>
+<tr><td>been out in the field, been to sales training, been to SE training, been to pitches, etc.</td><td>aren't sure what's going on in the field,  delegate working with sales.</td></tr>
+<tr><td>A good presenter, Responsive</td><td>boring presenters.talk about how future products will be great, but the current products are weak</td></tr>
+<tr><td>know a handful of current and potential customers personally</td><td>don't care about individual customers</td></tr>
+<tr><td>understand the exact dynamics of real customer situations.leverage this knowledge with engineering, other customers, the salesforce, press and analysts, etc.</td><td></td></tr>
+</tbody></table>
+<h3 id="other-key-skills"><a class="header" href="#other-key-skills">Other key skills</a></h3>
+<h4 id="marketing--communication"><a class="header" href="#marketing--communication">Marketing &amp; communication</a></h4>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>requires an understanding of and proficiency in though not deep expertise of a wide array of marketing functions.</td><td></td></tr>
+<tr><td>good product managers should be able to work effectively with PR and press and analysts, understand how to execute a product launch, develop collateral, staff a tradeshow, train the salesforce, etc.</td><td></td></tr>
+<tr><td>knows the importance of creating leveragable collateral, FAQs, presentations, white papers.</td><td>If your primary competitor is abc and the most recent competitive positioning on abs is nine months old and refers to the last release of their product, this is indicative of a bad product manager.</td></tr>
+<tr><td>take competition into account in developing their messages, but are not a slave to what the competition does.</td><td></td></tr>
+</tbody></table>
+<h4 id="time-management-and-sense-of-whats-important"><a class="header" href="#time-management-and-sense-of-whats-important">Time management and sense of what's important</a></h4>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>focuses on tasks that are critical to their product success</td><td>put out fires all day</td></tr>
+<tr><td>focuses on tasks that have a high impact on their business (closing big deals, updating their PRD, etc.)</td><td>complain that they spend all day answering questions for the sales force and are swamped</td></tr>
+<tr><td>tasks that have a high impact on their business (closing big deals, updating their PRD, etc.)</td><td>don't create FAQs or other leveragable collateral.</td></tr>
+</tbody></table>
+<h3 id="discipline"><a class="header" href="#discipline">Discipline</a></h3>
+<table><thead><tr><th>Good</th><th>Bad</th></tr></thead><tbody>
+<tr><td>respect a base level of discipline and organization in their work.</td><td></td></tr>
+<tr><td>keep their project up-to-date</td><td></td></tr>
+<tr><td>send their status reports in on time every week, because they are disciplined.</td><td>forget to send in their status reports on time, because they don't value discipline.</td></tr>
+<tr><td>don't over-promise.</td><td></td></tr>
+<tr><td>keep developers doing product development</td><td></td></tr>
+<tr><td>don't offer engineering resources for things that can and should be handled by sales or marketing</td><td></td></tr>
+<tr><td>Work well with executives.</td><td></td></tr>
+<tr><td>Leverage the entire organization</td><td></td></tr>
+<tr><td>Use whatever intensity is required to close critical issues.</td><td></td></tr>
+</tbody></table>
+<h2 id="management"><a class="header" href="#management">Management</a></h2>
+<h3 id="setting-a-vision-of-the-product"><a class="header" href="#setting-a-vision-of-the-product">Setting a vision of the product</a></h3>
+<ul>
+<li>
+<p>requires you to research, research, and then research some more your market, your customer and the problem they have that you’re trying to solve. </p>
+</li>
+<li>
+<p>assimilate huge amounts of information </p>
+<ul>
+<li>feedback from clients</li>
+<li>quantitative data from your analytics</li>
+<li>research reports</li>
+<li>market trends and statistics </li>
+</ul>
+</li>
+<li>
+<p>need to know everything about:</p>
+<ul>
+<li>your market and your customer</li>
+<li>your customers’ problem, 
+and then mix all that information with a healthy dose of creativity to <strong>define a vision for your product</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="spread-the-word-in-your-business"><a class="header" href="#spread-the-word-in-your-business">Spread the word in your business</a></h3>
+<p>Once you have a vision, you have to spread the word in your business.</p>
+<ul>
+<li>Get dogmatic, evangelical even, about the utopia that is your product. </li>
+<li>Get passionate about it </li>
+<li>Your <strong>success, and that of your product</strong>, relies on:
+<ul>
+<li>every team member — from sales to developer </li>
+</ul>
+</li>
+</ul>
+<h3 id="start-building-an-actionable-plan-to-reach-that-vision"><a class="header" href="#start-building-an-actionable-plan-to-reach-that-vision">Start building an actionable plan to reach that vision</a></h3>
+<ul>
+<li>
+<p>A roadmap of <strong>incremental improvements and iterative development</strong> that take you step by faltering step closer to that final vision.</p>
+</li>
+<li>
+<p>your team throw themselves into coming up with <strong>better designs, better code and better solutions</strong> to the <strong>customers problem</strong> alongside you.</p>
+</li>
+<li>
+<p>solving problems as they pop up and <strong>closely managing scope</strong> so you can get the product out on time.</p>
+</li>
+</ul>
+<h3 id="after-release"><a class="header" href="#after-release">After Release</a></h3>
+<ul>
+<li>Looking at how customers use the product</li>
+<li>Going out and talking to them about the product and generally eating, sleeping and breathing the product. 
+<ul>
+<li>Did you solve the right problem? </li>
+<li>Do your users get the product? </li>
+<li>Is it solving their problem? Will they pay for the product?</li>
+</ul>
+</li>
+</ul>
+<h2 id="references"><a class="header" href="#references">References</a></h2>
+<ul>
+<li>
+<p><a href="https://www.atlassian.com/agile/product-management/product-manager"> Product Manager: The role and best practices for beginners </a></p>
+</li>
+<li>
+<p><a href="https://sriramk.com/memos/Ben_Horowitz_Good_Product_Manager_Bad_Product_Manager.pdf">Good Product Manager and Bad Product Manager -  Ben Horowitzm(a16z) and David Weiden</a></p>
+</li>
+<li>
+<p><a href="https://a16z.com/2012/06/15/good-product-managerbad-product-manager/">Good Product Manager/Bad Product Manager</a></p>
+</li>
+<li>
+<p><a href="https://medium.com/@bfgmartin/what-is-a-product-manager-ce0efdcf114c">What is a Product Manager? - Martin Eriksson</a></p>
+</li>
+</ul>
+<h3 id="videos"><a class="header" href="#videos">Videos</a></h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/F2e3RqL4VWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yUOC-Y0f5ZQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/F2e3RqL4VWs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:7000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

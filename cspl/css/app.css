@@ -1,0 +1,52 @@
+/* app.css */
+
+#editor {
+    border-radius: 10px;
+    height: 720px;
+    width: 800px;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+}
+
+.gutter {
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+    cursor: col-resize;
+}
+textarea {
+font-family:Monaco, Arial; padding:10px;background-color:aliceblue; color:black; border-radius:10px;
+}
+#runScript {
+    background-color:#013; color:white; 
+}
+
+/* =----=*/
+
+.form-group {
+    position: relative;
+}
+input[type="text"] {
+    padding-left: 60px;
+}
+
+.label-danger {
+    position: absolute;
+    left: 3px;
+    top: 5px;
+    color:red;
+}
+
+
+#runScript {
+    border-radius: 10px;
+    height: 720px;
+    width: 800px;
+}

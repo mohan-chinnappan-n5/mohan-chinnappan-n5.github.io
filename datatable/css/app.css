@@ -1,0 +1,13 @@
+/* app.css */
+.popover {
+    width: 400px;
+    background-color:#99ccff ;
+}
+.popover-header {
+     background-color:#084a8b;
+     color: white;
+}
+
+body {
+    margin-left:10px;
+}

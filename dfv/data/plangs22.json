@@ -1,0 +1,86 @@
+[
+  {
+    "language": "Rust",
+    "value": 86.73
+  },
+  {
+    "language": "Kotlin",
+    "value": 63.29
+  },
+  {
+    "language": "Python",
+    "value": 67.34
+  },
+  {
+    "language": "TypeScript",
+    "value": 73.46
+  },
+  {
+    "language": "Go",
+    "value": 64.58
+  },
+  {
+    "language": "Swift",
+    "value": 62.88
+  },
+  {
+    "language": "JavaScript",
+    "value": 61.46
+  },
+  {
+    "language": "Dart",
+    "value": 62.16
+  },
+  {
+    "language": "LISP",
+    "value": 57.19
+  },
+  {
+    "language": "C",
+    "value": 39.68
+  },
+  {
+    "language": "C++",
+    "value": 48.39
+  },
+  {
+    "language": "Objective-C",
+    "value": 23.44
+  },
+  {
+    "language": "Erlang",
+    "value": 39.68
+  },
+  {
+    "language": "C#",
+    "value": 63.39
+  },
+  {
+    "language": "F#",
+    "value": 60.96
+  },
+  {
+    "language": "Clojure",
+    "value": 75.23
+  },
+  {
+    "language": "Scala",
+    "value": 50.3
+  },
+  {
+    "language": "Ruby",
+    "value": 49.99
+  },
+  {
+    "language": "Java",
+    "value": 45.75
+  },
+  {
+    "language": "Bash",
+    "value": 57.89
+  },
+  {
+    "language": "SQL",
+    "value": 64.25
+  }
+]

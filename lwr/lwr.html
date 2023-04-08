@@ -1,0 +1,153 @@
+
+    <!doctype html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+            
+            <title>LWR - Lightning Web Runtime</title>
+    
+            <link rel="stylesheet" href="../reveal/dist/reset.css">
+            <link rel="stylesheet" href="../reveal/dist/reveal.css">
+            <link rel="stylesheet" href="../reveal/dist/theme/sky.css">
+    
+            <!-- Theme used for syntax highlighted code -->
+            <link rel="stylesheet" href="../reveal/plugin/highlight/monokai.css">
+
+            <style>
+                
+                    .reveal section ul {
+                    display: inline-block;
+                    font-size: 0.9em;
+                    line-height: 1 em;
+                    vertical-align: top;
+                  }
+
+                  .title {
+                    display: inline-block;
+                    vertical-align: top;
+                    font-size: 20px;
+                    
+                    text-align: center;
+                    background-color: #fff;
+                    width: 100%;
+                    font-family: Arial, Helvetica, sans-serif;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                 }
+
+                </style>
+        </head>
+        <body>
+<h1 class="title"> LWR - Lightning Web Runtime </h1>
+ 
+            <div class="reveal">
+                <div class="slides">
+                
+    
+            <section data-markdown data-separator="---">
+            <textarea data-template>
+
+-  Build Your Own (LWR) template
+    - Based on Lightning Web Components (LWC)
+    - Can be used to build  blazing fast digital experiences
+        - Portals
+        - Microsites
+        - Websites
+    - Lightning Web Component (LWC) is based on core w3c Web Components Standards
+    - Built on code that runs natively in Browsers and it is
+        - lightweight
+        - efficient 
+
+                
+
+---    
+-  LWC includes
+    - Apex and UI API support
+	- [Notes on UI API](https://github.com/mohan-chinnappan-n/cli-dx/tree/master/ui-api)
+	- [How to access ui-api resources](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/ui-api/demo.md)
+    - Access to Salesforce Records and SOSL
+    - Provide data rich experiences
+- LWR has performance enhancement features
+    - Publish-time freezing
+    - HTTP caching
+
+- Provides custom URL paths for unauthenticated sites:
+    -  ```https://mycustomdomain.com/mypage``` 
+- Uses  Salesforce DX to improve productivity
+	- [DX tutorial](https://mohan-chinnappan-n.github.io/sfdc/dx.html#/home)
+ 
+---
+
+- LWR benefits
+    - Performance —  page generation at build time, not runtime, our bar is set at subsecond full-page loads
+    - Friction-Free — An enjoyable local development experience
+    - Power — All the power of Lightning Web Components (LWC) and the Salesforce platform at your disposal
+
+- Example: [Our Developer Site](https://developer.salesforce.com/) is built with LWR!
+
+---
+-  Pixel-perfect site
+    - you can  remove Salesforce Lightning Design System [SLDS](https://www.lightningdesignsystem.com/) 
+    - include your own components and **design system** to achieve the pixel-perfect site
+---
+- LWR  based exclusively on the Lightning Web Components
+    - No Aura Components
+    - Doesn’t include the same features as Aura sites
+---
+- Minimal Template includes only these template pages
+![Min Layout](img/lwr-1.png)
+   - Home
+   - Error
+   - Login
+   - Forgot Password
+   - Check Password
+   - Register
+---
+- Out-of-box components
+- ![OBC](img/lwr-2.png)
+
+---
+- Examples
+
+    - [Code Samples](https://github.com/mohan-chinnappan-n/LWR/tree/master/codeSamples)
+    - [az-insurance](https://github.com/mohan-chinnappan-n/LWR/tree/master/az-insurance-main)
+    - [Sample Site](https://platform-inspiration-4497-dev-ed.my.site.com/marketing/)
+---
+
+- Demos
+![ez-insurance demo](img/ez-insurance.webm.gif) 
+---
+### Videos
+- [How to build LWR sites in Experience Cloud](https://www.youtube.com/playlist?list=PLgIMQe2PKPSJXw3x0cPTJhzNyLBgpZV5a)
+
+            </textarea>
+            </section>
+            
+                </div>
+            </div>
+    
+            <script src="../reveal/dist/reveal.js"></script>
+            <script src="../reveal/plugin/notes/notes.js"></script>
+            <script src="../reveal/plugin/markdown/markdown.js"></script>
+            <script src="../reveal/plugin/highlight/highlight.js"></script>
+
+            <script src="../reveal/plugin/math/math.js"></script>
+
+            <script>
+                Reveal.initialize({
+                    hash: true,
+                    slideNumber: true,
+                    backgroundTransition: 'slide',
+                    controls: true,
+
+                    controlsLayout: 'top-right',
+
+                    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX  ]
+                });
+            </script>
+        </body>
+    </html>
+    
+    

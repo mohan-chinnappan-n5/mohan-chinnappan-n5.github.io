@@ -1,0 +1,397 @@
+countryISO|Country|stateISO|stateCode|stateName
+AU|Australia|AU-ACT|ACT|Australian Capital Territory
+AU|Australia|AU-NSW|NSW|New South Wales
+AU|Australia|AU-NT|NT|Northern Territory
+AU|Australia|AU-QLD|QLD|Queensland
+AU|Australia|AU-SA|SA|South Australia
+AU|Australia|AU-TAS|TAS|Tasmania
+AU|Australia|AU-VIC|VIC|Victoria
+AU|Australia|AU-WA|WA|Western Australia
+BR|Brazil|BR-AC|AC|Acre
+BR|Brazil|BR-AL|AL|Alagoas
+BR|Brazil|BR-AM|AM|Amazonas
+BR|Brazil|BR-AP|AP|Amapá
+BR|Brazil|BR-BA|BA|Bahia
+BR|Brazil|BR-CE|CE|Ceará
+BR|Brazil|BR-DF|DF|Distrito Federal
+BR|Brazil|BR-ES|ES|Espírito Santo
+BR|Brazil|BR-GO|GO|Goiás
+BR|Brazil|BR-MA|MA|Maranhão
+BR|Brazil|BR-MG|MG|Minas Gerais
+BR|Brazil|BR-MS|MS|Mato Grosso do Sul
+BR|Brazil|BR-MT|MT|Mato Grosso
+BR|Brazil|BR-PA|PA|Pará
+BR|Brazil|BR-PB|PB|Paraíba
+BR|Brazil|BR-PE|PE|Pernambuco
+BR|Brazil|BR-PI|PI|Piauí
+BR|Brazil|BR-PR|PR|Paraná
+BR|Brazil|BR-RJ|RJ|Rio de Janeiro
+BR|Brazil|BR-RN|RN|Rio Grande do Norte
+BR|Brazil|BR-RO|RO|Rondônia
+BR|Brazil|BR-RR|RR|Roraima
+BR|Brazil|BR-RS|RS|Rio Grande do Sul
+BR|Brazil|BR-SC|SC|Santa Catarina
+BR|Brazil|BR-SE|SE|Sergipe
+BR|Brazil|BR-SP|SP|São Paulo
+BR|Brazil|BR-TO|TO|Tocantins
+CA|Canada|CA-AB|AB|Alberta
+CA|Canada|CA-BC|BC|British Columbia
+CA|Canada|CA-MB|MB|Manitoba
+CA|Canada|CA-NB|NB|New Brunswick
+CA|Canada|CA-NL|NL|Newfoundland and Labrador
+CA|Canada|CA-NS|NS|Nova Scotia
+CA|Canada|CA-NT|NT|Northwest Territories
+CA|Canada|CA-NU|NU|Nunavut
+CA|Canada|CA-ON|ON|Ontario
+CA|Canada|CA-PE|PE|Prince Edward Island
+CA|Canada|CA-QC|QC|Quebec
+CA|Canada|CA-SK|SK|Saskatchewan
+CA|Canada|CA-YT|YT|Yukon Territories
+CN|China|CN-11|11|Beijing
+CN|China|CN-12|12|Tianjin
+CN|China|CN-13|13|Hebei
+CN|China|CN-14|14|Shanxi
+CN|China|CN-15|15|Nei Mongol
+CN|China|CN-21|21|Liaoning
+CN|China|CN-22|22|Jilin
+CN|China|CN-23|23|Heilongjiang
+CN|China|CN-31|31|Shanghai
+CN|China|CN-32|32|Jiangsu
+CN|China|CN-33|33|Zhejiang
+CN|China|CN-34|34|Anhui
+CN|China|CN-35|35|Fujian
+CN|China|CN-36|36|Jiangxi
+CN|China|CN-37|37|Shandong
+CN|China|CN-41|41|Henan
+CN|China|CN-42|42|Hubei
+CN|China|CN-43|43|Hunan
+CN|China|CN-44|44|Guangdong
+CN|China|CN-45|45|Guangxi
+CN|China|CN-46|46|Hainan
+CN|China|CN-50|50|Chongqing
+CN|China|CN-51|51|Sichuan
+CN|China|CN-52|52|Guizhou
+CN|China|CN-53|53|Yunnan
+CN|China|CN-54|54|Xizang
+CN|China|CN-61|61|Shaanxi
+CN|China|CN-62|62|Gansu
+CN|China|CN-63|63|Qinghai
+CN|China|CN-64|64|Ningxia
+CN|China|CN-65|65|Xinjiang
+CN|China|CN-71|71|Taiwan
+CN|China|CN-91|91|Hong Kong
+CN|China|CN-92|92|Macao
+IE|Ireland|IE-CE|CE|Clare
+IE|Ireland|IE-CN|CN|Cavan
+IE|Ireland|IE-CO|CO|Cork
+IE|Ireland|IE-CW|CW|Carlow
+IE|Ireland|IE-D|D|Dublin
+IE|Ireland|IE-DL|DL|Donegal
+IE|Ireland|IE-G|G|Galway
+IE|Ireland|IE-KE|KE|Kildare
+IE|Ireland|IE-KK|KK|Kilkenny
+IE|Ireland|IE-KY|KY|Kerry
+IE|Ireland|IE-LD|LD|Longford
+IE|Ireland|IE-LH|LH|Louth
+IE|Ireland|IE-LK|LK|Limerick
+IE|Ireland|IE-LM|LM|Leitrim
+IE|Ireland|IE-LS|LS|Laois
+IE|Ireland|IE-MH|MH|Meath
+IE|Ireland|IE-MN|MN|Monaghan
+IE|Ireland|IE-MO|MO|Mayo
+IE|Ireland|IE-OY|OY|Offaly
+IE|Ireland|IE-RN|RN|Roscommon
+IE|Ireland|IE-SO|SO|Sligo
+IE|Ireland|IE-TA|TA|Tipperary
+IE|Ireland|IE-WD|WD|Waterford
+IE|Ireland|IE-WH|WH|Westmeath
+IE|Ireland|IE-WW|WW|Wicklow
+IE|Ireland|IE-WX|WX|Wexford
+IN|India|IN-AN|AN|Andaman and Nicobar Islands
+IN|India|IN-AP|AP|Andhra Pradesh
+IN|India|IN-AR|AR|Arunachal Pradesh
+IN|India|IN-AS|AS|Assam
+IN|India|IN-BR|BR|Bihar
+IN|India|IN-CH|CH|Chandigarh
+IN|India|IN-CT|CT|Chhattisgarh
+IN|India|IN-DD|DD|Daman and Diu
+IN|India|IN-DL|DL|Delhi
+IN|India|IN-DN|DN|Dadra and Nagar Haveli
+IN|India|IN-GA|GA|Goa
+IN|India|IN-GJ|GJ|Gujarat
+IN|India|IN-HP|HP|Himachal Pradesh
+IN|India|IN-HR|HR|Haryana
+IN|India|IN-JH|JH|Jharkhand
+IN|India|IN-JK|JK|Jammu and Kashmir
+IN|India|IN-KA|KA|Karnataka
+IN|India|IN-KL|KL|Kerala
+IN|India|IN-LD|LD|Lakshadweep
+IN|India|IN-MH|MH|Maharashtra
+IN|India|IN-ML|ML|Meghalaya
+IN|India|IN-MN|MN|Manipur
+IN|India|IN-MP|MP|Madhya Pradesh
+IN|India|IN-MZ|MZ|Mizoram
+IN|India|IN-NL|NL|Nagaland
+IN|India|IN-OR|OR|Odisha
+IN|India|IN-PB|PB|Punjab
+IN|India|IN-PY|PY|Puducherry
+IN|India|IN-RJ|RJ|Rajasthan
+IN|India|IN-SK|SK|Sikkim
+IN|India|IN-TG|TG|Telangana
+IN|India|IN-TN|TN|Tamil Nadu
+IN|India|IN-TR|TR|Tripura
+IN|India|IN-UP|UP|Uttar Pradesh
+IN|India|IN-UT|UT|Uttarakhand
+IN|India|IN-WB|WB|West Bengal
+IT|Italy|IT-AG|AG|Agrigento
+IT|Italy|IT-AL|AL|Alessandria
+IT|Italy|IT-AN|AN|Ancona
+IT|Italy|IT-AO|AO|Aosta
+IT|Italy|IT-AP|AP|Ascoli Piceno
+IT|Italy|IT-AQ|AQ|L&apos;Aquila
+IT|Italy|IT-AR|AR|Arezzo
+IT|Italy|IT-AT|AT|Asti
+IT|Italy|IT-AV|AV|Avellino
+IT|Italy|IT-BA|BA|Bari
+IT|Italy|IT-BG|BG|Bergamo
+IT|Italy|IT-BI|BI|Biella
+IT|Italy|IT-BL|BL|Belluno
+IT|Italy|IT-BN|BN|Benevento
+IT|Italy|IT-BO|BO|Bologna
+IT|Italy|IT-BR|BR|Brindisi
+IT|Italy|IT-BS|BS|Brescia
+IT|Italy|IT-BT|BT|Barletta-Andria-Trani
+IT|Italy|IT-BZ|BZ|Bolzano
+IT|Italy|IT-CA|CA|Cagliari
+IT|Italy|IT-CB|CB|Campobasso
+IT|Italy|IT-CE|CE|Caserta
+IT|Italy|IT-CH|CH|Chieti
+IT|Italy|IT-CI|CI|Carbonia-Iglesias
+IT|Italy|IT-CL|CL|Caltanissetta
+IT|Italy|IT-CN|CN|Cuneo
+IT|Italy|IT-CO|CO|Como
+IT|Italy|IT-CR|CR|Cremona
+IT|Italy|IT-CS|CS|Cosenza
+IT|Italy|IT-CT|CT|Catania
+IT|Italy|IT-CZ|CZ|Catanzaro
+IT|Italy|IT-EN|EN|Enna
+IT|Italy|IT-FC|FC|Forlì-Cesena
+IT|Italy|IT-FE|FE|Ferrara
+IT|Italy|IT-FG|FG|Foggia
+IT|Italy|IT-FI|FI|Florence
+IT|Italy|IT-FM|FM|Fermo
+IT|Italy|IT-FR|FR|Frosinone
+IT|Italy|IT-GE|GE|Genoa
+IT|Italy|IT-GO|GO|Gorizia
+IT|Italy|IT-GR|GR|Grosseto
+IT|Italy|IT-IM|IM|Imperia
+IT|Italy|IT-IS|IS|Isernia
+IT|Italy|IT-KR|KR|Crotone
+IT|Italy|IT-LC|LC|Lecco
+IT|Italy|IT-LE|LE|Lecce
+IT|Italy|IT-LI|LI|Livorno
+IT|Italy|IT-LO|LO|Lodi
+IT|Italy|IT-LT|LT|Latina
+IT|Italy|IT-LU|LU|Lucca
+IT|Italy|IT-MB|MB|Monza and Brianza
+IT|Italy|IT-MC|MC|Macerata
+IT|Italy|IT-ME|ME|Messina
+IT|Italy|IT-MI|MI|Milan
+IT|Italy|IT-MN|MN|Mantua
+IT|Italy|IT-MO|MO|Modena
+IT|Italy|IT-MS|MS|Massa and Carrara
+IT|Italy|IT-MT|MT|Matera
+IT|Italy|IT-NA|NA|Naples
+IT|Italy|IT-NO|NO|Novara
+IT|Italy|IT-NU|NU|Nuoro
+IT|Italy|IT-OG|OG|Ogliastra
+IT|Italy|IT-OR|OR|Oristano
+IT|Italy|IT-OT|OT|Olbia-Tempio
+IT|Italy|IT-PA|PA|Palermo
+IT|Italy|IT-PC|PC|Piacenza
+IT|Italy|IT-PD|PD|Padua
+IT|Italy|IT-PE|PE|Pescara
+IT|Italy|IT-PG|PG|Perugia
+IT|Italy|IT-PI|PI|Pisa
+IT|Italy|IT-PN|PN|Pordenone
+IT|Italy|IT-PO|PO|Prato
+IT|Italy|IT-PR|PR|Parma
+IT|Italy|IT-PT|PT|Pistoia
+IT|Italy|IT-PU|PU|Pesaro and Urbino
+IT|Italy|IT-PV|PV|Pavia
+IT|Italy|IT-PZ|PZ|Potenza
+IT|Italy|IT-RA|RA|Ravenna
+IT|Italy|IT-RC|RC|Reggio Calabria
+IT|Italy|IT-RE|RE|Reggio Emilia
+IT|Italy|IT-RG|RG|Ragusa
+IT|Italy|IT-RI|RI|Rieti
+IT|Italy|IT-RM|RM|Rome
+IT|Italy|IT-RN|RN|Rimini
+IT|Italy|IT-RO|RO|Rovigo
+IT|Italy|IT-SA|SA|Salerno
+IT|Italy|IT-SI|SI|Siena
+IT|Italy|IT-SO|SO|Sondrio
+IT|Italy|IT-SP|SP|La Spezia
+IT|Italy|IT-SR|SR|Syracuse
+IT|Italy|IT-SS|SS|Sassari
+IT|Italy|IT-SV|SV|Savona
+IT|Italy|IT-TA|TA|Taranto
+IT|Italy|IT-TE|TE|Teramo
+IT|Italy|IT-TN|TN|Trento
+IT|Italy|IT-TO|TO|Turin
+IT|Italy|IT-TP|TP|Trapani
+IT|Italy|IT-TR|TR|Terni
+IT|Italy|IT-TS|TS|Trieste
+IT|Italy|IT-TV|TV|Treviso
+IT|Italy|IT-UD|UD|Udine
+IT|Italy|IT-VA|VA|Varese
+IT|Italy|IT-VB|VB|Verbano-Cusio-Ossola
+IT|Italy|IT-VC|VC|Vercelli
+IT|Italy|IT-VE|VE|Venice
+IT|Italy|IT-VI|VI|Vicenza
+IT|Italy|IT-VR|VR|Verona
+IT|Italy|IT-VS|VS|Medio Campidano
+IT|Italy|IT-VT|VT|Viterbo
+IT|Italy|IT-VV|VV|Vibo Valentia
+JP|Japan|JP-01|01|Hokkaido
+JP|Japan|JP-02|02|Akita
+JP|Japan|JP-03|03|Iwate
+JP|Japan|JP-04|04|Miyagi
+JP|Japan|JP-05|05|Aichi
+JP|Japan|JP-06|06|Yamagata
+JP|Japan|JP-07|07|Fukushima
+JP|Japan|JP-08|08|Ibaraki
+JP|Japan|JP-09|09|Tochigi
+JP|Japan|JP-10|10|Gunma
+JP|Japan|JP-11|11|Saitama
+JP|Japan|JP-12|12|Chiba
+JP|Japan|JP-13|13|Tokyo
+JP|Japan|JP-14|14|Kanagawa
+JP|Japan|JP-15|15|Niigata
+JP|Japan|JP-16|16|Toyama
+JP|Japan|JP-17|17|Ishikawa
+JP|Japan|JP-18|18|Fukui
+JP|Japan|JP-19|19|Yamanashi
+JP|Japan|JP-20|20|Nagano
+JP|Japan|JP-21|21|Gifu
+JP|Japan|JP-22|22|Shizuoka
+JP|Japan|JP-23|23|Aomori
+JP|Japan|JP-24|24|Mie
+JP|Japan|JP-25|25|Shiga
+JP|Japan|JP-26|26|Kyoto
+JP|Japan|JP-27|27|Osaka
+JP|Japan|JP-28|28|Hyogo
+JP|Japan|JP-29|29|Nara
+JP|Japan|JP-30|30|Wakayama
+JP|Japan|JP-31|31|Tottori
+JP|Japan|JP-32|32|Shimane
+JP|Japan|JP-33|33|Okayama
+JP|Japan|JP-34|34|Hiroshima
+JP|Japan|JP-35|35|Yamaguchi
+JP|Japan|JP-36|36|Tokushima
+JP|Japan|JP-37|37|Kagawa
+JP|Japan|JP-38|38|Ehime
+JP|Japan|JP-39|39|Kochi
+JP|Japan|JP-40|40|Fukuoka
+JP|Japan|JP-41|41|Saga
+JP|Japan|JP-42|42|Nagasaki
+JP|Japan|JP-43|43|Kumamoto
+JP|Japan|JP-44|44|Oita
+JP|Japan|JP-45|45|Miyazaki
+JP|Japan|JP-46|46|Kagoshima
+JP|Japan|JP-47|47|Okinawa
+MX|Mexico|MX-AG|AG|Aguascalientes
+MX|Mexico|MX-BC|BC|Baja California
+MX|Mexico|MX-BS|BS|Baja California Sur
+MX|Mexico|MX-CH|CH|Chihuahua
+MX|Mexico|MX-CL|CL|Colima
+MX|Mexico|MX-CM|CM|Campeche
+MX|Mexico|MX-CO|CO|Coahuila
+MX|Mexico|MX-CS|CS|Chiapas
+MX|Mexico|MX-DF|DF|Federal District
+MX|Mexico|MX-DG|DG|Durango
+MX|Mexico|MX-GR|GR|Guerrero
+MX|Mexico|MX-GT|GT|Guanajuato
+MX|Mexico|MX-HG|HG|Hidalgo
+MX|Mexico|MX-JA|JA|Jalisco
+MX|Mexico|MX-ME|ME|Mexico State
+MX|Mexico|MX-MI|MI|Michoacán
+MX|Mexico|MX-MO|MO|Morelos
+MX|Mexico|MX-NA|NA|Nayarit
+MX|Mexico|MX-NL|NL|Nuevo León
+MX|Mexico|MX-OA|OA|Oaxaca
+MX|Mexico|MX-PB|PB|Puebla
+MX|Mexico|MX-QE|QE|Querétaro
+MX|Mexico|MX-QR|QR|Quintana Roo
+MX|Mexico|MX-SI|SI|Sinaloa
+MX|Mexico|MX-SL|SL|San Luis Potosí
+MX|Mexico|MX-SO|SO|Sonora
+MX|Mexico|MX-TB|TB|Tabasco
+MX|Mexico|MX-TL|TL|Tlaxcala
+MX|Mexico|MX-TM|TM|Tamaulipas
+MX|Mexico|MX-VE|VE|Veracruz
+MX|Mexico|MX-YU|YU|Yucatán
+MX|Mexico|MX-ZA|ZA|Zacatecas
+US|United States|US-AA|AA|Armed Forces Americas
+US|United States|US-AE|AE|Armed Forces Europe
+US|United States|US-AK|AK|Alaska
+US|United States|US-AL|AL|Alabama
+US|United States|US-AP|AP|Armed Forces Pacific
+US|United States|US-AR|AR|Arkansas
+US|United States|US-AS|AS|American Samoa
+US|United States|US-AZ|AZ|Arizona
+US|United States|US-CA|CA|California
+US|United States|US-CO|CO|Colorado
+US|United States|US-CT|CT|Connecticut
+US|United States|US-DC|DC|District of Columbia
+US|United States|US-DE|DE|Delaware
+US|United States|US-FL|FL|Florida
+US|United States|US-FM|FM|Federated Micronesia
+US|United States|US-GA|GA|Georgia
+US|United States|US-GU|GU|Guam
+US|United States|US-HI|HI|Hawaii
+US|United States|US-IA|IA|Iowa
+US|United States|US-ID|ID|Idaho
+US|United States|US-IL|IL|Illinois
+US|United States|US-IN|IN|Indiana
+US|United States|US-KS|KS|Kansas
+US|United States|US-KY|KY|Kentucky
+US|United States|US-LA|LA|Louisiana
+US|United States|US-MA|MA|Massachusetts
+US|United States|US-MD|MD|Maryland
+US|United States|US-ME|ME|Maine
+US|United States|US-MH|MH|Marshall Islands
+US|United States|US-MI|MI|Michigan
+US|United States|US-MN|MN|Minnesota
+US|United States|US-MO|MO|Missouri
+US|United States|US-MP|MP|Northern Mariana Islands
+US|United States|US-MS|MS|Mississippi
+US|United States|US-MT|MT|Montana
+US|United States|US-NC|NC|North Carolina
+US|United States|US-ND|ND|North Dakota
+US|United States|US-NE|NE|Nebraska
+US|United States|US-NH|NH|New Hampshire
+US|United States|US-NJ|NJ|New Jersey
+US|United States|US-NM|NM|New Mexico
+US|United States|US-NV|NV|Nevada
+US|United States|US-NY|NY|New York
+US|United States|US-OH|OH|Ohio
+US|United States|US-OK|OK|Oklahoma
+US|United States|US-OR|OR|Oregon
+US|United States|US-PA|PA|Pennsylvania
+US|United States|US-PR|PR|Puerto Rico
+US|United States|US-PW|PW|Palau
+US|United States|US-RI|RI|Rhode Island
+US|United States|US-SC|SC|South Carolina
+US|United States|US-SD|SD|South Dakota
+US|United States|US-TN|TN|Tennessee
+US|United States|US-TX|TX|Texas
+US|United States|US-UM|UM|United States Minor Outlying Islands
+US|United States|US-UT|UT|Utah
+US|United States|US-VA|VA|Virginia
+US|United States|US-VI|VI|US Virgin Islands
+US|United States|US-VT|VT|Vermont
+US|United States|US-WA|WA|Washington
+US|United States|US-WI|WI|Wisconsin
+US|United States|US-WV|WV|West Virginia
+US|United States|US-WY|WY|Wyoming

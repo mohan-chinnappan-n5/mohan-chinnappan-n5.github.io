@@ -1,0 +1,819 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Dialogflow - Machine Learning for Everyone!</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Quick Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="sup.html"><strong aria-hidden="true">1.1.</strong> Supervised Learning</a></li><li class="chapter-item expanded "><a href="unsup.html"><strong aria-hidden="true">1.2.</strong> Unsupervised Learning</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Linear Algebra needed</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="eigen.html"><strong aria-hidden="true">2.1.</strong> Eigenvectors </a></li><li class="chapter-item expanded "><a href="chapter_2-ref.html"><strong aria-hidden="true">2.2.</strong> References</a></li></ol></li><li class="chapter-item expanded "><a href="ml_models.html"><strong aria-hidden="true">3.</strong> ML Models</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="word2vec.html"><strong aria-hidden="true">3.1.</strong> Word2Vec</a></li><li class="chapter-item expanded "><a href="glove.html"><strong aria-hidden="true">3.2.</strong> GloVe</a></li></ol></li><li class="chapter-item expanded "><a href="dl.html"><strong aria-hidden="true">4.</strong> Deep Learning</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="nn.html"><strong aria-hidden="true">4.1.</strong> Neural Network</a></li><li class="chapter-item expanded "><a href="grad_descent.html"><strong aria-hidden="true">4.2.</strong> Gradient descent</a></li><li class="chapter-item expanded "><a href="back_propagation.html"><strong aria-hidden="true">4.3.</strong> Back Propagation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="bp_calc.html"><strong aria-hidden="true">4.3.1.</strong> Calculus</a></li></ol></li><li class="chapter-item expanded "><a href="act_func.html"><strong aria-hidden="true">4.4.</strong> Activation Function</a></li><li class="chapter-item expanded "><a href="cnn.html"><strong aria-hidden="true">4.5.</strong> Convolutional Neural Networks</a></li><li class="chapter-item expanded "><a href="rnn.html"><strong aria-hidden="true">4.6.</strong> Recurrent Neural Networks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="mnist.html"><strong aria-hidden="true">4.6.1.</strong> MNIST</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="tf.html"><strong aria-hidden="true">5.</strong> Tensorflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tfjs.html"><strong aria-hidden="true">5.1.</strong> TensorFlow.js</a></li></ol></li><li class="chapter-item expanded "><a href="torch.html"><strong aria-hidden="true">6.</strong> PyTorch</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Transformers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="bert.html"><strong aria-hidden="true">7.1.</strong> BERT</a></li><li class="chapter-item expanded "><a href="GPT.html"><strong aria-hidden="true">7.2.</strong> GPT</a></li><li class="chapter-item expanded "><a href="T5.html"><strong aria-hidden="true">7.3.</strong> T5</a></li><li class="chapter-item expanded "><a href="copilot.html"><strong aria-hidden="true">7.4.</strong> GitHub Copilot</a></li><li class="chapter-item expanded "><a href="chapter_7_ref.html"><strong aria-hidden="true">7.5.</strong> References</a></li></ol></li><li class="chapter-item expanded "><a href="sf_e.html"><strong aria-hidden="true">8.</strong> Salesforce Einstein</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="sf_ml.html"><strong aria-hidden="true">8.1.</strong> Machine Learning</a></li><li class="chapter-item expanded "><a href="sf_nlp.html"><strong aria-hidden="true">8.2.</strong> Natural Language Processing</a></li><li class="chapter-item expanded "><a href="sf_cv.html"><strong aria-hidden="true">8.3.</strong> Computer Vision</a></li></ol></li><li class="chapter-item expanded "><a href="gcp.html"><strong aria-hidden="true">9.</strong> Google Cloud Platform</a></li><li class="chapter-item expanded "><a href="pu.html"><strong aria-hidden="true">10.</strong> Processing Units</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cpu.html"><strong aria-hidden="true">10.1.</strong> CPU</a></li><li class="chapter-item expanded "><a href="gpu.html"><strong aria-hidden="true">10.2.</strong> GPU</a></li><li class="chapter-item expanded "><a href="tpu.html"><strong aria-hidden="true">10.3.</strong> TPU</a></li></ol></li><li class="chapter-item expanded "><a href="ml_pl.html"><strong aria-hidden="true">11.</strong> ML Pipelines</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ml-ops.html"><strong aria-hidden="true">11.1.</strong> ML ops</a></li><li class="chapter-item expanded "><a href="tfs.html"><strong aria-hidden="true">11.2.</strong> TensorFlow Serving</a></li><li class="chapter-item expanded "><a href="tfx.html"><strong aria-hidden="true">11.3.</strong> TensorFlow Extended</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="apache_airflow.html"><strong aria-hidden="true">11.3.1.</strong> Apache Airflow</a></li><li class="chapter-item expanded "><a href="apache_beam.html"><strong aria-hidden="true">11.3.2.</strong> Apache Beam</a></li><li class="chapter-item expanded "><a href="kubeflow.html"><strong aria-hidden="true">11.3.3.</strong> Kubeflow</a></li></ol></li><li class="chapter-item expanded "><a href="automl.html"><strong aria-hidden="true">11.4.</strong> AutoML</a></li><li class="chapter-item expanded "><a href="kubernetes.html"><strong aria-hidden="true">11.5.</strong> Kubernetes</a></li></ol></li><li class="chapter-item expanded "><a href="speedup.html"><strong aria-hidden="true">12.</strong> Speedup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="jax.html"><strong aria-hidden="true">12.1.</strong> JAX</a></li><li class="chapter-item expanded "><a href="closure.html"><strong aria-hidden="true">12.2.</strong> Closures and Decorators</a></li><li class="chapter-item expanded "><a href="jax_ref.html"><strong aria-hidden="true">12.3.</strong> References</a></li></ol></li><li class="chapter-item expanded "><a href="openai.html"><strong aria-hidden="true">13.</strong> OpenAI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="openai-api.html"><strong aria-hidden="true">13.1.</strong> API</a></li><li class="chapter-item expanded "><a href="openai-chat.html"><strong aria-hidden="true">13.2.</strong> Chat</a></li><li class="chapter-item expanded "><a href="openai-summarize.html"><strong aria-hidden="true">13.3.</strong> Summarize</a></li><li class="chapter-item expanded "><a href="openai-tldr.html"><strong aria-hidden="true">13.4.</strong> TLDR</a></li><li class="chapter-item expanded "><a href="open-translate.html"><strong aria-hidden="true">13.5.</strong> Translate</a></li><li class="chapter-item expanded "><a href="openai-codex.html"><strong aria-hidden="true">13.6.</strong> Codex</a></li></ol></li><li class="chapter-item expanded "><a href="inspire.html"><strong aria-hidden="true">14.</strong> Inspirations</a></li><li class="chapter-item expanded "><a href="datasets.html"><strong aria-hidden="true">15.</strong> Datasets</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="datasets/boston.html"><strong aria-hidden="true">15.1.</strong> Boston Housing</a></li></ol></li><li class="chapter-item expanded "><a href="industry/ml-industry.html"><strong aria-hidden="true">16.</strong> Building ML for Industries</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="industry/lfitem-magmt.html"><strong aria-hidden="true">16.1.</strong> Lost-Found Item Management</a></li></ol></li><li class="chapter-item expanded "><a href="hardware/hardware.html"><strong aria-hidden="true">17.</strong> Hardware</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="hardware/raspi.html"><strong aria-hidden="true">17.1.</strong> Raspberry Pi</a></li></ol></li><li class="chapter-item expanded "><a href="conversational-ai.html"><strong aria-hidden="true">18.</strong> Conversational-AI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chatbots.html"><strong aria-hidden="true">18.1.</strong> Chatbots</a></li><li class="chapter-item expanded "><a href="ebot.html"><strong aria-hidden="true">18.2.</strong> Einstein Bots</a></li><li class="chapter-item expanded "><a href="DeepPavlov.html"><strong aria-hidden="true">18.3.</strong> DeepPavlov</a></li><li class="chapter-item expanded "><a href="dialogflow.html" class="active"><strong aria-hidden="true">18.4.</strong> Dialogflow</a></li><li class="chapter-item expanded "><a href="rasa.html"><strong aria-hidden="true">18.5.</strong> Rasa</a></li></ol></li><li class="chapter-item expanded "><a href="transformers.html"><strong aria-hidden="true">19.</strong> Transformers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="transformers/gpt.html"><strong aria-hidden="true">19.1.</strong> GPT</a></li><li class="chapter-item expanded "><a href="transformers/build-gpt.html"><strong aria-hidden="true">19.2.</strong> Building GPT</a></li></ol></li><li class="chapter-item expanded "><a href="tools.html"><strong aria-hidden="true">20.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="iac.html"><strong aria-hidden="true">20.1.</strong> Infrastructure as code</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Machine Learning for Everyone!</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="dialogflow"><a class="header" href="#dialogflow">Dialogflow</a></h1>
+<blockquote>
+<p>Trying to teach a machine to have conversion is not easy!</p>
+</blockquote>
+<blockquote>
+<p>User will ask same thing in a different ways!</p>
+</blockquote>
+<table><thead><tr><th>User Ask</th></tr></thead><tbody>
+<tr><td>What is the forecast tomorrow?</td></tr>
+<tr><td>What is the weather tomorrow?</td></tr>
+<tr><td>What is the weather tomorrow in Boston?</td></tr>
+</tbody></table>
+<blockquote>
+<p>Rule based systems to handle this not manageable! We need Natural Language Understanding (NLU)</p>
+</blockquote>
+<p><img src="img/chatbots/nlu-2.png" alt="nlu" /></p>
+<ul>
+<li>NLU works for both voice and text and with help of ML we can make chatbots really useful!
+<img src="img/chatbots/nlu-ml-1.png" alt="nlu-ml" /></li>
+</ul>
+<p><img src="img/chatbots/dialogflow-1.png" alt="dialogflow" /></p>
+<p>A natural language understanding (NLU) platform that makes it easy to design and integrate a conversational user interface into :</p>
+<ul>
+<li>mobile app</li>
+<li>web application</li>
+<li>device</li>
+<li>bot </li>
+<li>interactive voice response (IVR) system</li>
+</ul>
+<p>Using Dialogflow, you can provide new and <strong>engaging ways for users to interact</strong> with your product.</p>
+<ul>
+<li>
+<p>Translate the Natural Language into machine readable data using ML models trained by the given set of examples.</p>
+</li>
+<li>
+<p>It identifies about what the user is talking about, provides this data to the backend to take actions.</p>
+</li>
+<li>
+<p>The backend performs the actions</p>
+</li>
+</ul>
+<h2 id="steps"><a class="header" href="#steps">Steps</a></h2>
+<ul>
+<li>
+<p>Create an Agent (the chatbot application) within Dialogflow</p>
+<ul>
+<li>Collecting what the <strong>user is saying</strong> and mapping into an <strong>intent</strong></li>
+<li>Taking an action on that intent</li>
+<li>Provide the user with the <strong>response</strong></li>
+</ul>
+</li>
+<li>
+<p>This all starts with a trigger event - <strong>Utterance</strong></p>
+</li>
+<li>
+<p>This is how the user <strong>invokes</strong> the chatbot</p>
+</li>
+</ul>
+<blockquote>
+<p><em>Hey Google, what is the temperature at NY City?</em>  - is an utterance</p>
+</blockquote>
+<blockquote>
+<p><em>Hey Google</em> - is a trigger</p>
+</blockquote>
+<p><img src="img/chatbots/dialogflow-utternce-1.png" alt="dialogflow utterance" /></p>
+<blockquote>
+<p><em>Hey Google, find the current stock of iPads from Inventory Management</em>  - is an utterance</p>
+</blockquote>
+<blockquote>
+<p><em>find the current stock of iPads from Inventory Management</em> is the invocation phase for the chatbot</p>
+</blockquote>
+<blockquote>
+<p><em>Inventory Management</em> is the invocation name</p>
+</blockquote>
+<h3 id="key-idea"><a class="header" href="#key-idea">Key idea</a></h3>
+<ul>
+<li>We need to understand:  <em>what is the user's intent?</em></li>
+</ul>
+<blockquote>
+<p>User says: <em>I want to set an appointment</em></p>
+</blockquote>
+<blockquote>
+<p><em>set an appointment</em> is the <strong>intent</strong></p>
+</blockquote>
+<hr />
+<blockquote>
+<p>User says: <em>what are your hours of operation</em></p>
+</blockquote>
+<blockquote>
+<p><em>hours of operation</em> is the <strong>intent</strong></p>
+</blockquote>
+<ul>
+<li>We provide Diagflow the different examples of user's intents
+<ul>
+<li>Diagflow trains a ML model with many more similar phrases 
+<ul>
+<li>maps the <strong>user phrases</strong> into the <strong>right intent</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="intent-matching"><a class="header" href="#intent-matching">Intent Matching</a></h3>
+<table><thead><tr><th>Training Phrase</th><th>Intent</th><th>Action and Parameters</th></tr></thead><tbody>
+<tr><td>I want to set an appointment</td><td>set an appointment</td><td><code>set_appointment()</code></td></tr>
+<tr><td>what are your hours of operation</td><td>hours of operation</td><td><code>get_hoursOfOperation()</code></td></tr>
+</tbody></table>
+<ul>
+<li>Parameters define <strong>variables</strong> we need to <strong>collect and store</strong></li>
+</ul>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<table><thead><tr><th>User Phrase</th><th>Intent</th><th>Entities</th><th>Action and Parameters</th><th>Backend</th></tr></thead><tbody>
+<tr><td>I want to set an appointment at 10am tomorrow</td><td>set an appointment</td><td>10am, tomorrow</td><td><code>set_appointment(&quot;10&quot;, &quot;tomorrow)</code></td><td>Provide a dynamic response</td></tr>
+<tr><td>Good Morning</td><td>greeting</td><td></td><td><code>greet()</code></td><td>Provide a static response: <em>I am doing well</em></td></tr>
+</tbody></table>
+<h3 id="context"><a class="header" href="#context">Context</a></h3>
+<ul>
+<li>is the method for the chatbot to store and access <strong>variables</strong>  so it can <strong>exchange</strong> information from one intent to another in a conversation.</li>
+</ul>
+<h2 id="dialogflow-types-of-entities"><a class="header" href="#dialogflow-types-of-entities">Dialogflow types of entities</a></h2>
+<ul>
+<li></li>
+</ul>
+<h2 id="play-with-dialogflow"><a class="header" href="#play-with-dialogflow">Play with Dialogflow</a></h2>
+<ul>
+<li>
+<p>Dialogflow creates GCP project to access logs and Cloud functions</p>
+</li>
+<li>
+<p>Intents are mappings between a user's queries and actions fulfilled by your software. </p>
+</li>
+</ul>
+<blockquote>
+<p>User: good morning!</p>
+</blockquote>
+<blockquote>
+<p>Bot: Hi! How are you doing?</p>
+</blockquote>
+<p>User|Bot|Intent|Action|Sentiment|
+---|---|
+good morning!|Hi! How are you doing?|Default Welcome Intent|input.welcome|Query Score: 0.9|
+weather in Boston now|Sorry, what was that?|Default Fallback Intent|input.unknown|Query Score: 0.1|</p>
+<ul>
+<li>Resource URL</li>
+</ul>
+<pre><code> https://dialogflow.googleapis.com/v2/projects/appointmentscheduler-kjsl/agent/sessions/bcef58f8-e2ad-0641-7655-06f1945f3713:detectIntent
+
+</code></pre>
+<ul>
+<li>Request Payload</li>
+</ul>
+<pre><code class="language-json">{
+  &quot;queryInput&quot;: {
+    &quot;text&quot;: {
+      &quot;text&quot;: &quot;good morning!&quot;,
+      &quot;languageCode&quot;: &quot;en&quot;
+    }
+  },
+  &quot;queryParams&quot;: {
+    &quot;source&quot;: &quot;DIALOGFLOW_CONSOLE&quot;,
+    &quot;timeZone&quot;: &quot;America/New_York&quot;,
+    &quot;sentimentAnalysisRequestConfig&quot;: {
+      &quot;analyzeQueryTextSentiment&quot;: true
+    }
+  }
+}
+</code></pre>
+<ul>
+<li>Response</li>
+</ul>
+<pre><code class="language-json">
+{
+  &quot;responseId&quot;: &quot;0d8654f4-6b6e-4ac5-b99c-1054bcc653b3-e9fa6883&quot;,
+  &quot;queryResult&quot;: {
+    &quot;queryText&quot;: &quot;good morning!&quot;,
+    &quot;action&quot;: &quot;input.welcome&quot;,
+    &quot;parameters&quot;: {},
+    &quot;allRequiredParamsPresent&quot;: true,
+    &quot;fulfillmentText&quot;: &quot;Hello! How can I help you?&quot;,
+    &quot;fulfillmentMessages&quot;: [
+      {
+        &quot;text&quot;: {
+          &quot;text&quot;: [
+            &quot;Hello! How can I help you?&quot;
+          ]
+        }
+      }
+    ],
+    &quot;intent&quot;: {
+      &quot;name&quot;: &quot;projects/appointmentscheduler-kjsl/agent/intents/ef927e0a-b805-4ada-9936-90aa79d710a5&quot;,
+      &quot;displayName&quot;: &quot;Default Welcome Intent&quot;
+    },
+    &quot;intentDetectionConfidence&quot;: 0.4507024,
+    &quot;languageCode&quot;: &quot;en&quot;,
+    &quot;sentimentAnalysisResult&quot;: {
+      &quot;queryTextSentiment&quot;: {
+        &quot;score&quot;: 0.9,
+        &quot;magnitude&quot;: 0.9
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="response-for-weather-in-boston-now"><a class="header" href="#response-for-weather-in-boston-now">Response for &quot;weather in Boston now&quot;</a></h3>
+<pre><code class="language-json">{
+  &quot;responseId&quot;: &quot;1dbd8e9d-3440-40e6-9605-67e84e7b2b0c-e9fa6883&quot;,
+  &quot;queryResult&quot;: {
+    &quot;queryText&quot;: &quot;weather in Boston now&quot;,
+    &quot;action&quot;: &quot;input.unknown&quot;,
+    &quot;parameters&quot;: {},
+    &quot;allRequiredParamsPresent&quot;: true,
+    &quot;fulfillmentText&quot;: &quot;Say that one more time?&quot;,
+    &quot;fulfillmentMessages&quot;: [
+      {
+        &quot;text&quot;: {
+          &quot;text&quot;: [
+            &quot;Say that one more time?&quot;
+          ]
+        }
+      }
+    ],
+    &quot;outputContexts&quot;: [
+      {
+        &quot;name&quot;: &quot;projects/appointmentscheduler-kjsl/agent/sessions/bcef58f8-e2ad-0641-7655-06f1945f3713/contexts/__system_counters__&quot;,
+        &quot;lifespanCount&quot;: 1,
+        &quot;parameters&quot;: {
+          &quot;no-match&quot;: 2,
+          &quot;no-input&quot;: 0
+        }
+      }
+    ],
+    &quot;intent&quot;: {
+      &quot;name&quot;: &quot;projects/appointmentscheduler-kjsl/agent/intents/40d635ef-6274-4141-b6b3-7971c6866f53&quot;,
+      &quot;displayName&quot;: &quot;Default Fallback Intent&quot;,
+      &quot;isFallback&quot;: true
+    },
+    &quot;intentDetectionConfidence&quot;: 1,
+    &quot;languageCode&quot;: &quot;en&quot;,
+    &quot;sentimentAnalysisResult&quot;: {
+      &quot;queryTextSentiment&quot;: {
+        &quot;score&quot;: 0.1,
+        &quot;magnitude&quot;: 0.1
+      }
+    }
+  }
+}
+</code></pre>
+<h2 id="create-intent---schedule-appointment"><a class="header" href="#create-intent---schedule-appointment">Create Intent - Schedule Appointment</a></h2>
+<ul>
+<li>Train the intent with what your users will say</li>
+<li>Provide examples of how users will express their intent in natural language. </li>
+<li>Adding <strong>numerous phrases</strong> with different <strong>variations and parameters</strong> will improve the <strong>accuracy</strong> of intent matching.</li>
+</ul>
+<table><thead><tr><th>Intent training phrase</th><th>Parameter Name</th><th>Entity</th><th>Resolved Value</th></tr></thead><tbody>
+<tr><td>set an appointment on Friday at 10 am</td><td>date-time</td><td>@sys.data-time</td><td>Friday at 10 am</td></tr>
+</tbody></table>
+<h3 id="response-for"><a class="header" href="#response-for">Response for</a></h3>
+<pre><code>set an appointment on Tuesday at 9 am
+
+</code></pre>
+<pre><code class="language-json">{
+  &quot;responseId&quot;: &quot;676ca009-4f19-4e68-ac50-4f8db3c07fca-e9fa6883&quot;,
+  &quot;queryResult&quot;: {
+    &quot;queryText&quot;: &quot;set an appointment on Tuesday at 9 am&quot;,
+    &quot;parameters&quot;: {
+      &quot;date-time&quot;: {
+        &quot;date_time&quot;: &quot;2022-01-04T09:00:00-05:00&quot;
+      }
+    },
+    &quot;allRequiredParamsPresent&quot;: true,
+    &quot;fulfillmentText&quot;: &quot;You all set for the appointment at  2022-01-04T09:00:00&quot;,
+    &quot;fulfillmentMessages&quot;: [
+      {
+        &quot;text&quot;: {
+          &quot;text&quot;: [
+            &quot;You all set for the appointment at  2022-01-04T09:00:00&quot;
+          ]
+        }
+      }
+    ],
+    &quot;intent&quot;: {
+      &quot;name&quot;: &quot;projects/appointmentscheduler-kjsl/agent/intents/95898256-556e-4e53-a7af-a595e9f8ff7f&quot;,
+      &quot;displayName&quot;: &quot;Schedule Appointment&quot;
+    },
+    &quot;intentDetectionConfidence&quot;: 1,
+    &quot;languageCode&quot;: &quot;en&quot;,
+    &quot;sentimentAnalysisResult&quot;: {
+      &quot;queryTextSentiment&quot;: {}
+    }
+  }
+}
+</code></pre>
+<table><thead><tr><th>User</th><th>Bot</th><th>Intent</th><th>Action</th><th>Sentiment</th><th>Comments</th></tr></thead><tbody>
+<tr><td>set an appointment on Tuesday at 9 am</td><td>You all set for the appointment at 2022-01-04T09:00:00</td><td>Schedule Appointment</td><td>Not Available, Parameter:<code>date-time</code>, Value:<code>{ &quot;date_time&quot;: &quot;2022-01-04T09:00:00-05:00&quot; }</code></td><td>Query Score: 0.0</td><td></td></tr>
+<tr><td>set an appointment</td><td>Not Available</td><td>Schedule Appointment</td><td>Not Available, Parameter:<code>date-time</code>, Value:<code> </code></td><td>Query Score: 0.0</td><td>missing <code>date-time</code>, requires <strong>slot filling</strong></td></tr>
+</tbody></table>
+<h3 id="slot-filling"><a class="header" href="#slot-filling">Slot filling</a></h3>
+<ul>
+<li>Make the entities as <strong>required</strong>
+<ul>
+<li>Dialog flow will make sure it ask both date and time before it can respond back</li>
+</ul>
+</li>
+</ul>
+<table><thead><tr><th>User</th><th>Bot</th><th>Intent</th><th>Action</th><th>Sentiment</th><th>Comments</th></tr></thead><tbody>
+<tr><td>set an appointment</td><td>What time and date you like to come in for the appointment?</td><td>Schedule Appointment</td><td>Not Available, Parameter:<code>date-time</code>, Value:<code> </code></td><td>Query Score: 0.0</td><td>missing <code>date-time</code>, requires <strong>slot filling prompt is asked</strong></td></tr>
+<tr><td>Monday 10 am</td><td>You all set for the appointment at 2022-01-03T10:00:00</td><td>Schedule Appointment</td><td>Not Available, Parameter:<code>date-time</code>, Value:<code>{ &quot;date_time&quot;: &quot;2022-01-04T09:00:00-05:00&quot; }</code></td><td>Query Score: 0.0</td><td><code>date-time</code> is provided by the user</td></tr>
+</tbody></table>
+<h3 id="testing-in-our-app"><a class="header" href="#testing-in-our-app">Testing in our app</a></h3>
+<ul>
+<li>Create a sample webapp using SFDX CLI</li>
+</ul>
+<pre><code>sfdx mohanc:app:webapp:gen -i /tmp/app.md -o df-appt.html \ 
+                           -t 'Dialogflow Appointment testing app'
+</code></pre>
+<ul>
+<li>Demo
+<img src="img/chatbots/df-app-test.webm.gif" alt="testing Dialog flow Demo" /></li>
+</ul>
+<h2 id="dialog-flow-integration-with-dialogflow-messenger"><a class="header" href="#dialog-flow-integration-with-dialogflow-messenger">Dialog flow Integration with Dialogflow Messenger</a></h2>
+<pre><code>
+&lt;script src=&quot;https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1&quot;&gt;&lt;/script&gt;
+&lt;df-messenger
+  intent=&quot;WELCOME&quot;
+  chat-title=&quot;AppointmentScheduler&quot;
+  agent-id=&quot;d6e07c45-1523-4102-bf80-8fea7caf3caa&quot;
+  language-code=&quot;en&quot;
+&gt;&lt;/df-messenger&gt;
+
+</code></pre>
+<ul>
+<li>Demo</li>
+</ul>
+<p><img src="img/chatbots/df-appt-messenger-1.webm.gif" alt="testing with Dialogflow Messenger flow Demo" /></p>
+<h2 id="entities"><a class="header" href="#entities">Entities</a></h2>
+<ul>
+<li>System </li>
+</ul>
+<pre><code>@sys.date
+@sys.time
+@sys.number
+@sys.unit-currency
+@sys.percentage
+@sys.address
+@sys.phone-number
+@sys.email
+@sys.color
+
+</code></pre>
+<ul>
+<li>Developer</li>
+<li>Session</li>
+</ul>
+<h3 id="adding-developer-entity"><a class="header" href="#adding-developer-entity">Adding Developer Entity</a></h3>
+<table><thead><tr><th>Entity Name</th><th>Value</th><th>Synonyms</th></tr></thead><tbody>
+<tr><td>AppointmentType</td><td>Car Inspection</td><td>State Inspection, Vehicle Inspection</td></tr>
+<tr><td>AppointmentType</td><td>Scheduled Maintenance</td><td>6 months Maintenance, Yearly Maintenance</td></tr>
+</tbody></table>
+<p><img src="img/chatbots/df-setting-up-appt-type-0.png" alt="setting up appointment type" />
+<img src="img/chatbots/df-setting-up-appt-type-1.png" alt="setting up appointment type" />
+<img src="img/chatbots/df-setting-up-appt-type-2.png" alt="setting up appointment type" /></p>
+<ul>
+<li>Demo - slot filling</li>
+</ul>
+<p><img src="img/chatbots/df-appt-type-1.png" alt="Demo appointment type" /></p>
+<p><img src="img/chatbots/df-appt-type-2.png" alt="Demo appointment type-2" /></p>
+<ul>
+<li>Session Entity
+<ul>
+<li>Session ID</li>
+<li>Have the information collected from the user from the rest of the conversion</li>
+<li>Say, we can ask the user for the Vehicle Type  and get Toyota Camry, this value will be kept in the rest of the conversion</li>
+</ul>
+</li>
+</ul>
+<h2 id="integration-options"><a class="header" href="#integration-options">Integration options</a></h2>
+<ul>
+<li>One-click telephony BETA
+<ul>
+<li>Dialogflow Phone Gateway BETA</li>
+<li>Avaya</li>
+<li>SignalWire</li>
+<li>Voximplant</li>
+<li>AudioCodes</li>
+<li>Twilio</li>
+</ul>
+</li>
+</ul>
+<p><img src="img/chatbots/df-twilio-1.png" alt="Twilio Messaging Service" /></p>
+<ul>
+<li>
+<p>Telephony</p>
+<ul>
+<li>Genesys</li>
+<li>Twilio</li>
+</ul>
+</li>
+<li>
+<p>Text Based</p>
+<ul>
+<li>Web Demo</li>
+<li>Dialogflow Messenger BETA</li>
+<li>Messenger from Facebook</li>
+<li>Workplace from Facebook BETA</li>
+<li>Slack</li>
+<li>Telegram</li>
+<li>LINE</li>
+</ul>
+</li>
+</ul>
+<h2 id="fulfillment---integration-with-google-calendar"><a class="header" href="#fulfillment---integration-with-google-calendar">Fulfillment - Integration with Google Calendar</a></h2>
+<table><thead><tr><th>Intent</th><th>Fulfillment</th><th>Comments</th></tr></thead><tbody>
+<tr><td>Intent-1</td><td>BizLogic-1</td><td></td></tr>
+<tr><td>Intent-2</td><td>BizLogic-2</td><td></td></tr>
+</tbody></table>
+<p><img src="img/chatbots/df-fulfillment-1.png" alt="fulfillment" /></p>
+<ul>
+<li>webhook into Google Calendar</li>
+</ul>
+<blockquote>
+<p>The web service (in our case Google Calendar) will receive a POST request from Dialogflow in the form of the response to a user query matched by intents with webhook enabled. </p>
+</blockquote>
+<pre><code class="language-json">
+{
+  &quot;type&quot;: &quot;service_account&quot;,
+  &quot;project_id&quot;: &quot;projectid&quot;,
+  &quot;private_key_id&quot;: &quot;sk id here&quot;,
+  &quot;private_key&quot;: &quot;sk here&quot;,
+  &quot;client_email&quot;: &quot;appointmentscheduler-kjsl@appspot.gserviceaccount.com&quot;,
+  &quot;client_id&quot;: &quot;102792484459978676466&quot;,
+  &quot;auth_uri&quot;: &quot;https://accounts.google.com/o/oauth2/auth&quot;,
+  &quot;token_uri&quot;: &quot;https://oauth2.googleapis.com/token&quot;,
+  &quot;auth_provider_x509_cert_url&quot;: &quot;https://www.googleapis.com/oauth2/v1/certs&quot;,
+  &quot;client_x509_cert_url&quot;: &quot;https://www.googleapis.com/robot/v1/metadata/x509/xyz-kjsl%40appspot.gserviceaccount.com&quot;
+}
+
+
+</code></pre>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;dialogflowFirebaseFulfillment&quot;,
+  &quot;description&quot;: &quot;This is the default fulfillment for a Dialogflow agents using Cloud Functions for Firebase&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;private&quot;: true,
+  &quot;license&quot;: &quot;Apache Version 2.0&quot;,
+  &quot;author&quot;: &quot;Google Inc.&quot;,
+  &quot;engines&quot;: {
+    &quot;node&quot;: &quot;10&quot;
+  },
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;firebase serve --only functions:dialogflowFirebaseFulfillment&quot;,
+    &quot;deploy&quot;: &quot;firebase deploy --only functions:dialogflowFirebaseFulfillment&quot;
+  },
+  &quot;dependencies&quot;: {
+    &quot;actions-on-google&quot;: &quot;^2.2.0&quot;,
+    &quot;firebase-admin&quot;: &quot;^5.13.1&quot;,
+    &quot;firebase-functions&quot;: &quot;^2.0.2&quot;,
+    &quot;dialogflow&quot;: &quot;^0.6.0&quot;,
+    &quot;dialogflow-fulfillment&quot;: &quot;^0.5.0&quot;
+  }
+}
+</code></pre>
+<pre><code class="language-js">/**
+ * Copyright 2017 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ 'use strict';
+
+ const functions = require('firebase-functions');
+ const {google} = require('googleapis');
+ const {WebhookClient} = require('dialogflow-fulfillment');
+ 
+ // Enter your calendar ID below and service account JSON below
+ const calendarId = &quot;xyx@group.calendar.google.com&quot;;
+ const serviceAccount = &quot;xyx-kjsl@appspot.gserviceaccount.com&quot;; // Starts with {&quot;type&quot;: &quot;service_account&quot;,...
+ 
+ // Set up Google Calendar Service account credentials
+ const serviceAccountAuth = new google.auth.JWT({
+   email: serviceAccount.client_email,
+   key: serviceAccount.private_key,
+   scopes: 'https://www.googleapis.com/auth/calendar'
+ });
+ 
+ const calendar = google.calendar('v3');
+ process.env.DEBUG = 'dialogflow:*'; // enables lib debugging statements
+ 
+ const timeZone = 'America/New_York';
+ const timeZoneOffset = '-05:00';
+ 
+ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) =&gt; {
+   const agent = new WebhookClient({ request, response });
+   console.log(&quot;Parameters&quot;, agent.parameters);
+   const appointment_type = agent.parameters.AppointmentType
+   function makeAppointment (agent) {
+     // Calculate appointment start and end datetimes (end = +1hr from start)
+     //console.log(&quot;Parameters&quot;, agent.parameters.date);
+     const dateTimeStart = new Date(Date.parse(agent.parameters.date.split('T')[0] + 'T' + agent.parameters.time.split('T')[1].split('-')[0] + timeZoneOffset));
+     const dateTimeEnd = new Date(new Date(dateTimeStart).setHours(dateTimeStart.getHours() + 1));
+     const appointmentTimeString = dateTimeStart.toLocaleString(
+       'en-US',
+       { month: 'long', day: 'numeric', hour: 'numeric', timeZone: timeZone }
+     );
+ 
+     // Check the availibility of the time, and make an appointment if there is time on the calendar
+     return createCalendarEvent(dateTimeStart, dateTimeEnd, appointment_type).then(() =&gt; {
+       agent.add(`Ok, let me see if we can fit you in. ${appointmentTimeString} is fine!.`);
+     }).catch(() =&gt; {
+       agent.add(`I'm sorry, there are no slots available for ${appointmentTimeString}.`);
+     });
+   }
+ 
+   let intentMap = new Map();
+   intentMap.set('Schedule Appointment', makeAppointment);
+   agent.handleRequest(intentMap);
+ });
+ 
+ 
+ 
+ function createCalendarEvent (dateTimeStart, dateTimeEnd, appointment_type) {
+   return new Promise((resolve, reject) =&gt; {
+     calendar.events.list({
+       auth: serviceAccountAuth, // List events for time period
+       calendarId: calendarId,
+       timeMin: dateTimeStart.toISOString(),
+       timeMax: dateTimeEnd.toISOString()
+     }, (err, calendarResponse) =&gt; {
+       // Check if there is a event already on the Calendar
+       if (err || calendarResponse.data.items.length &gt; 0) {
+         reject(err || new Error('Requested time conflicts with another appointment'));
+       } else {
+         // Create event for the requested time period
+         calendar.events.insert({ auth: serviceAccountAuth,
+           calendarId: calendarId,
+           resource: {summary: appointment_type +' Appointment', description: appointment_type,
+             start: {dateTime: dateTimeStart},
+             end: {dateTime: dateTimeEnd}}
+         }, (err, event) =&gt; {
+           err ? reject(err) : resolve(event);
+         }
+         );
+       }
+     });
+   });
+ }
+</code></pre>
+<h2 id="dialogflow-integration-with-google-assistant-actions"><a class="header" href="#dialogflow-integration-with-google-assistant-actions">Dialogflow Integration with Google Assistant Actions</a></h2>
+<ul>
+<li>Actions in Google
+<ul>
+<li>Way to extend the functionality of Google Assistant</li>
+<li>We can reach 500 million devices that support Google Assistant
+<ul>
+<li>Smart speakers</li>
+<li>Phones</li>
+<li>Cars</li>
+<li>TVs</li>
+<li>Watches</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="knowledge-base-support-in-dialogflow-chatbots"><a class="header" href="#knowledge-base-support-in-dialogflow-chatbots">Knowledge Base Support in Dialogflow chatbots</a></h2>
+<p><img src="img/chatbots/df-kb-1.png" alt="Df knowledge setup" /></p>
+<ul>
+<li>Demo
+<img src="img/chatbots/dialog-kb-test.webm.gif" alt="Demo of KB with Dialogflow" /></li>
+</ul>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J8ttQ1Veo_I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 id="django-frontend"><a class="header" href="#django-frontend">Django frontend</a></h2>
+<p><img src="https://github.com/priyankavergadia/Django-Dialogflow-Appointment-Scheduler/raw/master/Architecture-image.png" alt="Django Dialogflow Appointment Scheduler" /></p>
+<ul>
+<li><a href="https://github.com/priyankavergadia/Django-Dialogflow-Appointment-Scheduler">Django Dialogflow Appointment Scheduler</a></li>
+</ul>
+<h2 id="integration-with-google-cloud-ml"><a class="header" href="#integration-with-google-cloud-ml">Integration with Google Cloud ML</a></h2>
+<p><img src="img/chatbots/df-ml-1.png" alt="DF integration with ML" /></p>
+<h2 id="dialogflow-cxhttpsdialogflowcloudgooglecomcxprojects"><a class="header" href="#dialogflow-cxhttpsdialogflowcloudgooglecomcxprojects">Dialogflow (CX](https://dialogflow.cloud.google.com/cx/projects)</a></h2>
+<p><img src="img/chatbots/dfcx-vb-1.png" alt="Visual Flow Builder" />
+<img src="img/chatbots/dfcx-arch-1.png" alt="CX arch" /></p>
+<h2 id="references"><a class="header" href="#references">References</a></h2>
+<ul>
+<li><a href="https://cloud.google.com/dialogflow/docs/">Dialogflow</a></li>
+</ul>
+<h2 id="videos"><a class="header" href="#videos">Videos</a></h2>
+<ul>
+<li>What is Dialog flow</li>
+</ul>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Ov3CDTxZRQc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<ul>
+<li>Intents, Prompts, Appointment Builder</li>
+</ul>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oU88sHd6ilE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 id="references-1"><a class="header" href="#references-1">References</a></h2>
+<ul>
+<li><a href="https://cloud.google.com/dialogflow/docs/">Dialogflow</a></li>
+<li><a href="https://github.com/asrivas/SmartAccountsBot">Integration with Sheets API</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="DeepPavlov.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="rasa.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="DeepPavlov.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="rasa.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:5000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

@@ -1,0 +1,964 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ETL with Spark</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="scala.html"><strong aria-hidden="true">2.</strong> Scala</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ETL with Spark</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="chapter-1---introduction-to-spark"><a class="header" href="#chapter-1---introduction-to-spark">Chapter 1 - Introduction to Spark</a></h1>
+<h2 id="data-sources-connectivity"><a class="header" href="#data-sources-connectivity">Data Sources Connectivity</a></h2>
+<p><img src="img/sparkml-1.png" alt="spark -1" /></p>
+<h2 id="databricks-notebook"><a class="header" href="#databricks-notebook">Databricks notebook</a></h2>
+<pre><code>%run ./Mount-Datasets
+
+
+</code></pre>
+<h2 id="parquet"><a class="header" href="#parquet">Parquet</a></h2>
+<p>Parquet is an open source file format built to handle <strong>flat columnar storage data formats</strong>.</p>
+<ul>
+<li>
+<p>Operates well with complex data in large volumes.</p>
+</li>
+<li>
+<p>It is known for its both <em>performant data compression</em> and its ability to handle a wide variety of <em>encoding</em> types. </p>
+</li>
+<li>
+<p>Deploys Google's <em>record-shredding and assembly algorithm</em> that can address complex data structures within data storage. </p>
+</li>
+<li>
+<p>Some Parquet benefits include:</p>
+<ul>
+<li>
+<p>Fast queries that can <em>fetch specific column values</em> without reading full row data</p>
+</li>
+<li>
+<p>Highly efficient column-wise compression</p>
+</li>
+<li>
+<p>High compatibility with with <strong>OLAP</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="parquet-vs-csv"><a class="header" href="#parquet-vs-csv">Parquet vs CSV</a></h3>
+<ul>
+<li>
+<p>CSV is simple and the most widely used data format. Row oriented format</p>
+</li>
+<li>
+<p>Parquet is column oriented</p>
+</li>
+<li>
+<p>Row-oriented formats are optimized for <strong>OLTP</strong> workloads</p>
+</li>
+<li>
+<p>Column-oriented formats are better suited for <strong>analytical</strong> workloads.</p>
+</li>
+<li>
+<p>Column-oriented databases such as AWS Redshift Spectrum bill by the <strong>amount data scanned per query</strong></p>
+<ul>
+<li>Therefore, converting CSV to Parquet with partitioning and compression <strong>lowers overall costs</strong> and improves performance</li>
+</ul>
+</li>
+<li>
+<p>Parquet has helped its users reduce storage requirements by at least <strong>one-third on large datasets</strong>, in addition, it greatly improves <strong>scan and de-serialization time</strong>, hence the overall costs.</p>
+</li>
+</ul>
+<h3 id="data"><a class="header" href="#data">Data</a></h3>
+<table><thead><tr><th>Name</th><th>Qty</th><th>State</th></tr></thead><tbody>
+<tr><td>Apple</td><td>100</td><td>NH</td></tr>
+<tr><td>Pear</td><td>200</td><td>MA</td></tr>
+<tr><td>Peach</td><td>400</td><td>CA</td></tr>
+</tbody></table>
+<ul>
+<li>Row-Oriented Store</li>
+</ul>
+<table><thead><tr><th>RowID</th><th>Value</th></tr></thead><tbody>
+<tr><td>Row#1</td><td>Apple</td></tr>
+<tr><td>Row#1</td><td>100</td></tr>
+<tr><td>Row#1</td><td>NH</td></tr>
+<tr><td>---</td><td>---</td></tr>
+<tr><td>Row#2</td><td>Pear</td></tr>
+<tr><td>Row#2</td><td>100</td></tr>
+<tr><td>Row#2</td><td>MA</td></tr>
+<tr><td>---</td><td>---</td></tr>
+<tr><td>Row#3</td><td>Peach</td></tr>
+<tr><td>Row#3</td><td>400</td></tr>
+<tr><td>Row#3</td><td>CA</td></tr>
+</tbody></table>
+<ul>
+<li>Col-Oriented Store</li>
+</ul>
+<table><thead><tr><th>Col</th><th>Value</th></tr></thead><tbody>
+<tr><td>Name</td><td>Apple</td></tr>
+<tr><td>Name</td><td>Pear</td></tr>
+<tr><td>Name</td><td>Peach</td></tr>
+<tr><td>---</td><td>---</td></tr>
+<tr><td>Qty</td><td>100</td></tr>
+<tr><td>Qty</td><td>200</td></tr>
+<tr><td>Qty</td><td>400</td></tr>
+<tr><td>---</td><td>---</td></tr>
+<tr><td>State</td><td>NH</td></tr>
+<tr><td>State</td><td>MA</td></tr>
+<tr><td>State</td><td>CA</td></tr>
+</tbody></table>
+<h2 id="working-with-parquet-file-example"><a class="header" href="#working-with-parquet-file-example">Working with Parquet file example</a></h2>
+<pre><code class="language-scala">
+
+val data = Seq((&quot;Apple&quot;,100, &quot;NH&quot;),
+              (&quot;Pear&quot;,200,   &quot;MA&quot;),
+              (&quot;Peach&quot;,400,  &quot;CA&quot;)
+)
+              
+val columns = Seq(&quot;name&quot;,&quot;qty&quot;,&quot;state&quot;)
+
+import spark.sqlContext.implicits._
+// data to dataFrame
+val df = data.toDF(columns:_*)
+
+// look at the df
+df.show()
+df.printSchema()
+
+
+val fruitsFile = &quot;/tmp/fruits.parquet&quot;
+// write this dataFrame to parquet file
+df.write.parquet(fruitsFile)
+
+// reading this parquet file into a dataFrame
+val fruitsDF = df.read.parquet(fruitsFile)
+
+ 
+// SQL queries on parquet file
+fruitsDF.createOrReplaceTempView(&quot;FruitsParquetTable&quot;)
+val parkSQL = spark.sql(&quot;SELECT * FROM FruitsParquetTable WHERE qty &gt;= 10 &quot;)
+
+
+
+
+
+</code></pre>
+<h2 id="spark-mllib"><a class="header" href="#spark-mllib">Spark MLlib</a></h2>
+<ul>
+<li>MLlib is Apache Spark's scalable machine learning library. </li>
+</ul>
+<iframe width="800" height="420" src="https://www.youtube.com/embed/DqihOzZl5jM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 id="transformers-and-estimators"><a class="header" href="#transformers-and-estimators">Transformers and Estimators</a></h2>
+<ul>
+<li><a href="https://spark.apache.org/docs/latest/ml-guide.html">Spark ML Programming Guide</a></li>
+</ul>
+<h3 id="stringindexer"><a class="header" href="#stringindexer"><a href="https://spark.apache.org/docs/3.2.0/ml-features.html#stringindexer">StringIndexer</a></a></h3>
+<table><thead><tr><th>id</th><th>category</th></tr></thead><tbody>
+<tr><td>0</td><td>apple</td></tr>
+<tr><td>1</td><td>mango</td></tr>
+<tr><td>2</td><td>peach</td></tr>
+<tr><td>3</td><td>apple</td></tr>
+<tr><td>4</td><td>apple</td></tr>
+<tr><td>5</td><td>peach</td></tr>
+</tbody></table>
+<p>category is a string column with three labels: “apple”, “mango”, and “peach”. 
+Applying <strong>StringIndexer</strong> with category as the input column and categoryIndex as the output column, we should get the following:</p>
+<table><thead><tr><th>id</th><th>category</th><th>categoryIndex</th></tr></thead><tbody>
+<tr><td>0</td><td>apple</td><td>0.0</td></tr>
+<tr><td>1</td><td>mango</td><td>2.0</td></tr>
+<tr><td>2</td><td>peach</td><td>1.0</td></tr>
+<tr><td>3</td><td>apple</td><td>0.0</td></tr>
+<tr><td>4</td><td>apple</td><td>0.0</td></tr>
+<tr><td>5</td><td>peach</td><td>1.0</td></tr>
+</tbody></table>
+<pre><code class="language-scala">
+import org.apache.spark.ml.feature.StringIndexer
+
+val df = spark.createDataFrame(
+ Seq((0, &quot;apple&quot;), (1, &quot;mango&quot;), (2, &quot;peach&quot;), (3, &quot;apple&quot;), (4, &quot;apple&quot;), (5, &quot;peach&quot;))
+).toDF(&quot;id&quot;, &quot;category&quot;)
+
+val indexer = new StringIndexer()
+ .setInputCol(&quot;category&quot;)
+ .setOutputCol(&quot;categoryIndex&quot;)
+
+val indexed = indexer.fit(df).transform(df)
+indexed.show()
+
+</code></pre>
+<h3 id="onehotencoder"><a class="header" href="#onehotencoder">OneHotEncoder</a></h3>
+<ul>
+<li>maps a categorical feature, represented as a label index, to a binary vector with at most a single one-value indicating the <strong>presence of a specific feature value</strong> from among the set of all feature values.</li>
+</ul>
+<pre><code class="language-scala">
+import org.apache.spark.ml.feature.OneHotEncoder
+
+val df = spark.createDataFrame(Seq(
+  (0.0, 1.0),
+  (1.0, 0.0),
+  (2.0, 1.0),
+  (0.0, 2.0),
+  (0.0, 1.0),
+  (2.0, 0.0)
+)).toDF(&quot;categoryIndex1&quot;, &quot;categoryIndex2&quot;)
+
+// setup encoder - OneHotEncoder
+val encoder = new OneHotEncoder()
+  .setInputCols(Array(&quot;categoryIndex1&quot;, &quot;categoryIndex2&quot;))
+  .setOutputCols(Array(&quot;categoryVec1&quot;, &quot;categoryVec2&quot;))
+
+// fit it 
+val model = encoder.fit(df)
+
+// transform the df
+val encoded = model.transform(df)
+
+encoded.show()
+
+</code></pre>
+<h3 id="vectorassembler"><a class="header" href="#vectorassembler">VectorAssembler</a></h3>
+<p>Spark ML  works on single column instead of array columns.</p>
+<p>VectorAssembler is a transformer that combines a <strong>given list of columns</strong> into a <strong>single vector column</strong>. - It is useful for combining raw features and features generated by different feature transformers into a single feature vector, in order to train ML models like logistic regression and decision trees. </p>
+<ul>
+<li>VectorAssembler accepts the following input column types:
+<ul>
+<li>all numeric types, boolean type, and vector type. </li>
+<li>In each row, the values of the input columns will be concatenated into a vector in the specified order.</li>
+</ul>
+</li>
+</ul>
+<table><thead><tr><th>id</th><th>hour</th><th>mobile</th><th>userFeatures</th><th>clicked</th></tr></thead><tbody>
+<tr><td>0</td><td>18</td><td>1.0</td><td>[0.0, 10.0, 0.5]</td><td>1.0</td></tr>
+</tbody></table>
+<table><thead><tr><th>id</th><th>hour</th><th>mobile</th><th>userFeatures</th><th>clicked</th><th>features</th></tr></thead><tbody>
+<tr><td>0</td><td>18</td><td>1.0</td><td>[0.0, 10.0, 0.5]</td><td>1.0</td><td>[18.0, 1.0, 0.0, 10.0, 0.5]</td></tr>
+</tbody></table>
+<pre><code class="language-scala">
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.linalg.Vectors
+
+val dataset = spark.createDataFrame(
+  Seq((0, 18, 1.0, Vectors.dense(0.0, 10.0, 0.5), 1.0))
+).toDF(&quot;id&quot;, &quot;hour&quot;, &quot;mobile&quot;, &quot;userFeatures&quot;, &quot;clicked&quot;)
+
+val assembler = new VectorAssembler()
+  .setInputCols(Array(&quot;hour&quot;, &quot;mobile&quot;, &quot;userFeatures&quot;))
+  .setOutputCol(&quot;features&quot;) // output column
+
+val output = assembler.transform(dataset) // transform the dataset
+
+println(&quot;Assembled columns 'hour', 'mobile', 'userFeatures' to vector column 'features'&quot;)
+output.select(&quot;features&quot;, &quot;clicked&quot;).show(false)
+
+</code></pre>
+<h3 id="vectorindexer"><a class="header" href="#vectorindexer">VectorIndexer</a></h3>
+<h3 id="linear-regression"><a class="header" href="#linear-regression">Linear Regression</a></h3>
+<pre><code class="language-scala">import org.apache.spark.ml.regression.LinearRegression
+
+// Load training data
+val training = spark.read.format(&quot;libsvm&quot;)
+  .load(&quot;data/mllib/sample_linear_regression_data.txt&quot;)
+
+val lr = new LinearRegression()
+  .setMaxIter(10)
+  .setRegParam(0.3)
+  .setElasticNetParam(0.8)
+
+// Fit the model
+val lrModel = lr.fit(training)
+
+// Print the coefficients and intercept for linear regression
+println(s&quot;Coefficients: ${lrModel.coefficients} Intercept: ${lrModel.intercept}&quot;)
+
+// Summarize the model over the training set and print out some metrics
+val trainingSummary = lrModel.summary
+println(s&quot;numIterations: ${trainingSummary.totalIterations}&quot;)
+println(s&quot;objectiveHistory: [${trainingSummary.objectiveHistory.mkString(&quot;,&quot;)}]&quot;)
+trainingSummary.residuals.show()
+println(s&quot;RMSE: ${trainingSummary.rootMeanSquaredError}&quot;)
+println(s&quot;r2: ${trainingSummary.r2}&quot;)
+
+</code></pre>
+<h3 id="ml-pipelines"><a class="header" href="#ml-pipelines">ML Pipelines</a></h3>
+<p>ML Pipelines provide a uniform set of high-level APIs built on top of DataFrames that help users create and tune practical machine learning pipelines.</p>
+<p><img src="https://spark.apache.org/docs/3.2.0/img/ml-Pipeline.png" alt="ML Pipelines" /></p>
+<pre><code class="language-scala">from pyspark.ml import Pipeline
+// setup the pipeline
+featurizationPipeline = Pipeline(stages=[ ])
+
+// fitting 
+featurizationPipeline.fit(df).transform(df)
+
+</code></pre>
+<pre><code class="language-scala">
+import org.apache.spark.ml.{Pipeline, PipelineModel}
+import org.apache.spark.ml.classification.LogisticRegression
+import org.apache.spark.ml.feature.{HashingTF, Tokenizer}
+import org.apache.spark.ml.linalg.Vector
+import org.apache.spark.sql.Row
+
+// Prepare training documents from a list of (id, text, label) tuples.
+val training = spark.createDataFrame(Seq(
+  (0L, &quot;a b c d e spark&quot;, 1.0),
+  (1L, &quot;b d&quot;, 0.0),
+  (2L, &quot;spark f g h&quot;, 1.0),
+  (3L, &quot;hadoop mapreduce&quot;, 0.0)
+)).toDF(&quot;id&quot;, &quot;text&quot;, &quot;label&quot;)
+
+// Configure an ML pipeline, which consists of three stages: tokenizer, hashingTF, and lr.
+val tokenizer = new Tokenizer()
+  .setInputCol(&quot;text&quot;)
+  .setOutputCol(&quot;words&quot;)
+val hashingTF = new HashingTF()
+  .setNumFeatures(1000)
+  .setInputCol(tokenizer.getOutputCol)
+  .setOutputCol(&quot;features&quot;)
+val lr = new LogisticRegression()
+  .setMaxIter(10)
+  .setRegParam(0.001)
+val pipeline = new Pipeline()
+  .setStages(Array(tokenizer, hashingTF, lr))
+
+// Fit the pipeline to training documents.
+val model = pipeline.fit(training)
+
+// Now we can optionally save the fitted pipeline to disk
+model.write.overwrite().save(&quot;/tmp/spark-logistic-regression-model&quot;)
+
+// We can also save this unfit pipeline to disk
+pipeline.write.overwrite().save(&quot;/tmp/unfit-lr-model&quot;)
+
+// And load it back in during production
+val sameModel = PipelineModel.load(&quot;/tmp/spark-logistic-regression-model&quot;)
+
+// Prepare test documents, which are unlabeled (id, text) tuples.
+val test = spark.createDataFrame(Seq(
+  (4L, &quot;spark i j k&quot;),
+  (5L, &quot;l m n&quot;),
+  (6L, &quot;spark hadoop spark&quot;),
+  (7L, &quot;apache hadoop&quot;)
+)).toDF(&quot;id&quot;, &quot;text&quot;)
+
+// Make predictions on test documents.
+model.transform(test)
+  .select(&quot;id&quot;, &quot;text&quot;, &quot;probability&quot;, &quot;prediction&quot;)
+  .collect()
+  .foreach { case Row(id: Long, text: String, prob: Vector, prediction: Double) =&gt;
+    println(s&quot;($id, $text) --&gt; prob=$prob, prediction=$prediction&quot;)
+  }
+
+</code></pre>
+<h2 id="featurization"><a class="header" href="#featurization">Featurization:</a></h2>
+<ul>
+<li>Encoding categorical variables</li>
+<li>Normalizing</li>
+<li>Creating new features</li>
+<li>Handling missing values</li>
+<li>Binning/discretizing</li>
+</ul>
+<p><img src="img/spark-ml-test-1.png" alt="Spark ML test and train split" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="scala"><a class="header" href="#scala">Scala</a></h1>
+<pre><code class="language-scala">Loading...
+Welcome to the Ammonite Repl 2.5.0 (Scala 2.13.7 Java 11.0.9)
+@ java.lang.Integer.MAX_VALUE 
+res0: Int = 2147483647
+
+@ java.lang.Integer.M 
+MAX_VALUE  MIN_VALUE
+@ java.lang.Integer.MI 
+MIN_VALUE
+@ java.lang.Integer.MIN_VALUE 
+res1: Int = -2147483648
+
+@ var y = 100 
+y: Int = 100
+
+@ y = 200 
+
+
+@ val c = 9 
+c: Int = 9
+
+@ c = 20 
+cmd5.sc:1: reassignment to val
+val res5 = c = 20
+             ^
+Compilation Failed
+
+@ var s = &quot;hello&quot; 
+s: String = &quot;hello&quot;
+
+@ var t: String = &quot;Apple&quot; 
+t: String = &quot;Apple&quot;
+
+@ println(t) 
+Apple
+
+
+@ val rec=  (&quot;apple&quot;, 100, &quot;nh&quot;) 
+rec: (String, Int, String) = (&quot;apple&quot;, 100, &quot;nh&quot;)
+
+@ rec._2 
+res9: Int = 100
+
+@ rec._1 
+res10: String = &quot;apple&quot;
+
+@ rec._2 
+res11: Int = 100
+
+@ rec._3 
+res12: String = &quot;nh&quot;
+
+
+@ val fruits = Array[String](&quot;apple&quot;, &quot;mango&quot;) 
+fruits: Array[String] = Array(&quot;apple&quot;, &quot;mango&quot;)
+
+@ fruits[0] 
+cmd14.sc:1: value fruits of type Array[String] does not take type parameters.
+val res14 = fruits[0]
+                  ^
+Compilation Failed
+
+@ fruits(1) 
+res14: String = &quot;mango&quot;
+
+@ fruits(0) 
+res15: String = &quot;apple&quot;
+
+@ def hello(title: String, firstName: String, lastNameOpt: Option[String]) = {
+      lastNameOpt match {
+        case Some(lastName) =&gt; println(s&quot;Hello $title. $lastName&quot;)
+        case None =&gt; println(s&quot;Hello $firstName&quot;)
+      }
+    } 
+defined function hello
+
+@ hello(&quot;mr&quot;, &quot;mohan&quot;) 
+cmd17.sc:1: not enough arguments for method hello: (title: String, firstName: String, lastNameOpt: Option[String]): Unit.
+Unspecified value parameter lastNameOpt.
+val res17 = hello(&quot;mr&quot;, &quot;mohan&quot;)
+                 ^
+Compilation Failed
+
+@ hello(&quot;mr&quot;, &quot;mohan&quot;, None) 
+Hello mohan
+
+
+@ hello(&quot;mr&quot;, &quot;mohan&quot;, &quot;Chinnappan&quot;) 
+cmd18.sc:1: type mismatch;
+ found   : String(&quot;Chinnappan&quot;)
+ required: Option[String]
+val res18 = hello(&quot;mr&quot;, &quot;mohan&quot;, &quot;Chinnappan&quot;)
+                                 ^
+Compilation Failed
+
+@ hello(&quot;mr&quot;, &quot;mohan&quot;, &quot;Chinnappan&quot;) 
+cmd18.sc:1: type mismatch;
+ found   : String(&quot;Chinnappan&quot;)
+ required: Option[String]
+val res18 = hello(&quot;mr&quot;, &quot;mohan&quot;, &quot;Chinnappan&quot;)
+                                 ^
+Compilation Failed
+
+@ hello(&quot;mr&quot;, &quot;mohan&quot;, Some(&quot;Chinnappan&quot;)) 
+Hello mr. Chinnappan
+
+
+</code></pre>
+<h2 id="loops"><a class="header" href="#loops">Loops</a></h2>
+<pre><code class="language-scala">@ var total = 0 
+total: Int = 0
+
+@  for (i &lt;- Range(0, 5)) {
+      println(&quot;Looping &quot; + i)
+      total = total + i
+    } 
+Looping 0
+Looping 1
+Looping 2
+Looping 3
+Looping 4
+</code></pre>
+<pre><code class="language-scala">@ var sum = 0 
+sum: Int = 0
+
+@ var qtys = Array(10,20,30) 
+qtys: Array[Int] = Array(10, 20, 30)
+
+@ for (qty &lt;- qtys) sum += qty 
+
+
+@ sum 
+res24: Int = 60
+</code></pre>
+<pre><code class="language-scala">val multi = Array(Array(1, 2, 3), Array(4, 5, 6))
+
+for (arr &lt;- multi; i &lt;- arr) println(i)
+
+
+1
+2
+3
+4
+5
+6
+</code></pre>
+<h2 id="yield"><a class="header" href="#yield">Yield</a></h2>
+<pre><code class="language-scala">@ val a = Array(1, 2, 3, 4) 
+a: Array[Int] = Array(1, 2, 3, 4)
+
+@ val a2 = for (i &lt;- a) yield i*i 
+a2: Array[Int] = Array(1, 4, 9, 16)
+
+</code></pre>
+<pre><code class="language-scala">@ val a = Array(1, 2); val b = Array(&quot;hello&quot;, &quot;world&quot;) 
+a: Array[Int] = Array(1, 2)
+b: Array[String] = Array(&quot;hello&quot;, &quot;world&quot;)
+
+@ val flattened = for (i &lt;- a; s &lt;- b) yield s + i 
+flattened: Array[String] = Array(&quot;hello1&quot;, &quot;world1&quot;, &quot;hello2&quot;, &quot;world2&quot;)
+
+
+</code></pre>
+<h2 id="methods-and-functions"><a class="header" href="#methods-and-functions">Methods and Functions</a></h2>
+<pre><code class="language-scala">
+@ def printHello(times: Int) = {
+      println(&quot;hello &quot; + times)
+    } 
+defined function printHello
+
+
+@ printHello(10) 
+hello 10
+
+</code></pre>
+<h3 id="method-returning-values"><a class="header" href="#method-returning-values">Method returning values</a></h3>
+<pre><code class="language-scala">@ def hello(i: Int = 0) = {
+      &quot;hello &quot; + i
+    } 
+defined function hello
+
+@ hello(5) 
+res34: String = &quot;hello 5&quot;
+
+</code></pre>
+<h3 id="function-values"><a class="header" href="#function-values">Function Values</a></h3>
+<p>Functions values are similar to methods, in that you call them with arguments and they can perform some action or return some value. </p>
+<p>Unlike methods, functions themselves are values: you can pass them around, store them in variables, and call them later.</p>
+<pre><code class="language-scala">@ var g: Int =&gt; Int = i =&gt; i + 1 
+g: Int =&gt; Int = ammonite.$sess.cmd35$$$Lambda$2056/0x00000008009d7040@7f14bdd1
+
+@ g(10) 
+res36: Int = 11
+
+@ g = i =&gt; i * 2 
+
+
+@ g(10) 
+res38: Int = 20
+
+</code></pre>
+<h2 id="method-taking-function-value-as-argument"><a class="header" href="#method-taking-function-value-as-argument">Method taking Function Value as argument</a></h2>
+<pre><code>- higher order methods
+</code></pre>
+<pre><code class="language-scala">  class Box(var x: Int) {
+      def update(f: Int =&gt; Int) = x = f(x)
+      def printMsg(msg: String) = {
+        println(msg + x)
+      }
+    } 
+defined class Box
+
+@ val b = new Box(10) 
+b: Box = ammonite.$sess.cmd39$Box@54516707
+
+@ b.p 
+printMsg
+@ b.printMsg(&quot;Awesome&quot;) 
+Awesome10
+
+
+@ b.up 
+update
+@ b.update(y =&gt; y*100) 
+
+
+@ b.printMsg(&quot;Awesome&quot;) 
+Awesome1000
+
+</code></pre>
+<pre><code>@  b.update(_ + 5) 
+
+@ b.printMsg(&quot;Great&quot;) 
+Great1005
+</code></pre>
+<h3 id="method-with-multiple-parameter-lists"><a class="header" href="#method-with-multiple-parameter-lists">Method with Multiple Parameter Lists</a></h3>
+<pre><code class="language-scala">@ def myLoop(start: Int, end: Int) (callback: Int =&gt; Unit) = {
+ for (i &lt;- Range(start, end)) {
+ callback(i)
+ }
+ } 
+defined function myLoop
+
+myLoop(start = 5, end = 10) { 
+    i =&gt; println(s&quot;i has value ${i}&quot;)
+ } 
+i has value 5
+i has value 6
+i has value 7
+i has value 8
+i has value 9
+
+
+
+</code></pre>
+<h2 id="classes-and-traits"><a class="header" href="#classes-and-traits">Classes and Traits</a></h2>
+<p>You can define classes using the class keyword, and instantiate them using new.</p>
+<pre><code>@  class Foo(x: Int) {
+      def printMsg(msg: String) = {
+        println(msg + x)
+      }
+    } 
+defined class Foo
+
+@ val f = Fo 
+Foo
+@ val f = Foo(10) 
+cmd49.sc:1: not found: value Foo
+val f = Foo(10)
+        ^
+Compilation Failed
+
+@ val f = new Foo(10) 
+f: Foo = ammonite.$sess.cmd48$Foo@5223eb62
+
+ 
+@ f.printMsg(&quot;foo&quot;) 
+foo10
+
+// PRIVATE
+@ f.x 
+cmd51.sc:1: value x is not a member of ammonite.$sess.cmd48.Foo
+val res51 = f.x
+              ^
+Compilation Failed
+
+</code></pre>
+<ul>
+<li>To make x publicly accessible you can make it a val, and to make it mutable you can make it a var:</li>
+</ul>
+<pre><code> @  class Bar(val x: Int) {
+      def printMsg(msg: String) = {
+        println(msg + x)
+      }
+    } 
+defined class Bar
+
+ 
+@ val b = new Bar(20) 
+b: Bar = ammonite.$sess.cmd51$Bar@69b242f9
+
+ 
+@ b.printMsg(&quot;bar&quot;) 
+bar20
+
+
+@ b.x 
+res54: Int = 20
+
+
+</code></pre>
+<pre><code>@  class Qux(var x: Int) {
+      def printMsg(msg: String) = {
+        x += 1
+        println(msg + x)
+      }
+    } 
+defined class Qux
+
+@ var q = new Qux(100) 
+q: Qux = ammonite.$sess.cmd55$Qux@139b9795
+
+@ q.x 
+res57: Int = 100
+
+@ q.printMsg(&quot;Qux&quot;) 
+Qux101
+
+
+
+</code></pre>
+<pre><code>@ var z = new Baz(12) 
+z: Baz = ammonite.$sess.cmd59$Baz@3dc666ab
+ 
+            
+Compilation Failed
+
+@ z.printMsg(&quot;Baz&quot;) 
+Baz!!!!!!!!!!!!
+
+
+</code></pre>
+<h2 id="traits"><a class="header" href="#traits">Traits</a></h2>
+<p>traits are similar to <strong>interfaces</strong> in traditional object-oriented languages: a set of methods that multiple classes can inherit. </p>
+<ul>
+<li>Instances of these classes (which extends the trait) can then be used interchangeably.</li>
+</ul>
+<pre><code class="language-scala">
+@ trait Point{ def hypotenuse: Double } 
+defined trait Point
+
+@ class Point2D(x: Double, y: Double) extends Point{
+      def hypotenuse = math.sqrt(x * x + y * y)
+    } 
+defined class Point2D
+
+@ class Point3D(x: Double, y: Double, z: Double) extends Point{
+      def hypotenuse = math.sqrt(x * x + y * y + z * z)
+    } 
+defined class Point3D
+
+@ val points: Array[Point] = Array(new Point2D(1, 2), new Point3D(4, 5, 6)) 
+points: Array[Point] = Array(ammonite.$sess.cmd63$Point2D@2a336787, ammonite.$sess.cmd64$Point3D@22b51ab4)
+
+@ for (p &lt;- points) println(p.hypotenuse) 
+2.23606797749979
+8.774964387392123
+
+
+</code></pre>
+<h2 id="collections"><a class="header" href="#collections">Collections</a></h2>
+<pre><code class="language-scala">@ def stdDev(a: Array[Double]): Double = {
+      val mean = a.sum / a.length
+      val squareErrors = a.map(x =&gt; x - mean).map(x =&gt; x * x)
+      math.sqrt(squareErrors.sum / a.length)
+    } 
+defined function stdDev
+
+@ val input = new Array(10,20,30,40,11,44) 
+cmd68.sc:1: too many arguments (found 6, expected 1) for constructor Array: (_length: Int): Array[T]
+val input = new Array(10,20,30,40,11,44)
+                         ^
+Compilation Failed
+
+@ val input = Array(10,20,30,40,11,44) 
+input: Array[Int] = Array(10, 20, 30, 40, 11, 44)
+
+@ stdD 
+stdDev
+@ stdDev(input) 
+cmd69.sc:1: type mismatch;
+ found   : Array[Int]
+ required: Array[Double]
+val res69 = stdDev(input)
+                   ^
+Compilation Failed
+
+@ val input2 = Array(10.0,20.0,30.0,40.0,11.0,44.0) 
+input2: Array[Double] = Array(10.0, 20.0, 30.0, 40.0, 11.0, 44.0)
+
+@ stdDev(input2) 
+res70: Double = 13.246592853342412
+
+// FUN
+
+@ input.map(x =&gt; x*x) 
+res71: Array[Int] = Array(100, 400, 900, 1600, 121, 1936)
+
+@ input.map(x =&gt; x*x).map(x =&gt; x-2) 
+res72: Array[Int] = Array(98, 398, 898, 1598, 119, 1934)
+
+
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3010/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>

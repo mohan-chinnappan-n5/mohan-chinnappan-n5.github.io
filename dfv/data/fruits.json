@@ -1,0 +1,6 @@
+[
+      {"name": "apple yd", "quantity": "100", "quality": "good"},
+      {"name": "peach", "quantity": "200",  "quality": "ok"},
+      {"name": "mango", "quantity": "400",  "quality": "good"},
+      {"name": "pear", "quantity": "250",  "quality": "awesome"}
+]

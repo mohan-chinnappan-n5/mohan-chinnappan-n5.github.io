@@ -1,0 +1,105 @@
+
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Plots</title>
+
+        <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+        <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+        <py-env>
+            - matplotlib
+            - pandas
+            - plotly
+        </py-env>
+
+</head>
+<body>
+
+        <div class="jumbotron">
+            <h1>Cool Plots</h1>
+            <p class="lead">
+                
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 p-2 shadow ml-4 mr-4 mb-4 bg-white rounded">
+                <div id="chart1"></div>
+                <div id="chart2"></div>
+
+                <div id="chart3"></div>
+                <div id="chart4"></div>
+
+
+            </div>
+        </div>
+        <script type='text/javascript'>
+           // Scatter Plot
+            function plot(graph, chart) {
+                var figure = JSON.parse(graph)
+                Plotly.newPlot(chart, figure, {});
+            }
+        </script>
+
+        <py-script>
+            # Import libraries
+            import pandas as pd
+            import matplotlib.pyplot as plt
+            import js
+            import json
+            import plotly
+            import plotly.express as px
+
+            import os
+
+            #print('Current Working Directory:')
+            #print(os.getcwd())
+            
+            import plotly.express as px
+
+            
+
+            #https://www.kaggle.com/code/jhossain/explore-the-gapminder-dataset-with-plotly-express/notebook
+            data_us= px.data.gapminder().query("country == 'United States'")
+            fig = px.bar(data_us, x='year', y='pop', color='lifeExp', labels={'pop': 'Population of US'}, height=400)
+            # fig.show()
+            graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+            js.plot(graphJSON,"chart4")
+
+
+            # filter 2007 data only from dataset 
+            gapminder2007 = px.data.gapminder().query('year == 2007')
+
+            # create scatter plot 
+            fig = px.scatter(gapminder2007, x='gdpPercap',  y='lifeExp', color='continent', size='pop', size_max=60,  hover_name='country')
+           
+            #fig.show()
+            #fig = px.scatter(x=[0, 1, 2, 3, 4], y=[0, 1, 4, 9, 16])
+            
+            graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+            js.plot(graphJSON,"chart1")
+
+
+            fig = px.line_geo(gapminder2007, locations='iso_alpha', color='continent', projection='orthographic')
+   
+            graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+            js.plot(graphJSON,"chart2")
+
+
+            fig = px.choropleth(gapminder2007, locations='iso_alpha', color='lifeExp', hover_name='country', 
+                    animation_frame='year', color_continuous_scale=px.colors.sequential.Plasma, projection='natural earth')
+            graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+            js.plot(graphJSON,"chart3")
+                    
+            </py-script>
+
+</body>
+</html> 
+                
+    

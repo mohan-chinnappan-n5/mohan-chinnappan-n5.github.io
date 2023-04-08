@@ -1,0 +1,24 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A simple bar chart with embedded data.",
+  "width": 300,
+  "height": 300,
+  
+  "data": {
+    "values": [
+      {"name": "apple", "quantity": "100", "quality": "good"},
+      {"name": "peach", "quantity": "200",  "quality": "ok"},
+      {"name": "mango", "quantity": "400",  "quality": "very good"},
+      {"name": "pear", "quantity": "250",  "quality": "awesome"}
+    ]
+  },
+  "mark": { "type" : "bar","tooltip": true},
+  "encoding": {
+    "x": {"field": "name", "type": "nominal", "axis": {"labelAngle": -90}},
+    "y": {"field": "quantity", "type": "quantitative"},
+    "color": {
+      "field": "quality",
+      "type": "nominal"
+    }
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMD Default Rulesets</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <style>
+        textarea {
+            font-family: Monaco, Arial;
+            padding: 10px;
+            background-color: black;
+            color: wheat;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body style="min-height: 75rem; padding-top: 3.5rem;">
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">&nbsp; PMD: Apex Default Rulesets</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <ul class="list-group">
+            <li class='list-group-item'><a href="./def-bestpractices.html">best practices</a></li>
+            <li class='list-group-item'><a href="./def-codestyle.html">code style</a></li>
+            <li class='list-group-item'><a href="./def-design.html">design</a></li>
+            <li class='list-group-item'><a href="./def-documentation.html">documentation</a></li>
+            <li class='list-group-item'><a href="./def-errorprone.html">error prone</a></li>
+            <li class='list-group-item'><a href="./def-multithreading.html">multithreading</a></li>
+            <li class='list-group-item'><a href="./def-performance.html">performance</a></li>
+            <li class='list-group-item'><a href="./def-security.html">security</a></li>
+        </ul>
+
+        <h3>Script to generate the html files</h3>
+        <textarea name="script" id="script" cols="120" rows="10">
+# Script to render html for the default PMD rules for apex
+for ITEM in bestpractices codestyle design documentation errorprone multithreading performance security
+do
+  echo sfdx mohanc:xml:transform -i https://raw.githubusercontent.com/pmd/pmd/master/pmd-apex/src/main/resources/category/apex/$ITEM.xml -m pmd-ruleset; 
+  sfdx mohanc:xml:transform -i https://raw.githubusercontent.com/pmd/pmd/master/pmd-apex/src/main/resources/category/apex/$ITEM.xml -m pmd-ruleset; 
+  mv output.html def-${ITEM}.html
+done
+</textarea>
+    </div>
+</body>
+
+</html>

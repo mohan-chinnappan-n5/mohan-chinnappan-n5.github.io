@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xml2jhtml</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <textarea name="xml" id="xml" cols="80" rows="10"></textarea>
+    <textarea name="xsl"  id="xsl" cols="80" rows="10"></textarea>
+   <hr>
+   <button id="transform">Transform</button>
+   <button id="transformLocal">TransformLocal</button>
+    <div id="output">
+
+    </div>
+
+    <script>
+
+        const getXSLT = async type => {
+            const url = `https://raw.githubusercontent.com/mohan-chinnappan-n/xml-xslt/main/${type}.xslt`;
+            const response = await fetch(url);
+            const text = await response.text();
+            return text;
+        }
+
+        const getURL = async url => {
+            const response = await fetch(url);
+            const text = await response.text();
+            return text;
+        }
+      
+
+
+
+        function CreateIframe(html, css, nodeWhereToAppend) {
+            var fragment = document.createDocumentFragment();
+            var iframe = document.createElement('iframe');
+            iframe.onload = function () {
+                var doc = this.contentWindow.document;
+                doc.body.innerHTML = html;
+                var style = document.createElement("style");
+                style.setAttribute("type", "text/css");
+                style.innerHTML = css;
+                doc.head.appendChild(style);
+            }
+            fragment.appendChild(iframe);
+            while (nodeWhereToAppend.firstChild) {
+                nodeWhereToAppend.removeChild(nodeWhereToAppend.firstChild);
+            }
+            nodeWhereToAppend.appendChild(fragment);
+        }
+
+
+
+        const transform = async () => {
+            const xsl = await getXSLT('cdmusic');
+            const parser = new DOMParser();
+
+            const xsl_doc = parser.parseFromString(xsl, "application/xml");
+
+            document.getElementById('xsl').value = xsl;
+
+            const xml = await getURL('https://raw.githubusercontent.com/mohan-chinnappan-n/xml-xslt/main/cdmusic.xml');
+            document.getElementById('xml').value = xml;
+
+            const xml_doc = parser.parseFromString(xml, "application/xml");
+
+            const proc = new XSLTProcessor();
+            proc.importStylesheet(xsl_doc);
+            const resultDocument = proc.transformToFragment(xml_doc, document);
+            const resultDoc = proc.transformToDocument(xml_doc);
+
+            const htmlOutput = new XMLSerializer().serializeToString(resultDoc);
+
+
+            document.getElementById('output').innerHTML = htmlOutput;
+
+            
+            //CreateIframe(resultDocument, "", document.getElementById('output'));
+
+            // document.getElementById('output').appendChild(resultDocument);
+
+        }
+        document.getElementById('transform').addEventListener('click', event => {
+            transform();
+
+        })
+
+
+        const transformLocal = async () => {
+            const xsl = document.getElementById('xsl').value;
+            //console.log(xsl)
+            const parser = new DOMParser();
+            const xsl_doc = parser.parseFromString(xsl, "application/xml");
+
+            const xml = document.getElementById('xml').value;
+            // document.getElementById('xml').value = xml;
+
+            const xml_doc = parser.parseFromString(xml, "application/xml");
+
+            const proc = new XSLTProcessor();
+            proc.importStylesheet(xsl_doc);
+            // const resultDocument = proc.transformToFragment(xml_doc, document);
+            const resultDoc = proc.transformToDocument(xml_doc);
+
+            const htmlOutput = new XMLSerializer().serializeToString(resultDoc);
+
+
+            document.getElementById('output').innerHTML = htmlOutput;
+
+            
+            //CreateIframe(resultDocument, "", document.getElementById('output'));
+
+            // document.getElementById('output').appendChild(resultDocument);
+
+        }
+
+        document.getElementById('transformLocal').addEventListener('click', event => {
+            transformLocal();
+
+        })
+
+       
+
+
+
+
+    </script>
+
+</body>
+
+</html>

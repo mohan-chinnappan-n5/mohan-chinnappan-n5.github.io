@@ -1,0 +1,983 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Einstein Bots - Machine Learning for Everyone!</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Quick Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="sup.html"><strong aria-hidden="true">1.1.</strong> Supervised Learning</a></li><li class="chapter-item expanded "><a href="unsup.html"><strong aria-hidden="true">1.2.</strong> Unsupervised Learning</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">2.</strong> Basic Linear Algebra needed</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="eigen.html"><strong aria-hidden="true">2.1.</strong> Eigenvectors </a></li><li class="chapter-item expanded "><a href="chapter_2-ref.html"><strong aria-hidden="true">2.2.</strong> References</a></li></ol></li><li class="chapter-item expanded "><a href="ml_models.html"><strong aria-hidden="true">3.</strong> ML Models</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="word2vec.html"><strong aria-hidden="true">3.1.</strong> Word2Vec</a></li><li class="chapter-item expanded "><a href="glove.html"><strong aria-hidden="true">3.2.</strong> GloVe</a></li></ol></li><li class="chapter-item expanded "><a href="dl.html"><strong aria-hidden="true">4.</strong> Deep Learning</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="nn.html"><strong aria-hidden="true">4.1.</strong> Neural Network</a></li><li class="chapter-item expanded "><a href="grad_descent.html"><strong aria-hidden="true">4.2.</strong> Gradient descent</a></li><li class="chapter-item expanded "><a href="back_propagation.html"><strong aria-hidden="true">4.3.</strong> Back Propagation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="bp_calc.html"><strong aria-hidden="true">4.3.1.</strong> Calculus</a></li></ol></li><li class="chapter-item expanded "><a href="act_func.html"><strong aria-hidden="true">4.4.</strong> Activation Function</a></li><li class="chapter-item expanded "><a href="cnn.html"><strong aria-hidden="true">4.5.</strong> Convolutional Neural Networks</a></li><li class="chapter-item expanded "><a href="rnn.html"><strong aria-hidden="true">4.6.</strong> Recurrent Neural Networks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="mnist.html"><strong aria-hidden="true">4.6.1.</strong> MNIST</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="tf.html"><strong aria-hidden="true">5.</strong> Tensorflow</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tfjs.html"><strong aria-hidden="true">5.1.</strong> TensorFlow.js</a></li></ol></li><li class="chapter-item expanded "><a href="torch.html"><strong aria-hidden="true">6.</strong> PyTorch</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">7.</strong> Transformers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="bert.html"><strong aria-hidden="true">7.1.</strong> BERT</a></li><li class="chapter-item expanded "><a href="GPT.html"><strong aria-hidden="true">7.2.</strong> GPT</a></li><li class="chapter-item expanded "><a href="T5.html"><strong aria-hidden="true">7.3.</strong> T5</a></li><li class="chapter-item expanded "><a href="copilot.html"><strong aria-hidden="true">7.4.</strong> GitHub Copilot</a></li><li class="chapter-item expanded "><a href="chapter_7_ref.html"><strong aria-hidden="true">7.5.</strong> References</a></li></ol></li><li class="chapter-item expanded "><a href="sf_e.html"><strong aria-hidden="true">8.</strong> Salesforce Einstein</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="sf_ml.html"><strong aria-hidden="true">8.1.</strong> Machine Learning</a></li><li class="chapter-item expanded "><a href="sf_nlp.html"><strong aria-hidden="true">8.2.</strong> Natural Language Processing</a></li><li class="chapter-item expanded "><a href="sf_cv.html"><strong aria-hidden="true">8.3.</strong> Computer Vision</a></li></ol></li><li class="chapter-item expanded "><a href="gcp.html"><strong aria-hidden="true">9.</strong> Google Cloud Platform</a></li><li class="chapter-item expanded "><a href="pu.html"><strong aria-hidden="true">10.</strong> Processing Units</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cpu.html"><strong aria-hidden="true">10.1.</strong> CPU</a></li><li class="chapter-item expanded "><a href="gpu.html"><strong aria-hidden="true">10.2.</strong> GPU</a></li><li class="chapter-item expanded "><a href="tpu.html"><strong aria-hidden="true">10.3.</strong> TPU</a></li></ol></li><li class="chapter-item expanded "><a href="ml_pl.html"><strong aria-hidden="true">11.</strong> ML Pipelines</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ml-ops.html"><strong aria-hidden="true">11.1.</strong> ML ops</a></li><li class="chapter-item expanded "><a href="tfs.html"><strong aria-hidden="true">11.2.</strong> TensorFlow Serving</a></li><li class="chapter-item expanded "><a href="tfx.html"><strong aria-hidden="true">11.3.</strong> TensorFlow Extended</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="apache_airflow.html"><strong aria-hidden="true">11.3.1.</strong> Apache Airflow</a></li><li class="chapter-item expanded "><a href="apache_beam.html"><strong aria-hidden="true">11.3.2.</strong> Apache Beam</a></li><li class="chapter-item expanded "><a href="kubeflow.html"><strong aria-hidden="true">11.3.3.</strong> Kubeflow</a></li></ol></li><li class="chapter-item expanded "><a href="automl.html"><strong aria-hidden="true">11.4.</strong> AutoML</a></li><li class="chapter-item expanded "><a href="kubernetes.html"><strong aria-hidden="true">11.5.</strong> Kubernetes</a></li></ol></li><li class="chapter-item expanded "><a href="speedup.html"><strong aria-hidden="true">12.</strong> Speedup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="jax.html"><strong aria-hidden="true">12.1.</strong> JAX</a></li><li class="chapter-item expanded "><a href="closure.html"><strong aria-hidden="true">12.2.</strong> Closures and Decorators</a></li><li class="chapter-item expanded "><a href="jax_ref.html"><strong aria-hidden="true">12.3.</strong> References</a></li></ol></li><li class="chapter-item expanded "><a href="openai.html"><strong aria-hidden="true">13.</strong> OpenAI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="openai-api.html"><strong aria-hidden="true">13.1.</strong> API</a></li><li class="chapter-item expanded "><a href="openai-chat.html"><strong aria-hidden="true">13.2.</strong> Chat</a></li><li class="chapter-item expanded "><a href="openai-summarize.html"><strong aria-hidden="true">13.3.</strong> Summarize</a></li><li class="chapter-item expanded "><a href="openai-tldr.html"><strong aria-hidden="true">13.4.</strong> TLDR</a></li><li class="chapter-item expanded "><a href="open-translate.html"><strong aria-hidden="true">13.5.</strong> Translate</a></li><li class="chapter-item expanded "><a href="openai-codex.html"><strong aria-hidden="true">13.6.</strong> Codex</a></li></ol></li><li class="chapter-item expanded "><a href="inspire.html"><strong aria-hidden="true">14.</strong> Inspirations</a></li><li class="chapter-item expanded "><a href="datasets.html"><strong aria-hidden="true">15.</strong> Datasets</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="datasets/boston.html"><strong aria-hidden="true">15.1.</strong> Boston Housing</a></li></ol></li><li class="chapter-item expanded "><a href="industry/ml-industry.html"><strong aria-hidden="true">16.</strong> Building ML for Industries</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="industry/lfitem-magmt.html"><strong aria-hidden="true">16.1.</strong> Lost-Found Item Management</a></li></ol></li><li class="chapter-item expanded "><a href="hardware/hardware.html"><strong aria-hidden="true">17.</strong> Hardware</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="hardware/raspi.html"><strong aria-hidden="true">17.1.</strong> Raspberry Pi</a></li></ol></li><li class="chapter-item expanded "><a href="conversational-ai.html"><strong aria-hidden="true">18.</strong> Conversational-AI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chatbots.html"><strong aria-hidden="true">18.1.</strong> Chatbots</a></li><li class="chapter-item expanded "><a href="ebot.html" class="active"><strong aria-hidden="true">18.2.</strong> Einstein Bots</a></li><li class="chapter-item expanded "><a href="DeepPavlov.html"><strong aria-hidden="true">18.3.</strong> DeepPavlov</a></li><li class="chapter-item expanded "><a href="dialogflow.html"><strong aria-hidden="true">18.4.</strong> Dialogflow</a></li><li class="chapter-item expanded "><a href="rasa.html"><strong aria-hidden="true">18.5.</strong> Rasa</a></li></ol></li><li class="chapter-item expanded "><a href="transformers.html"><strong aria-hidden="true">19.</strong> Transformers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="transformers/gpt.html"><strong aria-hidden="true">19.1.</strong> GPT</a></li><li class="chapter-item expanded "><a href="transformers/build-gpt.html"><strong aria-hidden="true">19.2.</strong> Building GPT</a></li></ol></li><li class="chapter-item expanded "><a href="tools.html"><strong aria-hidden="true">20.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="iac.html"><strong aria-hidden="true">20.1.</strong> Infrastructure as code</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Machine Learning for Everyone!</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="einstein-bots"><a class="header" href="#einstein-bots">Einstein Bots</a></h1>
+<h2 id="simple-setup"><a class="header" href="#simple-setup">Simple setup</a></h2>
+<p>Licenses required</p>
+<ul>
+<li>
+<p>Service Cloud</p>
+</li>
+<li>
+<p>A Chat license</p>
+</li>
+<li>
+<p>Enable Lightning Experience</p>
+</li>
+<li>
+<p>Click the toggle on the Einstein Bots Setup page</p>
+</li>
+<li>
+<p>Chat API Endpoint</p>
+</li>
+</ul>
+<pre><code>https://d.la4-c1-ia4.salesforceliveagent.com/chat/rest/
+
+</code></pre>
+<ul>
+<li>
+<p>Entities</p>
+<ul>
+<li>the bot to ask a question and then store the answer in a variable to use later. But first we need to set up an entity.</li>
+</ul>
+</li>
+<li>
+<p>Variable</p>
+<ul>
+<li>A variable is a container that stores a specific piece of data collected from the customer. </li>
+</ul>
+</li>
+</ul>
+<h2 id="demo"><a class="header" href="#demo">Demo</a></h2>
+<p><img src="img/chatbots/einstein-bot-demo-1.webm.gif" alt="Einstein Bot Demo" /></p>
+<h2 id="appointment-scheduler"><a class="header" href="#appointment-scheduler">Appointment Scheduler</a></h2>
+<h3 id="flow"><a class="header" href="#flow">Flow</a></h3>
+<pre><code>
+flowchart TB
+    O[Appointment Menu] --&gt;A[Schedule Appointment] --&gt; B[What time you like to set up the appointment?]
+    O --&gt;Z[Transfer To Agent] 
+    B --&gt; C{Get Appointment Date and Time}
+    C --&gt; D[What type of appointment?] 
+    D --&gt;  E{Get Appointment Type}
+    E --&gt;  F[What type of car you have?]
+    F --&gt;  G{Get Car Type}
+    G --&gt;  H[You are all set for your appointment \non ApptDateTime \nfor appointmentType for your car Car_Type]
+
+</code></pre>
+<h2 id="proposed-bot-def"><a class="header" href="#proposed-bot-def">Proposed Bot Def</a></h2>
+<pre><code class="language-yaml">
+name: Kovai
+ver: 1.0.0
+description: Bot able to provide appointment management and take actions at the CRM system
+menus:
+  mainMenu: 
+    - Appointment Booking
+    - Transfer to an Agent
+  AppointMenu:
+    - question: What time and date you like to book the appointment?
+        answer: 
+          - Tomorrow 10 am
+          - Tuesday 11 am
+          - Next week Wednesday 12 noon
+        entities:
+           type:  sys.DateTime
+           name: $AppointmentDateTime
+
+    - question: What type of appointment type you need?
+        menu:
+          - Car Inspection
+          - Car Maintenance
+        entities:
+          type: String
+          name: $AppointmentType 
+    - question: What type of car you have?
+        menu:
+          - Ford F-150
+          - Ford Explorer
+          - Toyota Camry
+          - Toyota Corolla
+        entities:
+          type: String
+          name :$CarType
+
+    - response: |-
+                 You are all set with your appointment on $AppointmentDateTime
+                for $AppointmentType  for your $CarType
+
+
+</code></pre>
+<p><img src="img/chatbots/eb-appointment-sched.svg" alt="Flow" /></p>
+<h3 id="setup"><a class="header" href="#setup">Setup</a></h3>
+<p><img src="img/chatbots/eb-appt-setup-1.webm.gif" alt="Einstein bot appointment scheduler setup" /></p>
+<h3 id="demo-1"><a class="header" href="#demo-1">Demo</a></h3>
+<p><img src="img/chatbots/eb-appt-demo-1.webm.gif" alt="Einstein bot appointment scheduler demo" /></p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3wDpNNMu6Y0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<h2 id="channels-supported"><a class="header" href="#channels-supported">Channels supported</a></h2>
+<p>Einstein Bots support the following channels: </p>
+<ul>
+<li>Chat (In-App and Web) </li>
+<li>Messaging 
+<ul>
+<li>SMS</li>
+<li>Facebook Messenger</li>
+<li>WhatsApp channels </li>
+</ul>
+</li>
+</ul>
+<h2 id="bot-metadata"><a class="header" href="#bot-metadata">Bot <a href="https://github.com/mohan-chinnappan-n/cli-dx/blob/master/metadata/Bot/bot.md">metadata</a></a></h2>
+<pre><code>sfdx mohanc:mdapi:list -u mohan.chinnappan.n_ea2@gmail.com -t Bot
+</code></pre>
+<pre><code>{
+  result: [
+    {
+      createdById: '0053h000002xQ5sAAE',
+      createdByName: 'Mohan Chinnappan',
+      createdDate: 2021-06-03T01:01:58.000Z,
+      fileName: 'bots/kovai.bot',
+      fullName: 'kovai',
+      id: '0Xx3h000000H4T0CAK',
+      lastModifiedById: '0053h000002xQ5sAAE',
+      lastModifiedByName: 'Mohan Chinnappan',
+      lastModifiedDate: 2021-06-03T01:01:58.000Z,
+      type: 'Bot'
+    }
+  ]
+}
+
+</code></pre>
+<pre><code>
+sfdx mohanc:mdapi:retrieve -u mohan.chinnappan.n_ea2@gmail.com -t Bot
+</code></pre>
+<pre><code>{
+    &quot;RetrieveRequest&quot;: {
+        &quot;apiVersion&quot;: &quot;53.0&quot;,
+        &quot;unpackaged&quot;: [
+            {
+                &quot;types&quot;: {
+                    &quot;members&quot;: &quot;*&quot;,
+                    &quot;name&quot;: &quot;Bot&quot;
+                }
+            }
+        ]
+    }
+}
+{ result: { done: false, id: '09S3h000005rNsXEAU', state: 'Queued' } }
+</code></pre>
+<pre><code> sfdx mohanc:mdapi:checkRetrieveStatus  -u mohan.chinnappan.n_ea2@gmail.com -i 09S3h000005rNsXEAU 
+</code></pre>
+<pre><code>[
+  {
+    createdById: '0053h000002xQ5sAAE',
+    createdByName: 'Mohan Chinnappan',
+    createdDate: 2021-06-03T01:01:58.000Z,
+    fileName: 'unpackaged/bots/kovai.bot',
+    fullName: 'kovai',
+    id: '0Xx3h000000H4T0CAK',
+    lastModifiedById: '0053h000002xQ5sAAE',
+    lastModifiedByName: 'Mohan Chinnappan',
+    lastModifiedDate: 2021-06-03T01:01:58.000Z,
+    type: 'Bot'
+  },
+  {
+    createdById: '0053h000002xQ5sAAE',
+    createdByName: 'Mohan Chinnappan',
+    createdDate: 2022-01-03T20:43:32.647Z,
+    fileName: 'unpackaged/package.xml',
+    fullName: 'unpackaged/package.xml',
+    id: '',
+    lastModifiedById: '0053h000002xQ5sAAE',
+    lastModifiedByName: 'Mohan Chinnappan',
+    lastModifiedDate: 2022-01-03T20:43:32.647Z,
+    manageableState: 'unmanaged',
+    type: 'Package'
+  }
+]
+=== Writing zipFile base64 content to 09S3h000005rNsXEAU.zip.txt ...
+=== Writing zipFile binary content to 09S3h000005rNsXEAU.zip ... 
+
+
+</code></pre>
+<pre><code>unzip 09S3h000005rNsXEAU.zip
+Archive:  09S3h000005rNsXEAU.zip
+  inflating: unpackaged/bots/kovai.bot  
+  inflating: unpackaged/package.xml  
+
+</code></pre>
+<pre><code>├── 09S3h000005rNsXEAU.zip
+├── 09S3h000005rNsXEAU.zip.txt
+└── unpackaged
+    ├── bots
+    │   └── kovai.bot
+    └── package.xml
+
+</code></pre>
+<pre><code class="language-xml">cat unpackaged/bots/kovai.bot 
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Bot xmlns=&quot;http://soap.sforce.com/2006/04/metadata&quot;&gt;
+    &lt;botMlDomain&gt;
+        &lt;label&gt;kovai&lt;/label&gt;
+        &lt;mlIntents&gt;
+            &lt;developerName&gt;Confused&lt;/developerName&gt;
+            &lt;label&gt;Confused&lt;/label&gt;
+        &lt;/mlIntents&gt;
+        &lt;mlIntents&gt;
+            &lt;developerName&gt;Transfer_To_Agent&lt;/developerName&gt;
+            &lt;label&gt;Transfer To Agent&lt;/label&gt;
+        &lt;/mlIntents&gt;
+        &lt;mlSlotClasses&gt;
+            &lt;dataType&gt;Text&lt;/dataType&gt;
+            &lt;developerName&gt;appointment_type&lt;/developerName&gt;
+            &lt;extractionRegex&gt;.*&lt;/extractionRegex&gt;
+            &lt;extractionType&gt;Pattern&lt;/extractionType&gt;
+            &lt;label&gt;appointment type&lt;/label&gt;
+        &lt;/mlSlotClasses&gt;
+        &lt;mlSlotClasses&gt;
+            &lt;dataType&gt;Text&lt;/dataType&gt;
+            &lt;developerName&gt;Car_Type&lt;/developerName&gt;
+            &lt;extractionRegex&gt;.*&lt;/extractionRegex&gt;
+            &lt;extractionType&gt;Pattern&lt;/extractionType&gt;
+            &lt;label&gt;Car Type&lt;/label&gt;
+        &lt;/mlSlotClasses&gt;
+        &lt;mlSlotClasses&gt;
+            &lt;dataType&gt;Text&lt;/dataType&gt;
+            &lt;description&gt;Memory size&lt;/description&gt;
+            &lt;developerName&gt;Memory_size&lt;/developerName&gt;
+            &lt;extractionRegex&gt;[1-9][0-9]*&lt;/extractionRegex&gt;
+            &lt;extractionType&gt;Pattern&lt;/extractionType&gt;
+            &lt;label&gt;Memory size&lt;/label&gt;
+        &lt;/mlSlotClasses&gt;
+        &lt;name&gt;kovai&lt;/name&gt;
+    &lt;/botMlDomain&gt;
+    &lt;botVersions&gt;
+        &lt;fullName&gt;v1&lt;/fullName&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;conversationRecordLookup&gt;
+                    &lt;SObjectType&gt;Contact&lt;/SObjectType&gt;
+                    &lt;conditions&gt;
+                        &lt;leftOperand&gt;Contact.LastName&lt;/leftOperand&gt;
+                        &lt;operatorType&gt;Contains&lt;/operatorType&gt;
+                        &lt;rightOperandName&gt;LastName&lt;/rightOperandName&gt;
+                        &lt;rightOperandType&gt;ConversationVariable&lt;/rightOperandType&gt;
+                        &lt;sortOrder&gt;1&lt;/sortOrder&gt;
+                    &lt;/conditions&gt;
+                    &lt;filterLogic&gt;And&lt;/filterLogic&gt;
+                    &lt;lookupFields&gt;
+                        &lt;fieldName&gt;Contact.Birthdate&lt;/fieldName&gt;
+                    &lt;/lookupFields&gt;
+                    &lt;maxLookupResults&gt;3&lt;/maxLookupResults&gt;
+                    &lt;targetVariableName&gt;ListVar&lt;/targetVariableName&gt;
+                &lt;/conversationRecordLookup&gt;
+                &lt;stepIdentifier&gt;33b7e5b2-e600-449d-ad6c-977980f017fd&lt;/stepIdentifier&gt;
+                &lt;type&gt;RecordLookup&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;stepIdentifier&gt;7bee15be-3454-49a9-a954-da9ec6d8ca1e&lt;/stepIdentifier&gt;
+                &lt;type&gt;Wait&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Check_My_Order&lt;/developerName&gt;
+            &lt;label&gt;Find  Birth Date&lt;/label&gt;
+            &lt;showInFooterMenu&gt;false&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botMessages&gt;
+                    &lt;message&gt;We will fix it soon!&lt;/message&gt;
+                    &lt;messageIdentifier&gt;9f7211b0-141a-4ac8-a15a-da405e3df903&lt;/messageIdentifier&gt;
+                &lt;/botMessages&gt;
+                &lt;stepIdentifier&gt;bc4b5ba5-d5d7-4e49-a3ea-e181d6b98aa8&lt;/stepIdentifier&gt;
+                &lt;type&gt;Message&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;stepIdentifier&gt;6d4435bf-c2cb-4dda-a0f9-9915213e766e&lt;/stepIdentifier&gt;
+                &lt;type&gt;Wait&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Printer_not_working&lt;/developerName&gt;
+            &lt;label&gt;Printer not working&lt;/label&gt;
+            &lt;showInFooterMenu&gt;false&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botVariableOperation&gt;
+                    &lt;askCollectIfSet&gt;false&lt;/askCollectIfSet&gt;
+                    &lt;botMessages&gt;
+                        &lt;message&gt;How much memory&lt;/message&gt;
+                        &lt;messageIdentifier&gt;ad3b8a35-52b2-4dda-b19d-d427c121bc21&lt;/messageIdentifier&gt;
+                    &lt;/botMessages&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;6 GB&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;be9aba98-d1ad-43a8-8919-8ff93dcc653a&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;12 GB&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;09772c46-ac87-4606-8dfc-6151be0f7392&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;16 GB&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;763e8f95-937d-4d6a-b293-b5efdbcd6e39&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;32 GB&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;f6155fa2-9a94-4062-a58f-3480bb49dd64&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botVariableOperands&gt;
+                        &lt;disableAutoFill&gt;false&lt;/disableAutoFill&gt;
+                        &lt;sourceName&gt;Memory_size&lt;/sourceName&gt;
+                        &lt;sourceType&gt;MlSlotClass&lt;/sourceType&gt;
+                        &lt;targetName&gt;Memory_Size&lt;/targetName&gt;
+                        &lt;targetType&gt;ConversationVariable&lt;/targetType&gt;
+                    &lt;/botVariableOperands&gt;
+                    &lt;optionalCollect&gt;false&lt;/optionalCollect&gt;
+                    &lt;quickReplyType&gt;Static&lt;/quickReplyType&gt;
+                    &lt;quickReplyWidgetType&gt;Buttons&lt;/quickReplyWidgetType&gt;
+                    &lt;retryMessages&gt;
+                        &lt;message&gt;Please provide memory size in GB&lt;/message&gt;
+                        &lt;messageIdentifier&gt;cde1f4ca-5d67-4792-ac54-a6ae49ff7f99&lt;/messageIdentifier&gt;
+                    &lt;/retryMessages&gt;
+                    &lt;type&gt;Collect&lt;/type&gt;
+                    &lt;variableOperationIdentifier&gt;4c5b98ee-95ac-4d5d-9700-95cfa31c269e&lt;/variableOperationIdentifier&gt;
+                &lt;/botVariableOperation&gt;
+                &lt;stepIdentifier&gt;3bb7b606-69ec-4d2c-9616-8bb1419efc5a&lt;/stepIdentifier&gt;
+                &lt;type&gt;VariableOperation&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;conversationSystemMessage&gt;
+                    &lt;type&gt;Transfer&lt;/type&gt;
+                &lt;/conversationSystemMessage&gt;
+                &lt;stepIdentifier&gt;b299f386-1ff0-4f00-8530-7baf68a7b059&lt;/stepIdentifier&gt;
+                &lt;type&gt;SystemMessage&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Find_a_MacBook_Pro&lt;/developerName&gt;
+            &lt;label&gt;Find a MacBook Pro&lt;/label&gt;
+            &lt;showInFooterMenu&gt;false&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botMessages&gt;
+                    &lt;message&gt;Hi, I’m &amp;apos;kovai&amp;apos;,  your digital assistant.&lt;/message&gt;
+                    &lt;messageIdentifier&gt;2426b915-4efd-426d-be46-c45713d7ed44&lt;/messageIdentifier&gt;
+                &lt;/botMessages&gt;
+                &lt;stepIdentifier&gt;c419550f-92e8-47d4-a127-9f0aaf0507df&lt;/stepIdentifier&gt;
+                &lt;type&gt;Message&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;botMessages&gt;
+                    &lt;message&gt;Let me offer you options&lt;/message&gt;
+                    &lt;messageIdentifier&gt;6b789c42-4d45-4b96-84ab-2971cfcf68a8&lt;/messageIdentifier&gt;
+                &lt;/botMessages&gt;
+                &lt;stepIdentifier&gt;ce9bfdd6-7993-48fd-abf4-f87b3d7efcf7&lt;/stepIdentifier&gt;
+                &lt;type&gt;Message&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;botNavigation&gt;
+                    &lt;botNavigationLinks&gt;
+                        &lt;targetBotDialog&gt;Main_Menu&lt;/targetBotDialog&gt;
+                    &lt;/botNavigationLinks&gt;
+                    &lt;type&gt;Redirect&lt;/type&gt;
+                &lt;/botNavigation&gt;
+                &lt;stepIdentifier&gt;85da64be-da77-4965-b978-2fa8488d758b&lt;/stepIdentifier&gt;
+                &lt;type&gt;Navigation&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Welcome&lt;/developerName&gt;
+            &lt;label&gt;Welcome&lt;/label&gt;
+            &lt;showInFooterMenu&gt;false&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botNavigation&gt;
+                    &lt;botNavigationLinks&gt;
+                        &lt;label&gt;Check My Order&lt;/label&gt;
+                        &lt;targetBotDialog&gt;Check_My_Order&lt;/targetBotDialog&gt;
+                    &lt;/botNavigationLinks&gt;
+                    &lt;botNavigationLinks&gt;
+                        &lt;label&gt;Printer not working&lt;/label&gt;
+                        &lt;targetBotDialog&gt;Printer_not_working&lt;/targetBotDialog&gt;
+                    &lt;/botNavigationLinks&gt;
+                    &lt;botNavigationLinks&gt;
+                        &lt;label&gt;Find a MacBook Pro&lt;/label&gt;
+                        &lt;targetBotDialog&gt;Find_a_MacBook_Pro&lt;/targetBotDialog&gt;
+                    &lt;/botNavigationLinks&gt;
+                    &lt;type&gt;Redirect&lt;/type&gt;
+                &lt;/botNavigation&gt;
+                &lt;stepIdentifier&gt;3d40fef7-a514-4c68-957b-ba2f3f9f0776&lt;/stepIdentifier&gt;
+                &lt;type&gt;Navigation&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Main_Menu&lt;/developerName&gt;
+            &lt;label&gt;Main Menu&lt;/label&gt;
+            &lt;showInFooterMenu&gt;true&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botMessages&gt;
+                    &lt;message&gt;Transferring to the  Agent&lt;/message&gt;
+                    &lt;messageIdentifier&gt;c76163dc-a4f3-47f5-890e-17de71f73006&lt;/messageIdentifier&gt;
+                &lt;/botMessages&gt;
+                &lt;stepIdentifier&gt;31b86047-f3e8-4eb5-9595-e41d45588cf5&lt;/stepIdentifier&gt;
+                &lt;type&gt;Message&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;conversationSystemMessage&gt;
+                    &lt;type&gt;Transfer&lt;/type&gt;
+                &lt;/conversationSystemMessage&gt;
+                &lt;stepIdentifier&gt;17a17172-c762-427d-ab07-ec23001781c6&lt;/stepIdentifier&gt;
+                &lt;type&gt;SystemMessage&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Transfer_To_Agent&lt;/developerName&gt;
+            &lt;label&gt;Transfer To Agent&lt;/label&gt;
+            &lt;mlIntent&gt;Transfer_To_Agent&lt;/mlIntent&gt;
+            &lt;mlIntentTrainingEnabled&gt;false&lt;/mlIntentTrainingEnabled&gt;
+            &lt;showInFooterMenu&gt;true&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botMessages&gt;
+                    &lt;message&gt;Goodbye! Click the &amp;quot;End Chat&amp;quot; button to end this chat&lt;/message&gt;
+                    &lt;messageIdentifier&gt;c11e71d1-bdcf-45c6-a8e4-cc7c5b97d134&lt;/messageIdentifier&gt;
+                &lt;/botMessages&gt;
+                &lt;stepIdentifier&gt;1c06aad9-d63c-4e47-88e4-58f3af6b858e&lt;/stepIdentifier&gt;
+                &lt;type&gt;Message&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;stepIdentifier&gt;fd33a42e-c466-4f9e-8c5e-ad53c3bdf81a&lt;/stepIdentifier&gt;
+                &lt;type&gt;Wait&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;End_Chat&lt;/developerName&gt;
+            &lt;label&gt;End Chat&lt;/label&gt;
+            &lt;showInFooterMenu&gt;false&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botMessages&gt;
+                    &lt;message&gt;Sorry, I didn&amp;apos;t understand the your request&lt;/message&gt;
+                    &lt;messageIdentifier&gt;653aa7c9-d205-4a52-96b8-543efd760d96&lt;/messageIdentifier&gt;
+                &lt;/botMessages&gt;
+                &lt;stepIdentifier&gt;26067502-7f1d-4bed-803f-43ca26c0ba63&lt;/stepIdentifier&gt;
+                &lt;type&gt;Message&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;stepIdentifier&gt;51dab797-c78f-41d0-a7b8-c30497a11446&lt;/stepIdentifier&gt;
+                &lt;type&gt;Wait&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Confused&lt;/developerName&gt;
+            &lt;label&gt;Confused&lt;/label&gt;
+            &lt;mlIntent&gt;Confused&lt;/mlIntent&gt;
+            &lt;mlIntentTrainingEnabled&gt;false&lt;/mlIntentTrainingEnabled&gt;
+            &lt;showInFooterMenu&gt;false&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botMessages&gt;
+                    &lt;message&gt;Unfortunately, there are no agents available at the moment&lt;/message&gt;
+                    &lt;messageIdentifier&gt;8813055e-c518-4dbe-b430-ae02c76e6bf0&lt;/messageIdentifier&gt;
+                &lt;/botMessages&gt;
+                &lt;stepIdentifier&gt;4cd74b3f-7fa5-466b-89f5-a37be3ee8794&lt;/stepIdentifier&gt;
+                &lt;type&gt;Message&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;stepIdentifier&gt;e15e7024-72e0-4656-a05e-15e0906bec8e&lt;/stepIdentifier&gt;
+                &lt;type&gt;Wait&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;No_Agent_Available&lt;/developerName&gt;
+            &lt;label&gt;No Agent&lt;/label&gt;
+            &lt;showInFooterMenu&gt;false&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botMessages&gt;
+                    &lt;message&gt;Unfortunately, a system error occurred. I&amp;apos;ll connect you to an agent who can help.&lt;/message&gt;
+                    &lt;messageIdentifier&gt;6bff781a-27bd-4fd3-9a5e-545d54313bd0&lt;/messageIdentifier&gt;
+                &lt;/botMessages&gt;
+                &lt;stepIdentifier&gt;390b8657-1e1d-4d5d-af4f-1ca00ca093db&lt;/stepIdentifier&gt;
+                &lt;type&gt;Message&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;conversationSystemMessage&gt;
+                    &lt;type&gt;Transfer&lt;/type&gt;
+                &lt;/conversationSystemMessage&gt;
+                &lt;stepIdentifier&gt;2cd2ecb8-e5d6-490a-a329-8fdd62e5e3ec&lt;/stepIdentifier&gt;
+                &lt;type&gt;SystemMessage&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Error_Handling&lt;/developerName&gt;
+            &lt;label&gt;Error Handler&lt;/label&gt;
+            &lt;showInFooterMenu&gt;false&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botVariableOperation&gt;
+                    &lt;askCollectIfSet&gt;false&lt;/askCollectIfSet&gt;
+                    &lt;botMessages&gt;
+                        &lt;message&gt;What time you like to set up the appointment?&lt;/message&gt;
+                        &lt;messageIdentifier&gt;db1c8f72-5d22-e3ac-d940-a9f7cebc43da&lt;/messageIdentifier&gt;
+                    &lt;/botMessages&gt;
+                    &lt;botVariableOperands&gt;
+                        &lt;disableAutoFill&gt;false&lt;/disableAutoFill&gt;
+                        &lt;sourceName&gt;_DateTime&lt;/sourceName&gt;
+                        &lt;sourceType&gt;StandardMlSlotClass&lt;/sourceType&gt;
+                        &lt;targetName&gt;ApptDateTime&lt;/targetName&gt;
+                        &lt;targetType&gt;ConversationVariable&lt;/targetType&gt;
+                    &lt;/botVariableOperands&gt;
+                    &lt;optionalCollect&gt;false&lt;/optionalCollect&gt;
+                    &lt;quickReplyWidgetType&gt;Buttons&lt;/quickReplyWidgetType&gt;
+                    &lt;type&gt;Collect&lt;/type&gt;
+                    &lt;variableOperationIdentifier&gt;e23fa3b7-c854-1169-4ec7-030cb091a885&lt;/variableOperationIdentifier&gt;
+                &lt;/botVariableOperation&gt;
+                &lt;stepIdentifier&gt;b1196beb-46f1-4dcc-b4aa-7486ae4cfd17&lt;/stepIdentifier&gt;
+                &lt;type&gt;VariableOperation&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;botNavigation&gt;
+                    &lt;botNavigationLinks&gt;
+                        &lt;targetBotDialog&gt;Ask_for_appointment_type&lt;/targetBotDialog&gt;
+                    &lt;/botNavigationLinks&gt;
+                    &lt;type&gt;Redirect&lt;/type&gt;
+                &lt;/botNavigation&gt;
+                &lt;stepIdentifier&gt;3493f124-9a0d-4ac5-965b-d2cccdff72b1&lt;/stepIdentifier&gt;
+                &lt;type&gt;Navigation&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Schedule_Appointment&lt;/developerName&gt;
+            &lt;label&gt;Schedule Appointment&lt;/label&gt;
+            &lt;showInFooterMenu&gt;true&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botVariableOperation&gt;
+                    &lt;askCollectIfSet&gt;false&lt;/askCollectIfSet&gt;
+                    &lt;botMessages&gt;
+                        &lt;message&gt;What type of appointment&lt;/message&gt;
+                        &lt;messageIdentifier&gt;4bb7bab9-7ffb-6834-58d4-95fe42586d2d&lt;/messageIdentifier&gt;
+                    &lt;/botMessages&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;Car Inspection&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;01fca43c-4167-8ce0-4064-ea6014f6d1e4&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;Car Maintenance&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;95203cce-8c74-11ad-04e9-3a7dfed1f24f&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botVariableOperands&gt;
+                        &lt;disableAutoFill&gt;true&lt;/disableAutoFill&gt;
+                        &lt;sourceName&gt;appointment_type&lt;/sourceName&gt;
+                        &lt;sourceType&gt;MlSlotClass&lt;/sourceType&gt;
+                        &lt;targetName&gt;appointmentType&lt;/targetName&gt;
+                        &lt;targetType&gt;ConversationVariable&lt;/targetType&gt;
+                    &lt;/botVariableOperands&gt;
+                    &lt;optionalCollect&gt;false&lt;/optionalCollect&gt;
+                    &lt;quickReplyType&gt;Static&lt;/quickReplyType&gt;
+                    &lt;quickReplyWidgetType&gt;Buttons&lt;/quickReplyWidgetType&gt;
+                    &lt;type&gt;Collect&lt;/type&gt;
+                    &lt;variableOperationIdentifier&gt;dcba7bf3-682d-6529-5dc3-20edebeaaf35&lt;/variableOperationIdentifier&gt;
+                &lt;/botVariableOperation&gt;
+                &lt;stepIdentifier&gt;7d685414-e474-4bb2-8d9f-0aa9ea3424ea&lt;/stepIdentifier&gt;
+                &lt;type&gt;VariableOperation&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;botNavigation&gt;
+                    &lt;botNavigationLinks&gt;
+                        &lt;targetBotDialog&gt;Ask_for_car_type&lt;/targetBotDialog&gt;
+                    &lt;/botNavigationLinks&gt;
+                    &lt;type&gt;Redirect&lt;/type&gt;
+                &lt;/botNavigation&gt;
+                &lt;stepIdentifier&gt;d2c2c402-d027-47ef-b281-30f705cc2977&lt;/stepIdentifier&gt;
+                &lt;type&gt;Navigation&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Ask_for_appointment_type&lt;/developerName&gt;
+            &lt;label&gt;Ask for appointment type&lt;/label&gt;
+            &lt;showInFooterMenu&gt;false&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botMessages&gt;
+                    &lt;message&gt;You are all set for your appointment on {!ApptDateTime} for {!appointmentType} for your car {!Car_Type}&lt;/message&gt;
+                    &lt;messageIdentifier&gt;118272b0-83ad-e8d8-0de0-92daa0ec9fc9&lt;/messageIdentifier&gt;
+                &lt;/botMessages&gt;
+                &lt;stepIdentifier&gt;141c3b77-466e-4f34-b347-f3a5805e7350&lt;/stepIdentifier&gt;
+                &lt;type&gt;Message&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;stepIdentifier&gt;947d7297-6c8a-4e5b-a8a5-44d7a847d316&lt;/stepIdentifier&gt;
+                &lt;type&gt;Wait&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Confirm_appointment&lt;/developerName&gt;
+            &lt;label&gt;Confirm appointment&lt;/label&gt;
+            &lt;showInFooterMenu&gt;false&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botNavigation&gt;
+                    &lt;botNavigationLinks&gt;
+                        &lt;targetBotDialog&gt;Schedule_Appointment&lt;/targetBotDialog&gt;
+                    &lt;/botNavigationLinks&gt;
+                    &lt;botNavigationLinks&gt;
+                        &lt;targetBotDialog&gt;Transfer_To_Agent&lt;/targetBotDialog&gt;
+                    &lt;/botNavigationLinks&gt;
+                    &lt;type&gt;Redirect&lt;/type&gt;
+                &lt;/botNavigation&gt;
+                &lt;stepIdentifier&gt;dbb09296-4a74-4618-8373-1379fc37041d&lt;/stepIdentifier&gt;
+                &lt;type&gt;Navigation&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Appointment_Menu&lt;/developerName&gt;
+            &lt;label&gt;Appointment Menu&lt;/label&gt;
+            &lt;showInFooterMenu&gt;true&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;botDialogs&gt;
+            &lt;botSteps&gt;
+                &lt;botVariableOperation&gt;
+                    &lt;askCollectIfSet&gt;false&lt;/askCollectIfSet&gt;
+                    &lt;botMessages&gt;
+                        &lt;message&gt;What type of car you have?&lt;/message&gt;
+                        &lt;messageIdentifier&gt;d3eb1be4-a229-eb2f-9f53-17970b8fbd11&lt;/messageIdentifier&gt;
+                    &lt;/botMessages&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;Toyota: Camry&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;09a8d86c-d225-c99b-148b-e0cd9604c334&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;Toyota: 4Runner&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;d8a40b69-c712-c35d-853d-beeeca9f08ed&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;Ford: Mustang&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;82d97836-9857-0db5-af32-708cbb114586&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;Ford: Ranger&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;f9b16e07-fedb-dd27-e2e0-66c5cd7ea5b8&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;Ford: Explorer&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;f2c96527-1dfa-0e7a-a711-8503d04c53b8&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botQuickReplyOptions&gt;
+                        &lt;literalValue&gt;Ford: F150&lt;/literalValue&gt;
+                        &lt;quickReplyOptionIdentifier&gt;7c54b29f-7428-d1c1-e667-6480a74a5702&lt;/quickReplyOptionIdentifier&gt;
+                    &lt;/botQuickReplyOptions&gt;
+                    &lt;botVariableOperands&gt;
+                        &lt;disableAutoFill&gt;true&lt;/disableAutoFill&gt;
+                        &lt;sourceName&gt;Car_Type&lt;/sourceName&gt;
+                        &lt;sourceType&gt;MlSlotClass&lt;/sourceType&gt;
+                        &lt;targetName&gt;Car_Type&lt;/targetName&gt;
+                        &lt;targetType&gt;ConversationVariable&lt;/targetType&gt;
+                    &lt;/botVariableOperands&gt;
+                    &lt;optionalCollect&gt;false&lt;/optionalCollect&gt;
+                    &lt;quickReplyType&gt;Static&lt;/quickReplyType&gt;
+                    &lt;quickReplyWidgetType&gt;Buttons&lt;/quickReplyWidgetType&gt;
+                    &lt;type&gt;Collect&lt;/type&gt;
+                    &lt;variableOperationIdentifier&gt;638af6ae-9405-6a15-c328-79e4cf4cd31e&lt;/variableOperationIdentifier&gt;
+                &lt;/botVariableOperation&gt;
+                &lt;stepIdentifier&gt;01542a2a-61d4-49cc-962b-0ac52767dae4&lt;/stepIdentifier&gt;
+                &lt;type&gt;VariableOperation&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;botSteps&gt;
+                &lt;botNavigation&gt;
+                    &lt;botNavigationLinks&gt;
+                        &lt;targetBotDialog&gt;Confirm_appointment&lt;/targetBotDialog&gt;
+                    &lt;/botNavigationLinks&gt;
+                    &lt;type&gt;Redirect&lt;/type&gt;
+                &lt;/botNavigation&gt;
+                &lt;stepIdentifier&gt;98bedd87-e0e3-4b71-8f57-81a79db90dea&lt;/stepIdentifier&gt;
+                &lt;type&gt;Navigation&lt;/type&gt;
+            &lt;/botSteps&gt;
+            &lt;developerName&gt;Ask_for_car_type&lt;/developerName&gt;
+            &lt;label&gt;Ask for car type&lt;/label&gt;
+            &lt;showInFooterMenu&gt;false&lt;/showInFooterMenu&gt;
+        &lt;/botDialogs&gt;
+        &lt;conversationSystemDialogs&gt;
+            &lt;dialog&gt;Error_Handling&lt;/dialog&gt;
+            &lt;type&gt;ErrorHandling&lt;/type&gt;
+        &lt;/conversationSystemDialogs&gt;
+        &lt;conversationSystemDialogs&gt;
+            &lt;dialog&gt;No_Agent_Available&lt;/dialog&gt;
+            &lt;type&gt;TransferFailed&lt;/type&gt;
+        &lt;/conversationSystemDialogs&gt;
+        &lt;conversationVariables&gt;
+            &lt;dataType&gt;Text&lt;/dataType&gt;
+            &lt;developerName&gt;appointmentType&lt;/developerName&gt;
+            &lt;label&gt;appointmentType&lt;/label&gt;
+        &lt;/conversationVariables&gt;
+        &lt;conversationVariables&gt;
+            &lt;dataType&gt;DateTime&lt;/dataType&gt;
+            &lt;developerName&gt;ApptDateTime&lt;/developerName&gt;
+            &lt;label&gt;ApptDateTime&lt;/label&gt;
+        &lt;/conversationVariables&gt;
+        &lt;conversationVariables&gt;
+            &lt;dataType&gt;Text&lt;/dataType&gt;
+            &lt;developerName&gt;Car_Type&lt;/developerName&gt;
+            &lt;label&gt;Car Type&lt;/label&gt;
+        &lt;/conversationVariables&gt;
+        &lt;conversationVariables&gt;
+            &lt;dataType&gt;Text&lt;/dataType&gt;
+            &lt;developerName&gt;LastName&lt;/developerName&gt;
+            &lt;label&gt;LastName&lt;/label&gt;
+        &lt;/conversationVariables&gt;
+        &lt;conversationVariables&gt;
+            &lt;collectionType&gt;List&lt;/collectionType&gt;
+            &lt;dataType&gt;Object&lt;/dataType&gt;
+            &lt;developerName&gt;ListVar&lt;/developerName&gt;
+            &lt;label&gt;ListVar&lt;/label&gt;
+        &lt;/conversationVariables&gt;
+        &lt;conversationVariables&gt;
+            &lt;dataType&gt;Text&lt;/dataType&gt;
+            &lt;developerName&gt;Memory_Size&lt;/developerName&gt;
+            &lt;label&gt;Memory Size&lt;/label&gt;
+        &lt;/conversationVariables&gt;
+        &lt;entryDialog&gt;Appointment_Menu&lt;/entryDialog&gt;
+        &lt;mainMenuDialog&gt;Schedule_Appointment&lt;/mainMenuDialog&gt;
+        &lt;nlpProviders&gt;
+            &lt;language&gt;en_US&lt;/language&gt;
+            &lt;nlpProviderType&gt;EinsteinAi&lt;/nlpProviderType&gt;
+        &lt;/nlpProviders&gt;
+    &lt;/botVersions&gt;
+    &lt;contextVariables&gt;
+        &lt;contextVariableMappings&gt;
+            &lt;SObjectType&gt;LiveChatTranscript&lt;/SObjectType&gt;
+            &lt;fieldName&gt;LiveChatTranscript.ChatKey&lt;/fieldName&gt;
+            &lt;messageType&gt;WebChat&lt;/messageType&gt;
+        &lt;/contextVariableMappings&gt;
+        &lt;dataType&gt;Text&lt;/dataType&gt;
+        &lt;developerName&gt;ChatKey&lt;/developerName&gt;
+        &lt;label&gt;Chat Key&lt;/label&gt;
+    &lt;/contextVariables&gt;
+    &lt;contextVariables&gt;
+        &lt;contextVariableMappings&gt;
+            &lt;SObjectType&gt;LiveChatTranscript&lt;/SObjectType&gt;
+            &lt;fieldName&gt;LiveChatTranscript.ContactId&lt;/fieldName&gt;
+            &lt;messageType&gt;WebChat&lt;/messageType&gt;
+        &lt;/contextVariableMappings&gt;
+        &lt;dataType&gt;Id&lt;/dataType&gt;
+        &lt;developerName&gt;ContactId&lt;/developerName&gt;
+        &lt;label&gt;Contact Id&lt;/label&gt;
+    &lt;/contextVariables&gt;
+    &lt;contextVariables&gt;
+        &lt;contextVariableMappings&gt;
+            &lt;SObjectType&gt;LiveChatTranscript&lt;/SObjectType&gt;
+            &lt;fieldName&gt;LiveChatTranscript.LiveChatVisitorId&lt;/fieldName&gt;
+            &lt;messageType&gt;WebChat&lt;/messageType&gt;
+        &lt;/contextVariableMappings&gt;
+        &lt;dataType&gt;Id&lt;/dataType&gt;
+        &lt;developerName&gt;EndUserId&lt;/developerName&gt;
+        &lt;label&gt;End User Id&lt;/label&gt;
+    &lt;/contextVariables&gt;
+    &lt;contextVariables&gt;
+        &lt;contextVariableMappings&gt;
+            &lt;SObjectType&gt;LiveChatTranscript&lt;/SObjectType&gt;
+            &lt;fieldName&gt;LiveChatTranscript.Id&lt;/fieldName&gt;
+            &lt;messageType&gt;WebChat&lt;/messageType&gt;
+        &lt;/contextVariableMappings&gt;
+        &lt;dataType&gt;Id&lt;/dataType&gt;
+        &lt;developerName&gt;RoutableId&lt;/developerName&gt;
+        &lt;label&gt;Routable Id&lt;/label&gt;
+    &lt;/contextVariables&gt;
+    &lt;conversationChannelProviders&gt;
+        &lt;agentRequired&gt;false&lt;/agentRequired&gt;
+        &lt;chatButtonName&gt;botQueueGroup&lt;/chatButtonName&gt;
+    &lt;/conversationChannelProviders&gt;
+    &lt;description&gt;A bot from scratch.&lt;/description&gt;
+    &lt;label&gt;kovai&lt;/label&gt;
+    &lt;logPrivateConversationData&gt;false&lt;/logPrivateConversationData&gt;
+    &lt;richContentEnabled&gt;false&lt;/richContentEnabled&gt;
+&lt;/Bot&gt;
+</code></pre>
+<h2 id="references"><a class="header" href="#references">References</a></h2>
+<ul>
+<li><a href="https://trailhead.salesforce.com/content/learn/projects/build-an-einstein-bot">Build an Einstein Bot</a></li>
+<li><a href="https://developer.salesforce.com/docs/atlas.en-us.bot_cookbook.meta/bot_cookbook/bot_cookbook_first_bot.htm">Einstein Bots Developer Cookbook</a></li>
+<li><a href="https://help.salesforce.com/s/articleView?id=sf.bots_service_deploy_to_channels.htm&amp;type=5">Deploy Your Bot to Your Channels</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="chatbots.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="DeepPavlov.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="chatbots.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="DeepPavlov.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:5000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>

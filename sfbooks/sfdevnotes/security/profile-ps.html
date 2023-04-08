@@ -1,0 +1,998 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Profile, PermissionSet - Salesforce Development Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../custom.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../dg/dg.html"><strong aria-hidden="true">2.</strong> Data Governance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dg/changeManagement.html"><strong aria-hidden="true">2.1.</strong> Change Management</a></li></ol></li><li class="chapter-item expanded "><a href="../dm/datamodel.html"><strong aria-hidden="true">3.</strong> Data Model</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dm/fsc-dm.html"><strong aria-hidden="true">3.1.</strong> Financial Services Cloud</a></li><li class="chapter-item expanded "><a href="../dm/salescloud.html"><strong aria-hidden="true">3.2.</strong> Sales Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/aboutTools.html"><strong aria-hidden="true">4.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-org.html"><strong aria-hidden="true">4.1.</strong> Org Tools</a></li><li class="chapter-item expanded "><a href="../tools/tools-data-bulkapi2.html"><strong aria-hidden="true">4.2.</strong> Data Loading BulkAPI2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/userloading.html"><strong aria-hidden="true">4.2.1.</strong> User Loading</a></li><li class="chapter-item expanded "><a href="../tools/product2loading.html"><strong aria-hidden="true">4.2.2.</strong> Product2 Loading and Update</a></li><li class="chapter-item expanded "><a href="../tools/flowinterview.html"><strong aria-hidden="true">4.2.3.</strong> FlowInterview Query and Deletion</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/tools-scpl.html"><strong aria-hidden="true">4.3.</strong> Loading State and Country Picklist</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-scpl-update.html"><strong aria-hidden="true">4.3.1.</strong> Updating State and Country Picklist </a></li></ol></li><li class="chapter-item expanded "><a href="../tools/project-management/gantt.html"><strong aria-hidden="true">4.4.</strong> Project Management</a></li><li class="chapter-item expanded "><a href="../tools/em.html"><strong aria-hidden="true">4.5.</strong> Event Monitoring</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../monitoring/realtime-event-monitoring.html"><strong aria-hidden="true">4.5.1.</strong> Real-Time Event Monitoring</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/instance.html"><strong aria-hidden="true">4.6.</strong> Instance Related</a></li><li class="chapter-item expanded "><a href="../tools/oms.html"><strong aria-hidden="true">4.7.</strong> Org Metadata Snapshot</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/scripts.html"><strong aria-hidden="true">5.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="../cq/cq.html"><strong aria-hidden="true">6.</strong> Code Quality</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cq/pmd.html"><strong aria-hidden="true">6.1.</strong> Code Scan PMD</a></li><li class="chapter-item expanded "><a href="../cq/comments.html"><strong aria-hidden="true">6.2.</strong> Comments Checking</a></li><li class="chapter-item expanded "><a href="../cq/test-coverage.html"><strong aria-hidden="true">6.3.</strong> Apex Code Test Coverage</a></li><li class="chapter-item expanded "><a href="../cq/lwc-linting.html"><strong aria-hidden="true">6.4.</strong> LWC Linting</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/deployments.html"><strong aria-hidden="true">7.</strong> Deployments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/delta.html"><strong aria-hidden="true">7.1.</strong> Delta Deployments</a></li><li class="chapter-item expanded "><a href="../deployments/gha.html"><strong aria-hidden="true">7.2.</strong> Github Actions</a></li><li class="chapter-item expanded "><a href="../deployments/validate.html"><strong aria-hidden="true">7.3.</strong> Validating changes</a></li><li class="chapter-item expanded "><a href="../deployments/admin-changes.html"><strong aria-hidden="true">7.4.</strong> Taking care of Admin changes</a></li><li class="chapter-item expanded "><a href="../deployments/devOpsCenter.html"><strong aria-hidden="true">7.5.</strong> DevOps Center</a></li><li class="chapter-item expanded "><a href="../deployments/jenkins.html"><strong aria-hidden="true">7.6.</strong> Jenkins</a></li><li class="chapter-item expanded "><a href="../deployments/git.html"><strong aria-hidden="true">7.7.</strong> git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/git-internals.html"><strong aria-hidden="true">7.7.1.</strong> git internals</a></li><li class="chapter-item expanded "><a href="../deployments/git-hooks.html"><strong aria-hidden="true">7.7.2.</strong> git hooks</a></li><li class="chapter-item expanded "><a href="../deployments/git-ops.html"><strong aria-hidden="true">7.7.3.</strong> git operations</a></li><li class="chapter-item expanded "><a href="../deployments/pr-template.html"><strong aria-hidden="true">7.7.4.</strong> pull request template</a></li><li class="chapter-item expanded "><a href="../deployments/git-diff.html"><strong aria-hidden="true">7.7.5.</strong> git diff</a></li><li class="chapter-item expanded "><a href="../deployments/git-log.html"><strong aria-hidden="true">7.7.6.</strong> git log</a></li><li class="chapter-item expanded "><a href="../deployments/git-stash.html"><strong aria-hidden="true">7.7.7.</strong> git stash</a></li><li class="chapter-item expanded "><a href="../deployments/git-config.html"><strong aria-hidden="true">7.7.8.</strong> git config</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/sourceTracking.html"><strong aria-hidden="true">7.8.</strong> Source Tracking</a></li><li class="chapter-item expanded "><a href="../deployments/dangling.html"><strong aria-hidden="true">7.9.</strong> Dangling Fields Finder</a></li><li class="chapter-item expanded "><a href="../deployments/sbx.html"><strong aria-hidden="true">7.10.</strong> Sandbox Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/sandbox-preview-guide.html"><strong aria-hidden="true">7.10.1.</strong> Sandbox Preview Guide</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/MetadataComponentDependency.html"><strong aria-hidden="true">7.11.</strong> MetadataComponentDependency</a></li></ol></li><li class="chapter-item expanded "><a href="../crma/tools.html"><strong aria-hidden="true">8.</strong> CRMA tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crma/load-export.html"><strong aria-hidden="true">8.1.</strong> Dataset Load and Export</a></li><li class="chapter-item expanded "><a href="../crma/analysis.html"><strong aria-hidden="true">8.2.</strong> Analysis</a></li><li class="chapter-item expanded "><a href="../crma/binding.html"><strong aria-hidden="true">8.3.</strong> Binding</a></li><li class="chapter-item expanded "><a href="../crma/deployment.html"><strong aria-hidden="true">8.4.</strong> Deployment</a></li></ol></li><li class="chapter-item expanded "><a href="../perf/perf.html"><strong aria-hidden="true">9.</strong> Performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../perf/lex-perf.html"><strong aria-hidden="true">9.1.</strong> Lex Performance</a></li><li class="chapter-item expanded "><a href="../perf/perf-testing.html"><strong aria-hidden="true">9.2.</strong> Performance testing</a></li><li class="chapter-item expanded "><a href="../perf/perf-pw.html"><strong aria-hidden="true">9.3.</strong> Testing with Playwright</a></li><li class="chapter-item expanded "><a href="../perf/edge.html"><strong aria-hidden="true">9.4.</strong> Salesforce Edge Network</a></li><li class="chapter-item expanded "><a href="../perf/lex-query.html"><strong aria-hidden="true">9.5.</strong> Lightning Experience Queries</a></li><li class="chapter-item expanded "><a href="../perf/rum.html"><strong aria-hidden="true">9.6.</strong> Real User Monitoring (RUM)</a></li></ol></li><li class="chapter-item expanded "><a href="../dwg/dwg-tools.html"><strong aria-hidden="true">10.</strong> Diagram tools</a></li><li class="chapter-item expanded "><a href="../xml/xml-tools.html"><strong aria-hidden="true">11.</strong> XML tools</a></li><li class="chapter-item expanded "><a href="../dp/dp.html"><strong aria-hidden="true">12.</strong> Data Processing tools</a></li><li class="chapter-item expanded "><a href="../i18n/i18n.html"><strong aria-hidden="true">13.</strong> Translation Tools</a></li><li class="chapter-item expanded "><a href="../media/recording.html"><strong aria-hidden="true">14.</strong> Media - Recording tools</a></li><li class="chapter-item expanded "><a href="../media/image.html"><strong aria-hidden="true">15.</strong> Image Processing</a></li><li class="chapter-item expanded "><a href="../codegen/codegen.html"><strong aria-hidden="true">16.</strong> Code Generators</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../codegen/lwc.html"><strong aria-hidden="true">16.1.</strong> LWC Code Generators</a></li></ol></li><li class="chapter-item expanded "><a href="../ml/ml.html"><strong aria-hidden="true">17.</strong> Machine Learning</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ml/sdcg.html"><strong aria-hidden="true">17.1.</strong> Semantic Doc Compare and Group</a></li><li class="chapter-item expanded "><a href="../ml/datacatalog.html"><strong aria-hidden="true">17.2.</strong> Data Catalog for ML Work</a></li><li class="chapter-item expanded "><a href="../ml/chatgpt.html"><strong aria-hidden="true">17.3.</strong> openAI - ChatGPT</a></li><li class="chapter-item expanded "><a href="../ml/gpt3codex.html"><strong aria-hidden="true">17.4.</strong> openAI - GPT3 Codex</a></li><li class="chapter-item expanded "><a href="../ml/einsteinbot.html"><strong aria-hidden="true">17.5.</strong> Einstein Bot</a></li><li class="chapter-item expanded "><a href="../ml/dialogflow.html"><strong aria-hidden="true">17.6.</strong> Dialogflow - Knowledge Base</a></li></ol></li><li class="chapter-item expanded "><a href="../docmgmt/docmgmt.html"><strong aria-hidden="true">18.</strong> Document Management tools</a></li><li class="chapter-item expanded "><a href="../design/design-notes.html"><strong aria-hidden="true">19.</strong> Design Principles</a></li><li class="chapter-item expanded "><a href="../chromeext/ext.html"><strong aria-hidden="true">20.</strong> Chrome Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chromeext/onnu.html"><strong aria-hidden="true">20.1.</strong> ONNU</a></li></ol></li><li class="chapter-item expanded "><a href="../vscode/ext.html"><strong aria-hidden="true">21.</strong> VS Code Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../vscode/sfland.html"><strong aria-hidden="true">21.1.</strong> SF Land</a></li><li class="chapter-item expanded "><a href="../vscode/pmd.html"><strong aria-hidden="true">21.2.</strong> VSCode Apex PMD</a></li></ol></li><li class="chapter-item expanded "><a href="../dviz/dviz.html"><strong aria-hidden="true">22.</strong> Data Viz</a></li><li class="chapter-item expanded "><a href="../releases.html"><strong aria-hidden="true">23.</strong> Releases</a></li><li class="chapter-item expanded "><a href="../rest/rest_tester.html"><strong aria-hidden="true">24.</strong> REST Tester</a></li><li class="chapter-item expanded "><a href="../security/security.html"><strong aria-hidden="true">25.</strong> Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/sd.html"><strong aria-hidden="true">25.1.</strong> Sharing Debugger</a></li><li class="chapter-item expanded "><a href="../security/rh.html"><strong aria-hidden="true">25.2.</strong> Role Hierarchy</a></li><li class="chapter-item expanded "><a href="../security/shield.html"><strong aria-hidden="true">25.3.</strong> Shield</a></li><li class="chapter-item expanded "><a href="../security/profile-ps.html" class="active"><strong aria-hidden="true">25.4.</strong> Profile, PermissionSet</a></li><li class="chapter-item expanded "><a href="../security/setupAuditTrail.html"><strong aria-hidden="true">25.5.</strong> SetupAuditTrail</a></li><li class="chapter-item expanded "><a href="../security/datamask.html"><strong aria-hidden="true">25.6.</strong> Data Mask</a></li><li class="chapter-item expanded "><a href="../security/saml.html"><strong aria-hidden="true">25.7.</strong> SAML</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectConcepts.html"><strong aria-hidden="true">25.8.</strong> OpenID Connect</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/openIDConnect.html"><strong aria-hidden="true">25.8.1.</strong> OIDC Google</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectProvider.html"><strong aria-hidden="true">25.8.2.</strong> OIDC Provider</a></li><li class="chapter-item expanded "><a href="../security/jwt.html"><strong aria-hidden="true">25.8.3.</strong> JWT</a></li></ol></li><li class="chapter-item expanded "><a href="../security/openssl.html"><strong aria-hidden="true">25.9.</strong> OpenSSL</a></li></ol></li><li class="chapter-item expanded "><a href="../mobile/mobile.html"><strong aria-hidden="true">26.</strong> Mobile</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../mobile/ios-sim.html"><strong aria-hidden="true">26.1.</strong> Simulator</a></li></ol></li><li class="chapter-item expanded "><a href="../rd/rd.html"><strong aria-hidden="true">27.</strong> Reports and Dashboards</a></li><li class="chapter-item expanded "><a href="../customLabels/cl.html"><strong aria-hidden="true">28.</strong> Custom Labels</a></li><li class="chapter-item expanded "><a href="../accessibility/508.html"><strong aria-hidden="true">29.</strong> 508 - Accessibility</a></li><li class="chapter-item expanded "><a href="../process-automation/pa.html"><strong aria-hidden="true">30.</strong> Process Automation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../process-automation/flow.html"><strong aria-hidden="true">30.1.</strong> Flow</a></li></ol></li><li class="chapter-item expanded "><a href="../great/folks.html"><strong aria-hidden="true">31.</strong> Great Folks</a></li><li class="chapter-item expanded "><a href="../editor/editor-tips.html"><strong aria-hidden="true">32.</strong> Editor tips</a></li><li class="chapter-item expanded "><a href="../bash/tips.html"><strong aria-hidden="true">33.</strong> Bash tips</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Salesforce Development Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="profile-permissionset"><a class="header" href="#profile-permissionset">Profile, PermissionSet</a></h1>
+<h2 id="topics"><a class="header" href="#topics">Topics</a></h2>
+<ul>
+<li><a href="#profile">Retrieving Profile from an Org</a></li>
+<li><a href="#ps">Retrieving Permission from an Org</a></li>
+<li><a href="#rc2">Comparing a profile in 2 orgs </a></li>
+<li><a href="#deltaProfile">Incremental/delta deployment of profile entries</a></li>
+<li><a href="#compare2branches">Comparing a permissionset/profile between 2 git branches</a></li>
+<li><a href="#viewprofile">Viewing Profile components</a></li>
+<li><a href="#micro-delta">Micro-delta on Profile and PermissionSet</a></li>
+<li><a href="#queries">Queries</a></li>
+<li><a href="#EOLProfile">EOL for permissions on profiles by Spring 26</a></li>
+<li><a href="#viz">Visualize Profile, PermissionSet</a>
+<ul>
+<li><a href="#xmlutil">Using xmlutil tool</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<p><a name='profile'></a></p>
+<h2 id="how-to-retrieve-profile-from-an-org-and-verify-its-correctness"><a class="header" href="#how-to-retrieve-profile-from-an-org-and-verify-its-correctness">How to retrieve Profile from an Org and verify its correctness?</a></h2>
+<h3 id="demo-video"><a class="header" href="#demo-video">Demo Video</a></h3>
+<ul>
+<li>Explains :
+<ul>
+<li>How to Retrieve a Profile from a Salesforce org and check its validity and talks about how you can commit it back into version control and deploy into another Salesforce org</li>
+</ul>
+</li>
+</ul>
+<iframe width="920" height="500" src="https://www.youtube.com/embed/aP4A9By1Ex8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<pre><code> sfdx mohanc:mdapi:helper:retrieve  -m Profile -u mohan.chinnappan.n.sel@gmail.com -n &quot;Admin&quot; 
+==== Writing to ./43/unpackaged/profiles/Admin.profile-meta.xml... ====
+==== Writing package.xml into ./43/unpackaged/package.xml... ====
+==== Executing zip command:  zip -r 43.zip unpackaged ====
+==== RUN:  cd 43; sfdx force:mdapi:deploy -f 43.zip -u mohan.chinnappan.n.sel@gmail.com  -w 1000  --verbose -c ====
+~/test2  &gt;vi 43/unpackaged/profiles/Admin.profile-meta.xml 
+~/test2  &gt;cd 43; sfdx force:mdapi:deploy -f 43.zip -u mohan.chinnappan.n.sel@gmail.com  -w 1000  --verbose -c
+Deploying metadata to mohan.chinnappan.n.sel@gmail.com using the v56.0 SOAP API
+Deploy ID: 0Af4x00000YA7XwCAL
+DEPLOY PROGRESS | ████████████████████████████████████████ | 1/1 Components
+
+=== Deployed Source
+
+ Type    File                                       Name        Id                 
+ ─────── ────────────────────────────────────────── ─────────── ────────────────── 
+         unpackaged/package.xml                     package.xml                    
+ Profile unpackaged/profiles/Admin.profile-meta.xml Admin       00e4x000002b8IgAAI 
+~/test2/43  &gt;cd ..
+~/test2  &gt;!v
+vi 43/unpackaged/profiles/Admin.profile-meta.xml
+
+</code></pre>
+<ul>
+<li>Note you can pass comma separated list of Profiles to this command like </li>
+</ul>
+<pre><code> sfdx mohanc:mdapi:helper:retrieve  -m Profile -u mohan.chinnappan.n.sel@gmail.com -n &quot;Profile1, Profile2&quot; 
+</code></pre>
+<p><a name='ps'></a></p>
+<h2 id="how-to-retrieve-permission-set-from-an-org-and-verify-its-correctness"><a class="header" href="#how-to-retrieve-permission-set-from-an-org-and-verify-its-correctness">How to retrieve Permission Set from an Org and verify its correctness?</a></h2>
+<h3 id="demo-video-1"><a class="header" href="#demo-video-1">Demo Video</a></h3>
+<iframe width="920" height="500" src="https://www.youtube.com/embed/k3ITeTNQT7U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<pre><code>~/test2  &gt; sfdx mohanc:mdapi:helper:retrieve  -m PermissionSet -u mohan.chinnappan.n.sel@gmail.com -n 'Experience_Profile_Manager'
+==== Writing to ./41/unpackaged/permissionsets/Experience_Profile_Manager.permissionset-meta.xml... ====
+==== Writing package.xml into ./41/unpackaged/package.xml... ====
+==== Executing zip command:  zip -r 41.zip unpackaged ====
+==== RUN:  cd 41; sfdx force:mdapi:deploy -f 41.zip -u mohan.chinnappan.n.sel@gmail.com  -w 1000  --verbose -c ====
+~/test2  &gt;vi 41/unpackaged/permissionsets/Experience_Profile_Manager.permissionset-meta.xml 
+~/test2  &gt;cd 41; sfdx force:mdapi:deploy -f 41.zip -u mohan.chinnappan.n.sel@gmail.com  -w 1000  --verbose -c
+Deploying metadata to mohan.chinnappan.n.sel@gmail.com using the v56.0 SOAP API
+Deploy ID: 0Af4x00000YA7YGCA1
+DEPLOY PROGRESS | ████████████████████████████████████████ | 1/1 Components
+
+=== Deployed Source
+
+ Type          File                                                                        Name                       Id                 
+ ───────────── ─────────────────────────────────────────────────────────────────────────── ────────────────────────── ────────────────── 
+               unpackaged/package.xml                                                      package.xml                                   
+ PermissionSet unpackaged/permissionsets/Experience_Profile_Manager.permissionset-meta.xml Experience_Profile_Manager 0PS4x0000045OQEGA2 
+~/test2/41  &gt;
+
+</code></pre>
+<ul>
+<li>Note you can pass comma separated list of <strong>PermissionSets API Names</strong> to this command like </li>
+</ul>
+<pre><code> sfdx mohanc:mdapi:helper:retrieve  -m PermissionSet -u mohan.chinnappan.n.sel@gmail.com -n &quot;Acct_View_All, Oppty_View_All&quot; 
+</code></pre>
+<hr />
+<p><a name='rc2'></a></p>
+<h2 id="comparing-a-profile-in-2-orgs"><a class="header" href="#comparing-a-profile-in-2-orgs">Comparing a profile in 2 orgs</a></h2>
+<iframe width="920" height="500" src="https://www.youtube.com/embed/LABZgIj2QAI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<pre><code>~/treeprj [patch1] &gt; sfdx mohanc:mdapi:helper:rc2 -m Profile -o mohan.chinnappan.n.sel@gmail.com,mohan.chinnappan.n.sel2@gmail.com  -n Admin
+====  sfdx mohanc:mdapi:helper:retrieveSimple -u mohan.chinnappan.n.sel@gmail.com -m Profile -n &quot;Admin&quot; &gt; /var/folders/ch/p19n6yj11wd1vp5c3svhpt800000gp/T/Profile-Admin.xml ====
+====  sfdx mohanc:mdapi:helper:retrieveSimple -u mohan.chinnappan.n.sel2@gmail.com -m Profile -n &quot;Admin&quot; &gt; /var/folders/ch/p19n6yj11wd1vp5c3svhpt800000gp/T/Profile-Admin.xml  ====
+~/treeprj [patch1] &gt;
+
+</code></pre>
+<h2 id="package-xml"><a class="header" href="#package-xml">Package xml</a></h2>
+<ul>
+<li>For <a href="https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_profile.htm">Profile</a> </li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=1.0 encoding=UTF-8 standalone=yes?&gt;
+&lt;Package xmlns=http://soap.sforce.com/2006/04/metadata&gt;
+
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;ApexClass&lt;/name&gt;
+    &lt;/types&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;ApexPage&lt;/name&gt;
+    &lt;/types&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;CustomApplication&lt;/name&gt;
+    &lt;/types&gt;
+  &lt;!-- need to specify Object.Field 
+     &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;CustomField&lt;/name&gt;
+    &lt;/types&gt;
+    --&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;CustomMetadata&lt;/name&gt;
+    &lt;/types&gt;  
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;CustomObject&lt;/name&gt;
+    &lt;/types&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;CustomTab&lt;/name&gt;
+    &lt;/types&gt;
+
+&lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;ExternalDataSource&lt;/name&gt;
+&lt;/types&gt;    
+
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;Layout&lt;/name&gt;
+&lt;/types&gt;    
+&lt;!-- needs specific value    
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;RecordType&lt;/name&gt;
+    &lt;/types&gt;
+--&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;FlexiPage&lt;/name&gt;
+    &lt;/types&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;Profile&lt;/name&gt;
+    &lt;/types&gt;
+    &lt;version&gt;56.0&lt;/version&gt;
+&lt;/Package&gt;
+</code></pre>
+<ul>
+<li>For Permission set</li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=1.0 encoding=UTF-8 standalone=yes?&gt;
+&lt;Package xmlns=http://soap.sforce.com/2006/04/metadata&gt;
+ 
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;ApexClass&lt;/name&gt;
+    &lt;/types&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;ApexPage&lt;/name&gt;
+    &lt;/types&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;CustomApplication&lt;/name&gt;
+    &lt;/types&gt;
+
+    &lt;!-- need to specify Object.Field 
+     &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;CustomField&lt;/name&gt;
+    &lt;/types&gt;
+    --&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;CustomMetadata&lt;/name&gt;
+    &lt;/types&gt;  
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;CustomObject&lt;/name&gt;
+    &lt;/types&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;CustomTab&lt;/name&gt;
+    &lt;/types&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;ExternalDataSource&lt;/name&gt;
+    &lt;/types&gt;    
+&lt;!-- needs specific value    
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;RecordType&lt;/name&gt;
+    &lt;/types&gt;
+--&gt;
+    &lt;types&gt;
+        &lt;members&gt;*&lt;/members&gt;
+        &lt;name&gt;PermissionSet&lt;/name&gt;
+    &lt;/types&gt;
+    &lt;version&gt;56.0&lt;/version&gt;
+&lt;/Package&gt;
+</code></pre>
+<p><a name='deltaProfile'></a></p>
+<h2 id="incrementaldelta-deployment-of-profile-entries"><a class="header" href="#incrementaldelta-deployment-of-profile-entries">Incremental/delta deployment of profile entries</a></h2>
+<h3 id="use-case"><a class="header" href="#use-case">Use Case</a></h3>
+<ul>
+<li><code>Read Only.profile</code> current has no <code>pageAccesses</code> for <code>CommunitiesLanding</code></li>
+</ul>
+<p><img src="img/ROProfilePageAccessesPre.png" alt="Pre" /></p>
+<ul>
+<li>
+<p>Current xml
+<img src="img/RO-per-xml.png" alt="Current xml" /></p>
+</li>
+<li>
+<p>We like to add this <code>pageAccesses</code> in the file <code>Read Only.profile</code></p>
+</li>
+</ul>
+<pre><code class="language-xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Profile xmlns=&quot;http://soap.sforce.com/2006/04/metadata&quot;&gt;
+   &lt;pageAccesses&gt;
+        &lt;apexPage&gt;CommunitiesLanding&lt;/apexPage&gt;
+        &lt;enabled&gt;true&lt;/enabled&gt;
+    &lt;/pageAccesses&gt;
+&lt;/Profile&gt;
+ 
+
+</code></pre>
+<p>in an incremental manner <strong>instead of deploying the whole xml</strong> with </p>
+<p><img src="img/RO-updated.png" alt="whole xml" /></p>
+<h3 id="steps"><a class="header" href="#steps">Steps</a></h3>
+<ul>
+<li>
+<ol>
+<li>Build the folders</li>
+</ol>
+</li>
+</ul>
+<pre><code>mkdir 100
+cd 100
+mkdir unpackaged
+cd unpackaged
+mkdir profiles
+
+</code></pre>
+<ul>
+<li>
+<ol start="2">
+<li>Build the <code>package.xml</code> using this <a href="https://mohan-chinnappan-n5.github.io/pkg/pkg-gen.html">tool</a>:
+<img src="img/package-xml-builder.webm.gif" alt="Build package.xml" /></li>
+</ol>
+<ul>
+<li>Note this tool puts the package.xml content into  your clipboard</li>
+</ul>
+</li>
+</ul>
+<pre><code># Get the package.xml content from clipboard
+pbpaste &gt; package.xml
+
+</code></pre>
+<pre><code>bat package.xml 
+───────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: package.xml
+───────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+   2   │ &lt;Package xmlns=&quot;http://soap.sforce.com/2006/04/metadata&quot;&gt;
+   3   │   &lt;version&gt;56.0&lt;/version&gt;
+   4   │ 
+   5   │ &lt;types&gt;
+   6   │     &lt;members&gt;Read Only&lt;/members&gt;
+   7   │     &lt;name&gt;Profile&lt;/name&gt;
+   8   │ &lt;/types&gt;
+   9   │ 
+  10   │ 
+  11   │ &lt;/Package&gt;
+</code></pre>
+<ul>
+<li>Copy <code>Read Only.profile</code> to profiles folder</li>
+</ul>
+<pre><code>
+/tmp/profile-exp/100/unpackaged  &gt;vi &quot;profiles/Read Only.profile&quot;
+/tmp/profile-exp/100/unpackaged  &gt;bat  &quot;profiles/Read Only.profile&quot;
+───────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: profiles/Read Only.profile
+───────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+   2   │ &lt;Profile xmlns=&quot;http://soap.sforce.com/2006/04/metadata&quot;&gt;
+   3   │    &lt;pageAccesses&gt;
+   4   │         &lt;apexPage&gt;CommunitiesLanding&lt;/apexPage&gt;
+   5   │         &lt;enabled&gt;true&lt;/enabled&gt;
+   6   │     &lt;/pageAccesses&gt;
+   7   │ &lt;/Profile&gt;
+   8   │  
+   9   │ 
+  10   │ 
+───────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ 
+</code></pre>
+<ul>
+<li>zip the package</li>
+</ul>
+<pre><code>/tmp/profile-exp/100/unpackaged  &gt;cd ..
+/tmp/profile-exp/100  &gt;pwd
+/tmp/profile-exp/100
+/tmp/profile-exp/100  &gt;zip -r 100.zip unpackaged 
+  adding: unpackaged/ (stored 0%)
+  adding: unpackaged/package.xml (deflated 24%)
+  adding: unpackaged/profiles/ (stored 0%)
+  adding: unpackaged/profiles/Read Only.profile (deflated 29%)
+</code></pre>
+<pre><code>&gt;tree
+.
+├── 100.zip
+└── unpackaged
+    ├── package.xml
+    └── profiles
+        └── Read\ Only.profile
+</code></pre>
+<ul>
+<li>Deploy 100.zip after you have logged into the org (checkOnly)</li>
+</ul>
+<pre><code>/tmp/profile-exp/100  &gt;sfdx force:mdapi:deploy -f 100.zip -u mohan.chinnappan.n.sel@gmail.com  -w 1000  --verbose -c 
+Deploying metadata to mohan.chinnappan.n.sel@gmail.com using the v57.0 SOAP API
+Deploy ID: 0Af4x00000YS5fmCAD
+DEPLOY PROGRESS | ████████████████████████████████████████ | 1/1 Components
+
+=== Deployed Source
+
+ Type    File                                  Name        Id                 
+ ─────── ───────────────────────────────────── ─────────── ────────────────── 
+         unpackaged/package.xml                package.xml                    
+ Profile unpackaged/profiles/Read Only.profile Read Only   00e4x000002b8JCAAY
+</code></pre>
+<ul>
+<li>Now Deploy </li>
+</ul>
+<pre><code>sfdx force:mdapi:deploy -f 100.zip -u mohan.chinnappan.n.sel@gmail.com  -w 1000  --verbose  
+Deploying metadata to mohan.chinnappan.n.sel@gmail.com using the v57.0 SOAP API
+Deploy ID: 0Af4x00000YS5hlCAD
+DEPLOY PROGRESS | ████████████████████████████████████████ | 1/1 Components
+
+=== Deployed Source
+
+ Type    File                                  Name        Id                 
+ ─────── ───────────────────────────────────── ─────────── ────────────────── 
+         unpackaged/package.xml                package.xml                    
+ Profile unpackaged/profiles/Read Only.profile Read Only   00e4x000002b8JCAAY 
+</code></pre>
+<ul>
+<li>Open the org to see the DeployStatus</li>
+</ul>
+<pre><code>sfdx force:org:open  -p  lightning/setup/DeployStatus/home -u mohan.chinnappan.n.sel@gmail.com  
+
+</code></pre>
+<p><img src="img/deploy-status-1.png" alt="Deploy Status" /></p>
+<ul>
+<li>Check this profile in the org</li>
+</ul>
+<p><img src="img/ROProfilePageAccessesPost.png?v=2" alt="post" /></p>
+<p><a name="viewprofile"></a></p>
+<h2 id="viewing-components-in-profilepermissionset-in-the-org"><a class="header" href="#viewing-components-in-profilepermissionset-in-the-org">Viewing components in Profile/PermissionSet in the org</a></h2>
+<h3 id="get-xmljson-for-the-given-profilepermissionset-in-the-org"><a class="header" href="#get-xmljson-for-the-given-profilepermissionset-in-the-org">Get XML/JSON for the given Profile/PermissionSet in the org</a></h3>
+<pre><code>sfdx mohanc:mdapi:helper:retrieveSimple  -m Profile -u mohan.chinnappan.n.sel2@gmail.com -n Admin -f xml
+</code></pre>
+<pre><code>sfdx mohanc:mdapi:helper:retrieveSimple  -m Profile -u mohan.chinnappan.n.sel2@gmail.com -n Admin -f json
+</code></pre>
+<pre><code>sfdx mohanc:mdapi:helper:retrieveSimple  -m PermissionSet -u mohan.chinnappan.n.sel2@gmail.com -n &quot;Experience_Profile_Manager&quot; -f xml
+
+</code></pre>
+<pre><code>sfdx mohanc:mdapi:helper:retrieveSimple  -m PermissionSet -u mohan.chinnappan.n.sel2@gmail.com -n &quot;Experience_Profile_Manager&quot; -f json
+
+</code></pre>
+<pre><code>
+sfdx mohanc:mdapi:helper:retrieveSimple  -m PermissionSet -u mohan.chinnappan.n.sel2@gmail.com -n Experience_Profile_Manager -f dt -s objectPermissions
+
+</code></pre>
+<pre><code>No data found!
+Valid sections:
+_________
+applicationVisibilities
+classAccesses
+customPermissions
+customMetadataTypeAccesses
+fieldPermissions
+layoutAssignments
+objectPermissions
+recordTypeVisibilities
+tabVisibilities
+userPermissions
+________
+
+</code></pre>
+<h3 id="permissionset"><a class="header" href="#permissionset">PermissionSet</a></h3>
+<pre><code>sfdx mohanc:mdapi:helper:retrieveSimple  -m PermissionSet -u mohan.chinnappan.n.sel2@gmail.com  -n Experience_Profile_Manager -f dt -s userPermissions 
+</code></pre>
+<p><img src="img/ps.viz-1.png" alt="ps userpermissions" /></p>
+<h3 id="profile"><a class="header" href="#profile">Profile</a></h3>
+<pre><code>sfdx mohanc:mdapi:helper:retrieveSimple  -m Profile -u mohan.chinnappan.n.sel2@gmail.com -n Admin -f dt -s userPermissions
+</code></pre>
+<p><img src="img/profile-viz-1.png" alt="profile userpermissions" /></p>
+<p><a name='micro-delta'></a></p>
+<h2 id="micro-delta-on-profile-and-permissionset"><a class="header" href="#micro-delta-on-profile-and-permissionset">Micro-delta on Profile and PermissionSet</a></h2>
+<h3 id="use-case-1"><a class="header" href="#use-case-1">Use case</a></h3>
+<ul>
+<li>We like to know the delta for a Profile or PermissionSet in the version control (which is in our local folder) with the same Profile or PermissionSet in the Org</li>
+<li>Tool should be able to produce a micro-delta profile or PermissionSet xml file which we can use for our delta deployments</li>
+</ul>
+<pre><code>
+sfdx mohanc:mdapi:helper:retrieveSimple  -m Profile -u mohan.chinnappan.n.sel2@gmail.com -n Admin -f jsonSection  -l ~/treeprj/force-app/main/default/profiles/Admin.profile-meta.xml -s ALL 
+
+
+</code></pre>
+<h3 id="flags"><a class="header" href="#flags">Flags:</a></h3>
+<ul>
+<li>-m Profile - metadata type</li>
+<li>-u is user name to login into the org</li>
+<li>-n Admin : We are working with Admin Proffile</li>
+<li>-f jsonSection : we like to go by section by section </li>
+<li>-l is the local file we got from the version control</li>
+<li>-s All says all the sections</li>
+</ul>
+<h3 id="sections"><a class="header" href="#sections"><a href="https://github.com/mohan-chinnappan-n/xml-xslt/blob/main/permissionSections.json">Sections</a></a></h3>
+<pre><code class="language-json"> {
+          &quot;applicationVisibilities&quot;: &quot;application&quot;,
+          &quot;classAccesses&quot;: &quot;apexClass&quot;,
+          &quot;customPermissions&quot;:&quot;name&quot;,
+          &quot;customMetadataTypeAccesses&quot;:&quot;name&quot;,
+          &quot;fieldPermissions&quot;:&quot;field&quot;,
+          &quot;layoutAssignments&quot;:&quot;layout&quot;,
+          &quot;objectPermissions&quot;:&quot;object&quot;,
+          &quot;recordTypeVisibilities&quot;:&quot;recordType&quot;,
+          &quot;tabVisibilities&quot;:&quot;tab&quot;,
+          &quot;userPermissions&quot;: &quot;name&quot;
+
+ }
+</code></pre>
+<h3 id="video-about-micro-delta-profile-file"><a class="header" href="#video-about-micro-delta-profile-file">Video about Micro-delta Profile file</a></h3>
+<iframe width="920" height="480" src="https://www.youtube.com/embed/XAkvLAZzOq4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<pre><code>cat /tmp/Admin_micro-delta.xml
+</code></pre>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Profile xmlns=&quot;http://soap.sforce.com/2006/04/metadata&quot;&gt;
+&lt;!-- Diff item --&gt;
+&lt;applicationVisibilities&gt;
+   &lt;application&gt;standard__AllTabSet&lt;/application&gt;
+   &lt;default&gt;false&lt;/default&gt;
+   &lt;visible&gt;false&lt;/visible&gt;
+&lt;/applicationVisibilities&gt;
+&lt;!-- New item --&gt;
+&lt;applicationVisibilities&gt;
+   &lt;application&gt;TESTAPP&lt;/application&gt;
+   &lt;default&gt;false&lt;/default&gt;
+   &lt;visible&gt;false&lt;/visible&gt;
+&lt;/applicationVisibilities&gt;
+&lt;!-- New item --&gt;
+&lt;applicationVisibilities&gt;
+   &lt;application&gt;NEWAPP&lt;/application&gt;
+   &lt;default&gt;false&lt;/default&gt;
+   &lt;visible&gt;false&lt;/visible&gt;
+&lt;/applicationVisibilities&gt;
+&lt;!-- Diff item --&gt;
+&lt;classAccesses&gt;
+   &lt;apexClass&gt;MyDomain&lt;/apexClass&gt;
+   &lt;enabled&gt;false&lt;/enabled&gt;
+&lt;/classAccesses&gt;
+&lt;!-- New item --&gt;
+&lt;classAccesses&gt;
+   &lt;apexClass&gt;Yourclass&lt;/apexClass&gt;
+   &lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/classAccesses&gt;
+&lt;!-- Diff item --&gt;
+&lt;fieldPermissions&gt;
+   &lt;editable&gt;false&lt;/editable&gt;
+   &lt;field&gt;Account.AccountNumber&lt;/field&gt;
+   &lt;readable&gt;true&lt;/readable&gt;
+&lt;/fieldPermissions&gt;
+&lt;!-- New item --&gt;
+&lt;fieldPermissions&gt;
+   &lt;editable&gt;true&lt;/editable&gt;
+   &lt;field&gt;Account.testNumber__c&lt;/field&gt;
+   &lt;readable&gt;true&lt;/readable&gt;
+&lt;/fieldPermissions&gt;
+&lt;!-- New item --&gt;
+&lt;fieldPermissions&gt;
+   &lt;editable&gt;true&lt;/editable&gt;
+   &lt;field&gt;Account.NewAccountNumber__c&lt;/field&gt;
+   &lt;readable&gt;true&lt;/readable&gt;
+&lt;/fieldPermissions&gt;
+&lt;/Profile&gt;
+</code></pre>
+<h3 id="permission-set"><a class="header" href="#permission-set">Permission Set</a></h3>
+<pre><code>
+sfdx mohanc:mdapi:helper:retrieveSimple  -m PermissionSet -u mohan.chinnappan.n.sel2@gmail.com -n &quot;Experience_Profile_Manager&quot;  -f jsonSection  -l ~/treeprj/force-app/main/default/permissionsets/Experience_Profile_Manager.permissionset-meta.xml -s ALL
+
+
+</code></pre>
+<pre><code class="language-xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;PermissionSet xmlns=&quot;http://soap.sforce.com/2006/04/metadata&quot;&gt;
+&lt;!-- Diff item --&gt;
+&lt;userPermissions&gt;
+	&lt;enabled&gt;false&lt;/enabled&gt;
+	&lt;name&gt;AccessCMC&lt;/name&gt;
+&lt;/userPermissions&gt;
+
+</code></pre>
+<h3 id="how-about-getting-micro-delta-between-2-local-files-may-be-coming-from-2-branches"><a class="header" href="#how-about-getting-micro-delta-between-2-local-files-may-be-coming-from-2-branches">How about getting micro-delta between 2 local files (may be coming from 2 branches)</a></h3>
+<ul>
+<li>with <code>-x</code> flag you can provide second file - this file will be treated as it is from the org</li>
+</ul>
+<pre><code>sfdx mohanc:mdapi:helper:retrieveSimple  -m PermissionSet -u mohan.chinnappan.n.sel2@gmail.com -n &quot;Experience_Profile_Manager&quot;  -f jsonSection  -l ~/treeprj/force-app/main/default/permissionsets/Experience_Profile_Manager.permissionset-meta.xml -s ALL  -x /tmp/EPM.permissionset-meta.xml 
+
+</code></pre>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;PermissionSet xmlns=&quot;http://soap.sforce.com/2006/04/metadata&quot;&gt;
+&lt;!-- Diff item --&gt;
+&lt;userPermissions&gt;
+	&lt;enabled&gt;false&lt;/enabled&gt;
+	&lt;name&gt;AccessCMC&lt;/name&gt;
+&lt;/userPermissions&gt;
+&lt;!-- Diff item --&gt;
+&lt;userPermissions&gt;
+	&lt;enabled&gt;true&lt;/enabled&gt;
+	&lt;name&gt;CreateReportInLightning&lt;/name&gt;
+&lt;/userPermissions&gt;
+&lt;/PermissionSet&gt;
+</code></pre>
+<h4 id="prepare-the-diff-viewer"><a class="header" href="#prepare-the-diff-viewer">Prepare the diff viewer</a></h4>
+<pre><code>pbcopy &lt; ~/treeprj/force-app/main/default/permissionsets/Experience_Profile_Manager.permissionset-meta.xml
+
+# Put the clipboard content into left side of the https://mohan-chinnappan-n5.github.io/delta/diff.html
+
+pbcopy &lt; /tmp/EPM.permissionset-meta.xml     
+
+# Now put the clipboard content into left side of the https://mohan-chinnappan-n5.github.io/delta/diff.html
+
+
+
+</code></pre>
+<p><img src="img/diff-ps-1.png" alt="Diff for Permission Set" /></p>
+<hr />
+<p><a name='compare2branches'></a></p>
+<h2 id="comparing-a-permissionsetprofile-between-2-git-branches"><a class="header" href="#comparing-a-permissionsetprofile-between-2-git-branches">Comparing a permissionset/profile between 2 git branches</a></h2>
+<h3 id="demo-video-2"><a class="header" href="#demo-video-2">Demo video</a></h3>
+<iframe width="920" height="480" src="https://www.youtube.com/embed/fDriAOo0r7o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<h3 id="commands-used-in-this-video"><a class="header" href="#commands-used-in-this-video">Commands used in this video</a></h3>
+<pre><code>~/lwc/dreamhouse-lwc [feature-1] &gt;git branch -a
+* feature-1
+  main
+  remotes/origin/HEAD -&gt; origin/main
+  remotes/origin/main
+
+</code></pre>
+<pre><code>vi force-app/main/default/permissionsets/dreamhouse.permissionset-meta.xml
+~/lwc/dreamhouse-lwc [feature-1] &gt;git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+vi force-app/main/default/permissionsets/dreamhouse.permissionset-meta.xml
+</code></pre>
+<pre><code>~/lwc/dreamhouse-lwc [main] &gt;python3 ~/sf-git-utils/git_diff_file_two_branches.py  --branch1=main --branch2=feature-1 --filepath=&quot;force-app/main/default/permissionsets/dreamhouse.permissionset-meta.xml&quot; --metadataType='permissionset' --help
+usage: git_diff_file_two_branches.py [-h] [--branch1 BRANCH1] [--branch2 BRANCH2] [--filepath FILEPATH]
+                                     [--metadataType METADATATYPE]
+
+Get content for a file from given 2 branches
+
+options:
+  -h, --help            show this help message and exit
+  --branch1 BRANCH1     branch1 (Default: main)
+  --branch2 BRANCH2     branch2 (Default: develop)
+  --filepath FILEPATH   File path for the file (Default: README.md)
+  --metadataType METADATATYPE
+                        profile or permission set (Default: profile)
+
+Get given file content in given 2 branches
+</code></pre>
+<pre><code>~/lwc/dreamhouse-lwc [main] &gt;python3 ~/sf-git-utils/git_diff_file_two_branches.py  --branch1=main --branch2=feature-1 --filepath=&quot;force-app/main/default/permissionsets/dreamhouse.permissionset-meta.xml&quot; --metadataType='permissionset' 
+=== Checking out main ===
+Already on 'main'
+Temporary file name: /var/folders/ch/p19n6yj11wd1vp5c3svhpt800000gp/T/tmpa701j416
+=== Going to run xml transform...===
+=== Writing the output into file : /var/folders/ch/p19n6yj11wd1vp5c3svhpt800000gp/T/tmpa701j416.html ===
+
+=== Contents of /var/folders/ch/p19n6yj11wd1vp5c3svhpt800000gp/T/tmpa701j416 is copied into your clipboard. Opening the diff app... ===
+=== ACTION REQUIRED: Paste the content into the diff app, once it opens up... and press [Enter] ===
+
+
+=== Continuing with the program... ===
+=== checking out feature-1 ===
+Switched to branch 'feature-1'
+Temporary file name: /var/folders/ch/p19n6yj11wd1vp5c3svhpt800000gp/T/tmp2rdylch1
+going to run xml transform...
+=== Writing the output into file : /var/folders/ch/p19n6yj11wd1vp5c3svhpt800000gp/T/tmp2rdylch1.html ===
+
+=== Contents of /var/folders/ch/p19n6yj11wd1vp5c3svhpt800000gp/T/tmp2rdylch1 is copied into your clipboard. Goto the diff app... ===
+===     ACTION REQUIRED: Paste the content into the diff app right side box ===
+</code></pre>
+<h4 id="tools"><a class="header" href="#tools">Tools</a></h4>
+<ul>
+<li><a href="https://github.com/mohan-chinnappan-n/sf-git-utils">sf-git-utils</a></li>
+</ul>
+<p><a name='queries'></a></p>
+<h2 id="queries"><a class="header" href="#queries">Queries</a></h2>
+<h3 id="query-to-check-users-assigned-with-a-given-permissionset"><a class="header" href="#query-to-check-users-assigned-with-a-given-permissionset">Query to check users assigned with a given permissionset</a></h3>
+<pre><code class="language-sql">SELECT id,PermissionSetId, Assignee.Name, Assignee.id FROM PermissionSetAssignment
+WHERE PermissionSet.Name = 'SalesUserPsl'
+
+</code></pre>
+<p><img src="img/permset-users-1.png" alt="permset-user" /></p>
+<p><a name='EOLProfile'></a></p>
+<h2 id="end-of-life-eol-of-permissions-on-profiles"><a class="header" href="#end-of-life-eol-of-permissions-on-profiles">End of life (EOL) of permissions on profiles</a></h2>
+<ul>
+<li>Permission sets are the future of user management</li>
+<li>End of life (EOL) of permissions on profiles that will be the <strong>Spring ’26</strong> release. </li>
+</ul>
+<h3 id="what-will-remain-on-a-profile"><a class="header" href="#what-will-remain-on-a-profile">What will remain on a profile?</a></h3>
+<ul>
+<li>One-to-one relationships
+<ul>
+<li>login hours/IP ranges</li>
+</ul>
+</li>
+<li>Defaults—record types, apps</li>
+<li>Page layout assignment</li>
+<li>The future is <strong>App Builder/Dynamic Forms</strong> so Salesforce will not invest in bringing page layout assignment to permission sets.</li>
+</ul>
+<h3 id="what-will-be-available-only-on-permission-sets-after-this-eol"><a class="header" href="#what-will-be-available-only-on-permission-sets-after-this-eol">What will be available <strong>only</strong> on permission sets after this EOL?</a></h3>
+<ul>
+<li>User permissions (system and app permissions)</li>
+<li>Object permissions (object Create, Read, Update, and Delete - CRUD)</li>
+<li>Field permissions (field-level security FLS)</li>
+<li>Tabs</li>
+<li>Record types (not defaults)</li>
+<li>Apps (not defaults)</li>
+<li>Connected app access</li>
+<li>Apex classes</li>
+<li>Visualforce pages</li>
+<li>Custom permissions</li>
+</ul>
+<h3 id="turning-of-profiles-before-eol"><a class="header" href="#turning-of-profiles-before-eol">Turning of Profiles before EOL</a></h3>
+<ul>
+<li>Turning  off the ability to use permissions on profiles before the official EOL - targeted for  Spring ’24 release</li>
+</ul>
+<h3 id="references"><a class="header" href="#references">References</a></h3>
+<ul>
+<li><a href="https://admin.salesforce.com/blog/2023/permissions-updates-learn-moar-spring-23">Permissions Updates | Learn MOAR Spring ’23</a></li>
+</ul>
+<p><a name='viz'></a></p>
+<h2 id="visualize-profile-permissionset"><a class="header" href="#visualize-profile-permissionset">Visualize Profile, PermissionSet</a></h2>
+<h3 id="profile-1"><a class="header" href="#profile-1">Profile</a></h3>
+<pre><code>sfdx mohanc:xml:transform -i &lt;ProfileXmlFile&gt; -m Profile
+
+</code></pre>
+<pre><code>sfdx mohanc:xml:transform -i force-app/main/default/profiles/Admin.profile-meta.xml -m Profile```
+
+</code></pre>
+<h3 id="permissionset-1"><a class="header" href="#permissionset-1">PermissionSet</a></h3>
+<pre><code>
+sfdx mohanc:xml:transform -i force-app/main/default/permissionsets/Experience_Profile_Manager.permissionset-meta.xml -m PermissionSet
+</code></pre>
+<h3 id="demos"><a class="header" href="#demos">Demos</a></h3>
+<iframe width="900" height="620" src="https://www.youtube.com/embed/dK2IzpwxO_w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<hr />
+<p><img src="img/viz-ps-1.webm.gif" alt="viz-permissionset" /></p>
+<p><a name='xmlutil'></a></p>
+<h3 id="using-xmlutil-executable"><a class="header" href="#using-xmlutil-executable">Using xmlutil executable</a></h3>
+<ul>
+<li><a href="https://github.com/mohan-chinnappan-n/xml-xslt/blob/main/py/dist/macOS/xmlutil">Download the tool</a></li>
+<li>Put the downloaded tool in your PATH</li>
+<li>You need to give permission to run this command in your macOS via <strong>System Settings</strong> &gt;  <strong>Privacy &amp; Security</strong></li>
+<li>Make it executable</li>
+</ul>
+<pre><code>chmod +x xmlutil
+</code></pre>
+<ul>
+<li>Visualize  Permission Set </li>
+</ul>
+<pre><code>
+xmlutil transform --xml=MyTest.profile-meta.xml --xsl=PermissionSet3 --out=/tmp/myTest.html
+
+</code></pre>
+<ul>
+<li>Visualize  Profile</li>
+</ul>
+<pre><code>
+xmlutil transform --xml=MyProfile.permissionset-meta.xml --xsl=Profile3 --out=/tmp/myProfile.html
+
+</code></pre>
+<ul>
+<li>Visualize  CustomLabels</li>
+</ul>
+<pre><code>
+xmlutil transform --xml=CustomLabels.labels-meta.xml --xsl=CustomLabel2 --out=/tmp/cl.html
+
+</code></pre>
+<h3 id="how-to-get-visualization-for-all-the-profiles-or--permissionsets-in-the-given-folder"><a class="header" href="#how-to-get-visualization-for-all-the-profiles-or--permissionsets-in-the-given-folder">How to get Visualization for all the profiles or  permissionsets in the given folder</a></h3>
+<ul>
+<li>
+<p>Make sure that xmlutil executable is in <strong>your PATH</strong> to make this work</p>
+</li>
+<li>
+<p>Download the scripts</p>
+<ul>
+<li><a href="https://github.com/mohan-chinnappan-n/xml-xslt/blob/main/py/process_profile.sh">Batch processing for profiles</a></li>
+<li><a href="https://github.com/mohan-chinnappan-n/xml-xslt/blob/main/py/process_ps.sh">Batch processing for permissionsets</a></li>
+</ul>
+</li>
+</ul>
+<pre><code> bash process_profile.sh &lt;profiles folder&gt; 
+ bash process_ps.sh &lt;permissionsets folder&gt; 
+
+</code></pre>
+<ul>
+<li>Example for permissionsets</li>
+</ul>
+<pre><code>bash process_ps.sh ~/treeprj/force-app/main/default/permissionsets
+</code></pre>
+<pre><code>=== 1: Processing /Users/mchinnappan/treeprj/force-app/main/default/permissionsets/Experience_Profile_Manager.permissionset-meta.xml file...
+=== Output is written into /tmp/_viz_PermissionSet/Experience_Profile_Manager.permissionset-meta.xml.html, view this file in your web browser: open /tmp/_viz_PermissionSet/Experience_Profile_Manager.permissionset-meta.xml.html ===
+-------------------------------------------
+=== 2: Processing /Users/mchinnappan/treeprj/force-app/main/default/permissionsets/Manage_Encryption_Keys.permissionset-meta.xml file...
+=== Output is written into /tmp/_viz_PermissionSet/Manage_Encryption_Keys.permissionset-meta.xml.html, view this file in your web browser: open /tmp/_viz_PermissionSet/Manage_Encryption_Keys.permissionset-meta.xml.html ===
+-------------------------------------------
+=== 3: Processing /Users/mchinnappan/treeprj/force-app/main/default/permissionsets/sf_devops_InitializeEnvironments.permissionset-meta.xml file...
+=== Output is written into /tmp/_viz_PermissionSet/sf_devops_InitializeEnvironments.permissionset-meta.xml.html, view this file in your web browser: open /tmp/_viz_PermissionSet/sf_devops_InitializeEnvironments.permissionset-meta.xml.html ===
+-------------------------------------------
+=== 4: Processing /Users/mchinnappan/treeprj/force-app/main/default/permissionsets/sf_devops_NamedCredentials.permissionset-meta.xml file...
+=== Output is written into /tmp/_viz_PermissionSet/sf_devops_NamedCredentials.permissionset-meta.xml.html, view this file in your web browser: open /tmp/_viz_PermissionSet/sf_devops_NamedCredentials.permissionset-meta.xml.html ===
+-------------------------------------------
+=== 4  processed ===
+  adding: tmp/_viz_PermissionSet/Experience_Profile_Manager.permissionset-meta.xml.html (deflated 79%)
+  adding: tmp/_viz_PermissionSet/Manage_Encryption_Keys.permissionset-meta.xml.html (deflated 80%)
+  adding: tmp/_viz_PermissionSet/sf_devops_InitializeEnvironments.permissionset-meta.xml.html (deflated 79%)
+  adding: tmp/_viz_PermissionSet/sf_devops_NamedCredentials.permissionset-meta.xml.html (deflated 79%)
+=== _viz_PermissionSet_files.zip created ===
+
+</code></pre>
+<h2 id="packagexml-for-profilepermissionset-covering-sales-objects"><a class="header" href="#packagexml-for-profilepermissionset-covering-sales-objects">Package.xml for profile/permissionset covering sales objects</a></h2>
+<ul>
+<li><a href="https://github.com/mohan-chinnappan-n/xml-xslt/blob/main/profiles-with-stdobjects-package.xml">Online</a></li>
+</ul>
+<pre><code class="language-xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Package xmlns=&quot;http://soap.sforce.com/2006/04/metadata&quot;&gt;
+  &lt;version&gt;56.0&lt;/version&gt;
+
+&lt;!-- 
+
+usage:
+sfdx force:mdapi:retrieve -k  profiles-with-stdobjects-package.xml -u &lt;username&gt; -r .
+
+--&gt;
+&lt;types&gt;
+    &lt;!-- needs to be customizable CustomObjects --&gt;
+	&lt;members&gt;Account&lt;/members&gt;
+	&lt;members&gt;Contact&lt;/members&gt;
+	&lt;members&gt;Opportunity&lt;/members&gt;
+	&lt;members&gt;Campaign&lt;/members&gt;
+	&lt;members&gt;Case&lt;/members&gt;
+	&lt;members&gt;Asset&lt;/members&gt;
+	&lt;members&gt;Order&lt;/members&gt;
+	&lt;members&gt;Lead&lt;/members&gt;
+	&lt;members&gt;CampaignMember&lt;/members&gt;
+	&lt;members&gt;Contract&lt;/members&gt;
+	&lt;name&gt;CustomObject&lt;/name&gt;
+&lt;/types&gt;
+
+&lt;types&gt;
+	&lt;members&gt;*&lt;/members&gt;
+	 
+	&lt;name&gt;Profile&lt;/name&gt;
+&lt;/types&gt;
+
+&lt;/Package&gt;
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../security/shield.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../security/setupAuditTrail.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../security/shield.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../security/setupAuditTrail.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+
+
+    </body>
+</html>

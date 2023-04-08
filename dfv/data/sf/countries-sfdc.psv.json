@@ -1,0 +1,958 @@
+[
+    {
+        "ISOCode": "AD",
+        "CountryName": "Andorra"
+    },
+    {
+        "ISOCode": "AE",
+        "CountryName": "United Arab Emirates"
+    },
+    {
+        "ISOCode": "AF",
+        "CountryName": "Afghanistan"
+    },
+    {
+        "ISOCode": "AG",
+        "CountryName": "Antigua and Barbuda"
+    },
+    {
+        "ISOCode": "AI",
+        "CountryName": "Anguilla"
+    },
+    {
+        "ISOCode": "AL",
+        "CountryName": "Albania"
+    },
+    {
+        "ISOCode": "AM",
+        "CountryName": "Armenia"
+    },
+    {
+        "ISOCode": "AO",
+        "CountryName": "Angola"
+    },
+    {
+        "ISOCode": "AQ",
+        "CountryName": "Antarctica"
+    },
+    {
+        "ISOCode": "AR",
+        "CountryName": "Argentina"
+    },
+    {
+        "ISOCode": "AT",
+        "CountryName": "Austria"
+    },
+    {
+        "ISOCode": "AU",
+        "CountryName": "Australia"
+    },
+    {
+        "ISOCode": "AW",
+        "CountryName": "Aruba"
+    },
+    {
+        "ISOCode": "AX",
+        "CountryName": "Aland Islands"
+    },
+    {
+        "ISOCode": "AZ",
+        "CountryName": "Azerbaijan"
+    },
+    {
+        "ISOCode": "BA",
+        "CountryName": "Bosnia and Herzegovina"
+    },
+    {
+        "ISOCode": "BB",
+        "CountryName": "Barbados"
+    },
+    {
+        "ISOCode": "BD",
+        "CountryName": "Bangladesh"
+    },
+    {
+        "ISOCode": "BE",
+        "CountryName": "Belgium"
+    },
+    {
+        "ISOCode": "BF",
+        "CountryName": "Burkina Faso"
+    },
+    {
+        "ISOCode": "BG",
+        "CountryName": "Bulgaria"
+    },
+    {
+        "ISOCode": "BH",
+        "CountryName": "Bahrain"
+    },
+    {
+        "ISOCode": "BI",
+        "CountryName": "Burundi"
+    },
+    {
+        "ISOCode": "BJ",
+        "CountryName": "Benin"
+    },
+    {
+        "ISOCode": "BL",
+        "CountryName": "Saint Barth\u00e9lemy"
+    },
+    {
+        "ISOCode": "BM",
+        "CountryName": "Bermuda"
+    },
+    {
+        "ISOCode": "BN",
+        "CountryName": "Brunei Darussalam"
+    },
+    {
+        "ISOCode": "BO",
+        "CountryName": "Bolivia, Plurinational State of"
+    },
+    {
+        "ISOCode": "BQ",
+        "CountryName": "Bonaire, Sint Eustatius and Saba"
+    },
+    {
+        "ISOCode": "BR",
+        "CountryName": "Brazil"
+    },
+    {
+        "ISOCode": "BS",
+        "CountryName": "Bahamas"
+    },
+    {
+        "ISOCode": "BT",
+        "CountryName": "Bhutan"
+    },
+    {
+        "ISOCode": "BV",
+        "CountryName": "Bouvet Island"
+    },
+    {
+        "ISOCode": "BW",
+        "CountryName": "Botswana"
+    },
+    {
+        "ISOCode": "BY",
+        "CountryName": "Belarus"
+    },
+    {
+        "ISOCode": "BZ",
+        "CountryName": "Belize"
+    },
+    {
+        "ISOCode": "CA",
+        "CountryName": "Canada"
+    },
+    {
+        "ISOCode": "CC",
+        "CountryName": "Cocos (Keeling) Islands"
+    },
+    {
+        "ISOCode": "CD",
+        "CountryName": "Congo, the Democratic Republic of the"
+    },
+    {
+        "ISOCode": "CF",
+        "CountryName": "Central African Republic"
+    },
+    {
+        "ISOCode": "CG",
+        "CountryName": "Congo"
+    },
+    {
+        "ISOCode": "CH",
+        "CountryName": "Switzerland"
+    },
+    {
+        "ISOCode": "CI",
+        "CountryName": "Cote d\u2019Ivoire"
+    },
+    {
+        "ISOCode": "CK",
+        "CountryName": "Cook Islands"
+    },
+    {
+        "ISOCode": "CL",
+        "CountryName": "Chile"
+    },
+    {
+        "ISOCode": "CM",
+        "CountryName": "Cameroon"
+    },
+    {
+        "ISOCode": "CN",
+        "CountryName": "China"
+    },
+    {
+        "ISOCode": "CO",
+        "CountryName": "Colombia"
+    },
+    {
+        "ISOCode": "CR",
+        "CountryName": "Costa Rica"
+    },
+    {
+        "ISOCode": "CU",
+        "CountryName": "Cuba"
+    },
+    {
+        "ISOCode": "CV",
+        "CountryName": "Cape Verde"
+    },
+    {
+        "ISOCode": "CW",
+        "CountryName": "Cura\u00e7ao"
+    },
+    {
+        "ISOCode": "CX",
+        "CountryName": "Christmas Island"
+    },
+    {
+        "ISOCode": "CY",
+        "CountryName": "Cyprus"
+    },
+    {
+        "ISOCode": "CZ",
+        "CountryName": "Czech Republic"
+    },
+    {
+        "ISOCode": "DE",
+        "CountryName": "Germany"
+    },
+    {
+        "ISOCode": "DJ",
+        "CountryName": "Djibouti"
+    },
+    {
+        "ISOCode": "DK",
+        "CountryName": "Denmark"
+    },
+    {
+        "ISOCode": "DM",
+        "CountryName": "Dominica"
+    },
+    {
+        "ISOCode": "DO",
+        "CountryName": "Dominican Republic"
+    },
+    {
+        "ISOCode": "DZ",
+        "CountryName": "Algeria"
+    },
+    {
+        "ISOCode": "EC",
+        "CountryName": "Ecuador"
+    },
+    {
+        "ISOCode": "EE",
+        "CountryName": "Estonia"
+    },
+    {
+        "ISOCode": "EG",
+        "CountryName": "Egypt"
+    },
+    {
+        "ISOCode": "EH",
+        "CountryName": "Western Sahara"
+    },
+    {
+        "ISOCode": "ER",
+        "CountryName": "Eritrea"
+    },
+    {
+        "ISOCode": "ES",
+        "CountryName": "Spain"
+    },
+    {
+        "ISOCode": "ET",
+        "CountryName": "Ethiopia"
+    },
+    {
+        "ISOCode": "FI",
+        "CountryName": "Finland"
+    },
+    {
+        "ISOCode": "FJ",
+        "CountryName": "Fiji"
+    },
+    {
+        "ISOCode": "FK",
+        "CountryName": "Falkland Islands (Malvinas)"
+    },
+    {
+        "ISOCode": "FO",
+        "CountryName": "Faroe Islands"
+    },
+    {
+        "ISOCode": "FR",
+        "CountryName": "France"
+    },
+    {
+        "ISOCode": "GA",
+        "CountryName": "Gabon"
+    },
+    {
+        "ISOCode": "GB",
+        "CountryName": "United Kingdom"
+    },
+    {
+        "ISOCode": "GD",
+        "CountryName": "Grenada"
+    },
+    {
+        "ISOCode": "GE",
+        "CountryName": "Georgia"
+    },
+    {
+        "ISOCode": "GF",
+        "CountryName": "French Guiana"
+    },
+    {
+        "ISOCode": "GG",
+        "CountryName": "Guernsey"
+    },
+    {
+        "ISOCode": "GH",
+        "CountryName": "Ghana"
+    },
+    {
+        "ISOCode": "GI",
+        "CountryName": "Gibraltar"
+    },
+    {
+        "ISOCode": "GL",
+        "CountryName": "Greenland"
+    },
+    {
+        "ISOCode": "GM",
+        "CountryName": "Gambia"
+    },
+    {
+        "ISOCode": "GN",
+        "CountryName": "Guinea"
+    },
+    {
+        "ISOCode": "GP",
+        "CountryName": "Guadeloupe"
+    },
+    {
+        "ISOCode": "GQ",
+        "CountryName": "Equatorial Guinea"
+    },
+    {
+        "ISOCode": "GR",
+        "CountryName": "Greece"
+    },
+    {
+        "ISOCode": "GS",
+        "CountryName": "South Georgia and the South Sandwich Islands"
+    },
+    {
+        "ISOCode": "GT",
+        "CountryName": "Guatemala"
+    },
+    {
+        "ISOCode": "GW",
+        "CountryName": "Guinea-Bissau"
+    },
+    {
+        "ISOCode": "GY",
+        "CountryName": "Guyana"
+    },
+    {
+        "ISOCode": "HM",
+        "CountryName": "Heard Island and McDonald Islands"
+    },
+    {
+        "ISOCode": "HN",
+        "CountryName": "Honduras"
+    },
+    {
+        "ISOCode": "HR",
+        "CountryName": "Croatia"
+    },
+    {
+        "ISOCode": "HT",
+        "CountryName": "Haiti"
+    },
+    {
+        "ISOCode": "HU",
+        "CountryName": "Hungary"
+    },
+    {
+        "ISOCode": "ID",
+        "CountryName": "Indonesia"
+    },
+    {
+        "ISOCode": "IE",
+        "CountryName": "Ireland"
+    },
+    {
+        "ISOCode": "IL",
+        "CountryName": "Israel"
+    },
+    {
+        "ISOCode": "IM",
+        "CountryName": "Isle of Man"
+    },
+    {
+        "ISOCode": "IN",
+        "CountryName": "India"
+    },
+    {
+        "ISOCode": "IO",
+        "CountryName": "British Indian Ocean Territory"
+    },
+    {
+        "ISOCode": "IQ",
+        "CountryName": "Iraq"
+    },
+    {
+        "ISOCode": "IR",
+        "CountryName": "Iran, Islamic Republic of"
+    },
+    {
+        "ISOCode": "IS",
+        "CountryName": "Iceland"
+    },
+    {
+        "ISOCode": "IT",
+        "CountryName": "Italy"
+    },
+    {
+        "ISOCode": "JE",
+        "CountryName": "Jersey"
+    },
+    {
+        "ISOCode": "JM",
+        "CountryName": "Jamaica"
+    },
+    {
+        "ISOCode": "JO",
+        "CountryName": "Jordan"
+    },
+    {
+        "ISOCode": "JP",
+        "CountryName": "Japan"
+    },
+    {
+        "ISOCode": "KE",
+        "CountryName": "Kenya"
+    },
+    {
+        "ISOCode": "KG",
+        "CountryName": "Kyrgyzstan"
+    },
+    {
+        "ISOCode": "KH",
+        "CountryName": "Cambodia"
+    },
+    {
+        "ISOCode": "KI",
+        "CountryName": "Kiribati"
+    },
+    {
+        "ISOCode": "KM",
+        "CountryName": "Comoros"
+    },
+    {
+        "ISOCode": "KN",
+        "CountryName": "Saint Kitts and Nevis"
+    },
+    {
+        "ISOCode": "KP",
+        "CountryName": "Korea, Democratic People\u2019s Republic of"
+    },
+    {
+        "ISOCode": "KR",
+        "CountryName": "Korea, Republic of"
+    },
+    {
+        "ISOCode": "KW",
+        "CountryName": "Kuwait"
+    },
+    {
+        "ISOCode": "KY",
+        "CountryName": "Cayman Islands"
+    },
+    {
+        "ISOCode": "KZ",
+        "CountryName": "Kazakhstan"
+    },
+    {
+        "ISOCode": "LA",
+        "CountryName": "Lao People\u2019s Democratic Republic"
+    },
+    {
+        "ISOCode": "LB",
+        "CountryName": "Lebanon"
+    },
+    {
+        "ISOCode": "LC",
+        "CountryName": "Saint Lucia"
+    },
+    {
+        "ISOCode": "LI",
+        "CountryName": "Liechtenstein"
+    },
+    {
+        "ISOCode": "LK",
+        "CountryName": "Sri Lanka"
+    },
+    {
+        "ISOCode": "LR",
+        "CountryName": "Liberia"
+    },
+    {
+        "ISOCode": "LS",
+        "CountryName": "Lesotho"
+    },
+    {
+        "ISOCode": "LT",
+        "CountryName": "Lithuania"
+    },
+    {
+        "ISOCode": "LU",
+        "CountryName": "Luxembourg"
+    },
+    {
+        "ISOCode": "LV",
+        "CountryName": "Latvia"
+    },
+    {
+        "ISOCode": "LY",
+        "CountryName": "Libya"
+    },
+    {
+        "ISOCode": "MA",
+        "CountryName": "Morocco"
+    },
+    {
+        "ISOCode": "MC",
+        "CountryName": "Monaco"
+    },
+    {
+        "ISOCode": "MD",
+        "CountryName": "Moldova, Republic of"
+    },
+    {
+        "ISOCode": "ME",
+        "CountryName": "Montenegro"
+    },
+    {
+        "ISOCode": "MF",
+        "CountryName": "Saint Martin (French part)"
+    },
+    {
+        "ISOCode": "MG",
+        "CountryName": "Madagascar"
+    },
+    {
+        "ISOCode": "MK",
+        "CountryName": "Macedonia, the former Yugoslav Republic of"
+    },
+    {
+        "ISOCode": "ML",
+        "CountryName": "Mali"
+    },
+    {
+        "ISOCode": "MM",
+        "CountryName": "Myanmar"
+    },
+    {
+        "ISOCode": "MN",
+        "CountryName": "Mongolia"
+    },
+    {
+        "ISOCode": "MO",
+        "CountryName": "Macao"
+    },
+    {
+        "ISOCode": "MQ",
+        "CountryName": "Martinique"
+    },
+    {
+        "ISOCode": "MR",
+        "CountryName": "Mauritania"
+    },
+    {
+        "ISOCode": "MS",
+        "CountryName": "Montserrat"
+    },
+    {
+        "ISOCode": "MT",
+        "CountryName": "Malta"
+    },
+    {
+        "ISOCode": "MU",
+        "CountryName": "Mauritius"
+    },
+    {
+        "ISOCode": "MV",
+        "CountryName": "Maldives"
+    },
+    {
+        "ISOCode": "MW",
+        "CountryName": "Malawi"
+    },
+    {
+        "ISOCode": "MX",
+        "CountryName": "Mexico"
+    },
+    {
+        "ISOCode": "MY",
+        "CountryName": "Malaysia"
+    },
+    {
+        "ISOCode": "MZ",
+        "CountryName": "Mozambique"
+    },
+    {
+        "ISOCode": "NA",
+        "CountryName": "Namibia"
+    },
+    {
+        "ISOCode": "NC",
+        "CountryName": "New Caledonia"
+    },
+    {
+        "ISOCode": "NE",
+        "CountryName": "Niger"
+    },
+    {
+        "ISOCode": "NF",
+        "CountryName": "Norfolk Island"
+    },
+    {
+        "ISOCode": "NG",
+        "CountryName": "Nigeria"
+    },
+    {
+        "ISOCode": "NI",
+        "CountryName": "Nicaragua"
+    },
+    {
+        "ISOCode": "NL",
+        "CountryName": "Netherlands"
+    },
+    {
+        "ISOCode": "NO",
+        "CountryName": "Norway"
+    },
+    {
+        "ISOCode": "NP",
+        "CountryName": "Nepal"
+    },
+    {
+        "ISOCode": "NR",
+        "CountryName": "Nauru"
+    },
+    {
+        "ISOCode": "NU",
+        "CountryName": "Niue"
+    },
+    {
+        "ISOCode": "NZ",
+        "CountryName": "New Zealand"
+    },
+    {
+        "ISOCode": "OM",
+        "CountryName": "Oman"
+    },
+    {
+        "ISOCode": "PA",
+        "CountryName": "Panama"
+    },
+    {
+        "ISOCode": "PE",
+        "CountryName": "Peru"
+    },
+    {
+        "ISOCode": "PF",
+        "CountryName": "French Polynesia"
+    },
+    {
+        "ISOCode": "PG",
+        "CountryName": "Papua New Guinea"
+    },
+    {
+        "ISOCode": "PH",
+        "CountryName": "Philippines"
+    },
+    {
+        "ISOCode": "PK",
+        "CountryName": "Pakistan"
+    },
+    {
+        "ISOCode": "PL",
+        "CountryName": "Poland"
+    },
+    {
+        "ISOCode": "PM",
+        "CountryName": "Saint Pierre and Miquelon"
+    },
+    {
+        "ISOCode": "PN",
+        "CountryName": "Pitcairn"
+    },
+    {
+        "ISOCode": "PS",
+        "CountryName": "Palestine"
+    },
+    {
+        "ISOCode": "PT",
+        "CountryName": "Portugal"
+    },
+    {
+        "ISOCode": "PY",
+        "CountryName": "Paraguay"
+    },
+    {
+        "ISOCode": "QA",
+        "CountryName": "Qatar"
+    },
+    {
+        "ISOCode": "RE",
+        "CountryName": "Reunion"
+    },
+    {
+        "ISOCode": "RO",
+        "CountryName": "Romania"
+    },
+    {
+        "ISOCode": "RS",
+        "CountryName": "Serbia"
+    },
+    {
+        "ISOCode": "RU",
+        "CountryName": "Russian Federation"
+    },
+    {
+        "ISOCode": "RW",
+        "CountryName": "Rwanda"
+    },
+    {
+        "ISOCode": "SA",
+        "CountryName": "Saudi Arabia"
+    },
+    {
+        "ISOCode": "SB",
+        "CountryName": "Solomon Islands"
+    },
+    {
+        "ISOCode": "SC",
+        "CountryName": "Seychelles"
+    },
+    {
+        "ISOCode": "SD",
+        "CountryName": "Sudan"
+    },
+    {
+        "ISOCode": "SE",
+        "CountryName": "Sweden"
+    },
+    {
+        "ISOCode": "SG",
+        "CountryName": "Singapore"
+    },
+    {
+        "ISOCode": "SH",
+        "CountryName": "Saint Helena, Ascension and Tristan da Cunha"
+    },
+    {
+        "ISOCode": "SI",
+        "CountryName": "Slovenia"
+    },
+    {
+        "ISOCode": "SJ",
+        "CountryName": "Svalbard and Jan Mayen"
+    },
+    {
+        "ISOCode": "SK",
+        "CountryName": "Slovakia"
+    },
+    {
+        "ISOCode": "SL",
+        "CountryName": "Sierra Leone"
+    },
+    {
+        "ISOCode": "SM",
+        "CountryName": "San Marino"
+    },
+    {
+        "ISOCode": "SN",
+        "CountryName": "Senegal"
+    },
+    {
+        "ISOCode": "SO",
+        "CountryName": "Somalia"
+    },
+    {
+        "ISOCode": "SR",
+        "CountryName": "Suriname"
+    },
+    {
+        "ISOCode": "SS",
+        "CountryName": "South Sudan"
+    },
+    {
+        "ISOCode": "ST",
+        "CountryName": "Sao Tome and Principe"
+    },
+    {
+        "ISOCode": "SV",
+        "CountryName": "El Salvador"
+    },
+    {
+        "ISOCode": "SX",
+        "CountryName": "Sint Maarten (Dutch part)"
+    },
+    {
+        "ISOCode": "SY",
+        "CountryName": "Syrian Arab Republic"
+    },
+    {
+        "ISOCode": "SZ",
+        "CountryName": "Swaziland"
+    },
+    {
+        "ISOCode": "TC",
+        "CountryName": "Turks and Caicos Islands"
+    },
+    {
+        "ISOCode": "TD",
+        "CountryName": "Chad"
+    },
+    {
+        "ISOCode": "TF",
+        "CountryName": "French Southern Territories"
+    },
+    {
+        "ISOCode": "TG",
+        "CountryName": "Togo"
+    },
+    {
+        "ISOCode": "TH",
+        "CountryName": "Thailand"
+    },
+    {
+        "ISOCode": "TJ",
+        "CountryName": "Tajikistan"
+    },
+    {
+        "ISOCode": "TK",
+        "CountryName": "Tokelau"
+    },
+    {
+        "ISOCode": "TL",
+        "CountryName": "Timor-Leste"
+    },
+    {
+        "ISOCode": "TM",
+        "CountryName": "Turkmenistan"
+    },
+    {
+        "ISOCode": "TN",
+        "CountryName": "Tunisia"
+    },
+    {
+        "ISOCode": "TO",
+        "CountryName": "Tonga"
+    },
+    {
+        "ISOCode": "TR",
+        "CountryName": "Turkey"
+    },
+    {
+        "ISOCode": "TT",
+        "CountryName": "Trinidad and Tobago"
+    },
+    {
+        "ISOCode": "TV",
+        "CountryName": "Tuvalu"
+    },
+    {
+        "ISOCode": "TW",
+        "CountryName": "Taiwan"
+    },
+    {
+        "ISOCode": "TZ",
+        "CountryName": "Tanzania, United Republic of"
+    },
+    {
+        "ISOCode": "UA",
+        "CountryName": "Ukraine"
+    },
+    {
+        "ISOCode": "UG",
+        "CountryName": "Uganda"
+    },
+    {
+        "ISOCode": "US",
+        "CountryName": "United States"
+    },
+    {
+        "ISOCode": "UY",
+        "CountryName": "Uruguay"
+    },
+    {
+        "ISOCode": "UZ",
+        "CountryName": "Uzbekistan"
+    },
+    {
+        "ISOCode": "VA",
+        "CountryName": "Holy See (Vatican City State)"
+    },
+    {
+        "ISOCode": "VC",
+        "CountryName": "Saint Vincent and the Grenadines"
+    },
+    {
+        "ISOCode": "VE",
+        "CountryName": "Venezuela, Bolivarian Republic of"
+    },
+    {
+        "ISOCode": "VG",
+        "CountryName": "Virgin Islands, British"
+    },
+    {
+        "ISOCode": "VN",
+        "CountryName": "Vietnam"
+    },
+    {
+        "ISOCode": "VU",
+        "CountryName": "Vanuatu"
+    },
+    {
+        "ISOCode": "WF",
+        "CountryName": "Wallis and Futuna"
+    },
+    {
+        "ISOCode": "WS",
+        "CountryName": "Samoa"
+    },
+    {
+        "ISOCode": "YE",
+        "CountryName": "Yemen"
+    },
+    {
+        "ISOCode": "YT",
+        "CountryName": "Mayotte"
+    },
+    {
+        "ISOCode": "ZA",
+        "CountryName": "South Africa"
+    },
+    {
+        "ISOCode": "ZM",
+        "CountryName": "Zambia"
+    },
+    {
+        "ISOCode": "ZW",
+        "CountryName": "Zimbabwe"
+    }
+]

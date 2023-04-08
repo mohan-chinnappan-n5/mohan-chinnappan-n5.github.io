@@ -1,0 +1,571 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>OIDC Google - Salesforce Development Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../custom.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../dg/dg.html"><strong aria-hidden="true">2.</strong> Data Governance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dg/changeManagement.html"><strong aria-hidden="true">2.1.</strong> Change Management</a></li></ol></li><li class="chapter-item expanded "><a href="../dm/datamodel.html"><strong aria-hidden="true">3.</strong> Data Model</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dm/fsc-dm.html"><strong aria-hidden="true">3.1.</strong> Financial Services Cloud</a></li><li class="chapter-item expanded "><a href="../dm/salescloud.html"><strong aria-hidden="true">3.2.</strong> Sales Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/aboutTools.html"><strong aria-hidden="true">4.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-org.html"><strong aria-hidden="true">4.1.</strong> Org Tools</a></li><li class="chapter-item expanded "><a href="../tools/tools-data-bulkapi2.html"><strong aria-hidden="true">4.2.</strong> Data Loading BulkAPI2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/userloading.html"><strong aria-hidden="true">4.2.1.</strong> User Loading</a></li><li class="chapter-item expanded "><a href="../tools/product2loading.html"><strong aria-hidden="true">4.2.2.</strong> Product2 Loading and Update</a></li><li class="chapter-item expanded "><a href="../tools/flowinterview.html"><strong aria-hidden="true">4.2.3.</strong> FlowInterview Query and Deletion</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/tools-scpl.html"><strong aria-hidden="true">4.3.</strong> Loading State and Country Picklist</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-scpl-update.html"><strong aria-hidden="true">4.3.1.</strong> Updating State and Country Picklist </a></li></ol></li><li class="chapter-item expanded "><a href="../tools/project-management/gantt.html"><strong aria-hidden="true">4.4.</strong> Project Management</a></li><li class="chapter-item expanded "><a href="../tools/em.html"><strong aria-hidden="true">4.5.</strong> Event Monitoring</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../monitoring/realtime-event-monitoring.html"><strong aria-hidden="true">4.5.1.</strong> Real-Time Event Monitoring</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/instance.html"><strong aria-hidden="true">4.6.</strong> Instance Related</a></li><li class="chapter-item expanded "><a href="../tools/oms.html"><strong aria-hidden="true">4.7.</strong> Org Metadata Snapshot</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/scripts.html"><strong aria-hidden="true">5.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="../cq/cq.html"><strong aria-hidden="true">6.</strong> Code Quality</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cq/pmd.html"><strong aria-hidden="true">6.1.</strong> Code Scan PMD</a></li><li class="chapter-item expanded "><a href="../cq/comments.html"><strong aria-hidden="true">6.2.</strong> Comments Checking</a></li><li class="chapter-item expanded "><a href="../cq/test-coverage.html"><strong aria-hidden="true">6.3.</strong> Apex Code Test Coverage</a></li><li class="chapter-item expanded "><a href="../cq/lwc-linting.html"><strong aria-hidden="true">6.4.</strong> LWC Linting</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/deployments.html"><strong aria-hidden="true">7.</strong> Deployments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/delta.html"><strong aria-hidden="true">7.1.</strong> Delta Deployments</a></li><li class="chapter-item expanded "><a href="../deployments/gha.html"><strong aria-hidden="true">7.2.</strong> Github Actions</a></li><li class="chapter-item expanded "><a href="../deployments/validate.html"><strong aria-hidden="true">7.3.</strong> Validating changes</a></li><li class="chapter-item expanded "><a href="../deployments/admin-changes.html"><strong aria-hidden="true">7.4.</strong> Taking care of Admin changes</a></li><li class="chapter-item expanded "><a href="../deployments/devOpsCenter.html"><strong aria-hidden="true">7.5.</strong> DevOps Center</a></li><li class="chapter-item expanded "><a href="../deployments/jenkins.html"><strong aria-hidden="true">7.6.</strong> Jenkins</a></li><li class="chapter-item expanded "><a href="../deployments/git.html"><strong aria-hidden="true">7.7.</strong> git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/git-internals.html"><strong aria-hidden="true">7.7.1.</strong> git internals</a></li><li class="chapter-item expanded "><a href="../deployments/git-hooks.html"><strong aria-hidden="true">7.7.2.</strong> git hooks</a></li><li class="chapter-item expanded "><a href="../deployments/git-ops.html"><strong aria-hidden="true">7.7.3.</strong> git operations</a></li><li class="chapter-item expanded "><a href="../deployments/pr-template.html"><strong aria-hidden="true">7.7.4.</strong> pull request template</a></li><li class="chapter-item expanded "><a href="../deployments/git-diff.html"><strong aria-hidden="true">7.7.5.</strong> git diff</a></li><li class="chapter-item expanded "><a href="../deployments/git-log.html"><strong aria-hidden="true">7.7.6.</strong> git log</a></li><li class="chapter-item expanded "><a href="../deployments/git-stash.html"><strong aria-hidden="true">7.7.7.</strong> git stash</a></li><li class="chapter-item expanded "><a href="../deployments/git-config.html"><strong aria-hidden="true">7.7.8.</strong> git config</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/sourceTracking.html"><strong aria-hidden="true">7.8.</strong> Source Tracking</a></li><li class="chapter-item expanded "><a href="../deployments/dangling.html"><strong aria-hidden="true">7.9.</strong> Dangling Fields Finder</a></li><li class="chapter-item expanded "><a href="../deployments/sbx.html"><strong aria-hidden="true">7.10.</strong> Sandbox Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/sandbox-preview-guide.html"><strong aria-hidden="true">7.10.1.</strong> Sandbox Preview Guide</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/MetadataComponentDependency.html"><strong aria-hidden="true">7.11.</strong> MetadataComponentDependency</a></li></ol></li><li class="chapter-item expanded "><a href="../crma/tools.html"><strong aria-hidden="true">8.</strong> CRMA tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crma/load-export.html"><strong aria-hidden="true">8.1.</strong> Dataset Load and Export</a></li><li class="chapter-item expanded "><a href="../crma/analysis.html"><strong aria-hidden="true">8.2.</strong> Analysis</a></li><li class="chapter-item expanded "><a href="../crma/binding.html"><strong aria-hidden="true">8.3.</strong> Binding</a></li><li class="chapter-item expanded "><a href="../crma/deployment.html"><strong aria-hidden="true">8.4.</strong> Deployment</a></li></ol></li><li class="chapter-item expanded "><a href="../perf/perf.html"><strong aria-hidden="true">9.</strong> Performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../perf/lex-perf.html"><strong aria-hidden="true">9.1.</strong> Lex Performance</a></li><li class="chapter-item expanded "><a href="../perf/perf-testing.html"><strong aria-hidden="true">9.2.</strong> Performance testing</a></li><li class="chapter-item expanded "><a href="../perf/perf-pw.html"><strong aria-hidden="true">9.3.</strong> Testing with Playwright</a></li><li class="chapter-item expanded "><a href="../perf/edge.html"><strong aria-hidden="true">9.4.</strong> Salesforce Edge Network</a></li><li class="chapter-item expanded "><a href="../perf/lex-query.html"><strong aria-hidden="true">9.5.</strong> Lightning Experience Queries</a></li><li class="chapter-item expanded "><a href="../perf/rum.html"><strong aria-hidden="true">9.6.</strong> Real User Monitoring (RUM)</a></li></ol></li><li class="chapter-item expanded "><a href="../dwg/dwg-tools.html"><strong aria-hidden="true">10.</strong> Diagram tools</a></li><li class="chapter-item expanded "><a href="../xml/xml-tools.html"><strong aria-hidden="true">11.</strong> XML tools</a></li><li class="chapter-item expanded "><a href="../dp/dp.html"><strong aria-hidden="true">12.</strong> Data Processing tools</a></li><li class="chapter-item expanded "><a href="../i18n/i18n.html"><strong aria-hidden="true">13.</strong> Translation Tools</a></li><li class="chapter-item expanded "><a href="../media/recording.html"><strong aria-hidden="true">14.</strong> Media - Recording tools</a></li><li class="chapter-item expanded "><a href="../media/image.html"><strong aria-hidden="true">15.</strong> Image Processing</a></li><li class="chapter-item expanded "><a href="../codegen/codegen.html"><strong aria-hidden="true">16.</strong> Code Generators</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../codegen/lwc.html"><strong aria-hidden="true">16.1.</strong> LWC Code Generators</a></li></ol></li><li class="chapter-item expanded "><a href="../ml/ml.html"><strong aria-hidden="true">17.</strong> Machine Learning</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ml/sdcg.html"><strong aria-hidden="true">17.1.</strong> Semantic Doc Compare and Group</a></li><li class="chapter-item expanded "><a href="../ml/datacatalog.html"><strong aria-hidden="true">17.2.</strong> Data Catalog for ML Work</a></li><li class="chapter-item expanded "><a href="../ml/chatgpt.html"><strong aria-hidden="true">17.3.</strong> openAI - ChatGPT</a></li><li class="chapter-item expanded "><a href="../ml/gpt3codex.html"><strong aria-hidden="true">17.4.</strong> openAI - GPT3 Codex</a></li><li class="chapter-item expanded "><a href="../ml/einsteinbot.html"><strong aria-hidden="true">17.5.</strong> Einstein Bot</a></li><li class="chapter-item expanded "><a href="../ml/dialogflow.html"><strong aria-hidden="true">17.6.</strong> Dialogflow - Knowledge Base</a></li></ol></li><li class="chapter-item expanded "><a href="../docmgmt/docmgmt.html"><strong aria-hidden="true">18.</strong> Document Management tools</a></li><li class="chapter-item expanded "><a href="../design/design-notes.html"><strong aria-hidden="true">19.</strong> Design Principles</a></li><li class="chapter-item expanded "><a href="../chromeext/ext.html"><strong aria-hidden="true">20.</strong> Chrome Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chromeext/onnu.html"><strong aria-hidden="true">20.1.</strong> ONNU</a></li></ol></li><li class="chapter-item expanded "><a href="../vscode/ext.html"><strong aria-hidden="true">21.</strong> VS Code Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../vscode/sfland.html"><strong aria-hidden="true">21.1.</strong> SF Land</a></li><li class="chapter-item expanded "><a href="../vscode/pmd.html"><strong aria-hidden="true">21.2.</strong> VSCode Apex PMD</a></li></ol></li><li class="chapter-item expanded "><a href="../dviz/dviz.html"><strong aria-hidden="true">22.</strong> Data Viz</a></li><li class="chapter-item expanded "><a href="../releases.html"><strong aria-hidden="true">23.</strong> Releases</a></li><li class="chapter-item expanded "><a href="../rest/rest_tester.html"><strong aria-hidden="true">24.</strong> REST Tester</a></li><li class="chapter-item expanded "><a href="../security/security.html"><strong aria-hidden="true">25.</strong> Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/sd.html"><strong aria-hidden="true">25.1.</strong> Sharing Debugger</a></li><li class="chapter-item expanded "><a href="../security/rh.html"><strong aria-hidden="true">25.2.</strong> Role Hierarchy</a></li><li class="chapter-item expanded "><a href="../security/shield.html"><strong aria-hidden="true">25.3.</strong> Shield</a></li><li class="chapter-item expanded "><a href="../security/profile-ps.html"><strong aria-hidden="true">25.4.</strong> Profile, PermissionSet</a></li><li class="chapter-item expanded "><a href="../security/setupAuditTrail.html"><strong aria-hidden="true">25.5.</strong> SetupAuditTrail</a></li><li class="chapter-item expanded "><a href="../security/datamask.html"><strong aria-hidden="true">25.6.</strong> Data Mask</a></li><li class="chapter-item expanded "><a href="../security/saml.html"><strong aria-hidden="true">25.7.</strong> SAML</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectConcepts.html"><strong aria-hidden="true">25.8.</strong> OpenID Connect</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/openIDConnect.html" class="active"><strong aria-hidden="true">25.8.1.</strong> OIDC Google</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectProvider.html"><strong aria-hidden="true">25.8.2.</strong> OIDC Provider</a></li><li class="chapter-item expanded "><a href="../security/jwt.html"><strong aria-hidden="true">25.8.3.</strong> JWT</a></li></ol></li><li class="chapter-item expanded "><a href="../security/openssl.html"><strong aria-hidden="true">25.9.</strong> OpenSSL</a></li></ol></li><li class="chapter-item expanded "><a href="../mobile/mobile.html"><strong aria-hidden="true">26.</strong> Mobile</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../mobile/ios-sim.html"><strong aria-hidden="true">26.1.</strong> Simulator</a></li></ol></li><li class="chapter-item expanded "><a href="../rd/rd.html"><strong aria-hidden="true">27.</strong> Reports and Dashboards</a></li><li class="chapter-item expanded "><a href="../customLabels/cl.html"><strong aria-hidden="true">28.</strong> Custom Labels</a></li><li class="chapter-item expanded "><a href="../accessibility/508.html"><strong aria-hidden="true">29.</strong> 508 - Accessibility</a></li><li class="chapter-item expanded "><a href="../process-automation/pa.html"><strong aria-hidden="true">30.</strong> Process Automation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../process-automation/flow.html"><strong aria-hidden="true">30.1.</strong> Flow</a></li></ol></li><li class="chapter-item expanded "><a href="../great/folks.html"><strong aria-hidden="true">31.</strong> Great Folks</a></li><li class="chapter-item expanded "><a href="../editor/editor-tips.html"><strong aria-hidden="true">32.</strong> Editor tips</a></li><li class="chapter-item expanded "><a href="../bash/tips.html"><strong aria-hidden="true">33.</strong> Bash tips</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Salesforce Development Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="openid-connect"><a class="header" href="#openid-connect">OpenId Connect</a></h1>
+<h2 id="how-to-use-google-as-openid-connect-provider-for-salesforce"><a class="header" href="#how-to-use-google-as-openid-connect-provider-for-salesforce">How to use Google as OpenID Connect provider for Salesforce?</a></h2>
+<h2 id="topics"><a class="header" href="#topics">Topics</a></h2>
+<ul>
+<li><a href="#demo">Demo</a></li>
+<li><a href="#ap">Auth. Provider Settings</a></li>
+<li><a href="#cs">Open ID Provider client secret</a></li>
+<li><a href="#rh">Auth.RegistrationHandler</a></li>
+<li><a href="#lrh">Auth.RegistrationHandler Log</a></li>
+<li><a href="#mdapi">Using Metadata API</a></li>
+<li><a href="#authtoken">Getting AccessToken for the Google using Auth.AuthToken and Getting userInfo</a></li>
+<li><a href="#ref">References</a></li>
+</ul>
+<p><a name='demo'></a></p>
+<h2 id="demo"><a class="header" href="#demo">Demo</a></h2>
+<p><img src="https://github.com/mohan-chinnappan-n/cli-dx/raw/master/oid/img/openIdconnect-SF-Google-1.gif" alt="Demo oid" /></p>
+<p><a name='ap'></a></p>
+<h2 id="auth-provider-settings"><a class="header" href="#auth-provider-settings">Auth. Provider settings</a></h2>
+<p><img src="https://github.com/mohan-chinnappan-n/cli-dx/raw/master/oid/img/auth-provide-google-1.png" alt="auth provide settings" /></p>
+<h2 id="salesforce-configuration"><a class="header" href="#salesforce-configuration">Salesforce Configuration</a></h2>
+<table><thead><tr><th>URL</th><th>Link</th></tr></thead><tbody>
+<tr><td>Test-Only Initialization URL</td><td>https://mohansun-ea-02-dev-ed.my.salesforce.com/services/auth/test/Google</td></tr>
+<tr><td>Single Sign-On Initialization URL</td><td>https://mohansun-ea-02-dev-ed.my.salesforce.com/services/auth/sso/Google</td></tr>
+<tr><td>Existing User Linking URL</td><td>https://mohansun-ea-02-dev-ed.my.salesforce.com/services/auth/link/Google</td></tr>
+<tr><td>OAuth-Only Initialization URL</td><td>https://mohansun-ea-02-dev-ed.my.salesforce.com/services/auth/oauth/Google</td></tr>
+<tr><td>Callback URL</td><td>https://mohansun-ea-02-dev-ed.my.salesforce.com/services/authcallback/Google</td></tr>
+<tr><td>Single Logout URL</td><td>https://mohansun-ea-02-dev-ed.my.salesforce.com/services/auth/rp/oidc/logout</td></tr>
+</tbody></table>
+<h2 id="google-oidc-provider-configuration"><a class="header" href="#google-oidc-provider-configuration">Google OIDC Provider Configuration</a></h2>
+<table><thead><tr><th>URL</th><th>Link</th></tr></thead><tbody>
+<tr><td>Authorize Endpoint URL</td><td>https://accounts.google.com/o/oauth2/auth</td></tr>
+<tr><td>Token Endpoint URL</td><td>https://accounts.google.com/o/oauth2/token</td></tr>
+<tr><td>User Info Endpoint URL</td><td>https://www.googleapis.com/oauth2/v3/userinfo</td></tr>
+</tbody></table>
+<p><a name='cs'></a></p>
+<h2 id="oid-provider-client-secret-details"><a class="header" href="#oid-provider-client-secret-details">OID provider client secret details</a></h2>
+<ul>
+<li>Note: Content is mangled here to protect the Identity</li>
+</ul>
+<pre><code class="language-json">
+{
+  &quot;web&quot;: {
+    &quot;project_id&quot;: &quot;oidtest-310720&quot;,
+    
+    &quot;client_id&quot;: &quot;113225562349-fqktafcJUNK.apps.googleusercontent.com&quot;,
+    &quot;client_secret&quot;: &quot;6VIgVAz8NlJUNKIk4INu4&quot;,
+
+    &quot;auth_uri&quot;: &quot;https://accounts.google.com/o/oauth2/auth&quot;,
+    &quot;token_uri&quot;: &quot;https://oauth2.googleapis.com/token&quot;,
+   
+     &quot;auth_provider_x509_cert_url&quot;: &quot;https://www.googleapis.com/oauth2/v1/certs&quot;,
+
+
+    &quot;redirect_uris&quot;: [
+      &quot;https://mohansun-ea-02-dev-ed.my.salesforce.com/services/authcallback/Google&quot;
+    ]
+  }
+}
+
+</code></pre>
+<p><a name='rh'></a></p>
+<h2 id="sample-autocreated-reghandler-class"><a class="header" href="#sample-autocreated-reghandler-class">Sample Autocreated RegHandler class</a></h2>
+<pre><code class="language-java">// TODO:This autogenerated class includes the basics for a Registration
+
+// Handler class. You will need to customize it to ensure it meets your needs and
+// the data provided by the third party.
+
+global class AutocreatedRegHandler1618428423355 implements Auth.RegistrationHandler {
+   
+ global boolean canCreateUser(Auth.UserData data) {
+        //TODO: Check whether we want to allow creation of a user with this data
+        //Set&lt;String&gt; s = new Set&lt;String&gt;{'usernamea', 'usernameb', 'usernamec'};
+        //if(s.contains(data.username)) {
+            //return true;
+        //}
+        return false;
+    }
+
+    global User createUser(Id portalId, Auth.UserData data){
+        System.debug(data);       
+    
+        User u = [Select Id From User WHERE federationidentifier = :data.email LIMIT 1];
+        return u;
+    }
+
+    global void updateUser(Id userId, Id portalId, Auth.UserData data){
+         
+    }
+
+
+}
+</code></pre>
+<h2 id="querying-authprovider"><a class="header" href="#querying-authprovider">Querying AuthProvider</a></h2>
+<pre><code class="language-sql">
+SELECT Id,authorizeUrl,
+consumerKey,consumerSecret,
+customMetadataTypeRecord,
+defaultScopes,
+DeveloperName,
+errorUrl,
+friendlyName,
+iconUrl,
+idTokenIssuer,
+LinkKickoffUrl,
+logoutUrl,
+OauthKickoffUrl,
+providerType,
+tokenUrl,
+userInfoUrl
+
+
+FROM AuthProvider 
+
+
+</code></pre>
+<p><a name='lrh'></a></p>
+<h2 id="log-from-the-reghandler"><a class="header" href="#log-from-the-reghandler">Log from the RegHandler</a></h2>
+<p><img src="https://github.com/mohan-chinnappan-n/cli-dx/raw/master/oid/img/oid-log-1.png" alt="log regHandler" /></p>
+<p><a name='mdapi'></a></p>
+<h2 id="metadata-details-of-this-authprovider"><a class="header" href="#metadata-details-of-this-authprovider">Metadata details of this AuthProvider</a></h2>
+<pre><code>$ sfdx mohanc:mdapi:list -u mohan.chinnappan.n_ea2@gmail.com -t AuthProvider
+
+</code></pre>
+<pre><code>{
+  result: [
+    {
+      createdById: '0053h000002xQ5sAAE',
+      createdByName: 'Mohan Chinnappan',
+      createdDate: 2020-12-11T17:06:31.000Z,
+      fileName: 'authproviders/Google.authprovider',
+      fullName: 'Google',
+      id: '0SO3h000000CwxxGAC',
+      lastModifiedById: '0053h000002xQ5sAAE',
+      lastModifiedByName: 'Mohan Chinnappan',
+      lastModifiedDate: 1970-01-01T00:00:00.000Z,
+      type: 'AuthProvider'
+    }
+  ]
+}
+
+</code></pre>
+<pre><code>$ sfdx mohanc:mdapi:retrieve -u mohan.chinnappan.n_ea2@gmail.com -t AuthProvider
+</code></pre>
+<pre><code>{
+    &quot;RetrieveRequest&quot;: {
+        &quot;apiVersion&quot;: &quot;51.0&quot;,
+        &quot;unpackaged&quot;: [
+            {
+                &quot;types&quot;: {
+                    &quot;members&quot;: &quot;*&quot;,
+                    &quot;name&quot;: &quot;AuthProvider&quot;
+                }
+            }
+        ]
+    }
+}
+{ result: { done: false, id: '09S3h000005hIRGEA2', state: 'Queued' } }
+</code></pre>
+<pre><code>$ sfdx mohanc:mdapi:checkRetrieveStatus  -u mohan.chinnappan.n_ea2@gmail.com -i 09S3h000005hIRGEA2
+
+</code></pre>
+<pre><code>[
+  {
+    createdById: '',
+    createdByName: '',
+    createdDate: 2020-12-11T17:06:31.000Z,
+    fileName: 'unpackaged/authproviders/Google.authprovider',
+    fullName: 'Google',
+    id: '0SO3h000000CwxxGAC',
+    lastModifiedById: '',
+    lastModifiedByName: '',
+    lastModifiedDate: 1970-01-01T00:00:00.000Z,
+    type: 'AuthProvider'
+  },
+  {
+    createdById: '0053h000002xQ5sAAE',
+    createdByName: 'Mohan Chinnappan',
+    createdDate: 2021-04-16T01:12:48.036Z,
+    fileName: 'unpackaged/package.xml',
+    fullName: 'unpackaged/package.xml',
+    id: '',
+    lastModifiedById: '0053h000002xQ5sAAE',
+    lastModifiedByName: 'Mohan Chinnappan',
+    lastModifiedDate: 2021-04-16T01:12:48.036Z,
+    manageableState: 'unmanaged',
+    type: 'Package'
+  }
+]
+=== Writing zipFile base64 content to 09S3h000005hIRGEA2.zip.txt ...
+=== Writing zipFile binary content to 09S3h000005hIRGEA2.zip ... 
+
+</code></pre>
+<pre><code>$ jar tvf 09S3h000005hIRGEA2.zip
+  1054 Fri Apr 16 01:12:48 EDT 2021 unpackaged/authproviders/Google.authprovider
+   224 Fri Apr 16 01:12:48 EDT 2021 unpackaged/package.xml
+</code></pre>
+<pre><code>$ unzip 09S3h000005hIRGEA2.zip
+Archive:  09S3h000005hIRGEA2.zip
+  inflating: unpackaged/authproviders/Google.authprovider  
+  inflating: unpackaged/package.xml  
+
+</code></pre>
+<pre><code>$ cat authproviders/Google.authprovider 
+</code></pre>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;AuthProvider xmlns=&quot;http://soap.sforce.com/2006/04/metadata&quot;&gt;
+    &lt;authorizeUrl&gt;https://accounts.google.com/o/oauth2/auth&lt;/authorizeUrl&gt;
+    &lt;consumerKey&gt;_junk_-fqktafcmesni74spapbj1ep0pvja4oor.apps.googleusercontent.com&lt;/consumerKey&gt;
+    &lt;consumerSecret&gt;_____&lt;/consumerSecret&gt;
+    &lt;defaultScopes&gt;email openid  profile&lt;/defaultScopes&gt;
+    &lt;executionUser&gt;mohan.chinnappan@email.com&lt;/executionUser&gt;
+    &lt;friendlyName&gt;Google&lt;/friendlyName&gt;
+    &lt;includeOrgIdInIdentifier&gt;false&lt;/includeOrgIdInIdentifier&gt;
+    &lt;providerType&gt;Google&lt;/providerType&gt;
+    &lt;registrationHandler&gt;AutocreatedRegHandler1618428423355&lt;/registrationHandler&gt;
+    &lt;sendAccessTokenInHeader&gt;false&lt;/sendAccessTokenInHeader&gt;
+    &lt;sendClientCredentialsInHeader&gt;false&lt;/sendClientCredentialsInHeader&gt;
+    &lt;sendSecretInApis&gt;true&lt;/sendSecretInApis&gt;
+    &lt;tokenUrl&gt;https://accounts.google.com/o/oauth2/token&lt;/tokenUrl&gt;
+    &lt;userInfoUrl&gt;https://www.googleapis.com/oauth2/v3/userinfo&lt;/userInfoUrl&gt;
+&lt;/AuthProvider&gt;
+
+
+</code></pre>
+<h2 id="test-only-initialization-url"><a class="header" href="#test-only-initialization-url">Test-Only Initialization URL</a></h2>
+<ul>
+<li>https://mohansun-ea-02-dev-ed.my.salesforce.com/services/auth/test/Google</li>
+<li><a href="https://mohansun-ea-02-dev-ed.my.salesforce.com/services/auth/test/Google">Run Test Only</a></li>
+</ul>
+<p><a name='authtoken'></a></p>
+<h2 id="getting-accesstoken-for-the-google-using-authauthtoken-and-userinfo"><a class="header" href="#getting-accesstoken-for-the-google-using-authauthtoken-and-userinfo">Getting AccessToken for the Google using Auth.AuthToken and UserInfo</a></h2>
+<pre><code class="language-java">// file: ~/.apex/oidc.cls 
+String authProviderId = '0SO3h000000Cwxx';
+String providerName = 'Google';
+String accessToken = Auth.AuthToken.getAccessToken(authProviderId, providerName);
+System.debug('accessToken: ' + accessToken);
+
+</code></pre>
+<pre><code class="language-bash"># you can also use developer console to execute above apex code instead of CLI
+sfdx mohanc:tooling:execute -a ~/.apex/oidc.cls -u mohan.chinnappan.n_ea2@gmail.com   
+</code></pre>
+<pre><code>apexCode: String authProviderId = '0SO3h000000Cwxx';
+String providerName = 'Google';
+String accessToken = Auth.AuthToken.getAccessToken(authProviderId, providerName);
+System.debug('accessToken: ' + accessToken);
+
+compiled?: true
+executed?: true
+{
+  line: -1,
+  column: -1,
+  compiled: true,
+  success: true,
+  compileProblem: null,
+  exceptionStackTrace: null,
+  exceptionMessage: null
+}
+
+</code></pre>
+<h3 id="check-logs"><a class="header" href="#check-logs">Check logs</a></h3>
+<pre><code>sfdx force:apex:log:list  -u mohan.chinnappan.n_ea2@gmail.com
+</code></pre>
+<pre><code>APPLICATION DURATION (MS) ID                 LOCATION   SIZE (B) LOG USER         OPERATION                                                 REQUEST     START TIME               STATUS  
+ ─────────── ───────────── ────────────────── ────────── ──────── ──────────────── ───────────────────────────────────────────────────────── ─────────── ──────────────────────── ─────── 
+ Unknown     94            07L3h00000AvxqyEAB SystemLog  3640     Mohan Chinnappan /services/data/v57.0/tooling/executeAnonymous             Api         2023-04-04T05:44:30+0000 Success 
+
+</code></pre>
+<pre><code>sfdx force:apex:log:get -i 07L3h00000AvxqyEAB  -u mohan.chinnappan.n_ea2@gmail.com    | grep -i Debug
+</code></pre>
+<pre><code>57.0 APEX_CODE,FINEST;APEX_PROFILING,INFO;CALLOUT,INFO;DB,INFO;NBA,INFO;SYSTEM,DEBUG;VALIDATION,INFO;VISUALFORCE,FINER;WAVE,INFO;WORKFLOW,INFO
+Execute Anonymous: System.debug('accessToken: ' + accessToken);
+22:44:30.1 (7497609)|USER_DEBUG|[4]|DEBUG|accessToken: ya29.a0Ael9sCNXJZqO7O34pvUcb4sDkO9S0X3hbBTxtMnnZ1H00TJQq_mhaPAR5fXffydfasdfsarerrvSneMUdC8Wen9YOHYNn4rQ1sNtiHDFQqRQ6gtqGPBdrgHFz3kBsTEobU4OP59OJSIJJ1OO1kUkaCgYKAUYSARMSFQF4udJh3LjnChU-94GnI--qgC6QcA0166
+
+</code></pre>
+<h4 id="if-you-have-used-developer-console-to-execute-the-apex-code-here-is-the-view-from-the-developer-console"><a class="header" href="#if-you-have-used-developer-console-to-execute-the-apex-code-here-is-the-view-from-the-developer-console">If you have used Developer Console to execute the apex code, here is the view from the Developer Console:</a></h4>
+<p><img src="img/accessToken-google-2.png" alt="Access Token Google" /></p>
+<h3 id="let-us-get-the-userinfo"><a class="header" href="#let-us-get-the-userinfo">Let us get the userInfo</a></h3>
+<pre><code class="language-bash">
+# Note the accessToken used here is mangled to protect identity
+curl https://www.googleapis.com/oauth2/v3/userinfo -H &quot;Authorization: Bearer ya29.a0Ael9sCNXJZqO7O34pvUcb4sDkO9S0X3hbBTxtMnnZ1H00TJQq_mhadfdj3335fXffy4JsugBpVZSjY06npxOmlFJPvSneMUdC8Wen9YOHYNn4rQ1sNtiHDFQqRQ6gtqGPBdrgHFz3kBsTEobU4OP59OJSIJJ1OO1kUkaCgYKAUYSARMSFQF4udJh3LjnChU-94GnI--qgC6QcA0166&quot; -X GET
+
+
+</code></pre>
+<pre><code class="language-json">{
+  &quot;sub&quot;: &quot;102467670031694452102&quot;,
+  &quot;name&quot;: &quot;Mohan Chinnappan&quot;,
+  &quot;given_name&quot;: &quot;Mohan&quot;,
+  &quot;family_name&quot;: &quot;Chinnappan&quot;,
+  &quot;picture&quot;: &quot;https://lh3.googleusercontent.com/a/AGNmyxbp471dpjPtNSeeeejyyNbh1fFJqlknZUaDqrmb\u003ds96-c&quot;,
+  &quot;email&quot;: &quot;mohan.chinnappan.n@gmail.com&quot;,
+  &quot;email_verified&quot;: true,
+  &quot;locale&quot;: &quot;en&quot;
+
+}
+</code></pre>
+<h3 id="viewing-registrationhandleruserupdate-log"><a class="header" href="#viewing-registrationhandleruserupdate-log">Viewing RegistrationHandlerUserUpdate log</a></h3>
+<pre><code>sfdx force:apex:log:list  -u mohan.chinnappan.n_ea2@gmail.com
+
+ APPLICATION DURATION (MS) ID                 LOCATION   SIZE (B) LOG USER         OPERATION                                                 REQUEST     START TIME               STATUS  
+ ─────────── ───────────── ────────────────── ────────── ──────── ──────────────── ───────────────────────────────────────────────────────── ─────────── ──────────────────────── ─────── 
+ Unknown     91            07L3h00000AvxrhEAB SystemLog  6559     Mohan Chinnappan RegistrationHandlerUserUpdate                             Application 2023-04-04T10:44:35+0000 Success 
+
+
+</code></pre>
+<pre><code>sfdx force:apex:log:get -i 07L3h00000AvxrhEAB  -u mohan.chinnappan.n_ea2@gmail.com    | grep -i Debug
+</code></pre>
+<pre><code>03:44:35.5 (12059570)|USER_DEBUG|[25]|DEBUG|UserData:[attributeMap={email=mohan.chinnappan.n@gmail.com, email_verified=true, family_name=Chinnappan, given_name=Mohan, locale=en, name=Mohan Chinnappan, picture=https://lh3.googleusercontent.com/a/AGNmyxbp471dpjPtNSeeeejyyNbh1fFJqlknZUaDqrmb=s96-c, sub=102467670031694452102}, email=mohan.chinnappan.n@gmail.com, firstName=Mohan, fullName=Mohan Chinnappan, identifier=102467670031694452102, lastName=Chinnappan, link=null, locale=en, provider=Google, siteLoginUrl=null, username=null]
+
+</code></pre>
+<p><a name='ref'></a></p>
+<h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
+<ul>
+<li>
+<p><a href="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_auth_plugin.htm">RegistrationHandler Interface</a></p>
+</li>
+<li>
+<p><a href="https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_auth_plugin.htm#apex_auth_plugin_part2">Auth.RegistrationHandler Example Implementation</a></p>
+</li>
+<li>
+<p><a href="https://developer.salesforce.com/docs/atlas.en-us.mobile_sdk.meta/mobile_sdk/sso_provider_openid_connect.htm">Configure an OpenID Connect Authentication Provider</a></p>
+</li>
+<li>
+<p><a href="https://developers.google.com/identity/openid-connect/openid-connect#sendauthrequest">Google OpenID Connect</a></p>
+</li>
+<li>
+<p><a href="https://openid.net/connect/">OpenID Connect</a></p>
+</li>
+<li>
+<p><a href="https://openid.net/specs/openid-connect-basic-1_0.html">Spec</a></p>
+</li>
+<li>
+<p>Okta specific</p>
+<ul>
+<li><a href="https://developer.okta.com/docs/reference/api/oidc/">OpenID Connect &amp; OAuth 2.0 API - Endpoints </a></li>
+<li><a href="https://auth0.com/docs/protocols/configure-okta-as-oauth2-identity-provider">Configure Okta for use as an OpenID Connect (OIDC) identity provide</a></li>
+</ul>
+</li>
+<li>
+<p>Videos</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=996OiexHze0">OAuth 2.0 and OpenID Connect (in plain English)</a></li>
+<li><a href="https://www.youtube.com/watch?v=0qNQ_YEIM8s">OpenId Connect in Salesforce | SSO Between Google and Salesforce</a></li>
+</ul>
+</li>
+<li>
+<p>Playgrounds</p>
+<ul>
+<li><a href="https://openidconnect.herokuapp.com/">Salesforce as OpenID Connect - Playground</a></li>
+<li><a href="https://openidconnect.net/">Auth0 - OpenID Connect Playground</a></li>
+<li><a href="https://developers.google.com/oauthplayground/">Google OAuth2 Playground</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="about-openid-connect"><a class="header" href="#about-openid-connect">About OpenID connect</a></h2>
+<ul>
+<li>Simple Identity layer on top of the OAuth 2.0 protocol</li>
+<li>Allows Clients (like service providers) to verify the identity of the End-User based on the authentication performed by an Authorization Server</li>
+</ul>
+<img src='https://github.com/mohan-chinnappan-n/cli-dx/raw/master/oid/img/oid-1.png' height='300'/>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../security/openIDConnectConcepts.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../security/openIDConnectProvider.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../security/openIDConnectConcepts.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../security/openIDConnectProvider.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+
+
+    </body>
+</html>

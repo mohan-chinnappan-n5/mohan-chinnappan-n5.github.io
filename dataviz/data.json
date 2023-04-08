@@ -1,0 +1,17 @@
+{
+      labels: ['Mango', 'Plum', 'Apple', 'Peach', 'Plum', 'Pear'],
+      datasets: [{
+        label: '# of Fruits',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          "#ffcc99",
+          'yellow',
+          'lightblue',
+          'steelblue',
+          '#99ccff',
+          '#99ffcc'
+        ],
+
+        borderWidth: 2
+      }]
+    }

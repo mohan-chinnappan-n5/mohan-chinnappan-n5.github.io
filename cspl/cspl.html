@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State and Country Picklist Recording Script Generator</title>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.6.0/split.min.js"></script>
+    <script src="js/cspl.js"></script>
+    <script src="js/htmlUtil.js"></script>
+
+    <link rel="stylesheet" href="css/app.css?v=5">
+
+
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">&nbsp; Salesforce Land - State and Country Picklist Recording Script
+            Generator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./demo.html">Demo</a>
+                </li>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div style="margin:20px;">
+        <div class="row">
+            <div class="form-group" style="width:200px ;">
+
+            <input class='col' title='instanceURL' size="100" type="text" name="instanceURL" id="instanceURL"
+                value="https://d4x000007rxogeaq-dev-ed.my.salesforce.com">
+                <span class="label label-danger" id="#danger">1</span>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="split">
+        <textarea name="list" id="list" cols="20" rows="20"></textarea>
+        <textarea name="runScript" id="runScript" cols="30" rows="20"></textarea>
+        <div id="editor"></div>
+
+
+ 
+    </div>
+    </div>
+    <div class="row" style="background-color:aliceblue">
+        <div class="col-sm">
+            
+            
+            <input class="btn btn-primary" type="file" id="inputfile" accept=".psv" >
+            <span class="badge badge-light">2</span>
+        </input>
+            <button class="btn btn-danger" id="generate">Generate
+                <span class="badge badge-light">3</span>
+
+            </button>
+
+            <input type="text" id="savefilename" value="myRecording.json" placeholder="file name to save the file to" />
+            <button class="btn btn-success" type="button" value="save" id="save" title="Download the file in the editor">
+                Save Source                 <span class="badge badge-light">4</span>
+
+            </button>
+            <a id='login' target="_new" class="btn btn-primary">Login
+                <span class="badge badge-light">5</span>
+
+            </a>
+
+        </div>
+    </div>
+
+    
+
+    <div class="accordion" id="help" style="width:800px ;">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+             <b>STEPS</b>
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+            <div class="accordion-body">
+                <ul class="list-group list-group-numbered">
+
+                    <li class="list-group-item">
+                         <a  href="./demo.html">Watch Demo</a>
+                   </li>
+            
+                    <li class="list-group-item">
+                         Login into <a href="https://test.salesforce.com">your sandbox org</a> or <a href="https://login.salesforce.com">your PROD org</a> and select Classic mode
+                    </li>
+                    <li class="list-group-item">
+                         Enter your Org Instance Url (Classic Mode)
+                    </li>
+                    <li class="list-group-item"> Upload the input file (Pipe Separated) with format the following format by clicking <b>[Choose File]</b>
+                        <pre>
+            
+            CountryCode|CountryName|ISO-Code|StateCode|IntegrationValue
+            NO|Norway|NO-03|3|Oslo
+                        </pre>
+                    </li>
+                  
+                    <li class="list-group-item">
+                       Click <b>[Generate]</b> button to generate the recording script
+                    </li>
+                    <li class="list-group-item">
+                       Click <b>[Save Source]</b> to save the recording script to your computer 
+                    </li>
+                    <li class="list-group-item">
+                      Click <b>[Login]</b> to land in your org 
+                    </li>
+            
+                    <li class="list-group-item">
+                         Load the downloaded script into Chrome DevTools Recorder and set timeout as 30000 or more
+                    </li>
+            
+                    <li class="list-group-item">
+                        Click <b>[Replay]</b> in the Chrome DevTools Recorder
+                   </li>
+                </ul>            </div>
+          </div>
+        </div>
+      
+       
+
+   
+   </div>
+
+   <script>
+    var require = { paths: { vs: "package/dev/vs" } };
+    </script>
+    <script src="package/dev/vs/loader.js"></script>
+    <script src="package/dev/vs/editor/editor.main.nls.js"></script>
+    <script src="package/dev/vs/editor/editor.main.js"></script>
+ 
+    <script type="module" src="js/app.js?v=3"> </script>
+</body>
+
+</html>

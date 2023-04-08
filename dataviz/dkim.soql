@@ -1,0 +1,17 @@
+SELECT 
+
+Selector,
+Domain,
+DomainMatch,
+IsActive,
+KeySize,
+
+
+PublicKey,
+
+TxtRecordName,
+AlternateTxtRecordName
+AlternatePublicKey,
+AlternateSelector,
+
+FROM EmailDomainKey

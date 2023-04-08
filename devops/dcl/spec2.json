@@ -1,0 +1,15 @@
+{
+ "columns": [
+           "name.firstName", 
+          "name.lastName", 
+          "name.jobArea",
+         
+          "phone.phoneNumber", 
+          "date.weekday", 
+          "internet.email",
+
+          "random.number",
+          "random.uuid",
+          "random.word"
+ ]
+}

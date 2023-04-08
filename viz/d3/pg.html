@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D3 Playground</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.2/d3.min.js" integrity="sha512-oKI0pS1ut+mxQZdqnD3w9fqArLyILRsT3Dx0B+8RVEXzEk3aNK3J3pWlaGJ8MtTs1oiwyXDAH6hG6jy1sY0YqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+</head>
+<body>
+
+  <h3>D3 Playground</h3>
+  
+  <svg id="bargraph1" width="400" height="100" ></svg>
+
+<script>
+  var homeless = [
+    {state: "California", population: 129972 },
+    {state: "New York", population: 91897 },
+    {state: "Florida", population: 31030 },
+    {state: "Texas", population: 25310 },
+    {state: "Washington", population: 22304 }];
+    
+  var bar = d3.select("#bargraph1")
+    .selectAll()
+    .data(homeless);
+
+    
+  bar.join("text")
+    .text((d) => d.state)
+    .attr('x', 96)
+    .attr('text-anchor', 'end')
+    .attr('y', (d, i) => i * 20 + 17);
+    console.log(bar);
+
+
+    
+  bar.join("rect")
+    .attr("height", 19)
+    .attr("width", (d) => d.population/500)
+    .attr("x", 100)
+    .attr("y", (d, i) => i * 20)
+    .attr("fill", "pink");
+</script>
+
+
+</body>
+</html>

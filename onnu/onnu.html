@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONNU</title>
+</head>
+<body>
+    <script type="module">
+        const url = 'https://mohanc-rest.deno.dev/users/1';
+        const url2 = 'https://mohanc-sf.deno.dev/authinfo';
+        const url3 = 'https://mohanc-sf.deno.dev/login';
+
+        async function fetchAuthInfo() {
+            const response = await fetch(url2);
+            if (!response.ok) {
+                window.location =  url3;
+                return null;
+            }
+            const authInfo = await response.json();
+            return authInfo;
+        }
+        const res = await fetchAuthInfo();
+        console.log(res);
+    </script>
+    
+</body>
+</html>
