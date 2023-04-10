@@ -233,6 +233,7 @@ jobs:
         run: |
           echo 'y' | sfdx plugins:install sfdx-mohanc-plugins
           sfdx plugins
+
       - name: Source DeployCheck Deploy
         run: |
           cd mc2Project 
@@ -264,7 +265,30 @@ jobs:
           sfdx mohanc:data:query   -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -q _check2.soql -f json | jq '.[].AssigneeId' | sed 's/&quot;//g' |  python3 py/list2in.py |sed &quot;s/{/SELECT Name FROM USER WHERE isActive=true AND Id IN (/g&quot; | sed 's/}/)/g' &gt; _psa_.soql; 
           sfdx mohanc:data:query   -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -q _psa_.soql -f json | jq '.[].Name' | sed 's/&quot;//g' | python3 py/disjoint-stdin.py data/approved-admins.txt   
 
+     # List unapproved users having ViewAllData - data/approved-admins.txt
+      - name: run-ViewAllData-check
+        run : |
+          export PERM=&quot;PermissionsViewAllData&quot;;   
+          echo &quot;SELECT AssigneeId FROM PermissionSetAssignment WHERE PermissionSet.$PERM=true&quot; &gt; _check2.soql          
+          sfdx mohanc:data:query   -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -q _check2.soql -f json | jq '.[].AssigneeId' | sed 's/&quot;//g' |  python3 py/list2in.py |sed &quot;s/{/SELECT Name FROM USER WHERE isActive=true AND Id IN (/g&quot; | sed 's/}/)/g' &gt; _psa_.soql; 
+          sfdx mohanc:data:query   -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -q _psa_.soql -f json | jq '.[].Name' | sed 's/&quot;//g' | python3 py/disjoint-stdin.py data/approved-admins.txt   
 
+
+     # List Users with given Profile who have Role
+      - name: run-users-with-role-check
+        run : |
+          export PROFILE=&quot;System Administrator&quot;;  
+          echo &quot;SELECT  Name, UserRole.Name FROM  User WHERE isActive = true AND Profile.Name =  '$PROFILE' AND UserRole.Name != null&quot; &gt; _check3.soql          
+          sfdx mohanc:data:query -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -q _check3.soql -f json | jq '.[].Name + &quot;|&quot; + .[].UserRole.Name' | sed 's/&quot;//g'
+
+     # Check users with given PermissionSet - EinsteinAnalyticsPlusAdmin
+      - name: check-user-with-given-ps
+        run : |
+          export PERMSET=&quot;EinsteinAnalyticsPlusAdmin&quot;; 
+          echo &quot;SELECT Id, PermissionSetId, PermissionSet.Name, PermissionSet.ProfileId, PermissionSet.Profile.Name, AssigneeId, Assignee.Name FROM PermissionSetAssignment WHERE PermissionSet.Name LIKE '%$PERMSET%'&quot; &gt; _check4.soql
+          sfdx mohanc:data:query -u   ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -q  _check4.soql -f json |jq '.[].Assignee.Name + &quot;|&quot; + .[].PermissionSet.Name'  | sed 's/&quot;//g' | sort -u
+
+    
 
 </code></pre>
 <p><img src="img/audit-github-actions-1.png" alt="audit - github-actions" /></p>
@@ -328,6 +352,7 @@ sfdx mohanc:data:query -u mohan.chinnappan.n.sel@gmail.com -q _check.soql -f jso
 <pre><code>Joe Carpenter|ROLE1
 John Smith|ROLE2
 </code></pre>
+<p><img src="img/audit-github-actions-3.png" alt="audit - github-actions" /></p>
 <p><a name ='checkpermset'></a></p>
 <h2 id="check-users-with-given-permissionset"><a class="header" href="#check-users-with-given-permissionset">Check users with given PermissionSet</a></h2>
 <pre><code>cat PermsetUsers.soql
@@ -349,6 +374,7 @@ export PERMSET=&quot;EinsteinAnalyticsPlusAdmin&quot;;  sed &quot;s/\$PERMSET/$P
 <pre><code>Mohan Chinnappan|EinsteinAnalyticsPlusAdmin
 
 </code></pre>
+<p><img src="img/audit-github-actions-4.png" alt="audit - github-actions" /></p>
 <h3 id="if-you-like-to-checked-against-an-approved-list"><a class="header" href="#if-you-like-to-checked-against-an-approved-list">if you like to checked against an approved list</a></h3>
 <pre><code>cat approved_crmaadmin.txt 
 </code></pre>
