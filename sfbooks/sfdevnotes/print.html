@@ -3845,6 +3845,7 @@ Wrote retrieve zip to /private/tmp/snapshot/unpackaged.zip
 <li><a href="tools/scripts.html#withrole">List Users with given Profile who have Role</a></li>
 <li><a href="tools/scripts.html#checkpermset">Check users with given PermissionSet </a></li>
 <li><a href="tools/scripts.html#sat">Check SetupAuditTrail    for a given Section</a></li>
+<li><a href="tools/scripts.html#opga">Operationalize Audit Scripts using github-actions</a></li>
 </ul>
 <hr />
 <p><a name="unapproved"></a></p>
@@ -3908,7 +3909,8 @@ sfdx mohanc:data:query  -u ${{ secrets.SALESFORCE_DEVHUB_USERNAME }} -q _check.s
 </ul>
 <pre><code>mohan chinnappan
 </code></pre>
-<h3 id="operationize-using-github-actions"><a class="header" href="#operationize-using-github-actions">Operationize using github-actions</a></h3>
+<p><a name='opga'></a></p>
+<h3 id="operationalize-audit-scripts-using-github-actions"><a class="header" href="#operationalize-audit-scripts-using-github-actions">Operationalize Audit Scripts using github-actions</a></h3>
 <pre><code class="language-yaml"> name: Auditor
 run-name: on-demand-auditor
 
