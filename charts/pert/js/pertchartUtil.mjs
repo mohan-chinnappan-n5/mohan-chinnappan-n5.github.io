@@ -4,6 +4,10 @@
 // mchinnappan
 // inspirations from  Dr. Sisay Chala for pert calc
 
+
+
+
+
 const dotPre = `digraph g {
         node [height=.1 shape=Mrecord style=rounded]
         rankdir=LR
@@ -56,11 +60,13 @@ export class PertChart {
       const duration = taskList[key]["duration"];
       const end = taskList[key]["end"];
       const responsible = taskList[key]["responsible"];
+      const task = taskList[key]["task"];
+
 
       if (id === "END") {
         continue;
       }
-      nodes += `"${id}"  [label="<f0> ${id} |{${start}|${duration}|${end}}|<f2>${responsible}" color=${color} fillcolor=${fillcolor} style=${style}]
+      nodes += `"${id}"  [label="<f0> ${id} |{${start}|${duration}|${end}}|<f2>${task}|<f3>${responsible}" color=${color} fillcolor=${fillcolor} style=${style}]
           `;
     }
 
@@ -113,7 +119,7 @@ const jsonEle = getEle("json");
 const saveBtn = getEle("save");
 
 const pert1Url =
-  "https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/charts/pert1.json";
+  "https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/charts/pert3.json";
 
 async function fetchJSON(url) {
   const response = await fetch(url);
