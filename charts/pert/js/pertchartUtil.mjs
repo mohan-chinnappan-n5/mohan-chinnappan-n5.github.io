@@ -10,7 +10,7 @@ const dotPre = `digraph g {
         node [shape=Mrecord]
       `;
 
-// ref: https://graphviz.org/doc/info/shapes.html 
+// ref: https://graphviz.org/doc/info/shapes.html
 export class PertChart {
   constructor() {}
 
@@ -46,7 +46,7 @@ export class PertChart {
     return taskList;
   }
 
-  getDot(taskList, color="black", fillcolor="grey93", style="filled") {
+  getDot(taskList, color = "black", fillcolor = "grey93", style = "filled") {
     let nodes = dotPre;
     let edges = "";
 
@@ -96,12 +96,13 @@ export class PertChart {
 }
 
 /*
+node usage:
       const pc = new PertChart();
       const taskList = pc.getInput(process.argv[2]);
       const calculatedTaskList = pc.calculateValues(taskList);
       console.log(calculatedTaskList);
       console.log(pc.getDot(calculatedTaskList, "blue", "steelblue", "filled"));
-      */
+*/
 
 const getEle = (id) => document.getElementById(id);
 
@@ -111,14 +112,25 @@ const drawBtn = getEle("draw");
 const jsonEle = getEle("json");
 const saveBtn = getEle("save");
 
+const pert1Url =
+  "https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/charts/pert1.json";
 
-Split(["#menu", "#content"], { sizes: [40, 60] });
+async function fetchJSON(url) {
+  const response = await fetch(url);
+  const content = await response.json();
+  return content;
+}
+
+const pertData = await fetchJSON(pert1Url);
+jsonEle.value = JSON.stringify(pertData, null, 4);
+
+Split(["#menu", "#content"], { sizes: [30, 70] });
 const pc = new PertChart();
 
 processBtn.addEventListener("click", (e) => {
-    const taskList = pc.getInputFromString(jsonEle.value);
-    const calculatedTaskList = pc.calculateValues(taskList);
-    dotEle.value = pc.getDot(calculatedTaskList);
+  const taskList = pc.getInputFromString(jsonEle.value);
+  const calculatedTaskList = pc.calculateValues(taskList);
+  dotEle.value = pc.getDot(calculatedTaskList);
 });
 
 // viz stuff
@@ -162,14 +174,16 @@ async function dot2svg(dot, options) {
 
 drawBtn.addEventListener("click", (e) => {
   processBtn.click();
-  saveBtn.style.display ='block';
   const graph = dotEle.value;
   dot2svg(graph)
     .then(
       (str) =>
         new DOMParser().parseFromString(str, "image/svg+xml").documentElement
     )
-    .then((el) => $("#graphviz").empty().append(el))
+    .then((el) => {
+      $("#graphviz").empty().append(el);
+      saveBtn.style.display = "block";
+    })
     .catch((err) => console.warn(err));
 });
 
@@ -178,7 +192,7 @@ drawBtn.addEventListener("click", (e) => {
 //-----------------------
 let svgFileName = "pertChart.svg";
 saveBtn.addEventListener("click", (event) => {
-  save( getEle('graphviz'));
+  save(getEle("graphviz"));
 });
 
 const triggerDownload = (imgURI, fileName) => {
@@ -197,6 +211,3 @@ let save = (ele) => {
   let url = URL.createObjectURL(svgBlob);
   triggerDownload(url, svgFileName);
 };
-
-
-
