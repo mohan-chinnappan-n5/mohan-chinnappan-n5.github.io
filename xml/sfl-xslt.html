@@ -16,6 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SF-LAND :: XSLT</title>
     <link rel="stylesheet" href="css/xslt.css">
+    <script src="https://mohan-chinnappan-n5.github.io/pkg/js/lib/autocomplete.min.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/pkg/css/lib/autocomplete.css">
 
 
 </head>
@@ -39,19 +41,29 @@
 
 
     <div id="menu" class="split split-horizontal">
+
+
         <textarea name="xml" id="xml" cols="80" rows="30"></textarea>
+        <input type="file" class='btn btn-info' id="file-input" class="open" title="open a xml file"  accept=".xml" />
+
     </div>
     <div class="split split-horizontal" id="content">
         <textarea name="xsl" id="xsl" class='xslt' cols="80" rows="30"></textarea>
+        <input type="file" class='btn btn-primary' id="xsl-input" class="open" title="open a xsl file"  accept=".xslt   " />
+        <hr/>
+
+        <div class="col"><input type="text" autocomplete="off" id="autoCompleteMtype"></div>
+        <hr/>
         <button class="btn btn-success" id="transform">Transform</button>
         <button class="btn btn-primary" disabled id="newTab">Show Results In New Tab</button>
+
 
     </div>
 
     <div name="result" id="result" class="split split-horizontal">
         <iframe id="result-iframe" width="1200" height="1200"></iframe>
     </div>
-    <script type="module" src="js/xslt.mjs"> </script>
+    <script type="module" src="js/xslt.mjs?v=2"> </script>
 </body>
 
 </html>
