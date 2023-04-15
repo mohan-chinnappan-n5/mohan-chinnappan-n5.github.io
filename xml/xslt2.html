@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>XSLT in the Browser</title>
+	<script>
+		function transformXML() {
+			// Load the XML and XSLT files
+			var xml = new XMLHttpRequest();
+			xml.open("GET", "data/example.xml", false);
+			xml.send(null);
+			var xslt = new XMLHttpRequest();
+			xslt.open("GET", "data/example.xsl", false);
+			xslt.send(null);
+
+			// Create an instance of the XSLTProcessor object
+			var parser = new DOMParser();
+			var xsltDoc = parser.parseFromString(xslt.responseText, "application/xml");
+			var processor = new XSLTProcessor();
+			processor.importStylesheet(xsltDoc);
+
+			// Transform the XML data using the XSLT stylesheet
+			var xmlDoc = parser.parseFromString(xml.responseText, "application/xml");
+			var result = processor.transformToFragment(xmlDoc, document);
+
+			// Apply the transformation result to the HTML document
+			document.getElementById("result").appendChild(result);
+		}
+	</script>
+</head>
+<body onload="transformXML()">
+	<h1>XSLT in the Browser</h1>
+	<div id="result"></div>
+</body>
+</html>

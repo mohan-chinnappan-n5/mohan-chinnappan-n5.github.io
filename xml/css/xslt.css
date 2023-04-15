@@ -1,0 +1,19 @@
+/* xslt.css */
+textarea {
+    font-family: Monaco, Arial;
+    font-size: 13px;
+    background-color: black;
+    color: azure;
+  }
+  body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+  }
+
+
+  .xslt {
+    font-family: Monaco, Arial;
+    font-size: 13px;
+    background-color:rgb(16, 17, 18);
+    color: wheat;
+  }

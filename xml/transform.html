@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>XSLT in the Browser</title>
+</head>
+<body>
+	<h1>XSLT in the Browser</h1>
+
+	<!-- XML source -->
+	<xml id="source">
+		<person>
+			<name>John Doe</name>
+			<age>30</age>
+			<email>john@example.com</email>
+		</person>
+	</xml>
+
+	<!-- XSLT stylesheet -->
+	<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+		<xsl:template match="/">
+			<h2>Personal Information</h2>
+			<ul>
+				<li><strong>Name:</strong> <xsl:value-of select="/person/name"/></li>
+				<li><strong>Age:</strong> <xsl:value-of select="/person/age"/></li>
+				<li><strong>Email:</strong> <xsl:value-of select="/person/email"/></li>
+			</ul>
+		</xsl:template>
+	</xsl:stylesheet>
+
+	<!-- JavaScript code to transform XML using XSLT -->
+	<script>
+		var source = document.getElementById('source').innerHTML;
+		var stylesheet = document.getElementsByTagName('xsl:stylesheet')[0].innerHTML;
+
+		var parser = new DOMParser();
+		var sourceDoc = parser.parseFromString(source, 'text/xml');
+		var stylesheetDoc = parser.parseFromString(stylesheet, 'text/xml');
+
+		var processor = new XSLTProcessor();
+		processor.importStylesheet(stylesheetDoc);
+
+		var resultDoc = processor.transformToDocument(sourceDoc);
+		document.body.appendChild(resultDoc.documentElement);
+	</script>
+</body>
+</html>
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div name="result" id="result" ></div>
+    <script>
+
+        // Load the XML and XSLT documents
+        fetch('data/example.xml')
+            .then(response => response.text())
+            .then(xml => {
+                fetch('data/example.xsl')
+                    .then(response => response.text())
+                    .then(xsl => {
+                        // Parse the XML document
+                        const parser = new DOMParser();
+                        const xmlDoc = parser.parseFromString(xml, 'application/xml');
+
+                        // Apply the XSLT stylesheet to the XML DOM tree
+                        const xsltProcessor = new XSLTProcessor();
+                        const xslDoc = parser.parseFromString(xsl, 'application/xml');
+                        xsltProcessor.importStylesheet(xslDoc);
+                        const resultDoc = xsltProcessor.transformToDocument(xmlDoc);
+
+                        // Display the transformed result in the browser
+                        const resultString = new XMLSerializer().serializeToString(resultDoc);
+                        console.log(resultString);
+                        document.getElementById('result').innerHTML = resultString;
+                    });
+            });
+    </script>
+
+</body>
+
+</html>
