@@ -1,0 +1,17 @@
+/* xmldelta.css */
+
+#json {
+    background-color:lightblue;
+    color:black;
+}
+#json2 {
+    background-color:lightgray;
+    color:black;
+}
+#diff {
+    background-color:black;
+    color:wheat;
+}
+textarea {
+    border-radius: 10px;
+}
