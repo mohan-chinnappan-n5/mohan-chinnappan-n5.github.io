@@ -217,3 +217,5 @@ let save = (ele) => {
   let url = URL.createObjectURL(svgBlob);
   triggerDownload(url, svgFileName);
 };
+
+drawBtn.click();
