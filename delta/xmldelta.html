@@ -51,20 +51,24 @@
         <textarea name="xml-in" id="xml-in" cols="60" rows="24"></textarea>
         <textarea name="json" id="json" cols="60" rows="24"></textarea>
         <br />
-        <button class="btn btn-info" style="margin-top:-35px;" id="convert">JSON</button>
+        <button class="btn btn-success"  id="convert">JSON</button>
+        <input type="file" class='btn btn-info' id="file-input1" class="open" title="open a xml file"  accept=".xml" />
+
 
         <h5>Target</h5>
         <textarea name="xml-in2" id="xml-in2" cols="60" rows="24"></textarea>
         <textarea name="json2" id="json2" cols="60" rows="24"></textarea>
         <br />
-        <button class='btn btn-primary' style="margin-top:-35px;" id="convert2">JSON</button>
+        <button class='btn btn-success'  id="convert2">JSON</button>
+        <input type="file" class='btn btn-primary' id="file-input2" class="open" title="open a xml file"  accept=".xml" />
+
     </div>
 
     <div id="content" class="split split-horizontal">
         <h5>Deltas</h5>
-        <textarea name="diff" id="diff" cols="60" rows="24"></textarea>
+        <textarea name="diff" id="diff" cols="80" rows="24"></textarea>
         <br />
-        <button class='btn btn-warning' style="margin-top:-35px;" id="compare">compare</button>
+        <button class='btn btn-warning'  id="compare">compare</button>
     </div>
 
     <script type="module" src="js/xmldeta.mjs"> </script>
