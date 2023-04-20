@@ -66,3 +66,9 @@ const getEle = id => document.getElementById(id);
     });
 
     convertBtn.click();
+
+    const downloadBtn = getEle('yaml-download');
+    downloadBtn.addEventListener('click', event => {
+        const yamlData = getEle('yaml-data').value;
+        console.log(yamlData);
+    });
