@@ -198,19 +198,38 @@
 <h2 id="cli"><a class="header" href="#cli">CLI</a></h2>
 <pre><code># Creates a new custom metadata type in the current project.
 force:cmdt:create
+sfdx force:cmdt:create --typename MyCustomType
+sfdx force:cmdt:create --typename MyCustomType --label &quot;Custom Type&quot; --plurallabel &quot;Custom Types&quot; --visibility Protected
+
 
 # Generate a custom metadata field based on the field type provided.
 force:cmdt:field:create
+sfdx force:cmdt:field:create --fieldname MyField --fieldtype Checkbox
+sfdx force:cmdt:field:create --fieldname MyField --fieldtype Picklist --picklistvalues &quot;A,B,C&quot;
+sfdx force:cmdt:field:create --fieldname MyField --fieldtype Number --decimalplaces 2
+
+
+
+
 
 # Generates a custom metadata type and all its records for the provided sObject.
 force:cmdt:generate
+sfdx force:cmdt:generate --devname MyCMDT --sobjectname MySourceObject__c
+sfdx force:cmdt:generate --devname MyCMDT --sobjectname MySourceObject__c  --ignoreunsupported --targetusername 'alias or user email of the org containing the source type'
+
+
+
 
 # Create a new record for a given custom metadata type in the current project.
 force:cmdt:record:create
+sfdx force:cmdt:record:create --typename MyCMT__mdt --recordname MyRecord My_Custom_Field_1=Foo My_Custom_Field_2=Bar
+
 
 
 # Create new custom metadata type records from a CSV file.
 force:cmdt:record:insert
+sfdx force:cmdt:record:insert --filepath path/to/my.csv --typename My_CMDT_Name
+
 
 
 

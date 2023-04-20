@@ -3863,7 +3863,7 @@ Wrote retrieve zip to /private/tmp/snapshot/unpackaged.zip
 <li><a href="tools/scripts.html#vad">List unapproved users having ViewAllData</a></li>
 <li><a href="tools/scripts.html#withrole">List Users with given Profile who have Role</a></li>
 <li><a href="tools/scripts.html#checkpermset">Check users with given PermissionSet </a></li>
-<li><a href="tools/scripts.html#sat">Check SetupAuditTrail    for a given Section</a></li>
+<li><a href="tools/scripts.html#sat">Check SetupAuditTrail</a></li>
 <li><a href="tools/scripts.html#opga">Operationalize Audit Scripts using github-actions</a></li>
 </ul>
 <hr />
@@ -4101,6 +4101,14 @@ export PERMSET=&quot;EinsteinAnalyticsPlusAdmin&quot;;  sed &quot;s/\$PERMSET/$P
 </code></pre>
 <p><a name='sat'></a></p>
 <h2 id="check-setupaudittrail"><a class="header" href="#check-setupaudittrail">Check SetupAuditTrail</a></h2>
+<h3 id="using-datatable-view"><a class="header" href="#using-datatable-view">Using Datatable view</a></h3>
+<pre><code>
+sfdx mohanc:data:bulkapi:query  -u  mohan.chinnappan.n.sel2@gmail.com -q setupAduit.soql; sed 's/CreatedBy.Name/CreatedByName/g' setupAduit.soql.csv  | pbcopy; open &quot;https://mohan-chinnappan-n5.github.io/viz/datatable/dt.html?c=csv&quot;
+
+
+</code></pre>
+<h2 id="-1"><a class="header" href="#-1"><img src="tools/img/setupAuditTrail-1.png" alt="Demo SAT-datatable" /></a></h2>
+<h3 id="using-sqlite3"><a class="header" href="#using-sqlite3">Using sqlite3</a></h3>
 <pre><code class="language-py">#!/usr/local/bin/python3
 # SQL Query for CSV using pandas and sqlite 
 # mchinnappan
@@ -4232,19 +4240,38 @@ sfdx mohanc:data:bulkapi:query  -u  mohan.chinnappan.n.sel@gmail.com -q setupAdu
 <h2 id="cli"><a class="header" href="#cli">CLI</a></h2>
 <pre><code># Creates a new custom metadata type in the current project.
 force:cmdt:create
+sfdx force:cmdt:create --typename MyCustomType
+sfdx force:cmdt:create --typename MyCustomType --label &quot;Custom Type&quot; --plurallabel &quot;Custom Types&quot; --visibility Protected
+
 
 # Generate a custom metadata field based on the field type provided.
 force:cmdt:field:create
+sfdx force:cmdt:field:create --fieldname MyField --fieldtype Checkbox
+sfdx force:cmdt:field:create --fieldname MyField --fieldtype Picklist --picklistvalues &quot;A,B,C&quot;
+sfdx force:cmdt:field:create --fieldname MyField --fieldtype Number --decimalplaces 2
+
+
+
+
 
 # Generates a custom metadata type and all its records for the provided sObject.
 force:cmdt:generate
+sfdx force:cmdt:generate --devname MyCMDT --sobjectname MySourceObject__c
+sfdx force:cmdt:generate --devname MyCMDT --sobjectname MySourceObject__c  --ignoreunsupported --targetusername 'alias or user email of the org containing the source type'
+
+
+
 
 # Create a new record for a given custom metadata type in the current project.
 force:cmdt:record:create
+sfdx force:cmdt:record:create --typename MyCMT__mdt --recordname MyRecord My_Custom_Field_1=Foo My_Custom_Field_2=Bar
+
 
 
 # Create new custom metadata type records from a CSV file.
 force:cmdt:record:insert
+sfdx force:cmdt:record:insert --filepath path/to/my.csv --typename My_CMDT_Name
+
 
 
 
@@ -4685,7 +4712,7 @@ jar xvf  09S3h000006DK3lEAG.zip
 
 </code></pre>
 <h3 id="using-vs-code"><a class="header" href="#using-vs-code">Using VS Code</a></h3>
-<h2 id="-1"><a class="header" href="#-1"><img src="https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/mdapi/img/pmd-supress-1.png" alt="VSCode PMD Suppress" /></a></h2>
+<h2 id="-2"><a class="header" href="#-2"><img src="https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/mdapi/img/pmd-supress-1.png" alt="VSCode PMD Suppress" /></a></h2>
 <h2 id="run-pmd-csv-output"><a class="header" href="#run-pmd-csv-output">Run pmd csv output</a></h2>
 <ul>
 <li>your apex class files are at: /tmp/apex/unpackaged/classes/</li>
@@ -10024,13 +10051,21 @@ RefMetadataComponentType
 <div style="break-before: page; page-break-before: always;"></div><h1 id="yaml"><a class="header" href="#yaml">YAML</a></h1>
 <h2 id="yaml-to-json-convertor"><a class="header" href="#yaml-to-json-convertor">YAML to JSON convertor</a></h2>
 <ul>
-<li><a href="https://mohan-chinnappan-n5.github.io/yaml/yaml2json.html">YAML2JSON</a></li>
+<li><a href="https://mohan-chinnappan-n5.github.io/yaml/yaml2json.html">YAML2JSON APP</a></li>
 </ul>
 <iframe id="YAML2JSON "
     title="YAML2JSON "
     width="1200"
     height="800"
     src="https://mohan-chinnappan-n5.github.io/yaml/yaml2json.html">
+</iframe>
+<h2 id="json-editor"><a class="header" href="#json-editor">JSON Editor</a></h2>
+<p><a href="https://mohan-chinnappan-n.github.io/json/jsonEditor.html">JSON Editor APP</a></p>
+<iframe id="JSONEditor"
+    title="JSONEditor "
+    width="1200"
+    height="800"
+    src="https://mohan-chinnappan-n.github.io/json/jsonEditor.html">
 </iframe>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="crma-tools"><a class="header" href="#crma-tools">CRMA tools</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="dataset-load-and-export"><a class="header" href="#dataset-load-and-export">Dataset Load and Export</a></h1>
@@ -11684,7 +11719,7 @@ sfdx mohanc:data:jq  -i MyReport.reportType-meta.xml.json -f '.ReportType.sectio
     src="https://mohan-chinnappan-n5.github.io/xml/sfl-xslt.html">
 </iframe>
 <h2 id="demos"><a class="header" href="#demos">Demos</a></h2>
-<h2 id="-2"><a class="header" href="#-2"><img src="xml/img/xmldelta-1.webm.gif" alt="demo1" /></a></h2>
+<h2 id="-3"><a class="header" href="#-3"><img src="xml/img/xmldelta-1.webm.gif" alt="demo1" /></a></h2>
 <p><img src="xml/img/xml-tools-1.webm.gif" alt="demo2" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="xml-delta-util"><a class="header" href="#xml-delta-util">XML Delta Util</a></h1>
 <h2 id="app-online"><a class="header" href="#app-online">App Online</a></h2>
@@ -11697,8 +11732,12 @@ sfdx mohanc:data:jq  -i MyReport.reportType-meta.xml.json -f '.ReportType.sectio
     height="800"
     src="https://mohan-chinnappan-n5.github.io/delta/xmldelta.html?t=Profile">
 </iframe>
+<h3 id="notes"><a class="header" href="#notes">Notes</a></h3>
+<ul>
+<li>Currently delta tool does not support <code>layoutAssignments</code> </li>
+</ul>
 <h2 id="demos-1"><a class="header" href="#demos-1">Demos</a></h2>
-<h2 id="-3"><a class="header" href="#-3"><img src="xml/img/xmldelta-1.webm.gif" alt="demo1" /></a></h2>
+<h2 id="-4"><a class="header" href="#-4"><img src="xml/img/xmldelta-1.webm.gif" alt="demo1" /></a></h2>
 <p><img src="xml/img/xml-tools-1.webm.gif" alt="demo2" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="data-processing-tools"><a class="header" href="#data-processing-tools">Data Processing tools</a></h1>
 <h2 id="how-to-convert-csv-file-into-tsv-tab-separated-values-or-psv-pipe-separated-values"><a class="header" href="#how-to-convert-csv-file-into-tsv-tab-separated-values-or-psv-pipe-separated-values">How to convert CSV file into TSV (Tab Separated Values) or PSV (Pipe Separated Values)</a></h2>
@@ -11841,7 +11880,7 @@ kural i18n:translate -i 'Good Morning, Friends!' -f 'en' -t ja -g true
 <hr />
 <p><a name='fillin'></a></p>
 <h2 id="using-cli-to-fill-in-salesforce-translation-file-stf"><a class="header" href="#using-cli-to-fill-in-salesforce-translation-file-stf">Using CLI to fill-in Salesforce translation file (STF)</a></h2>
-<h3 id="notes"><a class="header" href="#notes">NOTES</a></h3>
+<h3 id="notes-1"><a class="header" href="#notes-1">NOTES</a></h3>
 <ul>
 <li>You can use <a href="https://github.com/mohan-chinnappan-n/kural-docs">Kural CLI</a> to get free translations</li>
 <li>You can use the <a href="https://github.com/mohan-chinnappan-n/cli-dx/blob/master/i18n/stf/csv2.md">csv2</a> for CSV to PSV conversions</li>
@@ -12063,7 +12102,7 @@ cat translated-2.psv
 <p>Once installed ONNU in your chrome browser, login into Salesforce org and switch to Classic mode to start :</p>
 </li>
 </ul>
-<h2 id="-4"><a class="header" href="#-4"><img src="chromeext/img/onnu-start-1.png" alt="Onnu start" /></a></h2>
+<h2 id="-5"><a class="header" href="#-5"><img src="chromeext/img/onnu-start-1.png" alt="Onnu start" /></a></h2>
 <h2 id="topics-21"><a class="header" href="#topics-21">Topics</a></h2>
 <ul>
 <li><a href="chromeext/onnu.html#about">About Onnu</a></li>

@@ -152,7 +152,7 @@
 <li><a href="#vad">List unapproved users having ViewAllData</a></li>
 <li><a href="#withrole">List Users with given Profile who have Role</a></li>
 <li><a href="#checkpermset">Check users with given PermissionSet </a></li>
-<li><a href="#sat">Check SetupAuditTrail    for a given Section</a></li>
+<li><a href="#sat">Check SetupAuditTrail</a></li>
 <li><a href="#opga">Operationalize Audit Scripts using github-actions</a></li>
 </ul>
 <hr />
@@ -390,6 +390,14 @@ export PERMSET=&quot;EinsteinAnalyticsPlusAdmin&quot;;  sed &quot;s/\$PERMSET/$P
 </code></pre>
 <p><a name='sat'></a></p>
 <h2 id="check-setupaudittrail"><a class="header" href="#check-setupaudittrail">Check SetupAuditTrail</a></h2>
+<h3 id="using-datatable-view"><a class="header" href="#using-datatable-view">Using Datatable view</a></h3>
+<pre><code>
+sfdx mohanc:data:bulkapi:query  -u  mohan.chinnappan.n.sel2@gmail.com -q setupAduit.soql; sed 's/CreatedBy.Name/CreatedByName/g' setupAduit.soql.csv  | pbcopy; open &quot;https://mohan-chinnappan-n5.github.io/viz/datatable/dt.html?c=csv&quot;
+
+
+</code></pre>
+<h2 id=""><a class="header" href="#"><img src="img/setupAuditTrail-1.png" alt="Demo SAT-datatable" /></a></h2>
+<h3 id="using-sqlite3"><a class="header" href="#using-sqlite3">Using sqlite3</a></h3>
 <pre><code class="language-py">#!/usr/local/bin/python3
 # SQL Query for CSV using pandas and sqlite 
 # mchinnappan

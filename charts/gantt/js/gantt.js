@@ -154,3 +154,5 @@ drawEle.addEventListener("click", (event) => {
   const data = getData(parsed);
   chart.draw(data, options);
 });
+
+ 
