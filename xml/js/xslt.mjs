@@ -16,7 +16,9 @@ const selectionMap = {
     'samlrequest': 'samlrequest',
     'samlresponse': 'samlresponse',
     'pmd-report-v2': "pmd-report",
-    'pmd-ruleset': "apex_ruleset"
+    'pmd-ruleset': "apex_ruleset",
+    'wavexmd': "wavexmd",
+    "flow": "flow"
 }
 
 

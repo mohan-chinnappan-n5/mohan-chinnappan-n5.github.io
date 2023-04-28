@@ -12,6 +12,8 @@ export class XMLTypes {
           "samlrequest",
           "samlresponse",
           "pmd-report-v2",
+          "wavexmd",
+          "flow"
 
           
         ];
