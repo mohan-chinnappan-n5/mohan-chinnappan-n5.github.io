@@ -33,6 +33,8 @@
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="custom.css">
 
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -83,7 +85,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="dg/dg.html"><strong aria-hidden="true">2.</strong> Data Governance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="dg/changeManagement.html"><strong aria-hidden="true">2.1.</strong> Change Management</a></li></ol></li><li class="chapter-item expanded "><a href="dm/datamodel.html"><strong aria-hidden="true">3.</strong> Data Model</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="dm/fsc-dm.html"><strong aria-hidden="true">3.1.</strong> Financial Services Cloud</a></li><li class="chapter-item expanded "><a href="dm/salescloud.html"><strong aria-hidden="true">3.2.</strong> Sales Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="tools/aboutTools.html"><strong aria-hidden="true">4.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/tools-org.html"><strong aria-hidden="true">4.1.</strong> Org Tools</a></li><li class="chapter-item expanded "><a href="tools/tools-data-bulkapi2.html"><strong aria-hidden="true">4.2.</strong> Data Loading BulkAPI2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/userloading.html"><strong aria-hidden="true">4.2.1.</strong> User Loading</a></li><li class="chapter-item expanded "><a href="tools/product2loading.html"><strong aria-hidden="true">4.2.2.</strong> Product2 Loading and Update</a></li><li class="chapter-item expanded "><a href="tools/flowinterview.html"><strong aria-hidden="true">4.2.3.</strong> FlowInterview Query and Deletion</a></li></ol></li><li class="chapter-item expanded "><a href="tools/tools-scpl.html"><strong aria-hidden="true">4.3.</strong> Loading State and Country Picklist</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/tools-scpl-update.html"><strong aria-hidden="true">4.3.1.</strong> Updating State and Country Picklist </a></li></ol></li><li class="chapter-item expanded "><a href="tools/project-management/gantt.html"><strong aria-hidden="true">4.4.</strong> Project Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="project-management/pert.html"><strong aria-hidden="true">4.4.1.</strong> PERT</a></li></ol></li><li class="chapter-item expanded "><a href="tools/em.html"><strong aria-hidden="true">4.5.</strong> Event Monitoring</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="monitoring/realtime-event-monitoring.html"><strong aria-hidden="true">4.5.1.</strong> Real-Time Event Monitoring</a></li></ol></li><li class="chapter-item expanded "><a href="tools/instance.html"><strong aria-hidden="true">4.6.</strong> Instance Related</a></li><li class="chapter-item expanded "><a href="tools/oms.html"><strong aria-hidden="true">4.7.</strong> Org Metadata Snapshot</a></li></ol></li><li class="chapter-item expanded "><a href="tools/scripts.html"><strong aria-hidden="true">5.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="custom-metadata-types.html"><strong aria-hidden="true">6.</strong> Custom Metadata Types</a></li><li class="chapter-item expanded "><a href="cq/cq.html"><strong aria-hidden="true">7.</strong> Code Quality</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cq/pmd.html"><strong aria-hidden="true">7.1.</strong> Code Scan PMD</a></li><li class="chapter-item expanded "><a href="cq/comments.html"><strong aria-hidden="true">7.2.</strong> Comments Checking</a></li><li class="chapter-item expanded "><a href="cq/test-coverage.html"><strong aria-hidden="true">7.3.</strong> Apex Code Test Coverage</a></li><li class="chapter-item expanded "><a href="cq/lwc-linting.html"><strong aria-hidden="true">7.4.</strong> LWC Linting</a></li></ol></li><li class="chapter-item expanded "><a href="deployments/deployments.html"><strong aria-hidden="true">8.</strong> Deployments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="deployments/delta.html"><strong aria-hidden="true">8.1.</strong> Delta Deployments</a></li><li class="chapter-item expanded "><a href="deployments/gha.html"><strong aria-hidden="true">8.2.</strong> Github Actions</a></li><li class="chapter-item expanded "><a href="deployments/validate.html"><strong aria-hidden="true">8.3.</strong> Validating changes</a></li><li class="chapter-item expanded "><a href="deployments/admin-changes.html"><strong aria-hidden="true">8.4.</strong> Taking care of Admin changes</a></li><li class="chapter-item expanded "><a href="deployments/devOpsCenter.html"><strong aria-hidden="true">8.5.</strong> DevOps Center</a></li><li class="chapter-item expanded "><a href="deployments/jenkins.html"><strong aria-hidden="true">8.6.</strong> Jenkins</a></li><li class="chapter-item expanded "><a href="deployments/git.html"><strong aria-hidden="true">8.7.</strong> git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="deployments/git-internals.html"><strong aria-hidden="true">8.7.1.</strong> git internals</a></li><li class="chapter-item expanded "><a href="deployments/git-hooks.html"><strong aria-hidden="true">8.7.2.</strong> git hooks</a></li><li class="chapter-item expanded "><a href="deployments/git-ops.html"><strong aria-hidden="true">8.7.3.</strong> git operations</a></li><li class="chapter-item expanded "><a href="deployments/pr-template.html"><strong aria-hidden="true">8.7.4.</strong> pull request template</a></li><li class="chapter-item expanded "><a href="deployments/git-diff.html"><strong aria-hidden="true">8.7.5.</strong> git diff</a></li><li class="chapter-item expanded "><a href="deployments/git-log.html"><strong aria-hidden="true">8.7.6.</strong> git log</a></li><li class="chapter-item expanded "><a href="deployments/git-stash.html"><strong aria-hidden="true">8.7.7.</strong> git stash</a></li><li class="chapter-item expanded "><a href="deployments/git-config.html"><strong aria-hidden="true">8.7.8.</strong> git config</a></li></ol></li><li class="chapter-item expanded "><a href="deployments/sourceTracking.html"><strong aria-hidden="true">8.8.</strong> Source Tracking</a></li><li class="chapter-item expanded "><a href="deployments/dangling.html"><strong aria-hidden="true">8.9.</strong> Dangling Fields Finder</a></li><li class="chapter-item expanded "><a href="deployments/sbx.html"><strong aria-hidden="true">8.10.</strong> Sandbox Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="deployments/sandbox-preview-guide.html"><strong aria-hidden="true">8.10.1.</strong> Sandbox Preview Guide</a></li></ol></li><li class="chapter-item expanded "><a href="deployments/MetadataComponentDependency.html"><strong aria-hidden="true">8.11.</strong> MetadataComponentDependency</a></li><li class="chapter-item expanded "><a href="deployments/yaml.html"><strong aria-hidden="true">8.12.</strong> YAML</a></li><li class="chapter-item expanded "><a href="deployments/packages.html"><strong aria-hidden="true">8.13.</strong> Installed Packages</a></li></ol></li><li class="chapter-item expanded "><a href="crma/tools.html"><strong aria-hidden="true">9.</strong> CRMA tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="crma/load-export.html"><strong aria-hidden="true">9.1.</strong> Dataset Load and Export</a></li><li class="chapter-item expanded "><a href="crma/analysis.html"><strong aria-hidden="true">9.2.</strong> Analysis</a></li><li class="chapter-item expanded "><a href="crma/binding.html"><strong aria-hidden="true">9.3.</strong> Binding</a></li><li class="chapter-item expanded "><a href="crma/deployment.html"><strong aria-hidden="true">9.4.</strong> Deployment</a></li></ol></li><li class="chapter-item expanded "><a href="perf/perf.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="perf/lex-perf.html"><strong aria-hidden="true">10.1.</strong> Lex Performance</a></li><li class="chapter-item expanded "><a href="perf/perf-testing.html"><strong aria-hidden="true">10.2.</strong> Performance testing</a></li><li class="chapter-item expanded "><a href="perf/perf-pw.html"><strong aria-hidden="true">10.3.</strong> Testing with Playwright</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="e2e/playwright.html"><strong aria-hidden="true">10.3.1.</strong> More with Playwright</a></li></ol></li><li class="chapter-item expanded "><a href="perf/edge.html"><strong aria-hidden="true">10.4.</strong> Salesforce Edge Network</a></li><li class="chapter-item expanded "><a href="perf/lex-query.html"><strong aria-hidden="true">10.5.</strong> Lightning Experience Queries</a></li><li class="chapter-item expanded "><a href="perf/rum.html"><strong aria-hidden="true">10.6.</strong> Real User Monitoring (RUM)</a></li></ol></li><li class="chapter-item expanded "><a href="dwg/dwg-tools.html"><strong aria-hidden="true">11.</strong> Diagram tools</a></li><li class="chapter-item expanded "><a href="xml/xml-tools.html"><strong aria-hidden="true">12.</strong> XML tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="xml/xlst-transformer.html"><strong aria-hidden="true">12.1.</strong> Transformer</a></li><li class="chapter-item expanded "><a href="xml/xml-delta.html"><strong aria-hidden="true">12.2.</strong> XML Delta Util</a></li></ol></li><li class="chapter-item expanded "><a href="dp/dp.html"><strong aria-hidden="true">13.</strong> Data Processing tools</a></li><li class="chapter-item expanded "><a href="i18n/i18n.html"><strong aria-hidden="true">14.</strong> Translation Tools</a></li><li class="chapter-item expanded "><a href="media/recording.html"><strong aria-hidden="true">15.</strong> Media - Recording tools</a></li><li class="chapter-item expanded "><a href="media/image.html"><strong aria-hidden="true">16.</strong> Image Processing</a></li><li class="chapter-item expanded "><a href="codegen/codegen.html"><strong aria-hidden="true">17.</strong> Code Generators</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="codegen/lwc.html"><strong aria-hidden="true">17.1.</strong> LWC Code Generators</a></li></ol></li><li class="chapter-item expanded "><a href="ml/ml.html"><strong aria-hidden="true">18.</strong> Machine Learning</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ml/sdcg.html"><strong aria-hidden="true">18.1.</strong> Semantic Doc Compare and Group</a></li><li class="chapter-item expanded "><a href="ml/datacatalog.html"><strong aria-hidden="true">18.2.</strong> Data Catalog for ML Work</a></li><li class="chapter-item expanded "><a href="ml/chatgpt.html"><strong aria-hidden="true">18.3.</strong> openAI - ChatGPT</a></li><li class="chapter-item expanded "><a href="ml/gpt3codex.html"><strong aria-hidden="true">18.4.</strong> openAI - GPT3 Codex</a></li><li class="chapter-item expanded "><a href="ml/einsteinbot.html"><strong aria-hidden="true">18.5.</strong> Einstein Bot</a></li><li class="chapter-item expanded "><a href="ml/dialogflow.html"><strong aria-hidden="true">18.6.</strong> Dialogflow - Knowledge Base</a></li></ol></li><li class="chapter-item expanded "><a href="docmgmt/docmgmt.html"><strong aria-hidden="true">19.</strong> Document Management tools</a></li><li class="chapter-item expanded "><a href="design/design-notes.html"><strong aria-hidden="true">20.</strong> Design Principles</a></li><li class="chapter-item expanded "><a href="chromeext/ext.html"><strong aria-hidden="true">21.</strong> Chrome Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chromeext/onnu.html"><strong aria-hidden="true">21.1.</strong> ONNU</a></li></ol></li><li class="chapter-item expanded "><a href="vscode/ext.html"><strong aria-hidden="true">22.</strong> VS Code Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="vscode/sfland.html"><strong aria-hidden="true">22.1.</strong> SF Land</a></li><li class="chapter-item expanded "><a href="vscode/pmd.html"><strong aria-hidden="true">22.2.</strong> VSCode Apex PMD</a></li></ol></li><li class="chapter-item expanded "><a href="dviz/dviz.html"><strong aria-hidden="true">23.</strong> Data Viz</a></li><li class="chapter-item expanded "><a href="releases.html"><strong aria-hidden="true">24.</strong> Releases</a></li><li class="chapter-item expanded "><a href="rest/rest_tester.html"><strong aria-hidden="true">25.</strong> REST Tester</a></li><li class="chapter-item expanded "><a href="security/security.html"><strong aria-hidden="true">26.</strong> Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="security/sd.html"><strong aria-hidden="true">26.1.</strong> Sharing Debugger</a></li><li class="chapter-item expanded "><a href="security/rh.html"><strong aria-hidden="true">26.2.</strong> Role Hierarchy</a></li><li class="chapter-item expanded "><a href="security/shield.html"><strong aria-hidden="true">26.3.</strong> Shield</a></li><li class="chapter-item expanded "><a href="security/profile-ps.html"><strong aria-hidden="true">26.4.</strong> Profile, PermissionSet</a></li><li class="chapter-item expanded "><a href="security/setupAuditTrail.html"><strong aria-hidden="true">26.5.</strong> SetupAuditTrail</a></li><li class="chapter-item expanded "><a href="security/datamask.html"><strong aria-hidden="true">26.6.</strong> Data Mask</a></li><li class="chapter-item expanded "><a href="security/saml.html"><strong aria-hidden="true">26.7.</strong> SAML</a></li><li class="chapter-item expanded "><a href="security/openIDConnectConcepts.html"><strong aria-hidden="true">26.8.</strong> OpenID Connect</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="security/openIDConnect.html"><strong aria-hidden="true">26.8.1.</strong> OIDC Google</a></li><li class="chapter-item expanded "><a href="security/openIDConnectProvider.html"><strong aria-hidden="true">26.8.2.</strong> OIDC Provider</a></li><li class="chapter-item expanded "><a href="security/jwt.html"><strong aria-hidden="true">26.8.3.</strong> JWT</a></li></ol></li><li class="chapter-item expanded "><a href="security/openssl.html"><strong aria-hidden="true">26.9.</strong> OpenSSL</a></li></ol></li><li class="chapter-item expanded "><a href="mobile/mobile.html"><strong aria-hidden="true">27.</strong> Mobile</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="mobile/ios-sim.html"><strong aria-hidden="true">27.1.</strong> Simulator</a></li></ol></li><li class="chapter-item expanded "><a href="rd/rd.html"><strong aria-hidden="true">28.</strong> Reports and Dashboards</a></li><li class="chapter-item expanded "><a href="customLabels/cl.html"><strong aria-hidden="true">29.</strong> Custom Labels</a></li><li class="chapter-item expanded "><a href="accessibility/508.html"><strong aria-hidden="true">30.</strong> 508 - Accessibility</a></li><li class="chapter-item expanded "><a href="process-automation/processAutomation.html"><strong aria-hidden="true">31.</strong> Process Automation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="process-automation/flow.html"><strong aria-hidden="true">31.1.</strong> Flow</a></li></ol></li><li class="chapter-item expanded "><a href="great/folks.html"><strong aria-hidden="true">32.</strong> Great Folks</a></li><li class="chapter-item expanded "><a href="editor/editor-tips.html"><strong aria-hidden="true">33.</strong> Editor tips</a></li><li class="chapter-item expanded "><a href="bash/tips.html"><strong aria-hidden="true">34.</strong> Bash tips</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="dg/dg.html"><strong aria-hidden="true">2.</strong> Data Governance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="dg/changeManagement.html"><strong aria-hidden="true">2.1.</strong> Change Management</a></li></ol></li><li class="chapter-item expanded "><a href="dm/datamodel.html"><strong aria-hidden="true">3.</strong> Data Model</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="dm/fsc-dm.html"><strong aria-hidden="true">3.1.</strong> Financial Services Cloud</a></li><li class="chapter-item expanded "><a href="dm/salescloud.html"><strong aria-hidden="true">3.2.</strong> Sales Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="tools/aboutTools.html"><strong aria-hidden="true">4.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/tools-org.html"><strong aria-hidden="true">4.1.</strong> Org Tools</a></li><li class="chapter-item expanded "><a href="tools/tools-data-bulkapi2.html"><strong aria-hidden="true">4.2.</strong> Data Loading BulkAPI2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/userloading.html"><strong aria-hidden="true">4.2.1.</strong> User Loading</a></li><li class="chapter-item expanded "><a href="tools/product2loading.html"><strong aria-hidden="true">4.2.2.</strong> Product2 Loading and Update</a></li><li class="chapter-item expanded "><a href="tools/flowinterview.html"><strong aria-hidden="true">4.2.3.</strong> FlowInterview Query and Deletion</a></li></ol></li><li class="chapter-item expanded "><a href="tools/tools-scpl.html"><strong aria-hidden="true">4.3.</strong> Loading State and Country Picklist</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tools/tools-scpl-update.html"><strong aria-hidden="true">4.3.1.</strong> Updating State and Country Picklist </a></li></ol></li><li class="chapter-item expanded "><a href="tools/project-management/gantt.html"><strong aria-hidden="true">4.4.</strong> Project Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="project-management/pert.html"><strong aria-hidden="true">4.4.1.</strong> PERT</a></li></ol></li><li class="chapter-item expanded "><a href="tools/em.html"><strong aria-hidden="true">4.5.</strong> Event Monitoring</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="monitoring/realtime-event-monitoring.html"><strong aria-hidden="true">4.5.1.</strong> Real-Time Event Monitoring</a></li></ol></li><li class="chapter-item expanded "><a href="tools/instance.html"><strong aria-hidden="true">4.6.</strong> Instance Related</a></li><li class="chapter-item expanded "><a href="tools/oms.html"><strong aria-hidden="true">4.7.</strong> Org Metadata Snapshot</a></li></ol></li><li class="chapter-item expanded "><a href="tools/scripts.html"><strong aria-hidden="true">5.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="custom-metadata-types.html"><strong aria-hidden="true">6.</strong> Custom Metadata Types</a></li><li class="chapter-item expanded "><a href="cq/cq.html"><strong aria-hidden="true">7.</strong> Code Quality</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="cq/pmd.html"><strong aria-hidden="true">7.1.</strong> Code Scan PMD</a></li><li class="chapter-item expanded "><a href="cq/comments.html"><strong aria-hidden="true">7.2.</strong> Comments Checking</a></li><li class="chapter-item expanded "><a href="cq/test-coverage.html"><strong aria-hidden="true">7.3.</strong> Apex Code Test Coverage</a></li><li class="chapter-item expanded "><a href="cq/lwc-linting.html"><strong aria-hidden="true">7.4.</strong> LWC Linting</a></li></ol></li><li class="chapter-item expanded "><a href="deployments/deployments.html"><strong aria-hidden="true">8.</strong> Deployments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="deployments/delta.html"><strong aria-hidden="true">8.1.</strong> Delta Deployments</a></li><li class="chapter-item expanded "><a href="deployments/gha.html"><strong aria-hidden="true">8.2.</strong> Github Actions</a></li><li class="chapter-item expanded "><a href="deployments/validate.html"><strong aria-hidden="true">8.3.</strong> Validating changes</a></li><li class="chapter-item expanded "><a href="deployments/admin-changes.html"><strong aria-hidden="true">8.4.</strong> Taking care of Admin changes</a></li><li class="chapter-item expanded "><a href="deployments/devOpsCenter.html"><strong aria-hidden="true">8.5.</strong> DevOps Center</a></li><li class="chapter-item expanded "><a href="deployments/jenkins.html"><strong aria-hidden="true">8.6.</strong> Jenkins</a></li><li class="chapter-item expanded "><a href="deployments/git.html"><strong aria-hidden="true">8.7.</strong> git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="deployments/git-internals.html"><strong aria-hidden="true">8.7.1.</strong> git internals</a></li><li class="chapter-item expanded "><a href="deployments/git-hooks.html"><strong aria-hidden="true">8.7.2.</strong> git hooks</a></li><li class="chapter-item expanded "><a href="deployments/git-ops.html"><strong aria-hidden="true">8.7.3.</strong> git operations</a></li><li class="chapter-item expanded "><a href="deployments/pr-template.html"><strong aria-hidden="true">8.7.4.</strong> pull request template</a></li><li class="chapter-item expanded "><a href="deployments/git-diff.html"><strong aria-hidden="true">8.7.5.</strong> git diff</a></li><li class="chapter-item expanded "><a href="deployments/git-log.html"><strong aria-hidden="true">8.7.6.</strong> git log</a></li><li class="chapter-item expanded "><a href="deployments/git-stash.html"><strong aria-hidden="true">8.7.7.</strong> git stash</a></li><li class="chapter-item expanded "><a href="deployments/git-config.html"><strong aria-hidden="true">8.7.8.</strong> git config</a></li></ol></li><li class="chapter-item expanded "><a href="deployments/sourceTracking.html"><strong aria-hidden="true">8.8.</strong> Source Tracking</a></li><li class="chapter-item expanded "><a href="deployments/dangling.html"><strong aria-hidden="true">8.9.</strong> Dangling Fields Finder</a></li><li class="chapter-item expanded "><a href="deployments/sbx.html"><strong aria-hidden="true">8.10.</strong> Sandbox Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="deployments/sandbox-preview-guide.html"><strong aria-hidden="true">8.10.1.</strong> Sandbox Preview Guide</a></li></ol></li><li class="chapter-item expanded "><a href="deployments/MetadataComponentDependency.html"><strong aria-hidden="true">8.11.</strong> MetadataComponentDependency</a></li><li class="chapter-item expanded "><a href="deployments/yaml.html"><strong aria-hidden="true">8.12.</strong> YAML</a></li><li class="chapter-item expanded "><a href="deployments/packages.html"><strong aria-hidden="true">8.13.</strong> Installed Packages</a></li></ol></li><li class="chapter-item expanded "><a href="crma/tools.html"><strong aria-hidden="true">9.</strong> CRMA tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="crma/load-export.html"><strong aria-hidden="true">9.1.</strong> Dataset Load and Export</a></li><li class="chapter-item expanded "><a href="crma/analysis.html"><strong aria-hidden="true">9.2.</strong> Analysis</a></li><li class="chapter-item expanded "><a href="crma/binding.html"><strong aria-hidden="true">9.3.</strong> Binding</a></li><li class="chapter-item expanded "><a href="crma/deployment.html"><strong aria-hidden="true">9.4.</strong> Deployment</a></li></ol></li><li class="chapter-item expanded "><a href="perf/perf.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="perf/lex-perf.html"><strong aria-hidden="true">10.1.</strong> Lex Performance</a></li><li class="chapter-item expanded "><a href="perf/perf-testing.html"><strong aria-hidden="true">10.2.</strong> Performance testing</a></li><li class="chapter-item expanded "><a href="perf/perf-pw.html"><strong aria-hidden="true">10.3.</strong> Testing with Playwright</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="e2e/playwright.html"><strong aria-hidden="true">10.3.1.</strong> More with Playwright</a></li></ol></li><li class="chapter-item expanded "><a href="perf/edge.html"><strong aria-hidden="true">10.4.</strong> Salesforce Edge Network</a></li><li class="chapter-item expanded "><a href="perf/lex-query.html"><strong aria-hidden="true">10.5.</strong> Lightning Experience Queries</a></li><li class="chapter-item expanded "><a href="perf/rum.html"><strong aria-hidden="true">10.6.</strong> Real User Monitoring (RUM)</a></li></ol></li><li class="chapter-item expanded "><a href="dwg/dwg-tools.html"><strong aria-hidden="true">11.</strong> Diagram tools</a></li><li class="chapter-item expanded "><a href="xml/xml-tools.html"><strong aria-hidden="true">12.</strong> XML tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="xml/xlst-transformer.html"><strong aria-hidden="true">12.1.</strong> Transformer</a></li><li class="chapter-item expanded "><a href="xml/xml-delta.html"><strong aria-hidden="true">12.2.</strong> XML Delta Util</a></li></ol></li><li class="chapter-item expanded "><a href="dp/dp.html"><strong aria-hidden="true">13.</strong> Data Processing tools</a></li><li class="chapter-item expanded "><a href="i18n/i18n.html"><strong aria-hidden="true">14.</strong> Translation Tools</a></li><li class="chapter-item expanded "><a href="media/recording.html"><strong aria-hidden="true">15.</strong> Media - Recording tools</a></li><li class="chapter-item expanded "><a href="media/image.html"><strong aria-hidden="true">16.</strong> Image Processing</a></li><li class="chapter-item expanded "><a href="codegen/codegen.html"><strong aria-hidden="true">17.</strong> Code Generators</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="codegen/lwc.html"><strong aria-hidden="true">17.1.</strong> LWC Code Generators</a></li></ol></li><li class="chapter-item expanded "><a href="ml/ml.html"><strong aria-hidden="true">18.</strong> Machine Learning</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ml/sdcg.html"><strong aria-hidden="true">18.1.</strong> Semantic Doc Compare and Group</a></li><li class="chapter-item expanded "><a href="ml/datacatalog.html"><strong aria-hidden="true">18.2.</strong> Data Catalog for ML Work</a></li><li class="chapter-item expanded "><a href="ml/chatgpt.html"><strong aria-hidden="true">18.3.</strong> openAI - ChatGPT</a></li><li class="chapter-item expanded "><a href="ml/gpt3codex.html"><strong aria-hidden="true">18.4.</strong> openAI - GPT3 Codex</a></li><li class="chapter-item expanded "><a href="ml/einsteinbot.html"><strong aria-hidden="true">18.5.</strong> Einstein Bot</a></li><li class="chapter-item expanded "><a href="ml/dialogflow.html"><strong aria-hidden="true">18.6.</strong> Dialogflow - Knowledge Base</a></li><li class="chapter-item expanded "><a href="ml/transformers.html"><strong aria-hidden="true">18.7.</strong> Transformers</a></li></ol></li><li class="chapter-item expanded "><a href="docmgmt/docmgmt.html"><strong aria-hidden="true">19.</strong> Document Management tools</a></li><li class="chapter-item expanded "><a href="design/design-notes.html"><strong aria-hidden="true">20.</strong> Design Principles</a></li><li class="chapter-item expanded "><a href="chromeext/ext.html"><strong aria-hidden="true">21.</strong> Chrome Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chromeext/onnu.html"><strong aria-hidden="true">21.1.</strong> ONNU</a></li></ol></li><li class="chapter-item expanded "><a href="vscode/ext.html"><strong aria-hidden="true">22.</strong> VS Code Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="vscode/sfland.html"><strong aria-hidden="true">22.1.</strong> SF Land</a></li><li class="chapter-item expanded "><a href="vscode/pmd.html"><strong aria-hidden="true">22.2.</strong> VSCode Apex PMD</a></li></ol></li><li class="chapter-item expanded "><a href="dviz/dviz.html"><strong aria-hidden="true">23.</strong> Data Viz</a></li><li class="chapter-item expanded "><a href="releases.html"><strong aria-hidden="true">24.</strong> Releases</a></li><li class="chapter-item expanded "><a href="rest/rest_tester.html"><strong aria-hidden="true">25.</strong> REST Tester</a></li><li class="chapter-item expanded "><a href="security/security.html"><strong aria-hidden="true">26.</strong> Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="security/sd.html"><strong aria-hidden="true">26.1.</strong> Sharing Debugger</a></li><li class="chapter-item expanded "><a href="security/rh.html"><strong aria-hidden="true">26.2.</strong> Role Hierarchy</a></li><li class="chapter-item expanded "><a href="security/shield.html"><strong aria-hidden="true">26.3.</strong> Shield</a></li><li class="chapter-item expanded "><a href="security/profile-ps.html"><strong aria-hidden="true">26.4.</strong> Profile, PermissionSet</a></li><li class="chapter-item expanded "><a href="security/setupAuditTrail.html"><strong aria-hidden="true">26.5.</strong> SetupAuditTrail</a></li><li class="chapter-item expanded "><a href="security/datamask.html"><strong aria-hidden="true">26.6.</strong> Data Mask</a></li><li class="chapter-item expanded "><a href="security/saml.html"><strong aria-hidden="true">26.7.</strong> SAML</a></li><li class="chapter-item expanded "><a href="security/openIDConnectConcepts.html"><strong aria-hidden="true">26.8.</strong> OpenID Connect</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="security/openIDConnect.html"><strong aria-hidden="true">26.8.1.</strong> OIDC Google</a></li><li class="chapter-item expanded "><a href="security/openIDConnectProvider.html"><strong aria-hidden="true">26.8.2.</strong> OIDC Provider</a></li><li class="chapter-item expanded "><a href="security/jwt.html"><strong aria-hidden="true">26.8.3.</strong> JWT</a></li></ol></li><li class="chapter-item expanded "><a href="security/openssl.html"><strong aria-hidden="true">26.9.</strong> OpenSSL</a></li><li class="chapter-item expanded "><a href="security/pen-test.html"><strong aria-hidden="true">26.10.</strong> Penetration Testing</a></li></ol></li><li class="chapter-item expanded "><a href="mobile/mobile.html"><strong aria-hidden="true">27.</strong> Mobile</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="mobile/ios-sim.html"><strong aria-hidden="true">27.1.</strong> Simulator</a></li></ol></li><li class="chapter-item expanded "><a href="rd/rd.html"><strong aria-hidden="true">28.</strong> Reports and Dashboards</a></li><li class="chapter-item expanded "><a href="customLabels/cl.html"><strong aria-hidden="true">29.</strong> Custom Labels</a></li><li class="chapter-item expanded "><a href="accessibility/508.html"><strong aria-hidden="true">30.</strong> 508 - Accessibility</a></li><li class="chapter-item expanded "><a href="process-automation/processAutomation.html"><strong aria-hidden="true">31.</strong> Process Automation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="process-automation/flow.html"><strong aria-hidden="true">31.1.</strong> Flow</a></li></ol></li><li class="chapter-item expanded "><a href="great/folks.html"><strong aria-hidden="true">32.</strong> Great Folks</a></li><li class="chapter-item expanded "><a href="editor/editor-tips.html"><strong aria-hidden="true">33.</strong> Editor tips</a></li><li class="chapter-item expanded "><a href="bash/tips.html"><strong aria-hidden="true">34.</strong> Bash tips</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -12141,6 +12143,266 @@ cat translated-2.psv
 <ul>
 <li><a href="https://mohan-chinnappan-n5.github.io/2022/ai/bots/askme.html#">Dialogflow Knowledge Feature Testing App</a></li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="transformers"><a class="header" href="#transformers"><a href="https://arxiv.org/abs/1706.03762">Transformers</a></a></h1>
+<pre><code>Model success depends on how fast you can build it and how good it is in reducing the losses!
+</code></pre>
+<ul>
+<li>
+<p>It is a general-purpose <a href="https://twitter.com/karpathy/status/1582807367988654081?lang=en">differentiable computer</a>. </p>
+</li>
+<li>
+<p>A neural network architecture developed at Google that relies on self-attention mechanisms to transform a <strong>sequence of input embeddings</strong> into a <strong>sequence of output embeddings</strong> without relying on convolutions or recurrent neural networks. </p>
+</li>
+<li>
+<p>A <a href="https://developers.google.com/machine-learning/glossary#Transformer">Transformer</a> can be viewed as a stack of self-attention layers.</p>
+</li>
+<li>
+<p>Based on a self-attention mechanisms unlike traditional convolutional (CNN) or recurrent neural networks (RNN)</p>
+</li>
+<li>
+<p>Transformer outperforms both recurrent and convolutional models in language translation benchmarks</p>
+</li>
+</ul>
+<hr />
+<h3 id="resilient"><a class="header" href="#resilient">Resilient</a></h3>
+<p>Remarkably, the Transformer architecture published by <a href="https://arxiv.org/pdf/1706.03762.pdf">Google team</a> is very resilient over time. 
+The Transformer that came out in <a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html">2017</a> is basically the same as today except 
+that we reshuffle some of the layer normalizations. </p>
+<p>Researchers are making training datasets much larger, evaluation much larger,
+but they are keeping the architecture untouched, which is remarkable!</p>
+<hr />
+<p><img src="https://4.bp.blogspot.com/-ovHQGevt5Ks/WaiCfS0OPUI/AAAAAAAAB_U/nEqsh9fgecM1v98NAvGp8Zgr5BwBbOGBQCEwYBhgL/s640/image4.png" alt="Perf in lang modeling" /></p>
+<ul>
+<li>they aggregate information from <strong>surrounding words</strong> to determine the meaning of a given bit of language in context. </li>
+</ul>
+<hr />
+<p><strong>A man/word is known by the company she/he/word keeps means that a person/words is similar to the people/words she/
+he/word chooses to spend time with!</strong></p>
+<p>Example: </p>
+<ul>
+<li>deciding on the most likely meaning and appropriate representation of the word <strong>bank</strong> in the sentence :</li>
+</ul>
+<p><strong>I arrived at the bank after crossing the…</strong> requires knowing if the sentence ends in <strong>“... road.” or “... river.”</strong></p>
+<hr />
+<table><thead><tr><th>Architecture</th><th>Notes</th></tr></thead><tbody>
+<tr><td>RNN</td><td>Can determine that “bank” is likely to refer to the bank of a <strong>river</strong> after reading each word between “bank” and “river” step by step. <strong>More</strong> the steps decisions require, the <strong>harder</strong> it is for a RNN to learn how to make those decisions.The sequential nature of RNNs also makes it more difficult to fully take advantage of modern fast computing devices such as <a href="https://arxiv.org/abs/1704.04760">TPUs</a> and <a href="https://www.intel.com/content/www/us/en/products/docs/processors/what-is-a-gpu.html">GPUs</a>, which excel at parallel and not sequential processing.</td></tr>
+<tr><td>CNN</td><td>Less sequential than RNNs, the number of steps required to combine information from distant parts of the input <strong>still grows with increasing distance</strong></td></tr>
+<tr><td>Transformer</td><td>Performs a small, constant number of steps (chosen empirically). In each step, it applies a <strong>self-attention</strong> mechanism which directly models <strong>relationships between all words in a sentence</strong>, regardless of their respective position.</td></tr>
+</tbody></table>
+<hr />
+<table><thead><tr><th>Feature</th><th>Comments</th></tr></thead><tbody>
+<tr><td>Expressive</td><td>With forward pass. It nodes store <strong>vectors</strong> and these nodes look at each other and they can see what's important for their computation in the other nodes. Message-passing-like architecture is general (i.e. completeness) and powerful (i.e. efficiency), able to cover many real-world algorithms and in a small number of compute steps; an an empirical finding.</td></tr>
+<tr><td>Optimizable</td><td>With <a href="https://developers.google.com/machine-learning/glossary#b">Back-Propagation</a> and <a href="https://developers.google.com/machine-learning/glossary#gradient_descent">Gradient Descent</a>. With  residual connections, layer normalization and <a href="https://developers.google.com/machine-learning/glossary#softmax">softmax</a> attention. Residual connections support a kind of ability to learn short algorithms (think low LOC) fast and first, then gradually extend them longer during training.</td></tr>
+<tr><td>Efficient</td><td>High parallelism compute graph. Can efficiently run on modern hardware (GPUs). Compute graph is shallow and wide, mapping significantly better to our <a href="https://arxiv.org/abs/1511.08228">high-parallelism compute architectures</a></td></tr>
+</tbody></table>
+<hr />
+<ul>
+<li>
+<p>It can become a single neural network architecture for multi-modal inputs (text, image, video, audio), and thus converging all the other architectures into one.</p>
+</li>
+<li>
+<p>Transformers combine some of the benefits traditionally seen with convolutional neural networks (CNNs) and recurrent neural networks (RNNs).</p>
+</li>
+</ul>
+<table><thead><tr><th>Architecture</th><th>Feature</th><th>Transformer</th></tr></thead><tbody>
+<tr><td>CNN</td><td>learn structured representations of images</td><td>ability to process input in a <strong>hierarchical</strong> manner, with each layer of the model learning increasingly complex features</td></tr>
+<tr><td>CNN</td><td>process input in a fixed-length window</td><td>use self-attention mechanisms that allow the model to directly relate different input elements to each other, regardless of their distance in the sequence. Capture long-range dependencies between input elements,</td></tr>
+<tr><td>RNN</td><td>Cyclic. Ability to capture dependencies between elements in a <strong>sequence</strong></td><td></td></tr>
+</tbody></table>
+<hr />
+<h2 id="model-architecture"><a class="header" href="#model-architecture">Model Architecture</a></h2>
+<p><img src="ml/img/transformer-1.png" alt="Transformer Model" /> </p>
+<ul>
+<li>The encoder and decoder are represented by <strong>six layers</strong> (the number can be any, for example, in BERT there are 24 encoder blocks)</li>
+</ul>
+<pre class="mermaid">graph LR;
+Inputs--&gt;Embedding--&gt;SelfAttention--&gt;FeedForwardNN--&gt;Outputs
+</pre>
+<table><thead><tr><th>Steps</th><th>Description</th></tr></thead><tbody>
+<tr><td>1</td><td>The input data of the encoder first passes through the Self-Attention layer. This layer helps the encoder look at other words in the input sentence when it encodes a particular word.</td></tr>
+<tr><td>2</td><td>The results of this Self-Attention layer are fed to the FeedForward NN</td></tr>
+<tr><td>3</td><td>As the model processes each token (each word in the input sequence, say <em>w</em>), the Self-Attention layer allows it to search for hints in the other tokens (words) in the input sequence that may help improve the <strong>encoding</strong> of that word (<em>w</em>).</td></tr>
+<tr><td>4</td><td>FeedForward NN has <strong>no interaction with other words</strong>, and therefore <strong>various chains</strong> can be executed in parallel as they pass through this layer. This allows transformer to process all words in the input text in <strong>parallel</strong>.</td></tr>
+</tbody></table>
+<p>Model  constantly cares about what “she”, “it” , “the”, or “that” refers to (pronouns).</p>
+<pre><code>I never been to Mars. But it is on wish list
+</code></pre>
+<p><strong>it</strong>  here refers to <strong>Mars</strong></p>
+<h4 id="querykeyvalue-vectors----retrieval-system"><a class="header" href="#querykeyvalue-vectors----retrieval-system">Query/Key/Value vectors -  retrieval system</a></h4>
+<p>\( \int x dx = \frac{x^2}{2} + C \)</p>
+<pre class="mermaid">graph LR;
+
+Query--&gt;Keys--&gt;ToGetValues
+
+</pre>
+<ul>
+<li>we want to compute the self-attention for the word <strong>it</strong> in above sentence </li>
+<li>creating matrices Q, K, and V for this input sentence
+<ul>
+<li>where q (row in matrix Q) represents the query vector for the word <strong>it</strong>
+<ul>
+<li>K represents the key   matrix for all the words in the sentence</li>
+<li>V represents the value matrix for all the words in the sentence.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>The self-attention for the word <strong>it</strong> would then be computed as:
+<ul>
+<li>the dot product of Q and K, divided by the square root of the length of K, followed by a dot product with V.</li>
+</ul>
+</li>
+</ul>
+<p>\( \frac {Q \cdot K}{\sqrt(dim(K))} \)</p>
+<hr />
+<p>The matrices  \( (W^Q, W^K, W^V) \) are initially randomly initialized weight matrices.</p>
+<ul>
+<li>The vector \( (x_n) \)in this case would be a word embedding of the input token (or output of the previous attention layer). </li>
+</ul>
+<h5 id="example-1"><a class="header" href="#example-1">Example</a></h5>
+<pre><code>Hello World
+</code></pre>
+<ul>
+<li>Embeddings
+<ul>
+<li>\( x_0 \) : Hello</li>
+<li>\( x_1 \) : World</li>
+</ul>
+</li>
+<li>We have vectors \( q, k,  v \) for each of these two words. </li>
+<li>These vectors are generated by multiplying embedding vector of the word and the weight matrix \( W \)</li>
+</ul>
+<h3 id="encoder-and-decoder"><a class="header" href="#encoder-and-decoder">Encoder and Decoder</a></h3>
+<p>An encoder transforms a sequence of <a href="ml/">embeddings</a> into a new sequence of the same length. </p>
+<ul>
+<li>
+<p>Includes N identical layers (Nx), each of which contains <strong>two sub-layers</strong>. </p>
+<ul>
+<li>These two sub-layers are applied at each position of the input embedding sequence, transforming each element of the sequence into a new embedding. 
+<ul>
+<li>The first encoder sub-layer <strong>aggregates</strong> information from across the input sequence.  - aggregation </li>
+<li>The second encoder sub-layer <strong>transforms</strong> the aggregated information into an output embedding. - transformation</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Each encoder consists of two layers: Self-Attention and Feed Forward Neural Network.</p>
+</li>
+</ul>
+<pre class="mermaid">graph LR;
+  inputSequence --&gt; Aggregate --&gt; Transform --&gt; outputSequence
+</pre>
+<p>A decoder transforms a sequence of input embeddings into a sequence of output embeddings, possibly with a different length.</p>
+<ul>
+<li>Includes N identical layers with <strong>three sub-layers</strong></li>
+<li>First and second of which are similar to the encoder sub-layers. </li>
+<li>The third decoder sub-layer takes the output of the encoder and applies the self-attention mechanism to gather information from it</li>
+</ul>
+<pre class="mermaid">graph LR;
+  inputSequence --&gt; Aggregate --&gt; Transform --&gt; ApplySelfAttention
+</pre>
+<h3 id="self-attention"><a class="header" href="#self-attention">Self-attention</a></h3>
+<p>For this sentence:</p>
+<pre><code> The animal didn't cross the street because it was too tired.  
+ 
+</code></pre>
+<ul>
+<li>self-attention layer's attention pattern for the pronoun <strong>it</strong>:  (with the darkness of each line indicating how much each word contributes to the representation:)
+<img src="https://developers.google.com/static/machine-learning/glossary/images/self-attention.png" alt="representation" /></li>
+<li>The self-attention layer highlights words that are relevant to <strong>it</strong>. In this case, the attention layer has learned to highlight words that it might refer to, assigning the highest weight to animal.</li>
+<li>For a sequence of n tokens, self-attention transforms a sequence of embeddings n separate times, once at each position in the sequence.</li>
+</ul>
+<p>In the  example:</p>
+<pre><code>I arrived at the bank after crossing the river
+</code></pre>
+<ul>
+<li>
+<p>to determine that the word <strong>bank</strong> refers to the <em>shore of a river</em> and not a financial institution</p>
+<ul>
+<li>Transformer can learn to immediately attend to the word <strong>river</strong> and make this decision in a single step</li>
+</ul>
+</li>
+<li>
+<p>To compute the next representation for a given word - <strong>bank</strong> for example - the Transformer compares it to <strong>every other word</strong> in the sentence</p>
+<ul>
+<li>The result of these comparisons is an <strong>attention score</strong> for every other word in the sentence. </li>
+<li>These <strong>attention scores</strong> determine how much each of the other words should <strong>contribute</strong> to the next representation of <strong>bank</strong>
+<ul>
+<li>The disambiguating <strong>river</strong> could receive a <strong>high attention score</strong> when computing a new representation for <strong>bank</strong> </li>
+<li>The attention scores are then used as weights for a weighted average of all words’ representations which is fed into a fully-connected network to generate a new representation for <strong>bank</strong>, reflecting that the sentence is <strong>talking about a river bank</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://3.bp.blogspot.com/-aZ3zvPiCoXM/WaiKQO7KRnI/AAAAAAAAB_8/7a1CYjp40nUg4lKpW7covGZJQAySxlg8QCLcBGAs/s640/transform20fps.gif" alt="Demo" /></p>
+<p>Neural networks for machine translation typically contain </p>
+<ul>
+<li>
+<p>an <strong>encoder</strong> reading the input sentence and generating a representation of it</p>
+</li>
+<li>
+<p>a decoder then generates the output sentence word by word while <strong>consulting</strong> the representation generated by the encoder</p>
+</li>
+<li>
+<p>Transformer starts by generating initial representations, or embeddings, for each word. </p>
+<ul>
+<li>These are represented by the unfilled circles</li>
+<li>Then, using self-attention, it aggregates information from all of the other words, generating a new representation per word informed by the entire context, represented by the filled balls.</li>
+<li>This step is then repeated multiple times in <strong>parallel for all words</strong>, successively generating new representations.</li>
+</ul>
+</li>
+<li>
+<p>The <strong>decoder</strong> operates similarly, but generates one word at a time, from left to right. It attends not only to the other previously generated words, but also to the final representations generated by the encoder.</p>
+</li>
+<li>
+<p>We can visualize what other parts of a sentence the network <strong>attends</strong> to when processing or translating a given word, thus gaining insights into how information travels through the network.</p>
+</li>
+</ul>
+<p><img src="https://2.bp.blogspot.com/-2yoN-i1w6M4/WaiBaF3cEOI/AAAAAAAAB_I/okirZsIxxeQe9Rzh7cl3INMpdqgzvSPXQCLcBGAs/s400/Screen%2BShot%2B2017-08-31%2Bat%2B2.35.34%2BPM.png" alt="Example2" /></p>
+<ul>
+<li>In the first sentence pair <strong>it</strong> refers to the animal, and in the second to the street. </li>
+<li>In one of its steps, the Transformer clearly identified the two nouns <strong>it</strong> could refer to and the respective amount of attention reflects its choice in the different contexts.</li>
+</ul>
+<p><img src="https://1.bp.blogspot.com/-AVGK0ApREtk/WaiAuzddKVI/AAAAAAAAB_A/WPV5ropBU-cxrcMpqJBFHg73K9NX4vywwCLcBGAs/s640/image2.png" alt="Contexts" /></p>
+<p>Given this insight, it might not be that surprising that the Transformer also performs very well on the classic language analysis task of syntactic constituency parsing, a task the natural language processing community has attacked with highly specialized systems for decades.</p>
+<ul>
+<li><a href="https://colab.research.google.com/github/tensorflow/tensor2tensor/blob/master/tensor2tensor/notebooks/hello_t2t.ipynb">Sample work</a></li>
+</ul>
+<p><img src="ml/img/transformer-1.webm.gif" alt="tensor2tensor" /></p>
+<ul>
+<li><a href="https://github.com/tensorflow/tensor2tensor/blob/master/README.md#walkthrough">Walkthrough</a></li>
+<li><a href="https://github.com/tensorflow/tensor2tensor/blob/master/tensor2tensor/notebooks/Transformer_translate.ipynb">Notebook</a></li>
+</ul>
+<hr />
+<h2 id="terms-2"><a class="header" href="#terms-2">Terms</a></h2>
+<table><thead><tr><th>Term</th><th>Description</th></tr></thead><tbody>
+<tr><td>Gradient descent</td><td>A mathematical technique to <strong>minimize loss</strong>. <a href="https://developers.google.com/machine-learning/glossary#gradient_descent">Gradient descent</a> iteratively adjusts <strong>weights and biases</strong>, gradually finding the best combination to minimize loss</td></tr>
+<tr><td>Loss</td><td>The difference between the prediction and the label value is the loss</td></tr>
+<tr><td>Forward Pass</td><td>System processes a batch of <strong>examples</strong> to yield prediction(s). The system compares each prediction to each label value. The difference between the prediction and the label value is the loss for that example. The system aggregates the losses for all the examples to compute the total loss for the current batch.</td></tr>
+<tr><td>Backward pass (backpropagation)</td><td>System reduces loss by adjusting the weights of all the neurons in all the hidden layer(s).Backpropagation determines whether to increase or decrease the weights applied to particular neurons.</td></tr>
+<tr><td><a href="https://developers.google.com/machine-learning/glossary#hidden_layer">Hidden layer</a></td><td>A layer in a neural network between the input layer (the features) and the output layer (the prediction). Each <img src="https://developers.google.com/static/machine-learning/glossary/images/HiddenLayerBigPicture.png" alt="hidden layer" /> consists of one or more neurons.</td></tr>
+<tr><td>Learning Rate</td><td>Multiplier that controls the degree to which each backward pass increases or decreases each weight. A large learning rate will increase or decrease each weight more than a small learning rate</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/Chain_rule">Chain rule</a></td><td>expresses the derivative of the composition of two differentiable functions f and g in terms of the derivatives of f and g</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/Notation_for_differentiation#Lagrange&#x27;s_notation">Lagrange's notation</a></td><td>a prime mark denotes a derivative. If f is a function, then its derivative evaluated at x is written f`(x)</td></tr>
+<tr><td><a href="https://developers.google.com/machine-learning/glossary#e">Encode</a></td><td>In sequence-to-sequence tasks, encoder takes an input sequence and returns an internal state (a vector). Then, the decoder uses that internal state to predict the next sequence.</td></tr>
+<tr><td>Tensor</td><td>N-dimensional (where N could be very large) data structures, most commonly scalars, vectors, or matrices. The elements of a Tensor can hold integer, floating-point, or string values</td></tr>
+<tr><td>language understanding tasks</td><td>language modeling, machine translation and question answering</td></tr>
+<tr><td>Attention</td><td>Weighted <strong>sum over a set of inputs</strong>, where the weight for each input is computed by another part of the neural network</td></tr>
+<tr><td>self-attention</td><td>Each embedding in the output sequence is constructed by integrating information from the elements of the input sequence through an attention mechanism.The <strong>self</strong> part of <strong>self-attention</strong> refers to the <strong>sequence attending to itself</strong> rather than to some other context. A self-attention layer starts with a sequence of input representations, one for each word. For each word in an input sequence, the network scores the relevance of the word to every element in the whole sequence of words. The relevance scores determine how much the word's final representation incorporates the representations of other words.Self-attention is one of the main building blocks for Transformers and uses dictionary lookup terminology, such as “query”, “key”, and “value”. Self-attention and multi-head self-attention, which are the building blocks of Transformers.</td></tr>
+<tr><td>Masked language modelling</td><td>Encoder only architectures (like BERT) solve the task of predicting the masked word in a sentence. So the attention can see all the words before and after this masked word</td></tr>
+<tr><td>Predict next token</td><td>Predict the next token or set of tokens, i.e. given tokens [0, ..., n-1] predict n</td></tr>
+</tbody></table>
+<h2 id="sentence-completion-task"><a class="header" href="#sentence-completion-task">Sentence completion task</a></h2>
+<ul>
+<li>This requires decoder portion of the transformer architecture</li>
+<li>For the translation tasks we need to <strong>encode</strong> the input text first 
+<ul>
+<li>have a cross-attention layer with the translated text</li>
+</ul>
+</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="document-management-tools"><a class="header" href="#document-management-tools">Document management tools</a></h1>
 <p><img src="docmgmt/../img/cover/chromecast-sea-1.jpg" alt="sea image" /></p>
 <h2 id="ocr-the-paper-docs-via-images"><a class="header" href="#ocr-the-paper-docs-via-images">OCR the paper docs via images</a></h2>
@@ -15936,6 +16198,53 @@ sfdx mohanc:security:jwt:verify -s &quot;mySecret&quot; -j &quot;eyJhbGciOiJIUzI
 </code></pre>
 <pre><code>bb5e5ae325f4cfb8a9215602ef3964efc79848232d7c8715e621923692a27669
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="penetration-pen-testing"><a class="header" href="#penetration-pen-testing">Penetration (pen) Testing</a></h1>
+<p>Penetration testing, or <strong>pen testing</strong> for short, is the process of testing a website or other digital system for vulnerabilities that could be exploited by attackers. Penetration testing typically involves <strong>simulating</strong> various types of <strong>attacks</strong> to see how the system responds and to identify potential weaknesses that could be exploited by attackers.</p>
+<h2 id="steps-4"><a class="header" href="#steps-4">Steps</a></h2>
+<ul>
+<li>Note:  Unauthorized pen testing is illegal and could result in criminal charges.Take appropriate precautions to avoid causing any harm or disruption to the website or its users during the testing process</li>
+</ul>
+<table><thead><tr><th>Step</th><th>Description</th></tr></thead><tbody>
+<tr><td>1. Define the scope of the test</td><td>Determine what <strong>parts</strong> of the website will be tested, what types of attacks will be simulated, and any limitations or constraints that need to be taken into consideration.</td></tr>
+<tr><td>2. Reconnaissance/Scouting</td><td>Conduct a thorough reconnaissance of the website and any associated systems to identify potential vulnerabilities or weaknesses.Ping probes, port scanning, or <code>traceroute</code> or finger-printing are practical examples of active reconnaissance.</td></tr>
+<tr><td>3. Vulnerability scanning</td><td>Use automated tools to scan the website and associated systems for known vulnerabilities. Example: QL injection or cross-site scripting (XSS) vulnerabilities.</td></tr>
+<tr><td>4. Manual testing</td><td>Perform manual testing to identify any additional vulnerabilities or weaknesses that may <strong>not have been identified by automated tools</strong>.</td></tr>
+<tr><td>5. Exploitation</td><td>Attempt to exploit any vulnerabilities that have been identified to see if they can be used to <strong>gain unauthorized access</strong> or perform other malicious activities.</td></tr>
+<tr><td>6. Reporting</td><td>Document all findings and provide recommendations for remediation</td></tr>
+</tbody></table>
+<h2 id="reconnaissancescouting"><a class="header" href="#reconnaissancescouting">Reconnaissance/Scouting</a></h2>
+<p>The process of gathering information about a target system or network before attempting to launch a pen testing. It is an important step since it helps the tester to identify potential vulnerabilities and weaknesses in the target system, network or application.</p>
+<table><thead><tr><th>Step</th><th>Description</th></tr></thead><tbody>
+<tr><td>Passive reconnaissance</td><td>This involves gathering information about the target system, network or application without actively engaging with it. This includes searching for information on search engines, social media, and other publicly available sources.</td></tr>
+<tr><td>Active reconnaissance</td><td>This involves actively engaging with the target system, network or application to gather information. This includes techniques such as port scanning, network mapping, and fingerprinting.</td></tr>
+<tr><td>Social engineering</td><td>This involves using psychological manipulation to gather information from people associated with the target system, network or application. This includes techniques such as phishing, pre-texting, and baiting.</td></tr>
+<tr><td>Open-source intelligence (OSINT)</td><td>This involves gathering information from publicly available sources such as company websites, job postings, and news articles.</td></tr>
+</tbody></table>
+<h2 id="vulnerability-scanning"><a class="header" href="#vulnerability-scanning">Vulnerability scanning</a></h2>
+<table><thead><tr><th>Step</th><th>Description</th></tr></thead><tbody>
+<tr><td>1. Planning</td><td>Identify the scope of the scan, including the systems, networks, or applications to be scanned, and the types of vulnerabilities to be checked.</td></tr>
+<tr><td>2. Scanning</td><td>Use a vulnerability scanning tool to scan the target systems, networks, or applications to identify vulnerabilities, misconfigurations, or weak points that could be exploited.</td></tr>
+<tr><td>3. Analysis</td><td>Review the scan results to prioritize the vulnerabilities based on their severity, potential impact, and exploitability.</td></tr>
+<tr><td>4. Reporting</td><td>Generate a report that summarizes the vulnerabilities found, their severity, and recommendations for remediation</td></tr>
+<tr><td>5. Remediation</td><td>Address the vulnerabilities by applying patches, updating configurations, or implementing other measures to mitigate the identified risks</td></tr>
+</tbody></table>
+<h3 id="vulnerability-scanning-tools-for-linux"><a class="header" href="#vulnerability-scanning-tools-for-linux">Vulnerability scanning Tools for Linux</a></h3>
+<table><thead><tr><th>Tool</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="https://en.wikipedia.org/wiki/OpenVAS">OpenVAS</a></td><td>Can detect thousands of known vulnerabilities in Linux systems. It includes a web-based user interface and can be configured to run scheduled scans.</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/Nikto_(vulnerability_scanner)">Nikto</a></td><td>Can identify vulnerabilities in web servers and web applications running on Linux systems. It includes over 6,700 checks for potential vulnerabilities and misconfigurations.</td></tr>
+<tr><td>Nmap - <a href="https://en.wikipedia.org/wiki/Nmap">Network Mapper</a></td><td>Network scanner that can identify open ports, running services, and potential vulnerabilities in Linux systems. It includes a wide range of features, including version detection and OS fingerprinting.</td></tr>
+<tr><td><a href="https://en.wikipedia.org/wiki/Lynis">Lynis</a></td><td>Security auditing tool that can identify vulnerabilities in Linux systems. It includes over 200 tests for security and compliance</td></tr>
+</tbody></table>
+<h2 id="sample-pen-test-report"><a class="header" href="#sample-pen-test-report">Sample Pen Test Report</a></h2>
+<table><thead><tr><th>Section</th><th>Description</th></tr></thead><tbody>
+<tr><td>Executive Summary</td><td>Provides a high-level overview of the penetration test results, including the scope, objectives, key findings, and recommendations for remediation.</td></tr>
+<tr><td>Scope and Methodology</td><td>Outlines the scope of the penetration test, including the systems, networks, or applications tested, and the methodology used to conduct the test.</td></tr>
+<tr><td>Vulnerabilities</td><td>Provides a detailed description of the vulnerabilities found during the test, including their severity, potential impact, and recommendations for remediation.</td></tr>
+<tr><td>Exploitation</td><td>Provides details on how the vulnerabilities were exploited during the test, including the tools and techniques used.</td></tr>
+<tr><td>Recommendations</td><td>Provides recommendations for remediation, including prioritization of vulnerabilities and specific steps to be taken to address the identified risks.</td></tr>
+<tr><td>Conclusion</td><td>Summarizes the key findings and recommendations of the penetration test, and emphasizes the importance of addressing the identified vulnerabilities to improve the overall security of the organization</td></tr>
+<tr><td>Appendices</td><td>Includes additional information such as network diagrams, screenshots, and raw data from the penetration test.</td></tr>
+</tbody></table>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mobile"><a class="header" href="#mobile">Mobile</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="simulator"><a class="header" href="#simulator">Simulator</a></h1>
 <h2 id="ios-simulator"><a class="header" href="#ios-simulator">iOS simulator</a></h2>
@@ -16101,7 +16410,7 @@ console.log(pkg);
 </ul>
 </li>
 </ul>
-<h2 id="steps-4"><a class="header" href="#steps-4">Steps</a></h2>
+<h2 id="steps-5"><a class="header" href="#steps-5">Steps</a></h2>
 <ol>
 <li>
 <ul>
@@ -16522,7 +16831,9 @@ find . -name '* copy.*'  2&gt;&amp;1 | tee /tmp/copy_dup_files.txt
 
         <script type="text/javascript">
         window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
         });
         </script>
 
