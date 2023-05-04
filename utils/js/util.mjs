@@ -2,6 +2,7 @@
 
 // mchinnappan
 
+
 export class Util {
   constructor() {}
 
@@ -51,6 +52,10 @@ export class Util {
     const birthDate = new Date(dob);
     if (currentDate.getDate() == birthDate.getDate() + 1) return true;
     else return false;
+  }
+
+  doMatch(mathstr) {
+    return mathstr;
   }
 
   getAge(dob) {
