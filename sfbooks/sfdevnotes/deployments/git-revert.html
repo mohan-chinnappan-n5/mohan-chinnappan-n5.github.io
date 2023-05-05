@@ -240,7 +240,7 @@ sepal_length,sepal_width,petal_length,petal_width,species
 <li>This command merges the changes from <strong><source-branch-for-merge></strong> into the <strong>current branch</strong>. Before performing the merge, git checks whether there are any conflicts between the two branches. If there are conflicts, git will prompt you to resolve them manually.</li>
 </ul>
 <h2 id="reverting-a-branch-merge"><a class="header" href="#reverting-a-branch-merge">Reverting a Branch merge</a></h2>
-<pre><code>git revert commitId -m &lt;greaterThan 0&gt; 
+<pre><code>git revert &lt;merge-commit-hash&gt; -m &lt;greaterThan 0&gt; 
 
 </code></pre>
 <hr />
