@@ -22,6 +22,16 @@ FROM Account
 `;
 if (params.d) { soql = atob(params.d); }
 
+let qparams = (new URL(document.location)).searchParams;
+
+//------- via clipboard
+let c = qparams.get('c');
+if (c !== null) await navigator.clipboard.readText().then((clipText) => {
+    soql = clipText;
+});
+
+
+
 getEle('md').value = soql.trim();
 
 getEle('md2html').addEventListener('click', event => {
