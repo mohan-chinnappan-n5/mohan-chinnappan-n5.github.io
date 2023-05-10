@@ -27,7 +27,7 @@ let qparams = (new URL(document.location)).searchParams;
 //------- via clipboard
 let c = qparams.get('c');
 if (c !== null) await navigator.clipboard.readText().then((clipText) => {
-    soql = clipText;
+    soql = clipText.replace(/\n/g, " ");
 });
 
 
