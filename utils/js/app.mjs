@@ -2,13 +2,11 @@
 // mchinnappan
 
 import { Util } from './util.mjs';
-
-
-
-
-
+import { Similarity } from './similarity.mjs';
 
 const util = new Util();
+const sim = new Similarity();
+
 const resultsEle = util.getEle('results');
 resultsEle.value = "";
 
@@ -36,6 +34,12 @@ if (params.has('math')) {
     const math = params.get('math');
     const result = await util.doMatch(math)
     resultsEle.value +=  "\n" + result;
+}
+
+if (params.has('sim')) {
+    const items  = params.get('sim').split('|');
+    const result = sim.jaccardSimilarity(items[0], items[1])
+    resultsEle.value +=  items.join('\n') +  "\n\nSimilarity: " + result;
 }
 
 

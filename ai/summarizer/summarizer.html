@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Text Summarizer</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/textrank@2.0.2"></script>
+  </head>
+  <body>
+    <h1>Text Summarizer</h1>
+    <form>
+      <label for="input">Enter text to summarize:</label>
+      <br>
+      <textarea id="input" name="input" rows="10" cols="50"></textarea>
+      <br>
+      <button type="button" onclick="summarize()">Summarize</button>
+    </form>
+    <br>
+    <h2>Summary:</h2>
+    <p id="summary"></p>
+    <script>
+      const summarize = async () => {
+        // Get the user's input text from the textarea
+        const inputText = document.getElementById('input').value;
+        
+        // Load the TextRank model from TensorFlow.js
+        const model = await tf.models.loadModel('https://tfhub.dev/tensorflow/textrank/2');
+        
+        // Generate a summary of the input text using the TextRank model
+        const summary = await model.summarize(inputText);
+        
+        // Display the summary on the page
+        document.getElementById('summary').innerText = summary;
+      };
+    </script>
+  </body>
+</html>
+
