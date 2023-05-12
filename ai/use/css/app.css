@@ -1,7 +1,7 @@
 /* app.css */
 .editor {
     /** Setting height is also important, otherwise editor wont showup**/
-    height: 800px;
+    height: 300px;
     width: 100%;
     z-index: 0;
     /* important */
