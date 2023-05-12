@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drag and Drop Image</title>
+  </head>
+  <body>
+    <div id="image-container" style="border: 2px dashed black; width: 300px; height: 300px;"></div>
+    
+    <script>
+      var imageContainer = document.getElementById('image-container');
+      
+      // Add event listeners to the image container
+      imageContainer.addEventListener('dragover', function(e) {
+        e.preventDefault(); // prevent default behavior
+      });
+      
+      imageContainer.addEventListener('drop', function(e) {
+        e.preventDefault(); // prevent default behavior
+        
+        // Get the dropped image and display it in the image container
+        var imageUrl = e.dataTransfer.getData('text/plain');
+        var imageElement = document.createElement('img');
+        imageElement.src = imageUrl;
+        imageElement.style.maxWidth = '100%';
+        imageElement.style.maxHeight = '100%';
+        imageContainer.appendChild(imageElement);
+      });
+    </script>
+  </body>
+</html>

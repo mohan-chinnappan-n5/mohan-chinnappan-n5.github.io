@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drag and Drop Image</title>
+    <style>
+      /* Style the dropzone area */
+      #dropzone {
+        border: 2px dashed #ccc;
+        padding: 10px;
+        text-align: center;
+        margin: 20px;
+      }
+
+      /* Style the image display area */
+      #imageDisplay {
+        max-width: 100%;
+        max-height: 400px;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Drag and Drop Image</h1>
+    <div id="dropzone">Drag and drop an image file here</div>
+    <div>
+      <img id="imageDisplay" src="#" alt="Dropped Image">
+    </div>
+    <script>
+      const dropzone = document.getElementById("dropzone");
+      const imageDisplay = document.getElementById("imageDisplay");
+
+      // Prevent the default drag behaviors when an image is dragged over the dropzone
+      dropzone.addEventListener("dragover", function(event) {
+        event.preventDefault();
+      });
+
+      // Handle the image drop event
+      dropzone.addEventListener("drop", function(event) {
+        // Prevent the default drop behavior
+        event.preventDefault();
+
+        // Get the dropped file from the event data transfer object
+        const file = event.dataTransfer.files[0];
+
+        // Create a new FileReader object
+        const reader = new FileReader();
+
+        // Set the onload event handler to update the image display with the dropped file
+        reader.onload = function() {
+          imageDisplay.src = reader.result;
+        }
+
+        // Read the dropped file as a data URL
+        reader.readAsDataURL(file);
+      });
+    </script>
+  </body>
+</html>

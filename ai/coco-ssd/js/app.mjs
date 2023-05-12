@@ -3,12 +3,17 @@
 
 /*
 =====================
-MobileNet is a family of lightweight neural network models that are designed for mobile and embedded vision applications.
- They are designed to be computationally efficient and to require fewer resources than larger models. 
- MobileNet is used as the base architecture for many object detection models, including COCO-SSD.
-MobileNet can be fine-tuned on a specific dataset to create a custom object detection model that is tailored to a specific use case.
+
+COCO-SSD (Common Objects in Context - Single Shot MultiBox Detector) 
+is an object detection model trained on the COCO dataset. 
+The COCO dataset is a large-scale image recognition dataset that contains
+ more than 330,000 images with over 2.5 million object instances labeled with bounding boxes.
+  COCO-SSD is a single-shot detection model, which means that it can detect objects in an image in a single forward pass through the network. 
+It is a pre-trained model, which means that it has been trained on a large dataset and can be used out-of-the-box to detect objects in images.
+ 
 =====================
 */
+
 
 Split(["#menu", "#content"], { sizes: [40, 60] });
 
@@ -75,12 +80,12 @@ inputElement.addEventListener("change", function () {
 const img = document.getElementById('img');
 
 // Load the model.
-const model = await mobilenet.load();
+const model = await cocoSsd.load();
 
 
 // Classify the image.
 getEle('detect').addEventListener('click', event => {
-    model.classify(img).then(predictions => {
+    model.detect(img).then(predictions => {
         //console.log('Predictions: ');
         //console.log(predictions);
         answersEditor.setValue(JSON.stringify(predictions, null, 4));

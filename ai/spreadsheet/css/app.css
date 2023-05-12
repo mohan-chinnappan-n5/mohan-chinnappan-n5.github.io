@@ -1,0 +1,16 @@
+/* app.css */
+table {
+    border-collapse: collapse;
+  }
+  
+  td {
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: center;
+  }
+  
