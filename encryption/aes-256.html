@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES Encryption</title>
+
+    <style>
+        textarea {
+            border-radius: 10px;
+            background-color: black;
+            color: bisque;
+            padding: 10px;
+            font-family: Monaco, Arial;
+        }
+        button {
+            border-radius: 4px;
+            padding: 6px;
+            background-color: darkgreen;
+            color: azure;
+
+        
+        }
+        h3,p  {
+            border-bottom: 1px solid salmon;
+            font-family: Monaco, Arial;
+        }
+        h3 {
+            border-bottom: 1px solid salmon;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            padding: 10px;
+        }
+        p {
+            line-height: 200%;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h3>AES (Advanced Encryption Standard) GCM (Galois/Counter Mode) with 256 Encryption with key-size: 256 bits and IV-size: 128 bits</h3>
+
+    <p>Combines Counter (CTR) mode with a Galois field multiplication to compute a authentication flag <br/>
+        Data is encrypted with in fixed-size blocks using AES algorithm with Counter (CTR) mode.<br/>
+        The output of the encryption is multiplied with Galois field element to compute an authentication field,
+        which is added to cipherText to provide authenticity.<br>
+        Galois field multiplication provides a way to combine the plainText and a key generate a unique tag that
+        can only be computed with the correct key. <br/>
+        Provides confidentiality and authenticity with a single pass through the data. This improves the performance.<br/>
+        And it is parallelizable, so this makes it faster than other encryption modes. <br/>
+        Note, IV (128 bits is recommended) should be unpredictable and never be reused with the same key 
+
+
+    </p>
+
+
+    <textarea name="input" id="input" cols="80" rows="20">wow this is awesome!</textarea>
+    <button id="encrypt">Encrypt</button>
+    <textarea name="output" id="output" cols="80" rows="20"></textarea>
+
+
+
+
+    <script type='module'>
+
+        const getEle = id => document.getElementById(id);
+        getEle('encrypt').addEventListener('click', event => {
+
+            const plainText = getEle('input').value;
+            // secret key - 256 bits (8 * 32) must be 256 bits
+            const myKey = crypto.getRandomValues(new Uint8Array(32));
+
+            // Generate random init vector - 128 bits (8*16)
+            const iv = crypto.getRandomValues(new Uint8Array(16));
+
+            const plainTextBytes = new TextEncoder().encode(plainText);
+            console.log(plainTextBytes);
+
+            // create cryptoKey from secret key
+            crypto.subtle.importKey('raw', myKey, { name: 'AES-GCM', length: 256 }, false, ['encrypt']).then((key) => {
+                crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, plainTextBytes).then((cipherText) => {
+                    // convert cipherText to base64 encoded string
+                    const base64CipherText = btoa(String.fromCharCode(... new Uint8Array(cipherText)));
+
+                    const output = { PlainText:plainText, cipherText: base64CipherText, Key: myKey,  InitVector: iv};
+                    getEle('output').value = JSON.stringify(output, null, 4);
+                })
+            })
+
+        });
+        getEle('encrypt').click();
+
+
+
+
+
+    </script>
+</body>
+
+</html>
