@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shield Fields</title>
+    <style>
+        textarea {
+            background-color: black;
+            color:bisque;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        h3 {
+            border-bottom: 1px solid salmon;
+        }
+        body {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>Shield Fields</h3>
+
+    <textarea name="results" id="results" cols="100" rows="10"></textarea>
+
+
+
+    <script type='module'>
+
+        const getEle = id => document.getElementById(id);
+
+
+        let datatype = "Phone"; // default
+        let params = new URL(document.location).searchParams;
+        if (params.get("t") !== null) {
+            const t = params.get("t");
+            datatype = params.get("t");
+        }
+
+        const dataTypeSpecUrl = 'js/datatype.json?v=2';
+
+        const response = await fetch(dataTypeSpecUrl);
+        const dataTypeSpec = await response.json();
+        //console.log(dataTypeSpec.dataTypes);
+
+        const getFieldInfo = fieldName => dataTypeSpec.dataTypes.filter(field => {
+            return field.name === fieldName;
+        });
+
+
+        //---------
+        getEle('results').value = JSON.stringify(getFieldInfo(datatype), null, 4);
+
+        /*
+          roll-up summary
+          - limita
+          auto-number
+        */
+ 
+
+    </script>
+</body>
+
+</html>

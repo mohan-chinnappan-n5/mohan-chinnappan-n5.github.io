@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>GIF to MP4 Converter</title>
+  </head>
+  <body>
+    <div>
+      <label for="file">GIF File:</label>
+      <input type="file" id="file">
+    </div>
+    <button id="convert-btn">Convert</button>
+    <div id="output"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ffmpeg/0.11.6/ffmpeg.min.js"></script>
+    <script>
+      const fileInput = document.getElementById('file');
+      const convertBtn = document.getElementById('convert-btn');
+      const outputDiv = document.getElementById('output');
+
+      convertBtn.addEventListener('click', async () => {
+        const file = fileInput.files[0];
+
+        if (!file) {
+          alert('Please select a file');
+          return;
+        }
+
+        // Load the FFmpeg library
+        const { createFFmpeg, fetchFile } = FFmpeg;
+        const ffmpeg = createFFmpeg({ log: true });
+        await ffmpeg.load();
+
+        // Read the input file
+        const inputData = await file.arrayBuffer();
+        ffmpeg.FS('writeFile', 'input.gif', new Uint8Array(inputData));
+
+        // Run the conversion
+        await ffmpeg.run('-i', 'input.gif', '-movflags', '+faststart', '-pix_fmt', 'yuv420p', '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2', '-y', 'output.mp4');
+        
+        // Read the output file
+        const outputData = ffmpeg.FS('readFile', 'output.mp4');
+        const outputUrl = URL.createObjectURL(new Blob([outputData.buffer], { type: 'video/mp4' }));
+
+        // Display the output file
+        const video = document.createElement('video');
+        video.src = outputUrl;
+        video.controls = true;
+        outputDiv.appendChild(video);
+      });
+    </script>
+  </body>
+</html>
+

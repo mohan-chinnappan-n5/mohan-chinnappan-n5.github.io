@@ -1,0 +1,56 @@
+{
+  "dataTypes": [
+    { "name": "Text", "Description": "Storing alphanumeric characters ", "shield": "supported" },
+    {
+      "name": "EncryptedText",
+      "Description": "Storing sensitive data that needs to be encrypted ", "shield": "supported"
+    },
+    {
+      "name": "RichTextArea",
+      "Description": "Storing formatted text with styling  and images ", "shield": "supported"
+    },
+
+    { "name": "Number", "Description": "Storing numerical values " , "shield": "supported" },
+    { "name": "Currency", "Description": "Storing monetary values" , "shield": "supported" },
+
+    { "name": "Email", "Description": "Storing email addresses" , "shield": "supported" },
+    { "name": "Phone", "Description": "Storing phone numbers", "shield": "supported" },
+
+    { "name": "Percent", "Description": "Storing percentage values" , "shield": "supported" },
+
+    {
+      "name": "Formula",
+      "Description": "Storing calculations or combine data from other fields" , 
+       "shield": "restricted, supported: that derive values solely from encrypted fields and deterministic, non-encrypted fields. Non-deterministic fields/functions: NOW(), TODAY(), RAND() not supported."
+    },
+
+    { "name": "File", "Description": "Storing File and Attachments",  "shield": "supported" },
+    { "name": "URL", "Description": "Storing website addresses",  "shield": "supported" },
+
+    { "name": "Date", "Description": "Storing dates" , "shield": "supported" },
+    { "name": "Time", "Description": "Storing time values" , "shield": "supported" },
+    { "name": "Date/Time", "Description": "Storing date and time" , "shield": "supported" },
+
+    { "name": "Checkbox", "Description": "Storing Boolean values" , "shield": "supported" },
+
+    {
+      "name": "GeoLocation",
+      "Description": "Storing latitude and longitude coordinates", "shield": "unsupported"
+    },
+
+    { "name": "Picklist", "Description": "Storing list of pre-defined values" , "shield": "unsupported"},
+    {
+      "name": "Multi-Select Picklist",
+      "Description": "Storing  multiple values from a pre-defined values",  "shield": "unsupported"
+    },
+
+    {
+      "name": "Lookup Relationship",
+      "Description": "Storing  reference to a record in another object ", "shield": "unsupported"
+    },
+    {
+      "name": "Master-Detail Relationship",
+      "Description": "Storing  hierarchical relationship between 2 objects ", "shield": "unsupported"
+    }
+  ]
+}

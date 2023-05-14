@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>YAML Diff</title>
+  </head>
+  <body>
+    <div>
+      <label for="file1">File 1:</label>
+      <input type="file" id="file1">
+    </div>
+    <div>
+      <label for="file2">File 2:</label>
+      <input type="file" id="file2">
+    </div>
+    <button id="compare-btn">Compare</button>
+    <div id="diff"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/deep-diff@1/dist/deep-diff.min.js"></script>
+
+    <script>
+      // https://github.com/flitbit/diff?utm_source=cdnjs&utm_medium=cdnjs_link&utm_campaign=cdnjs_library
+      const file1Input = document.getElementById('file1');
+      const file2Input = document.getElementById('file2');
+      const compareBtn = document.getElementById('compare-btn');
+      const diffOutput = document.getElementById('diff');
+
+      compareBtn.addEventListener('click', () => {
+        const file1 = file1Input.files[0];
+        const file2 = file2Input.files[0];
+
+        if (!file1 || !file2) {
+          alert('Please select two files');
+          return;
+        }
+
+        const reader1 = new FileReader();
+        const reader2 = new FileReader();
+
+        reader1.onload = () => {
+          reader2.onload = () => {
+            const yaml1 = reader1.result;
+            const yaml2 = reader2.result;
+
+            const obj1 = jsyaml.load(yaml1);
+            const obj2 = jsyaml.load(yaml2);
+
+            const differences = DeepDiff.diff(obj1, obj2);
+
+            diffOutput.innerHTML = JSON.stringify(differences, null, 2);
+          };
+          reader2.readAsText(file2);
+        };
+        reader1.readAsText(file1);
+      });
+    </script>
+  </body>
+</html>
+
