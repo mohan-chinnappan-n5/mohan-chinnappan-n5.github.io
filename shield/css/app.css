@@ -1,0 +1,10 @@
+textarea {
+    background-color: black;
+    color: bisque;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+h3 {
+    border-bottom: 1px solid salmon;
+}

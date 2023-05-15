@@ -1,56 +1,148 @@
 {
   "dataTypes": [
-    { "name": "Text", "Description": "Storing alphanumeric characters ", "shield": "supported" },
     {
-      "name": "EncryptedText",
-      "Description": "Storing sensitive data that needs to be encrypted ", "shield": "supported"
+      "name": "Text",
+      "description": "Storing alphanumeric characters ",
+      "shield": "supported"
+    },
+
+    {
+        "name": "Text Area",
+        "description": "Allows users to enter up to 255 characters on separate lines",
+        "shield": "supported",
+        "notes": "When you encrypt the Name field, enhanced lookups are automatically enabled. Enhanced lookups improve the user’s experience by searching only through records that have been looked up recently, and not all existing records. Switching to enhanced lookups is a one-way change. You can’t go back to standard lookups, even if you disable encryption."
+      },
+
+      {
+        "name": "Text Area Long",
+        "description": "Allows users to enter up to 131,072 characters on separate lines  ",
+        "shield": "supported"
+      },
+{
+        "name": "Text Area Rich",
+        "description": "Allows users to enter formatted text, add images and links. Up to 131,072 characters on separate lines. ",
+        "shield": "supported"
+      },
+
+
+    {
+      "name": "Text Encrypted",
+      "description": "Storing sensitive data that needs to be encrypted, using classic encryption AES 128 ",
+      "url":"https://help.salesforce.com/s/articleView?id=sf.security_pe_vs_classic_encryption.htm&type=5",
+      "shield": "supported"
     },
     {
       "name": "RichTextArea",
-      "Description": "Storing formatted text with styling  and images ", "shield": "supported"
+      "description": "Storing formatted text with styling  and images ",
+      "shield": "supported"
     },
 
-    { "name": "Number", "Description": "Storing numerical values " , "shield": "supported" },
-    { "name": "Currency", "Description": "Storing monetary values" , "shield": "supported" },
+    {
+      "name": "Number",
+      "description": "Allows users to enter any number. Leading zeros are removed ",
+      "shield": "supported"
+    },
+    {
+      "name": "AutoNumber",
+      "description": "A system-generated sequence number,  automatically incremented for each new record. ",
+      "shield": "unsupported"
+    },
 
-    { "name": "Email", "Description": "Storing email addresses" , "shield": "supported" },
-    { "name": "Phone", "Description": "Storing phone numbers", "shield": "supported" },
+    {
+      "name": "Currency",
+      "description": "Allows users to enter a dollar or other currency amount and automatically formats the field as a currency amount. This can be useful if you export data to Excel or another spreadsheet  ",
+      "shield": "supported"
+    },
 
-    { "name": "Percent", "Description": "Storing percentage values" , "shield": "supported" },
+    {
+      "name": "Email",
+      "description": "Allows users to enter an email address, which is validated to ensure proper format. If this field is specified for a contact or lead, users can choose the address when clicking Send an Email. Note that custom email addresses cannot be used for mass emails  ",
+      "shield": "supported"
+    },
+    {
+      "name": "Phone",
+      "description": "Allows users to enter any phone number. Automatically formats it as a phone number. ",
+      "shield": "supported"
+    },
+
+    {
+      "name": "Percent",
+      "description": "Allows users to enter a percentage number, for example, '10' and automatically adds the percent sign to the number",
+      "shield": "supported"
+    },
 
     {
       "name": "Formula",
-      "Description": "Storing calculations or combine data from other fields" , 
-       "shield": "restricted, supported: that derive values solely from encrypted fields and deterministic, non-encrypted fields. Non-deterministic fields/functions: NOW(), TODAY(), RAND() not supported."
+      "description": "Storing calculations or combine data from other fields. A read-only field that derives its value from a formula expression you define. The formula field is updated when any of the source fields change.",
+      "shield": "restricted, supported: that derive values solely from encrypted fields and deterministic, non-encrypted fields. Non-deterministic fields/functions: NOW(), TODAY(), RAND() not supported."
     },
 
-    { "name": "File", "Description": "Storing File and Attachments",  "shield": "supported" },
-    { "name": "URL", "Description": "Storing website addresses",  "shield": "supported" },
+    {
+      "name": "File",
+      "description": "Storing File and Attachments",
+      "shield": "supported"
+    },
+    {
+      "name": "URL",
+      "description": "Allows users to enter any valid website address. When users click on the field, the URL will open in a separate browser window", "shield": "supported"
+    },
 
-    { "name": "Date", "Description": "Storing dates" , "shield": "supported" },
-    { "name": "Time", "Description": "Storing time values" , "shield": "supported" },
-    { "name": "Date/Time", "Description": "Storing date and time" , "shield": "supported" },
+    { "name": "Date", "description": "Allows users to enter a date or pick a date from a popup calendar", "shield": "supported" },
+    {
+      "name": "Time",
+      "description": "Allows users to enter a local time. For example, 2:40 PM, 14:40, 14:40:00, and 14:40:50.600 are all valid times for this field", "shield": "supported"
+    },
+    {
+      "name": "Date/Time",
+      "description": "Allows users to enter a date and time, or pick a date from a popup calendar. When users click a date in the pop-up, that date and the current time are entered into the Date/Time field ",
+      "shield": "supported"
+    },
 
-    { "name": "Checkbox", "Description": "Storing Boolean values" , "shield": "supported" },
+    {
+      "name": "Checkbox",
+      "description": "Allows users to select a True (checked) or False (unchecked) value",
+      "shield": "supported"
+    },
 
     {
       "name": "GeoLocation",
-      "Description": "Storing latitude and longitude coordinates", "shield": "unsupported"
+      "description": "Allows users to define locations. Includes latitude and longitude components, and can be used to calculate distance ",
+      "shield": "unsupported"
     },
 
-    { "name": "Picklist", "Description": "Storing list of pre-defined values" , "shield": "unsupported"},
+    {
+      "name": "Picklist",
+      "description": "Allows users to select a value from a list you define.",
+      "shield": "unsupported"
+    },
     {
       "name": "Multi-Select Picklist",
-      "Description": "Storing  multiple values from a pre-defined values",  "shield": "unsupported"
+      "description": "Allows users to select multiple values from a list you define.",
+      "shield": "unsupported"
     },
 
     {
       "name": "Lookup Relationship",
-      "Description": "Storing  reference to a record in another object ", "shield": "unsupported"
+      "description": "Storing  reference to a record in another object ",
+      "shield": "unsupported"
     },
+
+    {
+        "name": "External Lookup Relationship",
+        "description": "Creates a relationship that links this object to an external object whose data is stored outside the Salesforce org. ",
+        "shield": "unsupported"
+      },
+
     {
       "name": "Master-Detail Relationship",
-      "Description": "Storing  hierarchical relationship between 2 objects ", "shield": "unsupported"
+      "description": "Storing  hierarchical relationship between 2 objects ",
+      "shield": "unsupported"
+    },
+
+    {
+      "name": "Roll-Up Summary",
+      "description": "A read-only field that displays the sum, minimum, or maximum value of a field in a related list or the record count of all records listed in a related list.  ",
+      "shield": "unsupported"
     }
   ]
 }
