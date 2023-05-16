@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Whiteboard</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    
+    #canvas {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .tool-palette {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100%;
+    }
+    
+    .tool {
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div class="tool-palette">
+    <div class="tool" id="pen">
+      <img src="pen.png" alt="Pen">
+    </div>
+    <div class="tool" id="eraser">
+      <img src="eraser.png" alt="Eraser">
+    </div>
+    <div class="tool" id="select">
+      <img src="select.png" alt="Select">
+    </div>
+  </div>
+  <script>
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+    let tool = "pen";
+    
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    function draw() {
+      ctx.fillStyle = "black";
+      ctx.lineWidth = 10;
+      
+      switch (tool) {
+        case "pen":
+          ctx.beginPath();
+          ctx.moveTo(mouseX, mouseY);
+          ctx.lineTo(mouseX, mouseY);
+          ctx.stroke();
+          break;
+        case "eraser":
+          ctx.clearRect(mouseX - 5, mouseY - 5, 10, 10);
+          break;
+        case "select":
+          ctx.fillStyle = "red";
+          ctx.beginPath();
+          ctx.moveTo(mouseX, mouseY);
+          break;
+      }
+    }
+    
+    addEventListener("mousemove", e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+    
+    addEventListener("mousedown", e => {
+      tool = e.target.id;
+    });
+    
+    addEventListener("mouseup", e => {
+      draw();
+    });
+    
+    addEventListener("keydown", e => {
+      switch (e.keyCode) {
+        case 8: // Backspace
+          clearCanvas();
+          break;
+      }
+    });
+    
+    draw();
+  </script>
+</body>
+</html>
+

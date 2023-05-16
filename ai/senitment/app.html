@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sentiment Classification</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow.js/1.15.0/tf.min.js"></script>
+</head>
+<body>
+  <input type="text" id="text">
+  <button onclick="classify()">Classify</button>
+  <div id="result"></div>
+</body>
+<script>
+  function classify() {
+    const text = document.getElementById("text").value;
+    const model = tf.loadModel("https://tfhub.dev/tensorflow/sentiment_analysis_rnn/1");
+    const prediction = model.predict(text);
+    const sentiment = prediction.argMax(1).dataSync();
+    document.getElementById("result").innerHTML = sentiment === 0 ? "Positive" : "Negative";
+  }
+</script>
+</html>
