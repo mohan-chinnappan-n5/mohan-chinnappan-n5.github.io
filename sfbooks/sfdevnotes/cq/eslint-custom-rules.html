@@ -325,6 +325,79 @@ cat app.js
 </ul>
 <pre><code class="language-bash">eslint --rulesdir rules app.js
 </code></pre>
+<h2 id="taking-care-of-assertions-like-in-jest-expect1tobe1"><a class="header" href="#taking-care-of-assertions-like-in-jest-expect1tobe1">Taking care of assertions like in JEST <code>expect(1).toBe(1) </code></a></h2>
+<pre><code>cat .eslintrc.js 
+</code></pre>
+<pre><code class="language-js">module.exports = {
+    &quot;env&quot;: {
+        &quot;browser&quot;: true,
+        &quot;es2021&quot;: true,
+        &quot;jest&quot;: true
+    },
+    &quot;extends&quot;: [&quot;eslint:recommended&quot;],
+    &quot;overrides&quot;: [
+    ],
+    &quot;parserOptions&quot;: {
+        &quot;ecmaVersion&quot;: &quot;latest&quot;,
+        &quot;sourceType&quot;: &quot;module&quot;
+    },
+    &quot;plugins&quot;: [&quot;jest&quot;],
+    &quot;rules&quot;: {
+        &quot;no-alert&quot;: [&quot;warn&quot;],
+        &quot;no-literal-expect&quot;: [&quot;warn&quot;]
+    }
+}
+</code></pre>
+<pre><code>cat rules/no-literal-expect.js
+</code></pre>
+<pre><code class="language-js">module.exports = {
+  meta: {
+    type: 'problem',
+    docs: {
+      description: 'disallow hardcoded expect statements',
+      category: 'Possible Errors',
+      recommended: true
+    },
+    schema: []
+  },
+  create: function (context) {
+    return {
+      CallExpression(node) {
+        if (
+          node.callee.type === 'MemberExpression' &amp;&amp;
+          node.callee.property.name === 'toBe' &amp;&amp;
+          node.arguments.length === 1 &amp;&amp;
+          node.arguments[0].type === 'Literal'
+        ){
+          context.report({
+            node,
+            message: `${context.id}: Using expect(1).toBe(1) is not recommended`,
+          });
+        }
+      },
+    };
+  }
+  
+}
+</code></pre>
+<h3 id="testing"><a class="header" href="#testing">Testing</a></h3>
+<pre><code>cat app.js 
+</code></pre>
+<pre><code class="language-js">alert('hello')
+expect(1).toBe(1)
+const x = 100
+expect(x).to(100)
+</code></pre>
+<pre><code>eslint --rulesdir=rules app.js
+</code></pre>
+<pre><code>  1:1  warning  Using alert() is not recommended                               no-alert
+  2:1  warning  no-literal-expect: Using expect(1).toBe(1) is not recommended  no-literal-expect
+
+✖ 2 problems (0 errors, 2 warnings)
+
+✖ 2 problems (0 errors, 2 warnings)
+
+</code></pre>
 
                     </main>
 

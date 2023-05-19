@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script src="https://cdn.tailwindcss.com"></script>
+	<title>Q and A</title>
+
+
+	<link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+		integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	<script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+	<link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+    <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/xml/css/xslt.css">
+
+ 
+	<!-- polyfill for firefox + import maps -->
+	<script src="https://unpkg.com/es-module-shims@1.7.0/dist/es-module-shims.js"></script>
+	<script type="importmap">
+			{
+				"imports": {
+					"@huggingface/inference": "https://cdn.jsdelivr.net/npm/@huggingface/inference@1.8.0/+esm"
+				}
+			}
+		</script>
+	<style>
+		label {
+			font-weight: bold;
+		}
+
+		#content2 {
+			background: black;
+			color: wheat;
+			border: radius 10px;
+			padding: 10px;
+		}
+        textarea {
+            background-color: black;
+            color: white;
+        }
+	</style>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+		<a class="navbar-brand" href="#">&nbsp;Q and A</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Home</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+
+
+	<div id="menu" class="split split-horizontal">
+
+		<form class="w-[90%] mx-auto pt-8" onsubmit="launch(); return false;">
+
+			<label class="form-label">
+				Your Token from: <a target="_blank" href="https://huggingface.co/settings/tokens"
+					class="underline text-blue-500">hf.co/settings/tokens</a>
+			</label>
+
+			<input type="text" id="token" class="form-control" placeholder="token" required />
+			<hr />
+
+			<label class="form-label">Select the Model</label>
+
+			<select class="form-select" name="model" id="model">
+				<option value="deepset/roberta-base-squad2">deepset/roberta-base-squad2</option>
+			</select>
+			
+            <label class="form-label">Input Text</label>
+
+            <textarea class="form-control" name="" id="prompt" required cols="80" rows="10">The capital of France is Paris.</textarea>
+            <textarea rows="10" cols="60" style="color:wheat; padding:10px;" id="q">What is the capital of France?  </textarea>
+            <button id="submit" class="btn btn-success"> Run </button>
+		</form>
+	</div>
+
+	<div id="content" class="split split-horizontal">
+		<textarea rows="10" cols="60" style="color:wheat; padding:10px;" id="logs"> Output will be here </textarea>
+        
+	</div>
+
+
+
+	<script type="module">
+		// https://huggingface.co/huggingfacejs
+		Split(["#menu", "#content"], { sizes: [60, 40] });
+
+		const inputElement = document.getElementById("prompt");
+		const imageElement = document.getElementById("img");
+
+		 
+
+		import { HfInference } from "@huggingface/inference";
+		let running = false;
+		async function launch() {
+			if (running) {
+				return;
+			}
+			running = true;
+			try {
+				const hf = new HfInference(
+					document.getElementById("token").value.trim() || undefined
+				);
+
+                console.log(hf);
+				const model = document.getElementById("model").value.trim();
+				console.log(model);
+				const context = document.getElementById("prompt").value;
+                const question = document.getElementById("q").value;
+
+
+				document.getElementById("logs").textContent = "";
+
+                const summary = await hf.tableQuestionAnsweringOutput({
+                    model: 'google/tapas-base-finetuned-wtq',
+                    inputs: {
+                      query: 'How many stars does the transformers repository have?',
+                      table: {
+                        Repository: ['Transformers', 'Datasets', 'Tokenizers'],
+                        Stars: ['36542', '4512', '3934'],
+                        Contributors: ['651', '77', '34'],
+                        'Programming language': ['Python', 'Python', 'Rust, Python and NodeJS']
+                      }
+                    }
+                  })
+
+				// const summary2 = await hf.questionAnswering({ model, inputs: { context, question } })
+
+				document.getElementById("logs").value = summary.summary_text;
+			} catch (err) {
+				alert("Error: " + err.message);
+			} finally {
+				running = false;
+			}
+		}
+		window.launch = launch;
+	</script>
+</body>
+
+</html>

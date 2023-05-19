@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- polyfill for firefox + import maps -->
+    <script src="https://unpkg.com/es-module-shims@1.7.0/dist/es-module-shims.js"></script>
+    <script type="importmap">
+			{
+				"imports": {
+					"@huggingface/inference": "https://cdn.jsdelivr.net/npm/@huggingface/inference@2.1.1/+esm"
+				}
+			}
+    </script>
+</head>
+<body>
+<form class="w-[90%] mx-auto pt-8" onsubmit="launch(); return false;">
+    <h1 class="text-3xl font-bold">
+				<span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500"
+                >
+					Document & visual question answering demo with
+					<a href="https://github.com/huggingface/huggingface.js">
+						<kbd>@huggingface/inference</kbd>
+					</a>
+				</span>
+    </h1>
+
+    <p class="mt-8">
+        First, input your token if you have one! Otherwise, you may encounter
+        rate limiting. You can create a token for free at
+        <a
+                target="_blank"
+                href="https://huggingface.co/settings/tokens"
+                class="underline text-blue-500"
+        >hf.co/settings/tokens</a
+        >
+    </p>
+
+    <input
+            type="text"
+            id="token"
+            class="rounded border-2 border-blue-500 shadow-md px-3 py-2 w-96 mt-6"
+            placeholder="token (optional)"
+    />
+
+    <p class="mt-8">
+        Pick the model type and the model you want to run. Check out models for
+        <a
+                href="https://huggingface.co/tasks/document-question-answering"
+                class="underline text-blue-500"
+                target="_blank"
+        >
+            document</a
+        > and
+        <a
+                href="https://huggingface.co/tasks/visual-question-answering"
+                class="underline text-blue-500"
+                target="_blank"
+        >image</a> question answering.
+    </p>
+
+    <div class="space-x-2 flex text-sm mt-8">
+        <label>
+            <input class="sr-only peer" name="type" type="radio" value="document" onclick="update_model(this.value)" checked />
+            <div class="px-3 py-3 rounded-lg shadow-md flex items-center justify-center text-slate-700 bg-gradient-to-r peer-checked:font-semibold peer-checked:from-pink-500 peer-checked:to-violet-500 peer-checked:text-white">
+                Document
+            </div>
+        </label>
+        <label>
+            <input class="sr-only peer" name="type" type="radio" value="image" onclick="update_model(this.value)" />
+            <div class="px-3 py-3 rounded-lg shadow-md flex items-center justify-center text-slate-700 bg-gradient-to-r peer-checked:font-semibold peer-checked:from-pink-500 peer-checked:to-violet-500 peer-checked:text-white">
+                Image
+            </div>
+        </label>
+    </div>
+    
+    <input
+            id="model"
+            class="rounded border-2 border-blue-500 shadow-md px-3 py-2 w-96 mt-6"
+            value="impira/layoutlm-document-qa"
+            required
+    />
+
+    <p class="mt-8">The input image</p>
+
+    <input type="file" required accept="image/*"
+           class="rounded border-blue-500 shadow-md px-3 py-2 w-96 mt-6 block"
+           rows="5"
+           id="image"
+    />
+
+    <p class="mt-8">The question</p>
+
+    <input
+            type="text"
+            id="question"
+            class="rounded border-2 border-blue-500 shadow-md px-3 py-2 w-96 mt-6"
+            required
+    />
+
+    <button
+            id="submit"
+            class="my-8 bg-green-500 rounded py-3 px-5 text-white shadow-md disabled:bg-slate-300"
+    >
+        Run
+    </button>
+
+    <p class="text-gray-400 text-sm">Output logs</p>
+    <div id="logs" class="bg-gray-100 rounded p-3 mb-8 text-sm">
+        Output will be here
+    </div>
+
+    <p>Check out the <a class="underline text-blue-500"
+                        href="https://huggingface.co/spaces/huggingfacejs/doc-vis-qa/blob/main/index.html"
+                        target="_blank">source code</a></p>
+</form>
+
+<script type="module">
+    import {HfInference} from "@huggingface/inference";
+
+    const default_models = {
+        "document": "impira/layoutlm-document-qa",
+        "image": "dandelin/vilt-b32-finetuned-vqa",
+    };
+
+    let running = false;
+
+    async function launch() {
+        if (running) {
+            return;
+        }
+        running = true;
+        try {
+            const hf = new HfInference(
+                document.getElementById("token").value.trim() || undefined
+            );
+            const model = document.getElementById("model").value.trim();
+            const model_type = document.querySelector("[name=type]:checked").value;
+            const image = document.getElementById("image").files[0];
+            const question = document.getElementById("question").value.trim();
+            document.getElementById("logs").textContent = "";
+
+            const method = model_type === "document" ? hf.documentQuestionAnswering : hf.visualQuestionAnswering;
+            const {answer, score} = await method({model, inputs: {
+                image, question
+                }});
+
+            document.getElementById("logs").textContent = answer + ": " + score;
+        } catch (err) {
+            alert("Error: " + err.message);
+        } finally {
+            running = false;
+        }
+    }
+
+    window.launch = launch;
+
+    window.update_model = (model_type) => {
+        const model_input = document.getElementById("model");
+        const cur_model = model_input.value.trim();
+        let new_model = "";
+        if (
+            model_type === "document" && cur_model === default_models["image"]
+            || model_type === "image" && cur_model === default_models["document"]
+            || cur_model === ""
+        ) {
+             new_model = default_models[model_type];
+        }
+        model_input.value = new_model;
+    };
+</script>
+</body>
+</html>
