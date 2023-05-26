@@ -17,5 +17,9 @@ getEle('gen').addEventListener('click', event => {
     getEle('connectedApps').setAttribute('href', `${instanceURL}/lightning/setup/ConnectedApplication/home`);
     getEle('connectBulkDataLoads').setAttribute('href', `${instanceURL}/lightning/setup/AsyncApiJobStatus/home`);
     getEle('appBuilder').setAttribute('href', `${instanceURL}/lightning/setup/FlexiPageList/home`);
+
+    getEle('customLabels').setAttribute('href', `${instanceURL}/lightning/setup/ExternalStrings/home`);
+    getEle('CustomMetadata').setAttribute('href', `${instanceURL}/lightning/setup/CustomMetadata/home`);
+
 });
 
