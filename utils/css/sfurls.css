@@ -1,0 +1,6 @@
+.list-group.list-group-striped .list-group-item:not(.active):nth-of-type(even) {
+    background-color: var(--bs-list-group-action-hover-bg);
+  }
+  .list-group.list-group-striped .list-group-item:not(.active):hover {
+    background-color: var(--bs-list-group-action-active-bg);
+  }
