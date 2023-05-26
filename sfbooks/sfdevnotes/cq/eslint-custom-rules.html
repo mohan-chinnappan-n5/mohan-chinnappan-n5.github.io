@@ -146,11 +146,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="eslint-custom-rules"><a class="header" href="#eslint-custom-rules">eslint custom rules</a></h1>
-<p>Here we will explain how to setup a custom rule for eslint</p>
+<p>Here we will explain how to setup a custom rule for eslint in two methods </p>
+<ul>
+<li><a href="#np">Without using the plugin</a></li>
+<li><a href="#wp">With using the plugin - eslint-plugin-mohanc-eslint-rules</a></li>
+</ul>
 <h2 id="use-case"><a class="header" href="#use-case">Use case</a></h2>
 <ul>
 <li>We like want to warn the developers about using <code>alert()</code> in their code</li>
 </ul>
+<p><a name='np'></a></p>
 <h3 id="writing-the-rule"><a class="header" href="#writing-the-rule">Writing the rule</a></h3>
 <ul>
 <li>Prepare the offending code</li>
@@ -365,12 +370,12 @@ cat app.js
   create: function (context) {
     return {
       CallExpression(node) {
-        if (
-          node.callee.type === 'MemberExpression' &amp;&amp;
-          node.callee.property.name === 'toBe' &amp;&amp;
-          node.arguments.length === 1 &amp;&amp;
-          node.arguments[0].type === 'Literal'
-        ){
+       if (
+              node.callee.type === &quot;Identifier&quot; &amp;&amp;
+              node.callee.name === &quot;expect&quot; &amp;&amp;
+              node.arguments.length === 1 &amp;&amp;
+              node.arguments[0].value === 1
+            ) {
           context.report({
             node,
             message: `${context.id}: Using expect(1).toBe(1) is not recommended`,
@@ -398,6 +403,111 @@ expect(x).to(100)
 ✖ 2 problems (0 errors, 2 warnings)
 
 </code></pre>
+<p><a name='wp'></a></p>
+<h2 id="using-plugin-eslint-plugin-mohanc-eslint-rules"><a class="header" href="#using-plugin-eslint-plugin-mohanc-eslint-rules">Using plugin eslint-plugin-mohanc-eslint-rules</a></h2>
+<h3 id="create-a-new-project"><a class="header" href="#create-a-new-project">Create a new project</a></h3>
+<ul>
+<li>Note: In an existing project you <strong>do not need this step</strong></li>
+</ul>
+<pre><code>mkdir eslint-testing
+cd eslint-testing 
+npm init -y
+</code></pre>
+<pre><code>Wrote to /private/tmp/eslint-testing/package.json:
+
+{
+  &quot;name&quot;: &quot;eslint-testing&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;
+}
+
+</code></pre>
+<h3 id="install-the-plugin-for-the-custom-rules"><a class="header" href="#install-the-plugin-for-the-custom-rules">Install the plugin for the custom rules</a></h3>
+<ul>
+<li>Note: This step is required for an existing project as well</li>
+</ul>
+<pre><code>npm i eslint-plugin-mohanc-eslint-rules
+
+</code></pre>
+<pre><code>added 1 package, and audited 2 packages in 922ms
+
+found 0 vulnerabilities
+</code></pre>
+<h3 id="look-at-the-packagejson"><a class="header" href="#look-at-the-packagejson">Look at the package.json</a></h3>
+<pre><code> cat package.json 
+
+</code></pre>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;eslint-testing&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;keywords&quot;: [],
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;dependencies&quot;: {
+    &quot;eslint-plugin-mohanc-eslint-rules&quot;: &quot;^0.0.2&quot;
+  }
+}
+</code></pre>
+<h3 id="create-eslintrc"><a class="header" href="#create-eslintrc">Create .eslintrc</a></h3>
+<ul>
+<li>NOTE: <strong>In an existing project just add/update the line specific to &quot;plugins&quot;</strong></li>
+</ul>
+<pre><code>vi  .eslintrc
+cat .eslintrc
+</code></pre>
+<pre><code>{
+  &quot;parserOptions&quot;: {
+    &quot;ecmaVersion&quot;: 2021,
+    &quot;jest&quot;: true
+
+  },
+  &quot;rules&quot;: {
+    &quot;mohanc-eslint-rules/no-alert&quot;: &quot;warn&quot;,
+    &quot;mohanc-eslint-rules/no-literal-expect&quot;: &quot;warn&quot;
+ 
+  },
+  &quot;plugins&quot;: [&quot;mohanc-eslint-rules&quot;]
+}
+
+
+</code></pre>
+<h3 id="create-the-sample-code-appjs-to-test-these-custom-rules"><a class="header" href="#create-the-sample-code-appjs-to-test-these-custom-rules">Create the sample code (app.js) to test these custom rules</a></h3>
+<pre><code>vi app.js
+cat app.js
+</code></pre>
+<pre><code class="language-js">alert('hello');
+expect(1).toBe(1);
+const x = 100;
+expect(x).toBe(100);
+
+</code></pre>
+<h3 id="run-the-eslint-to-lint-this-file-appjs"><a class="header" href="#run-the-eslint-to-lint-this-file-appjs">Run the eslint to lint this file (app.js)</a></h3>
+<pre><code>/tmp/eslint-testing  &gt;npx eslint app.js 
+
+/private/tmp/eslint-testing/app.js
+  1:1  warning  Using alert() is not recommended                                                   mohanc-eslint-rules/no-alert
+  2:1  warning  mohanc-eslint-rules/no-literal-expect: Using expect(1).toBe(1) is not recommended  mohanc-eslint-rules/no-literal-expect
+
+✖ 2 problems (0 errors, 2 warnings)
+
+</code></pre>
+<h3 id="how-it-shows-in-vscode-click-on-the-image-to-view-the-full-view"><a class="header" href="#how-it-shows-in-vscode-click-on-the-image-to-view-the-full-view">How it shows in VSCode (click on the image to view the full view)</a></h3>
+<ul>
+<li>Demo</li>
+</ul>
+<p><a href="img/eslint-custom-rules-1.webm.gif"><img src="img/eslint-custom-rules-1.webm.gif" alt="ESLint Custom Rules Demo" /></a></p>
 
                     </main>
 
