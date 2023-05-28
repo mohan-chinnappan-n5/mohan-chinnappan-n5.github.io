@@ -1,0 +1,2 @@
+- [Petals](https://petals.ml/)
+    - [Petals Colab](https://colab.research.google.com/drive/1Ervk6HPNS6AYVr3xVdQnY5a-TjjmLCdQ?usp=sharing#scrollTo=2uuX1IMLLotQ)

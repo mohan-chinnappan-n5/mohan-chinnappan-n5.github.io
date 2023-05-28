@@ -1,7 +1,17 @@
 
 // sfurls.js
-
 const getEle = id => document.getElementById(id);
+
+let startUrl = 'https://d4x000007rxogeaq-dev-ed.my.salesforce.com';
+
+let params = (new URL(document.location)).searchParams;
+  //------- via clipboard
+  let c = params.get('c');
+  if (c !== null) await navigator.clipboard.readText().then((clipText) => {
+      startUrl = clipText;
+  });
+
+getEle('instanceURL').value = startUrl;
 
 Split(["#menu", "#content"], { sizes: [40, 60] });
 

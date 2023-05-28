@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="https://getbootstrap.com/docs/5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+    <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/xml/css/xslt.css">
+
+
+
+    <title>Sentiment Analysis</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">&nbsp;Sentiment Analysis</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="./senti.html">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      More Apps
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="./qa.html">Q & A</a></li>
+                      <li><a class="dropdown-item" href="./summarize.html">Summarize</a></li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="#">Coming soon</a></li>
+                    </ul>
+                  </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div id="menu" class="split split-horizontal">
+        <textarea name="output" id="output" cols="80" rows="30"></textarea>
+    </div>
+    <div class="split split-horizontal" id="content">
+
+        <textarea name="input" id="input" class="form-control" cols="80" rows="5">I love Transformers!</textarea>
+
+
+        <button id="run" class="btn btn-primary">Run</button>
+
+    </div>
+
+
+    <script type="module">
+
+        const getEle = id => document.getElementById(id);
+
+        Split(["#menu", "#content"], { sizes: [40, 60] });
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers';
+        let pipe = await pipeline('sentiment-analysis');
+
+
+        getEle('run').addEventListener('click', async event => {
+            let out = await pipe(getEle('input').value);
+            getEle('output').value = JSON.stringify(out, null, 4);
+
+        });
+        getEle('run').click();
+
+
+
+    </script>
+
+</body>
+
+</html>

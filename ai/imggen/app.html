@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,14 +13,15 @@
     <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
     <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/xml/css/xslt.css">
-    <title>Salesforce Org URLS</title>
-    <link rel="stylesheet" href="css/sfurls.css">
-</head>
 
+    
+
+    <title>ImageGen</title>
+</head>
 <body>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">&nbsp;Salesforce Org URLS</a>
+        <a class="navbar-brand" href="#">&nbsp;ImageGen</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,15 +37,29 @@
 
 
     <div id="menu" class="split split-horizontal">
-        <input class="form-control" type="text" value="https://d4x000007rxogeaq-dev-ed.my.salesforce.com"
-            id="instanceURL" placeholder="Instance URL of the org">
-        <button id='gen' class="btn btn-primary">Generate</button>
+        <textarea readonly name="xml" id="xml" cols="80" rows="30">
+Notes:
+1. Refresh the page to get new set of images
+        </textarea>
     </div>
     <div class="split split-horizontal" id="content">
-        <ul class="list-group list-group-hover list-group-striped" id="lg"> </ul>
+        <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/3.32.0/gradio.js" ></script>
+        <gradio-app src="https://mohanchinnappan-imagegen.hf.space"></gradio-app>
     </div>
-    <script type='module' src="js/sfurls.js?v=4"></script>
 
+
+    <script type='module'>
+
+        Split(["#menu", "#content"], { sizes: [40, 60] });
+
+
+
+
+
+
+
+
+    </script>
 </body>
-
 </html>
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <script src="https://getbootstrap.com/docs/5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+    <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/xml/css/xslt.css">
+
+
+
+    <title>Q & A</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">&nbsp;Q & A ::  distilbert-base-uncased-distilled-squad</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="./qa.html">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      More Apps
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="./senti.html">Sentiment Analysis</a></li>
+                      <li><a class="dropdown-item" href="./summarize.html">Summarize</a></li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="#">Coming soon</a></li>
+                    </ul>
+                  </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div id="menu" class="split split-horizontal">
+        <textarea name="output" id="output" cols="80" rows="30"></textarea>
+        <textarea name="q" id="q" cols="80" rows="5">elevation?</textarea>
+        
+    </div>
+    <div class="split split-horizontal" id="content">
+
+        <textarea name="input" id="input" class="form-control" cols="80" rows="30">I love Transformers!</textarea>
+
+
+        <button id="run" class="btn btn-primary">Run</button>
+
+    </div>
+
+
+    <script type="module">
+
+        const supported = ['text-classification',
+            'token-classification',
+            'question-answering',
+            'fill-mask,summarization',
+            'translation',
+            'text2text-generation'
+            , 'text-generation'
+            , 'zero-shot-classification',
+            'automatic-speech-recognition',
+            'image-to-text'
+            , 'image-classification',
+            'image-segmentation',
+            'zero-shot-image-classification'
+            , 'object-detection'
+            , 'feature-extraction']
+
+            const sample = `
+            Mount Everest (Nepali: सगरमाथा, romanized: Sagarmāthā; Tibetan: Chomolungma ཇོ་མོ་གླང་མ; Chinese: 珠穆朗玛峰; pinyin: Zhūmùlǎngmǎ Fēng) is Earth's highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point.[2] Its elevation (snow height) of 8,848.86 m (29,031 ft 8+1⁄2 in) was most recently established in 2020 by the Chinese and Nepali authorities.[3][4]
+            Mount Everest attracts many climbers, including highly experienced mountaineers. There are two main climbing routes, one approaching the summit from the southeast in Nepal (known as the "standard route") and the other from the north in Tibet. While not posing substantial technical climbing challenges on the standard route, Everest presents dangers such as altitude sickness, weather, and wind, as well as hazards from avalanches and the Khumbu Icefall. As of November 2022, 310 people have died on Everest. Over 200 bodies remain on the mountain and have not been removed due to the dangerous conditions.[5][6]            
+            `;
+                      
+        const getEle = id => document.getElementById(id);
+        getEle('input').value = sample;
+
+        Split(["#menu", "#content"], { sizes: [40, 60] });
+        import { pipeline } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers';
+        const modelLabel = 'Question answering w/ distilbert-base-uncased-distilled-squad (66 MB)';
+        const model = 'question-answering';
+        let pipe = await pipeline(model);
+
+
+        getEle('run').addEventListener('click', async event => {
+            // https://github.com/xenova/transformers.js/blob/main/src/pipelines.js#L244
+            let out = await pipe( getEle('q').value, getEle('input').value,);
+            getEle('output').value = JSON.stringify(out, null, 4);
+
+        });
+        getEle('run').click();
+
+
+
+    </script>
+
+</body>
+
+</html>
