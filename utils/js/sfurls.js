@@ -12,7 +12,6 @@ let params = (new URL(document.location)).searchParams;
   });
 
 getEle('instanceURL').value = startUrl;
-
 Split(["#menu", "#content"], { sizes: [40, 60] });
 
  
@@ -21,27 +20,26 @@ const urls = [
 
     {"Setup":  'SetupOneHome'  },
     {"Object Manager":  'ObjectManager' },
-    {"Apex":  'Apex'  },
-    {"ApexTriggers": 'ApexTriggers'},
-    {"Flows": 'Flows'},
     {"DeployStatus": 'DeployStatus'},
-    {"ObjectManager": 'ObjectManager'},
+    {"OrgWideEmailAddresses": "OrgWideEmailAddresses"},
+    
+    {"Apex":  'ApexClasses'  },
+   {"AppBuilder": 'FlexiPageList'},
+    {"ApexTriggers": 'ApexTriggers'},
+    
+    {"Flows": 'Flows'},
+    {"ConnectedApps": 'ConnectedApplication'},
     {"InstalledPackages": 'ImportedPackage'},
 
-    {"ConnectedApps": 'ConnectedApplication'},
-
    {"BulkDataLoads": 'AsyncApiJobStatus'},
-   {"AppBuilder": 'FlexiPageList'},
-
+   
    {"CustomLabels": 'ExternalStrings'},
-   {"AppBuilder": 'FlexiPageList'},
-
-    {"MatchingRules": 'MatchingRules'},
     {"CustomMetadata": 'CustomMetadata'},
+  
+    {"MatchingRules": 'MatchingRules'},
     {"EinsteinLeadScoring": 'SalesInsights' },
     {"Dashboard": 'o/Dashboard'},
-    {"EmailToCase": 'EmailToCase'},
-    {"OrgWideEmailAddresses": "OrgWideEmailAddresses"}
+    {"EmailToCase": 'EmailToCase'}
 
 
 
