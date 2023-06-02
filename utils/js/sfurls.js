@@ -39,7 +39,10 @@ const urls = [
     {"MatchingRules": 'MatchingRules'},
     {"EinsteinLeadScoring": 'SalesInsights' },
     {"Dashboard": 'o/Dashboard'},
-    {"EmailToCase": 'EmailToCase'}
+    {"EmailToCase": 'EmailToCase'},
+    {"Einstein Setup Assistant": 'SalesInsightsSetupAssistant'}
+
+
 
 
 
