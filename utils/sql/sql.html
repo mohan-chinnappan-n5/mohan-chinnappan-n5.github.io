@@ -23,12 +23,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.22.0/mode-json.min.js"
         integrity="sha512-K+H+3WTfhwE9fnfv4makUYJxz4kwIadQPOjGHAmOT96FtMSPRnvnuGR/sZjuNB2MmmHQ94Mnc9zoDxTHKMMEww=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.22.0/mode-sql.min.js"></script>  
 
     <script src='js/sql-wasm.js'></script>
 
 
 
-    <title>SQL</title>
+    <title>SQLite</title>
 
 </head>
 
@@ -36,12 +37,12 @@
     <style>
         .ace {
             width: 800px;
-            height: 590px;
+            height: 400px;
         }
     </style>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">&nbsp;SQL</a>
+        <a class="navbar-brand" href="#">&nbsp;SQLite</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -57,13 +58,10 @@
 
 
     <div id="menu" class="split split-horizontal">
-        <textarea name="commands" id="commands" cols="100" rows="30"></textarea>
+        <div id="commands" class='ace'></div>
         <hr>
-        <textarea name="query" id="query" cols="100" rows="3"></textarea>
+        <div id="query" class='ace'></div>
 
-
-
-        <button class="btn btn-primary" id="execute" class="button">Execute</button>
 
 
 
@@ -71,7 +69,10 @@
     <div class="split split-horizontal" id="content">
         <div id="editor" class='ace'>TEST</div>
         <hr>
-        <textarea name="errors" id="errors" cols="100" rows="3"></textarea>
+        <button class="btn btn-primary" id="execute" class="button">Execute</button>
+        <hr>
+        <textarea name="errors" id="errors" cols="100" rows="5"
+            placeholder="any errors will be displayed here..."></textarea>
 
 
     </div>
@@ -80,38 +81,55 @@
     <script type='module'>
 
 
-        const sql = `
+        const sql =
+            `-- setup the table and data for the table
     DROP TABLE IF EXISTS employees;
     CREATE TABLE employees(
         id          integer,  name    text,
         designation text,     manager integer,
         hired_on    date,     salary  integer,
-        commission  float,    dept    integer);
+        commission  float,    dept    integer
+    );
     
-      INSERT INTO employees VALUES (1,'JOHNSON','ADMIN',6,'1990-12-17',18000,NULL,4);
-      INSERT INTO employees VALUES (2,'HARDING','MANAGER',9,'1998-02-02',52000,300,3);
-      INSERT INTO employees VALUES (3,'TAFT','SALES I',2,'1996-01-02',25000,500,3);
-      INSERT INTO employees VALUES (4,'HOOVER','SALES I',2,'1990-04-02',27000,NULL,3);
-      INSERT INTO employees VALUES (5,'LINCOLN','TECH',6,'1994-06-23',22500,1400,4);
-      INSERT INTO employees VALUES (6,'GARFIELD','MANAGER',9,'1993-05-01',54000,NULL,4);
-      INSERT INTO employees VALUES (7,'POLK','TECH',6,'1997-09-22',25000,NULL,4);
-      INSERT INTO employees VALUES (8,'GRANT','ENGINEER',10,'1997-03-30',32000,NULL,2);
-      INSERT INTO employees VALUES (9,'JACKSON','CEO',NULL,'1990-01-01',75000,NULL,4);
-      INSERT INTO employees VALUES (10,'FILLMORE','MANAGER',9,'1994-08-09',56000,NULL,2);
-      INSERT INTO employees VALUES (11,'ADAMS','ENGINEER',10,'1996-03-15',34000,NULL,2);
-      INSERT INTO employees VALUES (12,'WASHINGTON','ADMIN',6,'1998-04-16',18000,NULL,4);
-      INSERT INTO employees VALUES (13,'MONROE','ENGINEER',10,'2000-12-03',30000,NULL,2);
-      INSERT INTO employees VALUES (14,'ROOSEVELT','CPA',9,'1995-10-12',35000,NULL,1);
+    INSERT INTO employees VALUES 
+    (1,'JOHNSON','ADMIN',6,'1990-12-17',18000,NULL,4),
+    (2,'HARDING','MANAGER',9,'1998-02-02',52000,300,3),
+    (3,'TAFT','SALES I',2,'1996-01-02',25000,500,3),
+    (4,'HOOVER','SALES I',2,'1990-04-02',27000,NULL,3),
+    (5,'LINCOLN','TECH',6,'1994-06-23',22500,1400,4),
+    (6,'GARFIELD','MANAGER',9,'1993-05-01',54000,NULL,4),
+    (7,'POLK','TECH',6,'1997-09-22',25000,NULL,4),
+    (8,'GRANT','ENGINEER',10,'1997-03-30',32000,NULL,2),
+    (9,'JACKSON','CEO',NULL,'1990-01-01',75000,NULL,4),
+    (10,'FILLMORE','MANAGER',9,'1994-08-09',56000,NULL,2),
+    (11,'ADAMS','ENGINEER',10,'1996-03-15',34000,NULL,2),
+    (12,'WASHINGTON','ADMIN',6,'1998-04-16',18000,NULL,4),
+    (13,'MONROE','ENGINEER',10,'2000-12-03',30000,NULL,2),
+    (14,'ROOSEVELT','CPA',9,'1995-10-12',35000,NULL,1)
+    ;
     
 
 
     `;
 
-        const query = `SELECT * FROM employees`;
+        const query =
+            `-- uncomment a query in the below list to run        
+SELECT * FROM employees;
+-- SELECT * FROM employees LIMIT 3;
+-- SELECT name, dept FROM employees LIMIT 3;
+-- SELECT name, dept FROM employees WHERE dept = '4';
+
+-- SELECT COUNT(*) CNT FROM employees;
+-- SELECT SUM(salary) total_salary FROM employees ;
+-- SELECT AVG(salary) avg_salary FROM employees ;
+-- SELECT MAX(salary) max_salary, name FROM employees ;
+
+
+        
+        `;
 
         const getEle = id => document.getElementById(id);
-        getEle('commands').value = sql;
-        getEle('query').value = query;
+        // getEle('query').value = query;
 
 
         Split(["#menu", "#content"], { sizes: [50, 50] });
@@ -119,10 +137,20 @@
         const editor = ace.edit("editor");
         editor.setTheme("ace/theme/monokai");
         editor.session.setMode("ace/mode/json");
-
         const data = [{ "name": "unix", "authors": "ken and dmr" }, { "name": "c", "authors": "dmr" }
         ];
         editor.setValue(JSON.stringify(data, null, '\t'));
+
+        const editorSQL = ace.edit("commands");
+        editorSQL.setTheme("ace/theme/monokai");
+        editorSQL.session.setMode("ace/mode/sql");
+        editorSQL.setValue(sql);
+
+       const editorQuery = ace.edit("query");
+       editorQuery.setTheme("ace/theme/monokai");
+       editorQuery.session.setMode("ace/mode/sql");
+       editorQuery.setValue(query);
+
 
         //-------------
         const config = { locateFile: filename => `js/${filename}` }
@@ -135,12 +163,12 @@
                 //Create the database
                 const DB = new SQL.Database();
                 // Run a query without reading the results
-                DB.run(getEle('commands').value)
+                DB.run(editorSQL.getValue());
                 // Prepare a statement
                 //const stmt = DB.prepare("SELECT * FROM employees WHERE name = $firstname");
                 //stmt.bind({ $firstname: 'GRANT'});
                 try {
-                    const stmt2 = DB.prepare(getEle('query').value);
+                    const stmt2 = DB.prepare(editorQuery.getValue());
                     let results = [];
                     while (stmt2.step()) { //
                         results.push(stmt2.getAsObject());
@@ -155,6 +183,9 @@
 
             });
         });
+
+        //-------
+        getEle('execute').click();
 
 
 
