@@ -170,6 +170,19 @@
 <p><img src="img/datamaks-lib-1.png" alt="Data mask lib" /></p>
 <h3 id="data-mask-demo"><a class="header" href="#data-mask-demo">Data Mask Demo</a></h3>
 <iframe width="920" height="480" src="https://www.youtube.com/embed/jRm6wTPC_9M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<hr />
+<iframe width="920" height="480" src="https://www.youtube.com/embed/ZAmszhN7GvU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a name='faq'></a></p>
+<h3 id="faq"><a class="header" href="#faq">FAQ</a></h3>
+<h4 id="guidelines-for-integration-testing"><a class="header" href="#guidelines-for-integration-testing">Guidelines for integration testing</a></h4>
+<ul>
+<li>Make sure that records are masked the same way between the <strong>data sources in your solution</strong></li>
+<li>Taking care of Referential integrity of the multiple data sources in your solution -  this requires a specific record is masked the same wherever it occurs (Salesforce and other sub-systems of your integration landscape).
+<ul>
+<li>Example: The customer <strong>Ken Thompson</strong> in Salesforce is masked into <strong>David Farmer</strong> in Salesforce and as well as in say SAP to which you are integrating with. And Ken's SSN (or any PII) must be masked into the <strong>same</strong> on Salesforce and SAP.</li>
+</ul>
+</li>
+</ul>
 <h2 id="references"><a class="header" href="#references">References</a></h2>
 <ul>
 <li><a href="https://www.salesforce.com/content/dam/web/en_us/www/documents/datasheets/data-mask-datasheet.pdf">Data Mask data sheet</a></li>

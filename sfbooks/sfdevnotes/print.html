@@ -9111,9 +9111,6 @@ touch r3.md
 * e855e40 - (3 minutes ago) WI-123456 added to support training - mohan-chinnappan-n (HEAD -&gt; WI-123456)
 </code></pre>
 <img src="deployments/img/prepare-commit-msg-2c.png" width='400'/>  
-<pre><code>git lg
-* 8ba0da4 - (3 minutes ago) WI-12345 added supported for new filed xyz - mohan-chinnappan-n (HEAD -&gt; WI-12345)
-</code></pre>
 <hr />
 <p><a name='commit-msg'></a></p>
 <h2 id="commit-msg"><a class="header" href="#commit-msg">commit-msg</a></h2>
@@ -13604,7 +13601,7 @@ print(llm_chain.run(question))
 
 ## prints: 
 ### London is the capital of England. The final answer: London.
-
+    
 
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="document-management-tools"><a class="header" href="#document-management-tools">Document management tools</a></h1>
@@ -15387,12 +15384,12 @@ https://help.salesforce.com/articleView?id=security_pe_masking.htm&amp;type=0</p
 <li><a href="https://github.com/mohan-chinnappan-n/Shield-setup">Shield Setup</a></li>
 <li><a href="https://help.salesforce.com/s/articleView?id=sf.security_pe_setup.htm&amp;type=5">Key Management and Rotation</a></li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="profile-permissionset"><a class="header" href="#profile-permissionset">Profile, PermissionSet</a></h1>
+<iframe width="600" height="400" src="https://www.youtube.com/embed/KfdfnGSJVYM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div style="break-before: page; page-break-before: always;"></div><h1 id="profile-permissionset"><a class="header" href="#profile-permissionset">Profile, PermissionSet</a></h1>
 <h2 id="topics-23"><a class="header" href="#topics-23">Topics</a></h2>
 <ul>
 <li><a href="security/profile-ps.html#profile">Retrieving Profile from an Org</a>
 <ul>
-<li><a href="security/profile-ps.html#source-read">Using Source Read Plugin</a></li>
+<li><a href="security/profile-ps.html#source-read-profile">Using Source Read Plugin</a></li>
 </ul>
 </li>
 <li><a href="security/profile-ps.html#ps">Retrieving Permission from an Org</a></li>
@@ -15448,7 +15445,7 @@ vi 43/unpackaged/profiles/Admin.profile-meta.xml
 </ul>
 <pre><code> sfdx mohanc:mdapi:helper:retrieve  -m Profile -u mohan.chinnappan.n.sel@gmail.com -n &quot;Profile1, Profile2&quot; 
 </code></pre>
-<p><a name='source-read'></a></p>
+<p><a name='source-read-profile'></a></p>
 <h3 id="using-sfdx-plugin-source-read"><a class="header" href="#using-sfdx-plugin-source-read">Using sfdx-plugin-source-read</a></h3>
 <pre><code># install
 sfdx plugins:install sfdx-plugin-source-read
@@ -16213,6 +16210,19 @@ sfdx force:mdapi:retrieve -k  profiles-with-stdobjects-package.xml -u &lt;userna
 <p><img src="security/img/datamaks-lib-1.png" alt="Data mask lib" /></p>
 <h3 id="data-mask-demo"><a class="header" href="#data-mask-demo">Data Mask Demo</a></h3>
 <iframe width="920" height="480" src="https://www.youtube.com/embed/jRm6wTPC_9M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<hr />
+<iframe width="920" height="480" src="https://www.youtube.com/embed/ZAmszhN7GvU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a name='faq'></a></p>
+<h3 id="faq-2"><a class="header" href="#faq-2">FAQ</a></h3>
+<h4 id="guidelines-for-integration-testing"><a class="header" href="#guidelines-for-integration-testing">Guidelines for integration testing</a></h4>
+<ul>
+<li>Make sure that records are masked the same way between the <strong>data sources in your solution</strong></li>
+<li>Taking care of Referential integrity of the multiple data sources in your solution -  this requires a specific record is masked the same wherever it occurs (Salesforce and other sub-systems of your integration landscape).
+<ul>
+<li>Example: The customer <strong>Ken Thompson</strong> in Salesforce is masked into <strong>David Farmer</strong> in Salesforce and as well as in say SAP to which you are integrating with. And Ken's SSN (or any PII) must be masked into the <strong>same</strong> on Salesforce and SAP.</li>
+</ul>
+</li>
+</ul>
 <h2 id="references-25"><a class="header" href="#references-25">References</a></h2>
 <ul>
 <li><a href="https://www.salesforce.com/content/dam/web/en_us/www/documents/datasheets/data-mask-datasheet.pdf">Data Mask data sheet</a></li>
@@ -19451,6 +19461,10 @@ public class AccountCleanup {
 </code></pre>
 <p><img src="language-design/img/parse-tree-1.png" alt="Parse Tree" /></p>
 <p><img src="language-design/img/antlr4_parse_tree_1.svg" alt="Parse Tree2" /></p>
+<h2 id="references-28"><a class="header" href="#references-28">References</a></h2>
+<ul>
+<li><a href="https://tomassetti.me/antlr-mega-tutorial/"> The ANTLR Mega Tutorial</a></li>
+</ul>
 
                     </main>
 
