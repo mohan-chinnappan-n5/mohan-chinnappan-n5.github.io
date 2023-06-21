@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Whiteboard App</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+            background-color: white;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+    <div id="toolbar">
+        <button id="selectTool">Select</button>
+        <button id="lineTool">Line</button>
+        <button id="circleTool">Circle</button>
+        <button id="textTool">Text</button>
+        <button id="moveTool">Move</button>
+        <button id="undoButton">Undo</button>
+        <button id="redoButton">Redo</button>
+        <select id="colorSelect">
+            <option value="#000000">Black</option>
+            <option value="#ff0000">Red</option>
+            <option value="#00ff00">Green</option>
+            <option value="#0000ff">Blue</option>
+        </select>
+    </div>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script src="whiteboard-3.js"></script>
+</body>
+</html>
+

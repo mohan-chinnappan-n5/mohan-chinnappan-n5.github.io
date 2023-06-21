@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Swimlane Chart</title>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+<div id="chart"></div>
+<script>
+var data = [
+  {
+    "name": "John Doe",
+    "values": [10, 20, 30, 40, 50]
+  },
+  {
+    "name": "Jane Doe",
+    "values": [20, 30, 40, 50, 60]
+  },
+  {
+    "name": "Bill Smith",
+    "values": [30, 40, 50, 60, 70]
+  }
+];
+
+var svg = d3.select("#chart").append("svg");
+
+var xScale = d3.scaleLinear().domain([0, data.length]).range([0, svg.attr("width")]);
+var yScale = d3.scaleLinear().domain([0, d3.max(data, function(d) { return d.values.reduce(function(a, b) { return a + b; }); })]).range([0, svg.attr("height")]);
+
+var rect = svg.selectAll(".rect")
+  .data(data)
+  .enter()
+  .append("rect")
+  .attr("x", function(d, i) { return xScale(i); })
+  .attr("y", function(d) { return yScale(0); })
+  .attr("width", xScale(1) - xScale(0))
+  .attr("height", function(d) { return yScale(d.values.reduce(function(a, b) { return a + b; })); })
+  .attr("fill", "steelblue");
+
+var text = svg.selectAll(".text")
+  .data(data)
+  .enter()
+  .append("text")
+  .attr("x", function(d, i) { return xScale(i) + (xScale(1) - xScale(0)) / 2; })
+  .attr("y", function(d) { return yScale(0) + 2; })
+  .text(function(d) { return d.name; });
+</script>
+</body>
+</html>
+

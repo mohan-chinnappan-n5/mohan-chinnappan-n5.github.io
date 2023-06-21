@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Swimlane Chart</title>
+  <style>
+    /* CSS styling for the swimlane chart */
+    .chart {
+      font-family: Arial, sans-serif;
+    }
+
+    .chart .axis text {
+      font-size: 12px;
+    }
+
+    .chart .lane {
+      fill: #f0f0f0;
+    }
+
+    .chart .task {
+      fill: #2196F3;
+      stroke: #1565C0;
+    }
+
+    .chart .task-label {
+      fill: #fff;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <svg id="chart" width="600" height="300"></svg>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    // Sample data for the swimlane chart
+    const swimlaneData = [
+      {
+        lane: 'Lane 1',
+        tasks: [
+          { id: 1, label: 'Task 1', start: new Date('2023-01-01'), end: new Date('2023-01-10') },
+          { id: 2, label: 'Task 2', start: new Date('2023-01-05'), end: new Date('2023-01-15') },
+          { id: 3, label: 'Task 3', start: new Date('2023-01-12'), end: new Date('2023-01-20') }
+        ]
+      },
+      {
+        lane: 'Lane 2',
+        tasks: [
+          { id: 4, label: 'Task 4', start: new Date('2023-01-02'), end: new Date('2023-01-08') },
+          { id: 5, label: 'Task 5', start: new Date('2023-01-09'), end: new Date('2023-01-18') }
+        ]
+      }
+    ];
+
+    // Set up the SVG container
+    const svg = d3.select('#chart');
+    const margin = { top: 20, right: 20, bottom: 30, left: 50 };
+    const width = +svg.attr('width') - margin.left - margin.right;
+    const height = +svg.attr('height') - margin.top - margin.bottom;
+    const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+    // Create scales for x and y axes
+    const xScale = d3.scaleTime().range([0, width]);
+    const yScale = d3.scaleBand().range([height, 0]);
+
+    // Draw the swimlane chart
+    swimlaneData.forEach(lane => {
+      // Draw the lane
+      g.append('rect')
+        .attr('class', 'lane')
+        .attr('x', 0)
+        .attr('y', yScale(lane.lane))
+        .attr('width', width)
+        .attr('height', yScale.bandwidth());
+
+      // Draw the tasks within the lane
+      g.selectAll('.task')
+        .data(lane.tasks)
+        .enter()
+        .append('rect')
+        .attr('class', 'task')
+        .attr('x', d => xScale(d.start))
+        .attr('y', yScale(lane.lane))
+        .attr('width', d => xScale(d.end) - xScale(d.start))
+        .attr('height', yScale.bandwidth();
+
+      // Add labels to the tasks
+      g.selectAll('.task-label')
+        .data(lane.tasks)
+        .enter()
+        .append('text')
+        .attr('class', 'task-label')
+        .attr('x', d => (xScale(d.start) + xScale(d.end)) / 2)
+        .attr('y', yScale(lane.lane) + yScale.bandwidth() / 2)
+        .attr('dy', '0.35em')
+        .text(d => d.label);
+    });
+
+    // Set the domain of x and y scales
+    const minDate = d3.min(swimlaneData, lane => d3.min(lane.tasks, task => task.start));
+    const maxDate = d3.max(swimlaneData, lane => d3.max(lane.tasks, task => task.end));
+    xScale.domain([minDate, maxDate]);
+    yScale.domain(swimlaneData.map(lane => lane.lane)).padding(0.1);
+
+    // Create x and y axes
+    const xAxis = d3.axisBottom(xScale);
+    const yAxis = d3.axisLeft(yScale);
+
+    // Append x and y axes to the chart
+    g.append('g')
+      .attr('class', 'axis axis-x')
+      .attr('transform', `translate(0,${height})`)
+      .call(xAxis);
+
+    g.append('g')
+      .attr('class', 'axis axis-y')
+      .call(yAxis);
+
+  </script>
+</body>
+</html>
+

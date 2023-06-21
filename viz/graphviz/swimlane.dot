@@ -1,0 +1,34 @@
+digraph G {
+  subgraph clusterSurround1 {
+    graph [label="three swim lanes"]
+    graph[_swimlane_equalwidth=TRUE _swimlane_group=a]
+    subgraph cluster0 {
+       label="Team red"
+      graph [color=blue]
+      x0 -> y0 
+      x0 -> z0
+      y0 -> q0
+      q0 -> r0
+      z0 -> q0
+    }
+    subgraph cluster1 {
+       label="Team purple"
+      graph [color=purple]
+      x1 -> y1 
+      x1 -> z1 
+    }
+    subgraph cluster2 {
+       label="Team spirit"
+      graph [color=pink]
+      x2 -> y2 
+      x2 -> z2
+      subgraph cluster2a {
+        graph [color=blue label=""]      
+        x21 ->x22
+      }
+    }
+    q0 -> x2;
+    z2 -> x1
+  }
+}
+
