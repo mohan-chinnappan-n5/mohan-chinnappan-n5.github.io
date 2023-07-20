@@ -71,7 +71,7 @@
 
 
     <div id='s1-md' class='md2' data-trim='true'>
-      <iframe allow="microphone;" width="1200" height="800" name="df"
+      <iframe id='askme' allow="microphone;" width="1200" height="800" name="df"
         src="https://console.dialogflow.com/api-client/demo/embedded/d6e07c45-1523-4102-bf80-8fea7caf3caa">
       </iframe>
 
@@ -113,6 +113,13 @@
     console.log(url);
     Split(["#left", "#right"], { sizes: [70, 30] })
 
+    /*
+    const iframe = document.getElementById('askme');
+    const iframeContent = iframe.contentWindow;
+    const iframeElement = iframeContent.document.getElementsByClassName('server-response');
+    console.log(iframeElement);
+    iframeElement[0].style.backgroundColor = 'lightblue';
+    */ 
   </script>
 
   <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script>
