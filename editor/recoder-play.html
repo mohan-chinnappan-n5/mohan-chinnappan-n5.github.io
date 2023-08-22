@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevTools Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chrome-remote-interface"></script>
+</head>
+<body>
+    <button onclick="captureScreenshot()">Capture Screenshot</button>
+
+    <script>
+        async function captureScreenshot() {
+            const client = await CDP();
+            const { DOM, Emulation, Page } = client;
+            await DOM.enable();
+            await Page.enable();
+
+            const { root: { nodeId } } = await DOM.getDocument();
+            const { contentSize } = await Page.getLayoutMetrics();
+            await Emulation.setDeviceMetricsOverride({
+                width: contentSize.width,
+                height: contentSize.height,
+                deviceScaleFactor: 1,
+                mobile: false
+            });
+            await Emulation.setVisibleSize({ width: contentSize.width, height: contentSize.height });
+            await Page.navigate({ url: 'https://www.salesforce.com' });
+            await Page.loadEventFired();
+
+            const screenshot = await Page.captureScreenshot();
+            const buffer = Buffer.from(screenshot.data, 'base64');
+
+            // You can save or display the screenshot as needed
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(new Blob([buffer], { type: 'image/png' }));
+            link.download = 'screenshot.png';
+            link.click();
+
+            client.close();
+        }
+    </script>
+</body>
+</html>

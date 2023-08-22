@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Tabs Example</title>
+    
+    <!-- Include Bootstrap CSS and JS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+    <ul class="nav nav-tabs" id="myTabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#tab1">Textarea</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tab2">List</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <!-- Tab 1: Textarea -->
+        <div id="tab1" class="tab-pane fade show active">
+            <div class="form-group mt-3">
+                <label for="textarea">Enter Text:</label>
+                <textarea class="form-control" id="textarea" rows="5"></textarea>
+            </div>
+        </div>
+
+        <!-- Tab 2: List -->
+        <div id="tab2" class="tab-pane fade">
+            <h3>List of Items</h3>
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+                <li>Item 5</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Activate Bootstrap Tabs -->
+<script>
+    $(document).ready(function(){
+        $('#myTabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    });
+</script>
+
+</body>
+</html>
+

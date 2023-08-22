@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pill-Style Items</title>
+    <style>
+        #inputContainer {
+            width: 300px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .item {
+            display: inline-block;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin: 5px;
+        }
+
+        .item button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            color: red;
+            margin-left: 5px;
+        }
+
+        .item button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="inputContainer">
+        <div>
+            <input type="text" id="itemInput" placeholder="Enter an item">
+            <button onclick="addItem()">Add</button>
+        </div>
+        <div id="itemList">
+            <!-- Item list will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Function to add a new item to the list
+        function addItem() {
+            const itemInput = document.getElementById('itemInput');
+            const itemList = document.getElementById('itemList');
+
+            // Get the item text from the input
+            const itemText = itemInput.value.trim();
+
+            // Check if the input is not empty
+            if (itemText !== '') {
+                // Create a new item element
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('item');
+
+                // Create a span for the item text
+                const itemTextSpan = document.createElement('span');
+                itemTextSpan.textContent = itemText;
+
+                // Create a button to delete the item
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = function () {
+                    // Remove the item when the delete button is clicked
+                    itemList.removeChild(itemElement);
+                };
+
+                // Append the text and delete button to the item element
+                itemElement.appendChild(itemTextSpan);
+                itemElement.appendChild(deleteButton);
+
+                // Append the item element to the list
+                itemList.appendChild(itemElement);
+
+                // Clear the input
+                itemInput.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
+
