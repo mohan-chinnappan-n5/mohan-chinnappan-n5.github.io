@@ -140,8 +140,8 @@ function handleFileDrop(e) {
       isFileLoaded = true;
       // Set Monaco Editor's language mode based on the inputExtension
       setEditorLanguage(inputExtension);
-      updateIframeContent();
       document.getElementById("downloadButton").disabled = false;
+      updateIframeContent();
     };
 
     reader.readAsText(file);
