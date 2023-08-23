@@ -2,7 +2,7 @@
 // mchinnappan
 //------------------------------------------------------------
 
-Split(["#menu", "#content"], { sizes: [20, 80] });
+Split(["#menu", "#content", "#htmlContent"], { sizes: [20, 50, 30] });
 let isFileLoaded = false; // Track whether a file is loaded
 let inputExtension = ""; // Store the input file's extension
 let originalFileName = ""; // Store the original uploaded file name
@@ -25,11 +25,71 @@ function setEditorLanguage(extension) {
 require.config({
   paths: { vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.27.0/min/vs" },
 });
+
+const initContent = `
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
+</head>
+
+<body class="container">
+  <h3>Hello Fruits!</h3>
+  <ul class="list-group">
+    <li class="list-group-item">Mango</li>
+    <li class='list-group-item'>Jackfruit</li>
+    <li class='list-group-item'>Peach</li>
+  </ul>
+
+  <h4>Choose</h4>
+  <select class='form-control'>
+    <option>Mango</option>
+    <option>Jackfruit</option>
+    <option>Peach</option>
+  </select>
+
+</html>
+
+
+`;
 require(["vs/editor/editor.main"], function () {
   editor = monaco.editor.create(document.getElementById("editor"), {
-    value: "",
-    language: "json",
+    value: initContent,
+    language: "html",
     theme: "vs-dark",
+  });
+
+  // Get the iframe element
+  var iframe = document.getElementById("output-iframe");
+
+  // Function to update the iframe content
+  function updateIframeContent() {
+    const contentType = editor.getModel().getModeId();
+
+    // Get the HTML content from the editor
+    var htmlContent = editor.getValue();
+
+    // Update the iframe content
+    iframe.contentWindow.document.open();
+    if (contentType !== 'html') iframe.contentWindow.document.write('<pre>' + htmlContent + '</pre>');
+    else iframe.contentWindow.document.write(htmlContent );
+    
+    iframe.contentWindow.document.close();
+  }
+
+  // Call the function to update the iframe content initially
+  updateIframeContent();
+
+  // Handle content change event
+  editor.onDidChangeModelContent(function () {
+    // Get the content type (language) of the editor's model
+    var contentType = editor.getModel().getModeId();
+
+    // Check if the content type is HTML
+    var isHtml = contentType === "html";
+
+    // Enable or disable the iframe based on the content type
+    iframe.style.display = isHtml ? "block" : "none";
+    updateIframeContent()
   });
 
   const jsonFileInput = document.getElementById("jsonFileInput");
@@ -80,6 +140,7 @@ function handleFileDrop(e) {
       isFileLoaded = true;
       // Set Monaco Editor's language mode based on the inputExtension
       setEditorLanguage(inputExtension);
+      updateIframeContent();
       document.getElementById("downloadButton").disabled = false;
     };
 
