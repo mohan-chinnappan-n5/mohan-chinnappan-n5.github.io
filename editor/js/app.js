@@ -1,13 +1,26 @@
-// simple editor
+// simple editor - kalam
 // mchinnappan
 //------------------------------------------------------------
+let editor;
 
-Split(["#menu", "#content", "#htmlContent"], { sizes: [20, 50, 30] });
+const selectionsAvailable = ['securityPredicate', 'leaflet'];
+
+async function fetchText(url) {
+  const response = await fetch(url);
+  const content = await response.text();
+  return content;
+}
+
+
+
+
+Split([ "#content", "#htmlContent"], { sizes: [60, 40] });
 let isFileLoaded = false; // Track whether a file is loaded
 let inputExtension = ""; // Store the input file's extension
 let originalFileName = ""; // Store the original uploaded file name
+const newTabBtn = document.getElementById('newTab');
 
-let editor;
+
 
 // Function to set Monaco Editor's language mode based on the file extension
 function setEditorLanguage(extension) {
@@ -35,15 +48,15 @@ const initContent = `
 <body class="container">
   <h3>Hello Fruits!</h3>
   <ul class="list-group">
+    <li class='list-group-item active'>Jackfruit</li>
     <li class="list-group-item">Mango</li>
-    <li class='list-group-item'>Jackfruit</li>
     <li class='list-group-item'>Peach</li>
   </ul>
 
   <h4>Choose</h4>
   <select class='form-control'>
-    <option>Mango</option>
     <option>Jackfruit</option>
+    <option>Mango</option>
     <option>Peach</option>
   </select>
 
@@ -188,3 +201,68 @@ function downloadFile() {
 document
   .getElementById("downloadButton")
   .addEventListener("click", downloadFile);
+
+
+  newTabBtn.addEventListener('click', event => {
+    const newWindow = window.open("", "_blank");
+    newWindow.document.write(editor.getValue());
+    newWindow.document.close();
+
+});
+
+let typeSelected = "package";
+
+const acConfigMtype = {
+  placeHolder: "Search for Sample Docs...",
+  selector: "#autoCompleteMtype",
+  data: {
+     src: selectionsAvailable
+    // src:XMLTypes.getSupported(),
+  },
+  resultItem: {
+    highlight: true,
+  },
+
+  resultsList: {
+    element: (list, data) => {
+      const info = document.createElement("p");
+      if (data.results.length) {
+        info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
+      } else {
+        info.innerHTML = `Found <strong>${data.matches.length}</strong> matching results for <strong>"${data.query}"</strong>`;
+      }
+      list.prepend(info);
+    },
+
+    noResults: true,
+    maxResults: 15,
+    tabSelect: true,
+  },
+
+  events: {
+    input: {
+      selection: async (event) => {
+        const selection = event.detail.selection.value;
+        autoCompleteJSMtype.input.value = selection;
+        await loadData(selection);
+
+
+      },
+    },
+  },
+};
+const autoCompleteJSMtype = new autoComplete(acConfigMtype);
+
+async function loadData(selection) {
+  const docUrl =
+  `https://raw.githubusercontent.com/mohan-chinnappan-n/xml-xslt/main/slides/${selection}.md.html`;
+  console.log(docUrl);
+
+  const docData = await fetchText(docUrl);
+  editor.setValue( docData);
+
+}
+
+
+
+
