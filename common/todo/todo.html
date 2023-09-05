@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple TODO app</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+
+
+
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+
+    <style>
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
+        } 
+        #todoList {
+            width: 300px;
+            margin: 0 auto;
+        }
+        #taskInput {
+            width: 100%;
+        }
+        .delete-button {
+            padding: 5px 10px; /* Add padding to the Delete button */
+            margin: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">&nbsp; Simple TODO app</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div id='todoList' class="split split-horizontal" >
+        <input class='form-control' type="text" id="taskInput" placeholder="Add a new task">
+        <button class="btn btn-primary" onclick="addTask()">Add</button>
+    </div>
+     <div  class="split split-horizontal" id="history">
+        <ul class="form-control" id="tasks"></ul>
+        <button class="btn btn-danger" id="clearLocalStorageButton" onclick="clearLocalStorage()">Clear Local Storage</button>
+
+    </div>
+
+
+    <script>
+        Split(["#todoList", "#history"], { sizes: [60, 40] });
+        const taskInput = document.getElementById("taskInput");
+        const tasksList = document.getElementById("tasks");
+        const clearLocalStorageButton = document.getElementById("clearLocalStorageButton");
+
+
+        // Load tasks from localStorage on page load
+        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+        function addTask() {
+            const taskText = taskInput.value.trim();
+            if (taskText === "") return;
+
+            tasks.push({ text: taskText, completed: false });
+            updateTasks();
+            taskInput.value = "";
+
+            // Save tasks to localStorage
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        function updateTasks() {
+            tasksList.innerHTML = "";
+            tasks.forEach((task, index) => {
+                const taskItem = document.createElement("li");
+                const taskCheckbox = document.createElement("input");
+                taskCheckbox.style.padding = '10px';
+                taskCheckbox.style.margin= '10px';
+                taskCheckbox.type = "checkbox";
+                taskCheckbox.checked = task.completed;
+                taskCheckbox.addEventListener("change", () => toggleTaskCompleted(index));
+                const taskText = document.createElement("span");
+                taskText.textContent = task.text;
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.className = "btn btn-info delete-button"; // Add Bootstrap classes
+
+                deleteButton.addEventListener("click", () => deleteTask(index));
+
+                taskItem.appendChild(taskCheckbox);
+                taskItem.appendChild(taskText);
+                taskItem.appendChild(deleteButton);
+                tasksList.appendChild(taskItem);
+                clearLocalStorageButton.disabled = false;
+            });
+        }
+
+        function toggleTaskCompleted(index) {
+            tasks[index].completed = !tasks[index].completed;
+            updateTasks();
+
+            // Save tasks to localStorage
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            updateTasks();
+
+            // Save tasks to localStorage
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+
+        function clearLocalStorage() {
+            // Clear tasks from localStorage and reset tasks array
+            localStorage.removeItem("tasks");
+            tasks = [];
+            updateTasks();
+
+            // Disable the "Clear Local Storage" button
+            clearLocalStorageButton.disabled = true;
+        }
+
+        // Enable the "Clear Local Storage" button if there are items in local storage
+        if (tasks.length > 0) {
+            clearLocalStorageButton.disabled = false;
+        }
+
+        updateTasks();
+
+    </script>
+</body>
+</html>
+
