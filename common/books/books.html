@@ -2,14 +2,13 @@
 <html>
 
 <head>
-    <title>Simple Accounting System</title>
+    <title>Simple Accounting App - Kalam</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
-
-
-
     <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+    <script src="https://mohan-chinnappan-n5.github.io/pkg/js/lib/autocomplete.min.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/pkg/css/lib/autocomplete.css">
 
     <style>
         body {
@@ -23,7 +22,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">&nbsp; Simple Accounting System</a>
+        <a class="navbar-brand" href="#">&nbsp; Simple Accounting App - Kalam</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -47,7 +46,7 @@
 
         <input type="radio" name="transactionType" value="debit" id="debitRadio"> Debit
         <input type="radio" name="transactionType" checked value="credit" id="creditRadio"> Credit
-        <hr>
+        <input type="text" autocomplete="off" id="autoCompleteMtype">
         <label class="form-control"><b>Description:</b></label>
         <input class="form-control" type="text" id="description">
         <label class="form-control"><b>Amount: $</b></label>
@@ -97,8 +96,10 @@
             document.getElementById("balance").textContent = `Balance: $${balance.toFixed(2)}`;
         }
 
+
         function recordTransaction() {
             const description = document.getElementById("description").value;
+
             const amount = parseFloat(document.getElementById("amount").value);
             const transactionType = document.querySelector('input[name="transactionType"]:checked');
 
@@ -162,7 +163,7 @@
                 cell2.textContent = `$${Math.abs(transaction.amount).toFixed(2)}`;
                 cell3.textContent = `$${transaction.balance.toFixed(2)}`;
                 cell4.textContent = transaction.type === "debit" ? "Debit" : "Credit";
-                cell5.innerHTML = `<button class='btn btn-warning' onclick="editTransaction(${index})">Edit</button>`;
+                cell5.innerHTML = `<button disabled class='btn btn-warning' onclick="editTransaction(${index})">Edit</button>`;
             });
         }
 
@@ -184,6 +185,52 @@
             document.getElementById("balance").textContent = `Balance: $0.00`;
             updateTransactionTable();
         }
+
+        // autocomplete
+
+        const selectionsAvailable = ['Salary', 'Garden Maintenance', 'Oil Bill', 'Gas Bill', 'Grocery', 'Internet Bill', 'Cellphone Bill', 'Water Bill', 'Shopping']
+        const acConfigMtype = {
+            placeHolder: "Search for Sample Transactions...",
+            selector: "#autoCompleteMtype",
+            data: {
+                src: selectionsAvailable
+                // src:XMLTypes.getSupported(),
+            },
+            resultItem: {
+                highlight: true,
+            },
+
+            resultsList: {
+                element: (list, data) => {
+                    const info = document.createElement("p");
+                    if (data.results.length) {
+                        info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
+                    } else {
+                        info.innerHTML = `Found <strong>${data.matches.length}</strong> matching results for <strong>"${data.query}"</strong>`;
+                    }
+                    list.prepend(info);
+                },
+
+                noResults: true,
+                maxResults: 15,
+                tabSelect: true,
+            },
+
+            events: {
+                input: {
+                    selection: async (event) => {
+                        const selection = event.detail.selection.value;
+                        autoCompleteJSMtype.input.value = selection;
+                        document.getElementById("description").value = selection;
+
+
+                    },
+                },
+            },
+        };
+        const autoCompleteJSMtype = new autoComplete(acConfigMtype);
+
+
     </script>
 </body>
 

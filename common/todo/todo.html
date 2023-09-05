@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Simple TODO app</title>
+    <title>Simple TODO app - Kalam</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
-
-
-
     <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+    <script src="https://mohan-chinnappan-n5.github.io/pkg/js/lib/autocomplete.min.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/pkg/css/lib/autocomplete.css">
+
 
     <style>
         body {
             min-height: 75rem;
             padding-top: 4.5rem;
-        } 
+        }
+
         #todoList {
             width: 300px;
             margin: 0 auto;
         }
+
         #taskInput {
             width: 100%;
         }
+
         .delete-button {
-            padding: 5px 10px; /* Add padding to the Delete button */
+            padding: 5px 10px;
+            /* Add padding to the Delete button */
             margin: 10px;
+            float: right;
         }
     </style>
 
@@ -33,7 +39,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">&nbsp; Simple TODO app</a>
+        <a class="navbar-brand" href="#">&nbsp; Simple TODO app - Kalam</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -46,13 +52,21 @@
             </ul>
         </div>
     </nav>
-    <div id='todoList' class="split split-horizontal" >
+
+
+    <div id='todoList' class="split split-horizontal">
+        <input type="text" autocomplete="off" id="autoCompleteMtype">
+
         <input class='form-control' type="text" id="taskInput" placeholder="Add a new task">
         <button class="btn btn-primary" onclick="addTask()">Add</button>
     </div>
-     <div  class="split split-horizontal" id="history">
-        <ul class="form-control" id="tasks"></ul>
-        <button class="btn btn-danger" id="clearLocalStorageButton" onclick="clearLocalStorage()">Clear Local Storage</button>
+    <div class="split split-horizontal" id="history">
+        <ul class="list-group" id="tasks"></ul>
+        <button class="btn btn-danger" id="clearLocalStorageButton" onclick="clearLocalStorage()">Clear Local
+            Storage</button>
+        <button id="exportCSVButton" class="btn btn-success" onclick="exportToCSV()" class="btn btn-primary">Export to
+            CSV</button>
+
 
     </div>
 
@@ -62,6 +76,8 @@
         const taskInput = document.getElementById("taskInput");
         const tasksList = document.getElementById("tasks");
         const clearLocalStorageButton = document.getElementById("clearLocalStorageButton");
+        const exportCSVButton = document.getElementById("exportCSVButton");
+
 
 
         // Load tasks from localStorage on page load
@@ -77,15 +93,19 @@
 
             // Save tasks to localStorage
             localStorage.setItem("tasks", JSON.stringify(tasks));
+            // Enable the "Clear Local Storage" and "Export to CSV" buttons
+            clearLocalStorageButton.disabled = false;
+            exportCSVButton.disabled = false;
         }
 
         function updateTasks() {
             tasksList.innerHTML = "";
             tasks.forEach((task, index) => {
                 const taskItem = document.createElement("li");
+                taskItem.className = 'list-group-item';
                 const taskCheckbox = document.createElement("input");
                 taskCheckbox.style.padding = '10px';
-                taskCheckbox.style.margin= '10px';
+                taskCheckbox.style.margin = '10px';
                 taskCheckbox.type = "checkbox";
                 taskCheckbox.checked = task.completed;
                 taskCheckbox.addEventListener("change", () => toggleTaskCompleted(index));
@@ -93,10 +113,10 @@
                 taskText.textContent = task.text;
                 const deleteButton = document.createElement("button");
                 deleteButton.textContent = "Delete";
-                deleteButton.className = "btn btn-info delete-button"; // Add Bootstrap classes
+                deleteButton.className = "btn btn-warning delete-button"; // Add Bootstrap classes
 
                 deleteButton.addEventListener("click", () => deleteTask(index));
-
+                // add elements to list item: taskItem
                 taskItem.appendChild(taskCheckbox);
                 taskItem.appendChild(taskText);
                 taskItem.appendChild(deleteButton);
@@ -128,18 +148,73 @@
             tasks = [];
             updateTasks();
 
-            // Disable the "Clear Local Storage" button
+            // Disable the "Clear Local Storage" and "Export to CSV" buttons
             clearLocalStorageButton.disabled = true;
+            exportCSVButton.disabled = true;
         }
-
-        // Enable the "Clear Local Storage" button if there are items in local storage
+        function exportToCSV() {
+            const csvContent = "Task,Completed\n" + tasks.map(task => `${task.text},${task.completed ? "Yes" : "No"}`).join("\n");
+            const blob = new Blob([csvContent], { type: "text/csv" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "todo_list.csv";
+            a.click();
+        }
+        // Enable the "Clear Local Storage" and "Export to CSV" buttons if there are items in local storage
         if (tasks.length > 0) {
             clearLocalStorageButton.disabled = false;
+            exportCSVButton.disabled = false;
         }
 
         updateTasks();
 
+        // autocomplete
+
+        const selectionsAvailable = ['Breakfast', 'Lunch', 'Dinner', 'Meeting', 'Development', 'Exercise', 'Walking', 'Running', 'Spend time with family']
+        const acConfigMtype = {
+            placeHolder: "Search for Sample Tasks...",
+            selector: "#autoCompleteMtype",
+            data: {
+                src: selectionsAvailable
+                // src:XMLTypes.getSupported(),
+            },
+            resultItem: {
+                highlight: true,
+            },
+
+            resultsList: {
+                element: (list, data) => {
+                    const info = document.createElement("p");
+                    if (data.results.length) {
+                        info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
+                    } else {
+                        info.innerHTML = `Found <strong>${data.matches.length}</strong> matching results for <strong>"${data.query}"</strong>`;
+                    }
+                    list.prepend(info);
+                },
+
+                noResults: true,
+                maxResults: 15,
+                tabSelect: true,
+            },
+
+            events: {
+                input: {
+                    selection: async (event) => {
+                        const selection = event.detail.selection.value;
+                        autoCompleteJSMtype.input.value = selection;
+                        taskInput.value = selection;
+
+
+                    },
+                },
+            },
+        };
+        const autoCompleteJSMtype = new autoComplete(acConfigMtype);
+
+
     </script>
 </body>
-</html>
 
+</html>
