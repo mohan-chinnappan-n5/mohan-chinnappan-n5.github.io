@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Entity Recognition with spaCy</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Entity Recognition with spaCy</h1>
+    <textarea id="textInput" cols="100" placeholder="Enter a sentence..."> dogs play in the playground </textarea>
+    <hr>
+    <button onclick="recognizeEntities()">Recognize Entities</button>
+    <div id="result"></div>
+
+    <script>
+        function recognizeEntities() {
+            const inputText = document.getElementById('textInput').value;
+            console.log(inputText)
+
+            // Replace 'http://localhost:8000' with the actual URL of your spaCy REST API server
+            const spaCyApiUrl = 'http://localhost:8000';
+
+            $.ajax({
+                type: 'POST',
+                url: `${spaCyApiUrl}/entities`,
+                contentType: 'application/json',
+                data: JSON.stringify({ text: inputText }),
+
+                success: function(response) {
+                    console.log(response);
+                    displayEntities(response.entities);
+                }
+            });
+        }
+
+        function displayEntities(entities) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<h3>Recognized Entities:</h3>';
+            if (entities.length === 0) {
+                resultDiv.innerHTML += '<p>No entities recognized.</p>';
+            } else {
+                entities.forEach(entity => {
+                    resultDiv.innerHTML += `<p><strong>Text:</strong> ${entity.text}, <strong>Type:</strong> ${entity.type}</p>`;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+

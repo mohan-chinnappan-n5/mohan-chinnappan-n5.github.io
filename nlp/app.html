@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Entity Recognition</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Entity Recognition</h1>
+    <textarea id="textInput" placeholder="Enter a sentence..."></textarea>
+    <button onclick="recognizeEntities()">Recognize Entities</button>
+    <div id="result"></div>
+
+    <script>
+        function recognizeEntities() {
+            const inputText = document.getElementById('textInput').value;
+            const apiKey = 'YOUR_GOOGLE_CLOUD_API_KEY';
+
+            $.ajax({
+                type: 'POST',
+                url: `https://language.googleapis.com/v1/documents:analyzeEntities?key=${apiKey}`,
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    document: {
+                        type: 'PLAIN_TEXT',
+                        content: inputText
+                    },
+                    encodingType: 'UTF8'
+                }),
+                success: function(response) {
+                    displayEntities(response.entities);
+                }
+            });
+        }
+
+        function displayEntities(entities) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<h3>Recognized Entities:</h3>';
+            if (entities.length === 0) {
+                resultDiv.innerHTML += '<p>No entities recognized.</p>';
+            } else {
+                entities.forEach(entity => {
+                    resultDiv.innerHTML += `<p><strong>Name:</strong> ${entity.name}, <strong>Type:</strong> ${entity.type}</p>`;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
