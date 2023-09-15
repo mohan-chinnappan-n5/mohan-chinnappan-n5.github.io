@@ -4,11 +4,11 @@
 const title = 'Diagram Editor Playground - mermaid based';
 const version =  'v1.0';
 
-getEle = id => document.getElementById(id);
+const getEle = id => document.getElementById(id);
 getEle('title').innerHTML = `${title} <small>${version}</small>`;
 
 // init the editor
-initEditor = (id, value, language, theme) => {
+const initEditor = (id, value, language, theme) => {
     const editorEle = getEle(id);
     const editor = monaco.editor.create(editorEle, { value, language, theme });
     return editor;
@@ -302,7 +302,7 @@ const contentMD =
 
 
 // param parsing
-parseParams = () => {
+const parseParams = () => {
     const query = location.search.substr(1);
     let qResult = {};
     query.split("&").forEach(function(part) {
@@ -400,10 +400,9 @@ const saveBtn = document.getElementById("saveBtn");
 
 
 const draw = (graphDefinition, ele, className) => {
-  const graph = mermaid.mermaidAPI.render(
-    className,
-    graphDefinition,
-    (svgCode, bindFunctions) => {
+  //console.log(graphDefinition);
+  const graph = mermaid.render( className, graphDefinition, (svgCode, bindFunctions) => {
+      // console.log(svgCode);
       ele.innerHTML = svgCode;
     }
   );
