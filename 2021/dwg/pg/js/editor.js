@@ -5,6 +5,13 @@ const title = 'Diagram Editor Playground - mermaid based';
 const version =  'v1.0';
 
 const getEle = id => document.getElementById(id);
+
+const btnLoad = getEle('load');
+btnLoad.addEventListener('click', event => {
+  editor.setValue(editorc.value);
+})
+
+
 getEle('title').innerHTML = `${title} <small>${version}</small>`;
 
 // init the editor
@@ -461,6 +468,9 @@ document.querySelectorAll('.examples').forEach(item => {
   savefilenameEle.value = `${exampleDwg}.dwg`;
   });
 });
+
+
+
   
 
 // on ready

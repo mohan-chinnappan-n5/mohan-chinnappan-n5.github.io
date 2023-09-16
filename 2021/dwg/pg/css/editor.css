@@ -9,6 +9,13 @@ iframe {
 }
 #editor {
     border-radius: 10px;
-    height: 600px;
+    height: 500px;
     width: 800px;
 }
+
+textarea {
+    font-family: Monaco, Arial;
+    font-size: 13px;
+    background-color: black;
+    color: azure;
+  }

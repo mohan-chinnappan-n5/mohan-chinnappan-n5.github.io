@@ -3,12 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Diagram Editor Playground</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="https://mohan-chinnappan-n2.github.io/favicon.ico"
-    />
-
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -34,6 +29,18 @@
     />
 
    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/9.4.3/mermaid.js"></script>
+
+   <script src="https://mohan-chinnappan-n5.github.io/pkg/js/lib/autocomplete.min.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/pkg/css/lib/autocomplete.css">
+
+<style>
+  textarea {
+    font-family: Monaco, Arial;
+    font-size: 13px;
+    background-color: black;
+    color: azure;
+  } 
+</style>
 
   </head>
   <body>
@@ -163,7 +170,15 @@
     <div class="row">
       <div class="col-lg">
         <div class="split split-horizontal" id="code">
+
           <div id="editor"></div>
+          <div class="col"><input type="text" autocomplete="off" id="autoCompleteMtype">
+          <button class="btn btn-primary" disabled id="load">Load</button>
+          <button class="btn btn-danger" id="run">Draw</button>
+
+
+          </div>
+          <textarea name="editorc" id="editorc" cols="100" readonly rows="10"></textarea>
         </div>
         <div class="split split-horizontal" id="content">
           <div class="graphDiv"></div>
@@ -177,7 +192,6 @@
 
     <div class="row" style="background-color: #99cccc">
       <div class="col-lg">
-        <button class="btn btn-danger" id="run">Draw</button>
         <button class="btn btn-warning" style="display: none" id="clean">
           Clean
         </button>
@@ -206,8 +220,79 @@
     <script src="package/dev/vs/loader.js"></script>
     <script src="package/dev/vs/editor/editor.main.nls.js"></script>
     <script src="package/dev/vs/editor/editor.main.js"></script>
+    <script type='module' src="js/editor.js?v=2"></script>
 
-    <script type='module' src="js/editor.js"></script>
+
+    <script type="module">
+
+      import { XMLTypes } from "https://mohan-chinnappan-n5.github.io/xml/js/xmlTypes.js";
+      async function fetchText(url) {
+        const response = await fetch(url);
+        const content = await response.text();
+        return content;
+    }
+
+   
+      let typeSelected = "package";
+      const editorc = document.getElementById('editorc');
+
+      const repoUrl = 'https://raw.githubusercontent.com/mohan-chinnappan-n/project-diagrams';
+      const listDwg = await fetchText(`${repoUrl}/main/list.txt`);
+      const selectionMap = listDwg.trim().split('\n');
+
+      async function loadData(selection) {
+        const packageUrl = `${repoUrl}/main/${selection}`;
+        const packageData = await fetchText(packageUrl);
+        // console.log(packageData);
+        document.getElementById('load').disabled = false;
+        editorc.value = packageData;
+     
+    }
+
+
+      const acConfigMtype = {
+        placeHolder: "Search for Diagram Type...",
+        selector: "#autoCompleteMtype",
+        data: {
+          src: selectionMap 
+        },
+        resultItem: {
+          highlight: true,
+        },
+      
+        resultsList: {  
+          element: (list, data) => {
+            const info = document.createElement("p");
+            if (data.results.length) {
+              info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
+            } else {
+              info.innerHTML = `Found <strong>${data.matches.length}</strong> matching results for <strong>"${data.query}"</strong>`;
+            }
+            list.prepend(info);
+          },
+      
+          noResults: true,
+          maxResults: 15,
+          tabSelect: true,
+        },
+      
+        events: {
+          input: {
+            selection: async (event) => {
+              const selection = event.detail.selection.value;
+              autoCompleteJSMtype.input.value = selection;
+              typeSelected = selection;
+              await loadData(typeSelected);
+      
+            },
+          },
+        },
+      };
+      const autoCompleteJSMtype = new autoComplete(acConfigMtype);
+
+     
+    </script>
+
     <script src="js/utils.js"></script>
   </body>
 </html>
