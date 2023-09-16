@@ -324,10 +324,32 @@ const params = parseParams();
 let lang = params['l'] || 'html';
 let theme = params['t'] || 'vs-dark';
 
+async function fetchText(url) {
+  const response = await fetch(url);
+  const content = await response.text();
+  return content;
+}
+const repoUrl = 'https://raw.githubusercontent.com/mohan-chinnappan-n/project-diagrams';
+
+async function loadData(selection) {
+  const packageUrl = `${repoUrl}/main/${selection}`;
+  const packageData = await fetchText(packageUrl);
+  // console.log(packageData);
+  document.getElementById('load').disabled = false;
+  editorc.value = packageData;
+
+}
+
 let dwgData =  contentHtml;
 if (params['d']) {
   dwgData = atob(params['d']);
+} else if (params['f']) {
+  const file = params['f']; 
+  await loadData(file);
+  console.log(dwgData);
 }
+
+
 
  
 
@@ -368,6 +390,8 @@ switch (lang) {
 const editor = initEditor('editor', content, lang, theme );
 const getEditorContent = (editor) => editor.getValue();
 let run = false;
+getEle('load').click();
+
 
 
 // iframe update
