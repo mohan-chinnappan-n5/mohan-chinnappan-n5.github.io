@@ -429,7 +429,6 @@ const graphDivClassName = "graphDiv";
 const graphDivEle = document.getElementsByClassName(graphDivClassName)[0];
 const saveBtn = document.getElementById("saveBtn");
 
-
 const draw = (graphDefinition, ele, className) => {
   //console.log(graphDefinition);
   const graph = mermaid.render( className, graphDefinition, (svgCode, bindFunctions) => {

@@ -11,7 +11,8 @@ async function fetchText(url) {
   return content;
 }
 
-
+// Get the query parameters from the URL
+const urlParams = new URLSearchParams(window.location.search);
 
 
 Split([ "#content", "#htmlContent"], { sizes: [60, 40] });
@@ -39,7 +40,7 @@ require.config({
   paths: { vs: "https://cdn.jsdelivr.net/npm/monaco-editor@0.27.0/min/vs" },
 });
 
-const initContent = `
+let initContent = `
 <html>
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
@@ -64,6 +65,32 @@ const initContent = `
 
 
 `;
+
+ if (urlParams.has('c')) {
+  await navigator.clipboard.readText().then((clipText) => {
+    initContent = clipText;
+  });
+}
+
+// Get the iframe element
+var iframe = document.getElementById("output-iframe");
+
+const converter = new showdown.Converter({tables: true});
+ // Function to update the iframe content
+ function updateIframeContent(editor) {
+  const contentType = editor.getModel().getModeId();
+
+  // Get the HTML content from the editor
+  var htmlContent = editor.getValue();
+
+  // Update the iframe content
+  iframe.contentWindow.document.open();
+  if (contentType !== 'html') iframe.contentWindow.document.write('<pre>' + htmlContent + '</pre>');
+  else iframe.contentWindow.document.write(htmlContent );
+  
+  iframe.contentWindow.document.close();
+}
+
 require(["vs/editor/editor.main"], function () {
   editor = monaco.editor.create(document.getElementById("editor"), {
     value: initContent,
@@ -71,26 +98,11 @@ require(["vs/editor/editor.main"], function () {
     theme: "vs-dark",
   });
 
-  // Get the iframe element
-  var iframe = document.getElementById("output-iframe");
 
-  // Function to update the iframe content
-  function updateIframeContent() {
-    const contentType = editor.getModel().getModeId();
-
-    // Get the HTML content from the editor
-    var htmlContent = editor.getValue();
-
-    // Update the iframe content
-    iframe.contentWindow.document.open();
-    if (contentType !== 'html') iframe.contentWindow.document.write('<pre>' + htmlContent + '</pre>');
-    else iframe.contentWindow.document.write(htmlContent );
-    
-    iframe.contentWindow.document.close();
-  }
+ 
 
   // Call the function to update the iframe content initially
-  updateIframeContent();
+  updateIframeContent(editor);
 
   // Handle content change event
   editor.onDidChangeModelContent(function () {
@@ -102,8 +114,9 @@ require(["vs/editor/editor.main"], function () {
 
     // Enable or disable the iframe based on the content type
     iframe.style.display = isHtml ? "block" : "none";
-    updateIframeContent()
+    updateIframeContent(editor);
   });
+
 
   const jsonFileInput = document.getElementById("jsonFileInput");
   jsonFileInput.addEventListener("change", function (event) {
@@ -113,13 +126,20 @@ require(["vs/editor/editor.main"], function () {
     originalFileName = fileName;
     // Extract the file extension from the input file
     inputExtension = fileName.split(".").pop().toLowerCase();
+   
+
     // Set Monaco Editor's language mode based on the inputExtension
     setEditorLanguage(inputExtension);
     if (file) {
       var reader = new FileReader();
       reader.onload = function (e) {
         var content = e.target.result;
-        editor.setValue(content);
+        if (inputExtension === 'md') {
+          // convert md into html
+          editor.setValue(converter.makeHtml(content));
+        } else { 
+           editor.setValue(content);
+        }
       };
       reader.readAsText(file);
     }
@@ -140,6 +160,7 @@ function handleFileDrop(e) {
 
     // Extract the file extension from the input file
     inputExtension = fileName.split(".").pop().toLowerCase();
+    
 
     // Check if the dropped file is a text file (you can adjust the condition)
     const reader = new FileReader();
@@ -148,13 +169,16 @@ function handleFileDrop(e) {
       const fileContent = event.target.result;
 
       // Set the file content in Monaco Editor
-      editor.setValue(fileContent);
+      if (inputExtension === 'md') {
+          editor.setValue(converter.makeHtml(fileContent));
+      }
+      else { editor.setValue(fileContent);}
       // Update the flag and enable the download button
       isFileLoaded = true;
       // Set Monaco Editor's language mode based on the inputExtension
       setEditorLanguage(inputExtension);
       document.getElementById("downloadButton").disabled = false;
-      updateIframeContent();
+      updateIframeContent(editor);
     };
 
     reader.readAsText(file);
