@@ -61,7 +61,6 @@ getEle('drawWC').style.display = 'block';
 if (urlParams.has('c')) {
   await navigator.clipboard.readText().then((clipText) => {
     text = clipText;
-    editor.setValue(text);
   });
 }
 if (urlParams.has('d')) {
