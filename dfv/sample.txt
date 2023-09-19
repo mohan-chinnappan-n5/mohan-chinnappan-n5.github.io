@@ -1,0 +1,8 @@
+People who are really serious about software should make their own hardware
+- Alan Kay
+
+All truely great things are simple
+- Albert Einstein
+
+Give new powerful GPUs, I will build the best LLM possible
+- Mohan Chinnappan

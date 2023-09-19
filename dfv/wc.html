@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>SF-LAND - Data Viz</title>
+  <title>SF-LAND - Word Cloud</title>
   <link rel="icon" type="image/x-icon" href="img/mc_favIcon.ico"/>
 
   
@@ -16,22 +16,19 @@
   integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
   crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.css" />
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-  <script type="text/javascript"
-    src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+ <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+  <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+  <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/monaco-editor@0.27.0/min/vs/editor/editor.main.min.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.6.1/d3.min.js" integrity="sha512-MefNfAGJ/pEy89xLOFs3V6pYPs6AmUhXJrRlydI/9wZuGrqxmrdQ80zKHUcyadAcpH67teDZcBeS6oMJLPtTqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 <body class='container2'>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">&nbsp; SF-LAND: Data Viz</a>
+    <a class="navbar-brand" href="#">&nbsp; SF-LAND: Word Cloud</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -82,32 +79,17 @@
       </ul>
     </div>
   </nav>
-  <div class='container'>
-    <hr />
-    <table id="dfv" class="display">
-      <thead>
-        <tr id="header">
-        </tr>
-      </thead>
-      <tbody id="tbody">
-        
-      </tbody>
-    </table>
-  
 
-    <div class="row" style="background-color:white; padding-left:10px; padding-top:4px; display:none;">
-      <div class="col-sm">
-          <input class="btn btn-primary" type="file" id="inputfile" accept=".json, .psv, .csv, .tsv" />
-      </div>
-  </div>
-    <div id="vizBar"></div>
-    <hr>
+   <div class="split split-horizontal" id="content">
+    <div id="editor" style="height: 800px;width:800px;border-radius:10px;"></div>
     <button class="btn btn-info" style="display: none;" id="drawWC">Word Cloud</button>
-    <hr>
-    <div id="wc">
+  </div>
 
-    </div>
-    <script src="./app.js?v=18"></script>
+  <div class="split split-horizontal" id="htmlContent">
+    <div id="wc"> </div>
+     <!-- Load Monaco Editor's scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.27.0/min/vs/loader.js"></script>
+    <script type='module' src="./wc.js"></script>
   </div>
 </body>
 </html>
