@@ -1,0 +1,16 @@
+{
+    "Track-1": {
+        "Platform": 10,
+        "Custom": 8
+    },
+
+   "Track-2": {
+        "Platform": 7,
+        "Custom":2 
+    },
+   "Track-3": {
+        "Platform": 2,
+        "Custom":2 
+    }
+}
+
