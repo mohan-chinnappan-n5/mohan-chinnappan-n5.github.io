@@ -196,11 +196,6 @@ dropArea.addEventListener("dragenter", preventDefault, false);
 dropArea.addEventListener("dragover", preventDefault, false);
 dropArea.addEventListener("drop", handleFileDrop, false);
 
-// Add a click event listener to the download button (as shown in the previous answer)
-document
-  .getElementById("downloadButton")
-  .addEventListener("click", downloadFile);
-
 // Function to download the file
 function downloadFile() {
   const fileContent = editor.getValue(); // Get the content from Monaco Editor

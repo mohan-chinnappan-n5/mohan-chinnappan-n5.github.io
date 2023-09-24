@@ -3,6 +3,7 @@
 // mohan chinnappan
 //----------------------------
 Split([ "#content", "#htmlContent"], { sizes: [50, 50] });
+let originalFileName = ""; // Store the original uploaded file name
 
 let initData = `
 # Animals
@@ -60,11 +61,88 @@ require(["vs/editor/editor.main"], function () {
     updatePreview();
   });
 
+
+  const jsonFileInput = document.getElementById("jsonFileInput");
+  jsonFileInput.addEventListener("change", function (event) {
+    var file = event.target.files[0];
+    originalFileName = file.name;
+
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var content = e.target.result;
+           editor.setValue(content);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+
   // Initialize the preview
   updatePreview();
 
 });
 
+// Function to handle file drop
+function handleFileDrop(e) {
+  e.preventDefault();
+
+  const files = e.dataTransfer.files;
+
+  if (files.length > 0) {
+    const file = files[0];
+    // Store the original uploaded file name
+    originalFileName = file.name;
+
+    // Check if the dropped file is a text file (you can adjust the condition)
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      const fileContent = event.target.result;
+       editor.setValue(fileContent);
+    };
+
+    reader.readAsText(file);
+  }
+}
+
+// Function to prevent the default behavior of drag-and-drop
+function preventDefault(e) {
+  e.preventDefault();
+}
+
+// Add event listeners to the drop area
+const dropArea = document.getElementById("dropArea");
+dropArea.addEventListener("dragenter", preventDefault, false);
+dropArea.addEventListener("dragover", preventDefault, false);
+dropArea.addEventListener("drop", handleFileDrop, false);
+
+
+
+// Function to download the file
+function downloadFile() {
+  const fileContent = editor.getValue(); // Get the content from Monaco Editor
+  const blob = new Blob([fileContent], { type: "text/plain" }); // Create a Blob
+
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+
+  // Set the file name with the input extension
+  // a.download = `downloaded_file.${inputExtension}`;
+  // Set the file name with the original uploaded file name and extension
+  a.download = originalFileName;
+  a.style.display = "none";
+
+  document.body.appendChild(a);
+  a.click();
+
+  document.body.removeChild(a);
+}
+
+// Add a click event listener to the download button
+document
+  .getElementById("downloadButton")
+  .addEventListener("click", downloadFile);
 
 //------ auto complete ---
 async function fetchText(url) {
@@ -78,7 +156,6 @@ let typeSelected = "package";
 
 const repoUrl = 'https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs';
 const listDwg = await fetchText(`${repoUrl}/main/sf/list.txt`);
-console.log(listDwg);
 const selectionMap = listDwg.trim().split('\n');
 
 async function loadData(selection) {
@@ -90,7 +167,7 @@ async function loadData(selection) {
 
 
 const acConfigMtype = {
-  placeHolder: "Search for chart data...",
+  placeHolder: "Search for markdown data...",
   selector: "#autoCompleteMtype",
   data: {
       src: selectionMap
