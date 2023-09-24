@@ -3,17 +3,13 @@
 
 const getEle = (id) => document.getElementById(id);
 
+
+
 const specEle = getEle("spec");
 const renderBtn = getEle("render");
 const loadBtn = getEle("load");
 
-// init the editor
-initEditor = (id, value, language, theme) => {
-  const editorEle = getEle(id);
-  const editor = monaco.editor.create(editorEle, { value, language, theme });
-  return editor;
-};
-const content = `
+let content = `
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "description": "A simple bar chart with embedded data.",
@@ -31,6 +27,24 @@ const content = `
     }
 }
   `;
+
+
+// Get the query parameters from the URL
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('c')) {
+  await navigator.clipboard.readText().then((clipText) => {
+    content = clipText;
+  });
+}
+
+
+// init the editor
+const initEditor = (id, value, language, theme) => {
+  const editorEle = getEle(id);
+  const editor = monaco.editor.create(editorEle, { value, language, theme });
+  return editor;
+};
+
 const lang = "json";
 const theme = "vs-dark";
 
@@ -148,5 +162,68 @@ const saveSourceToFile = (editor, saveFileNameEle) => {
 saveEle.addEventListener("click", (e) => {
     saveSourceToFile(editor, saveFileNameEle);
 });
+//------- auto complete stuff
 
+//------ auto complete ---
+async function fetchText(url) {
+  const response = await fetch(url);
+  const content = await response.text();
+  return content;
+}
+
+
+let typeSelected = "package";
+
+const repoUrl = 'https://raw.githubusercontent.com/mohan-chinnappan-n/project-diagrams';
+const listDwg = await fetchText(`${repoUrl}/main/charts/vega/list.txt`);
+const selectionMap = listDwg.trim().split('\n');
+
+async function loadData(selection) {
+  const packageUrl = `${repoUrl}/main/charts/vega/${selection}`;
+  const packageData = await fetchText(packageUrl);
+  editor.setValue(packageData);
+  renderBtn.click();
+
+}
+
+
+const acConfigMtype = {
+  placeHolder: "Search for chart data...",
+  selector: "#autoCompleteMtype",
+  data: {
+      src: selectionMap
+  },
+  resultItem: {
+      highlight: true,
+  },
+
+  resultsList: {
+      element: (list, data) => {
+          const info = document.createElement("p");
+          if (data.results.length) {
+              info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
+          } else {
+              info.innerHTML = `Found <strong>${data.matches.length}</strong> matching results for <strong>"${data.query}"</strong>`;
+          }
+          list.prepend(info);
+      },
+
+      noResults: true,
+      maxResults: 15,
+      tabSelect: true,
+  },
+
+  events: {
+      input: {
+          selection: async (event) => {
+              const selection = event.detail.selection.value;
+              autoCompleteJSMtype.input.value = selection;
+              typeSelected = selection;
+              await loadData(typeSelected);
+
+          },
+      },
+  },
+};
+const autoCompleteJSMtype = new autoComplete(acConfigMtype);
  
