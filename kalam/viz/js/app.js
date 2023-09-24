@@ -266,3 +266,65 @@ document.getElementById("fruitDropdown").addEventListener("change", (event) => {
   updateBarChart(JSON.parse(editor.getValue()));
   updatePieChart(JSON.parse(editor.getValue()));
 });
+
+//------ auto complete ---
+async function fetchText(url) {
+  const response = await fetch(url);
+  const content = await response.text();
+  return content;
+}
+
+
+let typeSelected = "package";
+
+const repoUrl = 'https://raw.githubusercontent.com/mohan-chinnappan-n/project-diagrams';
+const listDwg = await fetchText(`${repoUrl}/main/charts/list.txt`);
+const selectionMap = listDwg.trim().split('\n');
+
+async function loadData(selection) {
+  const packageUrl = `${repoUrl}/main/charts/${selection}`;
+  const packageData = await fetchText(packageUrl);
+  editor.setValue(packageData);
+
+}
+
+
+const acConfigMtype = {
+  placeHolder: "Search for chart data...",
+  selector: "#autoCompleteMtype",
+  data: {
+      src: selectionMap
+  },
+  resultItem: {
+      highlight: true,
+  },
+
+  resultsList: {
+      element: (list, data) => {
+          const info = document.createElement("p");
+          if (data.results.length) {
+              info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
+          } else {
+              info.innerHTML = `Found <strong>${data.matches.length}</strong> matching results for <strong>"${data.query}"</strong>`;
+          }
+          list.prepend(info);
+      },
+
+      noResults: true,
+      maxResults: 15,
+      tabSelect: true,
+  },
+
+  events: {
+      input: {
+          selection: async (event) => {
+              const selection = event.detail.selection.value;
+              autoCompleteJSMtype.input.value = selection;
+              typeSelected = selection;
+              await loadData(typeSelected);
+
+          },
+      },
+  },
+};
+const autoCompleteJSMtype = new autoComplete(acConfigMtype);
