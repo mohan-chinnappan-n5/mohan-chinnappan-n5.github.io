@@ -346,7 +346,7 @@ if (params['d']) {
 } else if (params['f']) {
   const file = params['f']; 
   await loadData(file);
-  console.log(dwgData);
+  //console.log(dwgData);
 }
 
 

@@ -4,6 +4,10 @@
 //----------------------------
 Split([ "#content", "#htmlContent"], { sizes: [50, 50] });
 let originalFileName = ""; // Store the original uploaded file name
+const repoUrl = 'https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs';
+const listDwg = await fetchText(`${repoUrl}/main/sf/list.txt`);
+const selectionMap = listDwg.trim().split('\n');
+
 
 let initData = `
 # Animals
@@ -22,8 +26,10 @@ if (urlParams.has('c')) {
   await navigator.clipboard.readText().then((clipText) => {
     initData = clipText;
   });
+} else if (urlParams.has('f')) {
+  const file = urlParams.get('f'); 
+  initData = await getData(file);
 }
-
 
 const getEle = (id) => document.getElementById(id);
 
@@ -154,16 +160,19 @@ async function fetchText(url) {
 
 let typeSelected = "package";
 
-const repoUrl = 'https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs';
-const listDwg = await fetchText(`${repoUrl}/main/sf/list.txt`);
-const selectionMap = listDwg.trim().split('\n');
-
 async function loadData(selection) {
   const packageUrl = `${repoUrl}/main/sf/${selection}`;
   const packageData = await fetchText(packageUrl);
   editor.setValue(packageData);
 
 }
+async function getData(selection) {
+  const packageUrl = `${repoUrl}/main/sf/${selection}`;
+  const packageData = await fetchText(packageUrl);
+  return packageData;
+
+}
+
 
 
 const acConfigMtype = {

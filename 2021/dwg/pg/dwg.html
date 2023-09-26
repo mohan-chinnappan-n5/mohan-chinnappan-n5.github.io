@@ -164,6 +164,11 @@
 
             </div>
           </li>
+          <li class="nav-item">
+            <div class="col"><input type="text" autocomplete="off" id="autoCompleteMtype">
+              <button class="btn btn-primary" style="display: none;" disabled id="load">Load</button>
+              <button class="btn btn-danger" id="run">Draw</button>
+          </li>
         </ul>
       </div>
     </nav>
@@ -171,15 +176,8 @@
     <div class="row">
       <div class="col-lg">
         <div class="split split-horizontal" id="code">
-
-          <div id="editor"></div>
-          <div class="col"><input type="text" autocomplete="off" id="autoCompleteMtype">
-          <button class="btn btn-primary" disabled id="load">Load</button>
-          <button class="btn btn-danger" id="run">Draw</button>
-
-
-          </div>
-          <textarea name="editorc" id="editorc" cols="100" readonly rows="10"></textarea>
+          <div id="editor" style="height: 800px;"></div>
+          <textarea name="editorc" id="editorc" style="display: none;" cols="100" readonly rows="10"></textarea>
         </div>
         <div class="split split-horizontal" id="content">
           <div class="graphDiv"></div>
@@ -284,6 +282,10 @@
               autoCompleteJSMtype.input.value = selection;
               typeSelected = selection;
               await loadData(typeSelected);
+              document.getElementById('load').click();
+              document.getElementById('draw').click();
+
+
       
             },
           },

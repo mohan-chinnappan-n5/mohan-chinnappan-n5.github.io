@@ -162,7 +162,7 @@
 <tr><td>Repeat</td><td>To ensure that the Salesforce instance can handle increasing levels of user activity and data volumes.</td></tr>
 </tbody></table>
 <h2 id="flow"><a class="header" href="#flow">Flow</a></h2>
-<pre class="mermaid">   graph TD;
+<pre class="mermaid">  graph TD;
         A[Setup Sandbox for Perf testing]--&gt;B[Draw a system diagram \nto visualize current and future features, systems,\n and users that involve Salesforce];
         B--&gt;C[For each part of the system: \n estimate peak load levels,\n average load\n levels features used\nIdentify your projected growth pattern];
         C--&gt;D[Calculate the throughput of your system in Requests per Second - RPS];
@@ -173,7 +173,19 @@
         H--&gt;I[Coordinate testing with Salesforce:\nPerformance tests can generate large amounts of traffic. \nTo avoid having your tests flagged as malicious activity,\ngive Salesforce a heads up];
 
      
+style A fill:#f9f,stroke:#333,stroke-width:4px
+style B fill:#ff9,stroke:#333,stroke-width:4px
+style C fill:#9ff,stroke:#333,stroke-width:4px
+style D fill:#f9f,stroke:#333,stroke-width:4px
+style E fill:#ff9,stroke:#333,stroke-width:4px
+style F fill:#9ff,stroke:#333,stroke-width:4px
+style G fill:#f9f,stroke:#333,stroke-width:4px
+style H fill:#ff9,stroke:#333,stroke-width:4px
+style I fill:#f9f,stroke:#333,stroke-width:4px
+
+     
 </pre>
+<p><a href="mohan-chinnappan-n5.github.io/2021/dwg/pg/dwg.html?f=perf-testing-flow-2.txt">Edit this diagram</a></p>
 <h2 id="now-the-details"><a class="header" href="#now-the-details">Now the details</a></h2>
 <ul>
 <li>
@@ -561,7 +573,7 @@ default ✓ [======================================] 00/15 VUs  1m50s
 
         <!-- Livereload script (if served using the cli tool) -->
         <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:5000/__livereload");
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
             socket.onmessage = function (event) {
                 if (event.data === "reload") {
                     socket.close();

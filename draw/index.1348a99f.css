@@ -1,0 +1,49 @@
+body {
+  font-family: sans-serif;
+}
+
+body #flowchart-container, body #unsupported {
+  max-width: 48%;
+}
+
+#excalidraw {
+  border-left: 1px solid #ccc;
+  width: 50vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+#excalidraw .mobile-misc-tools-container {
+  display: none !important;
+}
+
+.excalidraw-wrapper {
+  height: 100%;
+}
+
+#custom-test {
+  width: 50vw;
+}
+
+#custom-test #render-excalidraw-btn {
+  margin-top: 10px;
+}
+
+#custom-test #custom-diagram {
+  margin-top: 20px;
+}
+
+#custom-test #parsed-data-details {
+  margin-top: 20px;
+  display: none;
+}
+
+#custom-test #error {
+  color: red;
+  margin-top: 20px;
+  display: none;
+}
+
+/*# sourceMappingURL=index.1348a99f.css.map */

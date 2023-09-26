@@ -196,7 +196,7 @@ find . -name '* copy.*'  2&gt;&amp;1 | tee /tmp/copy_dup_files.txt
 
         <!-- Livereload script (if served using the cli tool) -->
         <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:5000/__livereload");
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
             socket.onmessage = function (event) {
                 if (event.data === "reload") {
                     socket.close();

@@ -354,7 +354,7 @@ sfdx mohanc:data:query  -u mohan.chinnappan.n.sel2@gmail.com -q oldAccounts.soql
 
         <!-- Livereload script (if served using the cli tool) -->
         <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:5000/__livereload");
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
             socket.onmessage = function (event) {
                 if (event.data === "reload") {
                     socket.close();
