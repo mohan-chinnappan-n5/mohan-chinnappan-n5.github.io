@@ -147,7 +147,7 @@ echo 'sfdx force:source:deploy -x package.xml  --\${2}destructivechanges destruc
 
   static getZipper( templateName) {
     return `
-zip -r ${templateName}.zip ${templateName}/*   
+zip -r ${templateName}.zip ${templateName}/*   ${templateName}/.forceignore
     `;
   }
 
