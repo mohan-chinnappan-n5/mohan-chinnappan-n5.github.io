@@ -2,11 +2,39 @@
 // mohan chinnappan
 //-----------------------
 
-import { Types } from "./Types.js?v=23";
-import { Util } from "./Util.js?v=23 ";
+const urlParams = new URLSearchParams(window.location.search);
+
+import { Types } from "./Types.js?v=24";
+import { Util } from "./Util.js?v=24";
 
 const getEle = (id) => document.getElementById(id);
+if (urlParams.has("d")) {
+  getEle("jsonEditor").style.display = "block";
+}
+
+let initData = `<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+<version>58.0</version>
+    <types>
+        <members>GreenPlant</members>
+        <members>BrownPaper</members>
+        <name>ApexClass</name>
+        </types>
+    <types>
+        <members>HomePage</members>
+        <name>FlexiPage</name>
+    </types>
+</Package>
+`;
+
+if (urlParams.has("c")) {
+  await navigator.clipboard.readText().then((clipText) => {
+    initData = clipText;
+  });
+}
+
 let bashEditor;
+let xmlEditor;
 
 require.config({
   paths: {
@@ -14,22 +42,8 @@ require.config({
   },
 });
 require(["vs/editor/editor.main"], function () {
-  var xmlEditor = monaco.editor.create(document.getElementById("xmlEditor"), {
-    value: `<?xml version="1.0" encoding="UTF-8"?>
-<Package xmlns="http://soap.sforce.com/2006/04/metadata">
-<version>56.0</version>
-<types>
-<members>GreenPlant</members>
-<members>BrownPaper</members>
-<name>ApexClass</name>
-</types>
-<types>
-<members>HomePage</members>
-<name>FlexiPage</name>
-</types>
-
-</Package>
-`,
+   xmlEditor = monaco.editor.create(document.getElementById("xmlEditor"), {
+    value: initData,
     language: "xml",
     theme: "vs-dark",
   });
@@ -52,7 +66,12 @@ require(["vs/editor/editor.main"], function () {
   );
 
   bashEditor = monaco.editor.create(document.getElementById("bashEditor"), {
-    value: "",
+    value: `#-------------------------------------------------------------------------
+# After clicking the Process button above,
+#  Download this bash script by clicking Download Script Button above
+#-------------------------------------------------------------------------
+`,
+
     language: "shell",
     theme: "vs-dark",
     minimap: {
@@ -70,7 +89,6 @@ require(["vs/editor/editor.main"], function () {
           xmlEditor.setValue(e.target.result);
         };
         reader.readAsText(file);
-
       }
     });
 
@@ -105,12 +123,14 @@ require(["vs/editor/editor.main"], function () {
 
       // Convert JSON to Bash (you should implement this logic)
       bashEditor.setValue(`
-# Download this bash script by clicking Download Script Button  below
-
+# Download this bash script by clicking Download Script Button  
+#-------------------------------------------------------------------------
 # Fill in for TEMPLATE_NAME, FROM_FOLDER, TEST_CLASS_LIST and USERNAME
-# run it:  bash  bundle-script.sh
+# run it:  bash  bundle-script.sh 
+#  - in a folder where you have package.xml and destructiveChanges
+#-------------------------------------------------------------------------
 # this script will create zip bundle file and a README.md file
-
+#-------------------------------------------------------------------------
 ## Modify the following to match your needs as shown above
 ## ---------------------
 ${envVars} 
@@ -124,8 +144,11 @@ cat << EOF  > README.md
 
 ${readme}
 EOF
+
+sed -i '' 's/------------------------/\`\`\`/g' README.md
+
         
-        `);
+`);
       xmlResultEditor.setValue(readme);
     });
 });
@@ -226,3 +249,40 @@ function downloadFile() {
 }
 
 getEle("downloadScript").addEventListener("click", downloadFile);
+let originalFileName;
+// drag n drop
+// Function to handle file drop
+function handleFileDrop(e) {
+    e.preventDefault();
+  
+    const files = e.dataTransfer.files;
+  
+    if (files.length > 0) {
+      const file = files[0];
+      // Store the original uploaded file name
+      originalFileName = file.name;
+  
+      // Check if the dropped file is a text file (you can adjust the condition)
+      const reader = new FileReader();
+  
+      reader.onload = function (event) {
+        const fileContent = event.target.result;
+         xmlEditor.setValue(fileContent);
+      };
+  
+      reader.readAsText(file);
+
+    }
+  }
+  
+  // Function to prevent the default behavior of drag-and-drop
+  function preventDefault(e) {
+    e.preventDefault();
+  }
+  
+  // Add event listeners to the drop area
+  const dropArea = document.getElementById("dropArea");
+  dropArea.addEventListener("dragenter", preventDefault, false);
+  dropArea.addEventListener("dragover", preventDefault, false);
+  dropArea.addEventListener("drop", handleFileDrop, false);
+  

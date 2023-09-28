@@ -124,7 +124,7 @@ Make sure the deploying user has required CRMA permission sets assigned
    
 Unzip it to a folder of your choice
 ------------------------
-       unzip \${TEMPLATE_NAME}.zip 
+unzip \${TEMPLATE_NAME}.zip 
 ------------------------
 
 cd to \${TEMPLATE_NAME} folder
@@ -138,7 +138,13 @@ deploy (validation)
 bash deploy.sh \${USERNAME} pre|post
 ------------------------
    
-copy the command in the terminal and run it
+copy the command in the terminal and run it after you have logged into the org
+
+------------------------
+sfdx force:auth:web:login -r https://login|test.salesforce.com
+------------------------
+
+
    
    
 ## Example:
@@ -155,7 +161,7 @@ sfdx force:source:deploy -x package.xml --postdestructivechanges destructiveChan
    
 Note down the **Deploy ID:** for  quick deploy:
 ------------------------ 
-sfdx force:mdapi:deploy -q <Deploy ID> -w -1 -u <userName>
+sfdx force:mdapi:deploy -q <Deploy ID> -w -1 -u \${USERNAME} 
 ------------------------ 
 `;
    return output;
@@ -170,10 +176,20 @@ echo sfdx force:source:deploy -x package.xml  --${2}destructivechanges destructi
 
   static getEnvVars() {
 return `
+# TEMPLATE_NAME is the your package name 
+# - example: PATCH_RELEASE_22)
 TEMPLATE_NAME="TEMPLATE_NAME"
+
+# FROM_FOLDER is where checkout branch code lives: full path until 'default' folder
+# - example: /User/DennisRitchie/ProjectX/force-app/main/default
 FROM_FOLDER= "FROM_FOLDER"
+
 TO_FOLDER="\${TEMPLATE_NAME}"
+# TEST_CLASS_LIST is comma separated list of Test classes to be run for RunSpecifiedTests option
 TEST_CLASS_LIST="X,Y,Z"
+
+# USERNAME is your username for the org that you are deploying to
+#  - Login to the org using:  'sfdx force:auth:web:login -r https://login|test.salesforce.com'x
 USERNAME="un.sel@gmail.com"
 `
   }
