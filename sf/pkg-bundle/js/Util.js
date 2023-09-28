@@ -4,6 +4,38 @@ export class Util {
     var replace = new RegExp(separator + "{1,}", "g");
     return parts.join(separator).replace(replace, separator);
   }
+
+  static getForceIgnore () {
+    const content =
+`package.xml
+src-env-specific-alias-post/**
+src-env-specific-alias-pre/**
+src-env-specific-pre/**
+src-env-specific/**
+src-ui/README.md
+src-env-specific-alias-post/README.md
+src-env-specific-pre/README.md
+src/core-crm/README.md
+src-temp/README.md
+**/README.md
+**/.DS_Store
+**/*.md
+**appMenu
+**appSwitcher
+**objectTranslations
+artifacts
+# LWC configuration files
+**/jsconfig.json
+**/.eslintrc.json
+# LWC Jest
+**/__tests__/**
+# LWC Jest
+**/lwc/__mocks__/**
+
+
+`
+return content;
+  }
   static generateCopyScript(
     sourceDir,
     destinationDir,
@@ -93,11 +125,17 @@ export class Util {
 
     return scriptLines.join("\n");
   }
-  static copyPkgXmls(templateName, packageXmlPath,destructiveXmlPath,) {
+  static copyPkgXmls(templateName, packageXmlPath,destructiveXmlPath) {
+    const getForceIgnore = this.getForceIgnore();
     return `
 
 echo "---- Creating sfdx project for ${templateName}... ----"
-rm -fr ${templateName}; sfdx force:project:create -n ${templateName} 
+rm -fr ${templateName}; sfdx force:project:create -n ${templateName}
+
+cat << EOF  >  ${templateName}/.forceignore 
+${getForceIgnore} 
+EOF
+
 
 echo "---- copying package.xml and destructiveChanges.xml to ${templateName} folder ... ----"
 cp ${packageXmlPath} ${templateName}
