@@ -1,6 +1,6 @@
 
 const getEle = id => document.getElementById(id);
-const initValue =
+let initValue =
     ` 1  192.168.1.1 (192.168.1.1)  93.076 ms  3.909 ms  4.102 ms
 2  * * *
 3  67.59.237.125 (67.59.237.125)  55.569 ms  12.583 ms  12.862 ms
@@ -19,7 +19,16 @@ const initValue =
 142.251.65.99 (142.251.65.99)  62.208 ms  22.591 ms
 11  lga34s34-in-f14.1e100.net (142.250.80.46)  62.763 ms
 142.250.57.139 (142.250.57.139)  66.758 ms
-lga34s34-in-f14.1e100.net (142.250.80.46)  21.104 ms`
+lga34s34-in-f14.1e100.net (142.250.80.46)  21.104 ms`;
+
+const urlParams = new URLSearchParams(window.location.search);
+
+if (urlParams.has("c")) {
+    await navigator.clipboard.readText().then((clipText) => {
+        initValue = clipText;
+    });
+  }
+
 
 // store location lookups in a database to prevent duplicate lookups
 let db = {};
@@ -176,18 +185,17 @@ require(['vs/editor/editor.main'], function () {
 
     });
 
+    /*
     document.getElementById('clear-button').addEventListener('click', function () {
         drawnItems.clearLayers();
 
-      /* map.eachLayer(function (layer) {
+      map.eachLayer(function (layer) {
             if (layer !== drawnItems) {
                 map.removeLayer(layer);
             }
-        }); */
-       
-
+        }); 
     });
-
+*/
 
     const parse = async () => {
         var coordinatesText = editor.getValue();
@@ -235,9 +243,15 @@ require(['vs/editor/editor.main'], function () {
 
 
         // Draw new lines on the map if there are valid coordinates
+        
         if (latLngArray.length > 1) {
             const polyline = L.polyline(latLngArray, { color: '#0d6efd' }).addTo(map);
             map.fitBounds(polyline.getBounds());
+        }
+
+        for (let i = 0 ; i < latLngArray.length; i++){
+            console.log(latLngArray[i], latLngArray[i+1]);
+            //L.polyline([latLngArray[i], latLngArray[i+1]], { color: 'red' }).addTo(map);
         }
     }
 
