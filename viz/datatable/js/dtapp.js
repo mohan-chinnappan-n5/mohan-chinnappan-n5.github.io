@@ -30,8 +30,6 @@ const drawBtn = getEle('draw');
 let width = 400;
 let height = 400;
 
-
-
 const queryEle = getEle('query');
 const runEle = getEle('run');
 const thsEle = getEle('header');
@@ -59,6 +57,19 @@ if (params.get('w') !== null) {
 if (params.get('h') !== null) {
     height = params.get('h');
 }
+
+let yAggregate = null;
+let xAggregate = null;
+ 
+
+
+if (params.get('xa') !== null) {
+    xAggregate = params.get('xa');
+}
+if (params.get('ya') !== null) {
+    yAggregate = params.get('ya');
+}
+
 
 
 if (c === 'json') {
@@ -189,6 +200,7 @@ function setupDropdowns(jsonData) {
 
 // charts
 const drawChart = (data, fieldTypes, x, y) => {
+
     const barSpec =
     {
         "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -205,6 +217,12 @@ const drawChart = (data, fieldTypes, x, y) => {
             "x": { "field": x, "type": fieldTypes[x], "axis": { "labelAngle": 0, "grid": true } },
             "y": { "field": y, "type": fieldTypes[y], "axis": { "labelAngle": 0, "grid": true } },
         }
+    }
+    if (xAggregate) {
+        barSpec.encoding.x.aggregate = xAggregate;
+    }
+    if (yAggregate) {
+        barSpec.encoding.y.aggregate = yAggregate;
     }
     //console.log(barSpec);
     vegaEmbed('#vizBar', barSpec);
