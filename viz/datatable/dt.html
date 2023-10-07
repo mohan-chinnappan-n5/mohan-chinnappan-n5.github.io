@@ -20,19 +20,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.6.1/d3.min.js"
         integrity="sha512-MefNfAGJ/pEy89xLOFs3V6pYPs6AmUhXJrRlydI/9wZuGrqxmrdQ80zKHUcyadAcpH67teDZcBeS6oMJLPtTqw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
     <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
-
-
 </head>
 
-
 <body class='container2'>
-
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">&nbsp; SF-LAND Data Viewer</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -44,142 +37,32 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home</a>
                 </li>
-                </li>
             </ul>
         </div>
     </nav>
 
-
     <div class='container'>
-
         <h3>Data</h3>
-
-        <textarea cols='80' rows='5' id='query' readonly
+        <textarea cols='80' rows='3' id='query' readonly
             style='padding:10px;background-color:black; color:white; border-radius:10px;'>
         </textarea>
         <hr />
-        <table id="example" class="display">
+        <label for="x-axis-select">X-axis:</label>
+        <select class="btn btn-primary" id="x-axis-select"></select>
+
+        <label for="y-axis-select">Y-axis:</label>
+        <select class="btn btn-success" id="y-axis-select"></select>
+
+        <button id='draw' class="btn btn-info">Draw</button>
+        <hr />
+        <table id="dt" class="display">
             <thead>
-                <tr id="header">
-                </tr>
+                <tr id="header"> </tr>
             </thead>
         </table>
-
-        <div id="vizBar"></div>
-
-        <script type="module">
-
-            // dynamic datatable 
-            // mohan chinnappan
-
-
-            const queryEle = document.getElementById('query');
-            const runEle = document.getElementById('run');
-            const thsEle = document.getElementById('header');
-            let input = `[{"name": "peach", "qty": 200, "quality": "good"}, {"name":"mango", "qty":700, "quality": "good"} ]`;
-            queryEle.value = input;
-
-            let params = (new URL(document.location)).searchParams;
-
-            //------------ can be called with this parameter d 
-            if (params.get('d') !== null) { // got it via query param d
-                input = atob(params.get('d'));
-                queryEle.value = input;
-            }
-
-            //------- via clipboard
-            let c = params.get('c');
-            if (c !== null) await navigator.clipboard.readText().then((clipText) => {
-                input = clipText;
-                queryEle.value = input;
-            });
-
-            if (c === 'json') {
-                queryEle.value = input;
-            } 
-            if (c === 'csv') {
-                queryEle.value = input;
-                input = JSON.stringify(d3.csvParse(input));
-            } else if (c === 'tsv') {
-                queryEle.value = input;
-                input = JSON.stringify(d3.tsvParse(input));
-            }
-
-
-            const prepareData = (input) => {
-                const data = JSON.parse(input);
-                let columns = Object.keys(data[0]);
-                let fieldsData = [];
-                let ths = '';
-                thsEle.innerHTML = '';
-                for (const col of columns) {
-                    //console.log(col);
-                    fieldsData.push({ data: col });
-                    ths += `<th>${col}</th>`;
-                }
-                thsEle.innerHTML = ths;
-                return { data, fieldsData };
-            }
-
-
-            const renderDataTable = (input) => {
-                let data, fieldsData;
-                ({ data, fieldsData } = prepareData(input));
-                // alert(JSON.stringify(fieldsData));
-                // console.log(data, fieldsData);
-                const dt = $('#example').DataTable({
-                    "destroy": true,
-                    "bDestroy": true,
-                    data: data,
-                    columns: fieldsData,
-                    dom: 'Blfrtip',
-                    buttons: [
-                        'copy', 'csv', 'excel', 'pdf', 'print'
-                    ]
-                })
-                for (let i = 0; i < dt.columns().nodes().length; i++) {
-                    dt.columns(i).header().to$().text(fieldsData[i].data)
-                }
-
-
-                dt.columns.adjust().draw();
-
-                drawChart(data.length);
-            }
-            // charts
-            const drawChart = count => {
-                const barSpec =
-                {
-                    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-                    "description": "Chart",
-                    "data": {
-                        "values": [
-                            { "records": "Total Records", "count": count },
-
-                        ]
-                    },
-                    "mark": { type: "bar", "tooltip": true, orient: "horizontal" },
-                    "encoding": {
-                        "y": { "field": "records", "type": "nominal", "axis": { "labelAngle": 0 } },
-                        "x": { "field": "count", "type": "quantitative" }
-                    }
-                }
-                vegaEmbed('#vizBar', barSpec);
-            }
-
-            renderDataTable(input);
-
- 
-
-        </script>
-        <div>
-
-
-
-
-        </div>
+        <div id="vizBar" tabindex="-1"></div>
     </div>
-    </div>
+    <script type="module" src="js/dtapp.js"></script>
 </body>
 
 </html>

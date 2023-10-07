@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSV to Bar Chart</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left-pane">
+            <input type="file" id="csvFileInput" accept=".csv" />
+            <div id="csvDataDisplay"></div>
+            <table id="csvDataTable" class="display"></table>
+        </div>
+        <div class="right-pane">
+            <h2>Bar Chart</h2>
+            <div>
+                <label for="xAxisField">X-Axis:</label>
+                <select id="xAxisField"></select>
+            </div>
+            <div>
+                <label for="yAxisField">Y-Axis:</label>
+                <select id="yAxisField"></select>
+            </div>
+            <div>
+                <label for="filterField">Filter Field:</label>
+                <select id="filterField"></select>
+            </div>
+            <button id="generateChart">Generate Chart</button>
+            <div id="chartContainer">
+                <svg id="barChart"></svg>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const csvFileInput = document.getElementById("csvFileInput");
+            const csvDataTable = $('#csvDataTable').DataTable();
+            const xAxisField = document.getElementById("xAxisField");
+            const yAxisField = document.getElementById("yAxisField");
+            const filterField = document.getElementById("filterField");
+            const generateChartButton = document.getElementById("generateChart");
+            const chartContainer = document.getElementById("chartContainer");
+
+            let csvData = null;
+
+            csvFileInput.addEventListener("change", function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        csvData = e.target.result;
+                        displayCSVData(csvData);
+                        populateSelectOptions(csvData);
+                        populateDataTable(csvData);
+                    };
+                    reader.readAsText(file);
+                }
+            });
+
+            function displayCSVData(data) {
+                csvDataDisplay.innerText = data;
+            }
+
+            function populateSelectOptions(data) {
+                // Parse CSV data and populate select options for X and Y axes using D3.js
+                d3.csvParse(data, function (d) {
+                    return d;
+                }).then(function (parsedData) {
+                    const headers = Object.keys(parsedData[0]);
+                    headers.forEach(function (header) {
+                        const optionX = document.createElement("option");
+                        const optionY = document.createElement("option");
+                        const optionFilter = document.createElement("option");
+                        optionX.value = header;
+                        optionX.textContent = header;
+                        optionY.value = header;
+                        optionY.textContent = header;
+                        optionFilter.value = header;
+                        optionFilter.textContent = header;
+                        xAxisField.appendChild(optionX);
+                        yAxisField.appendChild(optionY);
+                        filterField.appendChild(optionFilter);
+                    });
+                });
+            }
+
+            function populateDataTable(data) {
+                // Parse CSV data and populate DataTable
+                d3.csvParse(data, function (d) {
+                    return d;
+                }).then(function (parsedData) {
+                    csvDataTable.clear().rows.add(parsedData).draw();
+                });
+            }
+
+            function createBarChart(data, filterValue) {
+                // Create a D3.js bar chart with optional filtering
+                const xField = xAxisField.value;
+                const yField = yAxisField.value;
+
+                // Filter data based on the selected filter field and value
+                if (filterValue) {
+                    data = data.filter(function (d) {
+                        return d[filterField.value] === filterValue;
+                    });
+                }
+
+                // Rest of the code for creating the bar chart remains the same
+                // ...
+
+                // Example code for updating the chart after filtering
+                // d3.select("#barChart").remove();
+                // ...
+            }
+
+            generateChartButton.addEventListener("click", function () {
+                const xField = xAxisField.value;
+                const yField = yAxisField.value;
+                const filterValue = filterField.value;
+
+                // Parse CSV data using D3.js and create/update the bar chart
+                d3.csvParse(csvData, function (d) {
+                    return d;
+                }).then(function (parsedData) {
+                    createBarChart(parsedData, filterValue);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
