@@ -4,8 +4,8 @@
 
 const urlParams = new URLSearchParams(window.location.search);
 
-import { Types } from "./Types.js?v=24";
-import { Util } from "./Util.js?v=24";
+import { Types } from "./Types.js?v=26";
+import { Util } from "./Util.js?v=25";
 
 const getEle = (id) => document.getElementById(id);
 if (urlParams.has("d")) {

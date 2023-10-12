@@ -145,6 +145,9 @@ static typeInfoMap = {
     },
 
 
+   
+
+
 
     'QuickAction': {
         folderName: 'quickActions',
@@ -254,6 +257,27 @@ static typeInfoMap = {
         },
         copyAllFiles: true
     },
+
+    'Report': {
+        folderName: 'reports',
+        getFileAttributes: (member) => {
+            const parts = member.split('/');
+            if (parts.length === 2) {
+                const [folder, filename] = parts;
+                return {
+                    folderName: `reports/${folder}`,
+                    fileNames: [ `${filename}.report-meta.xml`]
+                };
+            }
+            return {
+                folderName: 'objects',
+                fileNames: [ '']
+            };
+        }
+    },
+
+
+     
 
 
 
@@ -393,10 +417,37 @@ static typeInfoMap = {
     },
 
 
+    'PathAssistant': {
+        folderName: 'pathAssistants',
+        getFileAttributes: (member) => {
+                return {
+                    folderName: `pathAssistants`,
+                    fileNames: [ `${member}.pathAssistant-meta.xml`]
+                };
+            }
+     },
 
 
 
+    'GlobalValueSet': {
+        folderName: 'globalValueSets',
+        getFileAttributes: (member) => {
+                return {
+                    folderName: `globalValueSets`,
+                    fileNames: [ `${member}.globalValueSet-meta.xml`]
+                };
+            }
+     },
 
+    'CustomTab': {
+        folderName: 'tabs',
+        getFileAttributes: (member) => {
+                return {
+                    folderName: `tabs`,
+                    fileNames: [ `${member}.tab-meta.xml`]
+                };
+            }
+     },
 
     'CustomObject': {
         folderName: 'objects',
@@ -425,6 +476,62 @@ static typeInfoMap = {
             };
         }
     },
+ 
+
+
+    'CompactLayout': {
+        folderName: 'objects',
+        getFileAttributes: (member) => {
+            const parts = member.split('.');
+            if (parts.length === 2) {
+                const [folder, filename] = parts;
+                return {
+                    folderName: `objects/${folder}/compactLayouts`,
+                    fileNames: [ `${filename}.compactLayout-meta.xml`]
+                };
+            }
+            return {
+                folderName: 'objects',
+                fileNames: [ '']
+            };
+        }
+    },
+    'ListView': {
+        folderName: 'objects',
+        getFileAttributes: (member) => {
+            const parts = member.split('.');
+            if (parts.length === 2) {
+                const [folder, filename] = parts;
+                return {
+                    folderName: `objects/${folder}/listViews`,
+                    fileNames: [ `${filename}.listView-meta.xml`]
+                };
+            }
+            return {
+                folderName: 'objects',
+                fileNames: [ '']
+            };
+        }
+    },
+
+    'RecordType': {
+        folderName: 'objects',
+        getFileAttributes: (member) => {
+            const parts = member.split('.');
+            if (parts.length === 2) {
+                const [folder, filename] = parts;
+                return {
+                    folderName: `objects/${folder}/recordTypes`,
+                    fileNames: [ `${filename}.recordType-meta.xml`]
+                };
+            }
+            return {
+                folderName: 'objects',
+                fileNames: [ '']
+            };
+        }
+    },
+
 
     'ValidationRule': {
         folderName: 'objects',

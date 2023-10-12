@@ -86,7 +86,7 @@ return content;
             destinationPaths.push(
               this.pathJoin([destinationDir, subFolder, folderName, fileName])
             );
-            if (ndx === 1) scriptLines.push( `mkdir -p "${destinationDir}/${subFolder}/${folderName}"`);
+            scriptLines.push( `mkdir -p "${destinationDir}/${subFolder}/${folderName}"`);
           };
         } else {
            
@@ -220,7 +220,7 @@ TEMPLATE_NAME="TEMPLATE_NAME"
 
 # FROM_FOLDER is where checkout branch code lives: full path until 'default' folder
 # - example: /User/DennisRitchie/ProjectX/force-app/main/default
-FROM_FOLDER= "FROM_FOLDER"
+FROM_FOLDER="FROM_FOLDER"
 
 TO_FOLDER="\${TEMPLATE_NAME}"
 # TEST_CLASS_LIST is comma separated list of Test classes to be run for RunSpecifiedTests option
