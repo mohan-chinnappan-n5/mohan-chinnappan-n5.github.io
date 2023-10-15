@@ -216,4 +216,31 @@ const acConfigMtype = {
 const autoCompleteJSMtype = new autoComplete(acConfigMtype);
 
 
+ // Function to handle the print action
+ function printDiv(divName) {
+  const printContents = document.getElementById(divName).innerHTML;
+  const originalContents = document.body.innerHTML;
+
+  // Temporarily replace the page's content with the content of the specified div
+  document.body.innerHTML = printContents;
+
+  // Apply the "print-only" class to hide elements not intended for printing
+  document.body.classList.add('print-only');
+
+  // Trigger the print action
+  window.print();
+
+  // Restore the original page content
+  document.body.innerHTML = originalContents;
+  document.body.classList.remove('print-only');
+}
+
+// Add a click event listener to the "Print" button
+document.getElementById('printButton').addEventListener('click', function () {
+  printDiv('preview'); // 'contentToPrint' is the id of the div to be printed
+});
+
+
+
+
 

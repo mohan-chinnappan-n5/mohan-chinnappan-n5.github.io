@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Story to CSV</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>User Story to CSV Converter</h2>
+    <form id="userStoryForm">
+      <div class="form-group">
+        <label for="userType">User Type:</label>
+        <select class="form-control" id="userType">
+          <option value="Standard">Standard</option>
+          <option value="Administrator">Administrator</option>
+          <option value="Custom">Custom</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="action">Action:</label>
+        <select class="form-control" id="action">
+          <option value="Create">Create</option>
+          <option value="Update">Update</option>
+          <option value="Delete">Delete</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="goal">Goal:</label>
+        <input type="text" class="form-control" id="goal">
+      </div>
+      <div class="form-group">
+        <label for="additionalInfo">Additional Information:</label>
+        <textarea class="form-control" id="additionalInfo"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Generate CSV</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('userStoryForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Collect user input
+      const userType = document.getElementById('userType').value;
+      const action = document.getElementById('action').value;
+      const goal = document.getElementById('goal').value;
+      const additionalInfo = document.getElementById('additionalInfo').value;
+
+      // Create CSV data
+      const csvData = `"User Type","Action","Goal","Additional Info"\n"${userType}","${action}","${goal}","${additionalInfo}"`;
+
+      // Create a Blob for CSV file
+      const blob = new Blob([csvData], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+
+      // Create a download link
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'user_story.csv';
+      a.style.display = 'none';
+      document.body.appendChild(a);
+
+      // Trigger download
+      a.click();
+
+      // Cleanup
+      window.URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
