@@ -4,13 +4,24 @@
 
 let editor;
 let summary = {};
+let simpleHAR;
+
+// Get the query parameters from the URL
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('c')) {
+  await navigator.clipboard.readText().then((clipText) => {
+    simpleHAR = clipText;
+  });
+} else {
+    simpleHAR = await fetchText(`./data/simple.har`);
+}
+
 
 async function fetchText(url) {
     const response = await fetch(url);
     const content = await response.text();
     return content;
 }
-const simpleHAR = await fetchText(`./data/simple.har`);
 
 
 const getEle = (id) => document.getElementById(id);
@@ -30,7 +41,11 @@ require(["vs/editor/editor.main"], function () {
     language: "json",
     theme: "vs-dark",
   });
+ 
+  monaco.editor.setModelLanguage(editor.getModel(), 'json');
+
   renderDataTable();
+
 
   function analyzeHarData(harData) {
     if (
@@ -258,3 +273,5 @@ const drawChartTime = (waitTime, blockedTime) => {
   };
   vegaEmbed("#vizTimes", spec);
 };
+
+
