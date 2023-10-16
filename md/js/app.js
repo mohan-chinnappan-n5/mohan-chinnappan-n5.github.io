@@ -243,7 +243,11 @@ document.getElementById('printButton').addEventListener('click', function () {
 // RUM stuff
 // Function to send performance data to the RUM server
     //const rumServer = 'http://localhost:1000/rum';
-    const rumServer = 'http://3.133.148.157:3000/rum'
+    let rumServer = 'http://localhost:1000/rum';
+    rumServer = 'http://3.133.148.157:3000/rum'; // aws
+    rumServer = 'https://mohanc-rum-server-5611934d8e1d.herokuapp.com/rum'; // heroku
+
+
     const pageName = 'Markdown Editor - Kalam';
     console.log(rumServer);
 
