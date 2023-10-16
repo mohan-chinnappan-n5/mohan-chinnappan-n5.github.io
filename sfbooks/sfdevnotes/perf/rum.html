@@ -1070,6 +1070,10 @@ performanceTiming: resource for site: https://google.com:
 <tr><td>disconnectedCallback()</td><td>Called when the element is removed from a document</td></tr>
 <tr><td>errorCallback(error, stack)</td><td>Called when a descendent component throws an error</td></tr>
 </tbody></table>
+<ul>
+<li>Component lifecycle from creation through render
+<img src="img/lc-render.png" alt="lwc-render" /></li>
+</ul>
 <h3 id="constructor----called-when-the-component-is-created"><a class="header" href="#constructor----called-when-the-component-is-created">constructor()  - Called when the component is created</a></h3>
 <ul>
 <li>This hook flows from parent to child, which means that it fires in the parent first.</li>
@@ -1102,9 +1106,17 @@ performanceTiming: resource for site: https://google.com:
 </ul>
 <h3 id="errorcallbackerror-stack---called-when-a-descendent-component-throws-an-error"><a class="header" href="#errorcallbackerror-stack---called-when-a-descendent-component-throws-an-error">errorCallback(error, stack) - Called when a descendent component throws an error</a></h3>
 <ul>
-<li>The error argument is a JavaScript native error object, and the stack argument is a string. </li>
-<li>This lifecycle hook is specific to Lightning Web Components, it <strong>isn’t from the HTML custom elements specification</strong>.</li>
+<li>
+<p>The error argument is a JavaScript native error object, and the stack argument is a string. </p>
+</li>
+<li>
+<p>This lifecycle hook is specific to Lightning Web Components, it <strong>isn’t from the HTML custom elements specification</strong>.</p>
+</li>
+<li>
+<p>Component instance is removed from the DOM</p>
+</li>
 </ul>
+<p><img src="img/lw-disconnect.png" alt="lwc-disconnect" /></p>
 <h2 id="references"><a class="header" href="#references">References</a></h2>
 <ul>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Rum-vs-Synthetic">MDN - Performance Monitoring: RUM vs. synthetic monitoring</a></li>
@@ -1113,6 +1125,7 @@ performanceTiming: resource for site: https://google.com:
 <li><a href="https://studio.webcomponents.dev/edit/ml8fb93ip4HhUuLE9TjN/src/app.js?p=stories">Dog Breed Example Playground</a>
 <ul>
 <li><a href="https://salesforce.stackexchange.com/questions/334634/lwc-setting-properties-in-connectedcallback">LWC setting properties in connectedCallback()</a></li>
+<li><a href="https://developer.salesforce.com/docs/platform/lwc/guide/create-lifecycle-hooks.html">Lifecycle Flow</a></li>
 </ul>
 </li>
 </ul>
