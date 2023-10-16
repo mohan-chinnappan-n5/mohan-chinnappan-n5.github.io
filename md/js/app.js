@@ -240,6 +240,70 @@ document.getElementById('printButton').addEventListener('click', function () {
   printDiv('preview'); // 'contentToPrint' is the id of the div to be printed
 });
 
+// RUM stuff
+// Function to send performance data to the RUM server
+    //const rumServer = 'http://localhost:1000/rum';
+    const rumServer = 'http://3.133.148.157:3000/rum'
+    const pageName = 'Markdown Editor - Kalam';
+    console.log(rumServer);
+
+    function sendPerformanceDataToServer(data) {
+      fetch(rumServer, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+          if (response.ok) {
+            console.log('Performance data sent to RUM server successfully');
+          } else {
+            console.error('Failed to send performance data to RUM server');
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+
+    // Function to gather and send performance metrics
+    function gatherAndSendPerformanceMetrics() {
+      console.log('inside gatherAndSendPerformanceMetrics() ')
+
+      if ('performance' in window) {
+        const perf = window.performance;
+        const timing = perf.timing;
+        const resources = perf.getEntriesByType('resource');
+        const userTimings = perf.getEntriesByType('measure');
+
+        // Calculate page load time
+        const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
+        // Ensure pageLoadTime is non-negative
+        const nonNegativePageLoadTime = Math.max(0, pageLoadTime);
+
+        // Gather performance data including page name
+        const performanceData = {
+          pageName: pageName, // Replace with the actual page name
+          pageLoadTime: nonNegativePageLoadTime,
+          timeToFirstByte: timing.responseStart - timing.navigationStart,
+          resources: resources,
+          userTimings: userTimings,
+        };
+
+        // Send performance data to the RUM server
+        sendPerformanceDataToServer(performanceData);
+      }
+      else {
+        console.log('could not find "performance" in the window object')
+      }
+    }
+
+    // Log performance metrics when the page is fully loaded
+    let myevent = 'load';
+    myevent = 'afterprint';
+    window.addEventListener(myevent, gatherAndSendPerformanceMetrics);
+
 
 
 
