@@ -1,0 +1,34 @@
+#analogClock {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 2px solid #03192f;
+    border-radius: 50%;
+    margin: 20px auto;
+    background-color: #eee; 
+}
+.container2 {
+    width: 300px;
+    border-radius: 10px soild #99ccff;
+}
+
+#digitalClock {
+    font-size: 24px;
+    text-align: left;
+    padding-left: 50px;
+}
+
+#timer {
+    font-size: 20px;
+    text-align: left;
+}
+
+#alarmTime {
+    font-size: 20px;
+    text-align: left;
+}
+body {
+    padding-left: 10px;
+    min-height: 75rem;
+    padding-top: 4.5rem;
+}
