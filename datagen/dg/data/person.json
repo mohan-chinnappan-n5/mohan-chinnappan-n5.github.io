@@ -1,0 +1,33 @@
+[
+
+    "location.country",
+    "location.zipCode",
+
+    "location.latitude",
+    "location.longitude",
+
+    "location.city",
+    "location.street",
+    "location.streetAddress",
+    "location.zipCode",
+
+    "person.firstName",
+    "person.middleName",
+    "person.lastName",
+    "person.sex",
+    "person.suffix",
+    "person.bio",
+    "person.zodiacSign",
+
+
+    "person.jobTitle",
+    "person.jobType",
+
+    "person.jobArea",
+    "person.jobDescriptor",
+
+    "phone.imei",
+    "phone.number"
+
+
+  ]

@@ -1,0 +1,21 @@
+[
+
+    "location.buildingNumber",
+    "location.cardinalDirection",
+    "location.city",
+    "location.country",
+    "location.countryCode",
+    "location.county",
+    "location.direction",
+    "location.latitude",
+    "location.longitude",
+    "location.nearbyGPSCoordinate",
+    "location.ordinalDirection",
+    "location.secondaryAddress",
+    "location.state",
+    "location.street",
+    "location.streetAddress",
+    "location.timeZone",
+    "location.zipCode"
+
+  ]
