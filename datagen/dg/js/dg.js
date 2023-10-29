@@ -132,6 +132,23 @@ require(["vs/editor/editor.main"], function () {
         URL.revokeObjectURL(url);
     }
 
+    const convertAndDownloadJSON = jsonData => {
+        // Convert JSON to CSV
+        const csvData = Papa.unparse(jsonData);
+
+        // Generate download link
+        const blob = new Blob([jsonData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'data.json';
+        link.click();
+
+        // Clean up
+        URL.revokeObjectURL(url);
+    }
+
+
 
     function convertAndCopyToClipboard(jsonData) {
         // Convert JSON to CSV
@@ -156,6 +173,7 @@ require(["vs/editor/editor.main"], function () {
 
     getEle('tocsv').addEventListener('click', event => {
         convertAndDownload(editor2.getValue());
+        convertAndDownloadJSON(editor2.getValue());
 
     });
 

@@ -8,37 +8,33 @@
     <script src="https://mohan-chinnappan-n5.github.io/pkg/js/lib/autocomplete.min.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/pkg/css/lib/autocomplete.css">
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"
-    integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   
+        integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css"
-        href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.css" />
 
- 
-
-       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript"
-        src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.js"></script>
-
-    <script src="https://cdn.datatables.net/plug-ins/1.13.6/api/sum().js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/loader.js"></script>
     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
-   
+    <style>
+        ul.list-group.list-group-striped li:nth-of-type(odd) {
+            background: #efefef;
+        }
+
+        ul.list-group.list-group-striped li:nth-of-type(even) {
+            background: white;
+        }
+
+        ul.list-group.list-group-hover li:hover {
+            background: linen;
+        }
+    </style>
 </head>
 
 <body>
@@ -53,26 +49,29 @@
                 <li class="nav-item">
                     <div id="dropArea" style="border: 2px dashed #ccc; padding: 2px; text-align: center;">
                         <input class='btn btn-dark' type="file" accept=".json" id="jsonFileInput">
-                        <span style="color: wheat;">Drag and drop a Data Spec JSON file here</span>
-                    <input type="text" autocomplete="off" id="autoCompleteMtype">
-                    <button class="btn btn-success" id="tocsv" >To CSV</button>
-                    <button class="btn btn-warning" id="viewcsv" >View CSV</button>
-
+                        <span style="color: wheat;">Drag & drop a Data Spec file</span>
+                        <input type="text" autocomplete="off" id="autoCompleteMtype">
+                        <button class="btn btn-success" id="tocsv">Download</button>
+                        <button class="btn btn-warning" id="viewcsv">View CSV</button>
                     </div>
-
                 </li>
             </ul>
         </div>
     </nav>
-
     <div class="split split-horizontal" id="code">
         <div id="editor" style="height: 600px;"></div>
     </div>
     <div class="split split-horizontal" id="content">
         <div id="editor2" style="height: 600px;"></div>
-     </div>
+        <h5 style="border-bottom:1px solid #99ccff;">References</h5>
 
-
+        <ul class="list-group list-group-hover list-group-striped">
+            <li class="list-group-item">
+                <a target="new" href="https://fakerjs.dev/api/">Fakerjs API</a>
+            </li>
+        </ul>
+    </div>
     <script type="module" src="./js/dg.js?v=4"></script>
 </body>
+
 </html>
