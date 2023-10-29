@@ -227,6 +227,8 @@ require(["vs/editor/editor.main"], function () {
         }
         catch (e) {
             console.log(e);
+            getEle('errors').value = e;
+
         }
 
 

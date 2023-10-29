@@ -23,6 +23,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/loader.js"></script>
     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
     <style>
+        textarea {
+            font-family: Monaco, Arial;
+            font-size: 13px;
+            background-color: black;
+            color: azure;
+            border-radius: 10px;
+        }
         ul.list-group.list-group-striped li:nth-of-type(odd) {
             background: #efefef;
         }
@@ -63,6 +70,9 @@
     </div>
     <div class="split split-horizontal" id="content">
         <div id="editor2" style="height: 600px;"></div>
+
+        <textarea name="errors" id="errors" cols="140" rows="5" placeholder="any errors will be displayed here..."></textarea>
+
         <h5 style="border-bottom:1px solid #99ccff;">References</h5>
 
         <ul class="list-group list-group-hover list-group-striped">
