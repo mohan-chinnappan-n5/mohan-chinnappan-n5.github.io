@@ -8,6 +8,12 @@
     <script src="https://mohan-chinnappan-n5.github.io/pkg/js/lib/autocomplete.min.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/pkg/css/lib/autocomplete.css">
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"
+    integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
+
     <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
     <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
@@ -33,28 +39,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/loader.js"></script>
     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
    
- 
-   
-
-    <style>
-        textarea {
-            font-family: Monaco, Arial;
-            font-size: 13px;
-            background-color: black;
-            color: azure;
-            border-radius: 10px;
-            padding: 10px;
-        }
-        ul.list-group.list-group-striped li:nth-of-type(odd){
-            background:#efefef;
-        }
-        ul.list-group.list-group-striped li:nth-of-type(even){
-            background:white;
-        }
-        ul.list-group.list-group-hover li:hover{
-            background:linen;
-        }
-    </style>
 </head>
 
 <body>
@@ -71,6 +55,9 @@
                         <input class='btn btn-dark' type="file" accept=".json" id="jsonFileInput">
                         <span style="color: wheat;">Drag and drop a Data Spec JSON file here</span>
                     <input type="text" autocomplete="off" id="autoCompleteMtype">
+                    <button class="btn btn-success" id="tocsv" >To CSV</button>
+                    <button class="btn btn-warning" id="viewcsv" >View CSV</button>
+
                     </div>
 
                 </li>
@@ -79,17 +66,13 @@
     </nav>
 
     <div class="split split-horizontal" id="code">
-        <div id="editor" style="height: 800px;"></div>
+        <div id="editor" style="height: 600px;"></div>
     </div>
     <div class="split split-horizontal" id="content">
-        <table id="data-table" class="display nowrap" style="width:100%"> </table>
-        <hr />
-        <textarea name="summary" id="summary" style="display:none;" cols="50" rows="10"> </textarea>
-        <div id="vizBytes" tabindex="-1"></div>
-        <div id="vizTimes"></div>
-    </div>
+        <div id="editor2" style="height: 600px;"></div>
+     </div>
 
 
-    <script type="module" src="./js/dg.js?v=2"></script>
+    <script type="module" src="./js/dg.js?v=4"></script>
 </body>
 </html>

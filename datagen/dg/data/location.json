@@ -9,7 +9,6 @@
     "location.direction",
     "location.latitude",
     "location.longitude",
-    "location.nearbyGPSCoordinate",
     "location.ordinalDirection",
     "location.secondaryAddress",
     "location.state",

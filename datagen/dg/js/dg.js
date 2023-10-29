@@ -1,6 +1,11 @@
+// synthetic (fake) data generator
+// mohan chinnappan
+
 let editor;
+let editor2;
+
 let simpleSpec;
-let total = 100;
+let total = 5;
 const MAX_LIMIT = 10000;
 import { faker } from 'https://cdn.skypack.dev/@faker-js/faker';
 
@@ -14,17 +19,12 @@ async function loadData(selection) {
     const packageUrl = `${repoUrl}/main/datagen/${selection}`;
     const packageData = await fetchText(packageUrl);
     editor.setValue(packageData);
- 
-  }
-  async function getData(selection) {
-    const packageUrl = `${repoUrl}/main/sf/${selection}`;
-    const packageData = await fetchText(packageUrl);
-    return packageData;
- 
-  }
+
+}
+
 
 const acConfigMtype = {
-    placeHolder: "Search for markdown data...",
+    placeHolder: "Search for data spec JSON data ...",
     selector: "#autoCompleteMtype",
     data: {
         src: selectionMap
@@ -32,7 +32,7 @@ const acConfigMtype = {
     resultItem: {
         highlight: true,
     },
- 
+
     resultsList: {
         element: (list, data) => {
             const info = document.createElement("p");
@@ -43,12 +43,12 @@ const acConfigMtype = {
             }
             list.prepend(info);
         },
- 
+
         noResults: true,
         maxResults: 15,
         tabSelect: true,
     },
- 
+
     events: {
         input: {
             selection: async (event) => {
@@ -56,12 +56,12 @@ const acConfigMtype = {
                 autoCompleteJSMtype.input.value = selection;
                 typeSelected = selection;
                 await loadData(typeSelected);
- 
+
             },
         },
     },
-  };
-  const autoCompleteJSMtype = new autoComplete(acConfigMtype);
+};
+const autoCompleteJSMtype = new autoComplete(acConfigMtype);
 
 
 // Get the query parameters from the URL
@@ -75,15 +75,13 @@ if (urlParams.has('c')) {
 }
 
 if (urlParams.has('t')) {
-  total =  parseInt (urlParams.get('t'));
+    total = parseInt(urlParams.get('t'));
 }
 
 if (total > MAX_LIMIT) {
-    alert (`Maximum limit for number of records per execution: ${MAX_LIMIT}. We generated ${MAX_LIMIT} records! `)
+    alert(`Maximum limit for number of records per execution: ${MAX_LIMIT}. We generated ${MAX_LIMIT} records! `)
     total = 10000;
 }
-
-
 
 async function fetchText(url) {
     const response = await fetch(url);
@@ -109,8 +107,57 @@ require(["vs/editor/editor.main"], function () {
         language: "json",
         theme: "vs-dark",
     });
+    editor2 = monaco.editor.create(document.getElementById("editor2"), {
+
+        language: "json",
+        theme: "vs-dark",
+    });
 
     monaco.editor.setModelLanguage(editor.getModel(), 'json');
+
+
+    const convertAndDownload = jsonData => {
+        // Convert JSON to CSV
+        const csvData = Papa.unparse(jsonData);
+
+        // Generate download link
+        const blob = new Blob([csvData], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'data.csv';
+        link.click();
+
+        // Clean up
+        URL.revokeObjectURL(url);
+    }
+
+
+    function convertAndCopyToClipboard(jsonData) {
+        // Convert JSON to CSV
+        const csvData = Papa.unparse(jsonData);
+        console.log(csvData);
+
+        // Copy CSV data to clipboard
+        navigator.clipboard.writeText(csvData)
+            .then(() => {
+                console.log('CSV data copied to clipboard!');
+            })
+            .catch((error) => {
+                console.error('Failed to copy CSV data to clipboard:', error);
+            });
+    }
+    getEle('viewcsv').addEventListener('click', event => {
+        // Convert JSON to CSV
+        convertAndCopyToClipboard(editor2.getValue());
+        window.location.href = `https://mohan-chinnappan-n5.github.io/viz/datatable/dt.html?c=csv`;
+    });
+
+
+    getEle('tocsv').addEventListener('click', event => {
+        convertAndDownload(editor2.getValue());
+
+    });
 
 
     const getData = (specs, count = 100) => {
@@ -129,10 +176,6 @@ require(["vs/editor/editor.main"], function () {
     }
 
     renderDataTable();
-
-
-
-
     // Function to render the DataTable view
     function renderDataTable() {
         try {
@@ -145,24 +188,27 @@ require(["vs/editor/editor.main"], function () {
 
 
             const genData = getData(editorContent, total);
+            editor2.setValue(JSON.stringify(genData, null, 4));
 
-           $('#data-table').empty();
-           //$("#data-table").DataTable().remove().draw();
+            /* $('#data-table').empty();
+            //$("#data-table").DataTable().remove().draw();
+  
+             const dt = $("#data-table").DataTable({
+                 destroy: true,
+                 bDestroy: true,
+                 scrollX: true,
+                 dom: "Blfrtip",
+                 buttons: ["copy", "csv", "excel", "pdf", "print"],
+                 data: genData,
+                 columns: fieldsData
  
-            const dt = $("#data-table").DataTable({
-                destroy: true,
-                bDestroy: true,
-                scrollX: true,
-                dom: "Blfrtip",
-                buttons: ["copy", "csv", "excel", "pdf", "print"],
-                data: genData,
-                columns: fieldsData
+             });
+             dt.columns.adjust().draw(); */
 
-            });
-            dt.columns.adjust().draw();
+
         }
         catch (e) {
-            alert(e);
+            console.log(e);
         }
 
 
@@ -182,48 +228,48 @@ require(["vs/editor/editor.main"], function () {
 // Function to handle file drop
 function handleFileDrop(e) {
     e.preventDefault();
- 
+
     const files = e.dataTransfer.files;
- 
+
     if (files.length > 0) {
-      const file = files[0];
-      // Store the original uploaded file name
-      // Check if the dropped file is a text file (you can adjust the condition)
-      const reader = new FileReader();
- 
-      reader.onload = function (event) {
-        const fileContent = event.target.result;
-        editor.setValue(fileContent);
-      };
- 
-      reader.readAsText(file);
+        const file = files[0];
+        // Store the original uploaded file name
+        // Check if the dropped file is a text file (you can adjust the condition)
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+            const fileContent = event.target.result;
+            editor.setValue(fileContent);
+        };
+
+        reader.readAsText(file);
     }
-  }
- 
-  // Function to prevent the default behavior of drag-and-drop
-  function preventDefault(e) {
+}
+
+// Function to prevent the default behavior of drag-and-drop
+function preventDefault(e) {
     e.preventDefault();
-  }
- 
-  // Add event listeners to the drop area
-  const dropArea = document.getElementById("dropArea");
-  dropArea.addEventListener("dragenter", preventDefault, false);
-  dropArea.addEventListener("dragover", preventDefault, false);
-  dropArea.addEventListener("drop", handleFileDrop, false);
- 
-  // file upload
-  const jsonFileInput = document.getElementById("jsonFileInput");
-  jsonFileInput.addEventListener("change", function (event) {
+}
+
+// Add event listeners to the drop area
+const dropArea = document.getElementById("dropArea");
+dropArea.addEventListener("dragenter", preventDefault, false);
+dropArea.addEventListener("dragover", preventDefault, false);
+dropArea.addEventListener("drop", handleFileDrop, false);
+
+// file upload
+const jsonFileInput = document.getElementById("jsonFileInput");
+jsonFileInput.addEventListener("change", function (event) {
     var file = event.target.files[0];
     if (file) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        var content = e.target.result;
-        editor.setValue(content);
-      };
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var content = e.target.result;
+            editor.setValue(content);
+        };
     }
     reader.readAsText(file);
-  });
+});
 
 
 
