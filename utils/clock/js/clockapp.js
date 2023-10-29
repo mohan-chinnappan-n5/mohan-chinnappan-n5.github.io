@@ -4,7 +4,11 @@
 const digitalClock = document.getElementById("digitalClock");
 const alarmTime = document.getElementById("alarmTime");
 const analogClock = document.getElementById("analogClock");
-const context = analogClock.getContext("2d");
+const analogClockContext = analogClock.getContext("2d");
+
+const analogClockIndia = document.getElementById("analogClockIndia");
+const analogClockIndiaContext = analogClockIndia.getContext("2d");
+
 const timerDisplay = document.getElementById("timer");
 const startButton = document.getElementById("startButton");
 const stopButton = document.getElementById("stopButton");
@@ -98,11 +102,11 @@ function displayElapsedTime() {
     timerDisplay.innerHTML = `Timer: ${formatTime(hours, minutes % 60, seconds % 60)}`;
 }
 
-function drawAnalogClock() {
+function drawAnalogClock(context, timeOffset) {
     context.clearRect(0, 0, 200, 200);
 
     const now = new Date();
-    const hours = now.getHours() % 12;
+    const hours = (now.getHours() + timeOffset) % 12;
     const minutes = now.getMinutes();
     const seconds = now.getSeconds();
 
@@ -162,4 +166,6 @@ function drawAnalogClock() {
 }
 
 setInterval(updateDigitalClock, 1000);
-setInterval(drawAnalogClock, 1000);
+setInterval(() => drawAnalogClock(analogClockContext,0 ), 1000);
+// setInterval(() => drawAnalogClock(analogClockIndiaContext,5.5 ), 1000);
+
