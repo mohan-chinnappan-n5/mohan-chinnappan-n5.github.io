@@ -207,6 +207,7 @@ require(["vs/editor/editor.main"], function () {
 
             const genData = getData(editorContent, total);
             editor2.setValue(JSON.stringify(genData, null, 4));
+            getEle('errors').value = `${total} records created!`;
 
             /* $('#data-table').empty();
             //$("#data-table").DataTable().remove().draw();
