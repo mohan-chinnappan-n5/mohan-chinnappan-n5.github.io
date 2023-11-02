@@ -52,18 +52,24 @@ echo '==== Create a branch ==='
 git branch ${jira}
 git checkout ${jira}
 
+echo "=== Get source status ==="
+sfdx force:source:status -u ${org}
+
 echo '=== Pull the code from the org ==='
+# https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_source_tracking.htm
+# https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_source_tracking_see_changes.htm
 sfdx force:source:pull  -f  -u ${org}
 
 
 echo '=== Commit the changes ==='
 git add -A
-git commit -m ${cmtMsg}
+git commit -m "${cmtMsg}"
 
 echo "=== Merge to ${parentBranch} ==="
 
 git checkout ${parentBranch}
 git merge ${jira}
+git push 
 
 `;
 
