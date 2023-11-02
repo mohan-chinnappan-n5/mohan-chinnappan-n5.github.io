@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Stock Quote App</title>
+  <style>
+    /* Style for left and right panes */
+    body {
+      display: flex;
+      height: 100vh;
+      margin: 0;
+    }
+    #left-pane, #right-pane {
+      flex: 1;
+      padding: 10px;
+    }
+    #stock-list {
+      width: 100%;
+      height: 100%;
+    }
+    #quote {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div id="left-pane">
+    <textarea id="stock-list" placeholder="Enter a list of stocks in JSON format"></textarea>
+  </div>
+  <div id="right-pane">
+    <div id="quote"></div>
+  </div>
+
+  <script>
+    // Function to fetch stock quotes
+    async function fetchStockQuote(symbol) {
+      const apiKey = 'WMXS95A9A4LMI2FF'; // Replace with your API key
+      const apiUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}`;
+      
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        const timeSeries = data['Time Series (1min)'];
+        const latestData = Object.values(timeSeries)[0];
+        return `Stock: ${symbol}, Price: ${latestData['4. close']}`;
+      } catch (error) {
+        return `Stock: ${symbol}, Error: ${error.message}`;
+      }
+    }
+
+    // Function to update stock quotes
+    async function updateStockQuotes() {
+      const stockList = JSON.parse(document.getElementById('stock-list').value);
+      const quoteDiv = document.getElementById('quote');
+      quoteDiv.innerHTML = '';
+
+      for (const symbol of stockList) {
+        const quote = await fetchStockQuote(symbol);
+        quoteDiv.innerHTML += `${quote}<br><br>`;
+      }
+    }
+
+    // Add an event listener to the stock list textarea
+    document.getElementById('stock-list').addEventListener('input', updateStockQuotes);
+
+    // Initial quote update
+    updateStockQuotes();
+  </script>
+</body>
+</html>
+

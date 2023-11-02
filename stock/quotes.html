@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Stock Quote App</title>
+
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.js"></script>
+  <style>
+    /* Style for left and right panes */
+    body {
+      display: flex;
+      height: 100vh;
+      margin: 0;
+    }
+    #left-pane, #right-pane {
+      flex: 1;
+      padding: 10px;
+    }
+    #stock-list {
+      height: 100%;
+    }
+    #quote {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div id="left-pane">
+    <div id="stock-list"></div>
+  </div>
+  <div id="right-pane">
+    <table id="dt" class="display">
+      <thead>
+          <tr id="header"> </tr>
+      </thead>
+  </table>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.js"></script>
+
+
+  <script>
+
+    let editor;
+    // Function to fetch stock quotes
+    async function fetchStockQuote(symbol) {
+      const apiKey = 'WMXS95A9A4LMI2FF'; // Replace with your API key
+      const apiUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}`;
+      
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        console.log(data);
+        const timeSeries = data['Time Series (1min)'];
+        const latestData = Object.values(timeSeries)[0];
+        return [symbol, latestData['4. close']];
+      } catch (error) {
+        return [symbol, 'Error: ' + error.message];
+      }
+    }
+
+    // Function to update stock quotes
+    async function updateStockQuotes() {
+      const stockListText = editor.getValue();
+      const stockList = JSON.parse(stockListText);
+      const quoteTable = $('#dt').DataTable();
+      quoteTable.clear();
+
+      for (const symbol of stockList) {
+        const [stockSymbol, stockQuote] = await fetchStockQuote(symbol);
+        quoteTable.row.add([stockSymbol, stockQuote]);
+        console.log(quoteTable);
+      }
+      quoteTable.draw();
+    }
+
+  
+    // Initialize Monaco Editor
+    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' } });
+    require(['vs/editor/editor.main'], function() {
+       editor = monaco.editor.create(document.getElementById('stock-list'), {
+        language: 'json',
+        theme: 'vs-dark',
+        automaticLayout: true,
+      });
+
+      // Load sample JSON content into the editor
+      const sampleJSON = ["AAPL", "GOOGL", "MSFT"];
+      editor.setValue(JSON.stringify(sampleJSON, null, 2));
+
+      // Add an event listener to the editor for content changes
+      editor.onDidChangeModelContent(updateStockQuotes);
+
+      // Initialize DataTable
+      $('#dt').DataTable({
+         
+        buttons: ["copy", "csv", "excel", "pdf", "print"],
+        columns: [
+          { title: 'Symbol' },
+          { title: 'Quote' },
+        ],
+      });
+
+      // Initial quote update
+      updateStockQuotes();
+    });
+  </script>
+</body>
+</html>
