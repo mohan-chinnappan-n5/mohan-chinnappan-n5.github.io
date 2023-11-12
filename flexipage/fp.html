@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="./xml2json.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XML to JSON Converter</title>
+    <script src="https://unpkg.com/monaco-editor/min/vs/loader.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #editor-xml, #editor-json {
+            flex: 1;
+            height: 400px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="editor-xml"></div>
+    <div id="editor-json"></div>
+
+    <script>
+        const initXML = 
+`<yield>
+    <fruits>
+     <fruit>Mango</fruit>
+     <fruit>Peach</fruit>
+     <fruit>Plum</fruit>
+    </fruits>
+     
+</yield>
+`;
+        require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor/min/vs' }});
+        require(['vs/editor/editor.main'], function () {
+            const xmlEditor = monaco.editor.create(document.getElementById('editor-xml'), {
+                value: initXML,
+                language: 'xml',
+                theme: 'vs-dark'
+            });
+
+            const jsonEditor = monaco.editor.create(document.getElementById('editor-json'), {
+                value: '',
+                language: 'json',
+                theme: 'vs-dark'
+            });
+
+            const x2js = new X2JS();
+            function convertXmlToJson() {
+                const xmlValue = xmlEditor.getValue();
+
+
+                try {
+
+                    const jsonObj = x2js.xml_str2json(xmlValue);
+                    jsonEditor.setValue(JSON.stringify(jsonObj, null, 4));
+                } catch (error) {
+                    console.error('Error converting XML to JSON:', error);
+                    jsonEditor.setValue('Error converting XML to JSON');
+                }
+            }
+            xmlEditor.onDidChangeModelContent(convertXmlToJson);
+
+            convertXmlToJson();
+        });
+    </script>
+
+</body>
+</html>
