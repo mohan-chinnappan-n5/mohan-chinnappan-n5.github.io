@@ -1,10 +1,7 @@
 // xml2json.js
 // mohan chinnappan
 
-Split(["#xml", "#content", "#je"], { sizes: [33, 33, 33] });
-
-const downloadButton = document.getElementById('download-button');
-const initXML =
+let initXML =
     `<yield>
     <fruits>
      <fruit>Mango</fruit>
@@ -14,6 +11,19 @@ const initXML =
      
 </yield>
 `;
+
+// Get the query parameters from the URL
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('c')) {
+  await navigator.clipboard.readText().then((clipText) => {
+    initXML = clipText;
+  });
+}
+
+Split(["#xml", "#content", "#je"], { sizes: [33, 33, 33] });
+
+const downloadButton = document.getElementById('download-button');
+
 
 const jqScript = 
 `
