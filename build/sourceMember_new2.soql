@@ -1,0 +1,8 @@
+SELECT Id,
+MemberType,MemberName,         
+RevisionNum, RevisionCounter,  
+LastModifiedById, IsNewMember,
+ChangedBy                      
+FROM SourceMember              
+WHERE isNewMember = true AND
+LastModifiedById IN (SELECT Id FROM User where userName ='test-5qg1icc3l4vd@example.com')
