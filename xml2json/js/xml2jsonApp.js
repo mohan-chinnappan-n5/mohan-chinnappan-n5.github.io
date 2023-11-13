@@ -14,6 +14,17 @@ const initXML =
      
 </yield>
 `;
+
+const jqScript = 
+`
+input=~/Downloads/fp-1.json
+numberRegions=\`cat  $input| jq '.FlexiPage.flexiPageRegions' | jq 'length'\`
+echo "=== number of Regions = $numberRegions ==="
+for ((i = 0; i < $numberRegions; i++)); do
+    cat  $input |   jq -c --argjson i "$i"    '.FlexiPage.flexiPageRegions[$i].itemInstances.componentInstance.componentName'
+done`;
+
+
 let xmlEditor;
 let jsonEditor;
 
@@ -78,6 +89,11 @@ require(['vs/editor/editor.main'], function () {
             const jsonObj = x2js.xml_str2json(xmlValue);
             jsonEditor.setValue(JSON.stringify(jsonObj, null, 4));
             editor.set(jsonObj);
+            if (jsonObj.FlexiPage) {
+                document.getElementById('jq').value = jqScript;
+                document.getElementById('jq').style.display = 'block';
+
+            }
         } catch (error) {
             console.error('Error converting XML to JSON:', error);
             jsonEditor.setValue('Error converting XML to JSON');
