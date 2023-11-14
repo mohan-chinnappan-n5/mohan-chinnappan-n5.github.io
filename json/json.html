@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <script src="js/xml2json.js"></script>
 
     <link href="css/jsoneditor.css" rel="stylesheet" type="text/css">
     <script src="js/jsoneditor.js"></script>
@@ -27,13 +26,13 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XML2JSON</title>
+    <title>JSON Editor</title>
     <script src="https://unpkg.com/monaco-editor/min/vs/loader.js"></script>
-    <link rel="stylesheet" href="css/xml2json.css?v=3">
+    <link rel="stylesheet" href="css/xml2json.css?v=5">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">&nbsp; XML2JSON</a>
+        <a class="navbar-brand" href="#">&nbsp; JSON Editor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -42,8 +41,8 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <div id="dropArea" style="border: 2px dashed #ccc; padding: 2px; text-align: center;">
-                        <input class='btn btn-dark' type="file" id="jsonFileInput" accept=".xml">
-                        <span style="color: wheat;">Drag and drop a XML file here</span>
+                        <input class='btn btn-dark' type="file" id="jsonFileInput" accept=".json">
+                        <span style="color: wheat;">Drag and drop a JSON file here</span>
                         <button class="btn btn-primary" id="download-button">Download JSON</button>
                     </div>
                 </li>
@@ -52,10 +51,6 @@
         </div>
     </nav>
     <div class="editor-container">
-        <div class="split split-horizontal" id="xml">
-            <div id="editor-xml"></div>
-        </div>
-
         <div class="split split-horizontal" id="content">
             <div id="editor-json"></div>
         </div>
@@ -64,9 +59,7 @@
         </div>
     </div>
 
-    <textarea name="jq" id="jq" cols="80" rows="10" style="display: none;"></textarea>
-
-  <script type="module" src="js/xml2jsonApp.js"></script> 
+  <script type="module" src="js/jsonApp.js"></script> 
 
 </body>
 
