@@ -115,7 +115,6 @@ require(['vs/editor/editor.main'], function () {
 const jsonFileInput = document.getElementById("jsonFileInput");
 jsonFileInput.addEventListener("change", function (event) {
     var file = event.target.files[0];
-    originalFileName = file.name;
 
     if (file) {
         var reader = new FileReader();
@@ -138,8 +137,6 @@ function handleFileDrop(e) {
 
     if (files.length > 0) {
         const file = files[0];
-        // Store the original uploaded file name
-        originalFileName = file.name;
 
         // Check if the dropped file is a text file (you can adjust the condition)
         const reader = new FileReader();
