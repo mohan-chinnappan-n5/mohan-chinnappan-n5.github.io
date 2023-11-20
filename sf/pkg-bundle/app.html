@@ -7,14 +7,30 @@
     <title>Package Bundle Builder - Turing</title>
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/editor/editor.main.css">
-    
+
     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="js/xml2json.js"></script>
+    <style>
+        label {
+            font-weight: bold;
+        }
+
+        textarea {
+            background-color: black;
+            font-family: Monaco, Arial;
+            border-radius: 10px solid;
+            color: wheat;
+
+        }
+    </style>
 </head>
 
 <body>
@@ -35,38 +51,87 @@
                         <button class="btn btn-success" id="downloadScript">Download Script</button>
 
 
-                    </div>                
+                    </div>
                 </li>
 
             </ul>
-             
+
         </div>
     </nav>
 
-    <div style="display: flex; flex-direction: row; height: 70vh;margin-top:3px;padding:3px;">
-        <div style="flex: 2;">
-            <div id="xmlEditor" style="height: 600px; width:700px;"></div>
-         
-        </div>
+    <div class="split split-horizontal" id="code">
+       
+        <form id="inputForm" class="mt-3">
 
-        <div style="flex: 3;">            
-            <div id="bashEditor" style="height: 600px;width:100%;padding-left:50px"></div>
-        </div>
+            <div class="form-group">
+                <label for="templateName">Template Name:</label>
+                <input type="text" class="form-control" id="templateName" value="UAT-NOV-12-2023" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fromFolder">From Folder</label>
+                <input type="text" class="form-control" id="fromFolder"
+                    value="/User/DennisRitchie/ProjectX/force-app/main/default" required>
+            </div>
+
+            <div class="form-group">
+                <label for="branchName">Branch Name</label>
+                <input type="text" class="form-control" id="branchName" value="release/R1" required>
+            </div>
+
+
+            <div class="form-group">
+                <label for="userName">User Name:</label>
+                <input type="text" class="form-control" id="userName" value="un.sel@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="testClassList">Test Classes List (comma separated):</label>
+                <textarea name="testClassList" class="form-control" id="testClassList" cols="30"
+                    rows="10">X,Y,Z</textarea>
+            </div>
+
+        </form>
+        <h5>Tips</h5>
+        <ul class="list-group" style="display: nones;">
+            <li class="list-group-item">Create a folder with package.xml and destructiveChanges.xml
+            </li>
+            <li class="list-group-item">Upload the package.xml in this app</li>
+            <li class="list-group-item">Fill up the required value in this form</li>
+            <li class="list-group-item">Store the downloaded script (bundle-script.sh) in that folder</li>
+            <li class="list-group-item">run this script:  bash bundle-script.sh in that folder</li>
+
+
+        </ul>
     </div>
-    <hr>
-    <div style="display: flex; flex-direction: row; height: 120vh;">
-        <div style="flex: 2;display:none;">           
-             <div id="xmlResultEditor" style="height: 600px;width:600px;"></div>
+
+    <div class="split split-horizontal" id="pkg">
+        <div id="xmlEditor" style="height: 800px; width:100%;"></div>
+
+    </div>
+
+    <div class="split split-horizontal" id="sh">
+        <div id="bashEditor" style="height: 800px;width:100%;"></div>
+    </div>
+
+
+    <div style="display: flex; flex-direction: row; height: 100vh;">
+        <div style="flex: 2;display:none;">
+            <div id="xmlResultEditor" style="height: 600px;width:600px;"></div>
             <input type="file" class="btn btn-info" id="xmlResultFileInput" accept=".xml">
         </div>
 
         <div style="flex: 2;">
             <div id="jsonEditor" style="height: 600px; width:750px;display:none;"></div>
         </div>
-       
+
     </div>
+ 
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/loader.js"></script>
-    <script  type="module" src="js/app.js?v=6"></script>
+    <script type="module" src="js/app.js?v=7"></script>
 </body>
 
 </html>

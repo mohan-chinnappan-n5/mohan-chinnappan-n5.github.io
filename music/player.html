@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Notes App</title>
+  <!-- Include Monaco Editor dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.22.3/min/vs/loader.js"></script>
+  <!-- Include Tone.js -->
+  <script src="https://cdn.jsdelivr.net/npm/tone@14.8.30/build/Tone.js"></script>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      height: 100vh;
+    }
+    #editor-container {
+      flex: 1;
+      height: 100vh;
+    }
+    #player-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <div id="editor-container"></div>
+  <div id="player-container">Write some notes in the editor to play!</div>
+
+  <script>
+    require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.22.3/min/vs' } });
+
+    require(['vs/editor/editor.main'], function () {
+      var editor = monaco.editor.create(document.getElementById('editor-container'), {
+        value: '// Write your music notes here\n// Example: Tone.Synth().toDestination().triggerAttackRelease("C4", "8n");',
+        language: 'javascript',
+        theme: 'vs-dark',
+      });
+
+      var playerContainer = document.getElementById('player-container');
+
+      function updatePlayer() {
+        try {
+          // Clear previous content in player container
+          playerContainer.innerHTML = '';
+
+          // Execute the code in the editor
+          eval(editor.getValue());
+        } catch (error) {
+          // Display any errors in the player container
+          playerContainer.innerHTML = '<div style="color: red;">Error: ' + error.message + '</div>';
+        }
+      }
+
+      // Update the player when the editor content changes
+      editor.onDidChangeModelContent(updatePlayer);
+
+      // Initial update
+      updatePlayer();
+    });
+  </script>
+</body>
+</html>

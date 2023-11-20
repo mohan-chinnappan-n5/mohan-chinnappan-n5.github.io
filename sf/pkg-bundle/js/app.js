@@ -3,11 +3,27 @@
 //-----------------------
 
 const urlParams = new URLSearchParams(window.location.search);
-
-import { Types } from "./Types.js?v=26";
-import { Util } from "./Util.js?v=25";
-
 const getEle = (id) => document.getElementById(id);
+
+Split(["#code", "#pkg", "#sh"], {
+  sizes: [20, 40, 40],
+});
+
+
+ // Load previous input from localStorage
+ const savedData = JSON.parse(localStorage.getItem('envData'));
+if (savedData) {
+  getEle('templateName').value = savedData.templateName;
+  getEle('fromFolder').value = savedData.fromFolder;
+  getEle('branchName').value = savedData.branchName;
+  getEle('userName').value = savedData.userName;
+  getEle('testClassList').value = savedData.testClassList;
+}
+
+
+import { Types } from "./Types.js?v=27";
+import { Util } from "./Util.js?v=28";
+
 if (urlParams.has("d")) {
   getEle("jsonEditor").style.display = "block";
 }
@@ -118,7 +134,8 @@ require(["vs/editor/editor.main"], function () {
         pkgFilesCopy,
         envVars,
         zipper,
-      } = convertXmlToJson(xmlContent);
+      } = convertXmlToJson(xmlContent,getEle('templateName').value, getEle('fromFolder').value, getEle('branchName').value,
+      getEle('testClassList').value, getEle('userName').value);
       jsonEditor.setValue(json);
 
       // Convert JSON to Bash (you should implement this logic)
@@ -158,7 +175,7 @@ const xml2json = (xml) => {
   return x2js.xml_str2json(xml);
 };
 
-function convertXmlToJson(xml) {
+function convertXmlToJson(xml, templateName, fromFolder, branchName, testClassList, userName ) {
   try {
     const jsonObj = xml2json(xml);
     const typeAndMembers = [];
@@ -181,12 +198,12 @@ function convertXmlToJson(xml) {
     const summary = [];
 
     //------------------ to be collected from a from
-    const TEMPLATE_NAME = "${TEMPLATE_NAME}";
-    const FROM = "${FROM_FOLDER}";
+    const TEMPLATE_NAME = templateName;
+    const FROM = fromFolder;
     const TO = "${TO_FOLDER}";
 
-    const TEST_CLASS_LIST = "X,Y,Z";
-    const USERNAME = "un.sel@gmail.com";
+    const TEST_CLASS_LIST = testClassList
+    const USERNAME = userName;
     const packageXmlPath = "./package.xml";
     const destructiveXmlPath = "./destructiveChanges.xml";
     // --------------------------------------------
@@ -208,7 +225,7 @@ function convertXmlToJson(xml) {
       packageXmlPath,
       destructiveXmlPath
     );
-    const envVars = Util.getEnvVars();
+    const envVars = Util.getEnvVars(templateName, fromFolder, branchName,testClassList, userName);
     const zipper = Util.getZipper(TEMPLATE_NAME);
 
     return {

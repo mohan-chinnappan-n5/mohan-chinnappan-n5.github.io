@@ -212,23 +212,37 @@ echo sfdx force:source:deploy -x package.xml  --${2}destructivechanges destructi
     `
   }
 
-  static getEnvVars() {
+  static getEnvVars(templateName, fromFolder, branchName,testClassList, userName ) {
+
+  // Store input in localStorage
+  const data = { templateName, fromFolder, branchName,  testClassList, userName  };
+  //console.log(data);
+  localStorage.setItem('envData', JSON.stringify(data));
+
+
+
 return `
 # TEMPLATE_NAME is the your package name 
 # - example: PATCH_RELEASE_22)
-TEMPLATE_NAME="TEMPLATE_NAME"
+TEMPLATE_NAME="${templateName}"
 
 # FROM_FOLDER is where checkout branch code lives: full path until 'default' folder
 # - example: /User/DennisRitchie/ProjectX/force-app/main/default
-FROM_FOLDER="FROM_FOLDER"
+FROM_FOLDER="${fromFolder}"
+
+CWD=\`pwd\`
+cd "${fromFolder}" 
+git checkout ${branchName}
+git pull
+cd "\${CWD}"
 
 TO_FOLDER="\${TEMPLATE_NAME}"
 # TEST_CLASS_LIST is comma separated list of Test classes to be run for RunSpecifiedTests option
-TEST_CLASS_LIST="X,Y,Z"
+TEST_CLASS_LIST="${testClassList}"
 
 # USERNAME is your username for the org that you are deploying to
 #  - Login to the org using:  'sfdx force:auth:web:login -r https://login|test.salesforce.com'x
-USERNAME="un.sel@gmail.com"
+USERNAME="${userName}"
 `
   }
 }
