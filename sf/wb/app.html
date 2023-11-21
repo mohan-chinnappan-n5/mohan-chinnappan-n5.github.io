@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsforce/1.9.1/jsforce.min.js"></script>
+
+</head>
+
+<body>
+  <button id="login" onclick="javascript:jsforce.browser.login();">Login</button>
+  <div id="at"></div>
+  <div id="instance_url"></div>
+
+
+
+  <script>
+
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('at')) {
+      console.log(urlParams.get('at'));
+      document.getElementById('login').style.display ='none';
+      document.getElementById('at').innerHTML = urlParams.get('at');
+      document.getElementById('instance_url').innerHTML = urlParams.get('instance_url');
+
+    }
+
+
+    jsforce.browser.init({
+      clientId: '3MVG9vp1McGXQBYGcnDR0UfAip.JjJVJUbccWajKPlMgbFIV.C9g3FdmKaKfOYlrJ6iY4QUQKnC1F8dzu8YAz',
+      // redirectUri: 'http://localhost:7010/admin-commit/OauthRedirect.html'
+      redirectUri: 'https://mohan-chinnappan-n5.github.io/sf/wb/OauthRedirect.html'
+    });
+    jsforce.browser.on('connect', function (conn) {
+      conn.query('SELECT Id, Name FROM Account', function (err, res) {
+        if (err) { return console.error(err); }
+        console.log(res);
+      });
+    });
+  </script>
+</body>
+
+</html>

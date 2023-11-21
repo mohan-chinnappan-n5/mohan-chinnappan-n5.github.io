@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuthRedirect</title>
+</head>
+<body>
+    
+    <script>
+
+// http://localhost:1717/OauthRedirect#access_token=00D8W000004Lymu%21ARMAQOi4TFevdJInl9M7FK9k_9Mai1WLrq_trgnIPVJOXXB.da9ug9GoHa8fDMlsu5HYzIC93kCKN9z77TQsQCspHJ1Kdj12&refresh_token=5Aep861c4inEt0Hp89cXuKSnWxWXAy944Nx8J7eNFFVufV2nDX8VFtu6Qvxol7w8clm2U96S9jx1YAgjghSDGmE&instance_url=https%3A%2F%2Fd8w000004lymuuac-dev-ed.develop.my.salesforce.com&id=https%3A%2F%2Flogin.salesforce.com%2Fid%2F00D8W000004LymuUAC%2F0058W00000BAlWSQA1&issued_at=1698176813545&signature=hB%2BXNnIDmPvLhbwcave8tsBlztnkcqvog90mRRQkFJw%3D&state=jsforce0.popup.5oj8uwd0zfv&scope=api+refresh_token&token_type=Bearer
+
+const urlParams = new URLSearchParams(window.location.hash);
+const items = window.location.hash.split('&');
+console.log(items);
+const [access_token, refresh_token, instance_url,id, issued_at,state, scope, token_type] = items; 
+const toUrl =`./app.html?at=${access_token.replace('#','')}&instance_url=${instance_url}`;
+window.open(toUrl, '_blank');
+
+     </script>
+</body>
+</html>
