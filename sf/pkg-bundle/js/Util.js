@@ -54,12 +54,14 @@ return content;
     typeAndMembers.forEach(({ type, members }) => {
       scriptLines.push(`echo "--------------------------------------------"`);
       if (typeInfoMap[type] === null) {
-        throw new Error(`*** ${type} has no typeInfoMap! ***`);
+        throw new Error(`--- ${type} has no typeInfoMap! Can't continue... ---`);
         // console.err(`*** ${type} has no typeInfoMap! ***`);
       }
 
       // Determine the folder name, file name, and file extension based on the type
       const typeInfo = typeInfoMap[type] ;
+
+    
 
       scriptLines.push(`echo "_____ ${type} : ${members.length} _____"`);
       summary.push(`${type} (${members.length})`);
@@ -76,6 +78,15 @@ return content;
 
       //members.forEach((member, ndx) => {
         scriptLines.push(`echo "======= member: ${member} ======="`);
+
+        try {
+
+         if (!typeInfo) {
+            // alert (`Do not know about the type : ${type}! Can't continue...`);
+            throw new Error(`--- ${type} has no typeInfoMap! Can't continue... ---`);
+            return;
+          } 
+
         if (typeInfo.getFileAttributes(member)) {
           const { folderName, fileNames } = typeInfo.getFileAttributes(member);
           for (const fileName of fileNames) {
@@ -106,6 +117,11 @@ return content;
             ])
           );
         }
+      }
+      catch(e){
+        alert (e);
+
+      }
 
  
       

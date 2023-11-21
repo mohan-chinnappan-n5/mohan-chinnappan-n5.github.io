@@ -21,8 +21,8 @@ if (savedData) {
 }
 
 
-import { Types } from "./Types.js?v=27";
-import { Util } from "./Util.js?v=28";
+import { Types } from "./Types.js?v=29";
+import { Util } from "./Util.js?v=29";
 
 if (urlParams.has("d")) {
   getEle("jsonEditor").style.display = "block";
@@ -124,6 +124,8 @@ require(["vs/editor/editor.main"], function () {
   document
     .getElementById("processButton")
     .addEventListener("click", function () {
+
+
       var xmlContent = xmlEditor.getValue();
       // Convert XML to JSON (you should implement this logic)
       const {
