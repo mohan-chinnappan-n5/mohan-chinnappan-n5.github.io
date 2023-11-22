@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/editor/editor.main.css">
+
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentiment Analysis - transformers</title>
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">&nbsp;Sentiment Analysis - transformers</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <div id="dropArea" style="border: 2px dashed #ccc; padding: 2px; text-align: center;">
+                        <input id="file-upload" type="file" class="btn btn-dark" accept="text/*" />
+                        <span style="color: wheat;">Drag and drop a text file here </span>
+                        <button class="btn btn-primary" id="classifyButton">Classify</button>
+
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="split split-horizontal" id="stat" >
+        <div id="status"></div>
+    </div>
+    <div class="split split-horizontal" id="inputDiv" >
+        <div id="inputEditor" style="height: 800px; width:100%"></div>
+    </div>
+    <div class="split split-horizontal" id="results">
+        <div id="resultsEditor" style="height: 800px; width:100%;"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/loader.js"></script>
+    <script src="app.js" type="module"></script>
+</body>
+</html>
