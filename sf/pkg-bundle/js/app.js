@@ -21,8 +21,8 @@ if (savedData) {
 }
 
 
-import { Types } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@41d3f2e/bundler/Types.js";
-import { Util  } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@41d3f2e/bundler/Util.js";
+import { Types } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@latest/bundler/Types.js";
+import { Util  } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@latest/bundler/Util.js";
 // ref: https://stackoverflow.com/questions/17341122/link-and-execute-external-javascript-file-hosted-on-github/18049842#18049842
 
 if (urlParams.has("d")) {
