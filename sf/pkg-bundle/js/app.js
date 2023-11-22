@@ -21,8 +21,8 @@ if (savedData) {
 }
 
 
-import { Types } from "./Types.js?v=30";
-import { Util } from "./Util.js?v=30";
+import { Types } from "./Types.js?v=31";
+import { Util } from "./Util.js?v=31";
 
 if (urlParams.has("d")) {
   getEle("jsonEditor").style.display = "block";
