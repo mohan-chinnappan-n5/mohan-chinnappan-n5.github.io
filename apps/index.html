@@ -10,27 +10,10 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="../editor/img/favicon.ico" />
 
-    <style>
-        textarea {
-            font-family: Monaco, Arial;
-            font-size: 13px;
-            background-color: black;
-            color: azure;
-            border-radius: 10px;
-        }
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+    <link rel="stylesheet" href="css/app.css">
 
-        ul.list-group.list-group-striped li:nth-of-type(odd) {
-            background: #eee;
-        }
-
-        ul.list-group.list-group-striped li:nth-of-type(even) {
-            background: white;
-        }
-
-        ul.list-group.list-group-hover li:hover {
-            background: linen;
-        }
-    </style>
 </head>
 
 <body>
@@ -43,191 +26,237 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-
                 </li>
             </ul>
         </div>
     </nav>
+    <div class="split split-horizontal" id="toc">
+        <label class="form-control" for="sectionDropdown"><b>Select a Section:</b></label>
+        <select class="form-control" id="sectionDropdown" onchange="navigateToSection()">
+            <option value="DataApps">Data Apps</option>
+            <option value="EditorApps">Editor Apps</option>
+            <option value="Database">Database</option>
+            <option value="JSONApps">JSON Apps</option>
+            <option value="XML">XML</option>
+            <option value="YAML">YAML</option>
+            <option value="GenericApps">Generic Apps</option>
+            <option value="DeploymentApps">Deployment Apps</option>
+            <option value="PerfMeasurementApps">Perf Measurement Apps</option>
+            <option value="ChartsApp">Charts Apps</option>
+            <option value="CRMAApps">CRMA Apps</option>
+            <option value="DiagramApps">Diagram Apps</option>
+            <option value="MediaApps">Media Apps</option>
+            <option value="UIRecorderApps">UI Recorder Apps</option>
+            <option value="GenAIApps">GenAI Apps</option>
+        </select>
+    </div>
+    <div class="split split-horizontal" id="sections">
+
+        <section id="DataApps">
+            <h4>Data Apps</h4>
+            <ul class="list-group list-group-striped container">
+
+                <li class='list-group-item'><a href="../viz/datatable/dt.html">DataTable</a></li>
+                <!-- <li class='list-group-item'><a href="../viz/datatable/dt-2.html">DataTable-2</a></li> -->
+                <li class='list-group-item'><a href="../kalam/viz/app.html">Data Viz -
+                        Kalam</a></li>
+
+                <li class='list-group-item'><a href="../dfv/renderer.html">SF-LAND: Data
+                        Viz
+                        : Renderer</a></li>
+
+                <li class='list-group-item'><a href="../datagen/dg/dg.html?t=100">DataGen
+                        -
+                        Turing</a></li>
+            </ul>
+        </section>
+
+        <section id="EditorApps">
+            <h4>Editor Apps</h4>
+            <ul class="list-group list-group-striped container">
+
+                <li class='list-group-item'><a href="../md/md.html">Markdown Editor -
+                        Kalam</a></li>
+                <li class='list-group-item'><a href="../editor/simple-editor.html">Simple
+                        File Editor - Kalam</a></li>
+            </ul>
+        </section>
+
+        <section id="Database">
+
+            <h4>Database</h4>
+            <ul class="list-group list-group-striped container">
+                <li class='list-group-item'><a href="../utils/sql/sql.html">SQLite</a>
+                </li>
+            </ul>
+        </section>
 
 
-    <div class="container">
+        <section id="JSONApps">
+            <h4>JSON Apps</h4>
+            <ul class="list-group list-group-striped container">
+
+                <li class='list-group-item'><a href="../json/json.html">JSON Editor</a>
+                </li>
 
 
-        <h4>Data Apps</h4>
-        <ul class="list-group list-group-striped container">
-
-            <li class='list-group-item'><a href="../viz/datatable/dt.html">DataTable</a></li>
-<!--
-            <li class='list-group-item'><a href="../viz/datatable/dt-2.html">DataTable-2</a></li>
--->
+            </ul>
+        </section>
 
 
-            <li class='list-group-item'><a href="../kalam/viz/app.html">Data Viz -
-                    Kalam</a></li>
+        <section id="XML">
+            <h4>XML</h4>
+            <ul class="list-group list-group-striped container">
 
-            <li class='list-group-item'><a href="../dfv/renderer.html">SF-LAND: Data
-                    Viz
-                    : Renderer</a></li>
-
-            <li class='list-group-item'><a href="../datagen/dg/dg.html?t=100">DataGen
-                    -
-                    Turing</a></li>
-        </ul>
-
-        <h4>Editor Apps</h4>
-        <ul class="list-group list-group-striped container">
-
-            <li class='list-group-item'><a href="../md/md.html">Markdown Editor -
-                    Kalam</a></li>
-            <li class='list-group-item'><a href="../editor/simple-editor.html">Simple
-                    File Editor - Kalam</a></li>
-        </ul>
+                <li class='list-group-item'><a href="../xml/sfl-xslt.html">SF-LAND ::
+                        XSLT</a>
+                </li>
+                <li class='list-group-item'><a href="../xml2json/xml2json.html">XML2JSON</a>
+                </li>
 
 
-        <h4>Database</h4>
-        <ul class="list-group list-group-striped container">
-            <li class='list-group-item'><a href="../utils/sql/sql.html">SQLite</a>
-            </li>
-        </ul>
+            </ul>
+        </section>
+
+        <section id="YAML">
+            <h4>YAML</h4>
+            <ul class="list-group list-group-striped container">
+                <li class='list-group-item'><a href="../yaml/json2yaml.html">JSON2YAML</a> </li>
+                <li class='list-group-item'><a href="../yaml/yaml2json.html">YAML2JSON</a> </li>
 
 
-        
-        <h4>JSON</h4>
-        <ul class="list-group list-group-striped container">
-
-            <li class='list-group-item'><a href="../json/json.html">JSON Editor</a>
-            </li>
-            
-
-        </ul>
+            </ul>
+        </section>
 
 
+        <section id="GenericApps">
+            <h4>Generic Apps</h4>
+            <ul class="list-group list-group-striped container">
 
-        <h4>XML</h4>
-        <ul class="list-group list-group-striped container">
+                <li class='list-group-item'><a href="../common/books/books.html">Simple
+                        Accounting App - Kalam</a></li>
 
-            <li class='list-group-item'><a href="../xml/sfl-xslt.html">SF-LAND ::
-                    XSLT</a>
-            </li>
-            <li class='list-group-item'><a href="../xml2json/xml2json.html">XML2JSON</a>
-            </li>
-
-
-        </ul>
-
-
-        <h4>YAML</h4>
-        <ul class="list-group list-group-striped container">
-            <li class='list-group-item'><a href="../yaml/json2yaml.html">JSON2YAML</a> </li>
-            <li class='list-group-item'><a href="../yaml/yaml2json.html">YAML2JSON</a> </li>
-
-
-        </ul>
-
-
-
-        <h4>Generic Apps</h4>
-        <ul class="list-group list-group-striped container">
-
-            <li class='list-group-item'><a href="../common/books/books.html">Simple
-                    Accounting App - Kalam</a></li>
-
-            <li class='list-group-item'><a href="../common/todo/todo.html">Simple
-                    TODO
-                    app -
-                    Kalam</a></li>
-
-            <li class="list-group-item"><a href="../utils/clock/clockapp.html">Clock
-                </a>
-            </li>
-        </ul>
+                <li class='list-group-item'><a href="../common/todo/todo.html">Simple
+                        TODO
+                        app -
+                        Kalam</a></li>
+                <li class="list-group-item"><a href="../utils/clock/clockapp.html">Clock
+                    </a>
+                </li>
+            </ul>
+        </section>
 
 
 
 
-        <h4>Deployment Apps</h4>
-        <ul class="list-group list-group-striped container">
-            <li class='list-group-item'><a
-                    href="../delta/xmldelta.html?t=Profile">SF-LAND :: DeltaUtil</a></li>
-            <li class='list-group-item'><a href="../pkg/pkg-gen.html">package.xml Generator</a></li>
-            <li class='list-group-item'><a href="../build/build.html">BuildGen - Turing</a></li>
-            <li class='list-group-item'><a href="../sf/pkg-bundle/app.html">Package Bundle Builder - Turing</a></li>
-        </ul>
 
-        <h4>Perf Measurement Apps</h4>
-        <ul class="list-group list-group-striped container">
-
-            <li class='list-group-item'><a
-                    href="../nw/traceroute/routemap.html">Traceroute
-                    Map Util - Turing</a></li>
+        <section id="DeploymentApps">
+            <h4>Deployment Apps</h4>
+            <ul class="list-group list-group-striped container">
+                <li class='list-group-item'><a href="../delta/xmldelta.html?t=Profile">SF-LAND :: DeltaUtil</a></li>
+                <li class='list-group-item'><a href="../pkg/pkg-gen.html">package.xml Generator</a></li>
+                <li class='list-group-item'><a href="../build/build.html">BuildGen - Turing</a></li>
+                <li class='list-group-item'><a href="../sf/pkg-bundle/app.html">Package Bundle Builder - Turing</a></li>
+            </ul>
+        </section>
 
 
-            <li class='list-group-item'><a href="../har/harviz.html">HAR Visualizer -
-                    Kalam</a></li>
+        <section id="PerfMeasurementApps">
+            <h4>Perf Measurement Apps</h4>
+            <ul class="list-group list-group-striped container">
 
-        </ul>
-        <h4>Charts Apps</h4>
-        <ul class="list-group list-group-striped container">
-            <li class="list-group-item"><a href="../charts/pert/pert.html">PERT
-                    Chart</a>
-            </li>
-            <li class="list-group-item"><a href="../charts/gantt/gantt.html">Gantt
-                    Chart</a>
-            </li>
-
-        </ul>
-
-        <h4>CRMA</h4>
-        <ul class="list-group list-group-striped container">
-            <li class='list-group-item'><a href="../2021/ea/df/dfviz.html">CRMA
-                    Dataflow Visualizer </a>
-            </li>
-            <li class='list-group-item'><a href="https://mohan-chinnappan-n2.github.io/crma/bchart.html">CRMA Recipe
-                    Schedule</a>
-            </li>
-        </ul>
-
-        <h4>Diagram Apps</h4>
-        <ul class="list-group list-group-striped container">
-            <li class='list-group-item'><a href="../svg/edit.html">SVG Editor</a></li>
-	    <li class='list-group-item'><a href="https://mohan-chinnappan-n2.github.io/2019/viz/seq/seq.html">UML Seq Diagram</a></li>
-         
-            <li class='list-group-item'><a href="..//2021/dwg/pg/dwg.html#">Diagram
-                    Editor Playground</a></li>
-            <li class="list-group-item"><a href="../draw/excalidraw/index.html">Draw Tool</a> </li>
-            <li class="list-group-item"><a href="https://mohan-chinnappan-n.github.io/viz/viz.html">GraphViz</a> </li>
-            <li class="list-group-item"><a href="https://mohan-chinnappan-n.github.io/drawio/src/main/webapp/index.html">DrawIO</a>
-        </li>
-
-         
-
-        </ul>
-
-        <h4>Media Apps (13 Apps)</h4>
-        <ul class="list-group list-group-striped container">
-            <li class='list-group-item'><a href="https://mohan-chinnappan-n2.github.io/media-app.html">Video, Audio, Screen Recording and Music Apps</a></li>
-        </li>
-
-        </ul>
-        <h4>UI Recorder Apps</h4>
-        <ul class="list-group list-group-striped container">
-            <li class='list-group-item'><a href="../cspl/cspl.html?a=0&t=30000">State and Country Picklist Recording Script Generator</a></li>
-        </li>
-
-        </ul>
-
-        <h4>GenAI apps</h4>
-        <ul class="list-group list-group-striped container">
-            <li class='list-group-item'><a href="../genai/od/app.html">Object Detector - transformer</a></li>
-            <li class='list-group-item'><a href="../genai/senti/app.html">Sentiment Analysis - transformer</a></li>
- 
-        </li>
-
-        </ul>
+                <li class='list-group-item'><a href="../nw/traceroute/routemap.html">Traceroute
+                        Map Util - Turing</a></li>
 
 
+                <li class='list-group-item'><a href="../har/harviz.html">HAR Visualizer -
+                        Kalam</a></li>
+
+            </ul>
+        </section>
+
+        <section id="ChartsApps">
+            <h4>Charts Apps</h4>
+            <ul class="list-group list-group-striped container">
+                <li class="list-group-item"><a href="../charts/pert/pert.html">PERT
+                        Chart</a>
+                </li>
+                <li class="list-group-item"><a href="../charts/gantt/gantt.html">Gantt
+                        Chart</a>
+                </li>
+
+            </ul>
+        </section>
+
+        <section id="CRMAApps">
+            <h4>CRMA</h4>
+            <ul class="list-group list-group-striped container">
+                <li class='list-group-item'><a href="../2021/ea/df/dfviz.html">CRMA
+                        Dataflow Visualizer </a>
+                </li>
+                <li class='list-group-item'><a href="https://mohan-chinnappan-n2.github.io/crma/bchart.html">CRMA Recipe
+                        Schedule</a>
+                </li>
+            </ul>
+        </section>
+
+        <section id="DiagramApps">
+            <h4>Diagram Apps</h4>
+            <ul class="list-group list-group-striped container">
+                <li class='list-group-item'><a href="../svg/edit.html">SVG Editor</a></li>
+                <li class='list-group-item'><a href="https://mohan-chinnappan-n2.github.io/2019/viz/seq/seq.html">UML
+                        Seq Diagram</a></li>
+
+                <li class='list-group-item'><a href="..//2021/dwg/pg/dwg.html#">Diagram
+                        Editor Playground</a></li>
+                <li class="list-group-item"><a href="../draw/excalidraw/index.html">Draw Tool</a> </li>
+                <li class="list-group-item"><a href="https://mohan-chinnappan-n.github.io/viz/viz.html">GraphViz</a>
+                </li>
+                <li class="list-group-item"><a
+                        href="https://mohan-chinnappan-n.github.io/drawio/src/main/webapp/index.html">DrawIO</a>
+                </li>
+
+
+
+            </ul>
+        </section>
+
+        <section id="MediaApps">
+
+            <h4>Media Apps (13 Apps)</h4>
+            <ul class="list-group list-group-striped container">
+                <li class='list-group-item'><a href="https://mohan-chinnappan-n2.github.io/media-app.html">Video, Audio,
+                        Screen Recording and Music Apps</a></li>
+                </li>
+
+            </ul>
+        </section>
+
+        <section id="UIRecorderApps">
+            <h4>UI Recorder Apps</h4>
+            <ul class="list-group list-group-striped container">
+                <li class='list-group-item'><a href="../cspl/cspl.html?a=0&t=30000">State and Country Picklist Recording
+                        Script Generator</a></li>
+                </li>
+
+            </ul>
+        </section>
+
+        <section id="GenAIApps">
+
+            <h4>GenAI apps</h4>
+            <ul class="list-group list-group-striped container">
+                <li class='list-group-item'><a href="../genai/od/app.html">Object Detector - transformer</a></li>
+                <li class='list-group-item'><a href="../genai/senti/app.html">Sentiment Analysis - transformer</a></li>
+                <li class='list-group-item'><a href="../genai/translate/app.html">Translate - transformer</a></li>
+                </li>
+
+            </ul>
+        </section>
 
     </div>
+
+    <script src="js/app.js"></script>
 
 
 </body>
