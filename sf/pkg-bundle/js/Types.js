@@ -374,7 +374,7 @@ static typeInfoMap = {
         getFileAttributes: (member) => {
             return {
                 folderName: `wave`,
-                fileNames: [ `${member}.wdf`, `${member}.wdf-meta.xml`]
+                fileNames: [ `${member}.wdpr`, `${member}.wdpr-meta.xml`]
             };
         }
      },
