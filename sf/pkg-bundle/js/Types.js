@@ -299,7 +299,7 @@ static typeInfoMap = {
         getFileAttributes: (member) => {
             return {
                 folderName: `experiences`,
-                fileNames: [ `${member}`]
+                fileNames: [ `${member}`,  `${member}.site-meta.xml`]
             };
         },
         copyAllFiles: true
