@@ -295,10 +295,10 @@ static typeInfoMap = {
     },
 
     'ExperienceBundle': {
-        folderName: 'ExperienceBundle',
+        folderName: 'experiences',
         getFileAttributes: (member) => {
             return {
-                folderName: `ExperienceBundle`,
+                folderName: `experiences`,
                 fileNames: [ `${member}`]
             };
         },
