@@ -294,6 +294,18 @@ static typeInfoMap = {
         copyAllFiles: true
     },
 
+    'ExperienceBundle': {
+        folderName: 'ExperienceBundle',
+        getFileAttributes: (member) => {
+            return {
+                folderName: `ExperienceBundle`,
+                fileNames: [ `${member}`]
+            };
+        },
+        copyAllFiles: true
+    },
+
+
     'AuraDefinitionBundle': {
         folderName: 'aura',
         getFileAttributes: (member) => {
@@ -315,12 +327,33 @@ static typeInfoMap = {
         }
      },
 
+     'WaveDataset': {
+        folderName: 'wave',
+        getFileAttributes: (member) => {
+            return {
+                folderName: `wave`,
+                fileNames: [  `${member}.wds-meta.xml`,  `${member}.xmd-meta.xml`]
+            };
+        }
+     },
+     
+
      'WaveDashboard': {
         folderName: 'wave',
         getFileAttributes: (member) => {
             return {
                 folderName: `wave`,
                 fileNames: [ `${member}.wdash`, `${member}.wdash-meta.xml`]
+            };
+        }
+     },
+
+     'WaveDataflow': {
+        folderName: 'wave',
+        getFileAttributes: (member) => {
+            return {
+                folderName: `wave`,
+                fileNames: [ `${member}.wdf`, `${member}.wdf-meta.xml`]
             };
         }
      },
