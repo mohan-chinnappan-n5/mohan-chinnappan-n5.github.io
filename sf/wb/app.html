@@ -10,7 +10,10 @@
 </head>
 
 <body>
-  <button id="login" class="btn btn-info" onclick="javascript:jsforce.browser.login();">Login</button>
+  <h5>Login into your Salesforce Org </h5>
+  <button id="login" class="btn btn-info" onclick="javascript:jsforce.browser.login({loginUrl: 'https://test.salesforce.com'});">Login Sandbox</button>
+  <button id="login" class="btn btn-warning" onclick="javascript:jsforce.browser.login({loginUrl: 'https://login.salesforce.com'});">Login Production or Dev Ed</button>
+
   <div id="at"></div>
   <div id="instance_url"></div>
 
