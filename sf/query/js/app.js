@@ -78,7 +78,7 @@ function querySalesforce() {
     var query = queryEditor.getValue();
 
     // Salesforce REST API endpoint for querying records
-    var apiEndpoint = `${instanceUrl}/services/data/v52.0/query?q=${encodeURIComponent(query)}`;
+    var apiEndpoint = `${instanceUrl}/services/data/v58.0/query?q=${encodeURIComponent(query)}`;
 
     // Make a GET request to the Salesforce REST API with 'no-cors' mode
     const headers = {
@@ -103,6 +103,6 @@ function querySalesforce() {
             resultEditor.setValue(JSON.stringify(data, null, 2));
         })
         .catch(error => {
-            resultEditor.setValue('Error: ' + error.message);
+            resultEditor.setValue('Error: ' + error.message + "\nDid you set up CORS in your Org?");
         });
 }
