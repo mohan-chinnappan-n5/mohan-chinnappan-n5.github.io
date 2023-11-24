@@ -22,9 +22,12 @@ if (savedData) {
 
 // b0baef6
 
-import { Types } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@b0baef6/bundler/Types.js";
-import { Util  } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@b0baef6/bundler/Util.js";
+//import { Types } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@b0baef6/bundler/Types.js";
+// import { Util  } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@b0baef6/bundler/Util.js";
 // ref: https://stackoverflow.com/questions/17341122/link-and-execute-external-javascript-file-hosted-on-github/18049842#18049842
+
+import { Types } from "./Types.js?v=100";
+import { Util  } from "./Util.js?v=100";
 
 if (urlParams.has("d")) {
   getEle("jsonEditor").style.display = "block";
