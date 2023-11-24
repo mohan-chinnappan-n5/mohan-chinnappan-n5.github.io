@@ -14,7 +14,7 @@
         const url = window.location.href;
         const items = url.split('#')[1].split('&');
         const [access_token, refresh_token, instance_url, id, issued_at, state, scope, token_type] = items;
-        const toUrl = `../query/app.html?o=${atoa(JSON.stringify(items))}`;
+        const toUrl = `../query/app.html?o=${btoa(JSON.stringify(items))}`;
         window.open(toUrl, '_blank');
     </script>
 </body>
