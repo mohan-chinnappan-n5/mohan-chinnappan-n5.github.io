@@ -86,6 +86,8 @@ function saveCredentials() {
 
 // Function to query Salesforce using the saved credentials and query
 function querySalesforce() {
+
+  console.log('querySalesforce');
   const accessToken = getEle("accessTokenInput").value;
   const instanceUrl = getEle("instanceUrlInput").value;
 
