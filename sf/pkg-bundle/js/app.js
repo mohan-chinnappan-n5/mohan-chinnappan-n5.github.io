@@ -20,9 +20,10 @@ if (savedData) {
   getEle('testClassList').value = savedData.testClassList;
 }
 
+// b0baef6
 
-import { Types } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@latest/bundler/Types.js";
-import { Util  } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@latest/bundler/Util.js";
+import { Types } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@b0baef6/bundler/Types.js";
+import { Util  } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@b0baef6/bundler/Util.js";
 // ref: https://stackoverflow.com/questions/17341122/link-and-execute-external-javascript-file-hosted-on-github/18049842#18049842
 
 if (urlParams.has("d")) {
