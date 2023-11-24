@@ -84,6 +84,11 @@ function saveCredentials() {
   localStorage.setItem("orgData", JSON.stringify(data));
 }
 
+getEle('saveOrgInfo').addEventListener('click', event => {
+    saveCredentials();
+
+})
+
 // Function to query Salesforce using the saved credentials and query
 function querySalesforce() {
 
