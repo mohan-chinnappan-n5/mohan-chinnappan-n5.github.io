@@ -79,7 +79,7 @@ function saveCredentials() {
 
   // Store input in localStorage
   const data = { accessToken, instanceUrl };
-  console.log(data);
+  // console.log(data);
   //console.log(data);
   localStorage.setItem("orgData", JSON.stringify(data));
 }
