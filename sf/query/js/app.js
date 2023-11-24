@@ -132,6 +132,10 @@ function querySalesforce() {
     });
 }
 
+getEle('processButton').addEventListener('click', event => {
+    querySalesforce();
+})
+
 // Download
 function downloadFile() {
   const fileContent = resultEditor.getValue(); // Get the content from Monaco Editor
