@@ -15,8 +15,8 @@ const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get('o')) {
     const input = urlParams.get('o');
     const inputObj = JSON.parse(atob(input));
-    const accessToken = inputObj[0].split('=')[1];
-    const instanceUrl = inputObj[1].split('=')[1];
+    const accessToken = decodeURIComponent(inputObj[0].split('=')[1]);
+    const instanceUrl = decodeURIComponent(inputObj[1].split('=')[1]);
     getEle('accessTokenInput').value = accessToken;
     getEle('instanceUrlInput').value = instanceUrl;
 }
