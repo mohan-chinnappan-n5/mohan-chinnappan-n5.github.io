@@ -5,9 +5,8 @@ export class Util {
     return parts.join(separator).replace(replace, separator);
   }
 
-  static getForceIgnore () {
-    const content =
-`package.xml
+  static getForceIgnore() {
+    const content = `package.xml
 src-env-specific-alias-post/**
 src-env-specific-alias-pre/**
 src-env-specific-pre/**
@@ -33,8 +32,8 @@ artifacts
 **/lwc/__mocks__/**
 
 
-`
-return content;
+`;
+    return content;
   }
   static generateCopyScript(
     sourceDir,
@@ -43,10 +42,10 @@ return content;
     typeInfoMap,
     summary
   ) {
-    const scriptLines = []; 
+    const scriptLines = [];
 
     let subFolder = "force-app/main/default";
-    
+
     // Create the destination directory if it doesn't exist
     //scriptLines.push(`mkdir -p "${destinationDir}/${subFolder}"`);
 
@@ -54,14 +53,14 @@ return content;
     typeAndMembers.forEach(({ type, members }) => {
       scriptLines.push(`echo "--------------------------------------------"`);
       if (typeInfoMap[type] === null) {
-        throw new Error(`--- ${type} has no typeInfoMap! Can't continue... ---`);
+        throw new Error(
+          `--- ${type} has no typeInfoMap! Can't continue... ---`
+        );
         // console.err(`*** ${type} has no typeInfoMap! ***`);
       }
 
       // Determine the folder name, file name, and file extension based on the type
-      const typeInfo = typeInfoMap[type] ;
-
-    
+      const typeInfo = typeInfoMap[type];
 
       scriptLines.push(`echo "_____ ${type} : ${members.length} _____"`);
       summary.push(`${type} (${members.length})`);
@@ -69,63 +68,62 @@ return content;
       // Create the destination directory if it doesn't exist
       // scriptLines.push(`mkdir -p "${destinationDir}/${subFolder}/${typeInfo.folderName}"`);
 
-      let sourcePaths = [], destinationPaths = [];
+      let sourcePaths = [],
+        destinationPaths = [];
 
-       let ndx = 0;
-       for (const member of members) {
+      let ndx = 0;
+      for (const member of members) {
         if (ndx === 1 && typeInfo.once) break;
         ndx++;
 
-      //members.forEach((member, ndx) => {
+        //members.forEach((member, ndx) => {
         scriptLines.push(`echo "======= member: ${member} ======="`);
 
         try {
-
-         if (!typeInfo) {
+          if (!typeInfo) {
             // alert (`Do not know about the type : ${type}! Can't continue...`);
-            throw new Error(`--- ${type} has no typeInfoMap! Can't continue... ---`);
+            throw new Error(
+              `--- ${type} has no typeInfoMap! Can't continue... ---`
+            );
             return;
-          } 
+          }
 
-        if (typeInfo.getFileAttributes(member)) {
-          const { folderName, fileNames } = typeInfo.getFileAttributes(member);
-          for (const fileName of fileNames) {
-          //fileNames.forEach((fileName) => {
+          if (typeInfo.getFileAttributes(member)) {
+            const { folderName, fileNames } =
+              typeInfo.getFileAttributes(member);
+            for (const fileName of fileNames) {
+              //fileNames.forEach((fileName) => {
+              sourcePaths.push(
+                this.pathJoin([sourceDir, folderName, fileName])
+              );
+              destinationPaths.push(
+                this.pathJoin([destinationDir, subFolder, folderName, fileName])
+              );
+              scriptLines.push(
+                `mkdir -p "${destinationDir}/${subFolder}/${folderName}"`
+              );
+            }
+          } else {
             sourcePaths.push(
-              this.pathJoin([sourceDir, folderName, fileName])
+              this.pathJoin([
+                sourceDir,
+                typeInfo.folderName,
+                member + typeInfo.fileExtension,
+              ])
             );
             destinationPaths.push(
-              this.pathJoin([destinationDir, subFolder, folderName, fileName])
+              this.pathJoin([
+                destinationDir,
+                subFolder,
+                typeInfo.folderName,
+                member + typeInfo.fileExtension,
+              ])
             );
-            scriptLines.push( `mkdir -p "${destinationDir}/${subFolder}/${folderName}"`);
-          };
-        } else {
-           
-          sourcePaths.push(
-            this.pathJoin([
-              sourceDir,
-              typeInfo.folderName,
-              member + typeInfo.fileExtension,
-            ])
-          );
-          destinationPaths.push(
-            this.pathJoin([
-              destinationDir,
-              subFolder,
-              typeInfo.folderName,
-              member + typeInfo.fileExtension,
-            ])
-          );
+          }
+        } catch (e) {
+          alert(e);
         }
       }
-      catch(e){
-        alert (e);
-
-      }
-
- 
-      
-      };
       sourcePaths.forEach((sourcePath, index) => {
         // Check if we should copy all files within a LightningComponentBundle
         if (typeInfo.copyAllFiles) {
@@ -141,7 +139,7 @@ return content;
 
     return scriptLines.join("\n");
   }
-  static copyPkgXmls(templateName, packageXmlPath,destructiveXmlPath) {
+  static copyPkgXmls(templateName, packageXmlPath, destructiveXmlPath) {
     const getForceIgnore = this.getForceIgnore();
     return `
 
@@ -158,18 +156,17 @@ cp ${packageXmlPath} ${templateName}
 cp ${destructiveXmlPath} ${templateName} 
 
 echo 'sfdx force:source:deploy -x package.xml  --\${2}destructivechanges destructiveChanges.xml --verbose --testlevel RunLocalTests  -c -u \${1}' > ${templateName}/deploy.sh
- `
+ `;
   }
 
-  static getZipper( templateName) {
+  static getZipper(templateName) {
     return `
 zip -r ${templateName}.zip ${templateName}/*   ${templateName}/.forceignore
     `;
   }
 
   static getReadme(templateName, testClassList, userName) {
-   const output = 
-`
+    const output = `
 # Steps to deploy this package
    
 Make sure the deploying user has required CRMA permission sets assigned
@@ -218,26 +215,34 @@ Note down the **Deploy ID:** for  quick deploy:
 sfdx force:mdapi:deploy -q <Deploy ID> -w -1 -u \${USERNAME} 
 ------------------------ 
 `;
-   return output;
-   
+    return output;
   }
 
   static writeDeloysh() {
     return `
 echo sfdx force:source:deploy -x package.xml  --${2}destructivechanges destructiveChanges.xml --verbose --testlevel RunLocalTests  -c -u $1
-    `
+    `;
   }
 
-  static getEnvVars(templateName, fromFolder, branchName,testClassList, userName ) {
+  static getEnvVars(
+    templateName,
+    fromFolder,
+    branchName,
+    testClassList,
+    userName
+  ) {
+    // Store input in localStorage
+    const data = {
+      templateName,
+      fromFolder,
+      branchName,
+      testClassList,
+      userName,
+    };
+    //console.log(data);
+    localStorage.setItem("envData", JSON.stringify(data));
 
-  // Store input in localStorage
-  const data = { templateName, fromFolder, branchName,  testClassList, userName  };
-  //console.log(data);
-  localStorage.setItem('envData', JSON.stringify(data));
-
-
-
-return `
+    return `
 # TEMPLATE_NAME is the your package name 
 # - example: PATCH_RELEASE_22)
 TEMPLATE_NAME="${templateName}"
@@ -259,6 +264,6 @@ TEST_CLASS_LIST="${testClassList}"
 # USERNAME is your username for the org that you are deploying to
 #  - Login to the org using:  'sfdx force:auth:web:login -r https://login|test.salesforce.com'x
 USERNAME="${userName}"
-`
+`;
   }
 }
