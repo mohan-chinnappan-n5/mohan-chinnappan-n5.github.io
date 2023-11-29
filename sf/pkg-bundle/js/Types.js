@@ -296,12 +296,13 @@ export class Types {
       copyAllFiles: true,
     },
 
-    WaveDataset: {
+
+    WaveComponent: {
       folderName: "wave",
       getFileAttributes: (member) => {
         return {
           folderName: `wave`,
-          fileNames: [`${member}.wds-meta.xml`, `${member}.xmd-meta.xml`],
+          fileNames: [`${member}.wcomp`, `${member}.wcomp-meta.xml`],
         };
       },
     },
@@ -311,10 +312,12 @@ export class Types {
       getFileAttributes: (member) => {
         return {
           folderName: `wave`,
-          fileNames: [`${member}.wds-meta.xml`, `${member}.xmd-meta.xml`],
+          fileNames: [`${member}.wds`, `${member}.wds-meta.xml`],
         };
       },
     },
+
+ 
 
     WaveDashboard: {
       folderName: "wave",
