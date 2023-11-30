@@ -42,6 +42,7 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item">
+                  
                     <div id="dropArea" style="border: 2px dashed #ccc; padding: 2px; text-align: center;">
                         <input type="file" class="btn btn-dark" id="soqlInput" accept=".soql">
                         <span style="color: wheat;">Drag and drop SOQL query file here</span>
@@ -75,16 +76,25 @@
         <div style="flex: 2; padding: 5px;">
             <h5>SOQL Query</h5>
             <div id="queryEditor" style="height: 600px; border: 1px solid #ddd;"></div>
+            <label for="tooling">Tooling:</label>
+              <input type="checkbox" id="tooling" ">
+
+
         </div>
 
         <!-- Right Pane -->
         <div style="flex: 3; padding: 5px; overflow-y: auto;">
-            <h5>Query Results</h5>
+            <h5>Query Results
+             
+
+            </h5>
+
             <div id="resultEditor" style="height: 600px; border: 1px solid #ddd;"></div>
             <div id="time-taken"></div>
+
         </div>
     </div>
-    <script type="module" src="js/app.js?v=9"></script>
+    <script type="module" src="js/app.js?v=11"></script>
 
 </body>
 

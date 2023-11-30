@@ -10,7 +10,6 @@ async function fetchText(url) {
   return content;
 }
 
-
 const repoUrl =
   "https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs";
 const listDwg = await fetchText(`${repoUrl}/main/soql/list.txt`);
@@ -37,16 +36,13 @@ if (urlParams.get("o")) {
 let queryEditor;
 let resultEditor;
 
-
 let typeSelected = "package";
 
 async function loadData(selection) {
   const packageUrl = `${repoUrl}/main/soql/${selection}`;
   const packageData = await fetchText(packageUrl);
   queryEditor.setValue(packageData);
-
 }
-
 
 require.config({
   paths: {
@@ -77,8 +73,10 @@ function saveCredentials() {
   const accessToken = getEle("accessTokenInput").value;
   const instanceUrl = getEle("instanceUrlInput").value;
 
-  getEle('login-frontDoor').href = `${instanceUrl}/secur/frontdoor.jsp?sid="${accessToken}"`;
-  getEle('login-frontDoor').style.display = 'block';
+  getEle(
+    "login-frontDoor"
+  ).href = `${instanceUrl}/secur/frontdoor.jsp?sid="${accessToken}"`;
+  getEle("login-frontDoor").style.display = "block";
   // Store input in localStorage
   const data = { accessToken, instanceUrl };
   // console.log(data);
@@ -86,14 +84,14 @@ function saveCredentials() {
   localStorage.setItem("orgData", JSON.stringify(data));
 }
 
-getEle('saveOrgInfo').addEventListener('click', event => {
-    saveCredentials();
-
-})
+getEle("saveOrgInfo").addEventListener("click", (event) => {
+  saveCredentials();
+});
 
 // Function to query Salesforce using the saved credentials and query
 function querySalesforce() {
-
+  
+  const tooling = getEle('tooling').checked;
   // console.log('querySalesforce');
   const accessToken = getEle("accessTokenInput").value;
   const instanceUrl = getEle("instanceUrlInput").value;
@@ -103,12 +101,17 @@ function querySalesforce() {
     return;
   }
 
-  var query = queryEditor.getValue();
-
   // Salesforce REST API endpoint for querying records
-  var apiEndpoint = `${instanceUrl}/services/data/v58.0/query?q=${encodeURIComponent(
+  const query = queryEditor.getValue();
+  let apiEndpoint = `${instanceUrl}/services/data/v58.0/query?q=${encodeURIComponent(
     query
   )}`;
+
+  if (tooling) {
+    apiEndpoint = `${instanceUrl}/services/data/v58.0/tooling/query?q=${encodeURIComponent(
+      query
+    )}`;
+  }
 
   // Make a GET request to the Salesforce REST API with 'no-cors' mode
   const headers = {
@@ -126,9 +129,11 @@ function querySalesforce() {
     .then((response) => {
       // Record the end time
       const endTime = performance.now();
-       // Calculate the elapsed time
+      // Calculate the elapsed time
       const elapsedTime = endTime - startTime;
-      getEle('time-taken').innerHTML = `Completed in: ${elapsedTime.toFixed(2)} ms`;
+      getEle("time-taken").innerHTML = `Completed in: ${elapsedTime.toFixed(
+        2
+      )} ms`;
       // Check if the request was successful (status code 2xx)
       /* if (!response.ok) {
         throw new Error(
@@ -144,17 +149,20 @@ function querySalesforce() {
     })
     .catch((error) => {
       // Check if there's additional error information in the response body
-    if (error instanceof Response) {
-      error.json().then(errorData => {
-        resultEditor.setValue(JSON.stringify(errorData, null,4));
-      })}
-      else resultEditor.setValue( {Error: error.message + ": Did you set up CORS in your Org?"});
+      if (error instanceof Response) {
+        error.json().then((errorData) => {
+          resultEditor.setValue(JSON.stringify(errorData, null, 4));
+        });
+      } else
+        resultEditor.setValue({
+          Error: error.message + ": Did you set up CORS in your Org?",
+        });
     });
 }
 
-getEle('processButton').addEventListener('click', event => {
-    querySalesforce();
-})
+getEle("processButton").addEventListener("click", (event) => {
+  querySalesforce();
+});
 
 // Download
 function downloadFile() {
