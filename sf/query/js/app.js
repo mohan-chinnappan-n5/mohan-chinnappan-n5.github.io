@@ -130,11 +130,26 @@ function displayStoredQueries() {
     listItem.classList.add("list-group-item");
     listItem.onclick = function () {
       // Set the selected query in the editor when clicked
-      queryEditor.setValue(query)
+      queryEditor.setValue(query);
     };
     storedQueriesList.appendChild(listItem);
   });
+  updateDownloadButtonState();
+
 }
+
+ // Function to remove stored queries
+ function removeQueries() {
+  // Clear stored queries in local storage
+  localStorage.removeItem("storedSOQLQueries");
+
+  // Clear displayed queries
+  getEle("storedQueries").innerHTML = "";
+
+  // Update download button state
+  updateDownloadButtonState();
+}
+
 
 // Function to query Salesforce using the saved credentials and query
 function querySalesforce() {
@@ -191,7 +206,6 @@ function querySalesforce() {
 
       // Store the query in local storage
       storeQuery(query);
-     
 
       return response.json();
     })
@@ -206,8 +220,7 @@ function querySalesforce() {
       // Select and copy the content of the textarea
       tempTextArea.select();
       document.execCommand("copy");
-      getEle('dtv').style.display = 'block';
-
+      getEle("dtv").style.display = "block";
     })
     .catch((error) => {
       // Check if there's additional error information in the response body
@@ -338,3 +351,52 @@ const acConfigMtype = {
 const autoCompleteJSMtype = new autoComplete(acConfigMtype);
 // Display stored queries on page load
 displayStoredQueries();
+
+// Function to download queries to a text file
+function downloadQueries() {
+  const storedQueries = getEle("storedQueries").getElementsByTagName("li");
+  let queriesText = "";
+
+  // Concatenate queries into a text string
+  for (let i = 0; i < storedQueries.length; i++) {
+    queriesText += storedQueries[i].textContent + "\n";
+  }
+
+  // Create a Blob with the text content
+  const blob = new Blob([queriesText], { type: "text/plain" });
+
+  // Create a download link
+  const link = document.createElement("a");
+  link.download = "queries.txt";
+  link.href = window.URL.createObjectURL(blob);
+  link.style.display = "none";
+
+  // Append the link to the body and trigger the click event
+  document.body.appendChild(link);
+  link.click();
+
+  // Remove the link from the document
+  document.body.removeChild(link);
+}
+
+getEle("download-queries").addEventListener("click", (event) => {
+  downloadQueries();
+});
+
+// Function to update the download button state based on stored queries
+function updateDownloadButtonState() {
+  const storedQueries = getEle("storedQueries").getElementsByTagName("li");
+  const downloadButton = getEle("download-queries");
+
+  // Enable the button if there are stored queries, otherwise disable it
+  downloadButton.disabled = storedQueries.length === 0;
+  getEle('delete-queries').disabled = storedQueries.length === 0;
+
+}
+
+// Initial state check on page load
+updateDownloadButtonState();
+
+getEle('delete-queries').addEventListener('click', event => {
+  removeQueries() ;
+})
