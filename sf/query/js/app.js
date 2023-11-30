@@ -130,11 +130,11 @@ function querySalesforce() {
       const elapsedTime = endTime - startTime;
       getEle('time-taken').innerHTML = `Completed in: ${elapsedTime.toFixed(2)} ms`;
       // Check if the request was successful (status code 2xx)
-      if (!response.ok) {
+      /* if (!response.ok) {
         throw new Error(
           `Salesforce API request failed: ${response.status} - ${response.statusText}`
         );
-      }
+      } */
       // Parse the JSON response
       return response.json();
     })
@@ -143,9 +143,12 @@ function querySalesforce() {
       resultEditor.setValue(JSON.stringify(data, null, 2));
     })
     .catch((error) => {
-      resultEditor.setValue(
-        "Error: " + error.message + "\nDid you set up CORS in your Org?"
-      );
+      // Check if there's additional error information in the response body
+    if (error instanceof Response) {
+      error.json().then(errorData => {
+        resultEditor.setValue(JSON.stringify(errorData, null,4));
+      })}
+      else resultEditor.setValue( {Error: error.message + ": Did you set up CORS in your Org?"});
     });
 }
 
