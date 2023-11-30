@@ -2,6 +2,27 @@
 // mohan chinnappan
 
 const getEle = (id) => document.getElementById(id);
+let initData = "SELECT Id, Name FROM Account LIMIT 5";
+
+// Get the query parameters from the URL
+
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("o")) {
+  const input = urlParams.get("o");
+  const inputObj = JSON.parse(atob(input));
+  const accessToken = decodeURIComponent(inputObj[0].split("=")[1]);
+  const instanceUrl = decodeURIComponent(inputObj[1].split("=")[1]);
+  getEle("accessTokenInput").value = accessToken;
+  getEle("instanceUrlInput").value = instanceUrl;
+} else if (urlParams.has("c")) {
+  await navigator.clipboard.readText().then((clipText) => {
+    initData = clipText;
+  });
+} else if (urlParams.has("c2")) {
+  await navigator.clipboard.readText().then((clipText) => {
+    initData = clipText.replace(/;/g, ",").replace(/WHERE/gi, "\nWHERE");
+  });
+}
 
 //------ auto complete ---
 async function fetchText(url) {
@@ -23,16 +44,6 @@ if (savedData) {
   getEle("instanceUrlInput").value = savedData.instanceUrl;
 }
 
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get("o")) {
-  const input = urlParams.get("o");
-  const inputObj = JSON.parse(atob(input));
-  const accessToken = decodeURIComponent(inputObj[0].split("=")[1]);
-  const instanceUrl = decodeURIComponent(inputObj[1].split("=")[1]);
-  getEle("accessTokenInput").value = accessToken;
-  getEle("instanceUrlInput").value = instanceUrl;
-}
-
 let queryEditor;
 let resultEditor;
 
@@ -52,7 +63,7 @@ require.config({
 require(["vs/editor/editor.main"], function () {
   // Initialize Monaco Editor for query input
   queryEditor = monaco.editor.create(getEle("queryEditor"), {
-    value: "SELECT Id, Name FROM Account LIMIT 5",
+    value: initData,
     language: "sql",
     theme: "vs-dark",
     automaticLayout: true,
@@ -76,10 +87,10 @@ function saveCredentials() {
   getEle(
     "login-frontDoor"
   ).href = `${instanceUrl}/secur/frontdoor.jsp?sid="${accessToken}"`;
-  
+
   getEle("login-frontDoor").style.display = "block";
 
-  getEle('corsLink').href = `${instanceUrl}/074`;
+  getEle("corsLink").href = `${instanceUrl}/074`;
   getEle("corsLink").style.display = "block";
 
   // Store input in localStorage
@@ -93,10 +104,41 @@ getEle("saveOrgInfo").addEventListener("click", (event) => {
   saveCredentials();
 });
 
+// Function to store SOQL query in local storage
+function storeQuery(query) {
+  let storedQueries =
+    JSON.parse(localStorage.getItem("storedSOQLQueries")) || [];
+
+  if (!storedQueries.includes(query)) {
+    storedQueries.push(query);
+    localStorage.setItem("storedSOQLQueries", JSON.stringify(storedQueries));
+    // Update the displayed stored queries
+    displayStoredQueries();
+  }
+}
+
+// Function to display stored queries
+function displayStoredQueries() {
+  const storedQueries =
+    JSON.parse(localStorage.getItem("storedSOQLQueries")) || [];
+  const storedQueriesList = getEle("storedQueries");
+  storedQueriesList.innerHTML = "";
+
+  storedQueries.forEach(function (query, index) {
+    const listItem = document.createElement("li");
+    listItem.textContent = query;
+    listItem.classList.add("list-group-item");
+    listItem.onclick = function () {
+      // Set the selected query in the editor when clicked
+      queryEditor.setValue(query)
+    };
+    storedQueriesList.appendChild(listItem);
+  });
+}
+
 // Function to query Salesforce using the saved credentials and query
 function querySalesforce() {
-  
-  const tooling = getEle('tooling').checked;
+  const tooling = getEle("tooling").checked;
   // console.log('querySalesforce');
   const accessToken = getEle("accessTokenInput").value;
   const instanceUrl = getEle("instanceUrlInput").value;
@@ -146,11 +188,26 @@ function querySalesforce() {
         );
       } */
       // Parse the JSON response
+
+      // Store the query in local storage
+      storeQuery(query);
+     
+
       return response.json();
     })
     .then((data) => {
       // Return the query results
       resultEditor.setValue(JSON.stringify(data, null, 2));
+      const tempTextArea = document.createElement("textarea");
+      tempTextArea.value = JSON.stringify(data.records);
+      // Append the textarea to the document
+      document.body.appendChild(tempTextArea);
+
+      // Select and copy the content of the textarea
+      tempTextArea.select();
+      document.execCommand("copy");
+      getEle('dtv').style.display = 'block';
+
     })
     .catch((error) => {
       // Check if there's additional error information in the response body
@@ -159,9 +216,12 @@ function querySalesforce() {
           resultEditor.setValue(JSON.stringify(errorData, null, 4));
         });
       } else
-        resultEditor.setValue({
-          Error: error.message + ": Did you set up CORS in your Org?",
-        });
+        resultEditor.setValue(
+          JSON.stringify({
+            msg: error.message,
+            info: "Did you set up CORS in your Org?",
+          })
+        );
     });
 }
 
@@ -276,3 +336,5 @@ const acConfigMtype = {
   },
 };
 const autoCompleteJSMtype = new autoComplete(acConfigMtype);
+// Display stored queries on page load
+displayStoredQueries();

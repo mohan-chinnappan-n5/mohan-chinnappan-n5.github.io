@@ -25,9 +25,37 @@
             font-weight: bold;
         }
         textarea {
+            font-family: Monaco, Arial;
+            font-size: 13px;
             background-color: black;
-            color: beige;
+            color: azure;
+            border-radius: 10px;
         }
+        ul.list-group.list-group-striped li:nth-of-type(odd) {
+            background: #dedeed;
+            opacity: .8;
+            cursor:grab;
+        }
+        
+        ul.list-group.list-group-striped li:nth-of-type(even) {
+            background: white;
+            cursor:grab;
+        }
+        
+        ul.list-group.list-group-hover li:hover {
+            background: linen;
+            cursor:grab;
+        }
+        ul.list-group{
+            max-height: 600px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            overflow:scroll;
+            -webkit-overflow-scrolling: touch;
+            font-family: Monaco, monospace;
+        }
+
+            
     </style>
 </head>
 
@@ -80,7 +108,10 @@
             <h5>SOQL Query</h5>
             <div id="queryEditor" style="height: 600px; border: 1px solid #ddd;"></div>
             <label for="tooling">Tooling:</label>
-              <input type="checkbox" id="tooling" ">
+              <input type="checkbox" id="tooling" >
+
+              <h5>Stored Queries:</h5>
+                <ul class="list-group list-group-striped" id="storedQueries"></ul>
 
 
         </div>
@@ -94,10 +125,11 @@
 
             <div id="resultEditor" style="height: 600px; border: 1px solid #ddd;"></div>
             <div id="time-taken"></div>
+            <a style="display: none;" id='dtv' class="btn btn-warning" target="new" href="https://mohan-chinnappan-n5.github.io/viz/datatable/dt.html?c=json">DataTable View</a>
 
         </div>
     </div>
-    <script type="module" src="js/app.js?v=13"></script>
+    <script type="module" src="js/app.js?v=16"></script>
 
 </body>
 
