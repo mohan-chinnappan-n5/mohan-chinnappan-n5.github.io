@@ -46,7 +46,7 @@
                     <div id="dropArea" style="border: 2px dashed #ccc; padding: 2px; text-align: center;">
                         <input type="file" class="btn btn-dark" id="soqlInput" accept=".soql">
                         <span style="color: wheat;">Drag and drop SOQL query file here</span>
-                        <button class="btn btn-primary"  id="processButton">Run
+                        <button class="btn btn-danger"  id="processButton">Run
                             Query</button>
                         <a class="btn btn-warning"  href="../wb/app.html">Login to Org</a>
                         <input type="text" autocomplete="off" id="autoCompleteMtype">
@@ -67,9 +67,12 @@
             <label for="instanceUrlInput">Instance URL:</label>
             <input type="text" id="instanceUrlInput"class='forn-control' style="width: 100%;" value="https://your-instance.salesforce.com">
             <button class="btn btn-success" id="saveOrgInfo" >Save</button>
-            <h5 style="border-top: 1px solid #99ccff; margin-top:5px;">CORS Setup in the org</h5>
+            
+
+            <h5 style="border-top: 1px solid #99ccff; margin-top:10px;">CORS Setup in the org for:<br><small> https://mohan-chinnappan-n5.github.io</small></h5>
+            <a href="#" class="btn btn-primary" target="new" id="corsLink"  style="display: none;">CORS Link</a>
             <img src="img/cors-1.png" width="400"  alt="">
-            <a  class="btn btn-primary"  target="new" style="display: none;" id='login-frontDoor' href="#">Login via frontdoor</a>
+            <a  class="btn btn-success"  target="new" style="display: none;" id='login-frontDoor' href="#">Login via frontdoor</a>
         </div>
 
         <!-- Middle Pane -->
@@ -94,7 +97,7 @@
 
         </div>
     </div>
-    <script type="module" src="js/app.js?v=11"></script>
+    <script type="module" src="js/app.js?v=13"></script>
 
 </body>
 

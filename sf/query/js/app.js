@@ -76,7 +76,12 @@ function saveCredentials() {
   getEle(
     "login-frontDoor"
   ).href = `${instanceUrl}/secur/frontdoor.jsp?sid="${accessToken}"`;
+  
   getEle("login-frontDoor").style.display = "block";
+
+  getEle('corsLink').href = `${instanceUrl}/074`;
+  getEle("corsLink").style.display = "block";
+
   // Store input in localStorage
   const data = { accessToken, instanceUrl };
   // console.log(data);
