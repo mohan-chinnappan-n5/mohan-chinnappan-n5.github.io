@@ -77,7 +77,7 @@ function saveCredentials() {
   const accessToken = getEle("accessTokenInput").value;
   const instanceUrl = getEle("instanceUrlInput").value;
 
-  getEle('login-frontDoor').href = `${instanceUrl}/secur/frontdoor.jsp?sid=${accessToken}`;
+  getEle('login-frontDoor').href = encodeURIComponent(`${instanceUrl}/secur/frontdoor.jsp?sid="${accessToken}"`);
   getEle('login-frontDoor').style.display = 'block';
   // Store input in localStorage
   const data = { accessToken, instanceUrl };
@@ -115,12 +115,20 @@ function querySalesforce() {
     Authorization: `Bearer ${accessToken}`,
     "Content-Type": "application/json",
   };
+  // Record the start time
+  const startTime = performance.now();
+
   fetch(apiEndpoint, {
     method: "GET",
     headers,
     // mode: 'no-cors'
   })
     .then((response) => {
+      // Record the end time
+      const endTime = performance.now();
+       // Calculate the elapsed time
+      const elapsedTime = endTime - startTime;
+      getEle('time-taken').innerHTML = `Completed in: ${elapsedTime.toFixed(2)} ms`;
       // Check if the request was successful (status code 2xx)
       if (!response.ok) {
         throw new Error(
