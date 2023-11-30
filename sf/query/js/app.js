@@ -77,6 +77,8 @@ function saveCredentials() {
   const accessToken = getEle("accessTokenInput").value;
   const instanceUrl = getEle("instanceUrlInput").value;
 
+  getEle('login-frontDoor').href = `${instanceUrl}/secur/frontdoor.jsp?sid=${accessToken}`;
+  getEle('login-frontDoor').style.display = 'block';
   // Store input in localStorage
   const data = { accessToken, instanceUrl };
   // console.log(data);

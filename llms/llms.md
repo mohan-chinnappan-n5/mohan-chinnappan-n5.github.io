@@ -113,4 +113,4 @@ The scaled dot-product attention is defined by the following steps:
 
 The scaled dot-product attention mechanism allows the Transformer model to capture important relationships between different parts of the input sequence. By attending to relevant information while considering the importance of different query-key pairs, the model can effectively model long-range dependencies and extract meaningful representations from the input data.
 
-This attention mechanism is a crucial building block in the Transformer's self-attention mechanism, which enables the model to incorporate contextual information from the input sequence during both the encoding and decoding stages.
+This attention mechanism is a crucial building block in the Transformer's self-attention mechanism, which enables the model to incorporate contextual information from the input sequence during both the encoding and decoding stages.https://www.youtube.com/watch?v=GI4Tpi48DlA
