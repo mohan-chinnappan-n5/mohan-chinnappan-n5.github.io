@@ -106,32 +106,30 @@ getEle("saveOrgInfo").addEventListener("click", (event) => {
 });
 
 // Function to store SOQL query in local storage
-function storeQuery(query) {
-  let storedQueries =
-    JSON.parse(localStorage.getItem("storedSOQLQueries")) || [];
-
-  if (!storedQueries.includes(query)) {
-    storedQueries.push(query);
-    localStorage.setItem("storedSOQLQueries", JSON.stringify(storedQueries));
-    // Update the displayed stored queries
-    displayStoredQueries();
-  }
+function storeQuery(query, time) {
+  const item ={q: query, t: time} ;
+  let storedQueries = new Set(JSON.parse(localStorage.getItem("storedSOQLQueries"))) || new Set();
+  storedQueries.add(item);
+  localStorage.setItem("storedSOQLQueries", JSON.stringify(Array.from(storedQueries)));
+   // Update the displayed stored queries
+   displayStoredQueries();
+  
 }
 
 // Function to display stored queries
 function displayStoredQueries() {
   const storedQueries =
-    JSON.parse(localStorage.getItem("storedSOQLQueries")) || [];
+    JSON.parse(localStorage.getItem("storedSOQLQueries")) || new Set();
   const storedQueriesList = getEle("storedQueries");
   storedQueriesList.innerHTML = "";
 
-  storedQueries.forEach(function (query, index) {
+  Array.from(storedQueries).forEach(function (query, index) {
     const listItem = document.createElement("li");
-    listItem.textContent = query;
+    listItem.textContent = `${query.q} | ${query.t}`;
     listItem.classList.add("list-group-item");
     listItem.onclick = function () {
       // Set the selected query in the editor when clicked
-      queryEditor.setValue(query);
+      queryEditor.setValue(query.q);
     };
     storedQueriesList.appendChild(listItem);
   });
@@ -206,7 +204,7 @@ function querySalesforce() {
       // Parse the JSON response
 
       // Store the query in local storage
-      storeQuery(query);
+      storeQuery(query, elapsedTime.toFixed(2));
 
       return response.json();
     })
