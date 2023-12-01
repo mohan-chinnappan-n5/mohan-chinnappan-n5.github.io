@@ -12,6 +12,16 @@ export class Types {
         };
       },
     },
+    ApexPage: {
+      folderName: "pages",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `pages`,
+          fileNames: [`${member}.page`, `${member}.page-meta.xml`],
+        };
+      },
+    },
+    
 
     ContentAsset: {
       folderName: "contentassets",
