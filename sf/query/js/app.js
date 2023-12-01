@@ -14,6 +14,7 @@ if (urlParams.get("o")) {
   const instanceUrl = decodeURIComponent(inputObj[1].split("=")[1]);
   getEle("accessTokenInput").value = accessToken;
   getEle("instanceUrlInput").value = instanceUrl;
+  saveCredentials();
 } else if (urlParams.has("c")) {
   await navigator.clipboard.readText().then((clipText) => {
     initData = clipText;
