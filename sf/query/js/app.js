@@ -10,7 +10,7 @@ const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get("o")) {
   const input = urlParams.get("o");
   const inputObj = JSON.parse(atob(input));
-  const accessToken = inputObj[0].split("=")[1];
+  const accessToken = decodeURIComponent(inputObj[0].split("=")[1]);
   const instanceUrl = decodeURIComponent(inputObj[1].split("=")[1]);
   getEle("accessTokenInput").value = accessToken;
   getEle("instanceUrlInput").value = instanceUrl;
@@ -38,7 +38,7 @@ const selectionMap = listDwg.trim().split("\n");
 
 // Load previous input from localStorage
 const savedData = JSON.parse(localStorage.getItem("orgData"));
-console.log(savedData);
+// console.log(savedData);
 if (savedData) {
   getEle("accessTokenInput").value = savedData.accessToken;
   getEle("instanceUrlInput").value = savedData.instanceUrl;
