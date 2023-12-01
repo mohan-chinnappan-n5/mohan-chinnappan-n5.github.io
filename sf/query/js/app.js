@@ -204,7 +204,7 @@ function querySalesforce() {
       // Parse the JSON response
 
       // Store the query in local storage
-      storeQuery(query, elapsedTime.toFixed(2));
+      if (query) storeQuery(query, elapsedTime.toFixed(2));
 
       return response.json();
     })
