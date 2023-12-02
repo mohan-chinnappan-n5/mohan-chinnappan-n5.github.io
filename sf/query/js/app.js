@@ -1,6 +1,12 @@
 // app.js
 // mohan chinnappan
 
+
+
+Split(["#settingPane", "#queryPane", "#resultsPane"], {
+  sizes: [20, 40, 40],
+});
+
 const getEle = (id) => document.getElementById(id);
 let initData = "SELECT Id, Name FROM Account LIMIT 5";
 
@@ -380,7 +386,7 @@ dropArea.addEventListener("drop", handleFileDrop, false);
 // autocomplete
 
 const acConfigMtype = {
-  placeHolder: "Search for SOQL query data...",
+  placeHolder: "Search for SOQL query files...",
   selector: "#autoCompleteMtype",
   data: {
     src: selectionMap,

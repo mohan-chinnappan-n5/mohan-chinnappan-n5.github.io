@@ -5,14 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> SOQL Playground</title>
-
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
     <script src="https://mohan-chinnappan-n5.github.io/pkg/js/lib/autocomplete.min.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/pkg/css/lib/autocomplete.css">
-
-    <!-- Load Monaco Editor styles -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/editor/editor.main.css">
-    <!-- Load Monaco Editor scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/loader.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
@@ -20,43 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
-    <style>
-        label {
-            font-weight: bold;
-        }
-        textarea {
-            font-family: Monaco, Arial;
-            font-size: 13px;
-            background-color: black;
-            color: azure;
-            border-radius: 10px;
-        }
-        ul.list-group.list-group-striped li:nth-of-type(odd) {
-            background: #dedeed;
-            opacity: .8;
-            cursor:grab;
-        }
-        
-        ul.list-group.list-group-striped li:nth-of-type(even) {
-            background: white;
-            cursor:grab;
-        }
-        
-        ul.list-group.list-group-hover li:hover {
-            background: linen;
-            cursor:grab;
-        }
-        ul.list-group{
-            max-height: 600px;
-            margin-bottom: 10px;
-            font-size: 13px;
-            overflow:scroll;
-            -webkit-overflow-scrolling: touch;
-            font-family: Monaco, monospace;
-        }
-
-            
-    </style>
+    <link rel="stylesheet" href="css/app.css">
 </head>
 
 <body>
@@ -70,73 +32,64 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item">
-                  
+
                     <div id="dropArea" style="border: 2px dashed #ccc; padding: 2px; text-align: center;">
                         <input type="file" class="btn btn-dark" id="soqlInput" accept=".soql">
-                        <span style="color: wheat;">Drag and drop SOQL query file here</span>
-                        <button class="btn btn-danger"  id="processButton">Run
-                            Query</button>
-                        <a class="btn btn-warning"  href="../wb/app.html">Login to Org</a>
+                        <span style="color: wheat;">Drag and drop query file </span>
+                        <button class="btn btn-danger" id="processButton">Query</button>
+                        <a class="btn btn-warning" href="../wb/app.html">Login</a>
                         <input type="text" autocomplete="off" id="autoCompleteMtype">
-
-                        <button class="btn btn-success" id="downloadScript">Download Results</button>
-                     </div>
+                        <button class="btn btn-success" id="downloadScript">Download</button>
+                    </div>
                 </li>
             </ul>
         </div>
     </nav>
-
-
-    <div style="display: flex; height: 100vh;">
+    <div class="split split-horizontal" id="settingPane">
         <!-- Left Pane -->
-        <div style="flex: 1; padding: 10px; border-right: 1px solid #ddd;">
-            <label for="accessTokenInput">Access Token:</label>
-            <input type="text" id="accessTokenInput" class="form-control" style="width: 100%;" value="">
-            <label for="instanceUrlInput">Instance URL:</label>
-            <input type="text" id="instanceUrlInput"class='forn-control' style="width: 100%;" value="https://your-instance.salesforce.com">
-            <button class="btn btn-success" id="saveOrgInfo" >Save</button>
-            
-
-            <h5 style="border-top: 1px solid #99ccff; margin-top:10px;">CORS Setup in the org for:<br><small> https://mohan-chinnappan-n5.github.io</small></h5>
-            <a href="#" class="btn btn-primary" target="new" id="corsLink"  style="display: none;">CORS Link</a>
-            <img src="img/cors-1.png" width="400"  alt="">
-            <a  class="btn btn-success"  target="new" style="display: none;" id='login-frontDoor' href="#">Login via frontdoor</a>
-        </div>
-
-        <!-- Middle Pane -->
-        <div style="flex: 2; padding: 5px;">
-            <h5>SOQL Query</h5>
-            <div id="queryEditor" style="height: 600px; border: 1px solid #ddd;"></div>
-            <label for="tooling">Tooling:</label>
-              <input type="checkbox" id="tooling" >
-
-              <h5>Stored Queries:</h5>
-                <ul class="list-group list-group-striped" id="storedQueries"></ul>
-                <button id="download-queries" class="btn btn-success" disabled>Download Queries</button>
-                <button id="delete-queries" class="btn btn-danger" disabled>Remove Queries</button>
-
-                
+        <label for="accessTokenInput">Access Token:</label>
+        <input type="text" id="accessTokenInput" class="form-control" style="width: 100%;" value="">
+        <label for="instanceUrlInput">Instance URL:</label>
+        <input type="text" id="instanceUrlInput" class='forn-control' style="width: 100%;"
+            value="https://your-instance.salesforce.com">
+        <button class="btn btn-success" id="saveOrgInfo">Save</button>
 
 
+        <h5 style="border-top: 1px solid #99ccff; margin-top:10px;">CORS Setup in the org for:<br><small>
+                https://mohan-chinnappan-n5.github.io</small></h5>
+        <a href="#" class="btn btn-primary" target="new" id="corsLink" style="display: none;">CORS Link</a>
+        <img src="img/cors-1.png" width="400" alt="">
+        <a class="btn btn-success" target="new" style="display: none;" id='login-frontDoor' href="#">Login via
+            frontdoor</a>
+    </div>
 
-        </div>
+    <!-- Middle Pane -->
+    <div class="split split-horizontal" id="queryPane">
 
-        <!-- Right Pane -->
-        <div style="flex: 3; padding: 5px; overflow-y: auto;">
-            <h5>Query Results
-             
+        <h5>SOQL Query</h5>
+        <div id="queryEditor" style="height: 600px; border: 1px solid #ddd;"></div>
+        <label for="tooling">Tooling:</label>
+        <input type="checkbox" id="tooling">
 
-            </h5>
+        <h5>Stored Queries:</h5>
+        <ul class="list-group list-group-striped" id="storedQueries"></ul>
+        <button id="download-queries" class="btn btn-success" disabled>Download Queries</button>
+        <button id="delete-queries" class="btn btn-danger" disabled>Remove Queries</button>
+    </div>
+    <!-- Right Pane -->
+    <div class="split split-horizontal" id="resultsPane">
+        <h5>Query Results
+        </h5>
+        <div id="resultEditor" style="height: 600px; border: 1px solid #ddd;"></div>
+        <div id="time-taken"></div>
+        <a style="display: none;width:200px;" id='dtv' class="btn btn-warning" target="new"
+            href="https://mohan-chinnappan-n5.github.io/viz/datatable/dt.html?c=json">DataTable View</a>
+        <a style="display: none;width:200px;" id='elf' class="btn btn-info" target="new"
+            href="https://mohan-chinnappan-n5.github.io/viz/datatable/dt.html?c=csv">Event Log</a>
 
-            <div id="resultEditor" style="height: 600px; border: 1px solid #ddd;"></div>
-            <div id="time-taken"></div>
-            <a style="display: none;" id='dtv' class="btn btn-warning" target="new" href="https://mohan-chinnappan-n5.github.io/viz/datatable/dt.html?c=json">DataTable View</a>
-            <a style="display: none;" id='elf' class="btn btn-info" target="new" href="https://mohan-chinnappan-n5.github.io/viz/datatable/dt.html?c=csv">Event Log</a>
-
-        </div>
+    </div>
     </div>
     <script type="module" src="js/app.js?v=26"></script>
-
 </body>
 
 </html>
