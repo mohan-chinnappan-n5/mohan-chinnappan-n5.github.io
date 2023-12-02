@@ -220,7 +220,8 @@ function querySalesforce() {
 
       const msg = "Are you sure you want to proceed to view the Latest Event Log File?"
 
-      if (data.records[0].attributes.url.includes('EventLogFile')
+      if (data.records[0].attributes.url && 
+        data.records[0].attributes.url.includes('EventLogFile/')
         && window.confirm(msg)) {
 
         const restPayload = {
