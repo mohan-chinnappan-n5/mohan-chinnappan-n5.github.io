@@ -197,6 +197,14 @@ function querySalesforce() {
       getEle("time-taken").innerHTML = `Completed in: ${elapsedTime.toFixed(
         2
       )} ms`;
+      // Check if the request was successful (status code 2xx)
+      /* if (!response.ok) {
+        throw new Error(
+          `Salesforce API request failed: ${response.status} - ${response.statusText}`
+        );
+      } */
+      // Parse the JSON response
+
       // Store the query in local storage
       if (query && query !== undefined) storeQuery(query, elapsedTime.toFixed(2));
 
@@ -218,73 +226,79 @@ function querySalesforce() {
       getEle("elf").style.display = "none";
       downloadFileExt = 'json';
 
-      const msg = "Are you sure you want to proceed to view the Latest Event Log File?"
-
-      if (data.records[0].attributes.url.includes('EventLogFile')
-        && window.confirm(msg)) {
+      if (data.records[0].attributes.url.includes('EventLogFile')) {
 
         const restPayload = {
           "method": "GET",
           "tooling": false,
-          "url": data.records[0].LogFile,
+          "url": data.records[0].LogFile ,
           "sfdc": true,
           "Content-Type": "text/csv"
         }
+        //getEle('rest').value = JSON.stringify(restPayload, null, 4);
+        //getEle("rest").style.display = "block";
 
-        headers["Content-Type"] = restPayload["Content-Type"];
-        // REST for event logs
-        fetch(`${instanceUrl}${restPayload.url}`, {
-          method: restPayload.method,
-          headers
-          // mode: 'no-cors'
+headers["Content-Type"] = restPayload["Content-Type"];
+// REST
+fetch(`${instanceUrl}${restPayload.url}`, {
+  method: restPayload.method,
+  headers 
+  // mode: 'no-cors'
+})
+  .then((response) => {
+    // Record the end time
+    const endTime = performance.now();
+    // Calculate the elapsed time
+    const elapsedTime = endTime - startTime;
+    getEle("time-taken").innerHTML = `Completed in: ${elapsedTime.toFixed(
+      2
+    )} ms`;
+    // Check if the request was successful (status code 2xx)
+    /* if (!response.ok) {
+      throw new Error(
+        `Salesforce API request failed: ${response.status} - ${response.statusText}`
+      );
+    } */
+    // Parse the JSON response
+
+    // Store the query in local storage
+    if (query && query !== undefined) storeQuery(query, elapsedTime.toFixed(2));
+
+    return response.text();
+  })
+  .then((data) => {
+    // Return the query results
+    resultEditor.setValue(data)
+
+    const tempTextArea = document.createElement("textarea");
+
+    tempTextArea.value = data; 
+    // Append the textarea to the document
+    document.body.appendChild(tempTextArea);
+
+    // Select and copy the content of the textarea
+    tempTextArea.select();
+    document.execCommand("copy");
+    getEle("elf").style.display = "block";
+    getEle("dtv").style.display = "none";
+    downloadFileExt = 'csv';
+
+
+  })
+  .catch((error) => {
+    // Check if there's additional error information in the response body
+    if (error instanceof Response) {
+      error.json().then((errorData) => {
+        getEle('log').value = JSON.stringify(errorData, null, 4);
+      });
+    } else
+    getEle('log').value = (
+        JSON.stringify({
+          msg: error.message,
+          info: "Did you set up CORS in your Org?",
         })
-          .then((response) => {
-            // Record the end time
-            const endTime = performance.now();
-            // Calculate the elapsed time
-            const elapsedTime = endTime - startTime;
-            getEle("time-taken").innerHTML = `Completed in: ${elapsedTime.toFixed(
-              2
-            )} ms`;
-
-            // Store the query in local storage
-            if (query && query !== undefined) storeQuery(query, elapsedTime.toFixed(2));
-
-            return response.text();
-          })
-          .then((data) => {
-            // Return the query results
-            resultEditor.setValue(data)
-
-            const tempTextArea = document.createElement("textarea");
-
-            tempTextArea.value = data;
-            // Append the textarea to the document
-            document.body.appendChild(tempTextArea);
-
-            // Select and copy the content of the textarea
-            tempTextArea.select();
-            document.execCommand("copy");
-            getEle("elf").style.display = "block";
-            getEle("dtv").style.display = "none";
-            downloadFileExt = 'csv';
-
-
-          })
-          .catch((error) => {
-            // Check if there's additional error information in the response body
-            if (error instanceof Response) {
-              error.json().then((errorData) => {
-                resultEditor.setValue(JSON.stringify(errorData, null, 4));
-              });
-            } else
-              resultEditor.setValue(
-                JSON.stringify({
-                  msg: error.message,
-                  info: "Did you set up CORS in your Org?",
-                })
-              );
-          });
+      );
+  });
 
 
       }

@@ -22,16 +22,28 @@ if (urlParams.has('c')) {
 
 Split(["#xml", "#content", "#je"], { sizes: [33, 33, 33] });
 
+// Split(["#xmljson", "#bash" ], { sizes: [80, 20] });
+
+
 const downloadButton = document.getElementById('download-button');
 
 
 const jqScript = 
 `
-input=~/Downloads/fp-1.json
+## Exploring Flexipage
+## run:
+### bash this_script.sh <input.json>
+input=$1
 numberRegions=\`cat  $input| jq '.FlexiPage.flexiPageRegions' | jq 'length'\`
 echo "=== number of Regions = $numberRegions ==="
+cat  $input |   jq -c  '.FlexiPage.masterLabel' 
+cat  $input |   jq -c  '.FlexiPage.sobjectType' 
+echo "======================================="
 for ((i = 0; i < $numberRegions; i++)); do
+    cat  $input |   jq -c --argjson i "$i"    '.FlexiPage.flexiPageRegions[$i].type' 
+    cat  $input |   jq -c --argjson i "$i"    '.FlexiPage.flexiPageRegions[$i].name' 
     cat  $input |   jq -c --argjson i "$i"    '.FlexiPage.flexiPageRegions[$i].itemInstances.componentInstance.componentName'
+    echo "$i----------------"
 done`;
 
 
