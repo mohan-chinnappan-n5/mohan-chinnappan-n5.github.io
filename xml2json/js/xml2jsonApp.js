@@ -15,21 +15,78 @@ let initXML =
 // Get the query parameters from the URL
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('c')) {
-  await navigator.clipboard.readText().then((clipText) => {
-    initXML = clipText;
-  });
+    await navigator.clipboard.readText().then((clipText) => {
+        initXML = clipText;
+    });
 }
 
 Split(["#xml", "#content", "#je"], { sizes: [33, 33, 33] });
 
 // Split(["#xmljson", "#bash" ], { sizes: [80, 20] });
 
+const getEle = id => document.getElementById(id);
 
-const downloadButton = document.getElementById('download-button');
+const downloadButton = getEle('download-button');
+
+function renderFlexiPage(flexiPageRegions) {
+    const container = getEle('cardsContainer');
+
+    flexiPageRegions.forEach(region => {
+        const regionCard = createCard(region);
+
+        if (Array.isArray(region.itemInstances)) {
+            region.itemInstances.forEach(itemInstance => {
+                const subCard = createSubCard(itemInstance.componentInstance);
+                regionCard.appendChild(subCard);
+            })
+        }
+        container.appendChild(regionCard);
+
+    });
+}
+function createSubCard(componentInstance) {
+    const subCard = document.createElement('div');
+    subCard.className = 'sub-card';
+
+    // You can customize the sub-card content based on your componentInstance properties
+    const componentName = componentInstance.componentName || 'Component Name';
+    subCard.innerHTML = `
+        <h3>${componentName}</h3>
+    `;
+    if (Array.isArray(componentInstance.componentInstanceProperties)) {
+        let table = `<table class='table table-bordered table-striped table-dark'>
+        <thead class="thead-dark">
+        <tr><th>name</th><th>value</th></tr>
+        </thead>
+        `;
+
+        componentInstance.componentInstanceProperties.forEach(cip => {
+            table += `<tr><td>${cip.name}</td><td>${cip.value}</td></tr>`;
+        })
+        table += '</table>';
+        subCard.innerHTML += table;
+    } 
+
+    return subCard;
+}
+
+function createCard(region) {
+    const card = document.createElement('div');
+    card.className = 'card';
 
 
-const jqScript = 
-`
+    const regionName = region.name || 'Region Name';
+    const regionType = region.type || 'Region Type';
+
+    card.innerHTML = `<h2>${regionName}</h2><h5>${regionType}</h5>`;
+
+    return card;
+
+}
+
+
+const jqScript =
+    `
 ## Exploring Flexipage
 ## run:
 ### bash this_script.sh <input.json>
@@ -51,7 +108,7 @@ let xmlEditor;
 let jsonEditor;
 
 // create the editor
-const container = document.getElementById('jsoneditor')
+const container = getEle('jsoneditor')
 const options = {
     mode: 'tree',
     modes: ['code', 'form', 'text', 'tree', 'view', 'preview'], // allowed modes
@@ -89,13 +146,13 @@ const editor = new JSONEditor(container, options)
 
 require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor/min/vs' } });
 require(['vs/editor/editor.main'], function () {
-    xmlEditor = monaco.editor.create(document.getElementById('editor-xml'), {
+    xmlEditor = monaco.editor.create(getEle('editor-xml'), {
         value: initXML,
         language: 'xml',
         theme: 'vs-dark'
     });
 
-    jsonEditor = monaco.editor.create(document.getElementById('editor-json'), {
+    jsonEditor = monaco.editor.create(getEle('editor-json'), {
         value: '',
         language: 'json',
         theme: 'vs-dark'
@@ -112,8 +169,10 @@ require(['vs/editor/editor.main'], function () {
             jsonEditor.setValue(JSON.stringify(jsonObj, null, 4));
             editor.set(jsonObj);
             if (jsonObj.FlexiPage) {
-                document.getElementById('jq').value = jqScript;
-                document.getElementById('jq').style.display = 'block';
+                getEle('masterLabel').innerHTML = `${jsonObj.FlexiPage.masterLabel}<br>${jsonObj.FlexiPage.sobjectType}`;
+                getEle('jq').value = jqScript;
+                getEle('jq').style.display = 'block';
+                renderFlexiPage(jsonObj.FlexiPage.flexiPageRegions);
 
             }
         } catch (error) {
@@ -150,7 +209,7 @@ require(['vs/editor/editor.main'], function () {
 
 
 
-const jsonFileInput = document.getElementById("jsonFileInput");
+const jsonFileInput = getEle("jsonFileInput");
 jsonFileInput.addEventListener("change", function (event) {
     var file = event.target.files[0];
     if (file) {
@@ -193,7 +252,7 @@ function preventDefault(e) {
 }
 
 // Add event listeners to the drop area
-const dropArea = document.getElementById("dropArea");
+const dropArea = getEle("dropArea");
 dropArea.addEventListener("dragenter", preventDefault, false);
 dropArea.addEventListener("dragover", preventDefault, false);
 dropArea.addEventListener("drop", handleFileDrop, false);
