@@ -20,7 +20,10 @@ if (urlParams.has('c')) {
     });
 }
 
-Split(["#xml", "#content", "#je"], { sizes: [33, 33, 33] });
+Split(["#xml", "#content" ], { sizes: [50,  50] });
+
+Split([ "#je",  "#cards"], { sizes: [50, 50] });
+
 
 // Split(["#xmljson", "#bash" ], { sizes: [80, 20] });
 
@@ -31,14 +34,18 @@ const downloadButton = getEle('download-button');
 function renderFlexiPage(flexiPageRegions) {
     const container = getEle('cardsContainer');
 
-    flexiPageRegions.forEach(region => {
-        const regionCard = createCard(region);
+    flexiPageRegions.forEach( (region, index) => {
+        const regionCard = createCard(region, index);
 
         if (Array.isArray(region.itemInstances)) {
             region.itemInstances.forEach(itemInstance => {
                 const subCard = createSubCard(itemInstance.componentInstance);
                 regionCard.appendChild(subCard);
             })
+        } else {
+            const subCard = createSubCard(region.itemInstances.componentInstance);
+            regionCard.appendChild(subCard);
+
         }
         container.appendChild(regionCard);
 
@@ -53,24 +60,40 @@ function createSubCard(componentInstance) {
     subCard.innerHTML = `
         <h3>${componentName}</h3>
     `;
+    let table = `<table class='table table-bordered table-striped table-dark'>
+    <thead class="thead-dark">
+    <tr><th>name</th><th>value</th></tr>
+    </thead>
+    `;
     if (Array.isArray(componentInstance.componentInstanceProperties)) {
-        let table = `<table class='table table-bordered table-striped table-dark'>
-        <thead class="thead-dark">
-        <tr><th>name</th><th>value</th></tr>
-        </thead>
-        `;
-
         componentInstance.componentInstanceProperties.forEach(cip => {
-            table += `<tr><td>${cip.name}</td><td>${cip.value}</td></tr>`;
+            if (cip.value !== undefined){
+              table += `<tr><td>${cip.name}</td><td>${cip.value}</td></tr>`;
+            }
+            else if (cip.valueList){
+                table += `<tr><td>${cip.name}</td><td>${cip.valueList.valueListItems.value}</td></tr>`;
+            }
         })
-        table += '</table>';
-        subCard.innerHTML += table;
+    } else {
+        const cip =  componentInstance.componentInstanceProperties; 
+        if (cip && cip.name && cip.value) {
+            table += `<tr><td>${cip.name}</td><td>${cip.value}</td></tr>`;
+        }
+    }
+    table += '</table>';
+
+    let visibilityRule = '';
+
+    if (componentInstance.visibilityRule) {
+        visibilityRule += `<pre>${JSON.stringify(componentInstance.visibilityRule, null, 4)}</pre>`;
+
     } 
+    subCard.innerHTML += table + visibilityRule;
 
     return subCard;
 }
 
-function createCard(region) {
+function createCard(region, index) {
     const card = document.createElement('div');
     card.className = 'card';
 
@@ -78,7 +101,7 @@ function createCard(region) {
     const regionName = region.name || 'Region Name';
     const regionType = region.type || 'Region Type';
 
-    card.innerHTML = `<h2>${regionName}</h2><h5>${regionType}</h5>`;
+    card.innerHTML = `<h2>(${index + 1}) ${regionName} </h2><h5>${regionType}</h5>`;
 
     return card;
 
@@ -169,7 +192,12 @@ require(['vs/editor/editor.main'], function () {
             jsonEditor.setValue(JSON.stringify(jsonObj, null, 4));
             editor.set(jsonObj);
             if (jsonObj.FlexiPage) {
-                getEle('masterLabel').innerHTML = `${jsonObj.FlexiPage.masterLabel}<br>${jsonObj.FlexiPage.sobjectType}`;
+                getEle('masterLabel').innerHTML = `MasterLabel: <b>${jsonObj.FlexiPage.masterLabel} (${jsonObj.FlexiPage.flexiPageRegions.length})</b>
+                <br>sObjectType: <b>${jsonObj.FlexiPage.sobjectType}</b>
+                <br>templateName:<b> ${jsonObj.FlexiPage.template.name} </b>
+                <br>type:<b> ${jsonObj.FlexiPage.type} </b>
+                
+                `;
                 getEle('jq').value = jqScript;
                 getEle('jq').style.display = 'block';
                 renderFlexiPage(jsonObj.FlexiPage.flexiPageRegions);
