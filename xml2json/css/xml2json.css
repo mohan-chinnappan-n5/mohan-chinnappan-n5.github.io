@@ -14,7 +14,7 @@ body {
     text-align: center;
     background-color: azure;
     margin-bottom: 10px;
-    max-height: 800px;
+    max-height: 1200px;
     overflow: scroll;
 }
 .sub-card {
@@ -48,7 +48,7 @@ textarea {
 #editor-xml,
 #editor-json {
     flex: 1;
-    height: 750px;
+    height: 600px;
     border: 1px solid #ddd;
 }
 

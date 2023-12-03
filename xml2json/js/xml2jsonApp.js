@@ -20,21 +20,40 @@ if (urlParams.has('c')) {
     });
 }
 
-Split(["#xml", "#content" ], { sizes: [50,  50] });
+Split(["#xml", "#content"], { sizes: [50, 50] });
 
-Split([ "#je",  "#cards"], { sizes: [50, 50] });
+Split(["#je", "#cards"], { sizes: [50, 50] });
+let masterLabel;
+
 
 
 // Split(["#xmljson", "#bash" ], { sizes: [80, 20] });
 
 const getEle = id => document.getElementById(id);
 
+function printContent(id, title) {
+    const contentToPrint = getEle(id);
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`<html><head><title>${title}</title>`);
+
+    // Include Bootstrap CSS in the print window
+    printWindow.document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">');
+
+    printWindow.document.write('</head><body>');
+    printWindow.document.write(contentToPrint.innerHTML);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    //printWindow.print();
+}
+
+
+
 const downloadButton = getEle('download-button');
 
 function renderFlexiPage(flexiPageRegions) {
     const container = getEle('cardsContainer');
 
-    flexiPageRegions.forEach( (region, index) => {
+    flexiPageRegions.forEach((region, index) => {
         const regionCard = createCard(region, index);
 
         if (Array.isArray(region.itemInstances)) {
@@ -67,15 +86,15 @@ function createSubCard(componentInstance) {
     `;
     if (Array.isArray(componentInstance.componentInstanceProperties)) {
         componentInstance.componentInstanceProperties.forEach(cip => {
-            if (cip.value !== undefined){
-              table += `<tr><td>${cip.name}</td><td>${cip.value}</td></tr>`;
+            if (cip.value !== undefined) {
+                table += `<tr><td>${cip.name}</td><td>${cip.value}</td></tr>`;
             }
-            else if (cip.valueList){
+            else if (cip.valueList) {
                 table += `<tr><td>${cip.name}</td><td>${cip.valueList.valueListItems.value}</td></tr>`;
             }
         })
     } else {
-        const cip =  componentInstance.componentInstanceProperties; 
+        const cip = componentInstance.componentInstanceProperties;
         if (cip && cip.name && cip.value) {
             table += `<tr><td>${cip.name}</td><td>${cip.value}</td></tr>`;
         }
@@ -87,7 +106,7 @@ function createSubCard(componentInstance) {
     if (componentInstance.visibilityRule) {
         visibilityRule += `<pre>${JSON.stringify(componentInstance.visibilityRule, null, 4)}</pre>`;
 
-    } 
+    }
     subCard.innerHTML += table + visibilityRule;
 
     return subCard;
@@ -192,7 +211,12 @@ require(['vs/editor/editor.main'], function () {
             jsonEditor.setValue(JSON.stringify(jsonObj, null, 4));
             editor.set(jsonObj);
             if (jsonObj.FlexiPage) {
-                getEle('masterLabel').innerHTML = `MasterLabel: <b>${jsonObj.FlexiPage.masterLabel} (${jsonObj.FlexiPage.flexiPageRegions.length})</b>
+                masterLabel = jsonObj.FlexiPage.masterLabel;
+                getEle('print-cards').style.display='block'; 
+                getEle('print-cards').addEventListener('click', event => {
+                    printContent('printable', `flexiPage-${masterLabel.replace(/ /g,'_')}`);
+                })
+                getEle('masterLabel').innerHTML = `MasterLabel: <b>${masterLabel} (${jsonObj.FlexiPage.flexiPageRegions.length})</b>
                 <br>sObjectType: <b>${jsonObj.FlexiPage.sobjectType}</b>
                 <br>templateName:<b> ${jsonObj.FlexiPage.template.name} </b>
                 <br>type:<b> ${jsonObj.FlexiPage.type} </b>

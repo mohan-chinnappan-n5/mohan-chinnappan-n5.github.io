@@ -29,7 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XML2JSON</title>
     <script src="https://unpkg.com/monaco-editor/min/vs/loader.js"></script>
-    <link rel="stylesheet" href="css/xml2json.css?v=9">
+    <link rel="stylesheet" href="css/xml2json.css?v=10">
 </head>
 
 <body>
@@ -60,19 +60,22 @@
         <div class="split split-horizontal" id="content">
             <div id="editor-json"></div>
         </div>
-      
+
     </div>
     <textarea name="jq" id="jq" cols="80" rows="10" style="display: none;"></textarea>
 
     <div>
- 
-    <div class="split split-horizontal" id="je">
-        <div id="jsoneditor"></div>
-    </div>
-    <div class="split split-horizontal" id="cards" style="max-height: 800px; overflow:scroll;">
-        <h5 style="border-bottom: 1px solid #99ccff;" id="masterLabel"></h5>
-        <div id="cardsContainer"></div>
-    </div>
+
+        <div class="split split-horizontal" id="je">
+            <div id="jsoneditor"></div>
+        </div>
+        <div class="split split-horizontal" id="cards" style="max-height: 800px; overflow:scroll;">
+            <button class="btn btn-success" style="display: none;" id="print-cards">Open in new Tab</button>
+            <div id="printable">
+                <h5 style="border-bottom: 1px solid #99ccff;" id="masterLabel"></h5>
+                <div id="cardsContainer"></div>
+            </div>
+        </div>
     </div>
     <script type="module" src="js/xml2jsonApp.js?v=6"></script>
 
