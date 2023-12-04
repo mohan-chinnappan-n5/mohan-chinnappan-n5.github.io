@@ -28,7 +28,31 @@ let masterLabel;
 
 const getEle = (id) => document.getElementById(id);
 
-function printContent(id, title) {
+
+//------ auto complete ---
+async function fetchText(url) {
+    const response = await fetch(url);
+    const content = await response.text();
+    return content;
+  }
+  
+  const repoUrl =
+    "https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs";
+  const listDwg = await fetchText(`${repoUrl}/main/xml/list.txt`);
+  const selectionMap = listDwg.trim().split("\n");
+  
+  
+  let typeSelected = "package";
+  
+  async function loadData(selection) {
+    const packageUrl = `${repoUrl}/main/xml/${selection}`;
+    const packageData = await fetchText(packageUrl);
+    xmlEditor.setValue(packageData);
+
+   }
+
+
+  function printContent(id, title) {
   const contentToPrint = getEle(id);
   const printWindow = window.open("", "_blank");
   printWindow.document.write(`<html><head><title>${title}</title>`);
@@ -292,3 +316,44 @@ const dropArea = getEle("dropArea");
 dropArea.addEventListener("dragenter", preventDefault, false);
 dropArea.addEventListener("dragover", preventDefault, false);
 dropArea.addEventListener("drop", handleFileDrop, false);
+
+// autocomplete
+
+const acConfigMtype = {
+    placeHolder: "Search for XML files...",
+    selector: "#autoCompleteMtype",
+    data: {
+      src: selectionMap,
+    },
+    resultItem: {
+      highlight: true,
+    },
+  
+    resultsList: {
+      element: (list, data) => {
+        const info = document.createElement("p");
+        if (data.results.length) {
+          info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
+        } else {
+          info.innerHTML = `Found <strong>${data.matches.length}</strong> matching results for <strong>"${data.query}"</strong>`;
+        }
+        list.prepend(info);
+      },
+  
+      noResults: true,
+      maxResults: 15,
+      tabSelect: true,
+    },
+  
+    events: {
+      input: {
+        selection: async (event) => {
+          const selection = event.detail.selection.value;
+          autoCompleteJSMtype.input.value = selection;
+          typeSelected = selection;
+          await loadData(typeSelected);
+        },
+      },
+    },
+  };
+  const autoCompleteJSMtype = new autoComplete(acConfigMtype);
