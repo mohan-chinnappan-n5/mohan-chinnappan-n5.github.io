@@ -1,8 +1,16 @@
 // app.js
 // mohan chinnappan
 
+
+
+Split(["#settingPane", "#queryPane", "#resultsPane"], {
+  sizes: [20, 40, 40],
+});
+
 const getEle = (id) => document.getElementById(id);
 let initData = "SELECT Id, Name FROM Account LIMIT 5";
+
+let downloadFileExt = 'json';
 
 // Get the query parameters from the URL
 
@@ -107,13 +115,13 @@ getEle("saveOrgInfo").addEventListener("click", (event) => {
 
 // Function to store SOQL query in local storage
 function storeQuery(query, time) {
-  const item ={q: query, t: time} ;
+  const item = { q: query, t: time };
   let storedQueries = new Set(JSON.parse(localStorage.getItem("storedSOQLQueries"))) || new Set();
   storedQueries.add(item);
   localStorage.setItem("storedSOQLQueries", JSON.stringify(Array.from(storedQueries)));
-   // Update the displayed stored queries
-   displayStoredQueries();
-  
+  // Update the displayed stored queries
+  displayStoredQueries();
+
 }
 
 // Function to display stored queries
@@ -137,8 +145,8 @@ function displayStoredQueries() {
 
 }
 
- // Function to remove stored queries
- function removeQueries() {
+// Function to remove stored queries
+function removeQueries() {
   // Clear stored queries in local storage
   localStorage.removeItem("storedSOQLQueries");
 
@@ -203,16 +211,8 @@ function querySalesforce() {
       getEle("time-taken").innerHTML = `Completed in: ${elapsedTime.toFixed(
         2
       )} ms`;
-      // Check if the request was successful (status code 2xx)
-      /* if (!response.ok) {
-        throw new Error(
-          `Salesforce API request failed: ${response.status} - ${response.statusText}`
-        );
-      } */
-      // Parse the JSON response
-
       // Store the query in local storage
-      if (query) storeQuery(query, elapsedTime.toFixed(2));
+      if (query && query !== undefined) storeQuery(query, elapsedTime.toFixed(2));
 
       return response.json();
     })
@@ -220,6 +220,7 @@ function querySalesforce() {
       // Return the query results
       resultEditor.setValue(JSON.stringify(data, null, 2));
       const tempTextArea = document.createElement("textarea");
+
       tempTextArea.value = JSON.stringify(data.records);
       // Append the textarea to the document
       document.body.appendChild(tempTextArea);
@@ -228,12 +229,87 @@ function querySalesforce() {
       tempTextArea.select();
       document.execCommand("copy");
       getEle("dtv").style.display = "block";
+      getEle("elf").style.display = "none";
+      downloadFileExt = 'json';
+
+      const msg = "Are you sure you want to proceed to view the Latest Event Log File?"
+
+      if (data && data.records && data.records[0].attributes.url && 
+        data.records[0].attributes.url.includes('EventLogFile/')
+        && window.confirm(msg)) {
+
+        const restPayload = {
+          "method": "GET",
+          "tooling": false,
+          "url": data.records[0].LogFile,
+          "sfdc": true,
+          "Content-Type": "text/csv"
+        }
+
+        headers["Content-Type"] = restPayload["Content-Type"];
+        // REST for event logs
+        fetch(`${instanceUrl}${restPayload.url}`, {
+          method: restPayload.method,
+          headers
+          // mode: 'no-cors'
+        })
+          .then((response) => {
+            // Record the end time
+            const endTime = performance.now();
+            // Calculate the elapsed time
+            const elapsedTime = endTime - startTime;
+            getEle("time-taken").innerHTML = `Completed in: ${elapsedTime.toFixed(
+              2
+            )} ms`;
+
+            // Store the query in local storage
+            if (query && query !== undefined) storeQuery(query, elapsedTime.toFixed(2));
+
+            return response.text();
+          })
+          .then((data) => {
+            // Return the query results
+            resultEditor.setValue(data)
+
+            const tempTextArea = document.createElement("textarea");
+
+            tempTextArea.value = data;
+            // Append the textarea to the document
+            document.body.appendChild(tempTextArea);
+
+            // Select and copy the content of the textarea
+            tempTextArea.select();
+            document.execCommand("copy");
+            getEle("elf").style.display = "block";
+            getEle("dtv").style.display = "none";
+            downloadFileExt = 'csv';
+
+
+          })
+          .catch((error) => {
+            // Check if there's additional error information in the response body
+            if (error instanceof Response) {
+              error.json().then((errorData) => {
+                resultEditor.setValue(JSON.stringify(errorData, null, 4));
+              });
+            } else
+              resultEditor.setValue(
+                JSON.stringify({
+                  msg: error.message,
+                  info: "Did you set up CORS in your Org?",
+                })
+              );
+          });
+
+
+      }
     })
     .catch((error) => {
       // Check if there's additional error information in the response body
       if (error instanceof Response) {
         error.json().then((errorData) => {
           resultEditor.setValue(JSON.stringify(errorData, null, 4));
+          console.log(errorData);
         });
       } else
         resultEditor.setValue(
@@ -260,7 +336,7 @@ function downloadFile() {
   // Set the file name with the input extension
   // a.download = `downloaded_file.${inputExtension}`;
   // Set the file name with the original uploaded file name and extension
-  a.download = "soql-results.json";
+  a.download = `soql-results.${downloadFileExt}`;
   a.style.display = "none";
 
   document.body.appendChild(a);
@@ -319,7 +395,7 @@ dropArea.addEventListener("drop", handleFileDrop, false);
 // autocomplete
 
 const acConfigMtype = {
-  placeHolder: "Search for SOQL query data...",
+  placeHolder: "Search for SOQL query files...",
   selector: "#autoCompleteMtype",
   data: {
     src: selectionMap,
@@ -405,5 +481,6 @@ function updateDownloadButtonState() {
 updateDownloadButtonState();
 
 getEle('delete-queries').addEventListener('click', event => {
-  removeQueries() ;
+  removeQueries();
 })
+

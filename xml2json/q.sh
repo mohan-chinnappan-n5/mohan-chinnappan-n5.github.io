@@ -1,7 +1,12 @@
-numberRegions=`cat  ~/Downloads/fp-1.json | jq '.FlexiPage.flexiPageRegions' | jq 'length'`
+input=~/Downloads/fp-1.json
+numberRegions=`cat  $input| jq '.FlexiPage.flexiPageRegions' | jq 'length'`
 echo "=== number of Regions = $numberRegions ==="
+cat  $input |   jq -c  '.FlexiPage.masterLabel' 
+cat  $input |   jq -c  '.FlexiPage.sobjectType' 
+echo "======================================="
 for ((i = 0; i < $numberRegions; i++)); do
-# jq -c --arg i "$i" '.[$i|tonumber]')
-    cat  ~/Downloads/fp-1.json |   jq -c --argjson i "$i"    '.FlexiPage.flexiPageRegions[$i].itemInstances.componentInstance.componentName'
+    cat  $input |   jq -c --argjson i "$i"    '.FlexiPage.flexiPageRegions[$i].type' 
+    cat  $input |   jq -c --argjson i "$i"    '.FlexiPage.flexiPageRegions[$i].name' 
+    cat  $input |   jq -c --argjson i "$i"    '.FlexiPage.flexiPageRegions[$i].itemInstances.componentInstance.componentName'
+    echo "${i}----------------"
 done
-

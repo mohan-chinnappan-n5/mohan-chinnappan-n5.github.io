@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@xenova/transformers/dist/transformers.js"></script>
+</head>
+
+<body>
+  <script>
+
+// use online model
+let model_path = 'https://huggingface.co/Xenova/transformers.js/resolve/main/quantized/bert-base-multilingual-cased/default'
+
+// or local model...
+// let model_path = './models/onnx/quantized/bert-base-multilingual-cased/default'
+
+let tokenizer = await AutoTokenizer.from_pretrained(model_path)
+let model = await AutoModel.from_pretrained(model_path)
+let text = "Replace me by any text you'd like."
+let encoded_input = await tokenizer(text)
+let output = await model(encoded_input)
+console.log(output)
+  </script>
+</body>
+
+</html>

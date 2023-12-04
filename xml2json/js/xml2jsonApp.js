@@ -15,23 +15,134 @@ let initXML =
 // Get the query parameters from the URL
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('c')) {
-  await navigator.clipboard.readText().then((clipText) => {
-    initXML = clipText;
-  });
+    await navigator.clipboard.readText().then((clipText) => {
+        initXML = clipText;
+    });
 }
 
-Split(["#xml", "#content", "#je"], { sizes: [33, 33, 33] });
+Split(["#xml", "#content"], { sizes: [50, 50] });
 
-const downloadButton = document.getElementById('download-button');
+Split(["#je", "#cards"], { sizes: [50, 50] });
+let masterLabel;
 
 
-const jqScript = 
-`
-input=~/Downloads/fp-1.json
+
+// Split(["#xmljson", "#bash" ], { sizes: [80, 20] });
+
+const getEle = id => document.getElementById(id);
+
+function printContent(id, title) {
+    const contentToPrint = getEle(id);
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`<html><head><title>${title}</title>`);
+
+    // Include Bootstrap CSS in the print window
+    printWindow.document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">');
+
+    printWindow.document.write('</head><body>');
+    printWindow.document.write(contentToPrint.innerHTML);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    //printWindow.print();
+}
+
+
+
+const downloadButton = getEle('download-button');
+
+function renderFlexiPage(flexiPageRegions) {
+    const container = getEle('cardsContainer');
+
+    flexiPageRegions.forEach((region, index) => {
+        const regionCard = createCard(region, index);
+
+        if (Array.isArray(region.itemInstances)) {
+            region.itemInstances.forEach(itemInstance => {
+                const subCard = createSubCard(itemInstance.componentInstance);
+                regionCard.appendChild(subCard);
+            })
+        } else {
+            const subCard = createSubCard(region.itemInstances.componentInstance);
+            regionCard.appendChild(subCard);
+
+        }
+        container.appendChild(regionCard);
+
+    });
+}
+function createSubCard(componentInstance) {
+    const subCard = document.createElement('div');
+    subCard.className = 'sub-card';
+
+    // You can customize the sub-card content based on your componentInstance properties
+    const componentName = componentInstance.componentName || 'Component Name';
+    subCard.innerHTML = `
+        <h3>${componentName}</h3>
+    `;
+    let table = `<table class='table table-bordered table-striped table-dark'>
+    <thead class="thead-dark">
+    <tr><th>name</th><th>value</th></tr>
+    </thead>
+    `;
+    if (Array.isArray(componentInstance.componentInstanceProperties)) {
+        componentInstance.componentInstanceProperties.forEach(cip => {
+            if (cip.value !== undefined) {
+                table += `<tr><td>${cip.name}</td><td>${cip.value}</td></tr>`;
+            }
+            else if (cip.valueList) {
+                table += `<tr><td>${cip.name}</td><td>${cip.valueList.valueListItems.value}</td></tr>`;
+            }
+        })
+    } else {
+        const cip = componentInstance.componentInstanceProperties;
+        if (cip && cip.name && cip.value) {
+            table += `<tr><td>${cip.name}</td><td>${cip.value}</td></tr>`;
+        }
+    }
+    table += '</table>';
+
+    let visibilityRule = '';
+
+    if (componentInstance.visibilityRule) {
+        visibilityRule += `<pre>${JSON.stringify(componentInstance.visibilityRule, null, 4)}</pre>`;
+
+    }
+    subCard.innerHTML += table + visibilityRule;
+
+    return subCard;
+}
+
+function createCard(region, index) {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+
+    const regionName = region.name || 'Region Name';
+    const regionType = region.type || 'Region Type';
+
+    card.innerHTML = `<h2>(${index + 1}) ${regionName} </h2><h5>${regionType}</h5>`;
+
+    return card;
+
+}
+
+
+const jqScript =
+    `
+## Exploring Flexipage
+## run:
+### bash this_script.sh <input.json>
+input=$1
 numberRegions=\`cat  $input| jq '.FlexiPage.flexiPageRegions' | jq 'length'\`
 echo "=== number of Regions = $numberRegions ==="
+cat  $input |   jq -c  '.FlexiPage.masterLabel' 
+cat  $input |   jq -c  '.FlexiPage.sobjectType' 
+echo "======================================="
 for ((i = 0; i < $numberRegions; i++)); do
+    cat  $input |   jq -c --argjson i "$i"    '.FlexiPage.flexiPageRegions[$i].type' 
+    cat  $input |   jq -c --argjson i "$i"    '.FlexiPage.flexiPageRegions[$i].name' 
     cat  $input |   jq -c --argjson i "$i"    '.FlexiPage.flexiPageRegions[$i].itemInstances.componentInstance.componentName'
+    echo "$i----------------"
 done`;
 
 
@@ -39,7 +150,7 @@ let xmlEditor;
 let jsonEditor;
 
 // create the editor
-const container = document.getElementById('jsoneditor')
+const container = getEle('jsoneditor')
 const options = {
     mode: 'tree',
     modes: ['code', 'form', 'text', 'tree', 'view', 'preview'], // allowed modes
@@ -77,13 +188,13 @@ const editor = new JSONEditor(container, options)
 
 require.config({ paths: { 'vs': 'https://unpkg.com/monaco-editor/min/vs' } });
 require(['vs/editor/editor.main'], function () {
-    xmlEditor = monaco.editor.create(document.getElementById('editor-xml'), {
+    xmlEditor = monaco.editor.create(getEle('editor-xml'), {
         value: initXML,
         language: 'xml',
         theme: 'vs-dark'
     });
 
-    jsonEditor = monaco.editor.create(document.getElementById('editor-json'), {
+    jsonEditor = monaco.editor.create(getEle('editor-json'), {
         value: '',
         language: 'json',
         theme: 'vs-dark'
@@ -100,8 +211,20 @@ require(['vs/editor/editor.main'], function () {
             jsonEditor.setValue(JSON.stringify(jsonObj, null, 4));
             editor.set(jsonObj);
             if (jsonObj.FlexiPage) {
-                document.getElementById('jq').value = jqScript;
-                document.getElementById('jq').style.display = 'block';
+                masterLabel = jsonObj.FlexiPage.masterLabel;
+                getEle('print-cards').style.display='block'; 
+                getEle('print-cards').addEventListener('click', event => {
+                    printContent('printable', `flexiPage-${masterLabel.replace(/ /g,'_')}`);
+                })
+                getEle('masterLabel').innerHTML = `MasterLabel: <b>${masterLabel} (${jsonObj.FlexiPage.flexiPageRegions.length})</b>
+                <br>sObjectType: <b>${jsonObj.FlexiPage.sobjectType}</b>
+                <br>templateName:<b> ${jsonObj.FlexiPage.template.name} </b>
+                <br>type:<b> ${jsonObj.FlexiPage.type} </b>
+                
+                `;
+                getEle('jq').value = jqScript;
+                getEle('jq').style.display = 'block';
+                renderFlexiPage(jsonObj.FlexiPage.flexiPageRegions);
 
             }
         } catch (error) {
@@ -138,7 +261,7 @@ require(['vs/editor/editor.main'], function () {
 
 
 
-const jsonFileInput = document.getElementById("jsonFileInput");
+const jsonFileInput = getEle("jsonFileInput");
 jsonFileInput.addEventListener("change", function (event) {
     var file = event.target.files[0];
     if (file) {
@@ -181,7 +304,7 @@ function preventDefault(e) {
 }
 
 // Add event listeners to the drop area
-const dropArea = document.getElementById("dropArea");
+const dropArea = getEle("dropArea");
 dropArea.addEventListener("dragenter", preventDefault, false);
 dropArea.addEventListener("dragover", preventDefault, false);
 dropArea.addEventListener("drop", handleFileDrop, false);

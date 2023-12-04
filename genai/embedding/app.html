@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedding - transformers </title>
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">&nbsp;Embedding - transformers</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <div id="dropArea" style="border: 2px dashed #ccc; padding: 2px; text-align: center;">
+                        <input id="file-upload" type="file" class="btn btn-dark" accept="text/*" />
+                        <span style="color: wheat;">Drag and drop a text file here </span>
+                        <button class="btn btn-primary" id="embed">Embed</button>
+                        <button class="btn btn-primary" id="embed2">Embed2</button>
+                        <button class="btn btn-success" id="cs">Cosine Similarity</button>
+                        <span class="btn btn-warning" id="csValue"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="split split-horizontal" id="set1">
+        <div id="inputEditor" style="height: 300px; "></div>
+        <div id="resultsEditor" style="height: 300px;"></div>
+    </div>
+
+    <div class="split split-horizontal" id="set2">
+        <div id="inputEditor2" style="height: 300px; "></div>
+        <div id="resultsEditor2" style="height: 300px;"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/loader.js"></script>
+    <script src="js/app.js?v=100" type="module"></script>
+</body>
+
+</html>

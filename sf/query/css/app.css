@@ -1,0 +1,36 @@
+/* app.css */
+label {
+    font-weight: bold;
+}
+textarea {
+    font-family: Monaco, Arial;
+    font-size: 13px;
+    background-color: black;
+    color: azure;
+    border-radius: 10px;
+}
+ul.list-group.list-group-striped li:nth-of-type(odd) {
+    background: #dedeed;
+    opacity: .8;
+    cursor:grab;
+}
+
+ul.list-group.list-group-striped li:nth-of-type(even) {
+    background: white;
+    cursor:grab;
+}
+
+ul.list-group.list-group-hover li:hover {
+    background: linen;
+    cursor:grab;
+}
+ul.list-group{
+    max-height: 600px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+    font-family: Monaco, monospace;
+}
+
+    

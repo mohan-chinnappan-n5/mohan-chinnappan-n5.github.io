@@ -1,4 +1,4 @@
-## LWC Bundle nameing convention 
+## LWC Bundle naming convention 
 - Markup
 	- Use **camelCase** to name the component
 	- Use **kehab-case** to reference a component 
