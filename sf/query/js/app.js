@@ -153,6 +153,8 @@ function displayStoredQueries() {
 // Function to query Salesforce using the saved credentials and query
 function querySalesforce() {
   const tooling = getEle("tooling").checked;
+  const explain = getEle("explain").checked;
+
   // console.log('querySalesforce');
   const accessToken = getEle("accessTokenInput").value;
   const instanceUrl = getEle("instanceUrlInput").value;
@@ -170,6 +172,12 @@ function querySalesforce() {
 
   if (tooling) {
     apiEndpoint = `${instanceUrl}/services/data/v58.0/tooling/query?q=${encodeURIComponent(
+      query
+    )}`;
+  }
+
+  if (explain) {
+    apiEndpoint = `${instanceUrl}/services/data/v58.0/tooling/query?explain=${encodeURIComponent(
       query
     )}`;
   }
