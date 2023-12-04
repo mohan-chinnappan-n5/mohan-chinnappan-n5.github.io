@@ -12,6 +12,17 @@ let initData = "SELECT Id, Name FROM Account LIMIT 5";
 
 let downloadFileExt = 'json';
 
+   // check for !=
+   const checks = {
+    'WHERE.*!=': 'Has != in WHERE clause filter, Index will not be used to drive the query',
+    'WHERE.*NULL': 'Has NULL in WHERE clause filter, Index will not be used to drive the query',
+    'WHERE.*%.*': 'Has WILDCARD in WHERE clause filter, Index will not be used to drive the query'
+
+
+  };
+
+
+
 // Get the query parameters from the URL
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -174,6 +185,16 @@ function querySalesforce() {
 
   // Salesforce REST API endpoint for querying records
   const query = queryEditor.getValue();
+
+  const tips = [query]; 
+  Object.keys(checks).forEach( check => {
+      const regEx = new RegExp(check, 'gi');
+      if (query.match(regEx)) {
+        tips.push(`${checks[check]}\n`);
+      }
+  });
+  if (tips.length > 1 ) getEle('tips').value = JSON.stringify(tips, null, 4);
+
   let apiEndpoint = `${instanceUrl}/services/data/v58.0/query?q=${encodeURIComponent(
     query
   )}`;
@@ -221,7 +242,9 @@ function querySalesforce() {
       resultEditor.setValue(JSON.stringify(data, null, 2));
       const tempTextArea = document.createElement("textarea");
 
-      tempTextArea.value = JSON.stringify(data.records);
+      if (getEle('explain').checked) {
+        tempTextArea.value = JSON.stringify(data.plans);
+      } else tempTextArea.value = JSON.stringify(data.records);
       // Append the textarea to the document
       document.body.appendChild(tempTextArea);
 

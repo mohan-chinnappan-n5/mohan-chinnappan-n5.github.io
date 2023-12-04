@@ -61,6 +61,10 @@
         <img src="img/cors-1.png" width="400" alt="">
         <a class="btn btn-success" target="new" style="display: none;" id='login-frontDoor' href="#">Login via
             frontdoor</a>
+            <hr>
+        <a target="new" class="btn btn-info" href="https://help.salesforce.com/s/articleView?id=000386864&type=1">Query Tips FAQ</a>
+        <br>
+        <textarea name="tips" id="tips" cols="80" rows="10">Query tips</textarea>
     </div>
 
     <!-- Middle Pane -->
@@ -68,8 +72,12 @@
 
         <h5>SOQL Query</h5>
         <div id="queryEditor" style="height: 600px; border: 1px solid #ddd;"></div>
+        <hr>
         <label for="tooling">Tooling:</label>
         <input type="checkbox" id="tooling">
+        <label for="explain">Explain Plan:</label>
+        <input type="checkbox" id="explain">
+        <hr>
 
         <h5>Stored Queries:</h5>
         <ul class="list-group list-group-striped" id="storedQueries"></ul>
@@ -90,7 +98,7 @@
     </div>
     </div>
     <hr style="border-bottom: 4px solid #99ccff;">
-    <script type="module" src="js/app.js?v=27"></script>
+    <script type="module" src="js/app.js?v=28"></script>
 </body>
 
 </html>
