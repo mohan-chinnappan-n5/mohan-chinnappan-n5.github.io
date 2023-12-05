@@ -1,7 +1,7 @@
 // jsonApp.js
 // mohan chinnappan
 
-Split(["#content", "#je"], { sizes: [50, 50] });
+Split(["#content", "#je"], { sizes: [50,50] });
 
 const downloadButton = document.getElementById('download-button');
 let initJSON =
@@ -27,7 +27,25 @@ let initJSON =
       }
 `;
 
+//------ auto complete ---
+async function fetchText(url) {
+    const response = await fetch(url);
+    const content = await response.text();
+    return content;
+  }
+  
+  const repoUrl =
+    "https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs";
+  const listDwg = await fetchText(`${repoUrl}/main/json/list.txt`);
+  const selectionMap = listDwg.trim().split("\n");
+
+
 let jsonEditor;
+let startFile = 'FlattenTest.json'
+let initFileUrl = undefined;
+
+initJSON = await fetchText(`${repoUrl}/main/json/${startFile}`); 
+
 
 // Get the query parameters from the URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -36,6 +54,21 @@ if (urlParams.has('c')) {
     initJSON = clipText;
   });
 }
+
+if (urlParams.has("u")) {
+    const url = urlParams.get('u');
+    // e.g: https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/svg/loginEvent.svg
+    initJSON = await fetchText(url); 
+}
+
+let typeSelected = "package";
+
+async function loadData(selection) {
+  const packageUrl = `${repoUrl}/main/json/${selection}`;
+  const packageData = await fetchText(packageUrl);
+  jsonEditor.setValue(packageData);
+}
+
 
 
 // create the editor
@@ -160,3 +193,44 @@ const dropArea = document.getElementById("dropArea");
 dropArea.addEventListener("dragenter", preventDefault, false);
 dropArea.addEventListener("dragover", preventDefault, false);
 dropArea.addEventListener("drop", handleFileDrop, false);
+
+
+const acConfigMtype = {
+    placeHolder: "Search for data  JSON data ...",
+    selector: "#autoCompleteMtype",
+    data: {
+    src: selectionMap
+    },
+    resultItem: {
+    highlight: true,
+    },
+    
+    resultsList: {
+    element: (list, data) => {
+        const info = document.createElement("p");
+        if (data.results.length) {
+            info.innerHTML = `Displaying <strong>${data.results.length}</strong> out of <strong>${data.matches.length}</strong> results`;
+        } else {
+            info.innerHTML = `Found <strong>${data.matches.length}</strong> matching results for <strong>"${data.query}"</strong>`;
+        }
+        list.prepend(info);
+    },
+    
+    noResults: true,
+    maxResults: 15,
+    tabSelect: true,
+    },
+    
+    events: {
+    input: {
+        selection: async (event) => {
+            const selection = event.detail.selection.value;
+            autoCompleteJSMtype.input.value = selection;
+            typeSelected = selection;
+            await loadData(typeSelected);
+    
+        },
+    },
+    },
+    };
+    const autoCompleteJSMtype = new autoComplete(acConfigMtype);

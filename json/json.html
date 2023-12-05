@@ -2,12 +2,15 @@
 <html lang="en">
 
 <head>
-
     <link href="css/jsoneditor.css" rel="stylesheet" type="text/css">
     <script src="js/jsoneditor.js"></script>
     <script src="https://mohan-chinnappan-n5.github.io/pkg/js/lib/autocomplete.min.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/pkg/css/lib/autocomplete.css">
 
+
+ 
+ 
+ 
     <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
 
@@ -43,6 +46,7 @@
                     <div id="dropArea" style="border: 2px dashed #ccc; padding: 2px; text-align: center;">
                         <input class='btn btn-dark' type="file" id="jsonFileInput" accept=".json">
                         <span style="color: wheat;">Drag and drop a JSON file here</span>
+                        <input type="text" autocomplete="off" id="autoCompleteMtype">
                         <button class="btn btn-primary" id="download-button">Download JSON</button>
                     </div>
                 </li>
@@ -50,16 +54,32 @@
             </ul>
         </div>
     </nav>
-    <div class="editor-container">
-        <div class="split split-horizontal" id="content">
+    <div class="editor-container" >
+        <div class="split split-horizontal" id="content" style="z-index: -10;">
             <div id="editor-json"></div>
         </div>
+
+           
+        
         <div class="split split-horizontal" id="je">
             <div id="jsoneditor"></div>
         </div>
+      
+      
     </div>
 
-  <script type="module" src="js/jsonApp.js"></script> 
+    <h5 style="border-bottom:1px solid #99ccff;"> Examples</h5>
+    <ul class="list-group list-group-hover list-group-striped">
+        <li class="list-group-item">
+            <a target="new" href="json.html?u=https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/json/FlattenTest.json">FlattenTest.json</a>
+        </li>
+        <li class="list-group-item">
+            <a target="new" href="json.html?u=https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/json/JoinedOutput.json">JoinedOutput.json</a>
+        </li>
+    </ul>
+
+
+  <script type="module" src="js/jsonApp.js?v=2"></script> 
 
 </body>
 
