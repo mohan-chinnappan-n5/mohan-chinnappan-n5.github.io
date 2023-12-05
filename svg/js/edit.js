@@ -6,8 +6,17 @@ const getEle = (id) => document.getElementById(id);
 Split(["#code", "#content"], {
     sizes: [50, 50],
 });
+
+// Get the query parameters from the URL
+const urlParams = new URLSearchParams(window.location.search);
+const repoUrl = 'https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs';
+
+
 const rendering = getEle('rendering');
-const simpleSVG =
+let startFile = 'lightningUriEvent.svg'
+let initFileUrl = undefined;
+
+let simpleSVG =
 `<svg width="1000" height="800">
     <circle cx="50" cy="50" r="40" stroke="black" 
     stroke-width="2" fill="#99ccff" />
@@ -26,13 +35,27 @@ const simpleSVG =
     </g>
 </svg>`;
 
+simpleSVG = await fetchText(`${repoUrl}/main/svg/lightningUriEvent.svg`); 
+
+if (urlParams.has("c")) {
+    await navigator.clipboard.readText().then((clipText) => {
+        simpleSVG = clipText;
+    });
+}
+if (urlParams.has("u")) {
+    const url = urlParams.get('u');
+    // e.g: https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/svg/loginEvent.svg
+    simpleSVG = await fetchText(url); 
+ } 
+ 
+
+
 async function fetchText(url) {
 const response = await fetch(url);
 const content = await response.text();
 return content;
 }
 
-const repoUrl = 'https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs';
 const listDwg = await fetchText(`${repoUrl}/main/svg/list.txt`);
 const selectionMap = listDwg.trim().split('\n');
 let typeSelected = "package";
@@ -95,6 +118,9 @@ require(['vs/editor/editor.main'], function () {
         value: simpleSVG,
         automaticLayout: true,
     });
+
+
+
 
 
     // Function to render the SVG based on user input
@@ -163,6 +189,9 @@ dropArea.addEventListener("dragenter", preventDefault, false);
 dropArea.addEventListener("dragover", preventDefault, false);
 dropArea.addEventListener("drop", handleFileDrop, false);
 
+if (urlParams.has("f")) {
+    loadData(initFileUrl);
+}
 
 
 
@@ -194,6 +223,9 @@ function handleFileDrop(e) {
 
 
 });
+
+
+
 
 
 
