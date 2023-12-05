@@ -204,6 +204,7 @@ function extractUniqueWords(json) {
 
 const editor = new JSONEditor(container, options);
 
+
 require.config({ paths: { vs: "https://unpkg.com/monaco-editor/min/vs" } });
 require(["vs/editor/editor.main"], function () {
   xmlEditor = monaco.editor.create(getEle("editor-xml"), {
@@ -217,6 +218,9 @@ require(["vs/editor/editor.main"], function () {
     language: "json",
     theme: "vs-dark",
   });
+  loadData('oppty.page-meta.xml'); 
+
+
 
   const x2js = new X2JS();
   function convertXmlToJson() {
@@ -356,4 +360,4 @@ const acConfigMtype = {
       },
     },
   };
-  const autoCompleteJSMtype = new autoComplete(acConfigMtype);
+const autoCompleteJSMtype = new autoComplete(acConfigMtype);
