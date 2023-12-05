@@ -1,7 +1,7 @@
 // jsonApp.js
 // mohan chinnappan
 
-Split(["#content", "#je"], { sizes: [50,50] });
+Split(["#content", "#je"], { sizes: [45,55] });
 
 const downloadButton = document.getElementById('download-button');
 let initJSON =
