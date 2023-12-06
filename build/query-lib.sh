@@ -38,6 +38,7 @@ csv_query_to_csv() {
 # Call the function with the CSV file, query, and output CSV file
 # The result of the query will be saved in the output CSV file
 # csv_query_to_csv "input.csv" "SELECT * FROM temp_table WHERE column_name = 'value'" "output.csv"
+#  bash query-lib.sh fruits.csv "SELECT fruit FROM temp_table WHERE qty > 100" /tmp/output.csv
 csv_query_to_csv $1 "$2" $3
 cat $3
 

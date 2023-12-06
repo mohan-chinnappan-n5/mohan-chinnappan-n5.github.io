@@ -7,6 +7,22 @@ Split(["#code", "#content"], {
     sizes: [40, 60],
 });
 
+  // Record the start time when the DOMContentLoaded event is fired
+  document.addEventListener('DOMContentLoaded', function() {
+    const domContentLoadedTime = performance.now();
+    console.log(`DOM Loaded Time: ${domContentLoadedTime} milliseconds`);
+  });
+
+  // Record the start time when the load event is fired
+  window.addEventListener('load', function() {
+    const loadTime = performance.now();
+    console.log(`Page Load Time: ${loadTime} milliseconds`);
+
+    // Now the page is ready for user interaction
+    const readyForInteractionTime = performance.now();
+    console.log(`Ready for User Interaction Time: ${readyForInteractionTime} milliseconds`);
+  });
+
 let editor;
 require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor/min/vs' } });
 require(['vs/editor/editor.main'], function () {
