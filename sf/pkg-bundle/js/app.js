@@ -26,8 +26,8 @@ if (savedData) {
 // import { Util  } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@b0baef6/bundler/Util.js";
 // ref: https://stackoverflow.com/questions/17341122/link-and-execute-external-javascript-file-hosted-on-github/18049842#18049842
 
-import { Types } from "./Types.js?v=103";
-import { Util  } from "./Util.js?v=103";
+import { Types } from "./Types.js?v=104";
+import { Util  } from "./Util.js?v=104";
 
 if (urlParams.has("d")) {
   getEle("jsonEditor").style.display = "block";

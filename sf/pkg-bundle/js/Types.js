@@ -307,6 +307,18 @@ export class Types {
     },
 
 
+
+    WaveApplication: {
+      folderName: "wave",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `wave`,
+          fileNames: [`${member}.wapp`, `${member}.wapp-meta.xml`],
+        };
+      },
+    },
+
+
     WaveComponent: {
       folderName: "wave",
       getFileAttributes: (member) => {
