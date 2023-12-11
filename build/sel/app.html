@@ -18,7 +18,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">&nbsp; BuildGen2 - Turing</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -28,7 +27,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                        <button class="btn btn-success" id="tosh">Download</button>
                 </li>
             </ul>
         </div>
@@ -40,10 +38,15 @@
     <!-- Right Pane: Monaco Editor -->
     <div id="editor" style="height: 500px;" class="split split-horizontal"></div>
 
+    <div id="bashEditor" style="height: 500px;" class="split split-horizontal"></div>
 
-    <textarea name="script" id="script" cols="90" rows="10">
+  
 
-SELECT Id,
+
+    <script type="module">
+
+        const script = 
+`SELECT Id,
 MemberType,MemberName,         
 RevisionNum, RevisionCounter,  
 LastModifiedById, IsNewMember,
@@ -56,22 +59,16 @@ LastModifiedById IN (SELECT Id FROM User where userName ='test-5qg1icc3l4vd@exam
 sf org generate password --target-org $1
 cd $PROJECT
 git checkout $BRANCH
-git branch feature/${JIRA_NUM}
+git branch feature/$JIRA_NUM
 
 ## retrieve assets from the ORG 
 sf project retrieve start -o $USERNAME --ignore-conflicts  
 git commit -m $COMMIT_MSG
-
-
-    </textarea>
-
-
-
-    <script type="module">
+`;
         const getEle = (id) => document.getElementById(id);
 
-        Split(["#jsonTable", "#editor"], {
-            sizes: [50, 50],
+        Split(["#jsonTable", "#editor", "#bashEditor"], {
+            sizes: [33, 33, 33],
         });
 
 
@@ -82,7 +79,7 @@ git commit -m $COMMIT_MSG
         });
 
 
-        let jsonEditor;
+        let jsonEditor, bashEditor;
         require(["vs/editor/editor.main"], function () {
             // Initialize Monaco Editor for query input
             jsonEditor = monaco.editor.create(getEle("editor"), {
@@ -90,6 +87,14 @@ git commit -m $COMMIT_MSG
                 theme: "vs-dark",
                 automaticLayout: true,
             });
+
+            bashEditor = monaco.editor.create(getEle("bashEditor"), {
+                language: "bash",
+                theme: "vs-dark",
+                value: script,
+                automaticLayout: true,
+            });
+
         });
 
         let jsonData;
