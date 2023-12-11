@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Viewer</title>
+    <title>BuilGen2 - Turing</title>
     <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
     <!-- Include Monaco Editor CSS and JS files -->
@@ -13,11 +13,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/loader.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/sf/query/css/app.css">
+    <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/sf/query/css/app.css">
 
-  </head> 
+</head>
 
 <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">&nbsp; BuildGen2 - Turing</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                        <button class="btn btn-success" id="tosh">Download</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <!-- Left Pane: JSON Table -->
     <div id="jsonTable" class="split split-horizontal"></div>
@@ -26,7 +41,19 @@
     <div id="editor" style="height: 500px;" class="split split-horizontal"></div>
 
 
-    <textarea name="script" id="script" cols="80" rows="10">
+    <textarea name="script" id="script" cols="90" rows="10">
+
+SELECT Id,
+MemberType,MemberName,         
+RevisionNum, RevisionCounter,  
+LastModifiedById, IsNewMember,
+ChangedBy                      
+FROM SourceMember              
+WHERE isNewMember = true AND
+LastModifiedById IN (SELECT Id FROM User where userName ='test-5qg1icc3l4vd@example.com')
+
+        
+sf org generate password --target-org $1
 cd $PROJECT
 git checkout $BRANCH
 git branch feature/${JIRA_NUM}
@@ -40,7 +67,7 @@ git commit -m $COMMIT_MSG
 
 
 
-    <script>
+    <script type="module">
         const getEle = (id) => document.getElementById(id);
 
         Split(["#jsonTable", "#editor"], {
@@ -65,8 +92,21 @@ git commit -m $COMMIT_MSG
             });
         });
 
+        let jsonData;
+        let params = new URL(document.location).searchParams;
+
+
+        //------- via clipboard
+        let c = params.get("c");
+        if (c !== null)
+            await navigator.clipboard.readText().then((clipText) => {
+                jsonData = clipText;
+            });
+
+        //console.log(jsonData)
+
         // Sample JSON data
-        const jsonData = {
+        const jsonData2 = {
             "records": [
                 {
                     "Id": "0MZ5300000W2DKsGAN",
@@ -116,16 +156,17 @@ git commit -m $COMMIT_MSG
             selectAllCheckbox.type = 'checkbox';
             selectAllCheckbox.addEventListener('change', () => selectAllRows(selectAllCheckbox.checked));
             headerRow.insertCell().appendChild(selectAllCheckbox);
+            console.log(data);
 
             // Create header cells
-            for (const key in data.records[0]) {
+            for (const key in data[0]) {
                 const th = document.createElement('th');
                 th.textContent = key;
                 headerRow.appendChild(th);
             }
 
             // Create rows
-            data.records.forEach(item => {
+            data.forEach(item => {
                 const row = table.insertRow();
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
@@ -178,7 +219,7 @@ git commit -m $COMMIT_MSG
         }
 
         // Initialize the JSON table and Monaco Editor
-        renderJsonTable(jsonData);
+        renderJsonTable(JSON.parse(jsonData));
 
     </script>
 

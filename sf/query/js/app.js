@@ -253,6 +253,10 @@ function querySalesforce() {
       document.execCommand("copy");
       getEle("dtv").style.display = "block";
       getEle("elf").style.display = "none";
+      console.log(data.entityTypeName);
+      if (data.entityTypeName && data.entityTypeName === 'SourceMember') {
+        getEle("sourceSel").style.display = "block";
+      }
       downloadFileExt = 'json';
 
       const msg = "Are you sure you want to proceed to view the Latest Event Log File?"
