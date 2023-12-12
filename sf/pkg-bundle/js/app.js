@@ -40,7 +40,7 @@ let initData = `<?xml version="1.0" encoding="UTF-8"?>
         <members>GreenPlant</members>
         <members>BrownPaper</members>
         <name>ApexClass</name>
-        </types>
+    </types>
     <types>
         <members>HomePage</members>
         <name>FlexiPage</name>
@@ -186,7 +186,12 @@ function convertXmlToJson(xml, templateName, fromFolder, branchName, testClassLi
   try {
     const jsonObj = xml2json(xml);
     const typeAndMembers = [];
-    const types = jsonObj.Package.types;
+    let types = jsonObj.Package.types;
+
+    if (!Array.isArray(types)) {
+        types = [types]
+    }
+
     if (Array.isArray(types)) {
       types.forEach((type) => {
         if (Array.isArray(type.members)) {
@@ -201,6 +206,8 @@ function convertXmlToJson(xml, templateName, fromFolder, branchName, testClassLi
           });
         }
       });
+    } else {
+      alert("Single types! Can't continue!");
     }
     const summary = [];
 
