@@ -12,12 +12,73 @@ export class Types {
         };
       },
     },
+    ApexTrigger: {
+      folderName: "triggers",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `triggers`,
+          fileNames: [`${member}.cls`, `${member}.trigger-meta.xml`],
+        };
+      },
+    },
+
+
     ApexPage: {
       folderName: "pages",
       getFileAttributes: (member) => {
         return {
           folderName: `pages`,
           fileNames: [`${member}.page`, `${member}.page-meta.xml`],
+        };
+      },
+    },
+
+    AssignmentRule: {
+      folderName: "assignmentRules",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `assignmentRules`,
+          fileNames: [`${member}.cls`, `${member}.assignmentRules-meta.xml`],
+        };
+      },
+    },
+
+    CustomNotificationType: {
+      folderName: "notificationtypes",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `notificationtypes`,
+          fileNames: [`${member}.cls`, `${member}.notificationtype-meta.xml`],
+        };
+      },
+    },
+
+  
+
+    Audience: {
+      folderName: "audience",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `audience`,
+          fileNames: [`${member}.cls`, `${member}.audience-meta.xml`],
+        };
+      },
+    },
+
+    BusinessProcess: {
+      folderName: "objects",
+      getFileAttributes: (member) => {
+        const parts = member.split(".");
+        if (parts.length === 2) {
+          const [folder, filename] = parts;
+          return {
+            folderName: `objects/${folder}/businessProcesses`,
+            fileNames: [`${filename}.businessProcess-meta.xml`],
+          };
+        }
+        return {
+          folderName: "objects",
+          fileNames: [""],
         };
       },
     },
@@ -284,6 +345,178 @@ export class Types {
       copyAllFiles: true,
     },
 
+
+    Territory2: {
+      folderName: "territory2Models",
+      getFileAttributes: (member) => {
+        return {
+          folderName: ``,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+
+    Territory2Rule: {
+      folderName: "territory2Models",
+      getFileAttributes: (member) => {
+        return {
+          folderName: ``,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+    Territory2Type: {
+      folderName: "territory2Types",
+      getFileAttributes: (member) => {
+        return {
+          folderName: ``,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+    Workflow: {
+      folderName: "workflows",
+      getFileAttributes: (member) => {
+        return {
+          folderName: ``,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+    WorkflowAlert: {
+      folderName: "workflows",
+      getFileAttributes: (member) => {
+        return {
+          folderName: ``,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+    WorkflowFieldUpdate: {
+      folderName: "workflows",
+      getFileAttributes: (member) => {
+        return {
+          folderName: ``,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+
+    WorkflowKnowledgePublish: {
+      folderName: "workflows",
+      getFileAttributes: (member) => {
+        return {
+          folderName: ``,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+    
+
+
+
+   PlatformEventChannel: {
+      folderName: "platformEventChannels",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `platformEventChannels`,
+          fileNames: [`${member}.platformEventChannel-meta.xml`],
+        };
+      },
+    }, 
+
+    PlatformEventChannelMember: {
+      folderName: "platformEventChannelMembers",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `platformEventChannelMembers`,
+          fileNames: [`${member}`],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+
+    Queue: {
+      folderName: "queues",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `queues`,
+          fileNames: [`${member}.queue-meta.xml`],
+        };
+      },
+    },
+    
+    
+    Role: {
+      folderName: "roles",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `roles`,
+          fileNames: [`${member}.role-meta.xml`],
+        };
+      },
+    }, 
+
+    Settings: {
+      folderName: "settings",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `settings`,
+          fileNames: [`${member}.settings-meta.xml`],
+        };
+      },
+    }, 
+
+    SharingRules: {
+      folderName: "sharingRules",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `sharingRules`,
+          fileNames: [`${member}.sharingRules-meta.xml`],
+        };
+      },
+    },
+
+    SharingCriteriaRule: {
+      folderName: "sharingRules",
+      getFileAttributes: (member) => {
+        return {
+          folderName: ``,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+    
+
+    CustomObjectTranslation: {
+      folderName: "objectTranslations",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `objectTranslations`,
+          fileNames: [`${member}`],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+   
+
     ExperienceBundle: {
       folderName: "experiences",
       getFileAttributes: (member) => {
@@ -506,6 +739,109 @@ export class Types {
         };
       },
     },
+
+    MatchingRule: {
+      folderName: "matchingRules",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `matchingRules`,
+          fileNames: [`${member}.matchingRule-meta.xml`],
+        };
+      },
+    },
+
+    MatchingRules   : {
+      folderName: "matchingRules",
+      getFileAttributes: (member) => {
+        return {
+          folderName: ``,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+ 
+
+
+    NavigationMenu: {
+      folderName: "navigationMenus",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `navigationMenus`,
+          fileNames: [`${member}.navigationMenu-meta.xml`],
+        };
+      },
+    },
+
+    SharingSet: {
+      folderName: "sharingSets",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `sharingSets`,
+          fileNames: [`${member}.sharingSet-meta.xml`],
+        };
+      },
+    },
+
+
+    StandardValueSet: {
+      folderName: "standardValueSets",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `standardValueSets`,
+          fileNames: [`${member}.standardValueSet-meta.xml`],
+        };
+      },
+    },
+
+
+
+
+   
+
+
+
+    FieldSet: {
+      folderName: "objects",
+      getFileAttributes: (member) => {
+        const parts = member.split(".");
+        if (parts.length === 2) {
+          const [folder, filename] = parts;
+          return {
+            folderName: `objects/${folder}/fieldSets`,
+            fileNames: [`${filename}.fieldSet-meta.xml`],
+          };
+        }
+        return {
+          folderName: "objects",
+          fileNames: [""],
+        };
+      },
+    },
+
+    WebLink: {
+      folderName: "objects",
+      getFileAttributes: (member) => {
+        const parts = member.split(".");
+        if (parts.length === 2) {
+          const [folder, filename] = parts;
+          return {
+            folderName: `objects/${folder}/webLinks`,
+            fileNames: [`${filename}.webLink-meta.xml`],
+          };
+        }
+        return {
+          folderName: "objects",
+          fileNames: [""],
+        };
+      },
+    },
+
+
+ 
+    
+
 
     CompactLayout: {
       folderName: "objects",
