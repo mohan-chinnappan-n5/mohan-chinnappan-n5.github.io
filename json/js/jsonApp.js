@@ -1,6 +1,17 @@
 // jsonApp.js
 // mohan chinnappan
 
+if (sforce) {
+const context = sforce.one.getContext();
+console.log('Salesforce Context:', context);
+}
+else {
+    console.log('Salesforce Context: missing');
+}
+
+
+
+
 Split(["#content", "#je"], { sizes: [45,55] });
 
 const downloadButton = document.getElementById('download-button');
