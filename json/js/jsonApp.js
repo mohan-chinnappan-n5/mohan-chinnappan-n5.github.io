@@ -1,12 +1,16 @@
 // jsonApp.js
 // mohan chinnappan
 
-if (sforce) {
+try {
+if (sforce !== undefined) {
 const context = sforce.one.getContext();
 console.log('Salesforce Context:', context);
 }
 else {
     console.log('Salesforce Context: missing');
+}
+} catch (e) {
+    console.log(e);
 }
 
 
