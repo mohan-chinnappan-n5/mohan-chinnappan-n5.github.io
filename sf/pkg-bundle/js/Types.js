@@ -346,39 +346,43 @@ export class Types {
     },
 
 
-    Territory2: {
+     Territory2: {
       folderName: "territory2Models",
       getFileAttributes: (member) => {
         return {
-          folderName: ``,
+          folderName: `territory2Models`,
           fileNames: [``],
         };
       },
       copyAllFiles: true,
     },
 
+    
 
+ 
     Territory2Rule: {
       folderName: "territory2Models",
       getFileAttributes: (member) => {
         return {
-          folderName: ``,
+          folderName: `territory2Models`,
           fileNames: [``],
         };
       },
       copyAllFiles: true,
     },
+    
 
     Territory2Type: {
       folderName: "territory2Types",
       getFileAttributes: (member) => {
         return {
-          folderName: ``,
+          folderName: `territory2Types`,
           fileNames: [``],
         };
       },
       copyAllFiles: true,
-    },
+    }, 
+    
     Workflow: {
       folderName: "workflows",
       getFileAttributes: (member) => {
