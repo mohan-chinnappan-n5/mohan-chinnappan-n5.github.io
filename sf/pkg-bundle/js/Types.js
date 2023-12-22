@@ -659,6 +659,18 @@ export class Types {
       copyAllFiles: true,
     },
 
+    CustomLabels: {
+      once: true,
+      folderName: "labels",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `labels`,
+          fileNames: [`CustomLabels.labels-meta.xml`],
+        };
+      },
+      copyAllFiles: true,
+    },
+
 
 
     StaticResource: {
