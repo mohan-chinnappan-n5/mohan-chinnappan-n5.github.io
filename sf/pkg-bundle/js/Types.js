@@ -1,5 +1,7 @@
 // Types.js, part of bundler builder
 // mohan chinnappan
+// keep this upto-date for each Salesforce release
+//---------------------------------------------
 export class Types {
   // Mapping of type names to folder names and file extensions
   static typeInfoMap = {
@@ -34,21 +36,38 @@ export class Types {
     },
 
     AssignmentRule: {
+      once:true,
       folderName: "assignmentRules",
       getFileAttributes: (member) => {
         return {
           folderName: `assignmentRules`,
-          fileNames: [`${member}.cls`, `${member}.assignmentRules-meta.xml`],
+          fileNames: [ ``],
         };
       },
+      copyAllFiles: true,
     },
+
+    AssignmentRules: {
+      once:true,
+      folderName: "assignmentRules",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `assignmentRules`,
+          fileNames: [ ``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+  
+
 
     CustomNotificationType: {
       folderName: "notificationtypes",
       getFileAttributes: (member) => {
         return {
           folderName: `notificationtypes`,
-          fileNames: [`${member}.cls`, `${member}.notificationtype-meta.xml`],
+          fileNames: [`${member}.notiftype-meta.xml`],
         };
       },
     },
@@ -60,7 +79,7 @@ export class Types {
       getFileAttributes: (member) => {
         return {
           folderName: `audience`,
-          fileNames: [`${member}.cls`, `${member}.audience-meta.xml`],
+          fileNames: [`${member}.audience-meta.xml`],
         };
       },
     },
@@ -89,7 +108,7 @@ export class Types {
       getFileAttributes: (member) => {
         return {
           folderName: `contentassets`,
-          fileNames: [`${member}*`],
+          fileNames: [`${member}.asset`, `${member}.asset-meta.xml`],
         };
       },
     },
@@ -264,15 +283,7 @@ export class Types {
       },
     },
 
-    AssignmentRules: {
-      folderName: "assignmentRules",
-      getFileAttributes: (member) => {
-        return {
-          folderName: `assignmentRules`,
-          fileNames: [`${member}.assignmentRules-meta.xml`],
-        };
-      },
-    },
+ 
 
     Layout: {
       folderName: "layouts",
@@ -294,23 +305,13 @@ export class Types {
       },
     },
 
-    CustomPermission: {
-      folderName: "customPermissions",
-      getFileAttributes: (member) => {
-        return {
-          folderName: `customPermissions`,
-          fileNames: [`${member}.customPermission-meta.xml`],
-        };
-      },
-    },
-
-    // TODO
     Document: {
+      once:true,
       folderName: "documents",
       getFileAttributes: (member) => {
         return {
           folderName: `documents`,
-          fileNames: [`${member}`],
+          fileNames: [``],
         };
       },
       copyAllFiles: true,
@@ -347,6 +348,7 @@ export class Types {
 
 
      Territory2: {
+      once: true,
       folderName: "territory2Models",
       getFileAttributes: (member) => {
         return {
@@ -361,6 +363,7 @@ export class Types {
 
  
     Territory2Rule: {
+      once: true,
       folderName: "territory2Models",
       getFileAttributes: (member) => {
         return {
@@ -373,6 +376,7 @@ export class Types {
     
 
     Territory2Type: {
+      once: true,
       folderName: "territory2Types",
       getFileAttributes: (member) => {
         return {
@@ -382,12 +386,13 @@ export class Types {
       },
       copyAllFiles: true,
     }, 
-    
+
     Workflow: {
+      once:true,
       folderName: "workflows",
       getFileAttributes: (member) => {
         return {
-          folderName: ``,
+          folderName: `workflows`,
           fileNames: [``],
         };
       },
@@ -395,10 +400,11 @@ export class Types {
     },
 
     WorkflowAlert: {
+      once:true,
       folderName: "workflows",
       getFileAttributes: (member) => {
         return {
-          folderName: ``,
+          folderName: `workflows`,
           fileNames: [``],
         };
       },
@@ -406,10 +412,11 @@ export class Types {
     },
 
     WorkflowFieldUpdate: {
+      once: true,
       folderName: "workflows",
       getFileAttributes: (member) => {
         return {
-          folderName: ``,
+          folderName: `workflows`,
           fileNames: [``],
         };
       },
@@ -418,10 +425,11 @@ export class Types {
 
 
     WorkflowKnowledgePublish: {
+      once:true,
       folderName: "workflows",
       getFileAttributes: (member) => {
         return {
-          folderName: ``,
+          folderName: `workflows`,
           fileNames: [``],
         };
       },
@@ -447,7 +455,7 @@ export class Types {
       getFileAttributes: (member) => {
         return {
           folderName: `platformEventChannelMembers`,
-          fileNames: [`${member}`],
+          fileNames: [`${member}.platformEventChannelMember-meta.xml`],
         };
       },
       copyAllFiles: true,
@@ -496,10 +504,11 @@ export class Types {
     },
 
     SharingCriteriaRule: {
+      once:true,
       folderName: "sharingRules",
       getFileAttributes: (member) => {
         return {
-          folderName: ``,
+          folderName: `sharingRules`,
           fileNames: [``],
         };
       },
@@ -550,7 +559,7 @@ export class Types {
       getFileAttributes: (member) => {
         return {
           folderName: `wave`,
-          fileNames: [`${member}.wapp`, `${member}.wapp-meta.xml`],
+          fileNames: [`${member}.wapp-meta.xml`],
         };
       },
     },
@@ -571,7 +580,7 @@ export class Types {
       getFileAttributes: (member) => {
         return {
           folderName: `wave`,
-          fileNames: [`${member}.wds`, `${member}.wds-meta.xml`],
+          fileNames: [`${member}.wds-meta.xml`],
         };
       },
     },
@@ -665,6 +674,7 @@ export class Types {
     },
 
     EmailTemplate: {
+      once:true,
       folderName: "email",
       getFileAttributes: (member) => {
         return {
@@ -676,6 +686,7 @@ export class Types {
     },
 
     Dashboard: {
+      once:true,
       folderName: "dashboards",
       getFileAttributes: (member) => {
         return {
@@ -755,10 +766,11 @@ export class Types {
     },
 
     MatchingRules   : {
+      once:true,
       folderName: "matchingRules",
       getFileAttributes: (member) => {
         return {
-          folderName: ``,
+          folderName: `matchingRules`,
           fileNames: [``],
         };
       },
@@ -933,7 +945,7 @@ export class Types {
       getFileAttributes: (member) => {
         return {
           folderName: `messageChannels`,
-          fileNames: [`${member}..messageChannel-meta.xml`],
+          fileNames: [`${member}.messageChannel-meta.xml`],
         };
       },
     },
@@ -942,7 +954,7 @@ export class Types {
       getFileAttributes: (member) => {
         return {
           folderName: `restrictionRules`,
-          fileNames: [`${member}..rule-meta.xml`],
+          fileNames: [`${member}.rule-meta.xml`],
         };
       },
     },

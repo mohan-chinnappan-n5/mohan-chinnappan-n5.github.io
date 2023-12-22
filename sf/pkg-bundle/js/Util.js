@@ -91,7 +91,9 @@ artifacts
           if (typeInfo.getFileAttributes(member)) {
             const { folderName, fileNames } =
               typeInfo.getFileAttributes(member);
+            let fileNdx = 0;
             for (const fileName of fileNames) {
+              fileNdx++;
               //fileNames.forEach((fileName) => {
               sourcePaths.push(
                 this.pathJoin([sourceDir, folderName, fileName])
@@ -99,9 +101,11 @@ artifacts
               destinationPaths.push(
                 this.pathJoin([destinationDir, subFolder, folderName, fileName])
               );
-              scriptLines.push(
-                `mkdir -p "${destinationDir}/${subFolder}/${folderName}"`
-              );
+              if (ndx === 1 && fileNdx === 1) {
+                scriptLines.push(
+                  `mkdir -p "${destinationDir}/${subFolder}/${folderName}"`
+                );
+              }
             }
           } else {
             sourcePaths.push(
@@ -136,6 +140,8 @@ artifacts
         }
       });
     });
+
+    document.getElementById('summary').value = JSON.stringify(summary, null, 4); 
 
     return scriptLines.join("\n");
   }
