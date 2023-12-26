@@ -99,7 +99,9 @@
             <li class="list-group-item">Upload the <code>package.xml</code> in this app</li>
             <li class="list-group-item">Fill up the required values in this form</li>
             <li class="list-group-item">Store the downloaded script (<code>bundle-script.sh</code>) in that folder</li>
-            <li class="list-group-item">run this script: <code> bash bundle-script.sh</code> in that folder</li>
+            <li class="list-group-item">run this script: <code> bash bundle-script.sh > results.txt</code> in that folder</li>
+            <li class="list-group-item">Any errors in the script run will be rendered on the screen</li>
+ 
         </ul>
         <textarea name="summary" id="summary"  class="form-control" style="background-color: black;color:bisque" cols="60" rows="10"></textarea>
         <hr>
@@ -131,7 +133,7 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/loader.js"></script>
-    <script type="module" src="js/app.js?v=120"></script>
+    <script type="module" src="js/app.js?v=123"></script>
 </body>
 
 </html>

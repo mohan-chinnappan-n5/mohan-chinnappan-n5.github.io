@@ -318,6 +318,19 @@ export class Types {
     },
 
     Report: {
+      once: true,
+      folderName: "reports",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `reports`,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
+
+    ReportOld: {
       folderName: "reports",
       getFileAttributes: (member) => {
         const parts = member.split("/");
@@ -325,11 +338,11 @@ export class Types {
           const [folder, filename] = parts;
           return {
             folderName: `reports/${folder}`,
-            fileNames: [`${filename}.report-meta.xml`],
+            fileNames: [`${filename}.report-meta.xml` ],
           };
         }
         return {
-          folderName: "objects",
+          folderName: "reports",
           fileNames: [""],
         };
       },

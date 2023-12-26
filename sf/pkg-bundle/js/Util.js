@@ -77,7 +77,7 @@ artifacts
         ndx++;
 
         //members.forEach((member, ndx) => {
-        scriptLines.push(`echo "======= member: ${member} ======="`);
+        scriptLines.push(`echo "======= member: ${member.replace(/\$/g, "\\$")} ======="`);
 
         try {
           if (!typeInfo) {
@@ -103,7 +103,7 @@ artifacts
               );
               //if (ndx === 1 && fileNdx === 1) {
                 scriptLines.push(
-                  `mkdir -p "${destinationDir}/${subFolder}/${folderName}"`
+                  `mkdir -p "${destinationDir}/${subFolder}/${folderName.replace(/\$/g, "\\$")}"`
                 );
               //}
             }
@@ -133,10 +133,10 @@ artifacts
         if (typeInfo.copyAllFiles) {
           // console.log(typeInfo)
           scriptLines.push(
-            `cp -r  "${sourcePath}" "${destinationPaths[index]}"`
+            `cp -r  "${sourcePath.replace(/\$/g, "\\$")}" "${destinationPaths[index]}"`
           );
         } else {
-          scriptLines.push(`cp "${sourcePath}" "${destinationPaths[index]}"`);
+          scriptLines.push(`cp "${sourcePath.replace(/\$/g, "\\$")}" "${destinationPaths[index]}"`);
         }
       });
     });
