@@ -19,7 +19,7 @@ export class Types {
       getFileAttributes: (member) => {
         return {
           folderName: `triggers`,
-          fileNames: [`${member}.cls`, `${member}.trigger-meta.xml`],
+          fileNames: [`${member}.trigger`, `${member}.trigger-meta.xml`],
         };
       },
     },

@@ -101,11 +101,11 @@ artifacts
               destinationPaths.push(
                 this.pathJoin([destinationDir, subFolder, folderName, fileName])
               );
-              if (ndx === 1 && fileNdx === 1) {
+              //if (ndx === 1 && fileNdx === 1) {
                 scriptLines.push(
                   `mkdir -p "${destinationDir}/${subFolder}/${folderName}"`
                 );
-              }
+              //}
             }
           } else {
             sourcePaths.push(
