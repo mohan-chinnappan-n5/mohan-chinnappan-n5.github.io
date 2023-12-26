@@ -207,12 +207,14 @@ sfdx force:auth:web:login -r https://login|test.salesforce.com
 ## Example:
 ### Run only specified classes only
 ------------------------
-sfdx force:source:deploy -x package.xml --postdestructivechanges destructiveChanges.xml --verbose --testlevel RunSpecifiedTests -r \${TEST_CLASS_LIST} -c -u \${USERNAME}
+
+ sfdx force:source:deploy -x package.xml --postdestructivechanges destructiveChanges.xml  --json   -w 200 --verbose --loglevel TRACE  --testlevel RunSpecifiedTests -r \${TEST_CLASS_LIST} -c -u \${USERNAME}
 ------------------------
 
 ### Run all test classes
 ------------------------
-sfdx force:source:deploy -x package.xml --postdestructivechanges destructiveChanges.xml --verbose --testlevel RunLocalTests  -c -u \${USERNAME}
+sfdx force:source:deploy -x package.xml --postdestructivechanges destructiveChanges.xml  --json   -w 200 --verbose --loglevel TRACE  --testlevel RunLocalTests -c -u \${USERNAME}
+
 ------------------------
   
    
