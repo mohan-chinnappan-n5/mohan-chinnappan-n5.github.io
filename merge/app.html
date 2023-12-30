@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Merge</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #container {
+            display: flex;
+            height: 100vh;
+        }
+
+        #file1, #file2, #merged {
+            flex: 1;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="file1"></div>
+        <div id="file2"></div>
+        <div id="merged"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.24.0/min/vs/loader.js"></script>
+    <script>
+        require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor@0.24.0/min/vs' } });
+
+        require(['vs/editor/editor.main'], function () {
+            const file1Editor = createDiffEditor('file1', 'File 1');
+            const file2Editor = createDiffEditor('file2', 'File 2');
+            const mergedEditor = createEditor('merged', 'Merged File');
+
+            // Load content into file1 and file2 editors
+            loadFileContent('file1.txt', file1Editor.original.getModel());
+            loadFileContent('file2.txt', file2Editor.original.getModel());
+
+            // Perform merge and display in merged editor
+            const file1Content = file1Editor.original.getModel().getValue();
+            const file2Content = file2Editor.original.getModel().getValue();
+            const mergedContent = mergeFiles(file1Content, file2Content);
+            mergedEditor.setValue(mergedContent);
+        });
+
+        function createDiffEditor(containerId, label) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `<label>${label}</label>`;
+            const editor = monaco.editor.createDiffEditor(container, {
+                theme: 'vs-dark',
+                readOnly: true,
+            });
+            return editor;
+        }
+
+        function createEditor(containerId, label) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `<label>${label}</label>`;
+            const editor = monaco.editor.create(container, {
+                language: 'plaintext',
+                theme: 'vs-dark',
+                minimap: { enabled: false },
+                scrollBeyondLastLine: false,
+            });
+            return editor;
+        }
+
+        function loadFileContent(filePath, model) {
+            // You can load file content using AJAX or any other method
+            // Here, we use a placeholder content for demonstration purposes
+            const placeholderContent = `Content of ${filePath}`;
+            model.setValue(placeholderContent);
+        }
+
+        function mergeFiles(file1Content, file2Content) {
+            // Implement your merging logic here
+            // For simplicity, we concatenate the content of both files
+            return `${file1Content}\n<<<<<<< HEAD\n${file2Content}\n=======\n>>>>>>>`;
+        }
+    </script>
+</body>
+</html>

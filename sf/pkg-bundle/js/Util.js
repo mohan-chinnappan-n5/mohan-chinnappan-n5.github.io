@@ -43,6 +43,9 @@ artifacts
     summary
   ) {
     const scriptLines = [];
+    const testClassListArray = [];
+    const testClassRegex = /(Test|_Test)$/;
+
 
     let subFolder = "force-app/main/default";
 
@@ -88,6 +91,7 @@ artifacts
             return;
           }
 
+          if (type === 'ApexClass' && testClassRegex.test(member))  testClassListArray.push(member);
           if (typeInfo.getFileAttributes(member)) {
             const { folderName, fileNames } =
               typeInfo.getFileAttributes(member);
@@ -141,7 +145,8 @@ artifacts
       });
     });
 
-    document.getElementById('summary').value = JSON.stringify(summary, null, 4); 
+    document.getElementById('summary').value = JSON.stringify(summary, null, 4);
+    document.getElementById('testClassList').value = (testClassListArray.map(JSON.stringify).join(',')).replace(/"/g,'');
 
     return scriptLines.join("\n");
   }
@@ -216,6 +221,14 @@ sfdx force:auth:web:login -r https://login|test.salesforce.com
 sfdx force:source:deploy -x package.xml --postdestructivechanges destructiveChanges.xml  --json   -w 200 --verbose --loglevel TRACE  --testlevel RunLocalTests -c -u \${USERNAME}
 
 ------------------------
+
+
+### Run all test classes with PRE and POST destructivechanges 
+------------------------
+sfdx force:source:deploy -x package.xml --predestructivechanges destructiveChangesPre.xml   --postdestructivechanges destructiveChangesPost.xml  --json   -w 200 --verbose --loglevel TRACE  --testlevel RunLocalTests -c -u \${USERNAME}
+
+------------------------
+
   
    
 Note down the **Deploy ID:** for  quick deploy:
@@ -267,7 +280,7 @@ cd "\${CWD}"
 
 TO_FOLDER="\${TEMPLATE_NAME}"
 # TEST_CLASS_LIST is comma separated list of Test classes to be run for RunSpecifiedTests option
-TEST_CLASS_LIST="${testClassList}"
+TEST_CLASS_LIST="${document.getElementById('testClassList').value}"
 
 # USERNAME is your username for the org that you are deploying to
 #  - Login to the org using:  'sfdx force:auth:web:login -r https://login|test.salesforce.com'x
