@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe Content</title>
+</head>
+<body>
+
+<h2>Iframe Content</h2>
+
+<!-- Display received message from the main application -->
+<p id="messageDisplay"></p>
+
+<script>
+// Add event listener to receive messages from the main application using document.referrer
+var parentOrigin = document.referrer;
+window.addEventListener('message', function(event) {
+    // Verify the origin for security reasons
+    if (event.origin === parentOrigin) {
+        // Display the received message
+        document.getElementById('messageDisplay').innerText = 'Received Message: ' + event.data;
+    }
+    else {
+        alert(event.origin )
+    }
+});
+</script>
+
+</body>
+</html>

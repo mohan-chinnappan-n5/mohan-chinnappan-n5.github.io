@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Application</title>
+</head>
+<body>
+
+<h1>Main Application</h1>
+
+<!-- Iframe container -->
+<iframe id="myIframe" src="iframe.html" width="300" height="200" frameborder="0"></iframe>
+
+<!-- Button to communicate with iframe -->
+<button onclick="sendMessageToIframe()">Send Message to Iframe</button>
+
+<script>
+function sendMessageToIframe() {
+    // Get the iframe window reference
+    var iframeWindow = document.getElementById('myIframe').contentWindow;
+
+    // Send a message to the iframe
+    iframeWindow.postMessage('Hello from Main Application!', '*');
+}
+
+// Add event listener to receive messages from the iframe
+window.addEventListener('message', function(event) {
+    // Display the received message
+    alert('Message from iframe: ' + event.data);
+});
+</script>
+
+</body>
+</html>

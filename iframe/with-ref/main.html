@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Application</title>
+    <style>
+        #myIframe {
+            border: 2px solid #3498db;
+            border-radius: 8px;
+        }
+
+        /* Add styles for buttons */
+        #resizeUpBtn, #resizeDownBtn {
+            margin-top: 10px;
+            padding: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Main Application</h1>
+
+<!-- Iframe container -->
+<iframe id="myIframe" src="iframe.html" width="300" height="200" frameborder="0"></iframe>
+
+<!-- Buttons for communication and resizing -->
+<button onclick="sendMessageToIframe()">Send Message to Iframe</button>
+<button id="resizeUpBtn" onclick="resizeIframe('up')">Resize Iframe Up</button>
+<button id="resizeDownBtn" onclick="resizeIframe('down')">Resize Iframe Down</button>
+
+<script>
+function sendMessageToIframe() {
+    // Get the iframe window reference using document.referrer
+    var iframeWindow = document.getElementById('myIframe').contentWindow;
+
+    // Send a message to the iframe
+    iframeWindow.postMessage('Hello from Main Application!', '*');
+}
+
+function resizeIframe(direction) {
+    var iframe = document.getElementById('myIframe');
+    var currentWidth = iframe.width;
+    var currentHeight = iframe.height;
+
+    var resizePercentage = 0.05; // Adjust the percentage as needed
+
+    if (direction === 'up') {
+        iframe.width = currentWidth * (1 + resizePercentage);
+        iframe.height = currentHeight * (1 + resizePercentage);
+    } else if (direction === 'down') {
+        iframe.width = currentWidth * (1 - resizePercentage);
+        iframe.height = currentHeight * (1 - resizePercentage);
+    }
+}
+</script>
+
+</body>
+</html>
