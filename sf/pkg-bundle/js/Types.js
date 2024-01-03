@@ -919,6 +919,25 @@ export class Types {
       },
     },
 
+    SharingReason: {
+      folderName: "objects",
+      getFileAttributes: (member) => {
+        const parts = member.split(".");
+        if (parts.length === 2) {
+          const [folder, filename] = parts;
+          return {
+            folderName: `objects/${folder}/sharingReasons`,
+            fileNames: [`${filename}.sharingReason-meta.xml`],
+          };
+        }
+        return {
+          folderName: "objects",
+          fileNames: [""],
+        };
+      },
+    },
+
+
     RecordType: {
       folderName: "objects",
       getFileAttributes: (member) => {
