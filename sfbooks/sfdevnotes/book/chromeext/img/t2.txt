@@ -1,0 +1,7 @@
+{
+    "method": "GET",
+    "tooling": false,
+    "url": "https://mohanc-rest.deno.dev/date",
+    "sfdc": false,
+    "Content-Type": "application/json"
+}

@@ -1,0 +1,1198 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Real User Monitoring (RUM) - Salesforce Development Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../custom.css">
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../dg/dg.html"><strong aria-hidden="true">2.</strong> Data Governance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dg/changeManagement.html"><strong aria-hidden="true">2.1.</strong> Change Management</a></li></ol></li><li class="chapter-item expanded "><a href="../dm/datamodel.html"><strong aria-hidden="true">3.</strong> Data Model</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dm/fsc-dm.html"><strong aria-hidden="true">3.1.</strong> Financial Services Cloud</a></li><li class="chapter-item expanded "><a href="../dm/salescloud.html"><strong aria-hidden="true">3.2.</strong> Sales Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/aboutTools.html"><strong aria-hidden="true">4.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-org.html"><strong aria-hidden="true">4.1.</strong> Org Tools</a></li><li class="chapter-item expanded "><a href="../tools/tools-data-bulkapi2.html"><strong aria-hidden="true">4.2.</strong> Data Loading BulkAPI2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/userloading.html"><strong aria-hidden="true">4.2.1.</strong> User Loading</a></li><li class="chapter-item expanded "><a href="../tools/product2loading.html"><strong aria-hidden="true">4.2.2.</strong> Product2 Loading and Update</a></li><li class="chapter-item expanded "><a href="../tools/flowinterview.html"><strong aria-hidden="true">4.2.3.</strong> FlowInterview Query and Deletion</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/dataTreeImport.html"><strong aria-hidden="true">4.3.</strong> Prepare and Load for data:tree:import</a></li><li class="chapter-item expanded "><a href="../tools/tools-scpl.html"><strong aria-hidden="true">4.4.</strong> Loading State and Country Picklist</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-scpl-update.html"><strong aria-hidden="true">4.4.1.</strong> Updating State and Country Picklist </a></li></ol></li><li class="chapter-item expanded "><a href="../tools/project-management/gantt.html"><strong aria-hidden="true">4.5.</strong> Project Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../project-management/pert.html"><strong aria-hidden="true">4.5.1.</strong> PERT</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/em.html"><strong aria-hidden="true">4.6.</strong> Event Monitoring</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../monitoring/proactive-monitoring.html"><strong aria-hidden="true">4.6.1.</strong> Proactive Monitoring</a></li><li class="chapter-item expanded "><a href="../monitoring/realtime-event-monitoring.html"><strong aria-hidden="true">4.6.2.</strong> Real-Time Event Monitoring</a></li><li class="chapter-item expanded "><a href="../tools/scripts.html"><strong aria-hidden="true">4.6.3.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="../tools/compare.html"><strong aria-hidden="true">4.6.4.</strong> Comparison</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/instance.html"><strong aria-hidden="true">4.7.</strong> Instance Related</a></li><li class="chapter-item expanded "><a href="../tools/oms.html"><strong aria-hidden="true">4.8.</strong> Org Metadata Snapshot</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/scripts.html"><strong aria-hidden="true">5.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="../custom-metadata-types.html"><strong aria-hidden="true">6.</strong> Custom Metadata Types</a></li><li class="chapter-item expanded "><a href="../cq/cq.html"><strong aria-hidden="true">7.</strong> Code Quality</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cq/pmd.html"><strong aria-hidden="true">7.1.</strong> Code Scan PMD</a></li><li class="chapter-item expanded "><a href="../cq/comments.html"><strong aria-hidden="true">7.2.</strong> Comments Checking</a></li><li class="chapter-item expanded "><a href="../cq/test-coverage.html"><strong aria-hidden="true">7.3.</strong> Apex Code Test Coverage</a></li><li class="chapter-item expanded "><a href="../cq/lwc-linting.html"><strong aria-hidden="true">7.4.</strong> LWC Linting</a></li><li class="chapter-item expanded "><a href="../cq/eslint-custom-rules.html"><strong aria-hidden="true">7.5.</strong> eslint custom rules</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/deployments.html"><strong aria-hidden="true">8.</strong> Deployments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/delta.html"><strong aria-hidden="true">8.1.</strong> Delta Deployments</a></li><li class="chapter-item expanded "><a href="../deployments/gha.html"><strong aria-hidden="true">8.2.</strong> Github Actions</a></li><li class="chapter-item expanded "><a href="../deployments/validate.html"><strong aria-hidden="true">8.3.</strong> Validating changes</a></li><li class="chapter-item expanded "><a href="../deployments/admin-changes.html"><strong aria-hidden="true">8.4.</strong> Taking care of Admin changes</a></li><li class="chapter-item expanded "><a href="../deployments/devOpsCenter.html"><strong aria-hidden="true">8.5.</strong> DevOps Center</a></li><li class="chapter-item expanded "><a href="../deployments/jenkins.html"><strong aria-hidden="true">8.6.</strong> Jenkins</a></li><li class="chapter-item expanded "><a href="../deployments/git.html"><strong aria-hidden="true">8.7.</strong> git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/git-internals.html"><strong aria-hidden="true">8.7.1.</strong> git internals</a></li><li class="chapter-item expanded "><a href="../deployments/git-hooks.html"><strong aria-hidden="true">8.7.2.</strong> git hooks</a></li><li class="chapter-item expanded "><a href="../deployments/git-ops.html"><strong aria-hidden="true">8.7.3.</strong> git operations</a></li><li class="chapter-item expanded "><a href="../deployments/pr-template.html"><strong aria-hidden="true">8.7.4.</strong> pull request template</a></li><li class="chapter-item expanded "><a href="../deployments/git-diff.html"><strong aria-hidden="true">8.7.5.</strong> git diff</a></li><li class="chapter-item expanded "><a href="../deployments/git-merge.html"><strong aria-hidden="true">8.7.6.</strong> git merge</a></li><li class="chapter-item expanded "><a href="../deployments/git-log.html"><strong aria-hidden="true">8.7.7.</strong> git log</a></li><li class="chapter-item expanded "><a href="../deployments/git-stash.html"><strong aria-hidden="true">8.7.8.</strong> git stash</a></li><li class="chapter-item expanded "><a href="../deployments/git-config.html"><strong aria-hidden="true">8.7.9.</strong> git config</a></li><li class="chapter-item expanded "><a href="../deployments/git-revert.html"><strong aria-hidden="true">8.7.10.</strong> git revert</a></li><li class="chapter-item expanded "><a href="../deployments/git-delete-branch.html"><strong aria-hidden="true">8.7.11.</strong> git deleting branch</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/app-exchange.html"><strong aria-hidden="true">8.8.</strong> Apps from App Exchange </a></li><li class="chapter-item expanded "><a href="../deployments/sourceTracking.html"><strong aria-hidden="true">8.9.</strong> Source Tracking</a></li><li class="chapter-item expanded "><a href="../deployments/dangling.html"><strong aria-hidden="true">8.10.</strong> Dangling Fields Finder</a></li><li class="chapter-item expanded "><a href="../deployments/sbx.html"><strong aria-hidden="true">8.11.</strong> Sandbox Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/sandbox-preview-guide.html"><strong aria-hidden="true">8.11.1.</strong> Sandbox Preview Guide</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/MetadataComponentDependency.html"><strong aria-hidden="true">8.12.</strong> MetadataComponentDependency</a></li><li class="chapter-item expanded "><a href="../deployments/yaml.html"><strong aria-hidden="true">8.13.</strong> YAML</a></li><li class="chapter-item expanded "><a href="../deployments/packages.html"><strong aria-hidden="true">8.14.</strong> Installed Packages</a></li></ol></li><li class="chapter-item expanded "><a href="../crma/tools.html"><strong aria-hidden="true">9.</strong> CRMA tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crma/load-export.html"><strong aria-hidden="true">9.1.</strong> Dataset Load and Export</a></li><li class="chapter-item expanded "><a href="../crma/analysis.html"><strong aria-hidden="true">9.2.</strong> Analysis</a></li><li class="chapter-item expanded "><a href="../crma/binding.html"><strong aria-hidden="true">9.3.</strong> Binding</a></li><li class="chapter-item expanded "><a href="../crma/deployment.html"><strong aria-hidden="true">9.4.</strong> Deployment</a></li></ol></li><li class="chapter-item expanded "><a href="../perf/perf.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../perf/lex-perf.html"><strong aria-hidden="true">10.1.</strong> Lex Performance</a></li><li class="chapter-item expanded "><a href="../perf/perf-testing.html"><strong aria-hidden="true">10.2.</strong> Performance testing</a></li><li class="chapter-item expanded "><a href="../perf/perf-pw.html"><strong aria-hidden="true">10.3.</strong> Testing with Playwright</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../e2e/playwright.html"><strong aria-hidden="true">10.3.1.</strong> More with Playwright</a></li></ol></li><li class="chapter-item expanded "><a href="../perf/edge.html"><strong aria-hidden="true">10.4.</strong> Salesforce Edge Network</a></li><li class="chapter-item expanded "><a href="../perf/lex-query.html"><strong aria-hidden="true">10.5.</strong> Lightning Experience Queries</a></li><li class="chapter-item expanded "><a href="../perf/rum.html" class="active"><strong aria-hidden="true">10.6.</strong> Real User Monitoring (RUM)</a></li></ol></li><li class="chapter-item expanded "><a href="../dwg/dwg-tools.html"><strong aria-hidden="true">11.</strong> Diagram tools</a></li><li class="chapter-item expanded "><a href="../xml/xml-tools.html"><strong aria-hidden="true">12.</strong> XML tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../xml/xlst-transformer.html"><strong aria-hidden="true">12.1.</strong> Transformer</a></li><li class="chapter-item expanded "><a href="../xml/xml-delta.html"><strong aria-hidden="true">12.2.</strong> XML Delta Util</a></li></ol></li><li class="chapter-item expanded "><a href="../dp/dp.html"><strong aria-hidden="true">13.</strong> Data Processing tools</a></li><li class="chapter-item expanded "><a href="../i18n/i18n.html"><strong aria-hidden="true">14.</strong> Translation Tools</a></li><li class="chapter-item expanded "><a href="../media/recording.html"><strong aria-hidden="true">15.</strong> Media - Recording tools</a></li><li class="chapter-item expanded "><a href="../media/image.html"><strong aria-hidden="true">16.</strong> Image Processing</a></li><li class="chapter-item expanded "><a href="../codegen/codegen.html"><strong aria-hidden="true">17.</strong> Code Generators</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../codegen/lwc.html"><strong aria-hidden="true">17.1.</strong> LWC Code Generators</a></li><li class="chapter-item expanded "><a href="../ml/nlp.html"><strong aria-hidden="true">17.2.</strong> Apex Code Generators</a></li></ol></li><li class="chapter-item expanded "><a href="../ml/ml.html"><strong aria-hidden="true">18.</strong> Machine Learning</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ml/sdcg.html"><strong aria-hidden="true">18.1.</strong> Semantic Doc Compare and Group</a></li><li class="chapter-item expanded "><a href="../ml/datacatalog.html"><strong aria-hidden="true">18.2.</strong> Data Catalog for ML Work</a></li><li class="chapter-item expanded "><a href="../ml/chatgpt.html"><strong aria-hidden="true">18.3.</strong> openAI - ChatGPT</a></li><li class="chapter-item expanded "><a href="../ml/gpt3codex.html"><strong aria-hidden="true">18.4.</strong> openAI - GPT3 Codex</a></li><li class="chapter-item expanded "><a href="../ml/einsteinbot.html"><strong aria-hidden="true">18.5.</strong> Einstein Bot</a></li><li class="chapter-item expanded "><a href="../ml/dialogflow.html"><strong aria-hidden="true">18.6.</strong> Dialogflow - Knowledge Base</a></li><li class="chapter-item expanded "><a href="../ml/nlp.html"><strong aria-hidden="true">18.7.</strong> NLP</a></li><li class="chapter-item expanded "><a href="../ml/transformers.html"><strong aria-hidden="true">18.8.</strong> Transformers</a></li><li class="chapter-item expanded "><a href="../ml/llm.html"><strong aria-hidden="true">18.9.</strong> Large Language Models</a></li><li class="chapter-item expanded "><a href="../ml/team-productivity.html"><strong aria-hidden="true">18.10.</strong> Using LLM to improve team productivity</a></li></ol></li><li class="chapter-item expanded "><a href="../docmgmt/docmgmt.html"><strong aria-hidden="true">19.</strong> Document Management tools</a></li><li class="chapter-item expanded "><a href="../design/design-notes.html"><strong aria-hidden="true">20.</strong> Design Principles</a></li><li class="chapter-item expanded "><a href="../chromeext/ext.html"><strong aria-hidden="true">21.</strong> Chrome Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chromeext/onnu.html"><strong aria-hidden="true">21.1.</strong> ONNU</a></li></ol></li><li class="chapter-item expanded "><a href="../vscode/ext.html"><strong aria-hidden="true">22.</strong> VS Code Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../vscode/sfland.html"><strong aria-hidden="true">22.1.</strong> SF Land</a></li><li class="chapter-item expanded "><a href="../vscode/pmd.html"><strong aria-hidden="true">22.2.</strong> VSCode Apex PMD</a></li><li class="chapter-item expanded "><a href="../vscode/vsc-tips.html"><strong aria-hidden="true">22.3.</strong> VSCode tips</a></li></ol></li><li class="chapter-item expanded "><a href="../dviz/dviz.html"><strong aria-hidden="true">23.</strong> Data Viz</a></li><li class="chapter-item expanded "><a href="../releases.html"><strong aria-hidden="true">24.</strong> Releases</a></li><li class="chapter-item expanded "><a href="../rest/rest_tester.html"><strong aria-hidden="true">25.</strong> REST Tester</a></li><li class="chapter-item expanded "><a href="../security/security.html"><strong aria-hidden="true">26.</strong> Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/exploit-prevention.html"><strong aria-hidden="true">26.1.</strong> Exploitation and prevention</a></li><li class="chapter-item expanded "><a href="../security/sd.html"><strong aria-hidden="true">26.2.</strong> Sharing Debugger</a></li><li class="chapter-item expanded "><a href="../security/rh.html"><strong aria-hidden="true">26.3.</strong> Role Hierarchy</a></li><li class="chapter-item expanded "><a href="../security/shield.html"><strong aria-hidden="true">26.4.</strong> Shield</a></li><li class="chapter-item expanded "><a href="../security/profile-ps.html"><strong aria-hidden="true">26.5.</strong> Profile, PermissionSet</a></li><li class="chapter-item expanded "><a href="../security/setupAuditTrail.html"><strong aria-hidden="true">26.6.</strong> SetupAuditTrail</a></li><li class="chapter-item expanded "><a href="../security/datamask.html"><strong aria-hidden="true">26.7.</strong> Data Mask</a></li><li class="chapter-item expanded "><a href="../security/saml.html"><strong aria-hidden="true">26.8.</strong> SAML</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectConcepts.html"><strong aria-hidden="true">26.9.</strong> OpenID Connect</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/openIDConnect.html"><strong aria-hidden="true">26.9.1.</strong> OIDC Google</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectProvider.html"><strong aria-hidden="true">26.9.2.</strong> OIDC Provider</a></li><li class="chapter-item expanded "><a href="../security/jwt.html"><strong aria-hidden="true">26.9.3.</strong> JWT</a></li></ol></li><li class="chapter-item expanded "><a href="../security/openssl.html"><strong aria-hidden="true">26.10.</strong> OpenSSL</a></li><li class="chapter-item expanded "><a href="../security/pen-test.html"><strong aria-hidden="true">26.11.</strong> Penetration Testing</a></li></ol></li><li class="chapter-item expanded "><a href="../mobile/mobile.html"><strong aria-hidden="true">27.</strong> Mobile</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../mobile/ios-sim.html"><strong aria-hidden="true">27.1.</strong> Simulator</a></li></ol></li><li class="chapter-item expanded "><a href="../rd/rd.html"><strong aria-hidden="true">28.</strong> Reports and Dashboards</a></li><li class="chapter-item expanded "><a href="../customLabels/cl.html"><strong aria-hidden="true">29.</strong> Custom Labels</a></li><li class="chapter-item expanded "><a href="../accessibility/508.html"><strong aria-hidden="true">30.</strong> 508 - Accessibility</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../accessibility/sally.html"><strong aria-hidden="true">30.1.</strong> Sally</a></li></ol></li><li class="chapter-item expanded "><a href="../process-automation/processAutomation.html"><strong aria-hidden="true">31.</strong> Process Automation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../process-automation/flow.html"><strong aria-hidden="true">31.1.</strong> Flow</a></li></ol></li><li class="chapter-item expanded "><a href="../great/folks.html"><strong aria-hidden="true">32.</strong> Great Folks</a></li><li class="chapter-item expanded "><a href="../editor/editor-tips.html"><strong aria-hidden="true">33.</strong> Editor tips</a></li><li class="chapter-item expanded "><a href="../bash/tips.html"><strong aria-hidden="true">34.</strong> Bash tips</a></li><li class="chapter-item expanded "><a href="../language-design/ld.html"><strong aria-hidden="true">35.</strong> Language Design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language-design/apex.html"><strong aria-hidden="true">35.1.</strong> Apex</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language-design/apex-grammar.html"><strong aria-hidden="true">35.1.1.</strong> Grammar</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../cal-integration/cal.html"><strong aria-hidden="true">36.</strong> Calendar Integrations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cal-integration/ical.html"><strong aria-hidden="true">36.1.</strong> iCal</a></li></ol></li><li class="chapter-item expanded "><a href="../tips.html"><strong aria-hidden="true">37.</strong> Tips</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Salesforce Development Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="real-user-monitoring-rum-and-synthetic-monitoring"><a class="header" href="#real-user-monitoring-rum-and-synthetic-monitoring">Real User Monitoring (RUM) and Synthetic Monitoring</a></h1>
+<h2 id="rum"><a class="header" href="#rum">RUM</a></h2>
+<ul>
+<li>An approach to monitoring and providing insights into web performance</li>
+<li>Generally best suited for understanding <strong>long-term trends</strong></li>
+<li>Measures the performance of a page from real users' machines. </li>
+</ul>
+<h3 id="how-it-works"><a class="header" href="#how-it-works">How it works?</a></h3>
+<ul>
+<li>Generally, a third party script injects a script <strong>on each page</strong> to measure and report back on page load data for <strong>every request made</strong>. This technique monitors an application's actual user interactions.</li>
+<li>The browsers of real users report back performance metrics experienced. </li>
+<li>Helps identify how an application is being used, including the geographic distribution of users and the impact of that distribution on the end user experience.</li>
+<li>As users interact with an application, all performance timings are captured, regardless of what actions are taken or pages viewed.</li>
+<li>Monitors actual use cases, not the synthetic, assumed use cases predefined by an engineer</li>
+<li>Business can better understand its users and identify the areas on its site that require the most attention.</li>
+<li>Helps to understand the geographic or channel distribution trends of your users. The can help you better define your business plan and, from a monitoring perspective, allows you to identify key areas to target for optimization and performance improvements.</li>
+</ul>
+<h2 id="synthetic-monitoring"><a class="header" href="#synthetic-monitoring">Synthetic Monitoring</a></h2>
+<ul>
+<li>
+<p>Involves monitoring the performance of a page in a 'laboratory' environment</p>
+</li>
+<li>
+<p>Well suited to regression testing and mitigating shorter-term performance issues during development. </p>
+</li>
+<li>
+<p>Typically with automation tooling in a consistent as possible environment.</p>
+</li>
+<li>
+<p>Involves deploying scripts to simulate the path an end user might take through a web application, reporting back the performance the <strong>simulator</strong> experiences.</p>
+</li>
+<li>
+<p>The traffic measured is <strong>not of your actual users</strong>, but rather <strong>synthetically generated traffic</strong> collecting data on page performance.</p>
+</li>
+<li>
+<p>It is done in a controlled environment where variable like geography, network, device, browser, and cached status are predetermined.</p>
+</li>
+<li>
+<p>Controlling for environmental variables is helpful in understanding where <strong>performance bottlenecks have been occurring</strong> and identifying the source of any performance issues</p>
+</li>
+<li>
+<p>Important component of regression testing and production site monitoring. </p>
+</li>
+</ul>
+<table><thead><tr><th>Synthetic</th><th>RUM</th></tr></thead><tbody>
+<tr><td>Well suited for catching regressions during development life cycles, especially with network throttling</td><td>Provides real metrics from real users using the site or application.</td></tr>
+<tr><td>Inexpensive, and great for spot-checking performance during development as an effective way to measure the effect of code changes, but it doesn't reflect what real users are experiencing and provides only a narrow view of performance.</td><td>More expensive and likely less convenient, it provides vital user experience data.</td></tr>
+</tbody></table>
+<h2 id="performance-apis"><a class="header" href="#performance-apis">Performance APIs</a></h2>
+<ul>
+<li>The Performance interface provides access to performance-related information for the current page.</li>
+</ul>
+<p><img src="img/timestamp-diagram.svg" alt="timestamps" /></p>
+<pre><code class="language-js">const navigationEntries = performance.getEntriesByType(&quot;navigation&quot;)[0];
+navigationEntries
+
+
+</code></pre>
+<p><img src="img/sf-perf-1.png" alt="sf perf" /></p>
+<pre><code class="language-js">const resourceListEntries = performance.getEntriesByType(&quot;resource&quot;);
+resourceListEntries
+
+</code></pre>
+<pre><code class="language-js">const dnsTime = navigationEntries.domainLookupEnd - navigationEntries.domainLookupStart;
+</code></pre>
+<pre><code>dnsTime
+0
+</code></pre>
+<p><img src="img/sf-perf-2.png" alt="sf perf2" /></p>
+<h3 id="using---puppeteer-to-view-performancetiming"><a class="header" href="#using---puppeteer-to-view-performancetiming">Using   puppeteer to view performance.timing</a></h3>
+<pre><code class="language-js">#!/usr/bin/env node
+const puppeteer = require(&quot;puppeteer&quot;);
+
+const site = process.argv[2] || &quot;https://google.com&quot;;
+const type = process.argv[3] || &quot;resource&quot;;
+  console.log( `=== Getting performanceTiming: ${type} for site: ${site}: ===`);
+ 
+(async () =&gt; {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto(site);
+
+  // Executes Navigation API within the page context
+
+  let performanceTiming;
+  if (type === &quot;resource&quot;) {
+    performanceTiming = JSON.parse(
+      await page.evaluate(() =&gt;
+        JSON.stringify(window.performance.getEntriesByType(&quot;resource&quot;))
+      )
+    );
+  } else if (type === &quot;all&quot;) {
+    performanceTiming = JSON.parse(
+      await page.evaluate(() =&gt; JSON.stringify(window.performance.timing))
+    );
+  }
+  console.log(
+    `performanceTiming: ${type} for site: ${site}:`,
+    performanceTiming
+  );
+  await browser.close();
+})();
+
+</code></pre>
+<pre><code>./webperf.js https://google.com all     
+=== Getting performanceTiming: all for site: https://google.com: ===
+
+performanceTiming: all for site: https://google.com: 
+</code></pre>
+<pre><code class="language-json">{
+  connectStart: 1677720916684,
+  navigationStart: 1677720916432,
+  secureConnectionStart: 1677720916709,
+  fetchStart: 1677720916682,
+  domContentLoadedEventStart: 1677720917232,
+  responseStart: 1677720916935,
+  domInteractive: 1677720917153,
+  domainLookupEnd: 1677720916684,
+  responseEnd: 1677720917010,
+  redirectStart: 0,
+  requestStart: 1677720916750,
+  unloadEventEnd: 0,
+  unloadEventStart: 0,
+  domLoading: 1677720917031,
+  domComplete: 1677720917640,
+  domainLookupStart: 1677720916683,
+  loadEventStart: 1677720917641,
+  domContentLoadedEventEnd: 1677720917232,
+  loadEventEnd: 1677720917645,
+  redirectEnd: 0,
+  connectEnd: 1677720916750
+}
+
+
+</code></pre>
+<pre><code>./webperf.js https://google.com resource
+</code></pre>
+<pre><code>=== Getting performanceTiming: resource for site: https://google.com: ===
+performanceTiming: resource for site: https://google.com: 
+</code></pre>
+<pre><code class="language-json">[
+  {
+    name: 'https://www.google.com/xjs/_/js/k=xjs.s.en_US.y9vzKGrGO0c.O/am=AIHIJ1wBcAAAAgAAABARAAAAAABgAACGACAAAAgAoBAGQQwGwFIJAAAAGH0QAQAAMABAAQwcBRAAAAAA-QMA8AIgBhMWAAAAAAAAAEBwEgSDGyQoCAABAAAAAAAAQJVMXFxBCA/d=1/ed=1/dg=2/rs=ACT90oFPVvppotwAo2N5XMiB1X5DNHmb0g/m=cdos,cr,dpf,hsm,jsa,d,csi',
+    entryType: 'resource',
+    startTime: 994.6000000238419,
+    duration: 97.5,
+    initiatorType: 'script',
+    nextHopProtocol: 'h2',
+    renderBlockingStatus: 'non-blocking',
+    workerStart: 0,
+    redirectStart: 0,
+    redirectEnd: 0,
+    fetchStart: 994.6000000238419,
+    domainLookupStart: 994.6000000238419,
+    domainLookupEnd: 994.6000000238419,
+    connectStart: 994.6000000238419,
+    secureConnectionStart: 994.6000000238419,
+    connectEnd: 994.6000000238419,
+    requestStart: 1015.2999999523163,
+    responseStart: 1035.1999999284744,
+    responseEnd: 1092.1000000238419,
+    transferSize: 314805,
+    encodedBodySize: 314505,
+    decodedBodySize: 897753,
+    responseStatus: 200,
+    serverTiming: []
+  },
+]
+</code></pre>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming">PerformanceNavigationTiming</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming">PerformanceResourceTiming</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceMark">PerformanceMark</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformanceMeasure">PerformanceMeasure</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/PerformancePaintTiming">PerformancePaintTiming</a>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/First_paint">First paint - FP</a> 
+<ul>
+<li>Time when anything is rendered. Note that the marking of the first paint is optional, not all user agents (browsers) report it.</li>
+</ul>
+</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/First_contentful_paint">First contentful paint - FCP</a>
+<ul>
+<li>when the browser renders the first bit of content from the DOM</li>
+<li>FCP timestamp is when the browser first rendered any text, image (including background images), video, canvas that had been drawn into, or non-empty SVG.</li>
+</ul>
+</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/LargestContentfulPaint">LargestContentfulPaint LCP</a>
+<ul>
+<li>Provides timing information about the <strong>largest image</strong> or text paint before user input on a web page.</li>
+</ul>
+</li>
+<li>Helps you minimize the time that users have to wait before they can see the site's content start to appear</li>
+</ul>
+</li>
+</ul>
+<h2 id="sample-instrumentation-code-embedded-into-web-page-and-response-at-rum-server-side"><a class="header" href="#sample-instrumentation-code-embedded-into-web-page-and-response-at-rum-server-side">Sample instrumentation code embedded into web page and response at RUM server side</a></h2>
+<h3 id="instrumentation-code"><a class="header" href="#instrumentation-code">Instrumentation code</a></h3>
+<pre><code class="language-js">
+// Function to send performance data to the RUM server
+    let rumServer = 'http://localhost:1000/rum';
+
+    const pageName = 'Markdown Editor - Kalam';
+    console.log(rumServer);
+
+    function sendPerformanceDataToServer(data) {
+      fetch(rumServer, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) =&gt; {
+          if (response.ok) {
+            console.log('Performance data sent to RUM server successfully');
+          } else {
+            console.error('Failed to send performance data to RUM server');
+          }
+        })
+        .catch((error) =&gt; {
+          console.error('Error:', error);
+        });
+    }
+
+    // Function to gather and send performance metrics
+    function gatherAndSendPerformanceMetrics() {
+      console.log('inside gatherAndSendPerformanceMetrics() ')
+
+      if ('performance' in window) {
+        const perf = window.performance;
+        const timing = perf.timing;
+        const resources = perf.getEntriesByType('resource');
+        const userTimings = perf.getEntriesByType('measure');
+
+        // Calculate page load time
+        const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
+        // Ensure pageLoadTime is non-negative
+        const nonNegativePageLoadTime = Math.max(0, pageLoadTime);
+
+        // Gather performance data including page name
+        const performanceData = {
+          pageName: pageName, // Replace with the actual page name
+          pageLoadTime: nonNegativePageLoadTime,
+          timeToFirstByte: timing.responseStart - timing.navigationStart,
+          resources: resources,
+          userTimings: userTimings,
+        };
+
+        // Send performance data to the RUM server
+        sendPerformanceDataToServer(performanceData);
+      }
+      else {
+        console.log('could not find &quot;performance&quot; in the window object')
+      }
+    }
+
+    // Log performance metrics when the page is fully loaded
+    let myevent = 'load';
+    myevent = 'afterprint';
+    window.addEventListener(myevent, gatherAndSendPerformanceMetrics);
+
+
+</code></pre>
+<h3 id="the-payload-received-by-the-rum-server"><a class="header" href="#the-payload-received-by-the-rum-server">The payload received by the RUM Server</a></h3>
+<ul>
+<li><code>heroku logs -t # for heroku RUM Server</code></li>
+</ul>
+<pre><code class="language-js">const rum = {
+    pageName: 'Markdown Editor - Kalam',
+    pageLoadTime: 114,
+    timeToFirstByte: 5,
+    resources: [
+      {
+        name: 'https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js',
+        entryType: 'resource',
+        startTime: 12.200000002980232,
+        duration: 0,
+        initiatorType: 'script',
+        deliveryType: 'cache',
+        nextHopProtocol: 'h3',
+        renderBlockingStatus: 'blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 12.200000002980232,
+        domainLookupStart: 12.200000002980232,
+        domainLookupEnd: 12.200000002980232,
+        connectStart: 12.200000002980232,
+        secureConnectionStart: 12.200000002980232,
+        connectEnd: 12.200000002980232,
+        requestStart: 12.200000002980232,
+        responseStart: 12.200000002980232,
+        firstInterimResponseStart: 0,
+        responseEnd: 12.200000002980232,
+        transferSize: 0,
+        encodedBodySize: 20705,
+        decodedBodySize: 75209,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://mohan-chinnappan-n5.github.io/pkg/js/lib/autocomplete.min.js',
+        entryType: 'resource',
+        startTime: 12.400000005960464,
+        duration: 0,
+        initiatorType: 'script',
+        deliveryType: '',
+        nextHopProtocol: '',
+        renderBlockingStatus: 'blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 12.400000005960464,
+        domainLookupStart: 0,
+        domainLookupEnd: 0,
+        connectStart: 0,
+        secureConnectionStart: 0,
+        connectEnd: 0,
+        requestStart: 0,
+        responseStart: 0,
+        firstInterimResponseStart: 0,
+        responseEnd: 12.400000005960464,
+        transferSize: 0,
+        encodedBodySize: 0,
+        decodedBodySize: 0,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://mohan-chinnappan-n5.github.io/pkg/css/lib/autocomplete.css',
+        entryType: 'resource',
+        startTime: 12.5,
+        duration: 11.700000002980232,
+        initiatorType: 'link',
+        deliveryType: '',
+        nextHopProtocol: '',
+        renderBlockingStatus: 'blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 12.5,
+        domainLookupStart: 0,
+        domainLookupEnd: 0,
+        connectStart: 0,
+        secureConnectionStart: 0,
+        connectEnd: 0,
+        requestStart: 0,
+        responseStart: 0,
+        firstInterimResponseStart: 0,
+        responseEnd: 24.200000002980232,
+        transferSize: 0,
+        encodedBodySize: 0,
+        decodedBodySize: 0,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js',
+        entryType: 'resource',
+        startTime: 12.700000002980232,
+        duration: 0,
+        initiatorType: 'script',
+        deliveryType: '',
+        nextHopProtocol: '',
+        renderBlockingStatus: 'blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 12.700000002980232,
+        domainLookupStart: 0,
+        domainLookupEnd: 0,
+        connectStart: 0,
+        secureConnectionStart: 0,
+        connectEnd: 0,
+        requestStart: 0,
+        responseStart: 0,
+        firstInterimResponseStart: 0,
+        responseEnd: 12.700000002980232,
+        transferSize: 0,
+        encodedBodySize: 0,
+        decodedBodySize: 0,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css',
+        entryType: 'resource',
+        startTime: 12.799999997019768,
+        duration: 14.600000008940697,
+        initiatorType: 'link',
+        deliveryType: '',
+        nextHopProtocol: '',
+        renderBlockingStatus: 'blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 12.799999997019768,
+        domainLookupStart: 0,
+        domainLookupEnd: 0,
+        connectStart: 0,
+        secureConnectionStart: 0,
+        connectEnd: 0,
+        requestStart: 0,
+        responseStart: 0,
+        firstInterimResponseStart: 0,
+        responseEnd: 27.400000005960464,
+        transferSize: 0,
+        encodedBodySize: 0,
+        decodedBodySize: 0,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://d3js.org/d3.v7.min.js',
+        entryType: 'resource',
+        startTime: 13,
+        duration: 0,
+        initiatorType: 'script',
+        deliveryType: '',
+        nextHopProtocol: '',
+        renderBlockingStatus: 'blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 13,
+        domainLookupStart: 0,
+        domainLookupEnd: 0,
+        connectStart: 0,
+        secureConnectionStart: 0,
+        connectEnd: 0,
+        requestStart: 0,
+        responseStart: 0,
+        firstInterimResponseStart: 0,
+        responseEnd: 13,
+        transferSize: 0,
+        encodedBodySize: 0,
+        decodedBodySize: 0,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/loader.js',
+        entryType: 'resource',
+        startTime: 13.099999994039536,
+        duration: 0,
+        initiatorType: 'script',
+        deliveryType: 'cache',
+        nextHopProtocol: 'h2',
+        renderBlockingStatus: 'blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 13.099999994039536,
+        domainLookupStart: 13.099999994039536,
+        domainLookupEnd: 13.099999994039536,
+        connectStart: 13.099999994039536,
+        secureConnectionStart: 13.099999994039536,
+        connectEnd: 13.099999994039536,
+        requestStart: 13.099999994039536,
+        responseStart: 13.099999994039536,
+        firstInterimResponseStart: 0,
+        responseEnd: 13.099999994039536,
+        transferSize: 0,
+        encodedBodySize: 8361,
+        decodedBodySize: 32170,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css',
+        entryType: 'resource',
+        startTime: 13.200000002980232,
+        duration: 15.899999991059303,
+        initiatorType: 'link',
+        deliveryType: 'cache',
+        nextHopProtocol: 'h3',
+        renderBlockingStatus: 'blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 13.200000002980232,
+        domainLookupStart: 13.200000002980232,
+        domainLookupEnd: 13.200000002980232,
+        connectStart: 13.200000002980232,
+        secureConnectionStart: 13.200000002980232,
+        connectEnd: 13.200000002980232,
+        requestStart: 25.299999997019768,
+        responseStart: 27.099999994039536,
+        firstInterimResponseStart: 27.099999994039536,
+        responseEnd: 29.099999994039536,
+        transferSize: 0,
+        encodedBodySize: 26099,
+        decodedBodySize: 160392,
+        responseStatus: 200,
+        serverTiming: []
+      },
+      {
+        name: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js',
+        entryType: 'resource',
+        startTime: 13.400000005960464,
+        duration: 0,
+        initiatorType: 'script',
+        deliveryType: 'cache',
+        nextHopProtocol: 'h2',
+        renderBlockingStatus: 'blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 13.400000005960464,
+        domainLookupStart: 13.400000005960464,
+        domainLookupEnd: 13.400000005960464,
+        connectStart: 13.400000005960464,
+        secureConnectionStart: 13.400000005960464,
+        connectEnd: 13.400000005960464,
+        requestStart: 13.400000005960464,
+        responseStart: 13.400000005960464,
+        firstInterimResponseStart: 0,
+        responseEnd: 13.400000005960464,
+        transferSize: 0,
+        encodedBodySize: 27938,
+        decodedBodySize: 89501,
+        responseStatus: 200,
+        serverTiming: []
+      },
+      {
+        name: 'https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js',
+        entryType: 'resource',
+        startTime: 13.599999994039536,
+        duration: 0,
+        initiatorType: 'script',
+        deliveryType: 'cache',
+        nextHopProtocol: 'h3',
+        renderBlockingStatus: 'blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 13.599999994039536,
+        domainLookupStart: 13.599999994039536,
+        domainLookupEnd: 13.599999994039536,
+        connectStart: 13.599999994039536,
+        secureConnectionStart: 13.599999994039536,
+        connectEnd: 13.599999994039536,
+        requestStart: 13.599999994039536,
+        responseStart: 13.599999994039536,
+        firstInterimResponseStart: 0,
+        responseEnd: 13.599999994039536,
+        transferSize: 0,
+        encodedBodySize: 7831,
+        decodedBodySize: 21233,
+        responseStatus: 200,
+        serverTiming: []
+      },
+      {
+        name: 'https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js',
+        entryType: 'resource',
+        startTime: 13.700000002980232,
+        duration: 0,
+        initiatorType: 'script',
+        deliveryType: 'cache',
+        nextHopProtocol: 'h3',
+        renderBlockingStatus: 'blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 13.700000002980232,
+        domainLookupStart: 13.700000002980232,
+        domainLookupEnd: 13.700000002980232,
+        connectStart: 13.700000002980232,
+        secureConnectionStart: 13.700000002980232,
+        connectEnd: 13.700000002980232,
+        requestStart: 13.700000002980232,
+        responseStart: 13.700000002980232,
+        firstInterimResponseStart: 0,
+        responseEnd: 13.700000002980232,
+        transferSize: 0,
+        encodedBodySize: 16162,
+        decodedBodySize: 63240,
+        responseStatus: 200,
+        serverTiming: []
+      },
+      {
+        name: 'http://localhost:7010/github-mirror-2/mohan-chinnappan-n5.github.io/md/js/app.js?v=5',
+        entryType: 'resource',
+        startTime: 13.700000002980232,
+        duration: 16.299999997019768,
+        initiatorType: 'script',
+        deliveryType: '',
+        nextHopProtocol: 'http/1.0',
+        renderBlockingStatus: 'non-blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 13.700000002980232,
+        domainLookupStart: 26.200000002980232,
+        domainLookupEnd: 26.200000002980232,
+        connectStart: 26.200000002980232,
+        secureConnectionStart: 0,
+        connectEnd: 26.700000002980232,
+        requestStart: 27,
+        responseStart: 28.799999997019768,
+        firstInterimResponseStart: 0,
+        responseEnd: 30,
+        transferSize: 8980,
+        encodedBodySize: 8680,
+        decodedBodySize: 8680,
+        responseStatus: 200,
+        serverTiming: []
+      },
+      {
+        name: 'https://mohan-chinnappan-n.github.io/sfdc/gs/css/vertical.png',
+        entryType: 'resource',
+        startTime: 108.29999999701977,
+        duration: 0,
+        initiatorType: 'css',
+        deliveryType: '',
+        nextHopProtocol: '',
+        renderBlockingStatus: 'non-blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 108.29999999701977,
+        domainLookupStart: 0,
+        domainLookupEnd: 0,
+        connectStart: 0,
+        secureConnectionStart: 0,
+        connectEnd: 0,
+        requestStart: 0,
+        responseStart: 0,
+        firstInterimResponseStart: 0,
+        responseEnd: 108.29999999701977,
+        transferSize: 0,
+        encodedBodySize: 0,
+        decodedBodySize: 0,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/sf/list.txt',
+        entryType: 'resource',
+        startTime: 108.70000000298023,
+        duration: 160.09999999403954,
+        initiatorType: 'fetch',
+        deliveryType: '',
+        nextHopProtocol: '',
+        renderBlockingStatus: 'non-blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 108.70000000298023,
+        domainLookupStart: 0,
+        domainLookupEnd: 0,
+        connectStart: 0,
+        secureConnectionStart: 0,
+        connectEnd: 0,
+        requestStart: 0,
+        responseStart: 0,
+        firstInterimResponseStart: 0,
+        responseEnd: 268.79999999701977,
+        transferSize: 0,
+        encodedBodySize: 0,
+        decodedBodySize: 0,
+        responseStatus: 200,
+        serverTiming: []
+      },
+      {
+        name: 'https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico',
+        entryType: 'resource',
+        startTime: 119.5,
+        duration: 2.5999999940395355,
+        initiatorType: 'other',
+        deliveryType: '',
+        nextHopProtocol: '',
+        renderBlockingStatus: 'non-blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 119.5,
+        domainLookupStart: 0,
+        domainLookupEnd: 0,
+        connectStart: 0,
+        secureConnectionStart: 0,
+        connectEnd: 0,
+        requestStart: 0,
+        responseStart: 0,
+        firstInterimResponseStart: 0,
+        responseEnd: 122.09999999403954,
+        transferSize: 0,
+        encodedBodySize: 0,
+        decodedBodySize: 0,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/editor/editor.main.js',
+        entryType: 'resource',
+        startTime: 270.5,
+        duration: 18.200000002980232,
+        initiatorType: 'script',
+        deliveryType: 'cache',
+        nextHopProtocol: 'h3',
+        renderBlockingStatus: 'non-blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 270.5,
+        domainLookupStart: 270.5,
+        domainLookupEnd: 270.5,
+        connectStart: 270.5,
+        secureConnectionStart: 270.5,
+        connectEnd: 270.5,
+        requestStart: 271.40000000596046,
+        responseStart: 272.29999999701977,
+        firstInterimResponseStart: 272.29999999701977,
+        responseEnd: 288.70000000298023,
+        transferSize: 0,
+        encodedBodySize: 501975,
+        decodedBodySize: 2568106,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://mohan-chinnappan-n5.github.io/pkg/css/lib/images/search.svg',
+        entryType: 'resource',
+        startTime: 272.09999999403954,
+        duration: 0,
+        initiatorType: 'css',
+        deliveryType: '',
+        nextHopProtocol: '',
+        renderBlockingStatus: 'non-blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 272.09999999403954,
+        domainLookupStart: 0,
+        domainLookupEnd: 0,
+        connectStart: 0,
+        secureConnectionStart: 0,
+        connectEnd: 0,
+        requestStart: 0,
+        responseStart: 0,
+        firstInterimResponseStart: 0,
+        responseEnd: 272.09999999403954,
+        transferSize: 0,
+        encodedBodySize: 0,
+        decodedBodySize: 0,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/editor/editor.main.css',
+        entryType: 'resource',
+        startTime: 309.70000000298023,
+        duration: 2.5,
+        initiatorType: 'link',
+        deliveryType: 'cache',
+        nextHopProtocol: 'h3',
+        renderBlockingStatus: 'non-blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 309.70000000298023,
+        domainLookupStart: 309.70000000298023,
+        domainLookupEnd: 309.70000000298023,
+        connectStart: 309.70000000298023,
+        secureConnectionStart: 309.70000000298023,
+        connectEnd: 309.70000000298023,
+        requestStart: 310.29999999701977,
+        responseStart: 311.29999999701977,
+        firstInterimResponseStart: 311.29999999701977,
+        responseEnd: 312.20000000298023,
+        transferSize: 0,
+        encodedBodySize: 11145,
+        decodedBodySize: 70275,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/editor/editor.main.nls.js',
+        entryType: 'resource',
+        startTime: 314.29999999701977,
+        duration: 2.4000000059604645,
+        initiatorType: 'script',
+        deliveryType: 'cache',
+        nextHopProtocol: 'h3',
+        renderBlockingStatus: 'non-blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 314.29999999701977,
+        domainLookupStart: 314.29999999701977,
+        domainLookupEnd: 314.29999999701977,
+        connectStart: 314.29999999701977,
+        secureConnectionStart: 314.29999999701977,
+        connectEnd: 314.29999999701977,
+        requestStart: 315,
+        responseStart: 315.90000000596046,
+        firstInterimResponseStart: 315.90000000596046,
+        responseEnd: 316.70000000298023,
+        transferSize: 0,
+        encodedBodySize: 12372,
+        decodedBodySize: 62955,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/base/browser/ui/codicons/codicon/codicon.ttf',
+        entryType: 'resource',
+        startTime: 346.40000000596046,
+        duration: 0,
+        initiatorType: 'css',
+        deliveryType: 'cache',
+        nextHopProtocol: 'h3',
+        renderBlockingStatus: 'non-blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 346.40000000596046,
+        domainLookupStart: 346.40000000596046,
+        domainLookupEnd: 346.40000000596046,
+        connectStart: 346.40000000596046,
+        secureConnectionStart: 346.40000000596046,
+        connectEnd: 346.40000000596046,
+        requestStart: 346.40000000596046,
+        responseStart: 346.40000000596046,
+        firstInterimResponseStart: 0,
+        responseEnd: 346.40000000596046,
+        transferSize: 0,
+        encodedBodySize: 40989,
+        decodedBodySize: 70964,
+        responseStatus: 200,
+        serverTiming: []
+      },
+      {
+        name: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/basic-languages/markdown/markdown.js',
+        entryType: 'resource',
+        startTime: 473.70000000298023,
+        duration: 4.5,
+        initiatorType: 'script',
+        deliveryType: 'cache',
+        nextHopProtocol: 'h3',
+        renderBlockingStatus: 'non-blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 473.70000000298023,
+        domainLookupStart: 473.70000000298023,
+        domainLookupEnd: 473.70000000298023,
+        connectStart: 473.70000000298023,
+        secureConnectionStart: 473.70000000298023,
+        connectEnd: 473.70000000298023,
+        requestStart: 477,
+        responseStart: 477.90000000596046,
+        firstInterimResponseStart: 477.90000000596046,
+        responseEnd: 478.20000000298023,
+        transferSize: 0,
+        encodedBodySize: 1407,
+        decodedBodySize: 4216,
+        responseStatus: 0,
+        serverTiming: []
+      },
+      {
+        name: 'https://www.greensboroughvets.com.au/images/mule.jpg',
+        entryType: 'resource',
+        startTime: 511.29999999701977,
+        duration: 0,
+        initiatorType: 'img',
+        deliveryType: '',
+        nextHopProtocol: '',
+        renderBlockingStatus: 'non-blocking',
+        workerStart: 0,
+        redirectStart: 0,
+        redirectEnd: 0,
+        fetchStart: 511.29999999701977,
+        domainLookupStart: 0,
+        domainLookupEnd: 0,
+        connectStart: 0,
+        secureConnectionStart: 0,
+        connectEnd: 0,
+        requestStart: 0,
+        responseStart: 0,
+        firstInterimResponseStart: 0,
+        responseEnd: 511.29999999701977,
+        transferSize: 0,
+        encodedBodySize: 0,
+        decodedBodySize: 0,
+        responseStatus: 0,
+        serverTiming: []
+      }
+    ],
+    userTimings: []
+  }
+  
+
+
+</code></pre>
+<h2 id="lifecycle-hooks"><a class="header" href="#lifecycle-hooks">Lifecycle Hooks</a></h2>
+<ul>
+<li>
+<p><strong>Component Lifecycle</strong></p>
+<ul>
+<li>Lightning web components have a lifecycle managed by the framework. </li>
+<li>The framework:
+<ul>
+<li>creates components</li>
+<li>inserts them into the DOM</li>
+<li>renders them</li>
+<li>removes them from the DOM. </li>
+</ul>
+</li>
+</ul>
+<p>It also monitors components for property changes.</p>
+</li>
+<li>
+<p>A <strong>lifecycle hook</strong> is a callback method triggered at a <strong>specific phase</strong> of a component instance’s lifecycle.</p>
+</li>
+</ul>
+<table><thead><tr><th>Hook</th><th>When Called</th></tr></thead><tbody>
+<tr><td>constructor()</td><td>Called when the component is created</td></tr>
+<tr><td>connectedCallback()</td><td>Called when the element is inserted into a document</td></tr>
+<tr><td>renderedCallback()</td><td>Called after every render of the component</td></tr>
+<tr><td>render()</td><td>Call this method to update the UI</td></tr>
+<tr><td>disconnectedCallback()</td><td>Called when the element is removed from a document</td></tr>
+<tr><td>errorCallback(error, stack)</td><td>Called when a descendent component throws an error</td></tr>
+</tbody></table>
+<ul>
+<li>Component lifecycle from creation through render
+<img src="img/lc-render.png" alt="lwc-render" /></li>
+</ul>
+<h3 id="constructor----called-when-the-component-is-created"><a class="header" href="#constructor----called-when-the-component-is-created">constructor()  - Called when the component is created</a></h3>
+<ul>
+<li>This hook flows from parent to child, which means that it fires in the parent first.</li>
+<li><a href="https://developer.salesforce.com/docs/platform/lwc/guide/create-lifecycle-hooks-created.html">Run Code When a Component Is Created</a></li>
+</ul>
+<h3 id="connectedcallback---called-when-the-element-is-inserted-into-a-document"><a class="header" href="#connectedcallback---called-when-the-element-is-inserted-into-a-document">connectedCallback() - Called when the element is inserted into a document</a></h3>
+<ul>
+<li>This hook flows from parent to child. You can’t access child elements because they don’t exist yet.</li>
+<li>This is invoked with the initial properties passed to the component. </li>
+<li>This callback is invoked after all the public properties are set and can be used to set the state of the component.</li>
+</ul>
+<h3 id="renderedcallback---called-after-every-render-of-the-component"><a class="header" href="#renderedcallback---called-after-every-render-of-the-component">renderedCallback() - Called after every render of the component</a></h3>
+<ul>
+<li>
+<p>This lifecycle hook is specific to Lightning Web Components, it <strong>isn’t from the HTML custom elements specification</strong>. This hook flows from child to parent.</p>
+</li>
+<li>
+<p>A component is <strong>rerendered</strong> when the value of a <strong>property changes</strong> and that property is used either directly in a component template or indirectly in the getter of a property that is used in a template.</p>
+</li>
+</ul>
+<h3 id="render----call-this-method-to-update-the-ui"><a class="header" href="#render----call-this-method-to-update-the-ui">render()  - Call this method to update the UI</a></h3>
+<ul>
+<li>It may be called before or after connectedCallback().</li>
+<li>The render() method is not technically a lifecycle hook. It is a protected method on the LightningElement class.</li>
+</ul>
+<h3 id="disconnectedcallback---called-when-the-element-is-removed-from-a-document"><a class="header" href="#disconnectedcallback---called-when-the-element-is-removed-from-a-document">disconnectedCallback() - Called when the element is removed from a document</a></h3>
+<ul>
+<li>This hook flows from parent to child.</li>
+<li>Use disconnectedCallback() to <strong>clean up</strong> work done in the connectedCallback(), like purging caches or removing event listeners.</li>
+</ul>
+<h3 id="errorcallbackerror-stack---called-when-a-descendent-component-throws-an-error"><a class="header" href="#errorcallbackerror-stack---called-when-a-descendent-component-throws-an-error">errorCallback(error, stack) - Called when a descendent component throws an error</a></h3>
+<ul>
+<li>
+<p>The error argument is a JavaScript native error object, and the stack argument is a string. </p>
+</li>
+<li>
+<p>This lifecycle hook is specific to Lightning Web Components, it <strong>isn’t from the HTML custom elements specification</strong>.</p>
+</li>
+<li>
+<p>Component instance is removed from the DOM</p>
+</li>
+</ul>
+<p><img src="img/lw-disconnect.png" alt="lwc-disconnect" /></p>
+<h2 id="references"><a class="header" href="#references">References</a></h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Performance/Rum-vs-Synthetic">MDN - Performance Monitoring: RUM vs. synthetic monitoring</a></li>
+<li><a href="https://developer.salesforce.com/docs/platform/lwc/guide/reference-lifecycle-hooks.html">LWC - Lifecycle Hooks</a></li>
+<li><a href="https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-conformance"> HTML: Custom elements spec</a></li>
+<li><a href="https://studio.webcomponents.dev/edit/ml8fb93ip4HhUuLE9TjN/src/app.js?p=stories">Dog Breed Example Playground</a>
+<ul>
+<li><a href="https://salesforce.stackexchange.com/questions/334634/lwc-setting-properties-in-connectedcallback">LWC setting properties in connectedCallback()</a></li>
+<li><a href="https://developer.salesforce.com/docs/platform/lwc/guide/create-lifecycle-hooks.html">Lifecycle Flow</a></li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../perf/lex-query.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../dwg/dwg-tools.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../perf/lex-query.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../dwg/dwg-tools.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+
+
+    </body>
+</html>

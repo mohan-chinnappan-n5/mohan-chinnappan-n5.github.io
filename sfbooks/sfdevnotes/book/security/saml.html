@@ -1,0 +1,355 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>SAML - Salesforce Development Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../custom.css">
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../dg/dg.html"><strong aria-hidden="true">2.</strong> Data Governance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dg/changeManagement.html"><strong aria-hidden="true">2.1.</strong> Change Management</a></li></ol></li><li class="chapter-item expanded "><a href="../dm/datamodel.html"><strong aria-hidden="true">3.</strong> Data Model</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dm/fsc-dm.html"><strong aria-hidden="true">3.1.</strong> Financial Services Cloud</a></li><li class="chapter-item expanded "><a href="../dm/salescloud.html"><strong aria-hidden="true">3.2.</strong> Sales Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/aboutTools.html"><strong aria-hidden="true">4.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-org.html"><strong aria-hidden="true">4.1.</strong> Org Tools</a></li><li class="chapter-item expanded "><a href="../tools/tools-data-bulkapi2.html"><strong aria-hidden="true">4.2.</strong> Data Loading BulkAPI2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/userloading.html"><strong aria-hidden="true">4.2.1.</strong> User Loading</a></li><li class="chapter-item expanded "><a href="../tools/product2loading.html"><strong aria-hidden="true">4.2.2.</strong> Product2 Loading and Update</a></li><li class="chapter-item expanded "><a href="../tools/flowinterview.html"><strong aria-hidden="true">4.2.3.</strong> FlowInterview Query and Deletion</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/dataTreeImport.html"><strong aria-hidden="true">4.3.</strong> Prepare and Load for data:tree:import</a></li><li class="chapter-item expanded "><a href="../tools/tools-scpl.html"><strong aria-hidden="true">4.4.</strong> Loading State and Country Picklist</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-scpl-update.html"><strong aria-hidden="true">4.4.1.</strong> Updating State and Country Picklist </a></li></ol></li><li class="chapter-item expanded "><a href="../tools/project-management/gantt.html"><strong aria-hidden="true">4.5.</strong> Project Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../project-management/pert.html"><strong aria-hidden="true">4.5.1.</strong> PERT</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/em.html"><strong aria-hidden="true">4.6.</strong> Event Monitoring</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../monitoring/proactive-monitoring.html"><strong aria-hidden="true">4.6.1.</strong> Proactive Monitoring</a></li><li class="chapter-item expanded "><a href="../monitoring/realtime-event-monitoring.html"><strong aria-hidden="true">4.6.2.</strong> Real-Time Event Monitoring</a></li><li class="chapter-item expanded "><a href="../tools/scripts.html"><strong aria-hidden="true">4.6.3.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="../tools/compare.html"><strong aria-hidden="true">4.6.4.</strong> Comparison</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/instance.html"><strong aria-hidden="true">4.7.</strong> Instance Related</a></li><li class="chapter-item expanded "><a href="../tools/oms.html"><strong aria-hidden="true">4.8.</strong> Org Metadata Snapshot</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/scripts.html"><strong aria-hidden="true">5.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="../custom-metadata-types.html"><strong aria-hidden="true">6.</strong> Custom Metadata Types</a></li><li class="chapter-item expanded "><a href="../cq/cq.html"><strong aria-hidden="true">7.</strong> Code Quality</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cq/pmd.html"><strong aria-hidden="true">7.1.</strong> Code Scan PMD</a></li><li class="chapter-item expanded "><a href="../cq/comments.html"><strong aria-hidden="true">7.2.</strong> Comments Checking</a></li><li class="chapter-item expanded "><a href="../cq/test-coverage.html"><strong aria-hidden="true">7.3.</strong> Apex Code Test Coverage</a></li><li class="chapter-item expanded "><a href="../cq/lwc-linting.html"><strong aria-hidden="true">7.4.</strong> LWC Linting</a></li><li class="chapter-item expanded "><a href="../cq/eslint-custom-rules.html"><strong aria-hidden="true">7.5.</strong> eslint custom rules</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/deployments.html"><strong aria-hidden="true">8.</strong> Deployments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/delta.html"><strong aria-hidden="true">8.1.</strong> Delta Deployments</a></li><li class="chapter-item expanded "><a href="../deployments/gha.html"><strong aria-hidden="true">8.2.</strong> Github Actions</a></li><li class="chapter-item expanded "><a href="../deployments/validate.html"><strong aria-hidden="true">8.3.</strong> Validating changes</a></li><li class="chapter-item expanded "><a href="../deployments/admin-changes.html"><strong aria-hidden="true">8.4.</strong> Taking care of Admin changes</a></li><li class="chapter-item expanded "><a href="../deployments/devOpsCenter.html"><strong aria-hidden="true">8.5.</strong> DevOps Center</a></li><li class="chapter-item expanded "><a href="../deployments/jenkins.html"><strong aria-hidden="true">8.6.</strong> Jenkins</a></li><li class="chapter-item expanded "><a href="../deployments/git.html"><strong aria-hidden="true">8.7.</strong> git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/git-internals.html"><strong aria-hidden="true">8.7.1.</strong> git internals</a></li><li class="chapter-item expanded "><a href="../deployments/git-hooks.html"><strong aria-hidden="true">8.7.2.</strong> git hooks</a></li><li class="chapter-item expanded "><a href="../deployments/git-ops.html"><strong aria-hidden="true">8.7.3.</strong> git operations</a></li><li class="chapter-item expanded "><a href="../deployments/pr-template.html"><strong aria-hidden="true">8.7.4.</strong> pull request template</a></li><li class="chapter-item expanded "><a href="../deployments/git-diff.html"><strong aria-hidden="true">8.7.5.</strong> git diff</a></li><li class="chapter-item expanded "><a href="../deployments/git-merge.html"><strong aria-hidden="true">8.7.6.</strong> git merge</a></li><li class="chapter-item expanded "><a href="../deployments/git-log.html"><strong aria-hidden="true">8.7.7.</strong> git log</a></li><li class="chapter-item expanded "><a href="../deployments/git-stash.html"><strong aria-hidden="true">8.7.8.</strong> git stash</a></li><li class="chapter-item expanded "><a href="../deployments/git-config.html"><strong aria-hidden="true">8.7.9.</strong> git config</a></li><li class="chapter-item expanded "><a href="../deployments/git-revert.html"><strong aria-hidden="true">8.7.10.</strong> git revert</a></li><li class="chapter-item expanded "><a href="../deployments/git-delete-branch.html"><strong aria-hidden="true">8.7.11.</strong> git deleting branch</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/app-exchange.html"><strong aria-hidden="true">8.8.</strong> Apps from App Exchange </a></li><li class="chapter-item expanded "><a href="../deployments/sourceTracking.html"><strong aria-hidden="true">8.9.</strong> Source Tracking</a></li><li class="chapter-item expanded "><a href="../deployments/dangling.html"><strong aria-hidden="true">8.10.</strong> Dangling Fields Finder</a></li><li class="chapter-item expanded "><a href="../deployments/sbx.html"><strong aria-hidden="true">8.11.</strong> Sandbox Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/sandbox-preview-guide.html"><strong aria-hidden="true">8.11.1.</strong> Sandbox Preview Guide</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/MetadataComponentDependency.html"><strong aria-hidden="true">8.12.</strong> MetadataComponentDependency</a></li><li class="chapter-item expanded "><a href="../deployments/yaml.html"><strong aria-hidden="true">8.13.</strong> YAML</a></li><li class="chapter-item expanded "><a href="../deployments/packages.html"><strong aria-hidden="true">8.14.</strong> Installed Packages</a></li></ol></li><li class="chapter-item expanded "><a href="../crma/tools.html"><strong aria-hidden="true">9.</strong> CRMA tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crma/load-export.html"><strong aria-hidden="true">9.1.</strong> Dataset Load and Export</a></li><li class="chapter-item expanded "><a href="../crma/analysis.html"><strong aria-hidden="true">9.2.</strong> Analysis</a></li><li class="chapter-item expanded "><a href="../crma/binding.html"><strong aria-hidden="true">9.3.</strong> Binding</a></li><li class="chapter-item expanded "><a href="../crma/deployment.html"><strong aria-hidden="true">9.4.</strong> Deployment</a></li></ol></li><li class="chapter-item expanded "><a href="../perf/perf.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../perf/lex-perf.html"><strong aria-hidden="true">10.1.</strong> Lex Performance</a></li><li class="chapter-item expanded "><a href="../perf/perf-testing.html"><strong aria-hidden="true">10.2.</strong> Performance testing</a></li><li class="chapter-item expanded "><a href="../perf/perf-pw.html"><strong aria-hidden="true">10.3.</strong> Testing with Playwright</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../e2e/playwright.html"><strong aria-hidden="true">10.3.1.</strong> More with Playwright</a></li></ol></li><li class="chapter-item expanded "><a href="../perf/edge.html"><strong aria-hidden="true">10.4.</strong> Salesforce Edge Network</a></li><li class="chapter-item expanded "><a href="../perf/lex-query.html"><strong aria-hidden="true">10.5.</strong> Lightning Experience Queries</a></li><li class="chapter-item expanded "><a href="../perf/rum.html"><strong aria-hidden="true">10.6.</strong> Real User Monitoring (RUM)</a></li></ol></li><li class="chapter-item expanded "><a href="../dwg/dwg-tools.html"><strong aria-hidden="true">11.</strong> Diagram tools</a></li><li class="chapter-item expanded "><a href="../xml/xml-tools.html"><strong aria-hidden="true">12.</strong> XML tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../xml/xlst-transformer.html"><strong aria-hidden="true">12.1.</strong> Transformer</a></li><li class="chapter-item expanded "><a href="../xml/xml-delta.html"><strong aria-hidden="true">12.2.</strong> XML Delta Util</a></li></ol></li><li class="chapter-item expanded "><a href="../dp/dp.html"><strong aria-hidden="true">13.</strong> Data Processing tools</a></li><li class="chapter-item expanded "><a href="../i18n/i18n.html"><strong aria-hidden="true">14.</strong> Translation Tools</a></li><li class="chapter-item expanded "><a href="../media/recording.html"><strong aria-hidden="true">15.</strong> Media - Recording tools</a></li><li class="chapter-item expanded "><a href="../media/image.html"><strong aria-hidden="true">16.</strong> Image Processing</a></li><li class="chapter-item expanded "><a href="../codegen/codegen.html"><strong aria-hidden="true">17.</strong> Code Generators</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../codegen/lwc.html"><strong aria-hidden="true">17.1.</strong> LWC Code Generators</a></li><li class="chapter-item expanded "><a href="../ml/nlp.html"><strong aria-hidden="true">17.2.</strong> Apex Code Generators</a></li></ol></li><li class="chapter-item expanded "><a href="../ml/ml.html"><strong aria-hidden="true">18.</strong> Machine Learning</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ml/sdcg.html"><strong aria-hidden="true">18.1.</strong> Semantic Doc Compare and Group</a></li><li class="chapter-item expanded "><a href="../ml/datacatalog.html"><strong aria-hidden="true">18.2.</strong> Data Catalog for ML Work</a></li><li class="chapter-item expanded "><a href="../ml/chatgpt.html"><strong aria-hidden="true">18.3.</strong> openAI - ChatGPT</a></li><li class="chapter-item expanded "><a href="../ml/gpt3codex.html"><strong aria-hidden="true">18.4.</strong> openAI - GPT3 Codex</a></li><li class="chapter-item expanded "><a href="../ml/einsteinbot.html"><strong aria-hidden="true">18.5.</strong> Einstein Bot</a></li><li class="chapter-item expanded "><a href="../ml/dialogflow.html"><strong aria-hidden="true">18.6.</strong> Dialogflow - Knowledge Base</a></li><li class="chapter-item expanded "><a href="../ml/nlp.html"><strong aria-hidden="true">18.7.</strong> NLP</a></li><li class="chapter-item expanded "><a href="../ml/transformers.html"><strong aria-hidden="true">18.8.</strong> Transformers</a></li><li class="chapter-item expanded "><a href="../ml/llm.html"><strong aria-hidden="true">18.9.</strong> Large Language Models</a></li><li class="chapter-item expanded "><a href="../ml/team-productivity.html"><strong aria-hidden="true">18.10.</strong> Using LLM to improve team productivity</a></li></ol></li><li class="chapter-item expanded "><a href="../docmgmt/docmgmt.html"><strong aria-hidden="true">19.</strong> Document Management tools</a></li><li class="chapter-item expanded "><a href="../design/design-notes.html"><strong aria-hidden="true">20.</strong> Design Principles</a></li><li class="chapter-item expanded "><a href="../chromeext/ext.html"><strong aria-hidden="true">21.</strong> Chrome Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chromeext/onnu.html"><strong aria-hidden="true">21.1.</strong> ONNU</a></li></ol></li><li class="chapter-item expanded "><a href="../vscode/ext.html"><strong aria-hidden="true">22.</strong> VS Code Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../vscode/sfland.html"><strong aria-hidden="true">22.1.</strong> SF Land</a></li><li class="chapter-item expanded "><a href="../vscode/pmd.html"><strong aria-hidden="true">22.2.</strong> VSCode Apex PMD</a></li><li class="chapter-item expanded "><a href="../vscode/vsc-tips.html"><strong aria-hidden="true">22.3.</strong> VSCode tips</a></li></ol></li><li class="chapter-item expanded "><a href="../dviz/dviz.html"><strong aria-hidden="true">23.</strong> Data Viz</a></li><li class="chapter-item expanded "><a href="../releases.html"><strong aria-hidden="true">24.</strong> Releases</a></li><li class="chapter-item expanded "><a href="../rest/rest_tester.html"><strong aria-hidden="true">25.</strong> REST Tester</a></li><li class="chapter-item expanded "><a href="../security/security.html"><strong aria-hidden="true">26.</strong> Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/exploit-prevention.html"><strong aria-hidden="true">26.1.</strong> Exploitation and prevention</a></li><li class="chapter-item expanded "><a href="../security/sd.html"><strong aria-hidden="true">26.2.</strong> Sharing Debugger</a></li><li class="chapter-item expanded "><a href="../security/rh.html"><strong aria-hidden="true">26.3.</strong> Role Hierarchy</a></li><li class="chapter-item expanded "><a href="../security/shield.html"><strong aria-hidden="true">26.4.</strong> Shield</a></li><li class="chapter-item expanded "><a href="../security/profile-ps.html"><strong aria-hidden="true">26.5.</strong> Profile, PermissionSet</a></li><li class="chapter-item expanded "><a href="../security/setupAuditTrail.html"><strong aria-hidden="true">26.6.</strong> SetupAuditTrail</a></li><li class="chapter-item expanded "><a href="../security/datamask.html"><strong aria-hidden="true">26.7.</strong> Data Mask</a></li><li class="chapter-item expanded "><a href="../security/saml.html" class="active"><strong aria-hidden="true">26.8.</strong> SAML</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectConcepts.html"><strong aria-hidden="true">26.9.</strong> OpenID Connect</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/openIDConnect.html"><strong aria-hidden="true">26.9.1.</strong> OIDC Google</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectProvider.html"><strong aria-hidden="true">26.9.2.</strong> OIDC Provider</a></li><li class="chapter-item expanded "><a href="../security/jwt.html"><strong aria-hidden="true">26.9.3.</strong> JWT</a></li></ol></li><li class="chapter-item expanded "><a href="../security/openssl.html"><strong aria-hidden="true">26.10.</strong> OpenSSL</a></li><li class="chapter-item expanded "><a href="../security/pen-test.html"><strong aria-hidden="true">26.11.</strong> Penetration Testing</a></li></ol></li><li class="chapter-item expanded "><a href="../mobile/mobile.html"><strong aria-hidden="true">27.</strong> Mobile</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../mobile/ios-sim.html"><strong aria-hidden="true">27.1.</strong> Simulator</a></li></ol></li><li class="chapter-item expanded "><a href="../rd/rd.html"><strong aria-hidden="true">28.</strong> Reports and Dashboards</a></li><li class="chapter-item expanded "><a href="../customLabels/cl.html"><strong aria-hidden="true">29.</strong> Custom Labels</a></li><li class="chapter-item expanded "><a href="../accessibility/508.html"><strong aria-hidden="true">30.</strong> 508 - Accessibility</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../accessibility/sally.html"><strong aria-hidden="true">30.1.</strong> Sally</a></li></ol></li><li class="chapter-item expanded "><a href="../process-automation/processAutomation.html"><strong aria-hidden="true">31.</strong> Process Automation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../process-automation/flow.html"><strong aria-hidden="true">31.1.</strong> Flow</a></li></ol></li><li class="chapter-item expanded "><a href="../great/folks.html"><strong aria-hidden="true">32.</strong> Great Folks</a></li><li class="chapter-item expanded "><a href="../editor/editor-tips.html"><strong aria-hidden="true">33.</strong> Editor tips</a></li><li class="chapter-item expanded "><a href="../bash/tips.html"><strong aria-hidden="true">34.</strong> Bash tips</a></li><li class="chapter-item expanded "><a href="../language-design/ld.html"><strong aria-hidden="true">35.</strong> Language Design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language-design/apex.html"><strong aria-hidden="true">35.1.</strong> Apex</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language-design/apex-grammar.html"><strong aria-hidden="true">35.1.1.</strong> Grammar</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../cal-integration/cal.html"><strong aria-hidden="true">36.</strong> Calendar Integrations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cal-integration/ical.html"><strong aria-hidden="true">36.1.</strong> iCal</a></li></ol></li><li class="chapter-item expanded "><a href="../tips.html"><strong aria-hidden="true">37.</strong> Tips</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Salesforce Development Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="saml---security-assertion-markup-language"><a class="header" href="#saml---security-assertion-markup-language">SAML - Security Assertion Markup Language.</a></h1>
+<pre class="mermaid">sequenceDiagram
+title: Magic of Security Assertion Markup Language -  Get into ExternalApps 
+User-&gt;&gt;Dashboard: Lands on  Dashboard
+Dashboard-&gt;&gt;IdP: Logs in using IdP
+CorporatePortal-&gt;&gt;User: Presents External Apps available to the User
+User-&gt;&gt;ExternalApp:Clicks into the ExternalApp 
+ExternalApp-&gt;&gt;IdP: Sends  Security Assertion Markup Language  &lt;br/&gt;request to authenticate User
+IdP-&gt;&gt;ExternalApp: Verifies the session and sends the User back to ExternalApp &lt;br/&gt; with Security Assertion Markup Language Response
+User-&gt;&gt;ExternalApp: Got access to ExternalApp
+
+
+</pre>
+<p>It is an XML-based open-standard for transferring identity data between two parties: an identity provider (IdP) and a service provider (SP).</p>
+<h3 id="identity-provider-idp"><a class="header" href="#identity-provider-idp">Identity Provider (IdP)</a></h3>
+<p>— Performs authentication and passes the user’s identity and authorization level to the service provider.</p>
+<h3 id="service-provider-sp"><a class="header" href="#service-provider-sp">Service Provider (SP)</a></h3>
+<p>— <strong>Trusts</strong> the identity provider and authorizes the given user to access the requested resource.</p>
+<h2 id="benefits"><a class="header" href="#benefits">Benefits</a></h2>
+<ul>
+<li>
+<p>Improved User Experience — Users only need to sign in one time to access multiple service providers.</p>
+</li>
+<li>
+<p>Increased Security — SAML provides a single point of authentication, which happens at a secured IdP.</p>
+<ul>
+<li>Then, SAML transfers the identity information to the service providers. This form of authentication ensures that credentials are only sent to the IdP directly.</li>
+</ul>
+</li>
+<li>
+<p>Loose Coupling of Directories — SAML doesn’t require user information to be maintained and synchronized between directories.</p>
+</li>
+<li>
+<p>Reduced Costs for Service Providers — With SAML, you don’t have to maintain account information across multiple SPs. IdP bears this burden.</p>
+</li>
+</ul>
+<h3 id="saml-request-from-sp"><a class="header" href="#saml-request-from-sp">SAML Request from SP</a></h3>
+<p>This SAML request is a POST binding request, meaning that it will be sent via an HTTP POST request to the Identity Provider (IdP) endpoint specified in the Destination attribute.</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;samlp:AuthnRequest
+    xmlns:samlp=&quot;urn:oasis:names:tc:SAML:2.0:protocol&quot;
+    xmlns:saml=&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;
+    ID=&quot;12345&quot;
+    Version=&quot;2.0&quot;
+    IssueInstant=&quot;2023-03-26T12:34:56Z&quot;
+    ProtocolBinding=&quot;urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST&quot;
+    AssertionConsumerServiceURL=&quot;https://sp.example.com/acs&quot;
+    Destination=&quot;https://idp.example.com/idp/login&quot;&gt;
+    &lt;saml:Issuer&gt;https://sp.example.com&lt;/saml:Issuer&gt;
+    &lt;samlp:NameIDPolicy
+        Format=&quot;urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified&quot;
+        AllowCreate=&quot;true&quot; /&gt;
+&lt;/samlp:AuthnRequest&gt;
+
+
+
+
+</code></pre>
+<p><img src="img/samlRequest-2.png" alt="SAML Request" /></p>
+<table><thead><tr><th>Element</th><th>Description</th></tr></thead><tbody>
+<tr><td>samlp:AuthnRequest</td><td>The root element of the SAML request</td></tr>
+<tr><td>xmlns:samlp and xmlns:saml</td><td>The namespaces used in the SAML request</td></tr>
+<tr><td>ID</td><td>A unique identifier for the SAML request</td></tr>
+<tr><td>Version</td><td>The version of the SAML protocol being used (in this case, SAML 2.0).</td></tr>
+<tr><td>IssueInstant</td><td>The timestamp when the SAML request was issued.</td></tr>
+<tr><td>ProtocolBinding</td><td>The binding used for the SAML request.</td></tr>
+<tr><td>AssertionConsumerServiceURL</td><td>The URL where the SAML response should be sent.</td></tr>
+<tr><td>Destination</td><td>The endpoint URL of the IdP where the SAML request should be sent.</td></tr>
+<tr><td>saml:Issuer</td><td>The entity ID of the service provider sending the SAML request.</td></tr>
+<tr><td>samlp:NameIDPolicy</td><td>A policy that specifies how the NameID should be formatted in the SAML response. In this case, the format is unspecified and the IdP is allowed to create a new NameID if necessary.</td></tr>
+</tbody></table>
+<ul>
+<li>Assertion Consumer Service (ACS)</li>
+</ul>
+<h3 id="saml-response-from-idp"><a class="header" href="#saml-response-from-idp">SAML response from IdP</a></h3>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;samlp:Response
+    xmlns:samlp=&quot;urn:oasis:names:tc:SAML:2.0:protocol&quot;
+    xmlns:saml=&quot;urn:oasis:names:tc:SAML:2.0:assertion&quot;
+    ID=&quot;abcdefg&quot;
+    Version=&quot;2.0&quot;
+    IssueInstant=&quot;2023-03-26T12:34:56Z&quot;
+    Destination=&quot;https://sp.example.com/acs&quot;
+    InResponseTo=&quot;12345&quot;&gt;
+    &lt;saml:Issuer&gt;https://idp.example.com&lt;/saml:Issuer&gt;
+    &lt;samlp:Status&gt;
+        &lt;samlp:StatusCode
+            Value=&quot;urn:oasis:names:tc:SAML:2.0:status:Success&quot; /&gt;
+    &lt;/samlp:Status&gt;
+    &lt;saml:Assertion
+        ID=&quot;hijklmn&quot;
+        Version=&quot;2.0&quot;
+        IssueInstant=&quot;2023-03-26T12:34:56Z&quot;&gt;
+        &lt;saml:Issuer&gt;https://idp.example.com&lt;/saml:Issuer&gt;
+        &lt;saml:Subject&gt;
+            &lt;saml:NameID&gt;user@example.com&lt;/saml:NameID&gt;
+            &lt;saml:SubjectConfirmation
+                Method=&quot;urn:oasis:names:tc:SAML:2.0:cm:bearer&quot;&gt;
+                &lt;saml:SubjectConfirmationData
+                    InResponseTo=&quot;12345&quot;
+                    NotOnOrAfter=&quot;2023-03-26T12:44:56Z&quot;
+                    Recipient=&quot;https://sp.example.com/acs&quot; /&gt;
+            &lt;/saml:SubjectConfirmation&gt;
+        &lt;/saml:Subject&gt;
+        &lt;saml:Conditions
+            NotBefore=&quot;2023-03-26T12:24:56Z&quot;
+            NotOnOrAfter=&quot;2023-03-26T12:44:56Z&quot;&gt;
+            &lt;saml:AudienceRestriction&gt;
+                &lt;saml:Audience&gt;https://sp.example.com&lt;/saml:Audience&gt;
+            &lt;/saml:AudienceRestriction&gt;
+        &lt;/saml:Conditions&gt;
+        &lt;saml:AuthnStatement
+            AuthnInstant=&quot;2023-03-26T12:34:56Z&quot;
+            SessionIndex=&quot;12345&quot;&gt;
+            &lt;saml:AuthnContext&gt;
+                &lt;saml:AuthnContextClassRef&gt;
+                    urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport
+                &lt;/saml:AuthnContextClassRef&gt;
+            &lt;/saml:AuthnContext&gt;
+        &lt;/saml:AuthnStatement&gt;
+    &lt;/saml:Assertion&gt;
+&lt;/samlp:Response&gt;
+</code></pre>
+<p><img src="img/samlResponse-2.png" alt="SAML Response" /></p>
+<table><thead><tr><th>Item</th><th>Description</th></tr></thead><tbody>
+<tr><td>Assertion</td><td>This is the primary component of the SAML response and contains the actual authentication and authorization information about the user. The assertion typically includes the user's identity information, such as their name and email address, as well as any relevant access control information.</td></tr>
+<tr><td>Status</td><td>This element indicates the success or failure of the authentication process. If the authentication was successful, the status will be set to &quot;Success.&quot; If it failed, the status will be set to &quot;Failure&quot; and may include an error message.</td></tr>
+<tr><td>Signature</td><td>The SAML response may be digitally signed to ensure its authenticity and integrity. The signature is typically generated using the private key of the IdP and can be verified using the public key of the IdP.</td></tr>
+<tr><td>Destination</td><td>This element specifies the URL of the SP that the SAML response is intended for.</td></tr>
+<tr><td>IssueInstant</td><td>This element indicates the time when the SAML response was issued.</td></tr>
+<tr><td>Issuer</td><td>This element identifies the IdP that issued the SAML response</td></tr>
+</tbody></table>
+<pre class="mermaid">sequenceDiagram
+title: Security Assertion Markup Language -  Request and Response
+User-&gt;&gt;Dashboard: Lands on  Dashboard via Browser
+Dashboard-&gt;&gt;IdP: POSTs Request 
+IdP-&gt;&gt;ExternalApp: Parses Request and authenticates User and sends Response via Browser
+User-&gt;&gt;ExternalApp: Got access to ExternalApp
+
+
+</pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../security/datamask.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../security/openIDConnectConcepts.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../security/datamask.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../security/openIDConnectConcepts.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+
+
+    </body>
+</html>

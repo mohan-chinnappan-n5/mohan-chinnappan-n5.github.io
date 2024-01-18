@@ -1,0 +1,1272 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Org Metadata Snapshot - Salesforce Development Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../custom.css">
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../dg/dg.html"><strong aria-hidden="true">2.</strong> Data Governance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dg/changeManagement.html"><strong aria-hidden="true">2.1.</strong> Change Management</a></li></ol></li><li class="chapter-item expanded "><a href="../dm/datamodel.html"><strong aria-hidden="true">3.</strong> Data Model</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dm/fsc-dm.html"><strong aria-hidden="true">3.1.</strong> Financial Services Cloud</a></li><li class="chapter-item expanded "><a href="../dm/salescloud.html"><strong aria-hidden="true">3.2.</strong> Sales Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/aboutTools.html"><strong aria-hidden="true">4.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-org.html"><strong aria-hidden="true">4.1.</strong> Org Tools</a></li><li class="chapter-item expanded "><a href="../tools/tools-data-bulkapi2.html"><strong aria-hidden="true">4.2.</strong> Data Loading BulkAPI2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/userloading.html"><strong aria-hidden="true">4.2.1.</strong> User Loading</a></li><li class="chapter-item expanded "><a href="../tools/product2loading.html"><strong aria-hidden="true">4.2.2.</strong> Product2 Loading and Update</a></li><li class="chapter-item expanded "><a href="../tools/flowinterview.html"><strong aria-hidden="true">4.2.3.</strong> FlowInterview Query and Deletion</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/dataTreeImport.html"><strong aria-hidden="true">4.3.</strong> Prepare and Load for data:tree:import</a></li><li class="chapter-item expanded "><a href="../tools/tools-scpl.html"><strong aria-hidden="true">4.4.</strong> Loading State and Country Picklist</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-scpl-update.html"><strong aria-hidden="true">4.4.1.</strong> Updating State and Country Picklist </a></li></ol></li><li class="chapter-item expanded "><a href="../tools/project-management/gantt.html"><strong aria-hidden="true">4.5.</strong> Project Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../project-management/pert.html"><strong aria-hidden="true">4.5.1.</strong> PERT</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/em.html"><strong aria-hidden="true">4.6.</strong> Event Monitoring</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../monitoring/proactive-monitoring.html"><strong aria-hidden="true">4.6.1.</strong> Proactive Monitoring</a></li><li class="chapter-item expanded "><a href="../monitoring/realtime-event-monitoring.html"><strong aria-hidden="true">4.6.2.</strong> Real-Time Event Monitoring</a></li><li class="chapter-item expanded "><a href="../tools/scripts.html"><strong aria-hidden="true">4.6.3.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="../tools/compare.html"><strong aria-hidden="true">4.6.4.</strong> Comparison</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/instance.html"><strong aria-hidden="true">4.7.</strong> Instance Related</a></li><li class="chapter-item expanded "><a href="../tools/oms.html" class="active"><strong aria-hidden="true">4.8.</strong> Org Metadata Snapshot</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/scripts.html"><strong aria-hidden="true">5.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="../custom-metadata-types.html"><strong aria-hidden="true">6.</strong> Custom Metadata Types</a></li><li class="chapter-item expanded "><a href="../cq/cq.html"><strong aria-hidden="true">7.</strong> Code Quality</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cq/pmd.html"><strong aria-hidden="true">7.1.</strong> Code Scan PMD</a></li><li class="chapter-item expanded "><a href="../cq/comments.html"><strong aria-hidden="true">7.2.</strong> Comments Checking</a></li><li class="chapter-item expanded "><a href="../cq/test-coverage.html"><strong aria-hidden="true">7.3.</strong> Apex Code Test Coverage</a></li><li class="chapter-item expanded "><a href="../cq/lwc-linting.html"><strong aria-hidden="true">7.4.</strong> LWC Linting</a></li><li class="chapter-item expanded "><a href="../cq/eslint-custom-rules.html"><strong aria-hidden="true">7.5.</strong> eslint custom rules</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/deployments.html"><strong aria-hidden="true">8.</strong> Deployments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/delta.html"><strong aria-hidden="true">8.1.</strong> Delta Deployments</a></li><li class="chapter-item expanded "><a href="../deployments/gha.html"><strong aria-hidden="true">8.2.</strong> Github Actions</a></li><li class="chapter-item expanded "><a href="../deployments/validate.html"><strong aria-hidden="true">8.3.</strong> Validating changes</a></li><li class="chapter-item expanded "><a href="../deployments/admin-changes.html"><strong aria-hidden="true">8.4.</strong> Taking care of Admin changes</a></li><li class="chapter-item expanded "><a href="../deployments/devOpsCenter.html"><strong aria-hidden="true">8.5.</strong> DevOps Center</a></li><li class="chapter-item expanded "><a href="../deployments/jenkins.html"><strong aria-hidden="true">8.6.</strong> Jenkins</a></li><li class="chapter-item expanded "><a href="../deployments/git.html"><strong aria-hidden="true">8.7.</strong> git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/git-internals.html"><strong aria-hidden="true">8.7.1.</strong> git internals</a></li><li class="chapter-item expanded "><a href="../deployments/git-hooks.html"><strong aria-hidden="true">8.7.2.</strong> git hooks</a></li><li class="chapter-item expanded "><a href="../deployments/git-ops.html"><strong aria-hidden="true">8.7.3.</strong> git operations</a></li><li class="chapter-item expanded "><a href="../deployments/pr-template.html"><strong aria-hidden="true">8.7.4.</strong> pull request template</a></li><li class="chapter-item expanded "><a href="../deployments/git-diff.html"><strong aria-hidden="true">8.7.5.</strong> git diff</a></li><li class="chapter-item expanded "><a href="../deployments/git-merge.html"><strong aria-hidden="true">8.7.6.</strong> git merge</a></li><li class="chapter-item expanded "><a href="../deployments/git-log.html"><strong aria-hidden="true">8.7.7.</strong> git log</a></li><li class="chapter-item expanded "><a href="../deployments/git-stash.html"><strong aria-hidden="true">8.7.8.</strong> git stash</a></li><li class="chapter-item expanded "><a href="../deployments/git-config.html"><strong aria-hidden="true">8.7.9.</strong> git config</a></li><li class="chapter-item expanded "><a href="../deployments/git-revert.html"><strong aria-hidden="true">8.7.10.</strong> git revert</a></li><li class="chapter-item expanded "><a href="../deployments/git-delete-branch.html"><strong aria-hidden="true">8.7.11.</strong> git deleting branch</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/app-exchange.html"><strong aria-hidden="true">8.8.</strong> Apps from App Exchange </a></li><li class="chapter-item expanded "><a href="../deployments/sourceTracking.html"><strong aria-hidden="true">8.9.</strong> Source Tracking</a></li><li class="chapter-item expanded "><a href="../deployments/dangling.html"><strong aria-hidden="true">8.10.</strong> Dangling Fields Finder</a></li><li class="chapter-item expanded "><a href="../deployments/sbx.html"><strong aria-hidden="true">8.11.</strong> Sandbox Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/sandbox-preview-guide.html"><strong aria-hidden="true">8.11.1.</strong> Sandbox Preview Guide</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/MetadataComponentDependency.html"><strong aria-hidden="true">8.12.</strong> MetadataComponentDependency</a></li><li class="chapter-item expanded "><a href="../deployments/yaml.html"><strong aria-hidden="true">8.13.</strong> YAML</a></li><li class="chapter-item expanded "><a href="../deployments/packages.html"><strong aria-hidden="true">8.14.</strong> Installed Packages</a></li></ol></li><li class="chapter-item expanded "><a href="../crma/tools.html"><strong aria-hidden="true">9.</strong> CRMA tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crma/load-export.html"><strong aria-hidden="true">9.1.</strong> Dataset Load and Export</a></li><li class="chapter-item expanded "><a href="../crma/analysis.html"><strong aria-hidden="true">9.2.</strong> Analysis</a></li><li class="chapter-item expanded "><a href="../crma/binding.html"><strong aria-hidden="true">9.3.</strong> Binding</a></li><li class="chapter-item expanded "><a href="../crma/deployment.html"><strong aria-hidden="true">9.4.</strong> Deployment</a></li></ol></li><li class="chapter-item expanded "><a href="../perf/perf.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../perf/lex-perf.html"><strong aria-hidden="true">10.1.</strong> Lex Performance</a></li><li class="chapter-item expanded "><a href="../perf/perf-testing.html"><strong aria-hidden="true">10.2.</strong> Performance testing</a></li><li class="chapter-item expanded "><a href="../perf/perf-pw.html"><strong aria-hidden="true">10.3.</strong> Testing with Playwright</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../e2e/playwright.html"><strong aria-hidden="true">10.3.1.</strong> More with Playwright</a></li></ol></li><li class="chapter-item expanded "><a href="../perf/edge.html"><strong aria-hidden="true">10.4.</strong> Salesforce Edge Network</a></li><li class="chapter-item expanded "><a href="../perf/lex-query.html"><strong aria-hidden="true">10.5.</strong> Lightning Experience Queries</a></li><li class="chapter-item expanded "><a href="../perf/rum.html"><strong aria-hidden="true">10.6.</strong> Real User Monitoring (RUM)</a></li></ol></li><li class="chapter-item expanded "><a href="../dwg/dwg-tools.html"><strong aria-hidden="true">11.</strong> Diagram tools</a></li><li class="chapter-item expanded "><a href="../xml/xml-tools.html"><strong aria-hidden="true">12.</strong> XML tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../xml/xlst-transformer.html"><strong aria-hidden="true">12.1.</strong> Transformer</a></li><li class="chapter-item expanded "><a href="../xml/xml-delta.html"><strong aria-hidden="true">12.2.</strong> XML Delta Util</a></li></ol></li><li class="chapter-item expanded "><a href="../dp/dp.html"><strong aria-hidden="true">13.</strong> Data Processing tools</a></li><li class="chapter-item expanded "><a href="../i18n/i18n.html"><strong aria-hidden="true">14.</strong> Translation Tools</a></li><li class="chapter-item expanded "><a href="../media/recording.html"><strong aria-hidden="true">15.</strong> Media - Recording tools</a></li><li class="chapter-item expanded "><a href="../media/image.html"><strong aria-hidden="true">16.</strong> Image Processing</a></li><li class="chapter-item expanded "><a href="../codegen/codegen.html"><strong aria-hidden="true">17.</strong> Code Generators</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../codegen/lwc.html"><strong aria-hidden="true">17.1.</strong> LWC Code Generators</a></li><li class="chapter-item expanded "><a href="../ml/nlp.html"><strong aria-hidden="true">17.2.</strong> Apex Code Generators</a></li></ol></li><li class="chapter-item expanded "><a href="../ml/ml.html"><strong aria-hidden="true">18.</strong> Machine Learning</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ml/sdcg.html"><strong aria-hidden="true">18.1.</strong> Semantic Doc Compare and Group</a></li><li class="chapter-item expanded "><a href="../ml/datacatalog.html"><strong aria-hidden="true">18.2.</strong> Data Catalog for ML Work</a></li><li class="chapter-item expanded "><a href="../ml/chatgpt.html"><strong aria-hidden="true">18.3.</strong> openAI - ChatGPT</a></li><li class="chapter-item expanded "><a href="../ml/gpt3codex.html"><strong aria-hidden="true">18.4.</strong> openAI - GPT3 Codex</a></li><li class="chapter-item expanded "><a href="../ml/einsteinbot.html"><strong aria-hidden="true">18.5.</strong> Einstein Bot</a></li><li class="chapter-item expanded "><a href="../ml/dialogflow.html"><strong aria-hidden="true">18.6.</strong> Dialogflow - Knowledge Base</a></li><li class="chapter-item expanded "><a href="../ml/nlp.html"><strong aria-hidden="true">18.7.</strong> NLP</a></li><li class="chapter-item expanded "><a href="../ml/transformers.html"><strong aria-hidden="true">18.8.</strong> Transformers</a></li><li class="chapter-item expanded "><a href="../ml/llm.html"><strong aria-hidden="true">18.9.</strong> Large Language Models</a></li><li class="chapter-item expanded "><a href="../ml/team-productivity.html"><strong aria-hidden="true">18.10.</strong> Using LLM to improve team productivity</a></li></ol></li><li class="chapter-item expanded "><a href="../docmgmt/docmgmt.html"><strong aria-hidden="true">19.</strong> Document Management tools</a></li><li class="chapter-item expanded "><a href="../design/design-notes.html"><strong aria-hidden="true">20.</strong> Design Principles</a></li><li class="chapter-item expanded "><a href="../chromeext/ext.html"><strong aria-hidden="true">21.</strong> Chrome Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chromeext/onnu.html"><strong aria-hidden="true">21.1.</strong> ONNU</a></li></ol></li><li class="chapter-item expanded "><a href="../vscode/ext.html"><strong aria-hidden="true">22.</strong> VS Code Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../vscode/sfland.html"><strong aria-hidden="true">22.1.</strong> SF Land</a></li><li class="chapter-item expanded "><a href="../vscode/pmd.html"><strong aria-hidden="true">22.2.</strong> VSCode Apex PMD</a></li><li class="chapter-item expanded "><a href="../vscode/vsc-tips.html"><strong aria-hidden="true">22.3.</strong> VSCode tips</a></li></ol></li><li class="chapter-item expanded "><a href="../dviz/dviz.html"><strong aria-hidden="true">23.</strong> Data Viz</a></li><li class="chapter-item expanded "><a href="../releases.html"><strong aria-hidden="true">24.</strong> Releases</a></li><li class="chapter-item expanded "><a href="../rest/rest_tester.html"><strong aria-hidden="true">25.</strong> REST Tester</a></li><li class="chapter-item expanded "><a href="../security/security.html"><strong aria-hidden="true">26.</strong> Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/exploit-prevention.html"><strong aria-hidden="true">26.1.</strong> Exploitation and prevention</a></li><li class="chapter-item expanded "><a href="../security/sd.html"><strong aria-hidden="true">26.2.</strong> Sharing Debugger</a></li><li class="chapter-item expanded "><a href="../security/rh.html"><strong aria-hidden="true">26.3.</strong> Role Hierarchy</a></li><li class="chapter-item expanded "><a href="../security/shield.html"><strong aria-hidden="true">26.4.</strong> Shield</a></li><li class="chapter-item expanded "><a href="../security/profile-ps.html"><strong aria-hidden="true">26.5.</strong> Profile, PermissionSet</a></li><li class="chapter-item expanded "><a href="../security/setupAuditTrail.html"><strong aria-hidden="true">26.6.</strong> SetupAuditTrail</a></li><li class="chapter-item expanded "><a href="../security/datamask.html"><strong aria-hidden="true">26.7.</strong> Data Mask</a></li><li class="chapter-item expanded "><a href="../security/saml.html"><strong aria-hidden="true">26.8.</strong> SAML</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectConcepts.html"><strong aria-hidden="true">26.9.</strong> OpenID Connect</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/openIDConnect.html"><strong aria-hidden="true">26.9.1.</strong> OIDC Google</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectProvider.html"><strong aria-hidden="true">26.9.2.</strong> OIDC Provider</a></li><li class="chapter-item expanded "><a href="../security/jwt.html"><strong aria-hidden="true">26.9.3.</strong> JWT</a></li></ol></li><li class="chapter-item expanded "><a href="../security/openssl.html"><strong aria-hidden="true">26.10.</strong> OpenSSL</a></li><li class="chapter-item expanded "><a href="../security/pen-test.html"><strong aria-hidden="true">26.11.</strong> Penetration Testing</a></li></ol></li><li class="chapter-item expanded "><a href="../mobile/mobile.html"><strong aria-hidden="true">27.</strong> Mobile</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../mobile/ios-sim.html"><strong aria-hidden="true">27.1.</strong> Simulator</a></li></ol></li><li class="chapter-item expanded "><a href="../rd/rd.html"><strong aria-hidden="true">28.</strong> Reports and Dashboards</a></li><li class="chapter-item expanded "><a href="../customLabels/cl.html"><strong aria-hidden="true">29.</strong> Custom Labels</a></li><li class="chapter-item expanded "><a href="../accessibility/508.html"><strong aria-hidden="true">30.</strong> 508 - Accessibility</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../accessibility/sally.html"><strong aria-hidden="true">30.1.</strong> Sally</a></li></ol></li><li class="chapter-item expanded "><a href="../process-automation/processAutomation.html"><strong aria-hidden="true">31.</strong> Process Automation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../process-automation/flow.html"><strong aria-hidden="true">31.1.</strong> Flow</a></li></ol></li><li class="chapter-item expanded "><a href="../great/folks.html"><strong aria-hidden="true">32.</strong> Great Folks</a></li><li class="chapter-item expanded "><a href="../editor/editor-tips.html"><strong aria-hidden="true">33.</strong> Editor tips</a></li><li class="chapter-item expanded "><a href="../bash/tips.html"><strong aria-hidden="true">34.</strong> Bash tips</a></li><li class="chapter-item expanded "><a href="../language-design/ld.html"><strong aria-hidden="true">35.</strong> Language Design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language-design/apex.html"><strong aria-hidden="true">35.1.</strong> Apex</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language-design/apex-grammar.html"><strong aria-hidden="true">35.1.1.</strong> Grammar</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../cal-integration/cal.html"><strong aria-hidden="true">36.</strong> Calendar Integrations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cal-integration/ical.html"><strong aria-hidden="true">36.1.</strong> iCal</a></li></ol></li><li class="chapter-item expanded "><a href="../tips.html"><strong aria-hidden="true">37.</strong> Tips</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Salesforce Development Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="org-metadata-snapshot"><a class="header" href="#org-metadata-snapshot">Org Metadata Snapshot</a></h1>
+<h2 id="here-is-a-simple-way-to-create-a-orgs-metadata-snapshot"><a class="header" href="#here-is-a-simple-way-to-create-a-orgs-metadata-snapshot">Here is a simple way to create a Org's metadata Snapshot</a></h2>
+<ul>
+<li>Build the package.xml using <a href="../chromeext/onnu.html">ONNU</a>
+<img src="img/onnu-soap-2.png" alt="ONNU" /></li>
+</ul>
+<pre><code>cat ~/.pkg/package.xml
+</code></pre>
+<pre><code class="language-xml">
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Package xmlns=&quot;http://soap.sforce.com/2006/04/metadata&quot;&gt;
+  &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;LeadConvertSettings&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;ApprovalProcess&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Audience&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;AuraDefinitionBundle&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;BrandingSet&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;ApexClass&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Contentasset&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;CustomMetadata&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;CustomPermission&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Dashboard&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;DelegateGroup&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;DuplicateRule&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;ExperienceBundle&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Flexipage&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;FlowDefinition&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Flow&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;GlobalValueSet&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Group&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;CustomLabel&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Layout&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Letterhead&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;LightningExperienceTheme&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;LightningComponentBundle&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;MatchingRule&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;LightningMessageChannel&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;NavigationMenu&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Network&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;NotificationTypeConfig&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Translations&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;CustomObject&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;ApexPage&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;PathAssistant&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;PermissionSetGroup&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;PermissionSet&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;PlatformEventChannelMember&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;ProfilePasswordPolicy&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;ProfileSessionSetting&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Profile&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Queue&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;QuickAction&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;RecommendationStrategy&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;ReportType&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Report&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;RestrictionRule&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Role&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Settings&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;SharingRules&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;SharingSet&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;StandardValueSet&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;StaticResource&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;CustomTab&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Territory2Model&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Territory2Type&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;ApexTrigger&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;WaveApplication&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;WaveComponent&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;WaveDashboard&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;WaveDataflow&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;WaveDataset&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;WaveLens&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;WaveRecipe&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;WaveTemplateBundle&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;WaveXmd&lt;/name&gt;
+          &lt;/types&gt;
+          &lt;types&gt;
+            &lt;members&gt;*&lt;/members&gt;
+            &lt;name&gt;Workflow&lt;/name&gt;
+          &lt;/types&gt;
+&lt;/Package&gt;
+
+</code></pre>
+<h3 id="option---1-extract-using-onnu"><a class="header" href="#option---1-extract-using-onnu">Option - 1 Extract using <a href="../chromeext/onnu.html">ONNU</a></a></h3>
+<p><img src="img/onnu-soap-3.png" alt="ONNU Extract" /></p>
+<hr />
+<h3 id="option--2-using-cli"><a class="header" href="#option--2-using-cli">Option -2 Using CLI</a></h3>
+<pre><code>sfdx force:mdapi:retrieve -k ~/.pkg/package.xml -u mohan.chinnappan.n.sel@gmail.com -r .
+</code></pre>
+<pre><code>Retrieving v57.0 metadata from mohan.chinnappan.n.sel@gmail.com using the v57.0 SOAP API
+Retrieve ID: 09S4x00000EyfKDEAZ
+Retrieving metadata from mohan.chinnappan.n.sel@gmail.com... done
+Wrote retrieve zip to /private/tmp/snapshot/unpackaged.zip
+=== Retrieved Source Warnings
+
+ FILE NAME              PROBLEM                                                                
+ ────────────────────── ────────────────────────────────────────────────────────────────────── 
+ unpackaged/package.xml Entity type 'Territory2Model' is not available in this organization    
+ unpackaged/package.xml Entity type 'Territory2Type' is not available in this organization     
+ unpackaged/package.xml Entity type 'WaveApplication' is not available in this organization    
+ unpackaged/package.xml Entity type 'WaveComponent' is not available in this organization      
+ unpackaged/package.xml Entity type 'WaveDashboard' is not available in this organization      
+ unpackaged/package.xml Entity type 'WaveDataflow' is not available in this organization       
+ unpackaged/package.xml Entity type 'WaveDataset' is not available in this organization        
+ unpackaged/package.xml Entity type 'WaveLens' is not available in this organization           
+ unpackaged/package.xml Entity type 'WaveRecipe' is not available in this organization         
+ unpackaged/package.xml Entity type 'WaveTemplateBundle' is not available in this organization 
+ unpackaged/package.xml Entity type 'WaveXmd' is not available in this organization   
+</code></pre>
+<h3 id="extract-the-zip-file"><a class="header" href="#extract-the-zip-file">Extract the zip file</a></h3>
+<pre><code>jar xvf unpackaged.zip
+
+</code></pre>
+<h3 id="view-the-zip-contents"><a class="header" href="#view-the-zip-contents">View the zip Contents</a></h3>
+<pre><code>tree
+</code></pre>
+<pre><code>.
+├── unpackaged
+│   ├── audience
+│   │   └── Default_mohanc.audience
+│   ├── aura
+│   │   ├── forgotPassword
+│   │   │   ├── forgotPassword.cmp
+│   │   │   ├── forgotPassword.cmp-meta.xml
+│   │   │   ├── forgotPassword.css
+│   │   │   ├── forgotPassword.design
+│   │   │   ├── forgotPasswordController.js
+│   │   │   └── forgotPasswordHelper.js
+│   │   ├── loginForm
+│   │   │   ├── loginForm.cmp
+│   │   │   ├── loginForm.cmp-meta.xml
+│   │   │   ├── loginForm.css
+│   │   │   ├── loginForm.design
+│   │   │   ├── loginFormController.js
+│   │   │   └── loginFormHelper.js
+│   │   ├── selfRegister
+│   │   │   ├── selfRegister.cmp
+│   │   │   ├── selfRegister.cmp-meta.xml
+│   │   │   ├── selfRegister.css
+│   │   │   ├── selfRegister.design
+│   │   │   ├── selfRegisterController.js
+│   │   │   └── selfRegisterHelper.js
+│   │   ├── setExpId
+│   │   │   ├── setExpId.evt
+│   │   │   └── setExpId.evt-meta.xml
+│   │   └── setStartUrl
+│   │       ├── setStartUrl.evt
+│   │       └── setStartUrl.evt-meta.xml
+│   ├── classes
+│   │   ├── ChangePasswordController.cls
+│   │   ├── ChangePasswordController.cls-meta.xml
+│   │   ├── ChangePasswordControllerTest.cls
+│   │   ├── ChangePasswordControllerTest.cls-meta.xml
+│   │   ├── CommunitiesLandingController.cls
+│   │   ├── CommunitiesLandingController.cls-meta.xml
+│   │   ├── CommunitiesLandingControllerTest.cls
+│   │   ├── CommunitiesLandingControllerTest.cls-meta.xml
+│   │   ├── CommunitiesLoginController.cls
+│   │   ├── CommunitiesLoginController.cls-meta.xml
+│   │   ├── CommunitiesLoginControllerTest.cls
+│   │   ├── CommunitiesLoginControllerTest.cls-meta.xml
+│   │   ├── CommunitiesSelfRegConfirmController.cls
+│   │   ├── CommunitiesSelfRegConfirmController.cls-meta.xml
+│   │   ├── CommunitiesSelfRegConfirmControllerTest.cls
+│   │   ├── CommunitiesSelfRegConfirmControllerTest.cls-meta.xml
+│   │   ├── CommunitiesSelfRegController.cls
+│   │   ├── CommunitiesSelfRegController.cls-meta.xml
+│   │   ├── CommunitiesSelfRegControllerTest.cls
+│   │   ├── CommunitiesSelfRegControllerTest.cls-meta.xml
+│   │   ├── FieldAuditor.cls
+│   │   ├── FieldAuditor.cls-meta.xml
+│   │   ├── ForgotPasswordController.cls
+│   │   ├── ForgotPasswordController.cls-meta.xml
+│   │   ├── ForgotPasswordControllerTest.cls
+│   │   ├── ForgotPasswordControllerTest.cls-meta.xml
+│   │   ├── HelloPeach.cls
+│   │   ├── HelloPeach.cls-meta.xml
+│   │   ├── HelloWorld.cls
+│   │   ├── HelloWorld.cls-meta.xml
+│   │   ├── HelloWorld2.cls
+│   │   ├── HelloWorld2.cls-meta.xml
+│   │   ├── LightningForgotPasswordController.cls
+│   │   ├── LightningForgotPasswordController.cls-meta.xml
+│   │   ├── LightningForgotPasswordControllerTest.cls
+│   │   ├── LightningForgotPasswordControllerTest.cls-meta.xml
+│   │   ├── LightningLoginFormController.cls
+│   │   ├── LightningLoginFormController.cls-meta.xml
+│   │   ├── LightningLoginFormControllerTest.cls
+│   │   ├── LightningLoginFormControllerTest.cls-meta.xml
+│   │   ├── LightningSelfRegisterController.cls
+│   │   ├── LightningSelfRegisterController.cls-meta.xml
+│   │   ├── LightningSelfRegisterControllerTest.cls
+│   │   ├── LightningSelfRegisterControllerTest.cls-meta.xml
+│   │   ├── MicrobatchSelfRegController.cls
+│   │   ├── MicrobatchSelfRegController.cls-meta.xml
+│   │   ├── MicrobatchSelfRegControllerTest.cls
+│   │   ├── MicrobatchSelfRegControllerTest.cls-meta.xml
+│   │   ├── MyHelloWorld.cls
+│   │   ├── MyHelloWorld.cls-meta.xml
+│   │   ├── MyProfilePageController.cls
+│   │   ├── MyProfilePageController.cls-meta.xml
+│   │   ├── MyProfilePageControllerTest.cls
+│   │   ├── MyProfilePageControllerTest.cls-meta.xml
+│   │   ├── ObjectAuditor.cls
+│   │   ├── ObjectAuditor.cls-meta.xml
+│   │   ├── RecordTypeAuditor.cls
+│   │   ├── RecordTypeAuditor.cls-meta.xml
+│   │   ├── SiteLoginController.cls
+│   │   ├── SiteLoginController.cls-meta.xml
+│   │   ├── SiteLoginControllerTest.cls
+│   │   ├── SiteLoginControllerTest.cls-meta.xml
+│   │   ├── SiteRegisterController.cls
+│   │   ├── SiteRegisterController.cls-meta.xml
+│   │   ├── SiteRegisterControllerTest.cls
+│   │   └── SiteRegisterControllerTest.cls-meta.xml
+│   ├── duplicateRules
+│   │   ├── Account.Standard_Account_Duplicate_Rule.duplicateRule
+│   │   ├── Contact.Standard_Contact_Duplicate_Rule.duplicateRule
+│   │   └── Lead.Standard_Lead_Duplicate_Rule.duplicateRule
+│   ├── experiences
+│   │   ├── mohanc1
+│   │   │   ├── brandingSets
+│   │   │   │   └── buildYourOwnLWR.json
+│   │   │   ├── config
+│   │   │   │   ├── languages.json
+│   │   │   │   ├── mainAppPage.json
+│   │   │   │   └── mohanc.json
+│   │   │   ├── routes
+│   │   │   │   ├── error.json
+│   │   │   │   ├── home.json
+│   │   │   │   ├── serviceNotAvailable.json
+│   │   │   │   └── tooManyRequests.json
+│   │   │   ├── themes
+│   │   │   │   └── buildYourOwnLWR.json
+│   │   │   └── views
+│   │   │       ├── error.json
+│   │   │       ├── home.json
+│   │   │       ├── serviceNotAvailable.json
+│   │   │       └── tooManyRequests.json
+│   │   └── mohanc1.site-meta.xml
+│   ├── flexipages
+│   │   ├── Account_Record_Page.flexipage
+│   │   ├── ContactCenter_UtilityBar.flexipage
+│   │   ├── CrisisCenter_UtilityBar.flexipage
+│   │   ├── LightningSalesConsole_UtilityBar.flexipage
+│   │   ├── LightningSales_UtilityBar.flexipage
+│   │   └── LightningService_UtilityBar.flexipage
+│   ├── flowDefinitions
+│   │   ├── OpptyAmountChange.flowDefinition
+│   │   └── sample1.flowDefinition
+│   ├── flows
+│   │   ├── OpptyAmountChange.flow
+│   │   └── sample1.flow
+│   ├── globalValueSets
+│   │   ├── Test.globalValueSet
+│   │   └── plants.globalValueSet
+│   ├── labels
+│   │   └── CustomLabels.labels
+│   ├── layouts
+│   │   ├── Account-Account\ %28Marketing%29\ Layout.layout
+│   │   ├── Account-Account\ %28Sales%29\ Layout.layout
+│   │   ├── Account-Account\ %28Support%29\ Layout.layout
+│   │   ├── Account-Account\ Layout.layout
+│   │   ├── Account-Simple.layout
+│   │   ├── AccountBrand-Account\ Brand\ Layout.layout
+│   │   ├── AlternativePaymentMethod-Alternative\ Payment\ Method\ Layout.layout
+│   │   ├── ApiAnomalyEventStore-API\ Anomaly\ Event\ Store\ Layout.layout
+│   │   ├── AppointmentInvitation-Appointment\ Invitation\ Layout.layout
+│   │   ├── Asset-Asset\ Layout.layout
+│   │   ├── AssetAction-Asset\ Action\ Layout.layout
+│   │   ├── AssetActionSource-Asset\ Action\ Source\ Layout.layout
+│   │   ├── AssetRelationship-Asset\ Relationship\ Layout.layout
+│   │   ├── AssetStatePeriod-Asset\ State\ Period\ Layout.layout
+│   │   ├── AssignedResource-Assigned\ Resource\ Layout.layout
+│   │   ├── AuthorizationForm-Authorization\ Form\ Layout.layout
+│   │   ├── AuthorizationFormConsent-Authorization\ Form\ Consent\ Layout.layout
+│   │   ├── AuthorizationFormDataUse-Authorization\ Form\ Data\ Use\ Layout.layout
+│   │   ├── AuthorizationFormText-Authorization\ Form\ Text\ Layout.layout
+│   │   ├── BusinessBrand-Business\ Brand\ Layout.layout
+│   │   ├── Campaign-Campaign\ Layout.layout
+│   │   ├── CampaignMember-Campaign\ Member\ Page\ Layout.layout
+│   │   ├── CardPaymentMethod-Card\ Payment\ Method\ Layout.layout
+│   │   ├── CartCheckoutSession-Cart\ Checkout\ Session\ Layout.layout
+│   │   ├── CartDeliveryGroup-Cart\ Delivery\ Group\ Layout.layout
+│   │   ├── CartItem-Cart\ Item\ Layout.layout
+│   │   ├── CartTax-Cart\ Tax\ Layout.layout
+│   │   ├── CartValidationOutput-Cart\ Validation\ Output\ Layout.layout
+│   │   ├── Case-Case\ %28Marketing%29\ Layout.layout
+│   │   ├── Case-Case\ %28Sales%29\ Layout.layout
+│   │   ├── Case-Case\ %28Support%29\ Layout.layout
+│   │   ├── Case-Case\ Layout.layout
+│   │   ├── CaseClose-Close\ Case\ Layout.layout
+│   │   ├── CaseMilestone-Case\ Milestone\ Layout.layout
+│   │   ├── CodeBuilder__CodeBuilderSetting__mdt-CodeBuilder__CodeBuilderSetting\ Layout.layout
+│   │   ├── CommunityMemberLayout-Community\ Member\ Layout.layout
+│   │   ├── ConsumptionRate-Consumption\ Rate\ Layout.layout
+│   │   ├── ConsumptionSchedule-Consumption\ Schedule\ Layout.layout
+│   │   ├── Contact-Contact\ %28Marketing%29\ Layout.layout
+│   │   ├── Contact-Contact\ %28Sales%29\ Layout.layout
+│   │   ├── Contact-Contact\ %28Support%29\ Layout.layout
+│   │   ├── Contact-Contact\ Layout.layout
+│   │   ├── ContactPointAddress-Contact\ Point\ Address\ Layout.layout
+│   │   ├── ContactPointEmail-Contact\ Point\ Email\ Layout.layout
+│   │   ├── ContactPointPhone-Contact\ Point\ Phone\ Layout.layout
+│   │   ├── ContactPointTypeConsent-Contact\ Point\ Type\ Consent\ Layout.layout
+│   │   ├── ContentVersion-Content\ Version\ Layout.layout
+│   │   ├── Contract-Contract\ Layout.layout
+│   │   ├── ContractLineItem-Contract\ Line\ Item\ Layout.layout
+│   │   ├── CredentialStuffingEventStore-Credential\ Stuffing\ Event\ Store\ Layout.layout
+│   │   ├── CreditMemo-Credit\ Memo\ Layout.layout
+│   │   ├── CreditMemoLine-Credit\ Memo\ Line\ Layout.layout
+│   │   ├── Customer-Customer\ Layout.layout
+│   │   ├── DandBCompany-D%26B\ Company\ Layout.layout
+│   │   ├── DataUseLegalBasis-Data\ Use\ Legal\ Basis\ Layout.layout
+│   │   ├── DataUsePurpose-Data\ Use\ Purpose\ Layout.layout
+│   │   ├── DelegatedAccount-External\ Managed\ Account\ Layout.layout
+│   │   ├── DigitalWallet-Digital\ Wallet\ Layout.layout
+│   │   ├── DuplicateRecordSet-Duplicate\ Record\ Set\ Layout.layout
+│   │   ├── EmailMessage-Email\ Message\ Layout.layout
+│   │   ├── EngagementChannelType-Engagement\ Channel\ Type\ Layout.layout
+│   │   ├── Entitlement-Entitlement\ Layout.layout
+│   │   ├── EntityMilestone-Object\ Milestone\ Layout.layout
+│   │   ├── Event-Event\ Layout.layout
+│   │   ├── FeedItem-Feed\ Item\ Layout.layout
+│   │   ├── FinanceBalanceSnapshot-Finance\ Balance\ Snapshot\ Layout.layout
+│   │   ├── FinanceTransaction-Finance\ Transaction\ Layout.layout
+│   │   ├── FruitTree__c-FruitTree\ Layout.layout
+│   │   ├── Global-Global\ Layout.layout
+│   │   ├── Idea-Idea\ Layout.layout
+│   │   ├── Individual-Individual\ Layout.layout
+│   │   ├── Invoice-Invoice\ Layout.layout
+│   │   ├── InvoiceLine-Invoice\ Line\ Layout.layout
+│   │   ├── Lead-Lead\ %28Marketing%29\ Layout.layout
+│   │   ├── Lead-Lead\ %28Sales%29\ Layout.layout
+│   │   ├── Lead-Lead\ %28Support%29\ Layout.layout
+│   │   ├── Lead-Lead\ Layout.layout
+│   │   ├── LegalEntity-Legal\ Entity\ Layout.layout
+│   │   ├── Macro-Macro\ Layout.layout
+│   │   ├── OperatingHours-Operating\ Hours\ Layout.layout
+│   │   ├── Opportunity-Opportunity\ %28Marketing%29\ Layout.layout
+│   │   ├── Opportunity-Opportunity\ %28Sales%29\ Layout.layout
+│   │   ├── Opportunity-Opportunity\ %28Support%29\ Layout.layout
+│   │   ├── Opportunity-Opportunity\ Layout.layout
+│   │   ├── OpportunityLineItem-Opportunity\ Product\ Layout.layout
+│   │   ├── OpportunityTeamMember-Opportunity\ Team\ Member\ Layout.layout
+│   │   ├── Order-Order\ Layout.layout
+│   │   ├── OrderItem-Order\ Product\ Layout.layout
+│   │   ├── Payment-Payment\ Layout.layout
+│   │   ├── PaymentAuthAdjustment-Payment\ Authorization\ Adjustment\ Layout.layout
+│   │   ├── PaymentAuthorization-Payment\ Authorization\ Layout.layout
+│   │   ├── PaymentGateway-Payment\ Gateway\ Layout.layout
+│   │   ├── PaymentGatewayLog-Payment\ Gateway\ Log\ Layout.layout
+│   │   ├── PaymentGroup-Payment\ Group\ Layout.layout
+│   │   ├── PaymentLineInvoice-Payment\ Line\ Invoice\ Layout.layout
+│   │   ├── Pricebook2-Price\ Book\ Layout.layout
+│   │   ├── PricebookEntry-Price\ Book\ Entry\ Layout.layout
+│   │   ├── ProcessException-Process\ Exception\ Layout.layout
+│   │   ├── Product2-Product\ Layout.layout
+│   │   ├── ProductConsumptionSchedule-Product\ Consumption\ Schedule\ Layout.layout
+│   │   ├── QuickText-Quick\ Text\ Layout.layout
+│   │   ├── Refund-Refund\ Layout.layout
+│   │   ├── RefundLinePayment-Refund\ Line\ Payment\ Layout.layout
+│   │   ├── ReportAnomalyEventStore-Report\ Anomaly\ Event\ Store\ Layout.layout
+│   │   ├── ResourceAbsence-Resource\ Absence\ Layout.layout
+│   │   ├── ResourcePreference-Resource\ Preference\ Layout.layout
+│   │   ├── ReturnOrder-Return\ Order\ Layout.layout
+│   │   ├── ReturnOrderItemAdjustment-Return\ Order\ Item\ Adjustment\ Layout.layout
+│   │   ├── ReturnOrderItemTax-Return\ Order\ Item\ Tax\ Layout.layout
+│   │   ├── ReturnOrderLineItem-Return\ Order\ Line\ Item\ Layout.layout
+│   │   ├── Sales_Play__c-Sales\ Play\ Layout.layout
+│   │   ├── Scorecard-Scorecard\ Layout.layout
+│   │   ├── ScorecardAssociation-Scorecard\ Association\ Layout.layout
+│   │   ├── ScorecardMetric-Scorecard\ Metric\ Layout.layout
+│   │   ├── Seller-Seller\ Layout.layout
+│   │   ├── ServiceAppointment-Service\ Appointment\ Layout.layout
+│   │   ├── ServiceContract-Service\ Contract\ Layout.layout
+│   │   ├── ServiceResource-Service\ Resource\ Layout.layout
+│   │   ├── ServiceResourceSkill-Service\ Resource\ Skill\ Layout.layout
+│   │   ├── ServiceTerritory-Service\ Territory\ Layout.layout
+│   │   ├── ServiceTerritoryMember-Service\ Territory\ Member\ Layout.layout
+│   │   ├── SessionHijackingEventStore-Session\ Hijacking\ Event\ Store\ Layout.layout
+│   │   ├── Shift-Shift\ Layout.layout
+│   │   ├── SkillRequirement-Skill\ Requirement\ Layout.layout
+│   │   ├── SocialPersona-Social\ Persona\ Layout.layout
+│   │   ├── Solution-Solution\ Layout.layout
+│   │   ├── Task-Task\ Layout.layout
+│   │   ├── ThreatDetectionFeedback-Threat\ Detection\ Feedback\ Layout.layout
+│   │   ├── TimeSlot-Time\ Slot\ Layout.layout
+│   │   ├── Tree__c-Tree\ Layout.layout
+│   │   ├── User-User\ Layout.layout
+│   │   ├── UserProvAccount-User\ Provisioning\ Account\ Layout.layout
+│   │   ├── UserProvisioningLog-User\ Provisioning\ Log\ Layout.layout
+│   │   ├── UserProvisioningRequest-User\ Provisioning\ Request\ Layout.layout
+│   │   ├── WebCart-Cart\ Layout.layout
+│   │   ├── WebCartAdjustmentBasis-Cart\ Adjustment\ Basis\ Layout.layout
+│   │   ├── WebCartAdjustmentGroup-Cart\ Adjustment\ Group\ Layout.layout
+│   │   ├── WebStore-Store\ Layout.layout
+│   │   ├── WebStoreConfig-Web\ Store\ Configuration\ Layout.layout
+│   │   ├── WorkOrder-Work\ Order\ Layout.layout
+│   │   ├── WorkOrderLineItem-Work\ Order\ Line\ Item\ Layout.layout
+│   │   ├── WorkPlan-Work\ Plan\ Layout.layout
+│   │   ├── WorkPlanTemplate-Work\ Plan\ Template\ Layout.layout
+│   │   ├── WorkPlanTemplateEntry-Work\ Plan\ Template\ Entry\ Layout.layout
+│   │   ├── WorkStep-Work\ Step\ Layout.layout
+│   │   ├── WorkStepTemplate-Work\ Step\ Template\ Layout.layout
+│   │   ├── WorkType-Work\ Type\ Layout.layout
+│   │   ├── WorkTypeGroup-Work\ Type\ Group\ Layout.layout
+│   │   ├── WorkTypeGroupMember-Work\ Type\ Group\ Member\ Layout.layout
+│   │   ├── sf_devops__App_Config__mdt-sf_devops__App\ Config\ Layout.layout
+│   │   ├── sf_devops__Async_Operation_Result__c-sf_devops__Async\ Operation\ Result\ Layout.layout
+│   │   ├── sf_devops__Back_Sync__c-sf_devops__Back\ Sync\ Layout.layout
+│   │   ├── sf_devops__Branch__c-sf_devops__Branch\ Layout.layout
+│   │   ├── sf_devops__Change_Bundle_Install__c-sf_devops__Change\ Bundle\ Install\ Layout.layout
+│   │   ├── sf_devops__Change_Bundle__c-sf_devops__Change\ Bundle\ Layout.layout
+│   │   ├── sf_devops__Change_Submission__c-sf_devops__Change\ Submission\ Layout.layout
+│   │   ├── sf_devops__Deploy_Component__c-sf_devops__Deploy\ Component\ Layout.layout
+│   │   ├── sf_devops__Deployment_Result__c-sf_devops__Deployment\ Result\ Layout.layout
+│   │   ├── sf_devops__Environment__c-sf_devops__Environment\ Layout.layout
+│   │   ├── sf_devops__Hidden_Remote_Change__c-sf_devops__Hidden\ Remote\ Change\ Layout.layout
+│   │   ├── sf_devops__Merge_Result__c-sf_devops__Merge\ Result\ Layout.layout
+│   │   ├── sf_devops__Object_Activity__c-sf_devops__Object\ Activity\ Layout.layout
+│   │   ├── sf_devops__Pipeline_Stage__c-sf_devops__Pipeline\ Stage\ Layout.layout
+│   │   ├── sf_devops__Pipeline__c-sf_devops__Pipeline\ Layout.layout
+│   │   ├── sf_devops__Remote_Change__c-sf_devops__Remote\ Change\ Layout.layout
+│   │   ├── sf_devops__Repository__c-sf_devops__Repository\ Layout.layout
+│   │   ├── sf_devops__Service__mdt-sf_devops__Service\ Layout.layout
+│   │   ├── sf_devops__Source_Member_Reference__c-sf_devops__Source\ Member\ Reference\ Layout.layout
+│   │   ├── sf_devops__Submit_Component__c-sf_devops__Submit\ Component\ Layout.layout
+│   │   ├── sf_devops__Vcs_Event__c-sf_devops__VCS\ Event\ Layout.layout
+│   │   ├── sf_devops__Work_Item_Promote__c-sf_devops__Work\ Item\ Promote\ Layout.layout
+│   │   └── sf_devops__Work_Item__c-sf_devops__Work\ Item\ Layout.layout
+│   ├── lwc
+│   │   ├── chart
+│   │   │   ├── chart.html
+│   │   │   ├── chart.js
+│   │   │   └── chart.js-meta.xml
+│   │   ├── hello
+│   │   │   ├── hello.html
+│   │   │   ├── hello.js
+│   │   │   └── hello.js-meta.xml
+│   │   └── uIRecordAPIAccount
+│   │       ├── uIRecordAPIAccount.html
+│   │       ├── uIRecordAPIAccount.js
+│   │       └── uIRecordAPIAccount.js-meta.xml
+│   ├── navigationMenus
+│   │   └── SFDC_Default_Navigation_mohanc.navigationMenu
+│   ├── networks
+│   │   └── mohanc.network
+│   ├── notificationTypeConfig
+│   │   └── NotificationTypeConfig.config
+│   ├── objects
+│   │   ├── FruitTree__c.object
+│   │   ├── Sales_Play__c.object
+│   │   └── Tree__c.object
+│   ├── package.xml
+│   ├── pages
+│   │   ├── AnswersHome.page
+│   │   ├── AnswersHome.page-meta.xml
+│   │   ├── BandwidthExceeded.page
+│   │   ├── BandwidthExceeded.page-meta.xml
+│   │   ├── ChangePassword.page
+│   │   ├── ChangePassword.page-meta.xml
+│   │   ├── CommunitiesLanding.page
+│   │   ├── CommunitiesLanding.page-meta.xml
+│   │   ├── CommunitiesLogin.page
+│   │   ├── CommunitiesLogin.page-meta.xml
+│   │   ├── CommunitiesSelfReg.page
+│   │   ├── CommunitiesSelfReg.page-meta.xml
+│   │   ├── CommunitiesSelfRegConfirm.page
+│   │   ├── CommunitiesSelfRegConfirm.page-meta.xml
+│   │   ├── CommunitiesTemplate.page
+│   │   ├── CommunitiesTemplate.page-meta.xml
+│   │   ├── Exception.page
+│   │   ├── Exception.page-meta.xml
+│   │   ├── FieldAuditView.page
+│   │   ├── FieldAuditView.page-meta.xml
+│   │   ├── FileNotFound.page
+│   │   ├── FileNotFound.page-meta.xml
+│   │   ├── ForgotPassword.page
+│   │   ├── ForgotPassword.page-meta.xml
+│   │   ├── ForgotPasswordConfirm.page
+│   │   ├── ForgotPasswordConfirm.page-meta.xml
+│   │   ├── IdeasHome.page
+│   │   ├── IdeasHome.page-meta.xml
+│   │   ├── InMaintenance.page
+│   │   ├── InMaintenance.page-meta.xml
+│   │   ├── MicrobatchSelfReg.page
+│   │   ├── MicrobatchSelfReg.page-meta.xml
+│   │   ├── MyProfilePage.page
+│   │   ├── MyProfilePage.page-meta.xml
+│   │   ├── SiteLogin.page
+│   │   ├── SiteLogin.page-meta.xml
+│   │   ├── SiteRegister.page
+│   │   ├── SiteRegister.page-meta.xml
+│   │   ├── SiteRegisterConfirm.page
+│   │   ├── SiteRegisterConfirm.page-meta.xml
+│   │   ├── SiteTemplate.page
+│   │   ├── SiteTemplate.page-meta.xml
+│   │   ├── StdExceptionTemplate.page
+│   │   ├── StdExceptionTemplate.page-meta.xml
+│   │   ├── Unauthorized.page
+│   │   ├── Unauthorized.page-meta.xml
+│   │   ├── UnderConstruction.page
+│   │   └── UnderConstruction.page-meta.xml
+│   ├── permissionsets
+│   │   ├── Experience_Profile_Manager.permissionset
+│   │   ├── Manage_Encryption_Keys.permissionset
+│   │   ├── sf_devops_InitializeEnvironments.permissionset
+│   │   ├── sf_devops_NamedCredentials.permissionset
+│   │   └── test2.permissionset
+│   ├── platformEventChannelMembers
+│   │   ├── ChangeEvents_AccountChangeEvent.platformEventChannelMember
+│   │   ├── ChangeEvents_CampaignChangeEvent.platformEventChannelMember
+│   │   └── ChangeEvents_CaseChangeEvent.platformEventChannelMember
+│   ├── profilePasswordPolicies
+│   │   └── PT1_profilePasswordPolicy1672084508523.profilePasswordPolicy
+│   ├── profileSessionSettings
+│   │   └── PT1_profileSessionSetting1672084508612.profileSessionSetting
+│   ├── profiles
+│   │   ├── Admin.profile
+│   │   ├── Analytics\ Cloud\ Integration\ User.profile
+│   │   ├── Analytics\ Cloud\ Security\ User.profile
+│   │   ├── Authenticated\ Website.profile
+│   │   ├── Chatter\ External\ User.profile
+│   │   ├── Chatter\ Free\ User.profile
+│   │   ├── Chatter\ Moderator\ User.profile
+│   │   ├── ContractManager.profile
+│   │   ├── Cross\ Org\ Data\ Proxy\ User.profile
+│   │   ├── Custom%3A\ Marketing\ Profile.profile
+│   │   ├── Custom%3A\ Sales\ Profile.profile
+│   │   ├── Custom%3A\ Support\ Profile.profile
+│   │   ├── Customer\ Community\ Login\ User.profile
+│   │   ├── Customer\ Community\ Plus\ Login\ User.profile
+│   │   ├── Customer\ Community\ Plus\ User.profile
+│   │   ├── Customer\ Community\ User.profile
+│   │   ├── Customer\ Portal\ Manager\ Custom.profile
+│   │   ├── Customer\ Portal\ Manager\ Standard.profile
+│   │   ├── External\ Apps\ Login\ User.profile
+│   │   ├── External\ Identity\ User.profile
+│   │   ├── Force%2Ecom\ -\ App\ Subscription\ User.profile
+│   │   ├── Force%2Ecom\ -\ Free\ User.profile
+│   │   ├── Gold\ Partner\ User.profile
+│   │   ├── Guest\ License\ User.profile
+│   │   ├── High\ Volume\ Customer\ Portal\ User.profile
+│   │   ├── HighVolumePortal.profile
+│   │   ├── Identity\ User.profile
+│   │   ├── MarketingProfile.profile
+│   │   ├── Minimum\ Access\ -\ Salesforce.profile
+│   │   ├── Partner\ App\ Subscription\ User.profile
+│   │   ├── Partner\ Community\ Login\ User.profile
+│   │   ├── Partner\ Community\ User.profile
+│   │   ├── PlatformPortal.profile
+│   │   ├── Read\ Only.profile
+│   │   ├── Silver\ Partner\ User.profile
+│   │   ├── SolutionManager.profile
+│   │   ├── Standard.profile
+│   │   ├── StandardAul.profile
+│   │   ├── Work%2Ecom\ Only\ User.profile
+│   │   └── mohanc\ Profile.profile
+│   ├── quickActions
+│   │   ├── Case.LogACall.quickAction
+│   │   ├── Case.NewChildCase.quickAction
+│   │   ├── CollaborationGroup.NewGroupMember.quickAction
+│   │   ├── CollaborationGroup.NewGroupRecord.quickAction
+│   │   ├── FeedItem.NewTaskFromFeedItem.quickAction
+│   │   ├── GuestCommunityCase.quickAction
+│   │   ├── LogACall.quickAction
+│   │   ├── NewAccount.quickAction
+│   │   ├── NewCase.quickAction
+│   │   ├── NewCommunityCase.quickAction
+│   │   ├── NewContact.quickAction
+│   │   ├── NewEvent.quickAction
+│   │   ├── NewGroup.quickAction
+│   │   ├── NewLead.quickAction
+│   │   ├── NewNote.quickAction
+│   │   ├── NewOpportunity.quickAction
+│   │   ├── NewTask.quickAction
+│   │   ├── SendEmail.quickAction
+│   │   ├── Task.Defer.quickAction
+│   │   ├── Task.EditDescription.quickAction
+│   │   ├── Task.UpdatePriority.quickAction
+│   │   └── Task.UpdateStatus.quickAction
+│   ├── reportTypes
+│   │   └── screen_flows_prebuilt_crt.reportType
+│   ├── roles
+│   │   ├── CEO.role
+│   │   ├── CFO.role
+│   │   ├── COO.role
+│   │   ├── ChannelSalesTeam.role
+│   │   ├── CustomerSupportInternational.role
+│   │   ├── CustomerSupportNorthAmerica.role
+│   │   ├── DirectorChannelSales.role
+│   │   ├── DirectorDirectSales.role
+│   │   ├── EasternSalesTeam.role
+│   │   ├── InstallationRepairServices.role
+│   │   ├── MarketingTeam.role
+│   │   ├── SVPCustomerServiceSupport.role
+│   │   ├── SVPHumanResources.role
+│   │   ├── SVPSalesMarketing.role
+│   │   ├── VPInternationalSales.role
+│   │   ├── VPMarketing.role
+│   │   ├── VPNorthAmericanSales.role
+│   │   └── WesternSalesTeam.role
+│   ├── settings
+│   │   ├── Account.settings
+│   │   ├── AccountIntelligence.settings
+│   │   ├── Actions.settings
+│   │   ├── Activities.settings
+│   │   ├── Address.settings
+│   │   ├── Analytics.settings
+│   │   ├── Apex.settings
+│   │   ├── AppAnalytics.settings
+│   │   ├── AppExperience.settings
+│   │   ├── Archive.settings
+│   │   ├── Blockchain.settings
+│   │   ├── Bot.settings
+│   │   ├── BusinessHours.settings
+│   │   ├── Campaign.settings
+│   │   ├── Case.settings
+│   │   ├── Chatter.settings
+│   │   ├── ChatterEmailsMD.settings
+│   │   ├── Commerce.settings
+│   │   ├── Communities.settings
+│   │   ├── Company.settings
+│   │   ├── ConnectedApp.settings
+│   │   ├── Content.settings
+│   │   ├── Contract.settings
+│   │   ├── ConversationalIntelligence.settings
+│   │   ├── Currency.settings
+│   │   ├── CustomAddressField.settings
+│   │   ├── CustomerDataPlatform.settings
+│   │   ├── CustomizablePropensityScoring.settings
+│   │   ├── DataDotCom.settings
+│   │   ├── Deployment.settings
+│   │   ├── DevHub.settings
+│   │   ├── Discovery.settings
+│   │   ├── DocumentChecklist.settings
+│   │   ├── EAC.settings
+│   │   ├── EinsteinDocumentCapture.settings
+│   │   ├── EmailAdministration.settings
+│   │   ├── EmailIntegration.settings
+│   │   ├── EmailTemplate.settings
+│   │   ├── EmployeeFieldAccess.settings
+│   │   ├── EmployeeUser.settings
+│   │   ├── EncryptionKey.settings
+│   │   ├── EngagementMessaging.settings
+│   │   ├── EnhancedNotes.settings
+│   │   ├── Entitlement.settings
+│   │   ├── Essentials.settings
+│   │   ├── Event.settings
+│   │   ├── ExperienceBundle.settings
+│   │   ├── ExternalClientApp.settings
+│   │   ├── FieldService.settings
+│   │   ├── FileUploadAndDownloadSecurity.settings
+│   │   ├── FilesConnect.settings
+│   │   ├── Flow.settings
+│   │   ├── Forecasting.settings
+│   │   ├── Formula.settings
+│   │   ├── GoogleApps.settings
+│   │   ├── Ideas.settings
+│   │   ├── IdentityProvider.settings
+│   │   ├── IncidentMgmt.settings
+│   │   ├── Industries.settings
+│   │   ├── IndustriesEinsteinFeature.settings
+│   │   ├── InvocableAction.settings
+│   │   ├── Knowledge.settings
+│   │   ├── Language.settings
+│   │   ├── LeadConfig.settings
+│   │   ├── LightningExperience.settings
+│   │   ├── LiveAgent.settings
+│   │   ├── LiveMessage.settings
+│   │   ├── Macro.settings
+│   │   ├── MailMerge.settings
+│   │   ├── Meetings.settings
+│   │   ├── Mobile.settings
+│   │   ├── MyDomain.settings
+│   │   ├── Name.settings
+│   │   ├── Notifications.settings
+│   │   ├── OauthOidc.settings
+│   │   ├── ObjectLinking.settings
+│   │   ├── OmniChannel.settings
+│   │   ├── Opportunity.settings
+│   │   ├── Order.settings
+│   │   ├── OrderManagement.settings
+│   │   ├── Org.settings
+│   │   ├── Pardot.settings
+│   │   ├── PardotEinstein.settings
+│   │   ├── PartyDataModel.settings
+│   │   ├── PathAssistant.settings
+│   │   ├── PaymentsIngestEnabled.settings
+│   │   ├── PaymentsManagementEnabled.settings
+│   │   ├── Picklist.settings
+│   │   ├── PlatformEncryption.settings
+│   │   ├── Portals.settings
+│   │   ├── PredictionBuilder.settings
+│   │   ├── Privacy.settings
+│   │   ├── Product.settings
+│   │   ├── QuickText.settings
+│   │   ├── Quote.settings
+│   │   ├── RealTimeEvent.settings
+│   │   ├── RecommendationBuilder.settings
+│   │   ├── RecordPage.settings
+│   │   ├── RetailExecution.settings
+│   │   ├── Sandbox.settings
+│   │   ├── Schema.settings
+│   │   ├── Search.settings
+│   │   ├── Security.settings
+│   │   ├── ServiceCloudVoice.settings
+│   │   ├── ServiceSetupAssistant.settings
+│   │   ├── Sharing.settings
+│   │   ├── Site.settings
+│   │   ├── SocialProfile.settings
+│   │   ├── SourceTracking.settings
+│   │   ├── Survey.settings
+│   │   ├── SystemNotification.settings
+│   │   ├── Territory2.settings
+│   │   ├── Trailhead.settings
+│   │   ├── TrialOrg.settings
+│   │   ├── UserEngagement.settings
+│   │   ├── UserInterface.settings
+│   │   ├── UserManagement.settings
+│   │   ├── Voice.settings
+│   │   ├── WebToX.settings
+│   │   └── WorkDotCom.settings
+│   ├── sharingRules
+│   │   ├── Account.sharingRules
+│   │   ├── AccountBrand.sharingRules
+│   │   ├── ActionCadenceAsyncJob.sharingRules
+│   │   ├── ActivityRecurrence2.sharingRules
+│   │   ├── ActivityRecurrence2Exception.sharingRules
+│   │   ├── AlternativePaymentMethod.sharingRules
+│   │   ├── AppointmentInvitation.sharingRules
+│   │   ├── Asset.sharingRules
+│   │   ├── AssistantInteraction.sharingRules
+│   │   ├── AssistantProgress.sharingRules
+│   │   ├── AssistantRecommendation.sharingRules
+│   │   ├── AuthorizationForm.sharingRules
+│   │   ├── AuthorizationFormConsent.sharingRules
+│   │   ├── AuthorizationFormDataUse.sharingRules
+│   │   ├── BusinessBrand.sharingRules
+│   │   ├── CalendarModel.sharingRules
+│   │   ├── CalendarView.sharingRules
+│   │   ├── Campaign.sharingRules
+│   │   ├── Case.sharingRules
+│   │   ├── ChangeRequest.sharingRules
+│   │   ├── ChannelProgram.sharingRules
+│   │   ├── CleanLeadBackup.sharingRules
+│   │   ├── CommSubscription.sharingRules
+│   │   ├── CommSubscriptionChannelType.sharingRules
+│   │   ├── CommSubscriptionConsent.sharingRules
+│   │   ├── ComponentResponseCache.sharingRules
+│   │   ├── ConsumptionSchedule.sharingRules
+│   │   ├── Contact.sharingRules
+│   │   ├── ContactPointConsent.sharingRules
+│   │   ├── ContactPointTypeConsent.sharingRules
+│   │   ├── ContactRequest.sharingRules
+│   │   ├── ConvCoachingRecommendation.sharingRules
+│   │   ├── Coupon.sharingRules
+│   │   ├── CreditMemo.sharingRules
+│   │   ├── Customer.sharingRules
+│   │   ├── DataPrepServiceLocator.sharingRules
+│   │   ├── DataUseLegalBasis.sharingRules
+│   │   ├── DataUsePurpose.sharingRules
+│   │   ├── DelegatedAccount.sharingRules
+│   │   ├── EngagementChannelType.sharingRules
+│   │   ├── ExchangeUserMapping.sharingRules
+│   │   ├── ExternalEventMapping.sharingRules
+│   │   ├── FinanceBalanceSnapshot.sharingRules
+│   │   ├── FinanceTransaction.sharingRules
+│   │   ├── FlowInterview.sharingRules
+│   │   ├── FlowInterviewLog.sharingRules
+│   │   ├── FlowOrchestrationInstance.sharingRules
+│   │   ├── FlowOrchestrationLog.sharingRules
+│   │   ├── FlowOrchestrationStageInstance.sharingRules
+│   │   ├── FlowOrchestrationStepInstance.sharingRules
+│   │   ├── FlowOrchestrationWorkItem.sharingRules
+│   │   ├── FlowTestResult.sharingRules
+│   │   ├── FruitTree__c.sharingRules
+│   │   ├── Image.sharingRules
+│   │   ├── Incident.sharingRules
+│   │   ├── Individual.sharingRules
+│   │   ├── Invoice.sharingRules
+│   │   ├── Lead.sharingRules
+│   │   ├── LearningItem.sharingRules
+│   │   ├── LegalEntity.sharingRules
+│   │   ├── ListEmail.sharingRules
+│   │   ├── LmaApiSession.sharingRules
+│   │   ├── LocWaitlistMsgTemplate.sharingRules
+│   │   ├── Location.sharingRules
+│   │   ├── LocationGroup.sharingRules
+│   │   ├── LocationWaitlist.sharingRules
+│   │   ├── LocationWaitlistedParty.sharingRules
+│   │   ├── Macro.sharingRules
+│   │   ├── MacroUsage.sharingRules
+│   │   ├── ManagedContentRelease.sharingRules
+│   │   ├── MessagingEndUser.sharingRules
+│   │   ├── MessagingSession.sharingRules
+│   │   ├── MobileHomeConfiguration.sharingRules
+│   │   ├── NetworkMemberChunk.sharingRules
+│   │   ├── NotifDeliveryUserPref.sharingRules
+│   │   ├── Opportunity.sharingRules
+│   │   ├── Order.sharingRules
+│   │   ├── OrgDeleteRequest.sharingRules
+│   │   ├── PartnerFundAllocation.sharingRules
+│   │   ├── PartnerFundClaim.sharingRules
+│   │   ├── PartnerFundRequest.sharingRules
+│   │   ├── PartnerMarketingBudget.sharingRules
+│   │   ├── PartyConsent.sharingRules
+│   │   ├── Problem.sharingRules
+│   │   ├── ProcessException.sharingRules
+│   │   ├── Product2.sharingRules
+│   │   ├── Promotion.sharingRules
+│   │   ├── PromotionSegment.sharingRules
+│   │   ├── PromptAction.sharingRules
+│   │   ├── PromptError.sharingRules
+│   │   ├── QuickText.sharingRules
+│   │   ├── QuickTextUsage.sharingRules
+│   │   ├── RecordMergeHistory.sharingRules
+│   │   ├── ReportResultBlob.sharingRules
+│   │   ├── RequestsForAccessSIQ.sharingRules
+│   │   ├── ReturnOrder.sharingRules
+│   │   ├── Sales_Play__c.sharingRules
+│   │   ├── Scorecard.sharingRules
+│   │   ├── Seller.sharingRules
+│   │   ├── ServiceAppointment.sharingRules
+│   │   ├── ServiceContract.sharingRules
+│   │   ├── ServiceResource.sharingRules
+│   │   ├── ServiceTerritory.sharingRules
+│   │   ├── Shift.sharingRules
+│   │   ├── SiqUserBlacklist.sharingRules
+│   │   ├── SiteUserViewMode.sharingRules
+│   │   ├── StreamActivityAccess.sharingRules
+│   │   ├── StreamingChannel.sharingRules
+│   │   ├── TaskLabel.sharingRules
+│   │   ├── TaskLabelRelation.sharingRules
+│   │   ├── TodayGoal.sharingRules
+│   │   ├── Tree__c.sharingRules
+│   │   ├── User.sharingRules
+│   │   ├── UserAppMenuCustomization.sharingRules
+│   │   ├── UserEmailPreferredPerson.sharingRules
+│   │   ├── UserExternalCredential.sharingRules
+│   │   ├── UserProvisioningRequest.sharingRules
+│   │   ├── VoiceCall.sharingRules
+│   │   ├── WebCart.sharingRules
+│   │   ├── WebCartDocument.sharingRules
+│   │   ├── WebStore.sharingRules
+│   │   ├── WorkOrder.sharingRules
+│   │   ├── WorkPlan.sharingRules
+│   │   ├── WorkPlanTemplate.sharingRules
+│   │   ├── WorkStepTemplate.sharingRules
+│   │   ├── WorkType.sharingRules
+│   │   └── WorkTypeGroup.sharingRules
+│   ├── staticresources
+│   │   ├── SiteSamples.resource
+│   │   ├── SiteSamples.resource-meta.xml
+│   │   ├── chartJs.resource
+│   │   └── chartJs.resource-meta.xml
+│   ├── translations
+│   │   ├── en_US.translation
+│   │   ├── es.translation
+│   │   └── fr.translation
+│   ├── triggers
+│   │   ├── Simple.trigger
+│   │   └── Simple.trigger-meta.xml
+│   └── workflows
+│       └── Case.workflow
+└── unpackaged.zip
+
+46 directories, 704 files
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../tools/instance.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../tools/scripts.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../tools/instance.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../tools/scripts.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+
+
+    </body>
+</html>

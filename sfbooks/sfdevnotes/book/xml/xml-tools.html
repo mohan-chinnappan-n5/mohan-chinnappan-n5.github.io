@@ -1,0 +1,481 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>XML tools - Salesforce Development Notes</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../custom.css">
+
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../dg/dg.html"><strong aria-hidden="true">2.</strong> Data Governance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dg/changeManagement.html"><strong aria-hidden="true">2.1.</strong> Change Management</a></li></ol></li><li class="chapter-item expanded "><a href="../dm/datamodel.html"><strong aria-hidden="true">3.</strong> Data Model</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../dm/fsc-dm.html"><strong aria-hidden="true">3.1.</strong> Financial Services Cloud</a></li><li class="chapter-item expanded "><a href="../dm/salescloud.html"><strong aria-hidden="true">3.2.</strong> Sales Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/aboutTools.html"><strong aria-hidden="true">4.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-org.html"><strong aria-hidden="true">4.1.</strong> Org Tools</a></li><li class="chapter-item expanded "><a href="../tools/tools-data-bulkapi2.html"><strong aria-hidden="true">4.2.</strong> Data Loading BulkAPI2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/userloading.html"><strong aria-hidden="true">4.2.1.</strong> User Loading</a></li><li class="chapter-item expanded "><a href="../tools/product2loading.html"><strong aria-hidden="true">4.2.2.</strong> Product2 Loading and Update</a></li><li class="chapter-item expanded "><a href="../tools/flowinterview.html"><strong aria-hidden="true">4.2.3.</strong> FlowInterview Query and Deletion</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/dataTreeImport.html"><strong aria-hidden="true">4.3.</strong> Prepare and Load for data:tree:import</a></li><li class="chapter-item expanded "><a href="../tools/tools-scpl.html"><strong aria-hidden="true">4.4.</strong> Loading State and Country Picklist</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tools/tools-scpl-update.html"><strong aria-hidden="true">4.4.1.</strong> Updating State and Country Picklist </a></li></ol></li><li class="chapter-item expanded "><a href="../tools/project-management/gantt.html"><strong aria-hidden="true">4.5.</strong> Project Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../project-management/pert.html"><strong aria-hidden="true">4.5.1.</strong> PERT</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/em.html"><strong aria-hidden="true">4.6.</strong> Event Monitoring</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../monitoring/proactive-monitoring.html"><strong aria-hidden="true">4.6.1.</strong> Proactive Monitoring</a></li><li class="chapter-item expanded "><a href="../monitoring/realtime-event-monitoring.html"><strong aria-hidden="true">4.6.2.</strong> Real-Time Event Monitoring</a></li><li class="chapter-item expanded "><a href="../tools/scripts.html"><strong aria-hidden="true">4.6.3.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="../tools/compare.html"><strong aria-hidden="true">4.6.4.</strong> Comparison</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/instance.html"><strong aria-hidden="true">4.7.</strong> Instance Related</a></li><li class="chapter-item expanded "><a href="../tools/oms.html"><strong aria-hidden="true">4.8.</strong> Org Metadata Snapshot</a></li></ol></li><li class="chapter-item expanded "><a href="../tools/scripts.html"><strong aria-hidden="true">5.</strong> Auditing Scripts</a></li><li class="chapter-item expanded "><a href="../custom-metadata-types.html"><strong aria-hidden="true">6.</strong> Custom Metadata Types</a></li><li class="chapter-item expanded "><a href="../cq/cq.html"><strong aria-hidden="true">7.</strong> Code Quality</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cq/pmd.html"><strong aria-hidden="true">7.1.</strong> Code Scan PMD</a></li><li class="chapter-item expanded "><a href="../cq/comments.html"><strong aria-hidden="true">7.2.</strong> Comments Checking</a></li><li class="chapter-item expanded "><a href="../cq/test-coverage.html"><strong aria-hidden="true">7.3.</strong> Apex Code Test Coverage</a></li><li class="chapter-item expanded "><a href="../cq/lwc-linting.html"><strong aria-hidden="true">7.4.</strong> LWC Linting</a></li><li class="chapter-item expanded "><a href="../cq/eslint-custom-rules.html"><strong aria-hidden="true">7.5.</strong> eslint custom rules</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/deployments.html"><strong aria-hidden="true">8.</strong> Deployments</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/delta.html"><strong aria-hidden="true">8.1.</strong> Delta Deployments</a></li><li class="chapter-item expanded "><a href="../deployments/gha.html"><strong aria-hidden="true">8.2.</strong> Github Actions</a></li><li class="chapter-item expanded "><a href="../deployments/validate.html"><strong aria-hidden="true">8.3.</strong> Validating changes</a></li><li class="chapter-item expanded "><a href="../deployments/admin-changes.html"><strong aria-hidden="true">8.4.</strong> Taking care of Admin changes</a></li><li class="chapter-item expanded "><a href="../deployments/devOpsCenter.html"><strong aria-hidden="true">8.5.</strong> DevOps Center</a></li><li class="chapter-item expanded "><a href="../deployments/jenkins.html"><strong aria-hidden="true">8.6.</strong> Jenkins</a></li><li class="chapter-item expanded "><a href="../deployments/git.html"><strong aria-hidden="true">8.7.</strong> git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/git-internals.html"><strong aria-hidden="true">8.7.1.</strong> git internals</a></li><li class="chapter-item expanded "><a href="../deployments/git-hooks.html"><strong aria-hidden="true">8.7.2.</strong> git hooks</a></li><li class="chapter-item expanded "><a href="../deployments/git-ops.html"><strong aria-hidden="true">8.7.3.</strong> git operations</a></li><li class="chapter-item expanded "><a href="../deployments/pr-template.html"><strong aria-hidden="true">8.7.4.</strong> pull request template</a></li><li class="chapter-item expanded "><a href="../deployments/git-diff.html"><strong aria-hidden="true">8.7.5.</strong> git diff</a></li><li class="chapter-item expanded "><a href="../deployments/git-merge.html"><strong aria-hidden="true">8.7.6.</strong> git merge</a></li><li class="chapter-item expanded "><a href="../deployments/git-log.html"><strong aria-hidden="true">8.7.7.</strong> git log</a></li><li class="chapter-item expanded "><a href="../deployments/git-stash.html"><strong aria-hidden="true">8.7.8.</strong> git stash</a></li><li class="chapter-item expanded "><a href="../deployments/git-config.html"><strong aria-hidden="true">8.7.9.</strong> git config</a></li><li class="chapter-item expanded "><a href="../deployments/git-revert.html"><strong aria-hidden="true">8.7.10.</strong> git revert</a></li><li class="chapter-item expanded "><a href="../deployments/git-delete-branch.html"><strong aria-hidden="true">8.7.11.</strong> git deleting branch</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/app-exchange.html"><strong aria-hidden="true">8.8.</strong> Apps from App Exchange </a></li><li class="chapter-item expanded "><a href="../deployments/sourceTracking.html"><strong aria-hidden="true">8.9.</strong> Source Tracking</a></li><li class="chapter-item expanded "><a href="../deployments/dangling.html"><strong aria-hidden="true">8.10.</strong> Dangling Fields Finder</a></li><li class="chapter-item expanded "><a href="../deployments/sbx.html"><strong aria-hidden="true">8.11.</strong> Sandbox Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../deployments/sandbox-preview-guide.html"><strong aria-hidden="true">8.11.1.</strong> Sandbox Preview Guide</a></li></ol></li><li class="chapter-item expanded "><a href="../deployments/MetadataComponentDependency.html"><strong aria-hidden="true">8.12.</strong> MetadataComponentDependency</a></li><li class="chapter-item expanded "><a href="../deployments/yaml.html"><strong aria-hidden="true">8.13.</strong> YAML</a></li><li class="chapter-item expanded "><a href="../deployments/packages.html"><strong aria-hidden="true">8.14.</strong> Installed Packages</a></li></ol></li><li class="chapter-item expanded "><a href="../crma/tools.html"><strong aria-hidden="true">9.</strong> CRMA tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../crma/load-export.html"><strong aria-hidden="true">9.1.</strong> Dataset Load and Export</a></li><li class="chapter-item expanded "><a href="../crma/analysis.html"><strong aria-hidden="true">9.2.</strong> Analysis</a></li><li class="chapter-item expanded "><a href="../crma/binding.html"><strong aria-hidden="true">9.3.</strong> Binding</a></li><li class="chapter-item expanded "><a href="../crma/deployment.html"><strong aria-hidden="true">9.4.</strong> Deployment</a></li></ol></li><li class="chapter-item expanded "><a href="../perf/perf.html"><strong aria-hidden="true">10.</strong> Performance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../perf/lex-perf.html"><strong aria-hidden="true">10.1.</strong> Lex Performance</a></li><li class="chapter-item expanded "><a href="../perf/perf-testing.html"><strong aria-hidden="true">10.2.</strong> Performance testing</a></li><li class="chapter-item expanded "><a href="../perf/perf-pw.html"><strong aria-hidden="true">10.3.</strong> Testing with Playwright</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../e2e/playwright.html"><strong aria-hidden="true">10.3.1.</strong> More with Playwright</a></li></ol></li><li class="chapter-item expanded "><a href="../perf/edge.html"><strong aria-hidden="true">10.4.</strong> Salesforce Edge Network</a></li><li class="chapter-item expanded "><a href="../perf/lex-query.html"><strong aria-hidden="true">10.5.</strong> Lightning Experience Queries</a></li><li class="chapter-item expanded "><a href="../perf/rum.html"><strong aria-hidden="true">10.6.</strong> Real User Monitoring (RUM)</a></li></ol></li><li class="chapter-item expanded "><a href="../dwg/dwg-tools.html"><strong aria-hidden="true">11.</strong> Diagram tools</a></li><li class="chapter-item expanded "><a href="../xml/xml-tools.html" class="active"><strong aria-hidden="true">12.</strong> XML tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../xml/xlst-transformer.html"><strong aria-hidden="true">12.1.</strong> Transformer</a></li><li class="chapter-item expanded "><a href="../xml/xml-delta.html"><strong aria-hidden="true">12.2.</strong> XML Delta Util</a></li></ol></li><li class="chapter-item expanded "><a href="../dp/dp.html"><strong aria-hidden="true">13.</strong> Data Processing tools</a></li><li class="chapter-item expanded "><a href="../i18n/i18n.html"><strong aria-hidden="true">14.</strong> Translation Tools</a></li><li class="chapter-item expanded "><a href="../media/recording.html"><strong aria-hidden="true">15.</strong> Media - Recording tools</a></li><li class="chapter-item expanded "><a href="../media/image.html"><strong aria-hidden="true">16.</strong> Image Processing</a></li><li class="chapter-item expanded "><a href="../codegen/codegen.html"><strong aria-hidden="true">17.</strong> Code Generators</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../codegen/lwc.html"><strong aria-hidden="true">17.1.</strong> LWC Code Generators</a></li><li class="chapter-item expanded "><a href="../ml/nlp.html"><strong aria-hidden="true">17.2.</strong> Apex Code Generators</a></li></ol></li><li class="chapter-item expanded "><a href="../ml/ml.html"><strong aria-hidden="true">18.</strong> Machine Learning</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ml/sdcg.html"><strong aria-hidden="true">18.1.</strong> Semantic Doc Compare and Group</a></li><li class="chapter-item expanded "><a href="../ml/datacatalog.html"><strong aria-hidden="true">18.2.</strong> Data Catalog for ML Work</a></li><li class="chapter-item expanded "><a href="../ml/chatgpt.html"><strong aria-hidden="true">18.3.</strong> openAI - ChatGPT</a></li><li class="chapter-item expanded "><a href="../ml/gpt3codex.html"><strong aria-hidden="true">18.4.</strong> openAI - GPT3 Codex</a></li><li class="chapter-item expanded "><a href="../ml/einsteinbot.html"><strong aria-hidden="true">18.5.</strong> Einstein Bot</a></li><li class="chapter-item expanded "><a href="../ml/dialogflow.html"><strong aria-hidden="true">18.6.</strong> Dialogflow - Knowledge Base</a></li><li class="chapter-item expanded "><a href="../ml/nlp.html"><strong aria-hidden="true">18.7.</strong> NLP</a></li><li class="chapter-item expanded "><a href="../ml/transformers.html"><strong aria-hidden="true">18.8.</strong> Transformers</a></li><li class="chapter-item expanded "><a href="../ml/llm.html"><strong aria-hidden="true">18.9.</strong> Large Language Models</a></li><li class="chapter-item expanded "><a href="../ml/team-productivity.html"><strong aria-hidden="true">18.10.</strong> Using LLM to improve team productivity</a></li></ol></li><li class="chapter-item expanded "><a href="../docmgmt/docmgmt.html"><strong aria-hidden="true">19.</strong> Document Management tools</a></li><li class="chapter-item expanded "><a href="../design/design-notes.html"><strong aria-hidden="true">20.</strong> Design Principles</a></li><li class="chapter-item expanded "><a href="../chromeext/ext.html"><strong aria-hidden="true">21.</strong> Chrome Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chromeext/onnu.html"><strong aria-hidden="true">21.1.</strong> ONNU</a></li></ol></li><li class="chapter-item expanded "><a href="../vscode/ext.html"><strong aria-hidden="true">22.</strong> VS Code Extensions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../vscode/sfland.html"><strong aria-hidden="true">22.1.</strong> SF Land</a></li><li class="chapter-item expanded "><a href="../vscode/pmd.html"><strong aria-hidden="true">22.2.</strong> VSCode Apex PMD</a></li><li class="chapter-item expanded "><a href="../vscode/vsc-tips.html"><strong aria-hidden="true">22.3.</strong> VSCode tips</a></li></ol></li><li class="chapter-item expanded "><a href="../dviz/dviz.html"><strong aria-hidden="true">23.</strong> Data Viz</a></li><li class="chapter-item expanded "><a href="../releases.html"><strong aria-hidden="true">24.</strong> Releases</a></li><li class="chapter-item expanded "><a href="../rest/rest_tester.html"><strong aria-hidden="true">25.</strong> REST Tester</a></li><li class="chapter-item expanded "><a href="../security/security.html"><strong aria-hidden="true">26.</strong> Security</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/exploit-prevention.html"><strong aria-hidden="true">26.1.</strong> Exploitation and prevention</a></li><li class="chapter-item expanded "><a href="../security/sd.html"><strong aria-hidden="true">26.2.</strong> Sharing Debugger</a></li><li class="chapter-item expanded "><a href="../security/rh.html"><strong aria-hidden="true">26.3.</strong> Role Hierarchy</a></li><li class="chapter-item expanded "><a href="../security/shield.html"><strong aria-hidden="true">26.4.</strong> Shield</a></li><li class="chapter-item expanded "><a href="../security/profile-ps.html"><strong aria-hidden="true">26.5.</strong> Profile, PermissionSet</a></li><li class="chapter-item expanded "><a href="../security/setupAuditTrail.html"><strong aria-hidden="true">26.6.</strong> SetupAuditTrail</a></li><li class="chapter-item expanded "><a href="../security/datamask.html"><strong aria-hidden="true">26.7.</strong> Data Mask</a></li><li class="chapter-item expanded "><a href="../security/saml.html"><strong aria-hidden="true">26.8.</strong> SAML</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectConcepts.html"><strong aria-hidden="true">26.9.</strong> OpenID Connect</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/openIDConnect.html"><strong aria-hidden="true">26.9.1.</strong> OIDC Google</a></li><li class="chapter-item expanded "><a href="../security/openIDConnectProvider.html"><strong aria-hidden="true">26.9.2.</strong> OIDC Provider</a></li><li class="chapter-item expanded "><a href="../security/jwt.html"><strong aria-hidden="true">26.9.3.</strong> JWT</a></li></ol></li><li class="chapter-item expanded "><a href="../security/openssl.html"><strong aria-hidden="true">26.10.</strong> OpenSSL</a></li><li class="chapter-item expanded "><a href="../security/pen-test.html"><strong aria-hidden="true">26.11.</strong> Penetration Testing</a></li></ol></li><li class="chapter-item expanded "><a href="../mobile/mobile.html"><strong aria-hidden="true">27.</strong> Mobile</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../mobile/ios-sim.html"><strong aria-hidden="true">27.1.</strong> Simulator</a></li></ol></li><li class="chapter-item expanded "><a href="../rd/rd.html"><strong aria-hidden="true">28.</strong> Reports and Dashboards</a></li><li class="chapter-item expanded "><a href="../customLabels/cl.html"><strong aria-hidden="true">29.</strong> Custom Labels</a></li><li class="chapter-item expanded "><a href="../accessibility/508.html"><strong aria-hidden="true">30.</strong> 508 - Accessibility</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../accessibility/sally.html"><strong aria-hidden="true">30.1.</strong> Sally</a></li></ol></li><li class="chapter-item expanded "><a href="../process-automation/processAutomation.html"><strong aria-hidden="true">31.</strong> Process Automation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../process-automation/flow.html"><strong aria-hidden="true">31.1.</strong> Flow</a></li></ol></li><li class="chapter-item expanded "><a href="../great/folks.html"><strong aria-hidden="true">32.</strong> Great Folks</a></li><li class="chapter-item expanded "><a href="../editor/editor-tips.html"><strong aria-hidden="true">33.</strong> Editor tips</a></li><li class="chapter-item expanded "><a href="../bash/tips.html"><strong aria-hidden="true">34.</strong> Bash tips</a></li><li class="chapter-item expanded "><a href="../language-design/ld.html"><strong aria-hidden="true">35.</strong> Language Design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language-design/apex.html"><strong aria-hidden="true">35.1.</strong> Apex</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../language-design/apex-grammar.html"><strong aria-hidden="true">35.1.1.</strong> Grammar</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../cal-integration/cal.html"><strong aria-hidden="true">36.</strong> Calendar Integrations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cal-integration/ical.html"><strong aria-hidden="true">36.1.</strong> iCal</a></li></ol></li><li class="chapter-item expanded "><a href="../tips.html"><strong aria-hidden="true">37.</strong> Tips</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Salesforce Development Notes</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="xml-tools"><a class="header" href="#xml-tools">XML tools</a></h1>
+<h2 id="topics"><a class="header" href="#topics">Topics</a></h2>
+<ul>
+<li><a href="#checkEmails">Checks email-Ids in  given folder of xml</a></li>
+<li><a href="#checkObjectIds">Checks ObjectIds in  given folder of xml</a></li>
+<li><a href="#xmlTransformer">XML Transformer</a></li>
+<li><a href="#stf">Using our CLI you can convert that XLF file into TSV</a></li>
+<li><a href="#valid">Checks XML files in given folder is valid or not?</a></li>
+<li><a href="#reporttypes">Find Object.Field from Report Types</a></li>
+</ul>
+<p><a name='checkEmails'></a></p>
+<h2 id="checks-email-ids-in--given-folder-of-xml"><a class="header" href="#checks-email-ids-in--given-folder-of-xml">Checks email-Ids in  given folder of xml</a></h2>
+<ul>
+<li>You can use this tool to find out any hard-corded email ids are in the code</li>
+</ul>
+<pre><code>sfdx mohanc:xml:email --help
+Checks emails in  given folder of xml
+
+USAGE
+  $ sfdx mohanc xml email [-p &lt;string&gt;] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -p, --path=&lt;value&gt;                                                                Path to the xml files folder
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for this command invocation
+
+DESCRIPTION
+  Checks emails in  given folder of xml
+
+EXAMPLES
+      ** Checks emails in  given folder of xml **
+    
+      sfdx mohanc:xml:email -p &lt;path/to/xml_files&gt;
+
+</code></pre>
+<h2 id="checks-objectids-in--given-folder-of-xml"><a class="header" href="#checks-objectids-in--given-folder-of-xml">Checks ObjectIds in  given folder of xml</a></h2>
+<ul>
+<li>You can use this tool to find out any hard-corded ObjectIds  are in the code</li>
+</ul>
+<pre><code>sfdx mohanc:xml:objectId --help                           
+Checks ObjectIds in  given folder of xml
+
+USAGE
+  $ sfdx mohanc xml objectId [-p &lt;string&gt;] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -p, --path=&lt;value&gt;                                                                Path to the xml files folder
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for this command invocation
+
+DESCRIPTION
+  Checks ObjectIds in  given folder of xml
+
+EXAMPLES
+      ** Checks ObjectIds in  given folder of xml **
+    
+      sfdx mohanc:xml:objectId -p &lt;path/to/xml_files&gt;
+    
+
+</code></pre>
+<p><a name='checkObjectIds'></a></p>
+<h2 id="convert-given-xml-file-into-json"><a class="header" href="#convert-given-xml-file-into-json">Convert given XML file into JSON</a></h2>
+<pre><code>Convert given XML file into JSON
+
+USAGE
+  $ sfdx mohanc xml xml2json [-i &lt;string&gt;] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -i, --inputfilename=&lt;value&gt;                                                       Data file input in XML format
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for this command invocation
+
+DESCRIPTION
+  Convert given XML file into JSON
+
+EXAMPLES
+      ** Convert given XML file into JSON **
+    
+      sfdx mohanc:xml:xml2json -i /tmp/cd.xml 
+
+</code></pre>
+<h3 id="demo"><a class="header" href="#demo">Demo</a></h3>
+<pre><code>sfdx mohanc:xml:xml2json -i force-app/main/default/profiles/Admin.profile-meta.xml
+bat force-app/main/default/profiles/Admin.profile-meta.xml.json 
+───────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       │ File: force-app/main/default/profiles/Admin.profile-meta.xml.json
+───────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1   │ {
+   2   │     &quot;?xml&quot;: &quot;&quot;,
+   3   │     &quot;Profile&quot;: {
+   4   │         &quot;custom&quot;: false,
+   5   │         &quot;objectPermissions&quot;: [
+   6   │             {
+   7   │                 &quot;allowCreate&quot;: true,
+   8   │                 &quot;allowDelete&quot;: true,
+   9   │                 &quot;allowEdit&quot;: true,
+  10   │                 &quot;allowRead&quot;: true,
+  11   │                 &quot;modifyAllRecords&quot;: true,
+  12   │                 &quot;object&quot;: &quot;Account_Plan__c&quot;,
+  13   │                 &quot;viewAllRecords&quot;: true
+  14   │             },
+  15   │             {
+  16   │                 &quot;allowCreate&quot;: true,
+  17   │                 &quot;allowDelete&quot;: true,
+  18   │                 &quot;allowEdit&quot;: true,
+  19   │                 &quot;allowRead&quot;: true,
+  20   │                 &quot;modifyAllRecords&quot;: true,
+  21   │                 &quot;object&quot;: &quot;Sales_Play__c&quot;,
+  22   │                 &quot;viewAllRecords&quot;: true
+  23   │             },
+  24   │             {
+  25   │                 &quot;allowCreate&quot;: true,
+  26   │                 &quot;allowDelete&quot;: true,
+  27   │                 &quot;allowEdit&quot;: true,
+  28   │                 &quot;allowRead&quot;: true,
+  29   │                 &quot;modifyAllRecords&quot;: true,
+  30   │                 &quot;object&quot;: &quot;Tree__c&quot;,
+  31   │                 &quot;viewAllRecords&quot;: true
+:
+</code></pre>
+<p><a name='xmlTransformer'></a></p>
+<h2 id="xml-transformer"><a class="header" href="#xml-transformer">XML Transformer</a></h2>
+<pre><code>sfdx mohanc:xml:transform --help                                                         
+Transform given xml using XSLT
+
+USAGE
+  $ sfdx mohanc xml transform [-i &lt;string&gt;] [-t &lt;string&gt;] [-m &lt;string&gt;] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -i, --inputfilename=&lt;value&gt;                                                       Data file in XML format you want to do the transformation
+  -m, --mtype=&lt;value&gt;                                                               metadata type: Supported: [package,profile, permset]
+  -t, --xsltfilename=&lt;value&gt;                                                        XSLT file to do the transformation
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for this command invocation
+
+DESCRIPTION
+  Transform given xml using XSLT
+
+EXAMPLES
+      ** Transform given xml using XSLT **
+    
+      sfdx mohanc:xml:transform -i /tmp/cd.xml -t /tmp/cd.xslt
+</code></pre>
+<iframe width="800" height="400" src="https://www.youtube.com/embed/dK2IzpwxO_w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p><a name='stf'></a></p>
+<h2 id="using--cli-you-can-convert-the-xlf-file-into-tsv"><a class="header" href="#using--cli-you-can-convert-the-xlf-file-into-tsv">Using  CLI you can convert the XLF file into TSV</a></h2>
+<ul>
+<li><a href="https://github.com/mohan-chinnappan-n/cli-dx/blob/master/i18n/stf/xsl/stf2tsvHtml.xsl">stf2tsvHtml.xsl</a> used here</li>
+</ul>
+<pre><code>sfdx mohanc:xml:transform -i img/exported-2.xlf -t xsl/stf2tsvHtml.xsl
+</code></pre>
+<p>Above command will open a HTML page with TSV file loaded in a textarea. You can cut and paste the content of the textarea to create a TSV file.</p>
+<p><img src="https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/i18n/stf/img/xliff2tsv.png" alt="Xliff2tsv" /></p>
+<ul>
+<li>If you want to view the XLIFF file as a TSV page:</li>
+</ul>
+<pre><code>sfdx mohanc:xml:transform -i img/exported-2.xlf -t xsl/stf2tsv.xsl
+=== Writing the output into file : img/exported-2.xlf.out.xml.html ===
+
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/i18n/stf/img/xliff2tsv2.png" alt="xmliff2tsv" /></p>
+<ul>
+<li>If you want to view the XLIFF file as a HTML page:</li>
+</ul>
+<pre><code>sfdx mohanc:xml:transform -i img/exported-2.xlf -t xsl/stf2html.xsl
+=== Writing the output into file : img/exported-2.xlf.out.xml.html ===
+
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/mohan-chinnappan-n/cli-dx/master/i18n/stf/img/xliff2html.png" alt="xmliff2html" /></p>
+<hr />
+<p><a name='valid'></a></p>
+<h2 id="checks-xml-files-in-given-folder-is-valid-or-not"><a class="header" href="#checks-xml-files-in-given-folder-is-valid-or-not">Checks XML files in given folder is valid or not?</a></h2>
+<pre><code>sfdx mohanc:xml:validate -p force-app/main/default/profiles/ --help
+Checks given folder of xml is valid or not 
+
+USAGE
+  $ sfdx mohanc xml validate -p &lt;string&gt; [-i] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -i, --invalid                                                                     Print only invalid
+  -p, --path=&lt;value&gt;                                                                (required) Path to the xml files folder
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for this command invocation
+
+DESCRIPTION
+  Checks given folder of xml is valid or not
+
+EXAMPLES
+      ** Checks given folder of xml is valid or not  **
+    
+      sfdx mohanc:xml:validate -p &lt;path/to/xml_files&gt; -i
+      - lists out xml files in the given path are valid or not 
+      -i flag provides only invalid files
+   
+</code></pre>
+<h3 id="demo-1"><a class="header" href="#demo-1">Demo</a></h3>
+<ul>
+<li>You can redirect to a TSV file and view in a spreadsheet program</li>
+</ul>
+<pre><code>sfdx mohanc:xml:validate -p force-app/main/default/profiles/
+force-app/main/default/profiles/Admin.profile-meta.xml	Admin.profile-meta.xml	true
+force-app/main/default/profiles/Analytics Cloud Integration User.profile-meta.xml	Analytics Cloud Integration User.profile-meta.xml	true
+force-app/main/default/profiles/Analytics Cloud Security User.profile-meta.xml	Analytics Cloud Security User.profile-meta.xml	true
+force-app/main/default/profiles/Authenticated Website.profile-meta.xml	Authenticated Website.profile-meta.xml	true
+force-app/main/default/profiles/Chatter External User.profile-meta.xml	Chatter External User.profile-meta.xml	true
+force-app/main/default/profiles/Chatter Free User.profile-meta.xml	Chatter Free User.profile-meta.xml	true
+force-app/main/default/profiles/Chatter Moderator User.profile-meta.xml	Chatter Moderator User.profile-meta.xml	true
+force-app/main/default/profiles/ContractManager.profile-meta.xml	ContractManager.profile-meta.xml	true
+force-app/main/default/profiles/Cross Org Data Proxy User.profile-meta.xml	Cross Org Data Proxy User.profile-meta.xml	true
+force-app/main/default/profiles/Custom%3A Marketing Profile.profile-meta.xml	Custom%3A Marketing Profile.profile-meta.xml	true
+force-app/main/default/profiles/Custom%3A Sales Profile.profile-meta.xml	Custom%3A Sales Profile.profile-meta.xml	true
+force-app/main/default/profiles/Custom%3A Support Profile.profile-meta.xml	Custom%3A Support Profile.profile-meta.xml	true
+force-app/main/default/profiles/Customer Community Login User.profile-meta.xml	Customer Community Login User.profile-meta.xml	true
+force-app/main/default/profiles/Customer Community Plus Login User.profile-meta.xml	Customer Community Plus Login User.profile-meta.xml	true
+force-app/main/default/profiles/Customer Community Plus User.profile-meta.xml	Customer Community Plus User.profile-meta.xml	true
+force-app/main/default/profiles/Customer Community User.profile-meta.xml	Customer Community User.profile-meta.xml	true
+force-app/main/default/profiles/Customer Portal Manager Custom.profile-meta.xml	Customer Portal Manager Custom.profile-meta.xml	true
+force-app/main/default/profiles/Customer Portal Manager Standard.profile-meta.xml	Customer Portal Manager Standard.profile-meta.xml	true
+force-app/main/default/profiles/External Apps Login User.profile-meta.xml	External Apps Login User.profile-meta.xml	true
+force-app/main/default/profiles/External Identity User.profile-meta.xml	External Identity User.profile-meta.xml	true
+force-app/main/default/profiles/Force%2Ecom - App Subscription User.profile-meta.xml	Force%2Ecom - App Subscription User.profile-meta.xml	true
+force-app/main/default/profiles/Force%2Ecom - Free User.profile-meta.xml	Force%2Ecom - Free User.profile-meta.xml	true
+force-app/main/default/profiles/Gold Partner User.profile-meta.xml	Gold Partner User.profile-meta.xml	true
+force-app/main/default/profiles/Guest License User.profile-meta.xml	Guest License User.profile-meta.xml	true
+force-app/main/default/profiles/High Volume Customer Portal User.profile-meta.xml	High Volume Customer Portal User.profile-meta.xml	true
+force-app/main/default/profiles/HighVolumePortal.profile-meta.xml	HighVolumePortal.profile-meta.xml	true
+force-app/main/default/profiles/Identity User.profile-meta.xml	Identity User.profile-meta.xml	true
+force-app/main/default/profiles/MarketingProfile.profile-meta.xml	MarketingProfile.profile-meta.xml	true
+force-app/main/default/profiles/Minimum Access - Salesforce.profile-meta.xml	Minimum Access - Salesforce.profile-meta.xml	true
+force-app/main/default/profiles/mohanc Profile.profile-meta.xml	mohanc Profile.profile-meta.xml	true
+force-app/main/default/profiles/Partner App Subscription User.profile-meta.xml	Partner App Subscription User.profile-meta.xml	true
+force-app/main/default/profiles/Partner Community Login User.profile-meta.xml	Partner Community Login User.profile-meta.xml	true
+force-app/main/default/profiles/Partner Community User.profile-meta.xml	Partner Community User.profile-meta.xml	true
+force-app/main/default/profiles/PlatformPortal.profile-meta.xml	PlatformPortal.profile-meta.xml	true
+force-app/main/default/profiles/Read Only.profile-meta.xml	Read Only.profile-meta.xml	true
+force-app/main/default/profiles/Silver Partner User.profile-meta.xml	Silver Partner User.profile-meta.xml	true
+force-app/main/default/profiles/SolutionManager.profile-meta.xml	SolutionManager.profile-meta.xml	true
+force-app/main/default/profiles/Standard.profile-meta.xml	Standard.profile-meta.xml	true
+force-app/main/default/profiles/StandardAul.profile-meta.xml	StandardAul.profile-meta.xml	true
+force-app/main/default/profiles/Work%2Ecom Only User.profile-meta.xml	Work%2Ecom Only User.profile-meta.xml	true
+</code></pre>
+<p><a name='reporttypes'></a></p>
+<h2 id="find-objectfield-from-report-types"><a class="header" href="#find-objectfield-from-report-types">Find Object.Field from Report Types</a></h2>
+<pre><code>
+# get the json file for the given xml file
+sfdx mohanc:xml:xml2json -i  MyReport.reportType-meta.xml
+# get the Object.Fields from the the reports
+sfdx mohanc:data:jq  -i MyReport.reportType-meta.xml.json -f '.ReportType.sections[].columns[] | .table + &quot;.&quot; + .field'
+
+&quot;Account.Type&quot;
+&quot;Account.RecordType&quot;
+&quot;Account.Parent&quot;
+&quot;Account.BillingAddress&quot;
+&quot;Account.BillingStreet&quot;
+&quot;Account.BillingCity&quot;
+&quot;Account.BillingState&quot;
+&quot;Account.BillingPostalCode&quot;
+&quot;Account.BillingCountry&quot;
+&quot;Account.BillingStateCode&quot;
+&quot;Account.BillingCountryCode&quot;
+&quot;Account.BillingLatitude&quot;
+&quot;Account.BillingLongitude&quot;
+&quot;Account.BillingGeocodeAccuracy&quot;
+...
+
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../dwg/dwg-tools.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../xml/xlst-transformer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../dwg/dwg-tools.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../xml/xlst-transformer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
+
+
+    </body>
+</html>

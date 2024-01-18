@@ -1,0 +1,7 @@
+{
+    "method": "GET",
+    "tooling": false,
+    "url": "sobjects/EventLogFile/0AT8W00000W4duwWAB/LogFile",
+    "sfdc": true,
+    "Content-Type": "text/plain"
+}

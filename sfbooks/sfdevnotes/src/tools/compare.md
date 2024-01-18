@@ -1,0 +1,7 @@
+## Comparing Proactive Monitoring, Real-Time-Event Monitoring and Auditing Scripts 
+
+|Monitoring type|Description|Refer for Details|
+|---|---|---|
+|Proactive Monitoring|Part of Signature Success Plan. **Assigns Designated Technical Account Manager (TAM).** Provides Personalized Trends and Insights. Supports Key Event Management. **24/7 Proactive Monitoring to Predict and prevent disruptions before they occur**. Includes customized monitoring plan including Smart Alerts to detect potential risks and root causes|[Proactive Monitoring](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/monitoring/proactive-monitoring.html)|
+|Real-Time-Event Monitoring|Helps the customer to **monitor and detect standard events in Salesforce in near real-time**.The customer **can store the event data for auditing or reporting purposes**. The customer can create transaction security policies using Condition Builder.|[Real-time-event monitoring](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/monitoring/realtime-event-monitoring.html)
+|Auditing Scripts|Provides scripts for List **unapproved users with given profile** in the org. List **unapproved users having ModifyAllData**. List **unapproved users having ViewAllData**. List **Users with given Profile who have Role**. Check **users with given PermissionSet**. Check SetupAuditTrail Operationalize Audit Scripts using github-actions|[Auditing script](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/tools/scripts.html)|
