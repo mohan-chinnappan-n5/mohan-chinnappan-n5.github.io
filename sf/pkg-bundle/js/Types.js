@@ -836,6 +836,30 @@ export class Types {
       },
     },
 
+    Network: {
+      folderName: "networks",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `networks`,
+          fileNames: [`${member}.network`, `${member}.network-meta.xml`],
+        };
+      },
+    },
+
+
+    SharingOwnerRule   : {
+      once:true,
+      folderName: "sharingRules",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `sharingRules`,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+    
+
 
 
 
