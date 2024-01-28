@@ -35,12 +35,15 @@ require(['vs/editor/editor.main'], function () {
 
     // Event listener for the "Create Script" button
     getEle('generateScript').addEventListener('click', function () {
-        const org = getEle('org').value;
-        const projectName = getEle('projectName').value;
-        const repo = getEle('repo').value;
-        const jira = getEle('jira').value;
-        const cmtMsg = getEle('cmtMsg').value;
-        const parentBranch = getEle('parentBranch').value;
+        const org = getEle('org').value ||  'mohan@org1.com';
+        const projectName = getEle('projectName').value || 'MyProj';
+        const repo = getEle('repo').value  || '/Users/mohan/proj/repo1';
+        const jira = getEle('jira').value || 'J-1234';
+        const cmtMsg = getEle('cmtMsg').value || 'Adding a new filed opts in Account';
+        const parentBranch = getEle('parentBranch').value || 'developer';
+
+  
+        
 
         // Create the Bash script
         const script = `
@@ -97,7 +100,7 @@ git checkout ${jira}
 
 # sfdx mohanc:tooling:query -q ./sourceMember_new2.soql > sourceMembers.csv
 sf data query -f $QUERY_FILE  -o ${org} -t -r csv > sourceMembers2.csv 
-select_records sourceMembers2.csv   ${SELECT_OUT_FILE}
+select_records sourceMembers2.csv   \${SELECT_OUT_FILE}
 
 
 echo "=== Get source status (remote changes) ==="
@@ -108,7 +111,7 @@ csv_data=$(cat  /tmp/_status.json  | jq -r '.result[] | [.fullName, .type, .stat
 
 # Add header row
 header="fullName,type,state,ignored,origin,actualState"
-csv_data_with_header="${header}\n${csv_data}"
+csv_data_with_header="\${header}\n\${csv_data}"
 
 # Write CSV data to a file
 echo -e "$csv_data_with_header" > /tmp/_status.csv
