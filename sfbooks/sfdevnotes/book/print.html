@@ -4830,12 +4830,59 @@ Formatted UUID: 550e8400-e29b-41d4-a716-446655440000
 UUID from String: 550e8400-e29b-41d4-a716-446655440000
 
 </code></pre>
+<h2 id="java-version"><a class="header" href="#java-version">Java version</a></h2>
+<ul>
+<li>Uses <a href="https://github.com/mohan-chinnappan-n/shell-scripts/blob/master/java/uuid/Uuid4.java">this</a> for Uuid4 </li>
+</ul>
+<pre><code class="language-java">// UuidExample.java
+public class UuidExample {
+    public static void main(String[] args) {
+        try {
+            // Create a new UUID instance
+            Uuid4 uuidInstance = new Uuid4();
+
+            // Access the generated UUID
+            String uuidValue = uuidInstance.getValue();
+            System.out.println(&quot;Generated UUID: &quot; + uuidValue);
+
+            // Check if a UUID is valid
+            boolean isValid = Uuid4.isValid(uuidValue);
+            System.out.println(&quot;Is Valid UUID: &quot; + isValid);
+
+            // Format a UUID
+            String unformattedUuid = &quot;550e8400-e29b-41d4-a716-446655440000&quot;;
+            String formattedUuid = Uuid4.formatValue(unformattedUuid);
+            System.out.println(&quot;Formatted UUID: &quot; + formattedUuid);
+
+            // Create a UUID instance from a string
+            Uuid4 uuidInstanceFromString = Uuid4.valueOf(&quot;550e8400-e29b-41d4-a716-446655440000&quot;);
+            System.out.println(&quot;UUID from String: &quot; + uuidInstanceFromString.getValue());
+
+        } catch (Uuid4.UuidException e) {
+            System.out.println(&quot;UuidException: &quot; + e.getMessage());
+        }
+    }
+}
+</code></pre>
+<ul>
+<li>Usage</li>
+</ul>
+<pre><code>javac Uuid4.java UuidExample.java 
+
+java UuidExample 
+Generated UUID: 7972fe1e-6ebb-4c27-9901-f7a025de7408
+Is Valid UUID: true
+Formatted UUID: 550e8400-e29b-41d4-a716-446655440000
+UUID from String: 550e8400-e29b-41d4-a716-446655440000
+
+</code></pre>
 <h2 id="references-9"><a class="header" href="#references-9">References</a></h2>
 <ul>
 <li><a href="https://datatracker.ietf.org/doc/html/rfc4122.html">UUID</a></li>
 <li><a href="https://help.salesforce.com/s/articleView?id=release-notes.rn_apex_uuid.htm&amp;release=248&amp;type=5">Get Support for Randomly Generated UUID v4</a></li>
 <li><a href="https://github.com/jongpie/ApexUUID/blob/main/apex-uuid/classes/Uuid.cls">ApexUuid by our Jonathan Gillespie</a></li>
 <li><a href="https://github.com/mohan-chinnappan-n/shell-scripts/blob/master/py/uuid/Uuid4.py">Python version of ApexUuid</a></li>
+<li><a href="https://github.com/mohan-chinnappan-n/shell-scripts/blob/master/java/uuid/UuidExample.java">Java Uuid Example</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="code-quality"><a class="header" href="#code-quality">Code Quality</a></h1>
 <p><img src="cq/../img/cover/chromecast-sea-7.jpg" alt="sea 5" /></p>

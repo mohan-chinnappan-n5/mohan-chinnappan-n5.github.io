@@ -105,7 +105,52 @@ UUID from String: 550e8400-e29b-41d4-a716-446655440000
 
 ```
 
+## Java version
+- Uses [this](https://github.com/mohan-chinnappan-n/shell-scripts/blob/master/java/uuid/Uuid4.java) for Uuid4 
 
+```java
+// UuidExample.java
+public class UuidExample {
+    public static void main(String[] args) {
+        try {
+            // Create a new UUID instance
+            Uuid4 uuidInstance = new Uuid4();
+
+            // Access the generated UUID
+            String uuidValue = uuidInstance.getValue();
+            System.out.println("Generated UUID: " + uuidValue);
+
+            // Check if a UUID is valid
+            boolean isValid = Uuid4.isValid(uuidValue);
+            System.out.println("Is Valid UUID: " + isValid);
+
+            // Format a UUID
+            String unformattedUuid = "550e8400-e29b-41d4-a716-446655440000";
+            String formattedUuid = Uuid4.formatValue(unformattedUuid);
+            System.out.println("Formatted UUID: " + formattedUuid);
+
+            // Create a UUID instance from a string
+            Uuid4 uuidInstanceFromString = Uuid4.valueOf("550e8400-e29b-41d4-a716-446655440000");
+            System.out.println("UUID from String: " + uuidInstanceFromString.getValue());
+
+        } catch (Uuid4.UuidException e) {
+            System.out.println("UuidException: " + e.getMessage());
+        }
+    }
+}
+```
+
+- Usage
+```
+javac Uuid4.java UuidExample.java 
+
+java UuidExample 
+Generated UUID: 7972fe1e-6ebb-4c27-9901-f7a025de7408
+Is Valid UUID: true
+Formatted UUID: 550e8400-e29b-41d4-a716-446655440000
+UUID from String: 550e8400-e29b-41d4-a716-446655440000
+
+```
 
 
 
@@ -115,3 +160,4 @@ UUID from String: 550e8400-e29b-41d4-a716-446655440000
 - [Get Support for Randomly Generated UUID v4](https://help.salesforce.com/s/articleView?id=release-notes.rn_apex_uuid.htm&release=248&type=5)
 - [ApexUuid by our Jonathan Gillespie](https://github.com/jongpie/ApexUUID/blob/main/apex-uuid/classes/Uuid.cls)
 - [Python version of ApexUuid](https://github.com/mohan-chinnappan-n/shell-scripts/blob/master/py/uuid/Uuid4.py)
+- [Java Uuid Example](https://github.com/mohan-chinnappan-n/shell-scripts/blob/master/java/uuid/UuidExample.java)
