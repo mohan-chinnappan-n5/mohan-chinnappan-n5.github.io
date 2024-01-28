@@ -28,6 +28,7 @@
     - [Org Metadata Snapshot](./tools/oms.md)
 - [Auditing Scripts](./tools/scripts.md)
 - [Custom Metadata Types](./custom-metadata-types.md)
+- [UUID](./tools/uuid.md)
 
 - [Code Quality](./cq/cq.md)
     - [Code Scan PMD](./cq/pmd.md)
@@ -125,6 +126,7 @@
 - [Security](./security/security.md)
     - [Exploitation and prevention](./security/exploit-prevention.md)
     - [Sharing Debugger](./security/sd.md)
+    - [Sharing Recalculation](./security/sharing-recalc.md)
     - [Role Hierarchy](./security/rh.md)
     - [Shield](./security/shield.md)
     - [Profile, PermissionSet](./security/profile-ps.md)
