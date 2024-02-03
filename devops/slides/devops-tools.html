@@ -1,0 +1,215 @@
+
+
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>DevOps Tools</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
+
+  <style>
+	  body {
+		  zoom:110%;
+	  }
+  </style>
+</head>
+<body>
+<google-codelab id="Notes on Design" title="DevOps Tools" environment="web" >
+
+<google-codelab-step label=' Introduction'>
+<div id='s0-md' class='md' data-trim='false'>
+  
+## Quotes to inspire us
+
+
+
+```
+When something is important enough, you do it even if the odds
+are not in your favour. 
+
+- Elon Musk
+
+```
+
+```
+To get a good idea, you need a lot of ideas!
+
+- Linus Carl Pauling, Two NOBEL PRIZE winner ( Chemistry and Peace )
+
+```
+
+## We discuss the following in this document:
+
+- Some of the tools I have built for DevOps 
+- How they can be configured to meet your specific needs
+- All the tools are open-sourced, so you can improve them and with hope you will give back to the community! 
+- This [book](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/index.html) is referenced at right places to provide more details
+
+</div>
+</google-codelab-step>
+<google-codelab-step label=' Package Bundler'>
+<div id='s1-md' class='md' data-trim='false'>
+  
+## Key Concepts
+
+First prepare artifacts [Delta Deployment](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/deployments/delta.html)
+```
+ - Create a folder with this package.xml and destructiveChanges.xml
+ - Upload the package.xml in this app
+- Fill up the required values in this form
+- Store the downloaded script (bundle-script.sh) in that folder
+- Run this script: ```bash bundle-script.sh > results.txt``` in that folder
+- Any errors in the script run will be rendered on the screen
+- Script prepares a zip bundle for the deployment and also the README.md 
+	- README.md explains how with one single command you can deploy the bundle
+```
+
+The Bundler App is available [here](https://mohan-chinnappan-n5.github.io/sf/pkg-bundle/app.html)
+
+[![Bundler](img/bundler-1.png)](img/bundler-1.png)
+
+</div>
+</google-codelab-step>
+
+<google-codelab-step label='Metadata Backup tool'>
+	<div id='s55-md' class='md' data-trim='false'>
+## Key Concepts
+
+First prepare artifacts for the given FROM and TO SHA1 for your release of the code base : [Delta Deployment](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/deployments/delta.html)
+```
+- Create a folder with this package.xml and destructiveChanges.xml
+- Upload the package.xml in this app
+- Fill up the required values in this form
+- Store the downloaded script (bundle-script.sh) in that folder
+- Run this script: ```bash bundle-script.sh > results.txt``` in that folder
+- Any errors in the script run will be rendered on the screen
+- Script prepares a zip bundle  which you can use it as backup for a release 
+
+```
+### Demo 
+[![Demo](https://mohan-chinnappan-n5.github.io/backup/img/bkp-demo1.webm.gif)](https://mohan-chinnappan-n5.github.io/backup/img/bkp-demo1.webm.gif)
+
+
+	</div>
+</google-codelab-step>
+
+<google-codelab-step label=' Tool to commit Admin config changes '>
+<div id='s2-md' class='md' data-trim='false'>
+## Key Concepts
+[![How it works](https://mohan-chinnappan-n5.github.io/build2/img/build2-dark.png)](https://mohan-chinnappan-n5.github.io/build2/img/build2-dark.png)
+ 
+- Tool is available [here](https://mohan-chinnappan-n5.github.io/build2/build.html)
+[![Build2 tool](img/build2-1.png)](img/build2-1.png)
+
+
+</div>
+</google-codelab-step>
+
+
+
+<google-codelab-step label=' How to remove deleted assets in an Org'>
+<div id='s90-md' class='md' data-trim='false'>
+## Key Concepts
+First prepare artifacts for FROM SHA1 and TO SHA1 using [Delta Deployment](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/deployments/delta.html)
+```
+	- This will create package.xml and destructiveChanges.xml
+	- Run deploy command to remove the deleted assets from the Org with empty package.xml:
+
+	- sfdx force:source:deploy -x package/package.xml --postdestructivechanges destructiveChanges/destructiveChanges.xml --verbose --loglevel TRACE
+
+
+```
+	
+	</div>
+	</google-codelab-step>
+
+<google-codelab-step label=' Pipeline Build Lib'>
+<div id='s39-md' class='md' data-trim='false'>
+
+## Key Concepts
+
+- Uses JWT for access
+- Has features mentioned in this diagram
+
+[![Buildv2](img/buildv2-1.png)](mg/buildv2-1.png)
+
+- This library is open-sourced like other tools. Available [here](https://github.com/mohan-chinnappan-n/buildv2/blob/main/build-scripts-lib.sh)
+- Can be used with any runners like Jenkins
+- Can be customized to run on github-actions, more details in the book [here](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/deployments/gha.html)
+
+
+</div>
+</google-codelab-step>
+
+
+ 
+<google-codelab-step label=' PMD Code Scan'>
+<div id='s97-md' class='md' data-trim='false'>
+
+## VS Code extension
+- Extension is available [here](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner#overview)
+- This is covered in the book [here](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/vscode/pmd.html)
+
+- [![PMD Report](https://raw.githubusercontent.com/mohan-chinnappan-n/kural-docs/master/img/new_pmd-report-1.gif)](https://raw.githubusercontent.com/mohan-chinnappan-n/kural-docs/master/img/new_pmd-report-1.gif)
+
+</div>
+</google-codelab-step>
+<google-codelab-step label='Chrome Extension ONNU '>
+<div id='s8-md' class='md3' data-trim='false'>
+<h3>Key features</h3>
+
+<ul>
+
+	<li>  SOAP Console covers the deployments </li>
+	<li> You can get packages from one org and deploy into another org</li>
+</ul>
+
+
+  
+<span>ONNU is covered in the book 
+	<a href="https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/chromeext/onnu.html">here</a></span>
+
+<iframe width="700" height="380" src="https://www.youtube.com/embed/feH8KIuUsrY?si=CcNll9JWgeYKKRlz" title="YouTube video player" 
+frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
+
+
+
+</div>
+</google-codelab-step>
+
+<google-codelab-step label=' Good Projects have good git hooks!'>
+<div id='s977-md' class='md' data-trim='false'>
+
+## Detailed discussions of how to use git hooks is explained [here](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/deployments/git-hooks.html) 
+
+</div>
+</google-codelab-step>
+
+
+<google-codelab-step label=' Resources'>
+<div id='s9-md' class='md' data-trim='false'>
+
+- [Salesforce Development Notes](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/)
+- [Notes on Code Quality](https://mohan-chinnappan-n5.github.io/code-quality/cq.md.html#0)
+
+</div>
+</google-codelab-step>
+</google-codelab>
+
+  <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/native-shim.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
+
+</body>
+</html>
