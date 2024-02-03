@@ -195,6 +195,35 @@ frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media
 </google-codelab-step>
 
 
+<google-codelab-step label='Mock Data Generation'>
+  <div id='s9787-md' class='md' data-trim='false'>
+
+  - To generate mock data, copy the below script and paste into your terminal
+  ```
+
+  # create working folder
+  mkdir  /tmp/mock-data
+  cd /tmp/mock-data
+
+  # get the script
+  curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/mock/run_generate_mock_data2.sh
+  # run the script
+  bash run_generate_mock_data2.sh
+  bash run_generate_mock_data2.sh --spec contact.json --num-records 500 --output output.csv 
+
+  ```
+  - Demo
+  ![Demo](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/mock/mock-data-gen-1.webm.gif)
+
+  [Direct Link to Demo](https://github.com/mohan-chinnappan-n/shell-scripts/blob/master/py/mock/mock-data-gen-1.webm.gif)
+  
+  
+  </div>
+  </google-codelab-step>
+
+
+
+
 <google-codelab-step label=' Resources'>
 <div id='s9-md' class='md' data-trim='false'>
 
