@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="wili class='list-group-item'h=device-wili class='list-group-item'h, initial-scale=1.0">
-    <title>Apps</title>
+    <title>Apps and Books</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="icon" type="image/x-icon" href="../editor/img/favicon.ico" />
@@ -18,7 +18,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">&nbsp; Apps</a>
+        <a class="navbar-brand" href="#">&nbsp; Apps and Books</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,6 +33,8 @@
     <div class="split split-horizontal" id="toc">
         <label class="form-control" for="sectionDropdown"><b>Select a Section:</b></label>
         <select class="form-control" id="sectionDropdown" onchange="navigateToSection()">
+            <option value="sfbook">SF Book</option>
+
             <option value="DataApps">Data Apps</option>
             <option value="EditorApps">Editor Apps</option>
             <option value="Database">Database</option>
@@ -54,9 +56,18 @@
             <option value="VSCExts">VS Code Extensions</option>
 
 
+
         </select>
     </div>
     <div class="split split-horizontal" id="sections">
+
+        <section id="sfbook">
+            <h4>Books</h4>
+            <ul class="list-group list-group-striped container">
+                <li class='list-group-item'><a href="../sfbooks/sfdevnotes/index.html">Salesforce Development Notes</a></li>
+            </ul>
+        </section>
+
 
         <section id="DataApps">
             <h4>Data Apps</h4>
@@ -164,6 +175,8 @@
                 <li class='list-group-item'><a href="../pkg/pkg-gen.html">package.xml Generator</a></li>
                 <li class='list-group-item'><a href="../build2/build.html">BuildGen - Turing</a></li>
                 <li class='list-group-item'><a href="../sf/pkg-bundle/app.html">Package Bundle Builder - Turing</a></li>
+                <li class='list-group-item'><a href="../backup/bkp.html">Backup - Turing</a></li>
+
             </ul>
         </section>
 
