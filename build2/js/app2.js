@@ -23,6 +23,12 @@ Split(["#code", "#content"], {
     console.log(`Ready for User Interaction Time: ${readyForInteractionTime} milliseconds`);
   });
 
+getEle('hiwbtn').addEventListener('click',function() {
+    // Use smooth scrolling to navigate to the section
+    document.querySelector('#hiw').scrollIntoView({
+        behavior: 'smooth'
+    });
+} )
 let editor;
 require.config({ paths: { 'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor/min/vs' } });
 require(['vs/editor/editor.main'], function () {
