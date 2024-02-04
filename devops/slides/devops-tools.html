@@ -59,6 +59,9 @@ To get a good idea, you need a lot of ideas!
 - All the tools are open-sourced, so you can improve them and with hope you will give back to the community! 
 - This [book](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/index.html) is referenced at right places to provide more details
 - **All the images in these slides can be clicked to view the full size version**
+
+## Tools 
+
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Package Bundler'>
@@ -491,6 +494,181 @@ bash psg_util.sh PROD mohan.chinnappan.n.sel2@gmail.com "Mohan Chinnappan"
   
     </div>
     </google-codelab-step>
+
+
+<google-codelab-step label=' Profile Viz'>
+	<div id='profiles9-md' class='md' data-trim='false'>
+## Visualize Profile into PDF 
+- Demo
+[![Demo](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/viz/profile/profile-viz-1.webm.gif)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/viz/profile/profile-viz-1.webm.gif)
+
+	</div>
+	</google-codelab-step>
+<google-codelab-step label=' Permission Set Viz'>
+	<div id='ps9-md' class='md' data-trim='false'>
+## Visualize Permission Set into PDF 
+- Demo
+[![Demo](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/viz/ps/ps-viiz-1.webm.gif)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/viz/ps/ps-viiz-1.webm.gif)
+
+	</div>
+	</google-codelab-step>
+
+
+<google-codelab-step label=' FlexiPage Viz'>
+	<div id='fp9-md' class='md' data-trim='false'>
+## Visualize FlexiPage into PDF 
+- Demo
+[![Demo](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/viz/fp/fp-viz-1.webm.gif)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/viz/fp/fp-viz-1.webm.gif)
+
+	</div>
+</google-codelab-step>
+
+<google-codelab-step label=' CustomLabels Viz'>
+	<div id='cl9-md' class='md' data-trim='false'>
+## Visualize CustomLabels into PDF 
+- Demo
+[![Demo](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/viz/cl/cl-viz-1.webm.gif)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/viz/cl/cl-viz-1.webm.gif)
+
+	</div>
+</google-codelab-step>
+
+<google-codelab-step label=' Package Viz'>
+	<div id='pkg9-md' class='md' data-trim='false'>
+## Visualize package.xml into PDF 
+- Demo
+[![Demo](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/viz/pkg/pkg-viz-1.webm.gif)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/viz/pkg/pkg-viz-1.webm.gif)
+
+	</div>
+</google-codelab-step>
+
+<google-codelab-step label=' Streaming Subscribe  Tool'>
+	<div id='streaming9-md' class='md' data-trim='false'>
+## Subscribe to a Streaming topic and receive updates 
+```
+Subscribe to stream topic
+
+USAGE
+  $ sf mohanc streaming sub -t string [-u string] [--apiversion string]
+    [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -t, --topic=value
+      (required) Topic to Subscribe
+
+  -u, --targetusername=value
+      username or alias for the target org; overrides default target org
+
+  --apiversion=value
+      override the api version used for api requests made by this command
+
+  --json
+      format output as json
+
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATA
+  L)
+      [default: warn] logging level for this command invocation
+
+DESCRIPTION
+  Subscribe to stream topic
+
+EXAMPLES
+Subscribe to topic 
+sfdx mohanc:streaming:sub  -u username -t topic
+example:
+// apex code to create push topic ( ~/.apex/pushNewAccounts.cls)
+  PushTopic pushTopic = new PushTopic();
+  pushTopic.Name = 'NewAccounts';
+  pushTopic.Query = 'SELECT Id, Name, Phone FROM Account';
+  pushTopic.ApiVersion = 58.0;
+  pushTopic.NotifyForOperationUpdate = false;
+  pushTopic.NotifyForOperationDelete = false;
+  pushTopic.NotifyForOperationUndelete = false; 
+  // run it 
+  $ sfdx mohanc:tooling:execute -u mohan.chinnappan.n.sel2@gmail.com -a ~/.apex/pushNewAccounts.cls
+  // in UI create a New Account record
+  // subscribe
+  $ sfdx mohanc:streaming:sub  -u username -t NewAccounts
+  // output
+  {
+      "event": {
+          "createdDate": "2023-11-14T10:48:37.079Z",
+          "replayId": 1,
+          "type": "created"
+      },
+      "sobject": {
+          "Phone": null,
+          "Id": "0018W00002UMYPiQAP",
+          "Name": "MakeGreenWorld"
+      }
+  }
+  ```
+      
+
+
+
+	</div>
+</google-codelab-step>
+
+
+
+<google-codelab-step label=' XML Validation Tool'>
+	<div id='xmlv9-md' class='md' data-trim='false'>
+## Check the given xmls in given and sub-folders are valid 
+- Run this after a branch merge
+
+```
+sf mohanc xml validate --help
+Checks given folder of xml is valid or not 
+
+USAGE
+  $ sf mohanc xml validate -p string [-i] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -i, --invalid                                                                         Print only invalid
+  -p, --path=value                                                                  (required) Path to the xml files folder
+      --json                                                                            format output as json
+      --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for this command invocation
+
+DESCRIPTION
+  Checks given folder of xml is valid or not
+
+EXAMPLES
+      ** Checks given folder of xml is valid or not  **
+    
+      sfdx mohanc:xml:validate -p path/to/xml_files -i
+      - lists out xml files in the given path are valid or not 
+      -i flag provides only invalid files
+    
+
+➜  pkg git:(master) ✗           sf mohanc xml validate --help
+Checks given folder of xml is valid or not 
+
+USAGE
+  $ sf mohanc xml validate -p string [-i] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -i, --invalid                                                                         Print only invalid
+  -p, --path=value                                                                   (required) Path to the xml files folder
+      --json                                                                            format output as json
+      --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for this command invocation
+
+DESCRIPTION
+  Checks given folder of xml is valid or not
+
+EXAMPLES
+      ** Checks given folder of xml is valid or not  **
+    
+      sfdx mohanc:xml:validate -p path/to/xml_files -i
+      - lists out xml files in the given path are valid or not 
+      -i flag provides only invalid files
+```
+
+	</div>
+</google-codelab-step>
+
+
+
 
 
 <google-codelab-step label=' Resources'>
