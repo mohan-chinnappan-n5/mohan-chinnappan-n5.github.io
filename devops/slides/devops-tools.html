@@ -51,7 +51,7 @@ To get a good idea, you need a lot of ideas!
 - How they can be configured to meet your specific needs
 - All the tools are open-sourced, so you can improve them and with hope you will give back to the community! 
 - This [book](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/index.html) is referenced at right places to provide more details
-
+- **All the images in these slides can be clicked to view the full size version**
 </div>
 </google-codelab-step>
 <google-codelab-step label=' Package Bundler'>
@@ -217,7 +217,28 @@ frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media
 
   [Direct Link to Demo](https://github.com/mohan-chinnappan-n/shell-scripts/blob/master/py/mock/mock-data-gen-1.webm.gif)
   
+  ## Custom Mock Data Provider
+
+  ```
+  # get the script
+  curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/mock/custom_faker_provider.py
+  # run the script
+  python3 custom_faker_provider.py  'open' 'closed won' 'closed lost'
+  # closed won
+  ```
   
+  - Paragraph Provider
+
+  ```
+  # get the script
+  curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/mock/paragraph_generator.py
+  # run the script
+  python3 paragraph_generator.py --word-list opportunity available in close won stage 
+  # Opportunity in close available.
+
+  ```
+
+
   </div>
   </google-codelab-step>
 
@@ -239,9 +260,83 @@ frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media
     </div>
     </google-codelab-step>
 
+	<google-codelab-step label='Org Viz - Visualizing the org'>
+<div id='s97878-md' class='md' data-trim='false'>
+[![Org Viz](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/tools/img/Org.svg)](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/tools/img/Org.svg)
+
+
+```
+sfdx mohanc:org:viz -u test-uzsmfdqkhtk7@example.com --help
+
+Visualize the Org
+
+USAGE
+  $ sfdx mohanc org viz [-u <string>] [--apiversion <string>] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -u, --targetusername=<value>                                                      username or alias for the target org; overrides default target org
+  --apiversion=<value>                                                              override the api version used for api requests made by this command
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for this command invocation
+
+DESCRIPTION
+  Visualize the Org
+
+EXAMPLES
+             Visualize the org
+             sfdx mohanc:org:viz
+
+```
+- Details about these scripts are [here](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/tools/tools-org.html#orgviz)
+		</div>
+		</google-codelab-step>
 
 
 
+	<google-codelab-step label='Sharing Debugger'>
+		<div id='s97879-md' class='md' data-trim='false'>
+
+
+[![SD](https://github.com/mohan-chinnappan-n/cli-dx/raw/master/img/userInfo.svg)](https://github.com/mohan-chinnappan-n/cli-dx/raw/master/img/userInfo.svg)
+
+```
+$ sfdx mohanc:sharing:debug -h
+Run Sharing Debugger on the given org for the given user
+
+USAGE
+  $ sfdx mohanc:sharing:debug
+
+Run Sharing Debugger on the given org for the given user
+
+USAGE
+  $ sfdx mohanc:sharing:debug
+
+OPTIONS
+  -n, --username=username                          User Name to Debug
+  -u, --targetusername=targetusername              username or alias for the target org; overrides default target org
+  -v, --targetdevhubusername=targetdevhubusername  username or alias for the dev hub org; overrides default dev hub org
+  --apiversion=apiversion                          override the api version used for api requests made by this command
+  --json                                           format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)   logging level for this command invocation
+
+EXAMPLE
+
+       ** Run Sharing Debugger on the given org for the given user **
+
+       USAGE
+       sfdx mohanc:sharing:debug -u <username>  -n <userNameToDebug>
+
+       writes userInfo.json and userInfo.svg files in the current directory
+
+       -----------
+    
+
+```
+
+- Details about sharing debugger is [here](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/security/sd.html)
+		</div>
+		</google-codelab-step>
 
 
 
