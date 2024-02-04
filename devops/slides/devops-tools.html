@@ -18,6 +18,13 @@
 	  body {
 		  zoom:110%;
 	  }
+    code {
+      font-family:'Monaco', monospace !important;
+      font-size: 11px;
+      white-space: pre-wrap;
+      line-height: 2 !important;
+      
+    }
   </style>
 </head>
 <body>
@@ -61,14 +68,16 @@ To get a good idea, you need a lot of ideas!
 
 First prepare artifacts [Delta Deployment](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/deployments/delta.html)
 ```
- - Create a folder with this package.xml and destructiveChanges.xml
- - Upload the package.xml in this app
+- Create a folder with this package.xml and destructiveChanges.xml after running the Delta Deployment 
+- Upload the package.xml in this app
 - Fill up the required values in this form
 - Store the downloaded script (bundle-script.sh) in that folder
-- Run this script: ```bash bundle-script.sh > results.txt``` in that folder
+- Run this script in that folder: 
+  - bash bundle-script.sh > results.txt
 - Any errors in the script run will be rendered on the screen
 - Script prepares a zip bundle for the deployment and also the README.md 
-	- README.md explains how with one single command you can deploy the bundle
+	- README.md explains:
+    - how with one single command you can deploy the bundle
 ```
 
 The Bundler App is available [here](https://mohan-chinnappan-n5.github.io/sf/pkg-bundle/app.html)
@@ -84,11 +93,12 @@ The Bundler App is available [here](https://mohan-chinnappan-n5.github.io/sf/pkg
 
 First prepare artifacts for the given FROM and TO SHA1 for your release of the code base : [Delta Deployment](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/deployments/delta.html)
 ```
-- Create a folder with this package.xml and destructiveChanges.xml
+- Create a folder with the package.xml and destructiveChanges.xml from the above step
 - Upload the package.xml in this app
 - Fill up the required values in this form
 - Store the downloaded script (bundle-script.sh) in that folder
-- Run this script: ```bash bundle-script.sh > results.txt``` in that folder
+- Run this script in that folder: 
+  - bash bundle-script.sh > results.txt 
 - Any errors in the script run will be rendered on the screen
 - Script prepares a zip bundle  which you can use it as backup for a release 
 
@@ -119,10 +129,10 @@ First prepare artifacts for the given FROM and TO SHA1 for your release of the c
 ## Key Concepts
 First prepare artifacts for FROM SHA1 and TO SHA1 using [Delta Deployment](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/deployments/delta.html)
 ```
-	- This will create package.xml and destructiveChanges.xml
-	- Run deploy command to remove the deleted assets from the Org with empty package.xml:
+- This will create package.xml and destructiveChanges.xml
+- Run deploy command to remove the deleted assets from the Org with empty package.xml:
 
-	- sfdx force:source:deploy -x package/package.xml --postdestructivechanges destructiveChanges/destructiveChanges.xml --verbose --loglevel TRACE
+- sfdx force:source:deploy -x package/package.xml --postdestructivechanges destructiveChanges/destructiveChanges.xml --verbose --loglevel TRACE
 
 
 ```
@@ -206,18 +216,18 @@ frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media
   - To generate mock data, copy the below script and paste into your terminal
   ```
 
-  # create working folder
-  mkdir  /tmp/mock-data
-  cd /tmp/mock-data
+# create working folder
+mkdir  /tmp/mock-data
+cd /tmp/mock-data
 
-  # get the script
-  curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/mock/run_generate_mock_data2.sh
-  # run the script
-  bash run_generate_mock_data2.sh
-  bash run_generate_mock_data2.sh --spec contact.json --num-records 500 --output output.csv 
+# get the script
+curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/mock/run_generate_mock_data2.sh
+# run the script
+# bash run_generate_mock_data2.sh
+bash run_generate_mock_data2.sh --spec contact.json --num-records 500 --output output.csv 
 
   ```
-  - Demo
+- Demo
   ![Demo](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/mock/mock-data-gen-1.webm.gif)
 
   [Direct Link to Demo](https://github.com/mohan-chinnappan-n/shell-scripts/blob/master/py/mock/mock-data-gen-1.webm.gif)
@@ -225,21 +235,21 @@ frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media
   ## Custom Mock Data Provider
 
   ```
-  # get the script
-  curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/mock/custom_faker_provider.py
-  # run the script
-  python3 custom_faker_provider.py  'open' 'closed won' 'closed lost'
-  # closed won
-  ```
+# get the script
+curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/mock/custom_faker_provider.py
+# run the script
+python3 custom_faker_provider.py  'open' 'closed won' 'closed lost'
+# closed won
+```
   
   - Paragraph Provider
 
   ```
-  # get the script
-  curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/mock/paragraph_generator.py
-  # run the script
-  python3 paragraph_generator.py --word-list opportunity available in close won stage 
-  # Opportunity in close available.
+# get the script
+curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/mock/paragraph_generator.py
+# run the script
+python3 paragraph_generator.py --word-list opportunity available in close won stage 
+# Opportunity in close available.
 
   ```
 
@@ -466,14 +476,31 @@ bash psg_util.sh PROD mohan.chinnappan.n.sel2@gmail.com "Mohan Chinnappan"
   </google-codelab-step>
 
 
+  <google-codelab-step label=' How to delete Obsolete Flow versions?'>
+    <div id='f9-md' class='md' data-trim='false'>
+  ```
+  # login into your Org
+  # sf force auth web login -r https://login.salesforce.com 
+  # sf force auth web login -r https://test.salesforce.com 
+  curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/pkg/build_destructiveChanges_pkg_for_obsolete_flows.sh
+  bash build_destructiveChanges_pkg_for_obsolete_flows.sh -u username@email.com
+  ```
+  - Details about these scripts are [here](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/process-automation/flow.html)
+  
+     
+  
+    </div>
+    </google-codelab-step>
 
 
 <google-codelab-step label=' Resources'>
 	<div id='s9-md' class='md' data-trim='false'>
 - [Salesforce Development Notes](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/)
 - [Notes on Code Quality](https://mohan-chinnappan-n5.github.io/code-quality/cq.md.html#0)
-- [Apps and Books](https://mohan-chinnappan-n5.github.io/apps/)
-	
+- [Apps and Books](https://mohan-chinnappan-n5.github.io/apps/) 
+- [PMD Code Scan - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner#overview)
+- [SF-LAND - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-land)
+
 	</div>
 	</google-codelab-step>
 
