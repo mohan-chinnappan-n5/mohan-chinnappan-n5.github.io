@@ -155,7 +155,12 @@ First prepare artifacts for FROM SHA1 and TO SHA1 using [Delta Deployment](https
 
 ## VS Code extension
 - Extension is available [here](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner#overview)
+- Demo
+[![PMD Demo](https://github.com/mohan-chinnappan-n/vscode-apex-pmd/raw/master/images/code-scan-vscode-6.gif)](https://github.com/mohan-chinnappan-n/vscode-apex-pmd/raw/master/images/code-scan-vscode-6.gif)
+
 - This is covered in the book [here](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/vscode/pmd.html)
+
+- Report Demo 
 
 - [![PMD Report](https://raw.githubusercontent.com/mohan-chinnappan-n/kural-docs/master/img/new_pmd-report-1.gif)](https://raw.githubusercontent.com/mohan-chinnappan-n/kural-docs/master/img/new_pmd-report-1.gif)
 
@@ -340,14 +345,119 @@ EXAMPLE
 
 
 
-<google-codelab-step label=' Resources'>
-<div id='s9-md' class='md' data-trim='false'>
 
+
+
+<google-codelab-step label='BulkAPI 2.0 Data Operations'>
+    <div id='s97888-md' class='md' data-trim='false'>
+
+## Operations supported
+```
+sf mohanc data bulkapi delete    Data Update using BulkAPI 2
+sf mohanc data bulkapi listJobs  List  BulkAPI 2 jobs
+sf mohanc data bulkapi load      Data Load using BulkAPI 2
+sf mohanc data bulkapi query     Data Query using BulkAPI 2
+sf mohanc data bulkapi update    Data Update using BulkAPI 2
+```
+
+## Load Example
+```
+$ sfdx mohanc:data:bulkapi:load -h
+
+Data Load using BulkAPI 2  
+
+USAGE
+  $ sfdx mohanc:data:bulkapi:load
+
+OPTIONS
+  -e, --lineending=lineending                     Line Ending (LF or CRLF), default:  LF
+  -f, --inputfile=inputfile                       CSV file to load, default: input.csv
+  -o, --sobject=sobject                           sObject to load into,  default: Case
+  -u, --targetusername=targetusername             username or alias for the target org; overrides default target org
+  --apiversion=apiversion                         override the api version used for api requests made by this command
+  --json                                          format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal)  logging level for this command invocation
+
+EXAMPLE
+          
+sfdx mohanc:bulkapi:load  -u <username>  -f input.csv -e LF -o Case
+      
+
+
+
+
+
+```
+
+- Details about these scripts are [here](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/tools/tools-data-bulkapi2.html)
+  
+    
+    </div>
+    </google-codelab-step>
+
+<google-codelab-step label=' ERD Generator'>
+	<div id='ss9-md' class='md' data-trim='false'>
+
+[![Sample ERD](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/dm/img/contact-account.dot.svg)](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/dm/img/contact-account.dot.svg)
+
+```
+sfdx mohanc:md:describe -s Contact,Account -e contact-account.dot -u test-uzsmfdqkhtk7@example.com > contact-account.csv
+
+```
+
+- This tool is explained [here](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/dm/datamodel.html)
+	
+	</div>
+	</google-codelab-step>
+
+<google-codelab-step label=' Async Apex Jobs'>
+	<div id='ss10-md' class='md' data-trim='false'>
+
+- List out Async Apex Jobs currently with status of **Queued or Failed**
+- Show the output the datatable
+```
+# build the soql
+echo "SELECT Id, ApexClassId, ApexClass.Name,  \
+Status,ExtendedStatus, JobType, CreatedDate, CompletedDate, JobItemsProcessed,   \
+NumberOfErrors,TotalJobItems \
+FROM AsyncApexJob \
+WHERE Status IN ('Queued','Failed')
+ORDER BY CreatedDate DESC" > async_apex.soql
+
+# login prod/dev
+# sf force auth web login -r https://login.salesforce.com
+# login sandbox 
+# sf force auth web login -r https://test.salesforce.com
+
+sf mohanc data bulkapi query -u mohan.chinnappan.n.sel2@gmail.com -q async_apex.soql 
+pbcopy < async_apex.soql.csv 
+open "https://mohan-chinnappan-n5.github.io/viz/datatable/dt.html?c=csv" 
+
+
+```
+
+[![async-apex](img/async-apex-1.png)](img/async-apex-1.png)
+
+
+	
+	</div>
+	</google-codelab-step>
+	
+
+
+
+
+
+<google-codelab-step label=' Resources'>
+	<div id='s9-md' class='md' data-trim='false'>
 - [Salesforce Development Notes](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/)
 - [Notes on Code Quality](https://mohan-chinnappan-n5.github.io/code-quality/cq.md.html#0)
+- [Apps and Books](https://mohan-chinnappan-n5.github.io/apps/)
+	
+	</div>
+	</google-codelab-step>
 
-</div>
-</google-codelab-step>
+
 </google-codelab>
 
   <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
