@@ -3,18 +3,21 @@
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
+
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
   <meta charset="UTF-8">
   <title>DevOps Tools</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
-  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico">
   <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
 
   <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
   <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/devops/slides/css/pd.css">
   <style>
 	  body {
 		  zoom:110%;
@@ -769,6 +772,58 @@ open 'https://mohan-chinnappan-n5.github.io/viz/datatable/dt-2.html?c=csv'
 	</google-codelab-step>
 
 
+<google-codelab-step label='Micro Delta on Profiles and Permission Sets'>
+
+	<table>
+		<thead>
+		<tr>
+		<th>Use Case</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td>We like to know the delta for a Profile or PermissionSet in the version control (which is in our local folder) with the same Profile or PermissionSet in the Org</td>
+		</tr>
+		<tr>
+		<td>Tool should be able to produce a micro-delta profile or PermissionSet xml file which we can use for our delta deployments</td>
+		</tr>
+		</tbody>
+		</table>
+	<h3>Demo</h3>
+	<div id='demo-micro-delta-profile99-md' class='md2' data-trim='false'>
+<iframe width="700" height="400" src="https://www.youtube.com/embed/XAkvLAZzOq4?si=OMmivz4SH8iHmBMx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<br><i class="fas fa-bars"></i>
+<a href="https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/security/profile-ps.html#micro-delta">More Details in the Book</a>
+</div>
+</google-codelab-step>
+
+
+<google-codelab-step label='CRMA Dataflow Visualizer Tool'>
+
+<div id='crma-df-viz-99-md' class='md2' data-trim='false'>
+<img src="https://i0.wp.com/www.salesforceblogger.com/wp-content/uploads/2022/01/svg-df.png?w=1447&ssl=1" alt="">
+<h3>Demo</h3>
+<iframe width="700" height="400" src="https://www.youtube.com/embed/XAkvLAZzOq4?si=-BpuDSZGikk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<br><i class="fas fa-bars"></i>
+<a href="https://www.salesforceblogger.com/2022/01/13/introducing-the-dataflow-visualizer/">More Details in the Blog</a>
+</div>
+</google-codelab-step>
+
+
+<google-codelab-step label='CRMA  Recipe Schedule Designer'>
+
+<div id='crma-rs-viz-99-md' class='md2' data-trim='false'>
+<img src="img/crma-receipe-sched-1.png" alt="">
+<h3>Demo</h3>
+<a href='https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/crma/crma-receipe-sched-1.webm.gif'>
+	<img src="https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/crma/crma-receipe-sched-1.webm.gif" alt="">
+</a>
+</div>
+</google-codelab-step>
+
+
+
+
 
 <google-codelab-step label=' Resources'>
 	<div id='s9-md' class='md' data-trim='false'>
@@ -781,7 +836,7 @@ open 'https://mohan-chinnappan-n5.github.io/viz/datatable/dt-2.html?c=csv'
 |[Apps and Books](https://mohan-chinnappan-n5.github.io/apps/)| 
 |[PMD Code Scan - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner#overview)|
 |[SF-LAND - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-land)|
-|[Mohan’s SFDX plugin for Analytics](https://www.salesforceblogger.com/2020/11/17/mohans-sfdx-plugin-for-analytics/)|
+|[Mohan's SFDX plugin for Analytics](https://www.salesforceblogger.com/2020/11/17/mohans-sfdx-plugin-for-analytics/)|
 
 	</div>
 	</google-codelab-step>
@@ -794,8 +849,12 @@ open 'https://mohan-chinnappan-n5.github.io/viz/datatable/dt-2.html?c=csv'
   <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
   <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
   <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
+  <script src="https://mohan-chinnappan-n5.github.io/devops/slides/js/utils.js"></script>
+
 
   <script>
+
+	addLinks('Book','https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/' )
 	const drawer = document.getElementById('drawer');
     // Add a CSS class to the element
     drawer.classList.add('split');

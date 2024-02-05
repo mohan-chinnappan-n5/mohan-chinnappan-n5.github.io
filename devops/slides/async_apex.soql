@@ -1,2 +1,0 @@
-SELECT Id, ApexClassId, ApexClass.Name,  Status,ExtendedStatus, JobType, CreatedDate, CompletedDate, JobItemsProcessed,   NumberOfErrors,TotalJobItems FROM AsyncApexJob WHERE Status IN ('Queued','Failed')
-ORDER BY CreatedDate DESC
