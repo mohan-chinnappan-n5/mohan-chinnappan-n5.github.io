@@ -718,7 +718,42 @@ EXAMPLES
 	</div>
 	</google-codelab-step>
 
+<google-codelab-step label='SetupAuditTrail Query'>
+	<div id='satsc9-md' class='md' data-trim='false'>
+[![SAT ERD](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/setupAuditTrail/setupAuditTrail.svg)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/setupAuditTrail/setupAuditTrail.svg)
+```
+# get the script
+curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/setupAuditTrail/get_sat.sh
+# run 
+bash get_sat.sh 'mohan chinnappan' 2024-01-01 2023-10-10
+# it will open the csv file in Excel or Numbers (app assigned for csv file)
+```
+## Results	
+[![SAT results](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/setupAuditTrail/sat-1.png)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/setupAuditTrail/sat-1.png)
 
+
+	</div>
+	</google-codelab-step>
+
+
+<google-codelab-step label=' git diff tools'>
+
+	<div id='gitdiff9-md' class='md' data-trim='false'>
+```
+# get the script
+curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/git/git_diff.py
+
+python3 git_diff.py --git_repo_path ~/dreamhouse-lwc  --from_commitId 'HEAD~100' --to_commitId 'HEAD'  --output_csv ./git-diff.csv 
+
+pbcopy < git-diff.csv 
+
+open 'https://mohan-chinnappan-n5.github.io/viz/datatable/dt-2.html?c=csv'
+
+```
+## Demo on DreamHouse LWC Repo
+[![demo](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/git/git-diff-1.webm.gif)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/git/git-diff-1.webm.gif)
+	</div>
+	</google-codelab-step>
 
 <google-codelab-step label=' Resources'>
 	<div id='s9-md' class='md' data-trim='false'>

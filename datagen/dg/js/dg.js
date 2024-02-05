@@ -7,7 +7,7 @@ let editor2;
 let simpleSpec;
 let total = 5;
 const MAX_LIMIT = 10000;
-import { faker } from 'https://cdn.skypack.dev/@faker-js/faker';
+// import { faker } from 'https://cdn.skypack.dev/@faker-js/faker';
 
 const repoUrl = 'https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs';
 const listDwg = await fetchText(`${repoUrl}/main/datagen/list.txt`);
