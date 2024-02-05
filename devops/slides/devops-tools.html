@@ -145,7 +145,26 @@ First prepare artifacts for the given FROM and TO SHA1 for your release of the c
 ### Demo 
 [![Demo](https://mohan-chinnappan-n5.github.io/backup/img/bkp-demo1.webm.gif)](https://mohan-chinnappan-n5.github.io/backup/img/bkp-demo1.webm.gif)
 
+### Script to get package.xml for most of the components in the org 
+```
+curl https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/pkg/org-package-xml.py
+```
+```
+Set Salesforce credentials in environment variables:
+   - SF_USERNAME: Salesforce username
+   - SF_PASSWORD: Salesforce password
+   - SF_SECURITY_TOKEN: Salesforce security token
+in .env file like this:
+SF_USERNAME=username
+SF_PASSWORD=pwd
+SF_SECURITY_TOKEN=st
+```
 
+```
+Run the script:
+   $ python3 org-package-xml.py
+
+```
 	</div>
 </google-codelab-step>
 
