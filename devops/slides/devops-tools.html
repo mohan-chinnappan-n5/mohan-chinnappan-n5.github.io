@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
 
+  <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+  <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+
   <style>
 	  body {
 		  zoom:110%;
@@ -757,15 +760,28 @@ open 'https://mohan-chinnappan-n5.github.io/viz/datatable/dt-2.html?c=csv'
 	</div>
 	</google-codelab-step>
 
+<google-codelab-step label=' package.xml Generator'>
+	<div id='pkgbuilder99-md' class='md' data-trim='false'>
+## Demo 
+[![demo](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/pkg/pkgBuilder-1.webm.gif)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/pkg/pkgBuilder-1.webm.gif)
+- Tools is available [here](https://mohan-chinnappan-n5.github.io/pkg/pkg-gen.html)
+</div>
+	</google-codelab-step>
+
+
+
 <google-codelab-step label=' Resources'>
 	<div id='s9-md' class='md' data-trim='false'>
-- [Salesforce Development Notes](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/)
-- [Notes on Code Quality](https://mohan-chinnappan-n5.github.io/code-quality/cq.md.html#0)
-- [Notes on Design](https://mohan-chinnappan-n2.github.io/2021/wp/design/design.md.html#0)
 
-- [Apps and Books](https://mohan-chinnappan-n5.github.io/apps/) 
-- [PMD Code Scan - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner#overview)
-- [SF-LAND - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-land)
+|Resource|
+|---|
+|[Salesforce Development Notes](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/)|
+|[Notes on Code Quality](https://mohan-chinnappan-n5.github.io/code-quality/cq.md.html#0)|
+|[Notes on Design](https://mohan-chinnappan-n2.github.io/2021/wp/design/design.md.html#0)|
+|[Apps and Books](https://mohan-chinnappan-n5.github.io/apps/)| 
+|[PMD Code Scan - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner#overview)|
+|[SF-LAND - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-land)|
+|[Mohan’s SFDX plugin for Analytics](https://www.salesforceblogger.com/2020/11/17/mohans-sfdx-plugin-for-analytics/)|
 
 	</div>
 	</google-codelab-step>
@@ -778,6 +794,23 @@ open 'https://mohan-chinnappan-n5.github.io/viz/datatable/dt-2.html?c=csv'
   <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
   <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
   <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
+
+  <script>
+	const drawer = document.getElementById('drawer');
+    // Add a CSS class to the element
+    drawer.classList.add('split');
+    drawer.classList.add('split-horizontal');
+	const main = document.getElementById('main');
+    // Add a CSS class to the element
+    main.classList.add('split');
+    main.classList.add('split-horizontal');
+	Split(["#drawer", "#main" ], {
+		sizes: [20, 80],
+	});
+
+
+
+  </script>
 
 </body>
 </html>
