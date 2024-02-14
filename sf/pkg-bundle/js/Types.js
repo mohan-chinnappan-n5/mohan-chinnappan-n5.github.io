@@ -35,6 +35,39 @@ export class Types {
       },
     },
 
+    CampaignInfluenceModel: {
+      folderName: "campaignInfluenceModels",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `campaignInfluenceModels`,
+          fileNames: [ `${member}.campaignInfluenceModel-meta.xml`],
+        };
+      },
+    },
+
+    ExternalCredential: {
+      folderName: "externalCredentials",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `externalCredentials`,
+          fileNames: [ `${member}.externalCredential-meta.xml`],
+        };
+      },
+    },
+
+    NamedCredential: {
+      folderName: "namedCredentials",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `namedCredentials`,
+          fileNames: [ `${member}.namedCredential-meta.xml`],
+        };
+      },
+    },
+
+
+
+
     AssignmentRule: {
       once:true,
       folderName: "assignmentRules",
