@@ -25,14 +25,40 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
+                <li class="nav-item" >
+                    <select class="form-control"  id="sectionDropdown" style="display: none;" onchange="navigateToSection()">
+                        <option value="sfbook">SF Book</option>
+            
+                        <option value="DataApps">Data Apps</option>
+                        <option value="EditorApps">Editor Apps</option>
+                        <option value="Database">Database</option>
+                        <option value="JSONApps">JSON Apps</option>
+                        <option value="XML">XML</option>
+                        <option value="YAML">YAML</option>
+                        <option value="GenericApps">Generic Apps</option>
+                        <option value="DeploymentApps">Deployment Apps</option>
+                        <option value="PerfMeasurementApps">Perf Measurement Apps</option>
+                        <option value="ChartsApp">Charts Apps</option>
+                        <option value="CRMAApps">CRMA Apps</option>
+                        <option value="DiagramApps">Diagram Apps</option>
+                        <option value="SOQLApps">SOQL Apps</option>
+            
+                        <option value="MediaApps">Media Apps</option>
+                        <option value="UIRecorderApps">UI Recorder Apps</option>
+                        <option value="GenAIApps">GenAI Apps</option>
+                        <option value="ChromeExts">Chrome Extensions</option>
+                        <option value="VSCExts">VS Code Extensions</option>
+            
+            
+            
+                    </select>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="split split-horizontal" id="toc">
+    <div class="split split-horizontal" id="toc" style="display: block;">
         <label class="form-control" for="sectionDropdown"><b>Select a Section:</b></label>
-        <select class="form-control" id="sectionDropdown" onchange="navigateToSection()">
+        <select class="form-control" id="sectionDropdownToc" onchange="navigateToSectionToc()">
             <option value="sfbook">SF Book</option>
 
             <option value="DataApps">Data Apps</option>
