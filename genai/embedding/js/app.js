@@ -5,13 +5,17 @@ const TASK = 'feature-extraction'; // extracts feature,  embedding for the given
 const MODEL = 'Xenova/all-MiniLM-L6-v2';
 
 const getEle = id => document.getElementById(id);
-let initInputText = "Ken Thompson and Dennis Ritchie are fathers of the Unix operating system";
+let initInputText = ["Who are the fathers of the Unix operating system"];
+let knowledge = [
+    "Ken Thompson and Dennis Ritchie are fathers of the Unix operating system",
+    "Java was written by James Gosling"
+];
 
 // read url parameters
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has("c")) {
     await navigator.clipboard.readText().then((clipText) => {
-        initInputText = clipText;
+        initInputText = [clipText];
     })
 }
 
@@ -52,6 +56,7 @@ function cosineSimilarity(obj1, obj2) {
 
 let resultsEditor, resultsEditor2;
 let inputEditor, inputEditor2;
+let csEditor;
 
 require.config({
     paths: {
@@ -68,8 +73,8 @@ require(["vs/editor/editor.main"], function () {
     });
 
     inputEditor = monaco.editor.create(getEle("inputEditor"), {
-        value: initInputText,
-        language: "text",
+        value: JSON.stringify(initInputText,null,4),
+        language: "json",
         theme: "vs-dark",
     });
     // second editor
@@ -79,8 +84,13 @@ require(["vs/editor/editor.main"], function () {
     });
 
     inputEditor2 = monaco.editor.create(getEle("inputEditor2"), {
-        value: initInputText,
-        language: "text",
+        value: JSON.stringify(knowledge,null,4),
+        language: "json",
+        theme: "vs-dark",
+    });
+
+    csEditor = monaco.editor.create(getEle("csEditor"), {
+        language: "json",
         theme: "vs-dark",
     });
 
@@ -89,7 +99,7 @@ require(["vs/editor/editor.main"], function () {
 
 
 async function loadModel(task, model) {
-    return await pipeline(TASK, MODEL);
+    return await pipeline(task, model);
 }
 const extractor = await loadModel(TASK, MODEL);
 
@@ -108,23 +118,38 @@ async function main(sentence) {
 getEle('embed').addEventListener('click', async event => {
     // let sentence = 'Ken Thompson and Dennis Ritchie are fathers of the Unix operating system';
     const sentence = inputEditor.getValue();
+    console.log(sentence);
     const embedding = await main(sentence);
     resultsEditor.setValue(JSON.stringify(embedding, null, 4));
 });
 getEle('embed2').addEventListener('click', async event => {
     // let sentence = 'Ken Thompson and Dennis Ritchie are fathers of the Unix operating system';
-    const sentence = inputEditor2.getValue();
-    const embedding = await main(sentence);
-    resultsEditor2.setValue(JSON.stringify(embedding, null, 4));
+    const sentences = JSON.parse(inputEditor2.getValue());
+
+    let embeddings = [];                                                                                                                      
+    for(let sentence of sentences) {
+        const embedding = await main(sentence);
+        embeddings.push(embedding);
+    }
+    resultsEditor2.setValue(JSON.stringify(embeddings, null, 4));
 });
 
 getEle('cs').addEventListener('click', async event => {
     // let sentence = 'Ken Thompson and Dennis Ritchie are fathers of the Unix operating system';
     if (resultsEditor.getValue() && resultsEditor2.getValue()) {
         const vec1 = JSON.parse(resultsEditor.getValue());
-        const vec2 = JSON.parse(resultsEditor2.getValue());
-        const cs = cosineSimilarity(vec1, vec2);
-        getEle('csValue').innerHTML = `${cs.toFixed(6)}`;
+        const vec2s = JSON.parse(resultsEditor2.getValue());
+        const csList = [];
+        for (const vec2 of vec2s) {
+            const cs = cosineSimilarity(vec1, vec2);
+            csList.push(cs);
+        }
+        const max = Math.max(...csList);
+        const index = csList.indexOf(max);
+
+        getEle('csValue').innerHTML = `${max.toFixed(6)} - ${knowledge[index]}`;
+
+        csEditor.setValue(JSON.stringify(csList, null, 4));
     } else {
         alert ("Two vectors are needed for cosine similarity!");
         throw new Error('Two vectors are needed for cosine similarity!');
