@@ -118,7 +118,7 @@ async function main(sentence) {
 getEle('embed').addEventListener('click', async event => {
     // let sentence = 'Ken Thompson and Dennis Ritchie are fathers of the Unix operating system';
     const sentence = inputEditor.getValue();
-    console.log(sentence);
+    // console.log(sentence);
     const embedding = await main(sentence);
     resultsEditor.setValue(JSON.stringify(embedding, null, 4));
 });
