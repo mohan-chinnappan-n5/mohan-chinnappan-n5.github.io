@@ -17,7 +17,7 @@ let knowledge = [
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has("c")) {
     await navigator.clipboard.readText().then((clipText) => {
-        initInputText = [clipText];
+        knowledge = clipText;
     })
 }
 
@@ -173,7 +173,7 @@ getEle("file-upload")
         if (file) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                inputEditor.setValue(e.target.result);
+                inputEditor2.setValue(e.target.result);
                 getEle('embed').click();
             };
             reader.readAsText(file);
@@ -191,7 +191,7 @@ function handleFileDrop(e) {
         const reader = new FileReader();
         reader.onload = function (event) {
             const fileContent = event.target.result;
-            inputEditor.setValue(fileContent);
+            inputEditor2.setValue(fileContent);
             getEle('embed').click();
         };
         reader.readAsText(file);

@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+
     <title>Embedding - transformers </title>
     <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
@@ -25,8 +27,8 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <div id="dropArea" style="border: 2px dashed #ccc; padding: 2px; text-align: center;">
-                        <input id="file-upload" type="file" class="btn btn-dark" accept="text/*" />
-                        <span style="color: wheat;">Drag and drop a text file here </span>
+                        <input id="file-upload" type="file" class="btn btn-dark" accept="application/json" />
+                        <span style="color: wheat;">Drag and drop a Knowledge Base JSON file here </span>
                         <button class="btn btn-primary" id="embed">Embed Question</button>
                         <button class="btn btn-primary" id="embed2">Embed Knowledge Base</button>
                         <button class="btn btn-success" id="cs">Cosine Similarity</button>
@@ -54,6 +56,7 @@
         <div id="inputEditor2" style="height: 300px; "></div>
         <h2 style="font-size:small;">Embedding of Knowledge Base:</h2>
         <div id="resultsEditor2" style="height: 200px;"></div>
+        <img src="img/cs-1.png" width="800" alt="">
 
     </div>
 
