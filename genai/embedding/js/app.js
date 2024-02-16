@@ -8,7 +8,9 @@ const getEle = id => document.getElementById(id);
 let initInputText = ["Who are the fathers of the Unix operating system"];
 let knowledge = [
     "Ken Thompson and Dennis Ritchie are fathers of the Unix operating system",
-    "Java was written by James Gosling"
+    "Java was written by James Gosling",
+    "To activate the users in permission set groups: https://github.com/mohan-chinnappan-n/shell-scripts/blob/master/apex/psg/activate_users_psg.cls",
+    "To get users in a permission set group: https://github.com/mohan-chinnappan-n/shell-scripts/blob/master/apex/psg/users_in_psg.cls "
 ];
 
 // read url parameters
@@ -135,6 +137,9 @@ getEle('embed2').addEventListener('click', async event => {
 });
 
 getEle('cs').addEventListener('click', async event => {
+    getEle('embed').click();
+    getEle('embed2').click();
+
     // let sentence = 'Ken Thompson and Dennis Ritchie are fathers of the Unix operating system';
     if (resultsEditor.getValue() && resultsEditor2.getValue()) {
         const vec1 = JSON.parse(resultsEditor.getValue());
