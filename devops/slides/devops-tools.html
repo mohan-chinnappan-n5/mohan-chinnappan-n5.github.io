@@ -310,6 +310,9 @@ python3 paragraph_generator.py --word-list opportunity available in close won st
 # Opportunity in close available.
 
   ```
+## Using CLI
+- [Fake Data Gen CLI](https://github.com/mohan-chinnappan-n/cli-dx/blob/master/data/fake/fake-data-gen.md)
+
 
 
   </div>
@@ -469,7 +472,23 @@ sfdx mohanc:bulkapi:load  -u <username>  -f input.csv -e LF -o Case
 [![Sample ERD](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/dm/img/contact-account.dot.svg)](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/dm/img/contact-account.dot.svg)
 
 ```
-sfdx mohanc:md:describe -s Contact,Account -e contact-account.dot -u test-uzsmfdqkhtk7@example.com > contact-account.csv
+sfdx mohanc:md:describe -s Contact,Account -e contact-account.svg -u test-uzsmfdqkhtk7@example.com > contact-account.csv
+
+```
+
+## Profile PermissionSet PermissionSetGroup, PermissionSetAssignment ERD
+
+```
+sf mohanc md describe -s Profile,PermissionSet,PermissionSetGroup,PermissionSetAssignment -e psg.dot.svg -u  username
+
+```
+
+[![PSG ERD](img/psg.dot.svg)](img/psg.dot.svg)
+
+## Territory2
+
+```
+sf mohanc md describe -s Territory2Type,Territory2Model,Territory2    -e TM2.svg -u username
 
 ```
 
@@ -842,6 +861,73 @@ open 'https://mohan-chinnappan-n5.github.io/viz/datatable/dt-2.html?c=csv'
 </a>
 </div>
 </google-codelab-step>
+
+<google-codelab-step label='Role Hierarchy Viz'>
+  <div id='rh-viz-99-md' class='md' data-trim='false'>
+   [![Sample RH](img/__RH__.svg)](img/__RH__.svg)
+
+  ```
+  sf mohanc security rh  -u   username
+
+  ```
+  </div>
+</google-codelab-step>
+
+<google-codelab-step label='Metadata Dependency Viz'>
+  <div id='mdep-viz-99-md' class='md' data-trim='false'>
+   [![Sample dep viz](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/meta-dep/dependency_graph.svg)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/meta-dep/dependency_graph.svg)
+
+##  credentials.json format
+```
+{
+  "access_token": "YOUR_ACCESS_TOKEN",
+  "instance_url": "YOUR_INSTANCE_URL"
+}
+```
+
+## How to run it?
+```
+#--- get the script ---
+curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/meta-dep/metadata_dependency_graph.py
+#--- run the script (make sure to prepare credentials.json) ---
+python3 metadata_dependency_graph.py -c ~/tmp/credentials.json
+#--- output svg will be in the file: dependency_graph.svg ---
+#--- open in your web browser (macOS)---
+open dependency_graph.svg
+
+```
+
+
+  </div>
+</google-codelab-step>
+
+<google-codelab-step label='Permission Set Group Viz'>
+  <div id='psg-viz-99-md' class='md' data-trim='false'>
+  [![PSG Viz](img/psg_graph.svg)](img/psg_graph.svg)
+
+##  credentials.json format
+```
+{
+  "access_token": "YOUR_ACCESS_TOKEN",
+  "instance_url": "YOUR_INSTANCE_URL"
+}
+```
+
+## How to run?
+```
+# get the script
+curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/py/psg/psg_graph.py
+
+# run the script (after filling up credentials.json)
+python3 psg_graph.py --c credentials.json  --user_id "user_id"
+
+# example
+# python3 psg_graph.py --c ~/tmp/credentials.json  --user_id "0058W00000BAlWSQA1"  
+
+```
+  </div>
+  </google-codelab-step>
+
 
 
 
