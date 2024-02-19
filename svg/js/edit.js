@@ -70,7 +70,7 @@ editor.setValue(packageData);
 
 
 const acConfigMtype = {
-placeHolder: "Search for data spec JSON data ...",
+placeHolder: "Search for SVG files...",
 selector: "#autoCompleteMtype",
 data: {
 src: selectionMap
