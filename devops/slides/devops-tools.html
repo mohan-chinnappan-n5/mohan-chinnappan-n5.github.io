@@ -1,5 +1,4 @@
 
-
 <!doctype html>
 <html>
 <head>
@@ -886,11 +885,6 @@ open 'https://mohan-chinnappan-n5.github.io/viz/datatable/dt-2.html?c=csv'
 }
 ```
 
-## How to get Access Token (SID)?
-- [Use Cookie Viewer Chrome Extension](https://chromewebstore.google.com/detail/cookie-viewer/dedhcncdjkmjpebfohadfeeaopiponca)
-- [![cookie viewe](img/sid-cookie.png)](img/sid-cookie.png)
-
-
 ## How to run it?
 ```
 #--- get the script ---
@@ -971,7 +965,6 @@ curl -O https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/maste
 ## install dependencies
 pip install vlookup-mc==0.1.0
 pip install argparse
-pip install sfutilpsg==0.1.4
 
 # run the script 
 python3 vlookup_test.py --file1 ~/tmp/vlookup/fruits.csv --file2 ~/tmp/vlookup/wearhouse.csv --key-col1 Name --key-col2 Name --output-file ~/tmp/vlookup/FW.csv
@@ -1020,7 +1013,26 @@ Peach,W12
 
 
 
+  <google-codelab-step label='Field Usage Viz'>
+    <div id='fieldusage-viz-99-md' class='md' data-trim='false'>
+[![Account Field Usage](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/graphs/field-usage/fieldusage-account-1.png)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/graphs/field-usage/fieldusage-account-1.png)
+[![Account Field Usage csv](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/graphs/field-usage/fieldusage-account-csv-1.png)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/graphs/field-usage/fieldusage-account-csv-1.png)
 
+
+   ```
+  sf mohanc data field usage -u username -s Account 
+```
+```
+=== Writing  in file Account_fieldUsage.csv ... ===
+=== Opening  Account_fieldUsage.csv... ===
+==== Opening the Chart Site in the web browser... ===
+```
+
+[![Contact Field Usage](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/graphs/field-usage/fieldusage-contact-1.png)](https://raw.githubusercontent.com/mohan-chinnappan-n/shell-scripts/master/graphs/field-usage/fieldusage-contact-1.png)
+
+
+    </div>
+  </google-codelab-step>
 
 
 <google-codelab-step label=' Resources'>
