@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSV to Parquet Converter</title>
+  <!-- Load required libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src=" https://cdn.jsdelivr.net/npm/parquetjs-lite@0.8.7/parquet.min.js "></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs/loader.js"></script>
+  <style>
+    #editor-container {
+      display: flex;
+      height: 90vh;
+    }
+    #csv-editor, #parquet-editor {
+      flex: 1;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="editor-container">
+    <div id="csv-editor"></div>
+    <div id="parquet-editor"></div>
+  </div>
+
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.27.0/min/vs' }});
+      require(['vs/editor/editor.main'], function() {
+        var csvEditor = monaco.editor.create(document.getElementById('csv-editor'), {
+          value: 'Put your CSV content here',
+          language: 'plaintext'
+        });
+
+        var parquetEditor = monaco.editor.create(document.getElementById('parquet-editor'), {
+          value: '',
+          language: 'plaintext'
+        });
+
+        function convertCsvToParquet() {
+          var csvContent = csvEditor.getValue();
+
+          // Parse CSV content using PapaParse library
+          Papa.parse(csvContent, {
+            complete: function(results) {
+              var data = results.data;
+              console.log(data)
+              // Create Parquet file from the parsed CSV data
+              var schema = new parquet.ParquetSchema({
+                name: { type: 'UTF8' },
+                age: { type: 'INT32' },
+                // Define schema according to your CSV structure
+              });
+              var writer = parquet.ParquetWriter(fs.createWriteStream('output.parquet'), schema);
+              writer.writeRecords(data);
+              writer.close();
+
+              // Display Parquet content in the editor
+              var parquetContent = 'Parquet file is created. Download the file to view its content.';
+              parquetEditor.setValue(parquetContent);
+            }
+          });
+        }
+
+        // Trigger conversion when the content of CSV editor changes
+        csvEditor.onDidChangeModelContent(convertCsvToParquet);
+      });
+  </script>
+</body>
+</html>
