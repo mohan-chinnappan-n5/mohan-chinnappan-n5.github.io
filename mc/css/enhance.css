@@ -1,0 +1,62 @@
+/* enhance.css */
+body {
+  zoom: 110%;
+}
+code {
+  font-family: "Monaco", monospace !important;
+  font-size: 11px;
+  white-space: pre-wrap;
+  line-height: 2 !important;
+}
+
+@keyframes slideIn {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 500px; /* Adjust the height as needed */
+    opacity: 1;
+  }
+}
+h2 + ul {
+  border: 2px solid #99ccff;
+  background-color: #f0f8ff; /* Light blue background */
+  padding: 10px; /* Add some padding for better visual */
+  border-radius: 4px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow with a blur radius of 10px */
+  animation: slideIn 2s ease-in-out; /* Animation effect */
+}
+h2 + ul li:nth-child(odd) {
+  background-color: #e6f7ff; /* Lighter shade of blue for odd rows */
+}
+
+h2 + ul li:nth-child(even) {
+  background-color: #d6ecff; /* Darker shade of blue for even rows */
+}
+
+img {
+  border-radius: 10px; /* Rounded corners */
+}
+
+div#s1-md > p > img {
+  border-radius: 50%; /* Rounded corners */
+  animation: slideIn 2s ease-in-out; /* Animation effect */
+}
+
+h2 {
+  border-bottom: 1px solid brown; /* Border properties */
+}
+ul > li:hover {
+  background-color: brown; /* Change background color of li on hover */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+/* Define the keyframes for the cloth opening animation */
+@keyframes clothOpen {
+  0% {
+    transform: scaleY(0); /* Start with the cloth collapsed */
+  }
+  100% {
+    transform: scaleY(1); /* End with the cloth fully opened */
+  }
+}
