@@ -3,8 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="wili class='list-group-item'h=device-wili class='list-group-item'h, initial-scale=1.0">
     <title>Apps and Books</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -13,6 +11,8 @@
     <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
     <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css" >
+    
 
 </head>
 
@@ -80,17 +80,19 @@
             <option value="GenAIApps">GenAI Apps</option>
             <option value="ChromeExts">Chrome Extensions</option>
             <option value="VSCExts">VS Code Extensions</option>
+            <option value="CodeGen">Code Gen</option>
 
 
 
         </select>
     </div>
+    <!-- https://docs.fontawesome.com/web/style/size-->
     <div class="split split-horizontal" id="sections">
 
         <section id="sfbook">
             <h4>Books</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="../sfbooks/sfdevnotes/index.html">Salesforce Development Notes</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-book fa-2x"></i></span> <a href="../sfbooks/sfdevnotes/index.html">Salesforce Development Notes</a></li>
             </ul>
         </section>
 
@@ -98,26 +100,26 @@
         <section id="DataApps">
             <h4>Data Apps</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="../dfv/catalog.html">Data Catalog</a></li>
-                <li class='list-group-item'><a href="../viz/datatable/dt.html">DataTable</a></li>
-                <!-- <li class='list-group-item'><a href="../viz/datatable/dt-2.html">DataTable-2</a></li> -->
-                <li class='list-group-item'><a href="../kalam/viz/app.html">Data Viz -
+                    <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span>   <a href="../dfv/catalog.html">Data Catalog</a></li>
+                    <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span>   <a href="../viz/datatable/dt.html">DataTable</a></li>
+                <!--   <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../viz/datatable/dt-2.html">DataTable-2</a></li> -->
+                    <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span>   <a href="../kalam/viz/app.html">Data Viz -
                         Kalam</a></li>
 
-                <li class='list-group-item'><a href="../dfv/renderer.html">SF-LAND: Data
+                    <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span>   <a href="../dfv/renderer.html">SF-LAND: Data
                         Viz
                         : Renderer</a></li>
 
-                <li class='list-group-item'><a href="https://mohan-chinnappan-n5.github.io/devops/slides/devops-tools.html#9">DataGen</a></li> </ul>
+                    <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span>  <a href="https://mohan-chinnappan-n5.github.io/devops/slides/devops-tools.html#9">DataGen</a></li> </ul>
         </section>
 
         <section id="EditorApps">
             <h4>Editor Apps</h4>
             <ul class="list-group list-group-striped container">
 
-                <li class='list-group-item'><a href="../md/md.html">Markdown Editor -
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../md/md.html">Markdown Editor -
                         Kalam</a></li>
-                <li class='list-group-item'><a href="../editor/simple-editor.html">Simple
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../editor/simple-editor.html">Simple
                         File Editor - Kalam</a></li>
             </ul>
         </section>
@@ -126,7 +128,7 @@
 
             <h4>Database</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="../utils/sql/sql.html">SQLite</a>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../utils/sql/sql.html">SQLite</a>
                 </li>
             </ul>
         </section>
@@ -136,7 +138,7 @@
             <h4>JSON Apps</h4>
             <ul class="list-group list-group-striped container">
 
-                <li class='list-group-item'><a href="../json/json.html">JSON Editor</a>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../json/json.html">JSON Editor</a>
                 </li>
 
 
@@ -148,10 +150,10 @@
             <h4>XML</h4>
             <ul class="list-group list-group-striped container">
 
-                <li class='list-group-item'><a href="../xml/sfl-xslt.html">SF-LAND ::
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../xml/sfl-xslt.html">SF-LAND ::
                         XSLT</a>
                 </li>
-                <li class='list-group-item'><a href="../xml2json/xml2json.html">XML2JSON</a>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../xml2json/xml2json.html">XML2JSON</a>
                 </li>
 
 
@@ -161,8 +163,8 @@
         <section id="YAML">
             <h4>YAML</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="../yaml/json2yaml.html">JSON2YAML</a> </li>
-                <li class='list-group-item'><a href="../yaml/yaml2json.html">YAML2JSON</a> </li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../yaml/json2yaml.html">JSON2YAML</a> </li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../yaml/yaml2json.html">YAML2JSON</a> </li>
 
 
             </ul>
@@ -173,10 +175,10 @@
             <h4>Generic Apps</h4>
             <ul class="list-group list-group-striped container">
 
-                <li class='list-group-item'><a href="../common/books/books.html">Simple
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../common/books/books.html">Simple
                         Accounting App - Kalam</a></li>
 
-                <li class='list-group-item'><a href="../common/todo/todo.html">Simple
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../common/todo/todo.html">Simple
                         TODO
                         app -
                         Kalam</a></li>
@@ -196,14 +198,14 @@
         <section id="DeploymentApps">
             <h4>Deployment Apps</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="../delta/diff.html">Simple File Diff</a></li>
-                <li class='list-group-item'><a href="../delta/xmldelta.html?t=Profile">SF-LAND :: DeltaUtil</a></li>
-                <li class='list-group-item'><a href="../pkg/pkg-gen.html">package.xml Generator</a></li>
-                <li class='list-group-item'><a href="../sf/merger/merger.html">Merger for package.xml - Turning</a></li>
-                <li class='list-group-item'><a href="../build2/build.html">BuildGen - Turing</a></li>
-                <li class='list-group-item'><a href="../sf/pkg-bundle/app.html">Package Bundle Builder - Turing</a></li>
-                <li class='list-group-item'><a href="../backup/bkp.html">Backup - Turing</a></li>
-                <li class='list-group-item'><a href="../devops/slides/devops-tools.html">DevOps Tools</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../delta/diff.html">Simple File Diff</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../delta/xmldelta.html?t=Profile">SF-LAND :: DeltaUtil</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../pkg/pkg-gen.html">package.xml Generator</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../sf/merger/merger.html">Merger for package.xml - Turning</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../build2/build.html">BuildGen - Turing</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../sf/pkg-bundle/app.html">Package Bundle Builder - Turing</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../backup/bkp.html">Backup - Turing</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../devops/slides/devops-tools.html">DevOps Tools</a></li>
 
 
             </ul>
@@ -214,11 +216,11 @@
             <h4>Perf Measurement Apps</h4>
             <ul class="list-group list-group-striped container">
 
-                <li class='list-group-item'><a href="../nw/traceroute/routemap.html">Traceroute
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../nw/traceroute/routemap.html">Traceroute
                         Map Util - Turing</a></li>
 
 
-                <li class='list-group-item'><a href="../har/harviz.html">HAR Visualizer -
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../har/harviz.html">HAR Visualizer -
                         Kalam</a></li>
 
             </ul>
@@ -240,10 +242,10 @@
         <section id="CRMAApps">
             <h4>CRMA</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="../2021/ea/df/dfviz.html">CRMA
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../2021/ea/df/dfviz.html">CRMA
                         Dataflow Visualizer </a>
                 </li>
-                <li class='list-group-item'><a href="https://mohan-chinnappan-n2.github.io/crma/bchart.html">CRMA Recipe
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="https://mohan-chinnappan-n2.github.io/crma/bchart.html">CRMA Recipe
                         Schedule</a>
                 </li>
             </ul>
@@ -252,20 +254,20 @@
         <section id="DiagramApps">
             <h4>Diagram Apps</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="../svg/edit.html?u=https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/svg/simple.svg">SVG Editor</a></li>
-                <li class='list-group-item'><a href="https://mohan-chinnappan-n2.github.io/2019/viz/seq/seq.html">UML
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../svg/edit.html?u=https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/svg/simple.svg">SVG Editor</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="https://mohan-chinnappan-n2.github.io/2019/viz/seq/seq.html">UML
                         Seq Diagram</a></li>
 
-                <li class='list-group-item'><a href="..//2021/dwg/pg/dwg.html#">Diagram
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="..//2021/dwg/pg/dwg.html#">Diagram
                         Editor Playground</a></li>
-                <li class="list-group-item"><a href="../draw/excalidraw/index.html">Draw Tool</a> </li>
-                <li class="list-group-item"><a href="https://mohan-chinnappan-n.github.io/viz/viz.html">GraphViz</a>
+                <li class="list-group-item"><span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span><a href="../draw/excalidraw/index.html">Draw Tool</a> </li>
+                <li class="list-group-item"><span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span><a href="https://mohan-chinnappan-n.github.io/viz/viz.html">GraphViz</a>
                 </li>
-                <li class="list-group-item"><a
+                <li class="list-group-item"><span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span><a
                         href="https://mohan-chinnappan-n.github.io/drawio/src/main/webapp/index.html">DrawIO</a>
                 </li>
 
-                <li class="list-group-item"><a href="../image/svg2png/svg2png.html">SVG2PNG</a> </li>
+                <li class="list-group-item"><span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span><a href="../image/svg2png/svg2png.html">SVG2PNG</a> </li>
 
 
 
@@ -278,9 +280,9 @@
 
             <h4>SOQL Apps</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="https://mohan-chinnappan-n5.github.io/sf/query/app.html">SOQL Playground</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="https://mohan-chinnappan-n5.github.io/sf/query/app.html">SOQL Playground</a></li>
                 </li>
-                <li class='list-group-item'><a href="https://mohanc-sf.deno.dev">SOQL Playground - Deno</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="https://mohanc-sf.deno.dev">SOQL Playground - Deno</a></li>
             </li>
 
             </ul>
@@ -291,7 +293,7 @@
 
             <h4>Media Apps (13 Apps)</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="https://mohan-chinnappan-n2.github.io/media-app.html">Video, Audio,
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="https://mohan-chinnappan-n2.github.io/media-app.html">Video, Audio,
                         Screen Recording and Music Apps</a></li>
                 </li>
 
@@ -301,7 +303,7 @@
         <section id="UIRecorderApps">
             <h4>UI Recorder Apps</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="../cspl/cspl.html?a=0&t=30000">State and Country Picklist Recording
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../cspl/cspl.html?a=0&t=30000">State and Country Picklist Recording
                         Script Generator</a></li>
             </ul>
         </section>
@@ -310,14 +312,14 @@
 
             <h4>GenAI apps</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="../genai/od/app.html">Object Detector - transformer</a></li>
-                <li class='list-group-item'><a href="../genai/senti/app.html">Sentiment Analysis - transformer</a></li>
-                <li class='list-group-item'><a href="../genai/translate/app.html">Translate - transformer</a></li>
-                <li class='list-group-item'><a href="../ai/qna/app.html">Q and A - Tensorflow</a></li>
-                <li class='list-group-item'><a href="../ai/hf/img2txt/img2txt.html">Image to Text - HF</a></li>
-                <li class='list-group-item'><a href="../ai/coco-ssd/app.html">Image to Text - coco-ssd</a></li>
-                <li class='list-group-item'><a href="../genai/embedding/app.html">Embedding - transformer</a></li>
-                <li class='list-group-item'><a href="../genai/cf/cf.html">OpenSource LLMs Playground</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../genai/od/app.html">Object Detector - transformer</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../genai/senti/app.html">Sentiment Analysis - transformer</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../genai/translate/app.html">Translate - transformer</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../ai/qna/app.html">Q and A - Tensorflow</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../ai/hf/img2txt/img2txt.html">Image to Text - HF</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../ai/coco-ssd/app.html">Image to Text - coco-ssd</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../genai/embedding/app.html">Embedding - transformer</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../genai/cf/cf.html">OpenSource LLMs Playground</a></li>
 
 
 
@@ -330,8 +332,8 @@
 
             <h4>Chrome Extensions</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="https://chromewebstore.google.com/detail/onnu-salesforce-utils/epdodcflhaclcmidephmhajpneilommo">ONNU - Salesforce Utils</a></li>
-                <li class='list-group-item'><a href="https://chromewebstore.google.com/detail/cookie-viewer/dedhcncdjkmjpebfohadfeeaopiponca">Cookie Viewer</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="https://chromewebstore.google.com/detail/onnu-salesforce-utils/epdodcflhaclcmidephmhajpneilommo">ONNU - Salesforce Utils</a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="https://chromewebstore.google.com/detail/cookie-viewer/dedhcncdjkmjpebfohadfeeaopiponca">Cookie Viewer</a></li>
                 </li>
 
             </ul>
@@ -341,10 +343,21 @@
 
             <h4>VS Code  Extensions</h4>
             <ul class="list-group list-group-striped container">
-                <li class='list-group-item'><a href="https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner">VSCode Apex PMD
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner">VSCode Apex PMD
                 </a></li>
-                <li class='list-group-item'><a href="https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-land">sf-land - Salesforce Development Tools
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-land">sf-land - Salesforce Development Tools
                 </a></li>
+                </li>
+
+            </ul>
+        </section>
+
+        <section id="CodeGen">
+
+            <h4>Code Gen</h4>
+            <ul class="list-group list-group-striped container">
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="https://mohan-chinnappan-n5.github.io/2022/dpa/oauth2/callback/codegen.html">LWC Generator<a></li>
+                  <li class='list-group-item'> <span style="font-size: 18px; color: steelblue;"><i class="fa fa-desktop fa-1x"></i></span> <a href="../apex/batch/app.html">Batch Apex Assembler</a></li>
                 </li>
 
             </ul>
