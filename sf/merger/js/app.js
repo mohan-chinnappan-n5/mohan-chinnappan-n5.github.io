@@ -201,6 +201,50 @@ require(['vs/editor/editor.main'], function () {
         // Create a map to store merged types by name
         const mergedTypesMap = new Map();
 
+
+
+        if (json2.Package.types && typeof json2.Package.types === 'object') {
+            // If it's an array, iterate over it
+            if (Array.isArray(json2.Package.types)) {
+                for (const type of json2.Package.types) {
+                    const name = type.name;
+                    if (!mergedTypesMap.has(name)) {
+                        mergedTypesMap.set(name, type.members.slice());
+                    } else {
+                        mergedTypesMap.get(name).push(...type.members.filter(member => !mergedTypesMap.get(name).includes(member)));
+                    }
+                }
+            } else {
+                alert('Make sure to have as minimum you have 2 types entries in the second xml');
+            }
+        } else {
+            // Handle the case when json2.Package.types is not iterable
+            console.error('json2.Package.types is not iterable');
+        }
+
+
+
+        if (json1.Package.types && typeof json1.Package.types === 'object') {
+            // If it's an array, iterate over it
+            if (Array.isArray(json1.Package.types)) {
+                for (const type of json1.Package.types) {
+                    const name = type.name;
+                    if (!mergedTypesMap.has(name)) {
+                        mergedTypesMap.set(name, type.members.slice());
+                    } else {
+                        mergedTypesMap.get(name).push(...type.members.filter(member => !mergedTypesMap.get(name).includes(member)));
+                    }
+                }
+            } else {
+                alert('Make sure to have as minimum you have 2 types entries in the first xml');
+            }
+        } else {
+            // Handle the case when json2.Package.types is not iterable
+            console.error('json1.Package.types is not iterable');
+        }
+
+        
+/*
         // Merge types from json1
         for (const type of json1.Package.types) {
             const name = type.name;
@@ -212,6 +256,7 @@ require(['vs/editor/editor.main'], function () {
         }
 
         // Merge types from json2
+
         for (const type of json2.Package.types) {
             const name = type.name;
             if (!mergedTypesMap.has(name)) {
@@ -220,7 +265,7 @@ require(['vs/editor/editor.main'], function () {
                 mergedTypesMap.get(name).push(...type.members.filter(member => !mergedTypesMap.get(name).includes(member)));
             }
         }
-
+*/
         // Construct the merged JSON object
         const mergedJSON = {
             "Package": {
