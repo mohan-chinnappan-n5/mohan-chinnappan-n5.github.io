@@ -242,7 +242,7 @@ require(['vs/editor/editor.main'], function () {
         const json2 = xml2json(editor2.getValue());
         const mergedJSON = mergeJSON(json1, json2);
         const mergedXML = jsonToXml(mergedJSON);
-        editor3.setValue(prettifyXml(mergedXML));
+        editor3.setValue('<?xml version="1.0" encoding="UTF-8"?>\n' + prettifyXml(mergedXML));
 
     });
     mergeButton.click();
