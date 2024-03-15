@@ -75,6 +75,8 @@
 - **Importance:** Understanding lock types, monitoring techniques, and best practices is essential for efficient database management.
 - **Further Learning:** Explore Oracle documentation, training resources, and community forums for deeper understanding.
 
+## References
+- [Automatic Locks in DML Operations](https://docs.oracle.com/cd/E18283_01/server.112/e17118/ap_locks001.htm)
 
 </div>
 </google-codelab-step>
@@ -126,9 +128,93 @@
 - **Understanding:** Familiarity with lock types, monitoring techniques, and best practices is essential for efficient Salesforce development.
 - **Continued Learning:** Stay updated with Salesforce documentation, trailhead modules, and community forums for advanced lock management techniques.
 
+
+## Locking statements
+- For example in Apex: in addition to querying for two accounts, also locks the accounts that are returned
+```
+Account [] accts = [SELECT Id FROM Account LIMIT 2 FOR UPDATE];
+// You can not use the ORDER BY keywords in any SOQL query that uses locking.
+
+```
+
+- While the records are locked by a client, the locking client can modify their field values in the database in the same transaction. 
+  - Other clients **have to wait until the transaction completes** and the records are no longer locked before being able to update the same records. 
+  - Other clients can still **query the same records while they are locked**.
+  - If you attempt to lock a record currently locked by another client, your process waits a **maximum of 10 seconds for the lock to be released before acquiring a new lock**. 
+    - If the wait time exceeds 10 seconds, a **QueryException** is thrown. 
+    - Similarly, if you attempt to update a record currently locked by another client and the lock is not released within a maximum of 10 seconds:  a **DmlException** is thrown.
+
+  - If a client attempts to **modify a locked record**, the update operation can succeed if the lock gets released within a short amount of time after the update call was made. 
+    - In this case, it is possible that the updates overwrite changes made by the locking client if the second client obtained an **old copy** of the record.
+    - To prevent the overwrite from happening, the second client must lock the record first. 
+      - The locking process returns a fresh copy of the record from the database through the SELECT statement. 
+      - The second client can use this copy to make new updates.
+
+- The record locks that are obtained in Apex via **FOR UPDATE** clause are automatically released when making callouts. 
+  - The information is logged in the debug log and the logged message includes the most recently locked entity type. 
+    - For example: FOR_UPDATE_LOCKS_RELEASE FOR UPDATE locks released due to a callout. The most recent lock was Account. 
+      - Use caution while making callouts in contexts where FOR UPDATE queries could have been previously executed.
+- When you perform a DML operation on one record, related records are locked in addition to the record in question.
+
+## Avoiding Deadlocks
+
+Avoiding Deadlocks
+- Apex has the possibility of deadlocks, as does any other procedural logic language involving updates to multiple database tables or rows. 
+- To avoid such deadlocks, the Apex runtime engine:
+  - First locks sObject parent records, then children.
+  - Locks sObject records in order of ID when multiple records of the same type are being edited.
+- As a developer, use care when locking rows to ensure that you are not introducing deadlocks. Verify that you are using standard deadlock avoidance techniques by accessing tables and rows in the same order from all locations in an application.
+
+
+## Locking in a SOQL For Loop
+```
+// makes  calls to the query() and queryMore() methods in the SOAP API.
+for (Account[] accts : [SELECT Id FROM Account FOR UPDATE]) { 
+    // Your code
+}
+
+// Note that there is no commit statement. 
+//  If your Apex trigger completes successfully, any database changes are automatically committed
+//  If your Apex trigger does not complete successfully, any changes made to the database are rolled back.
+
+
+```
+
+## Example
+![Account Contact](img/contact-account.svg)
+
+|Operation|Comments|Salesforce|
+|---|---|---|
+|Like to update 10,000 Contacts in Salesforce|push the updates in batches of 200, serially and **they are ordered by parent Account**| Lock the contacts (200 of them) in the batch|
+|||Lock the parent Accounts for those 200 contacts|
+|||Group the Contacts by those that share the **same parent Account** and then process them as a single transaction via single update to the parent Account|
+|||If Platform can not obtain a lock on the parent Account record, the whole transaction fails and an error is issued for each Contact in that transaction.|
+||If we do not order our data by parent, we increase the number of locks, and with it the potential for record locking issues.|If Platform can lock that parent Account, but **not for one of the contacts in the transaction**, the update fails for that one Contact only.|
+||**Incase of Parallel loading**: Let's say we have 3 contacts that belong to the same parent Account in the dataset. Because they are unordered, each of those 3 contacts land in a different batch (since we loading the batches in parallel), Platform will try to lock the parent Account 3 times at once, by 3 different processes. None can get the lock, and all 3 fail, or one gets the lock and the other 2 fail, or all pass but after wasting time on retry cycles **slowing our load down considerably**.|||
+||Solution: Sort the Contacts by parent Account. This will make all the Contacts that belong to the same Account have a **high likelihood of being in the same batch**, reducing the lock potential. Note: Platform will try to gets the lock up to 10 times|||
+
+
+## Record Locking Cheat Sheet
+## References
+- [Locking Records](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_locking_records.htm)
+- [Salesforce Platform Record Locking and Concurrency](https://developer.salesforce.com/blogs/engineering/2014/07/record-locking-cheat-sheet)
+- [Locking Down Record Access in Salesforce](https://developer.salesforce.com/blogs/engineering/2013/12/locking-down-record-access-in-salesforce)
+- [Developing Data Migrations and Integrations with Salesforce: Patterns and Best Practices ](https://www.amazon.com/gp/product/1484242084/)
   </div>
 
 </google-codelab-step>
+
+
+<google-codelab-step label="Record Locking Cheatsheet">
+  <div id='DM-md' class='md2' data-trim='false'>
+  <img src="img/rl_page_1.png" alt="">
+  <img src="img/rl_page_2.png" alt="">
+  <img src="img/rl_page_3.png" alt="">
+  <img src="img/rl_page_4.png" alt="">
+  
+  </div>
+  </google-codelab-step>
+
 </google-codelab>
 
   <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
