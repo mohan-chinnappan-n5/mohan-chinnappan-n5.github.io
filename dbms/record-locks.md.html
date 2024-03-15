@@ -1,0 +1,141 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Row Locks</title>
+
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
+
+  <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+  <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/devops/slides/css/pd.css"> 
+  <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/mc/css/enhance.css">
+<body>
+<google-codelab id="Row Locks in Oracle RDBMS" title="Row Locks" environment="web" >
+
+<google-codelab-step label='Record Locks in Oracle Database'>
+<div id='s0-md' class='md' data-trim='false'>
+  
+## Introduction
+- **Record/Row Locks:** Mechanism used in database management systems to control access to individual rows of data within a table.
+- **Importance:** Essential for maintaining data integrity and consistency in multi-user environments.
+
+## Types of Locks
+- **Shared Locks:** Allow multiple transactions to read a row simultaneously.
+- **Exclusive Locks:** Restrict access to a row to only one transaction for writing.
+- **Intent Locks:** Indicate the intention of a transaction to acquire further locks on a resource.
+- **Row-Level Locks:** Lock individual rows of a table.
+- **Table-Level Locks:** Lock entire tables, impacting all rows within them.
+
+## Why Do We Need Record Locks?
+- **Prevent Data Corruption:** Ensures that concurrent transactions do not interfere with each other, avoiding data inconsistencies.
+- **Maintain Data Integrity:** Guarantees that transactions see consistent views of the data during read and write operations.
+
+## Acquiring and Releasing Locks
+- **Acquisition:** Transactions acquire locks on rows or tables before performing operations like reading or modifying data.
+- **Release:** Locks are released after the transaction completes its operation, allowing other transactions to access the locked resource.
+
+## Deadlocks
+- **Definition:** Occurs when two or more transactions are waiting for locks held by each other, resulting in a circular dependency.
+- **Causes:** Competing for resources in a different order, lack of proper lock management.
+- **Resolution:** Oracle database detects deadlocks and automatically resolves them by rolling back one of the transactions involved.
+
+## Lock Escalation
+- **Definition:** Process where the granularity of locks is escalated from row-level to table-level due to resource contention.
+- **Occurs:** When a large number of row-level locks are acquired, impacting system performance.
+- **Impact:** Can reduce concurrency and increase contention, affecting scalability.
+
+## Monitoring Locks
+- **Tools:** Oracle Enterprise Manager, Oracle SQL Developer, custom scripts using dynamic performance views.
+- **Lock Wait Events:** Events in Oracle database indicating processes waiting for locks to be released.
+- **Dynamic Performance Views:** Queries against views like V$LOCK and V$SESSION to monitor active locks.
+
+## Best Practices for Managing Locks
+- **Optimizing SQL:** Use efficient SQL statements to minimize lock contention, avoid unnecessary locking.
+- **Transaction Isolation Levels:** Choose appropriate isolation levels to balance concurrency and consistency requirements.
+- **Transaction Duration:** Keep transactions short to minimize the duration of locks, reducing contention.
+
+## Case Study: Real-world Example
+- **Scenario:** A banking application updating account balances concurrently.
+- **Locking Strategy:** Implement row-level locks to prevent concurrent updates to the same account balance.
+- **Oracle Handling:** Automatically manages locks to ensure data integrity and prevent conflicts.
+
+## Conclusion
+- **Recap:** Record/row locks are crucial for maintaining data integrity and consistency in multi-user database environments.
+- **Importance:** Understanding lock types, monitoring techniques, and best practices is essential for efficient database management.
+- **Further Learning:** Explore Oracle documentation, training resources, and community forums for deeper understanding.
+
+
+</div>
+</google-codelab-step>
+
+<google-codelab-step label='Record Locks in Salesforce'>
+  <div id='s1-md' class='md' data-trim='false'>
+# Understanding Row/Record Locks in Salesforce
+
+## Introduction
+- **Row/Record Locks:** Mechanism used in Salesforce to control access to individual records within the platform.
+- **Key Aspect:** Essential for maintaining data integrity and preventing data corruption in a multi-user environment.
+
+## Types of Locks
+- **Shared Locks:** Allow multiple users to read a record simultaneously.
+- **Exclusive Locks:** Restrict access to a record to only one user for editing.
+- **Record-Level Locks:** Apply to individual records, ensuring data consistency during updates.
+- **System Locks:** Used by Salesforce internally for platform operations and maintenance.
+
+## Why Do We Need Record Locks?
+- **Prevent Data Loss:** Ensures that concurrent transactions do not overwrite each other's changes, avoiding data loss.
+- **Maintain Data Integrity:** Guarantees that transactions see consistent views of the data during read and write operations.
+
+## Acquiring and Releasing Locks
+- **Acquisition:** Users acquire locks on records before performing operations like editing or deleting data.
+- **Release:** Locks are released automatically after the transaction completes its operation, allowing other users to access the locked record.
+
+## Impact of Locks
+- **Concurrency:** Lock contention can impact system performance by reducing concurrency.
+- **Deadlocks:** Occur when two transactions are waiting for locks held by each other, resulting in a circular dependency.
+- **Lock Duration:** Long-held locks can delay other users' access to records, affecting user experience.
+
+## Monitoring Locks
+- **Tools:** Salesforce Inspector, Workbench, custom Apex code using system methods.
+- **Locking Information:** Access detailed locking information through system logs, debug logs, and platform events.
+- **Lock Wait Time:** Monitor lock wait times to identify potential bottlenecks and optimize performance.
+
+## Best Practices for Managing Locks
+- **Bulk Processing:** Use bulk processing techniques to minimize the number of record locks acquired.
+- **Transaction Isolation Levels:** Choose appropriate isolation levels to balance concurrency and consistency requirements.
+- **Asynchronous Processing:** Offload long-running processes to asynchronous Apex to reduce lock contention.
+
+## Case Study: Real-world Example
+- **Scenario:** A Salesforce application updating Opportunity records concurrently.
+- **Locking Strategy:** Implement record-level locks to prevent concurrent updates to the same Opportunity record.
+- **Salesforce Handling:** Automatically manages locks to ensure data integrity and prevent conflicts.
+
+## Conclusion
+- **Importance:** Row/record locks are critical for maintaining data integrity and consistency in Salesforce applications.
+- **Understanding:** Familiarity with lock types, monitoring techniques, and best practices is essential for efficient Salesforce development.
+- **Continued Learning:** Stay updated with Salesforce documentation, trailhead modules, and community forums for advanced lock management techniques.
+
+  </div>
+
+</google-codelab-step>
+</google-codelab>
+
+  <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/native-shim.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
+
+</body>
+</html>
