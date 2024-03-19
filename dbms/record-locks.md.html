@@ -21,7 +21,109 @@
   <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/devops/slides/css/pd.css"> 
   <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/mc/css/enhance.css">
 <body>
-<google-codelab id="Row Locks in Oracle RDBMS" title="Row Locks" environment="web" >
+<google-codelab id="Row Locks in RDBMS" title="Row Locks" environment="web" >
+
+
+<google-codelab-step label='Record Locks in Postgres Database'>
+  <div id='s00-md' class='md' data-trim='false'>
+PostgreSQL, commonly referred to as Postgres, implements record-level locking through its **Multi-Version Concurrency Control (MVCC)** system. 
+In MVCC, each transaction operates on **a snapshot of the database** at a specific point in time, allowing for concurrent reads and writes without blocking each other. However, to maintain data consistency and prevent conflicts, PostgreSQL employs various locking mechanisms, including record-level locks.
+
+Here's how PostgreSQL implements record-level locks:
+
+1. **Row-Level Locks**: PostgreSQL provides support for row-level locking, allowing transactions to lock individual rows in a table. This is achieved through the `FOR UPDATE` and `FOR SHARE` clauses in SQL statements like `SELECT`.
+
+   - `FOR UPDATE`: Acquires an exclusive lock on selected rows, preventing other transactions from modifying or acquiring locks on those rows until the transaction holding the lock is committed or rolled back.
+   
+   - `FOR SHARE`: Acquires a shared lock on selected rows, allowing other transactions to read but not modify those rows until the transaction holding the lock is committed or rolled back.
+
+2. **Tuple-Level Locks**: Internally, PostgreSQL uses tuple-level locks (also known as row-level locks) to implement record-level locking. These locks are associated with individual tuples (rows) within tables and are managed by the PostgreSQL backend processes.
+
+3. **Lock Modes**: PostgreSQL supports different lock modes, including shared, exclusive, and update locks. These lock modes determine the level of access permitted by concurrent transactions.
+
+4. **Deadlock Detection**: PostgreSQL includes mechanisms to detect and resolve deadlocks, which can occur when transactions wait indefinitely for locks held by other transactions. When a deadlock is detected, PostgreSQL automatically aborts one of the involved transactions to resolve the deadlock and allow the remaining transactions to proceed.
+
+5. **Lock Escalation**: In some cases, PostgreSQL may escalate row-level locks to coarser-grained locks (e.g., table-level locks) to reduce overhead and contention. However, PostgreSQL typically tries to minimize lock escalation to maintain concurrency.
+
+Overall, PostgreSQL's record-level locking mechanisms, combined with its MVCC system, provide a balance between concurrency and data consistency, allowing multiple transactions to operate on the database concurrently while preventing conflicts and ensuring data integrity.
+
+</div>
+</google-codelab-step>
+
+
+<google-codelab-step label='Deadlocks in Postgres Database'>
+ 
+  <div id='s01-md' class='md2' data-trim='false'>
+
+<textarea rows="60" cols="80" style="background-color: black; color:white;font-family:Monaco">
+## Sample code for deadlock Detection
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <libpq-fe.h>
+  
+  void handleError(PGconn *conn) {
+      fprintf(stderr, "Error: %s\n", PQerrorMessage(conn));
+      PQfinish(conn);
+      exit(1);
+  }
+  
+  int main() {
+      PGconn *conn;
+      PGresult *res;
+  
+      // Establish connection to the PostgreSQL database
+      conn = PQconnectdb("dbname=mydb user=myuser password=mypassword");
+      if (PQstatus(conn) != CONNECTION_OK) {
+          handleError(conn);
+      }
+  
+      // Begin a transaction
+      res = PQexec(conn, "BEGIN");
+      if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+          PQclear(res);
+          handleError(conn);
+      }
+      PQclear(res);
+  
+      // Execute SQL statements within the transaction
+      res = PQexec(conn, "UPDATE mytable SET column1 = value1 WHERE condition1");
+      if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+          PQclear(res);
+          handleError(conn);
+      }
+      PQclear(res);
+  
+      // Another transaction or session that could potentially cause a deadlock
+
+      /*
+
+      PostgreSQL detects deadlocks internally and returns an error to the
+      client application 
+      if a deadlock occurs. 
+      Your code should handle this error gracefully by checking the return status
+      of PostgreSQL functions like PQexec() and PQresultStatus() 
+      and taking appropriate action, such as rolling back the transaction, 
+      retrying the operation, or logging the error for further investigation.
+      */
+  
+      // Commit the transaction
+      res = PQexec(conn, "COMMIT");
+      if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+          PQclear(res);
+          handleError(conn);
+      }
+      PQclear(res);
+  
+      // Close the connection
+      PQfinish(conn);
+  
+      return 0;
+  }
+</textarea>
+  
+  </div>
+</google-codelab-step>
 
 <google-codelab-step label='Record Locks in Oracle Database'>
 <div id='s0-md' class='md' data-trim='false'>
