@@ -150,6 +150,8 @@ blockedTime ms: ${summary.blockedTime}
         //{ data: 'serverIPAddress', title: 'serverIPAddress' },
 
         { data: "time", title: "Time (ms)" },
+        { data: "request.url", title: "URL" },
+
 
         { data: "request.method", title: "Method" },
         { data: "response.status", title: "Status" },
@@ -169,7 +171,6 @@ blockedTime ms: ${summary.blockedTime}
 
         //{ data: 'connection', title: 'Connection' },
 
-        { data: "request.url", title: "URL" },
       ],
       /* drawCallback: function () {
                 var api = this.api();
