@@ -150,14 +150,14 @@ blockedTime ms: ${summary.blockedTime}
         //{ data: 'serverIPAddress', title: 'serverIPAddress' },
 
         { data: "time", title: "Time (ms)" },
-        { data: "request.url", title: "URL" },
-
-
         { data: "request.method", title: "Method" },
         { data: "response.status", title: "Status" },
         { data: "response.httpVersion", title: "HTTP" },
         { data: "response.bodySize", title: "BodySize" },
-        { data: "timings.blocked", title: "Blocked (ms)" },
+        { data: "request.url", title: "URL" },
+
+
+       { data: "timings.blocked", title: "Blocked (ms)" },
 
         { data: "timings.receive", title: "Receive (ms)" },
         { data: "timings.dns", title: "DNS (ms)" },
