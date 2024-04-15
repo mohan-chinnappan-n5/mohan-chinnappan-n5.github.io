@@ -1,0 +1,36 @@
+/* app.css */
+
+.container {
+    display: flex;
+}
+
+.pane {
+    flex: 1;
+    padding: 10px;
+}
+
+#csv-data {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: none;
+}
+
+#sql-query {
+    height: 100px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: Monaco;
+    background-color: black;
+    color:wheat;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#query-results {
+    height: 600px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 5px;
+}

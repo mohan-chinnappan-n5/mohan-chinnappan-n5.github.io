@@ -21,6 +21,26 @@ const getFileType = () => {
   }
   return null;
 }
+// Get the query parameters from the URL
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('c')) {
+  await navigator.clipboard.readText().then((clipText) => {
+    document.getElementById('t1').value = clipText;
+  });
+}
+
+const enableCompareButton = () => {
+  const v1 = document.getElementById("t1").value;
+  const v2 = document.getElementById("t2").value;
+  // console.log(v1.trim().length, v2.trim().length);
+  if (v1.trim().length > 0 && v2.trim().length > 0) {
+    document.getElementById("compare").disabled = false;
+  } else {
+    document.getElementById("compare").disabled = true;
+  }
+}
+
+
 
 
 
@@ -99,16 +119,6 @@ const json2xml = (json) => {
   return  prettifyXml(x2js.json2xml_str (json ));
 }
 
-enableCompareButton = () => {
-  const v1 = document.getElementById("t1").value;
-  const v2 = document.getElementById("t2").value;
-  // console.log(v1.trim().length, v2.trim().length);
-  if (v1.trim().length > 0 && v2.trim().length > 0) {
-    document.getElementById("compare").disabled = false;
-  } else {
-    document.getElementById("compare").disabled = true;
-  }
-}
 
 
 document.getElementById("t1").addEventListener('input', event => enableCompareButton());
