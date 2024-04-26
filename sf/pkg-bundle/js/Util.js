@@ -250,7 +250,8 @@ echo sfdx force:source:deploy -x package.xml  --${2}destructivechanges destructi
     fromFolder,
     branchName,
     testClassList,
-    userName
+    userName,
+    readLocal
   ) {
     // Store input in localStorage
     const data = {
@@ -263,6 +264,10 @@ echo sfdx force:source:deploy -x package.xml  --${2}destructivechanges destructi
     //console.log(data);
     localStorage.setItem("envData", JSON.stringify(data));
 
+
+    let gitCheckout = `git checkout ${branchName}; git pull `;
+    if (readLocal) { gitCheckout = '# read from local' }
+
     return `
 # TEMPLATE_NAME is the your package name 
 # - example: PATCH_RELEASE_22)
@@ -274,8 +279,9 @@ FROM_FOLDER="${fromFolder}"
 
 CWD=\`pwd\`
 cd "${fromFolder}" 
-git checkout ${branchName}
-git pull
+
+${gitCheckout}
+
 cd "\${CWD}"
 
 TO_FOLDER="\${TEMPLATE_NAME}"

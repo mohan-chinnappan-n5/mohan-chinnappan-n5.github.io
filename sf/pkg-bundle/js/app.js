@@ -26,8 +26,10 @@ if (savedData) {
 // import { Util  } from "https://cdn.jsdelivr.net/gh/mohan-chinnappan-n/buildv2@b0baef6/bundler/Util.js";
 // ref: https://stackoverflow.com/questions/17341122/link-and-execute-external-javascript-file-hosted-on-github/18049842#18049842
 
-import { Types } from "./Types.js?v=123";
-import { Util  } from "./Util.js?v=118";
+import { Types } from "./Types.js?v=126";
+import { Util  } from "./Util.js?v=119";
+
+// console.log(Types.typeInfoMap['ApexClass'])
 
 if (urlParams.has("d")) {
   getEle("jsonEditor").style.display = "block";
@@ -48,10 +50,16 @@ let initData = `<?xml version="1.0" encoding="UTF-8"?>
 </Package>
 `;
 
+let readLocal = false;
+
 if (urlParams.has("c")) {
   await navigator.clipboard.readText().then((clipText) => {
     initData = clipText;
   });
+}
+
+if (urlParams.has("l")) {
+  readLocal = true;
 }
 
 let bashEditor;
@@ -240,7 +248,7 @@ function convertXmlToJson(xml, templateName, fromFolder, branchName, testClassLi
       packageXmlPath,
       destructiveXmlPath
     );
-    const envVars = Util.getEnvVars(templateName, fromFolder, branchName,testClassList, userName);
+    const envVars = Util.getEnvVars(templateName, fromFolder, branchName,testClassList, userName, readLocal);
     const zipper = Util.getZipper(TEMPLATE_NAME);
 
     return {

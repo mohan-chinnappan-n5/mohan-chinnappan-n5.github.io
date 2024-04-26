@@ -1060,6 +1060,79 @@ export class Types {
       },
     },
 
+    CspTrustedSite: {
+      folderName: "cspTrustedSites",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `cspTrustedSites`,
+          fileNames: [`${member}.cspTrustedSite-meta.xml`],
+
+        };
+      },
+    },
+
+    ConnectedApp: {
+      folderName: "connectedApps",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `connectedApps`,
+          fileNames: [`${member}.connectedApp-meta.xml`],
+
+        };
+      },
+    },
+
+    Letterhead: {
+      folderName: "letterhead",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `letterhead`,
+          fileNames: [`${member}.letter-meta.xml`],
+
+        };
+      },
+    },
+
+    LightningExperienceTheme: {
+      folderName: "lightningExperienceThemes",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `lightningExperienceThemes`,
+          fileNames: [`${member}.lightningExperienceTheme-meta.xml`],
+
+        };
+      },
+    },
+
+    RecommendationStrategy: {
+      folderName: "RecommendationStrategies",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `RecommendationStrategies`,
+          fileNames: [`${member}.recommendationStrategy-meta.xml`],
+
+        };
+      },
+    },
+
+    RemoteSiteSetting: {
+      folderName: "remoteSiteSettings",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `remoteSiteSettings`,
+          fileNames: [`${member}.remoteSite-meta.xml`],
+
+        };
+      },
+    },
+
+
+
+
+
+
+
+
     // Add more mappings for other types if needed
   };
 }
