@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Add shadow effect */
+    padding: 20px;
+    background-color: #ffffff;
+
+    transition: transform 0.3s ease; /* Add transition for smooth sliding */
+
+    
+}
+
+#question {
+    font-weight: bold;;
+}
+
+.card.slide-out {
+    transform: translateY(-100%); /* Slide the card out of view */
+}
+
+
+.choice {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: block;
+    width: 200px;
+}
+
+#done {
+    background-color: #af4c8b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: block;
+    width: 200px;
+    float: right;
+}
+
+
+.choice:hover {
+    background-color: #45a049;
+}
+
+#scoreChart {
+    width: 100px;
+    height: 100px;
+}

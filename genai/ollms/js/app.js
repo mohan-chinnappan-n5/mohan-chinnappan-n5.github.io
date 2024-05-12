@@ -31,6 +31,7 @@ require(['vs/editor/editor.main'], function () {
         });
 
 });
+// OLLAMA_ORIGINS=https://mohan-chinnappan-n5.github.io/*  ollama serve
 
 function fetchResponse() {
     // Show spinner
@@ -46,7 +47,7 @@ function fetchResponse() {
 
 
     // Fetch response from service
-    axios.post('http://localhost:11434/api/generate', {
+    axios.post('http://localhost:11434/api/generate',  {
         model: modelName,
         prompt: prompt,
         stream: false
