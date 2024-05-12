@@ -1,3 +1,18 @@
+// --------------------------------------
+// Trivia App
+// Mohan Chinnappan
+// --------------------------------------
+
+
+// Create a URLSearchParams object with the current URL
+const urlParams = new URLSearchParams(window.location.search);
+
+// Get the value of the "cat" parameter
+const catParameter = urlParams.get('cat');
+
+let _CAT = 'trivia';
+if (catParameter === 'sf') _CAT = 'sf';
+
 // Function to fetch trivia data from the JSON file
 async function fetchTriviaData(source) {
     try {
@@ -55,6 +70,13 @@ function selectChoice(choice) {
     const correctAnswer = trivia[currentIndex].answer;
     if (choice === correctAnswer) {
         score++;
+        trivia[currentIndex].correct = true;
+        trivia[currentIndex].answered = true;
+        
+    } else {
+        trivia[currentIndex].correct = false;
+        trivia[currentIndex].answered = true;
+
     }
     currentIndex++;
     if (currentIndex < trivia.length) {
@@ -64,7 +86,22 @@ function selectChoice(choice) {
     }
 }
 
-// Function to display the final score
+// Function to display a list of questions with a given heading
+function displayQuestionList(heading, questions) {
+    const headingElement = document.createElement("h2");
+    headingElement.textContent = heading;
+    choicesElement.appendChild(headingElement);
+
+    const questionList = document.createElement("ul");
+    questions.forEach(question => {
+        const listItem = document.createElement("li");
+        listItem.textContent = question.question;
+        questionList.appendChild(listItem);
+    });
+    choicesElement.appendChild(questionList);
+}
+
+
 // Function to display the final score and draw a pie chart
 function displayScore() {
     questionElement.textContent = "Quiz Completed!";
@@ -72,26 +109,41 @@ function displayScore() {
     scoreElement.textContent = `Your Score: ${score} / ${trivia.length}`;
     doneButton.style.display = "none";
 
+    // Count correct, incorrect, and unanswered questions
+    let correctCount = trivia.filter(question => question.correct).length;
+    let incorrectCount = trivia.filter(question => !question.correct && question.answered).length;
+    let unansweredCount = trivia.length - (correctCount + incorrectCount);
+
+    console.log(correctCount, incorrectCount, unansweredCount)
+
     // Draw pie chart
     const chartData = {
-        labels: ["Correct Answers", "Incorrect Answers"],
+        labels: ["Correct", "Incorrect", "Unanswered"],
         datasets: [{
-            data: [score, trivia.length - score],
-            backgroundColor: ["#99ffcc", "#ff99cc"]
+            data: [correctCount, incorrectCount, unansweredCount],
+            backgroundColor: ["green", "red", "gray"]
         }]
     };
 
-    // Set canvas width and height
-    const canvas = document.getElementById("scoreChart");
-    canvas.width = 200; // Set desired width
-    canvas.height = 200; // Set desired height
-
-    const ctx = canvas.getContext("2d");
+    const ctx = document.getElementById("scoreChart").getContext("2d");
     new Chart(ctx, {
         type: "pie",
         data: chartData
     });
+
+    // Display list of incorrect or not answered questions
+    const incorrectQuestions = trivia.filter(question => !question.correct && question.answered);
+    const notAnsweredQuestions = trivia.filter(question => !question.answered);
+    
+    if (incorrectQuestions.length > 0) {
+        displayQuestionList("Incorrect Questions", incorrectQuestions);
+    }
+    
+    if (notAnsweredQuestions.length > 0) {
+       // displayQuestionList("Not Answered Questions", notAnsweredQuestions);
+    }
 }
+ 
 
 
 
@@ -107,7 +159,7 @@ doneButton.addEventListener("click", displayScore);
 
 // Load trivia data when the page loads
 window.onload = async function () {
-    trivia = await fetchTriviaData('js/trivia.json');
+    trivia = await fetchTriviaData(`js/${_CAT}.json`);
     trivia = removeDuplicates(trivia);
     trivia = shuffle(trivia);
     displayQuestion();
