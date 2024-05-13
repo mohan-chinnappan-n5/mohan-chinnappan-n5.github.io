@@ -4,15 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Chat With Local LLMs</title>
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.0/min/vs/loader.js"></script>
     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
-    <link rel="stylesheet" href="css/app.css?v=3">
+    <link rel="stylesheet" href="css/app.css?v=4">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 </head>
 
 <body>
@@ -24,6 +28,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <!-- Dropdown to select model name -->
                     <select id="modelName"></select>
@@ -34,25 +39,23 @@
                     <button class="fetch-button btn btn-primary" onclick="fetchResponse()">Ask
                         <div id="spinner" class="spinner"></div>
                     </button>
+                    <!-- Span to display response time -->
+                    <span id="responseTime"></span>
                 </li>
 
             </ul>
         </div>
     </nav>
-    <div style="display: flex; flex-direction: row; height: 120vh;">
-        <div style="flex: 2;">
-            <!-- Textarea for user input -->
-            <textarea id="markdownInput" rows="10" cols="60">Why Sky is blue?</textarea>
-            <!-- Span to display response time -->
-            <span id="responseTime"></span>
-        </div>
-
-        <div style="flex: 2;">
-            <!-- Monaco editor for rendering response -->
-            <div id="editor" style="width: 800px; height: 600px; border: radius 10px;"></div>
-        </div>
+    <div class="split split-horizontal" id="prompt">
+        <!-- Textarea for user input -->
+        <textarea id="markdownInput" rows="10" cols="60">Why Sky is blue?</textarea>
     </div>
-    <script src="js/app.js"></script>
+
+    <div class="split split-horizontal" id="response">
+        <!-- Monaco editor for rendering response -->
+        <div id="editor" style="width: 100%; height:100%; border: radius 10px;"></div>
+    </div>
+    <script src="js/app.js?v3"></script>
 </body>
 
 </html>

@@ -3,6 +3,12 @@
 // mohan chinnappan
 //-------------------------
 
+
+Split(["#prompt", "#response"], {
+    sizes: [30, 70],
+});
+
+
 require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.0/min/vs' } });
 require(['vs/editor/editor.main'], function () {
     // Initialize Monaco editor

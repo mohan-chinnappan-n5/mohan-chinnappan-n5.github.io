@@ -35,3 +35,6 @@ textarea {
 #modelName {
     width: 200px;
 }
+#responseTime {
+    color:white;
+}
