@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub PR Search</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .dark .dark\:bg-gray-900 { background-color: #1a202c; }
+        .dark .dark\:text-gray-200 { color: #e2e8f0; }
+        .dark .dark\:bg-gray-700 { background-color: #2d3748; }
+        .dark .dark\:text-white { color: #ffffff; }
+        .dark .dark\:bg-gray-800 { background-color: #2d3748; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+    <!-- Navbar -->
+    <nav class="bg-gray-800 dark:bg-gray-700 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-xl font-bold">GitHub PR Search Tool</h1>
+            <button id="themeToggle" class="text-white bg-blue-500 px-4 py-2 rounded">Toggle Theme</button>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="flex items-center justify-center min-h-screen p-8">
+        <div class="bg-white dark:bg-gray-800 p-8 rounded shadow-md w-full max-w-lg">
+            <h2 class="text-2xl font-bold mb-6 text-center">Search GitHub Pull Requests</h2>
+            <form id="searchForm" class="space-y-4">
+                <div>
+                    <label for="github_repo" class="block text-gray-700 dark:text-gray-400">GitHub Repository URL:</label>
+                    <input type="text" id="github_repo" name="github_repo" placeholder="https://github.com/user/repo" class="mt-1 block w-full p-2 border border-gray-300 rounded bg-gray-200 dark:bg-gray-700 dark:text-white">
+                </div>
+                
+                <div>
+                    <label for="review" class="block text-gray-700 dark:text-gray-400">Review:</label>
+                    <select id="review" name="review" class="mt-1 block w-full p-2 border border-gray-300 rounded bg-gray-200 dark:bg-gray-700 dark:text-white">
+                        <option value="approved">Approved</option>
+                        <option value="changes_requested">Changes Requested</option>
+                        <option value="commented">Commented</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="reviewed_by" class="block text-gray-700 dark:text-gray-400">Reviewed By:</label>
+                    <input type="text" id="reviewed_by" name="reviewed_by" placeholder="Your GitHub Username" class="mt-1 block w-full p-2 border border-gray-300 rounded bg-gray-200 dark:bg-gray-700 dark:text-white">
+                </div>
+                
+                <div>
+                    <label for="base" class="block text-gray-700 dark:text-gray-400">Base:</label>
+                    <input type="text" id="base" name="base" placeholder="Branch Name" class="mt-1 block w-full p-2 border border-gray-300 rounded bg-gray-200 dark:bg-gray-700 dark:text-white">
+                </div>
+                
+                <div>
+                    <label for="created" class="block text-gray-700 dark:text-gray-400">Created:</label>
+                    <input type="text" id="created" name="created" placeholder=">2024-01-01" class="mt-1 block w-full p-2 border border-gray-300 rounded bg-gray-200 dark:bg-gray-700 dark:text-white">
+                </div>
+                
+                <div class="text-center">
+                    <button type="button" onclick="generateUrl()" class="bg-blue-500 text-white px-4 py-2 rounded">Generate URL</button>
+                </div>
+            </form>
+            
+            <div id="result" class="mt-6 text-center"></div>
+        </div>
+    </div>
+    
+    <script src='js/app.js'></script>
+</body>
+</html>
