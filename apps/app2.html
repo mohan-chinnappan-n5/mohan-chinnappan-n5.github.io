@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apps and Books</title>
+    <link rel="icon" type="image/x-icon" href="../editor/img/favicon.ico" />
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Include Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    .fixed {
+        position: fixed;
+    }
+    
+    .top-0 {
+        top: 0;
+    }
+    
+    .w-full {
+        width: 100%;
+    }
+    
+    .z-10 {
+        z-index: 10; /* Adjust z-index as needed */
+    }
+</style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed top-0 w-full z-10 bg-blue-500 text-white p-2">
+
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-lg font-bold" href="#">Apps and Books</a>
+            <select class="form-select rounded-lg px-4 py-2 bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" id="sectionDropdown"></select>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto my-8" id="sectionsContainer"></div>
+    <script src="app2.js"></script>
+</body>
+</html>

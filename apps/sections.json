@@ -1,0 +1,142 @@
+{
+    "sections": [
+      {
+        "id": "sfbook",
+        "title": "Books",
+        "items": [
+          {
+            "text": "Salesforce Development Notes",
+            "url": "../sfbooks/sfdevnotes/index.html",
+            "icon": "fa-book"
+          }
+        ]
+      },
+      {
+        "id": "gh",
+        "title": "Github Tools",
+        "items": [
+          {
+            "text": "GitHub PR Search Tool",
+            "url": "../gh/github-app.html",
+            "icon": "fa-search"
+          }
+        ]
+      },
+
+      {
+        "id": "DataApps",
+        "title": "Data Apps",
+        "items": [
+          {
+            "text": "Data Catalog",
+            "url": "../dfv/catalog.html",
+            "icon": "fa-database"
+          },
+          {
+            "text": "Data Table",
+            "url": "../viz/datatable/dt.html",
+            "icon": "fa-table"
+          },
+          {
+            "text": "Data viz",
+            "url": "./kalam/viz/app.html",
+            "icon": "fa-chart-simple"
+          },
+          {
+            "text": "SF-LAND: Data Viz : Renderer",
+            "url": "../dfv/renderer.html",
+            "icon": "fa-chart-simple"
+          },
+          {
+            "text": "DataGen",
+            "url": "https://mohan-chinnappan-n5.github.io/devops/slides/devops-tools.html#9",
+            "icon": "fa-database"
+          },
+          {
+            "text": "Word Cloud",
+            "url": "../wc/wc.html",
+            "icon": "fa-chart-simple"
+          }
+
+
+
+        ]
+      },
+      {
+        "id": "EditorApps",
+        "title": "Editor Apps",
+        "items": [
+          {
+            "text": "Markdown Editor",
+            "url": "../md/md.html",
+            "icon": "fa-edit"
+          },
+          {
+            "text": "Simple File Editor",
+            "url": "../editor/simple-editor.html",
+            "icon": "fa-edit"
+          }
+
+
+        ]
+      },
+
+      {
+        "id": "Database",
+        "title": "Database",
+        "items": [
+          {
+            "text": "SQLite",
+            "url": "../utils/sql/sql.html",
+            "icon": "fa-database"
+          },
+          {
+            "text": "CSV - SQL Query",
+            "url": "../csv/query.html",
+            "icon": "fa-database"
+          }
+
+
+        ]
+      },
+
+
+      {
+        "id": "JSONApps",
+        "title": "JSON Apps",
+        "items": [
+          {
+            "text": "JSON Editor",
+            "url": "../json/json.html",
+            "icon": "fa-bars"
+          }
+
+        ]
+      },
+
+      {
+        "id": "XML Apps",
+        "title": "XML Apps",
+        "items": [
+          {
+            "text": "XSLT",
+            "url": "../xml/sfl-xslt.html",
+            "icon": "fa-bars"
+          },
+          {
+            "text": "XML2JSON",
+            "url": "../xml2json/xml2json.html",
+            "icon": "fa-bars"
+          }
+
+        ]
+      }
+
+
+
+
+
+
+    ]
+  }
+  
