@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexiPage Hierarchical Structure</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    .node {
+      cursor: pointer;
+    }
+    .node circle {
+      fill: #999;
+    }
+    .node text {
+      font: 12px sans-serif;
+    }
+    .link {
+      fill: none;
+      stroke: #555;
+      stroke-width: 1.5px;
+    }
+    .label {
+      font: 12px sans-serif;
+      fill: black;
+    }
+  </style>
+</head>
+<body>
+  <svg width="960" height="600"></svg>
+  <script>
+    const data = {
+      name: "FlexiPage",
+      children: [
+        {
+          name: "Region",
+          children: [
+            {
+              name: "ItemInstance",
+              children: [
+                {
+                  name: "ComponentInstance",
+                  children: [
+                    { name: "Attributes" },
+                    { name: "VisibilityRules" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    const svg = d3.select("svg"),
+          margin = { top: 20, right: 90, bottom: 30, left: 90 },
+          width = +svg.attr("width") - margin.left - margin.right,
+          height = +svg.attr("height") - margin.top - margin.bottom,
+          g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const tree = d3.tree().size([width, height]);
+    const root = d3.hierarchy(data);
+    tree(root);
+
+    const link = g.selectAll(".link")
+                  .data(root.links())
+                  .enter().append("path")
+                  .attr("class", "link")
+                  .attr("d", d3.linkVertical()
+                      .x(d => d.x)
+                      .y(d => d.y));
+
+    const node = g.selectAll(".node")
+                  .data(root.descendants())
+                  .enter().append("g")
+                  .attr("class", "node")
+                  .attr("transform", d => `translate(${d.x},${d.y})`);
+
+    node.append("circle").attr("r", 5);
+
+    node.append("text")
+        .attr("dy", 3)
+        .attr("x", d => d.children ? -8 : 8)
+        .style("text-anchor", d => d.children ? "end" : "start")
+        .text(d => d.data.name);
+
+    // Add edge labels to depict relationships
+    const linkNames = [
+      {source: "FlexiPage", target: "Region", name: "One-to-Many"},
+      {source: "Region", target: "ItemInstance", name: "One-to-Many"},
+      {source: "ItemInstance", target: "ComponentInstance", name: "One-to-Many"},
+      {source: "ComponentInstance", target: "Attributes", name: "One-to-Many"},
+      {source: "ComponentInstance", target: "VisibilityRules", name: "One-to-Many"},
+    ];
+
+    g.selectAll(".link-label")
+      .data(linkNames)
+      .enter().append("text")
+      .attr("class", "label")
+      .attr("dy", -5)
+      .attr("x", d => {
+        const source = root.descendants().find(n => n.data.name === d.source);
+        const target = root.descendants().find(n => n.data.name === d.target);
+        return (source.x + target.x) / 2;
+      })
+      .attr("y", d => {
+        const source = root.descendants().find(n => n.data.name === d.source);
+        const target = root.descendants().find(n => n.data.name === d.target);
+        return (source.y + target.y) / 2;
+      })
+      .attr("text-anchor", "middle")
+      .text(d => d.name);
+  </script>
+</body>
+</html>
