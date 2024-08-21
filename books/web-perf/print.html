@@ -1,0 +1,828 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>All about Web Performance</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="web-perf.html"><strong aria-hidden="true">1.</strong> 1. What is Web Performance</a></li><li class="chapter-item expanded "><a href="cert.html"><strong aria-hidden="true">2.</strong> 2. What is inside a Server's Cert</a></li><li class="chapter-item expanded "><a href="async-defer.html"><strong aria-hidden="true">3.</strong> 3. async and defer</a></li><li class="chapter-item expanded "><a href="performance-api.html"><strong aria-hidden="true">4.</strong> 4. Performance API</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">All about Web Performance</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="1-what-is-web-performance"><a class="header" href="#1-what-is-web-performance">1. What is Web Performance?</a></h1>
+<h2 id="objective-measurements"><a class="header" href="#objective-measurements">Objective measurements</a></h2>
+<ul>
+<li>time to load</li>
+<li>frames per second</li>
+<li>time to become interactive</li>
+</ul>
+<h2 id="subjective-measurements"><a class="header" href="#subjective-measurements">Subjective measurements</a></h2>
+<ul>
+<li>how long it felt like it took the content to load</li>
+</ul>
+<h2 id="goals"><a class="header" href="#goals">Goals</a></h2>
+<ul>
+<li>
+<p>making the experience as available and interactive as possible, as soon as possible, while asynchronously loading in the longer tail parts of the experience.</p>
+</li>
+<li>
+<p>users want web experiences with content that is fast to load and smooth to interact with.</p>
+</li>
+</ul>
+<h2 id="issues"><a class="header" href="#issues">Issues</a></h2>
+<p>Two major issues in web performance are issues having to do with <strong>latency</strong> and issues having to do with the fact that for the most part, <strong>browsers are single-threaded</strong></p>
+<ul>
+<li>
+<p>Browsers execute a task from beginning to end before taking up another task.</p>
+<ul>
+<li>Minimize the main thread's responsibilities, where possible and appropriate, to ensure rendering is smooth and responses to interactions are immediate.</li>
+<li>Render time is key, ensuring the main thread can complete all the work we throw at it and still always be available to handle user interactions. </li>
+</ul>
+</li>
+<li>
+<p>The user gets the requested information as quickly as possible</p>
+</li>
+</ul>
+<h2 id="lazy-loading"><a class="header" href="#lazy-loading">Lazy Loading</a></h2>
+<ul>
+<li>Lazy loading is a strategy to <strong>identify resources as non-blocking (non-critical)</strong> and load these only when needed. 
+<ul>
+<li>It's a way to shorten the length of the critical rendering path, which translates into reduced page load times</li>
+</ul>
+</li>
+</ul>
+<h2 id="navigation-timing"><a class="header" href="#navigation-timing">Navigation timing</a></h2>
+<ul>
+<li>measures <strong>the main document's</strong> timings</li>
+</ul>
+<h2 id="resource-timing"><a class="header" href="#resource-timing">Resource timing</a></h2>
+<ul>
+<li>provides the times for all the assets or resources called in by the <strong>main document</strong> and the resources' requested resources.</li>
+</ul>
+<h2 id="two-approaches-for-monitoring-and-providing-insight-into-web-performance"><a class="header" href="#two-approaches-for-monitoring-and-providing-insight-into-web-performance">Two approaches for monitoring and providing insight into web performance</a></h2>
+<ul>
+<li>Synthetic monitoring 
+<ul>
+<li>very well suited to regression testing and mitigating shorter-term performance issues during development</li>
+</ul>
+</li>
+<li>Real user monitoring (RUM)
+<ul>
+<li>best suited for understanding long-term trends</li>
+</ul>
+</li>
+</ul>
+<h2 id="speculative-loading"><a class="header" href="#speculative-loading">Speculative loading</a></h2>
+<ul>
+<li>
+<p>practice of performing navigation actions (such as DNS fetching, fetching resources, or rendering documents)  before the associated pages are actually visited, based on predictions as to what pages the user is most likely to visit next.</p>
+</li>
+<li>
+<p><strong>DNS-prefetch</strong> is an attempt to resolve domain names before resources get requested. This could be a file loaded later or link target a user tries to follow.</p>
+</li>
+</ul>
+<h2 id="latency"><a class="header" href="#latency">Latency</a></h2>
+<ul>
+<li>time it takes for a packet of data to travel from source to a destination.</li>
+</ul>
+<h2 id="dns-lookup"><a class="header" href="#dns-lookup">DNS Lookup</a></h2>
+<p>Your browser requests a DNS lookup, which is eventually fielded by a <strong>name server</strong>, which in turn responds with an IP address</p>
+<p>After this initial request, the IP will likely be cached for a time, which speeds up subsequent requests by retrieving the IP address from the cache instead of contacting a name server again.</p>
+<p>If your fonts, images, scripts, ads, and metrics all have different hostnames, a DNS lookup will have to be made for each one.</p>
+<p>This can be problematic for performance, particularly on mobile networks. When a user is on a mobile network, each DNS lookup has to go from the phone to the cell tower to reach an authoritative DNS server. The distance between a phone, a cell tower, and the name server can add significant latency.</p>
+<h2 id="tcp-handshake"><a class="header" href="#tcp-handshake">TCP handshake</a></h2>
+<p>Once the IP address is known, the browser sets up a connection to the server via a TCP three-way handshake.</p>
+<p>This handshake step happens after a DNS lookup and before the TLS handshake, when creating a secure connection. </p>
+<p>DNS Lookup --- TCP handshake --- TLS handshake</p>
+<p>This mechanism is designed so that two entities attempting to communicate — in this case the browser and web server — can <strong>negotiate the parameters of the network TCP socket connection</strong> before transmitting data, often over HTTPS.</p>
+<p>There are three messages ( SYN-SYN-ACK ) transmitted by TCP to negotiate and start a TCP session between two computer
+Three messages back and forth between each server, and the request has yet to be made</p>
+<div class="table-wrapper"><table><thead><tr><th>No.</th><th>What it does</th></tr></thead><tbody>
+<tr><td>1</td><td>The initiator, generally the browser, sends a TCP SYNchronize packet to the other host, generally the server.</td></tr>
+<tr><td>2</td><td>The server receives the SYN and sends back a SYNchronize-ACKnowledgement.</td></tr>
+<tr><td>3</td><td>The initiator receives the server's SYN-ACK and sends an ACKnowledge. The server receives ACK and the TCP socket connection is established.</td></tr>
+</tbody></table>
+</div>
+<p><img src="img/tcp-3way-hankdshake.png" alt="TCP 3 way handshake" /></p>
+<h2 id="connection-termination---four-way-handshake"><a class="header" href="#connection-termination---four-way-handshake">Connection termination - four-way handshake</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>No.</th><th>What it does</th></tr></thead><tbody>
+<tr><td>1</td><td>The initiator, generally the browser, sends the  FIN packet to the other host</td></tr>
+<tr><td>2</td><td>The other host sends an ACK packet back to the initiator.</td></tr>
+<tr><td>3</td><td>Now, the connection is half-closed, and the other host can still send data. (For example, the server can finish off sending data to the client when the client has closed its connection to the server.)</td></tr>
+<tr><td>4</td><td>The other host sends a FIN packet to the initiator.</td></tr>
+<tr><td>5</td><td>The initiator sends an ACK packet back to the other host.</td></tr>
+</tbody></table>
+</div>
+<h2 id="tls-handshake"><a class="header" href="#tls-handshake">TLS handshake</a></h2>
+<p>For secure connections established over HTTPS, another &quot;handshake&quot; is required.</p>
+<p>This determines
+- which <strong>cipher will be used to encrypt the communication</strong>
+- verifies the server
+- establishes that a secure connection is in place before beginning the actual transfer of data</p>
+<p><img src="img/ssl.jpg" alt="SSL" /></p>
+<p>Server provides the Cert  which contains the <strong>public key of the server</strong>. This key is used by clients to encrypt data that can only be decrypted by the corresponding private key held by the server.</p>
+<p>While making the connection secure <strong>adds time to the page load</strong>, a secure connection is worth the latency expense, as the data transmitted between the browser and the web server cannot be decrypted by a third party.</p>
+<h2 id="response"><a class="header" href="#response">Response</a></h2>
+<p>Once we have an established connection to a web server, the browser sends an initial <strong>HTTP GET</strong> request on behalf of the user, which for websites is most often an HTML file. </p>
+<p>Once the server receives the request, it will reply with relevant response headers and the contents of the HTML.</p>
+<p>This response for this initial request contains the first byte of data received.</p>
+<p>Time to First Byte (TTFB) is the time between when the user made the request — say by clicking on a link — and the receipt of this first packet of HTML. The first chunk of content is usually 14KB of data.</p>
+<h2 id="tcp"><a class="header" href="#tcp">TCP</a></h2>
+<p>TCP packets are split into segments during transmission.
+Because TCP guarantees the sequence of packets, the server must receive an acknowledgment from the client in the form of an ACK packet after sending a certain number of segments.</p>
+<p>If the server waits for an ACK after each segment, that will result in frequent ACKs from the client and may increase transmission time, even in the case of a low-load network.</p>
+<p>On the other hand, sending too many segments at once can lead to the problem that in a busy network the client will not be able to receive the segments and will just keep responding with ACKs for a long time, and the server will have to keep re-sending the segments.</p>
+<p>In order to balance the number of transmitted segments, the TCP slow start algorithm is used to gradually increase the amount of transmitted data until the maximum network bandwidth can be determined, and to reduce the amount of transmitted data in case of high network load.</p>
+<p>The number of segments to be transmitted is controlled by the value of the congestion window (CWND), which can be initialized to 1, 2, 4, or 10 MSS (MSS is 1500 bytes over the Ethernet protocol). That value is the number of bytes to send, upon receipt of which the client must send an ACK.</p>
+<p>If an ACK is received, then the CWND value will be doubled, and so the server will be able to send more segments the next time. If instead no ACK is received, then the CWND value will be halved. That mechanism thus achieves a balance between sending too many segments, and sending too few.</p>
+<h2 id="parsing"><a class="header" href="#parsing">Parsing</a></h2>
+<p>Once the browser receives the first chunk of data, it can begin parsing the information received. Parsing is the step the browser takes to turn the data it receives over the network into the DOM and CSSOM, which is used by the renderer to paint a page to the screen.</p>
+<p>The DOM is the internal representation of the markup for the browser. The DOM is also exposed and can be manipulated through various APIs in JavaScript.</p>
+<p>Even if the requested page's HTML is larger than the initial 14KB packet, the browser will begin parsing and attempting to render an experience based on the data it has. This is why it's important for web performance optimization to include everything the browser needs to start rendering a page, or at least a template of the page — the CSS and HTML needed for the first render — in the first 14KB. But before anything is rendered to the screen, the HTML, CSS, and JavaScript have to be parsed.</p>
+<h2 id="dom-tree"><a class="header" href="#dom-tree">DOM Tree</a></h2>
+<p>The first step is processing the HTML markup and building the DOM tree. HTML parsing involves tokenization and tree construction. HTML tokens include start and end tags, as well as attribute names and values. If the document is well-formed, parsing it is straightforward and faster. The parser parses tokenized input into the document, building up the document tree.</p>
+<p>The DOM tree describes the content of the document. The html element is the first element and root node of the document tree. The tree reflects the relationships and hierarchies between different elements. Elements nested within other elements are child nodes. The greater the number of DOM nodes, the longer it takes to construct the DOM tree.</p>
+<p>When the parser finds non-blocking resources, such as an image, the browser will request those resources and continue parsing.</p>
+<p>Parsing can continue when a CSS file is encountered, but script elements — particularly those without an async or defer attribute — block rendering, and pause the parsing of HTML. Though the browser's preload scanner hastens this process, excessive scripts can still be a significant bottleneck.</p>
+<h2 id="preload-scanner"><a class="header" href="#preload-scanner">Preload scanner</a></h2>
+<p>While the browser builds the DOM tree, this process occupies the main thread. </p>
+<p>While the browser builds the DOM tree, this process occupies the main thread. As this happens, the preload scanner will parse through the content available and request high-priority resources like CSS, JavaScript, and web fonts. Thanks to the preload scanner, we don't have to wait until the parser finds a reference to an external resource to request it. It will retrieve resources in the background so that by the time the main HTML parser reaches the requested assets, they may already be in flight or have been downloaded. The optimizations the preload scanner provides reduce blockages.</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot; /&gt;
+&lt;script src=&quot;myscript.js&quot; async&gt;&lt;/script&gt;
+&lt;img src=&quot;myimage.jpg&quot; alt=&quot;image description&quot; /&gt;
+&lt;script src=&quot;anotherscript.js&quot; async&gt;&lt;/script&gt;
+
+</code></pre>
+<p>In this example, while the main thread is parsing the HTML and CSS, the preload scanner will find the scripts and image, and start downloading them as well. To ensure the script doesn't block the process, add the async attribute, or the defer attribute if JavaScript parsing and execution order is important.</p>
+<p>Waiting to obtain CSS doesn't block HTML parsing or downloading, but it does block JavaScript because JavaScript is often used to query CSS properties' impact on elements.</p>
+<h2 id="cssom-tree"><a class="header" href="#cssom-tree">CSSOM tree</a></h2>
+<p>The second step in the critical rendering path is processing CSS and building the CSSOM tree. The CSS object model is similar to the DOM. The DOM and CSSOM are both trees. They are independent data structures. The browser converts the CSS rules into a map of styles it can understand and work with. The browser goes through each rule set in the CSS, creating a tree of nodes with parent, child, and sibling relationships based on the CSS selectors.</p>
+<p>As with HTML, the browser needs to convert the received CSS rules into something it can work with. Hence, it repeats the HTML-to-object process, but for the CSS.</p>
+<p>The CSSOM tree includes styles from the user agent style sheet. The browser begins with the most general rule applicable to a node and recursively refines the computed styles by applying more specific rules. In other words, it cascades the property values.</p>
+<p>Building the CSSOM is very, very fast and is not displayed in a unique color in current developer tools. Rather, the &quot;Recalculate Style&quot; in developer tools shows the total time it takes to parse CSS, construct the CSSOM tree, and recursively calculate computed styles. In terms of web performance optimization, there are lower hanging fruit, as the total time to create the CSSOM is generally less than the time it takes for one DNS lookup.</p>
+<h2 id="javascript-compilation"><a class="header" href="#javascript-compilation">JavaScript compilation</a></h2>
+<p>While the CSS is being parsed and the CSSOM created, other assets, including JavaScript files, are downloading (thanks to the preload scanner). JavaScript is parsed, compiled, and interpreted. The scripts are parsed into abstract syntax trees. Some browser engines take the abstract syntax trees and pass them into a compiler, outputting bytecode. This is known as JavaScript compilation. Most of the code is interpreted on the main thread, but there are exceptions such as code run in web workers.</p>
+<h2 id="accessibility-tree-aom"><a class="header" href="#accessibility-tree-aom">Accessibility tree (AOM)</a></h2>
+<p>The browser also builds an accessibility tree that assistive devices use to parse and interpret content. The accessibility object model (AOM) is like a semantic version of the DOM. The browser updates the accessibility tree when the DOM is updated. The accessibility tree is not modifiable by assistive technologies themselves</p>
+<p>Until the AOM is built, the content is not accessible to screen readers.</p>
+<h2 id="render"><a class="header" href="#render">Render</a></h2>
+<p>Rendering steps include style, layout, paint, and in some cases compositing. The CSSOM and DOM trees created in the parsing step are combined into a render tree which is then used to compute the layout of every visible element, which is then painted to the screen. In some cases, content can be promoted to its own layer and composited, improving performance by painting portions of the screen on the GPU instead of the CPU, freeing up the main thread.</p>
+<h2 id="style"><a class="header" href="#style">Style</a></h2>
+<p>The third step in the critical rendering path is combining the DOM and CSSOM into a render tree. The computed style tree, or render tree, construction starts with the root of the DOM tree, traversing each visible node.</p>
+<p>Elements that aren't going to be displayed, like the head element and its children and any nodes with display: none, such as the script <code>{ display: none; }</code> you will find in user agent stylesheets, are not included in the render tree as they will not appear in the rendered output. Nodes with <code>visibility: hidden</code> applied are included in the render tree, as they do take up space. As we have not given any directives to override the user agent default, the script node in our code example above will not be included in the render tree.</p>
+<p>Each visible node has its CSSOM rules applied to it. The render tree holds all the visible nodes with content and computed styles — matching up all the relevant styles to every visible node in the DOM tree, and determining, based on the CSS cascade, what the computed styles are for each node.</p>
+<h2 id="layout"><a class="header" href="#layout">Layout</a></h2>
+<p>The fourth step in the critical rendering path is running layout on the render tree to compute the geometry of each node. Layout is the process by which the dimensions and location of all the nodes in the render tree are determined, plus the determination of the size and position of each object on the page. Reflow is any subsequent size and position determination of any part of the page or the entire document.</p>
+<p>Once the render tree is built, layout commences. The render tree identified which nodes are displayed (even if invisible) along with their computed styles, but not the dimensions or location of each node. To determine the exact size and position of each object, the browser starts at the root of the render tree and traverses it.</p>
+<p>On the web page, almost everything is a box. Different devices and different desktop preferences mean an unlimited number of differing viewport sizes. In this phase, taking the viewport size into consideration, the browser determines what the sizes of all the different boxes are going to be on the screen. Taking the size of the viewport as its base, layout generally starts with the body, laying out the sizes of all the body's descendants, with each element's box model properties, providing placeholder space for replaced elements it doesn't know the dimensions of, such as our image.</p>
+<p>The first time the size and position of each node is determined is called layout. Subsequent recalculations of are called reflows. In our example, suppose the initial layout occurs before the image is returned. Since we didn't declare the dimensions of our image, there will be a reflow once the image dimensions are known.</p>
+<h2 id="paint"><a class="header" href="#paint">Paint</a></h2>
+<p>The last step in the critical rendering path is painting the individual nodes to the screen, the first occurrence of which is called the first meaningful paint. In the painting or rasterization phase, the browser converts each box calculated in the layout phase to actual pixels on the screen. Painting involves drawing every visual part of an element to the screen, including text, colors, borders, shadows, and replaced elements like buttons and images. The browser needs to do this super quickly.</p>
+<p>To ensure smooth scrolling and animation, everything occupying the main thread, including calculating styles, along with reflow and paint, must take the browser less than 16.67ms to accomplish. At 2048 x 1536, the iPad has over 3,145,000 pixels to be painted to the screen. That is a lot of pixels that have to be painted very quickly. To ensure repainting can be done even faster than the initial paint, the drawing to the screen is generally broken down into several layers. If this occurs, then compositing is necessary.</p>
+<p>Painting can break the elements in the layout tree into layers. Promoting content into layers on the GPU (instead of the main thread on the CPU) improves paint and repaint performance. There are specific properties and elements that instantiate a layer, including video and canvas, and any element which has the CSS properties of opacity, a 3D transform, will-change, and a few others. These nodes will be painted onto their own layer, along with their descendants, unless a descendant necessitates its own layer for one (or more) of the above reasons.</p>
+<p>Layers do improve performance but are expensive when it comes to memory management, so should not be overused as part of web performance optimization strategies.</p>
+<h2 id="compositing"><a class="header" href="#compositing">Compositing</a></h2>
+<p>When sections of the document are drawn in different layers, overlapping each other, compositing is necessary to ensure they are drawn to the screen in the right order and the content is rendered correctly.</p>
+<p>As the page continues to load assets, reflows can happen (recall our example image that arrived late). A reflow sparks a repaint and a re-composite. Had we defined the dimensions of our image, no reflow would have been necessary, and only the layer that needed to be repainted would be repainted, and composited if necessary. But we didn't include the image dimensions! When the image is obtained from the server, the rendering process goes back to the layout steps and restarts from there.</p>
+<h2 id="interactivity"><a class="header" href="#interactivity">Interactivity</a></h2>
+<p>Once the main thread is done painting the page, you would think we would be &quot;all set.&quot; That isn't necessarily the case. If the load includes JavaScript, that was correctly deferred, and only executed after the onload event fires, the main thread might be busy, and not available for scrolling, touch, and other interactions.</p>
+<p>Time to Interactive (TTI) is the measurement of how long it took from that first request which led to the DNS lookup and TCP connection to when the page is interactive — interactive being the point in time after the First Contentful Paint when the page responds to user interactions within <strong>50ms</strong>. If the main thread is occupied parsing, compiling, and executing JavaScript, it is not available and therefore not able to respond to user interactions in a timely (less than 50ms) fashion.</p>
+<p>In our example, maybe the image loaded quickly, but perhaps the anotherscript.js file was 2MB and our user's network connection was slow. In this case, the user would see the page super quickly, but wouldn't be able to scroll without jank until the script was downloaded, parsed, and executed. That is not a good user experience. Avoid occupying the main thread, as demonstrated in this WebPageTest example:</p>
+<p><img src="img/waterfall.png" alt="Waterfall" /></p>
+<p>In this example, JavaScript execution took over 1.5 seconds, and the main thread was fully occupied that entire time, unresponsive to click events or screen taps.</p>
+<h2 id="references"><a class="header" href="#references">References</a></h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Performance">MDN - Web performance</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="2-what-is-inside-a-servers-cert"><a class="header" href="#2-what-is-inside-a-servers-cert">2. What is inside a Server's Cert</a></h1>
+<p>A server certificate, commonly referred to as an SSL/TLS certificate, contains several important pieces of information that are used to establish secure communication between a client (like a web browser) and a server. Here's what is typically found inside a server certificate:</p>
+<h3 id="1-certificate-version"><a class="header" href="#1-certificate-version">1. <strong>Certificate Version</strong></a></h3>
+<ul>
+<li>Indicates the version of the X.509 standard that the certificate follows. The most common version is X.509 v3.</li>
+</ul>
+<h3 id="2-serial-number"><a class="header" href="#2-serial-number">2. <strong>Serial Number</strong></a></h3>
+<ul>
+<li>A unique identifier assigned by the certificate authority (CA) that issued the certificate. It helps distinguish this certificate from others issued by the same CA.</li>
+</ul>
+<h3 id="3-signature-algorithm"><a class="header" href="#3-signature-algorithm">3. <strong>Signature Algorithm</strong></a></h3>
+<ul>
+<li>Specifies the algorithm used by the CA to sign the certificate. Common algorithms include SHA-256 with RSA encryption (<code>sha256WithRSAEncryption</code>).</li>
+</ul>
+<h3 id="4-issuer"><a class="header" href="#4-issuer">4. <strong>Issuer</strong></a></h3>
+<ul>
+<li>The entity that issued the certificate, usually a trusted certificate authority (CA). This field includes the CA's distinguished name (DN), which might contain information like the CA's organization name, country, and more.</li>
+</ul>
+<h3 id="5-validity-period"><a class="header" href="#5-validity-period">5. <strong>Validity Period</strong></a></h3>
+<ul>
+<li><strong>Not Before</strong>: The date and time from which the certificate is valid.</li>
+<li><strong>Not After</strong>: The expiration date and time of the certificate.</li>
+</ul>
+<h3 id="6-subject"><a class="header" href="#6-subject">6. <strong>Subject</strong></a></h3>
+<ul>
+<li>The entity to which the certificate has been issued. This field contains the subject's distinguished name (DN), which often includes the following:
+<ul>
+<li><strong>Common Name (CN)</strong>: Usually the domain name of the server (e.g., <code>www.example.com</code>).</li>
+<li><strong>Organization (O)</strong>: The organization that owns the certificate.</li>
+<li><strong>Organizational Unit (OU)</strong>: The department within the organization.</li>
+<li><strong>Country (C)</strong>: The country where the organization is located.</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-public-key"><a class="header" href="#7-public-key">7. <strong>Public Key</strong></a></h3>
+<ul>
+<li>Contains the public key of the server. This key is used by clients to encrypt data that can only be decrypted by the corresponding private key held by the server.</li>
+</ul>
+<h3 id="8-subject-alternative-name-san"><a class="header" href="#8-subject-alternative-name-san">8. <strong>Subject Alternative Name (SAN)</strong></a></h3>
+<ul>
+<li>A list of additional domain names or IP addresses that the certificate is valid for. This allows a single certificate to cover multiple domains or subdomains.</li>
+</ul>
+<h3 id="9-key-usage"><a class="header" href="#9-key-usage">9. <strong>Key Usage</strong></a></h3>
+<ul>
+<li>Specifies the purpose of the public key contained in the certificate. It defines whether the key is used for digital signatures, key encipherment, certificate signing, etc.</li>
+</ul>
+<h3 id="10-extended-key-usage"><a class="header" href="#10-extended-key-usage">10. <strong>Extended Key Usage</strong></a></h3>
+<ul>
+<li>Specifies additional purposes for which the certificate may be used, such as server authentication, client authentication, code signing, email protection, etc.</li>
+</ul>
+<h3 id="11-certificate-policies"><a class="header" href="#11-certificate-policies">11. <strong>Certificate Policies</strong></a></h3>
+<ul>
+<li>Specifies the policies under which the certificate was issued. This might include a policy identifier and additional information that describes the terms and conditions of the certificate's use.</li>
+</ul>
+<h3 id="12-authority-key-identifier"><a class="header" href="#12-authority-key-identifier">12. <strong>Authority Key Identifier</strong></a></h3>
+<ul>
+<li>A reference to the public key of the issuing CA, which helps clients verify the authenticity of the certificate.</li>
+</ul>
+<h3 id="13-subject-key-identifier"><a class="header" href="#13-subject-key-identifier">13. <strong>Subject Key Identifier</strong></a></h3>
+<ul>
+<li>A unique identifier for the public key contained in the certificate. This is used to facilitate certificate path building.</li>
+</ul>
+<h3 id="14-basic-constraints"><a class="header" href="#14-basic-constraints">14. <strong>Basic Constraints</strong></a></h3>
+<ul>
+<li>Indicates whether the certificate is for a CA and how deep a certification path is allowed to be (e.g., whether the certificate can be used to sign other certificates).</li>
+</ul>
+<h3 id="15-crl-distribution-points"><a class="header" href="#15-crl-distribution-points">15. <strong>CRL Distribution Points</strong></a></h3>
+<ul>
+<li>Contains information about where to obtain the Certificate Revocation List (CRL) if the certificate has been revoked.</li>
+</ul>
+<h3 id="16-authority-information-access-aia"><a class="header" href="#16-authority-information-access-aia">16. <strong>Authority Information Access (AIA)</strong></a></h3>
+<ul>
+<li>Provides information on how to access the CA's certificate, often used for chaining certificates back to a trusted root.</li>
+</ul>
+<h3 id="17-digital-signature"><a class="header" href="#17-digital-signature">17. <strong>Digital Signature</strong></a></h3>
+<ul>
+<li>A digital signature created by the CA using its private key. This signature is used to verify that the certificate was indeed issued by the trusted CA and that it hasn't been tampered with.</li>
+</ul>
+<h3 id="optional-fields-and-extensions"><a class="header" href="#optional-fields-and-extensions"><strong>Optional Fields and Extensions</strong></a></h3>
+<ul>
+<li><strong>Certificate Transparency (SCT)</strong>: Logs included to provide transparency and detect certificate misissuance.</li>
+<li><strong>OCSP Stapling</strong>: An extension that provides a signed timestamped response from the CA, verifying the certificate status.</li>
+<li><strong>Custom Extensions</strong>: Some certificates may include custom extensions for specific use cases.</li>
+</ul>
+<p>The information inside a server certificate is critical for establishing trust between the server and the client, ensuring secure communication, and verifying the identity of the server. This data structure is standardized under the X.509 specification, and each part plays a role in the security and validity of the certificate.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="3-async-and-defer"><a class="header" href="#3-async-and-defer">3. async and defer</a></h1>
+<p>Using <code>async</code> in a <code>&lt;script&gt;</code> tag in HTML is a way to control how the browser loads and executes JavaScript files. It is particularly useful for optimizing the loading performance of a web page. Here's what <code>async</code> does and how it differs from other script loading techniques:</p>
+<h3 id="purpose-of-async-in-script-tag"><a class="header" href="#purpose-of-async-in-script-tag"><strong>Purpose of <code>async</code> in <code>&lt;script&gt;</code> Tag</strong></a></h3>
+<ul>
+<li>The <code>async</code> attribute allows the browser to load the script file in the background while it continues to parse the HTML document. Once the script is fully loaded, it is executed immediately, without waiting for the entire HTML to be parsed.</li>
+</ul>
+<h3 id="how-async-works"><a class="header" href="#how-async-works"><strong>How <code>async</code> Works</strong></a></h3>
+<ul>
+<li>When a script is marked with <code>async</code>, the browser starts downloading the script as soon as it encounters the <code>&lt;script&gt;</code> tag.</li>
+<li>The HTML parsing continues while the script is being downloaded.</li>
+<li>As soon as the script is fully downloaded, the HTML parsing is paused, and the script is executed immediately.</li>
+<li>Once the script execution is complete, the browser resumes parsing the HTML.</li>
+</ul>
+<h3 id="when-to-use-async"><a class="header" href="#when-to-use-async"><strong>When to Use <code>async</code></strong></a></h3>
+<ul>
+<li>
+<p><strong>Independent Scripts</strong>: Use <code>async</code> for scripts that don't rely on other scripts or DOM elements that come after the script tag. For example, analytics scripts or tracking codes often use <code>async</code> because they don’t depend on the rest of the page’s content.</p>
+</li>
+<li>
+<p><strong>Performance Optimization</strong>: <code>async</code> can be used to speed up page load times by allowing scripts to load in parallel with the HTML parsing.</p>
+</li>
+</ul>
+<h3 id="syntax"><a class="header" href="#syntax"><strong>Syntax</strong></a></h3>
+<pre><code class="language-html">&lt;script src=&quot;script.js&quot; async&gt;&lt;/script&gt;
+</code></pre>
+<h3 id="comparison-with-other-loading-strategies"><a class="header" href="#comparison-with-other-loading-strategies"><strong>Comparison with Other Loading Strategies</strong></a></h3>
+<ul>
+<li>
+<p><strong>Without <code>async</code> or <code>defer</code> (Default Behavior)</strong>:</p>
+<ul>
+<li>The browser stops HTML parsing to download the script and then executes it before continuing to parse the HTML. This can block the page from rendering quickly.</li>
+</ul>
+</li>
+<li>
+<p><strong>With <code>defer</code></strong>:</p>
+<ul>
+<li>Similar to <code>async</code>, the script is downloaded in parallel with HTML parsing. However, with <code>defer</code>, the script execution is deferred until after the HTML has been fully parsed. This ensures that the script does not block the rendering of the page, making it more predictable, especially for scripts that rely on the DOM.</li>
+</ul>
+</li>
+<li>
+<p><strong>With <code>async</code></strong>:</p>
+<ul>
+<li>The script is also downloaded in parallel with HTML parsing but is executed as soon as it’s ready, potentially before the HTML is fully parsed. This can lead to issues if the script relies on elements that haven’t been parsed yet.</li>
+</ul>
+</li>
+</ul>
+<h3 id="use-cases"><a class="header" href="#use-cases"><strong>Use Cases</strong></a></h3>
+<ul>
+<li><strong><code>async</code></strong> is ideal for scripts like analytics or advertisements that don’t depend on other content and where you want to minimize the impact on page load time.</li>
+<li><strong><code>defer</code></strong> is better for scripts that should run after the document has been fully parsed, like those manipulating DOM elements that appear later in the HTML.</li>
+</ul>
+<h3 id="example-usage"><a class="header" href="#example-usage"><strong>Example Usage</strong></a></h3>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Async Script Example&lt;/title&gt;
+    &lt;script src=&quot;analytics.js&quot; async&gt;&lt;/script&gt; &lt;!-- Independent script that runs as soon as it's ready --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Async Script Demo&lt;/h1&gt;
+    &lt;p&gt;This content loads while the script is being fetched asynchronously.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>In this example, <code>analytics.js</code> will load in the background, allowing the rest of the page to be parsed and displayed without waiting for the script to finish downloading. Once <code>analytics.js</code> is ready, it will be executed immediately.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="4-performance-api"><a class="header" href="#4-performance-api">4. Performance API</a></h1>
+<p>The Performance API is a group of standards used to measure the performance of web applications.</p>
+<p>The performance timeline contains high precision timestamps and can be displayed in developer tools. You can also send its data to analytics end points to record performance metrics over time.</p>
+<p>Each performance metric is represented by a single PerformanceEntry. A performance entry has a name, a duration, a startTime, and a type. All performance metrics extend the PerformanceEntry interface and qualify it further.</p>
+<p>The Performance API in web browsers is a powerful tool that provides detailed timing and performance data about how web pages and applications load and run. It is a part of the larger set of Web APIs and allows developers to measure the speed of various aspects of their web applications, helping them optimize performance and improve user experience.</p>
+<h3 id="key-components-of-the-performance-api"><a class="header" href="#key-components-of-the-performance-api"><strong>Key Components of the Performance API</strong></a></h3>
+<ol>
+<li>
+<p><strong>Performance Interface</strong></p>
+<ul>
+<li>The <code>window.performance</code> object is the main entry point for accessing the Performance API. It provides various methods and properties to measure and retrieve performance-related information.</li>
+</ul>
+<pre><code class="language-javascript">const perf = window.performance;
+</code></pre>
+</li>
+<li>
+<p><strong>Performance Timeline</strong></p>
+<ul>
+<li>
+<p>The Performance Timeline API allows developers to retrieve a detailed list of performance-related events and marks. It includes interfaces like <code>PerformanceEntry</code>, <code>PerformanceMark</code>, <code>PerformanceMeasure</code>, and <code>PerformanceObserver</code>.</p>
+</li>
+<li>
+<p><strong>PerformanceEntry</strong>: Represents individual performance-related events, such as marks, measures, or resource timings.</p>
+</li>
+<li>
+<p><strong>PerformanceMark</strong>: Allows developers to create custom timestamps in the performance timeline.</p>
+</li>
+<li>
+<p><strong>PerformanceMeasure</strong>: Measures the duration between two marks or between a mark and the current time.</p>
+</li>
+</ul>
+<pre><code class="language-javascript">performance.mark('start');
+// Some code to measure
+performance.mark('end');
+performance.measure('duration', 'start', 'end');
+const measure = performance.getEntriesByName('duration')[0];
+console.log(measure.duration);
+</code></pre>
+</li>
+<li>
+<p><strong>Navigation Timing</strong></p>
+<ul>
+<li>The Navigation Timing API provides detailed timing information about the loading of the document, from the initial request to the completion of the load event. This includes DNS lookup time, connection time, response time, and more.</li>
+</ul>
+<pre><code class="language-javascript">const timing = performance.timing;
+const pageLoadTime = timing.loadEventEnd - timing.navigationStart;
+console.log(`Page load time: ${pageLoadTime} ms`);
+</code></pre>
+</li>
+<li>
+<p><strong>Resource Timing</strong></p>
+<ul>
+<li>The Resource Timing API provides timing information for each resource (e.g., scripts, images, stylesheets) loaded by the page. It allows developers to see how long each resource takes to fetch, which can be crucial for identifying slow resources.</li>
+</ul>
+<pre><code class="language-javascript">const resources = performance.getEntriesByType('resource');
+resources.forEach(resource =&gt; {
+    console.log(`Resource ${resource.name} took ${resource.duration} ms to load.`);
+});
+</code></pre>
+</li>
+<li>
+<p><strong>User Timing</strong></p>
+<ul>
+<li>The User Timing API allows developers to create custom performance metrics by marking specific points in the code and measuring the time between them. This is particularly useful for measuring the performance of specific functions or user interactions.</li>
+</ul>
+<pre><code class="language-javascript">performance.mark('startWork');
+// Perform some work
+performance.mark('endWork');
+performance.measure('workDuration', 'startWork', 'endWork');
+const workDuration = performance.getEntriesByName('workDuration')[0].duration;
+console.log(`Work duration: ${workDuration} ms`);
+</code></pre>
+</li>
+<li>
+<p><strong>PerformanceObserver</strong></p>
+<ul>
+<li>The PerformanceObserver API allows developers to observe and respond to performance events as they occur. This is useful for tracking performance in real-time.</li>
+</ul>
+<pre><code class="language-javascript">const observer = new PerformanceObserver((list) =&gt; {
+    const entries = list.getEntries();
+    entries.forEach(entry =&gt; {
+        console.log(`Observed ${entry.entryType} entry:`, entry);
+    });
+});
+
+observer.observe({ entryTypes: ['mark', 'measure'] });
+</code></pre>
+</li>
+</ol>
+<h3 id="use-cases-of-the-performance-api"><a class="header" href="#use-cases-of-the-performance-api"><strong>Use Cases of the Performance API</strong></a></h3>
+<ol>
+<li>
+<p><strong>Page Load Performance</strong></p>
+<ul>
+<li>Measure how long it takes for the page to load completely, including all resources, scripts, and images.</li>
+</ul>
+</li>
+<li>
+<p><strong>Resource Load Timing</strong></p>
+<ul>
+<li>Identify slow-loading resources that might be causing delays in rendering or user interactions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Custom User Timings</strong></p>
+<ul>
+<li>Track specific user interactions or code execution paths to understand where bottlenecks occur.</li>
+</ul>
+</li>
+<li>
+<p><strong>Real-time Performance Monitoring</strong></p>
+<ul>
+<li>Use <code>PerformanceObserver</code> to monitor performance events as they happen and respond immediately.</li>
+</ul>
+</li>
+</ol>
+<h3 id="limitations-of-the-performance-api"><a class="header" href="#limitations-of-the-performance-api"><strong>Limitations of the Performance API</strong></a></h3>
+<ul>
+<li><strong>Browser Support</strong>: While widely supported, older browsers may not support all features of the Performance API.</li>
+<li><strong>Complexity</strong>: Interpreting the detailed performance data can be complex, requiring a good understanding of web performance principles.</li>
+<li><strong>Security and Privacy</strong>: The Performance API may expose sensitive timing information that can be exploited, leading to potential security risks such as timing attacks.</li>
+</ul>
+<h3 id="conclusion"><a class="header" href="#conclusion"><strong>Conclusion</strong></a></h3>
+<p>The Performance API is a robust toolset that provides developers with the means to deeply analyze and optimize the performance of their web applications. By leveraging its capabilities, developers can significantly enhance the user experience by ensuring faster load times, smoother interactions, and more responsive applications.</p>
+<h2 id="waterfall"><a class="header" href="#waterfall">Waterfall</a></h2>
+<p>Creating a waterfall diagram using the Performance API involves visualizing the sequence and timing of resource loading on a web page. A waterfall diagram typically shows how long each resource (e.g., HTML, CSS, JS, images) takes to load, from the start of the request to the completion of the response.</p>
+<h3 id="steps-to-draw-a-waterfall-diagram-using-the-performance-api"><a class="header" href="#steps-to-draw-a-waterfall-diagram-using-the-performance-api"><strong>Steps to Draw a Waterfall Diagram Using the Performance API</strong></a></h3>
+<ol>
+<li>
+<p><strong>Collect Performance Data</strong></p>
+<ul>
+<li>Use the <code>performance.getEntriesByType('resource')</code> method to gather data about the resources loaded on the page. This will give you an array of <code>PerformanceResourceTiming</code> objects, each containing detailed timing information for a resource.</li>
+</ul>
+<pre><code class="language-javascript">const resources = performance.getEntriesByType('resource');
+</code></pre>
+</li>
+<li>
+<p><strong>Extract Timing Information</strong></p>
+<ul>
+<li>For each resource, extract the relevant timing data, such as <code>startTime</code>, <code>responseEnd</code>, and <code>duration</code>.</li>
+</ul>
+<pre><code class="language-javascript">const timings = resources.map(resource =&gt; ({
+    name: resource.name,
+    startTime: resource.startTime,
+    duration: resource.duration,
+    requestStart: resource.requestStart,
+    responseEnd: resource.responseEnd,
+}));
+</code></pre>
+</li>
+<li>
+<p><strong>Sort Resources by Start Time</strong></p>
+<ul>
+<li>To create a waterfall diagram, resources should be displayed in the order they were requested. Sort the resources by <code>startTime</code>.</li>
+</ul>
+<pre><code class="language-javascript">timings.sort((a, b) =&gt; a.startTime - b.startTime);
+</code></pre>
+</li>
+<li>
+<p><strong>Visualize the Data</strong></p>
+<ul>
+<li>Use an HTML <code>&lt;canvas&gt;</code>, SVG, or a charting library like D3.js to draw the waterfall diagram. Each resource can be represented as a horizontal bar starting at <code>startTime</code> and extending to <code>responseEnd</code>.</li>
+</ul>
+<p>Here’s a basic example using HTML and a <code>&lt;canvas&gt;</code> element:</p>
+<pre><code class="language-html">&lt;canvas id=&quot;waterfall&quot; width=&quot;800&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;
+&lt;script&gt;
+    const canvas = document.getElementById('waterfall');
+    const ctx = canvas.getContext('2d');
+    const rowHeight = 20;
+    const startX = 100;  // Starting X position for the bars
+    const scale = 2;     // Scale factor for converting time to pixels
+
+    timings.forEach((timing, index) =&gt; {
+        const y = index * rowHeight;
+        const width = timing.duration * scale;
+        const x = timing.startTime * scale + startX;
+
+        // Draw the background bar for the total duration
+        ctx.fillStyle = '#ccc';
+        ctx.fillRect(x, y, width, rowHeight - 2);
+
+        // Draw the name of the resource
+        ctx.fillStyle = '#000';
+        ctx.fillText(timing.name, 10, y + rowHeight / 2);
+    });
+&lt;/script&gt;
+</code></pre>
+</li>
+<li>
+<p><strong>Customize and Enhance</strong></p>
+<ul>
+<li><strong>Labels</strong>: Add labels for each resource to show the resource name and duration.</li>
+<li><strong>Color Coding</strong>: Use different colors to represent different types of resources (e.g., HTML, CSS, JS).</li>
+<li><strong>Tooltips</strong>: Add tooltips to display detailed timing information when hovering over each bar.</li>
+</ul>
+</li>
+<li>
+<p><strong>Consider Using a Library</strong></p>
+<ul>
+<li>For more complex and feature-rich waterfall diagrams, consider using a library like <strong>D3.js</strong> or <strong>Chart.js</strong>. These libraries can help manage scales, axes, tooltips, and interactions more effectively.</li>
+</ul>
+</li>
+</ol>
+<h3 id="example-using-d3js"><a class="header" href="#example-using-d3js"><strong>Example Using D3.js</strong></a></h3>
+<p>If you want to use D3.js for more sophisticated visualization:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Waterfall Chart&lt;/title&gt;
+    &lt;script src=&quot;https://d3js.org/d3.v6.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;svg width=&quot;800&quot; height=&quot;400&quot;&gt;&lt;/svg&gt;
+    &lt;script&gt;
+        const svg = d3.select(&quot;svg&quot;);
+        const margin = { top: 20, right: 30, bottom: 30, left: 150 };
+        const width = +svg.attr(&quot;width&quot;) - margin.left - margin.right;
+        const height = +svg.attr(&quot;height&quot;) - margin.top - margin.bottom;
+
+        const g = svg.append(&quot;g&quot;).attr(&quot;transform&quot;, `translate(${margin.left},${margin.top})`);
+
+        // Scale
+        const x = d3.scaleLinear().range([0, width]);
+        const y = d3.scaleBand().range([0, height]).padding(0.1);
+
+        // Data
+        const timings = resources.map(resource =&gt; ({
+            name: resource.name,
+            startTime: resource.startTime,
+            duration: resource.duration
+        })).sort((a, b) =&gt; a.startTime - b.startTime);
+
+        x.domain([0, d3.max(timings, d =&gt; d.startTime + d.duration)]);
+        y.domain(timings.map(d =&gt; d.name));
+
+        // Bars
+        g.selectAll(&quot;.bar&quot;)
+            .data(timings)
+            .enter().append(&quot;rect&quot;)
+            .attr(&quot;class&quot;, &quot;bar&quot;)
+            .attr(&quot;x&quot;, d =&gt; x(d.startTime))
+            .attr(&quot;y&quot;, d =&gt; y(d.name))
+            .attr(&quot;width&quot;, d =&gt; x(d.duration))
+            .attr(&quot;height&quot;, y.bandwidth())
+            .attr(&quot;fill&quot;, &quot;steelblue&quot;);
+
+        // Axes
+        g.append(&quot;g&quot;).call(d3.axisLeft(y));
+        g.append(&quot;g&quot;).call(d3.axisBottom(x)).attr(&quot;transform&quot;, `translate(0,${height})`);
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="conclusion-1"><a class="header" href="#conclusion-1"><strong>Conclusion</strong></a></h3>
+<p>Drawing a waterfall diagram using the Performance API can provide insightful visualizations for analyzing and optimizing resource loading on web pages. Whether you use a basic <code>&lt;canvas&gt;</code> approach or a more advanced library like D3.js, this method allows you to see how each resource contributes to the overall load time, helping you to identify and address performance bottlenecks.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
