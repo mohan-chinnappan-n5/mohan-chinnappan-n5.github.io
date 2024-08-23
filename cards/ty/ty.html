@@ -22,6 +22,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"
         integrity="sha512-sn/GHTj+FCxK5wam7k9w4gPPm6zss4Zwl/X9wgrvGMFbnedR8lTUSLdsolDRBRzsX6N+YgG6OWyvn9qaFVXH9w=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
     <link rel="stylesheet" href="css/app.css">
 
 </head>
@@ -36,6 +38,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <div id="dropArea" style="border: 2px dashed #ccc; padding: 2px; text-align: center;">
+
                         <button class="btn btn-success" onclick="downloadImage2()">Create Image</button>
                     </div>
                 </li>
@@ -48,15 +51,15 @@
         <div class="form-pane">
             <form id="appreciationForm">
                 <label for="recipientName">Recipient's Name:</label>
-                <input type="text" id="recipientName" name="recipientName" value="Ken Thompson" required><br><br>
+                <input type="text" id="recipientName" name="recipientName" size="78" value="Ken Thompson" required><br><br>
                 <label for="senderName">Sender's Name:</label>
-                <input type="text" id="senderName" name="senderName" value="Mohan Chinnappan" required><br><br>
+                <input type="text" id="senderName" name="senderName" size="78" value="Mohan Chinnappan" required><br><br>
                 <label for="message">Appreciation Message:</label><br>
-                <textarea id="message" name="message"
+                <textarea id="message" name="message" rows="3"
                     required> I am writing to express my heartfelt appreciation and gratitude to you for creating B Language,  Unix Operating System, ed, grep, UTF-8, Go Language and many others</textarea><br><br>
 
                 <label for="template">Appreciation Template:</label><br>
-                <textarea id="template" name="template"
+                <textarea id="template" name="template" 
                     required>We stand on your shoulders! Thank you for your exceptional contributions. </textarea><br><br>
 
                 <input type="submit" class="btn btn-primary" id="submit" value="Generate Appreciation">
