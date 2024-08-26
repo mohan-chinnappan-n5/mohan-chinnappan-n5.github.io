@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="what-is-playwright.html"><strong aria-hidden="true">1.</strong> What is Playwrighlt?</a></li><li class="chapter-item expanded "><a href="hello-world-playwright.html"><strong aria-hidden="true">2.</strong> Hello World in Playwright</a></li><li class="chapter-item expanded "><a href="automating-thankyou-card.html"><strong aria-hidden="true">3.</strong> Automating Thank You Card Generation</a></li><li class="chapter-item expanded "><a href="salesforce-login.html"><strong aria-hidden="true">4.</strong> Salesforce Login</a></li><li class="chapter-item expanded "><a href="salesforce-add-accounts.html"><strong aria-hidden="true">5.</strong> Salesforce Add Accounts</a></li><li class="chapter-item expanded "><a href="salesforce-set-email-deliverability.html"><strong aria-hidden="true">6.</strong> Salesforce  Set Email Deliverability</a></li><li class="chapter-item expanded "><a href="salesforce-pwd-reset-forall.html"><strong aria-hidden="true">7.</strong> Salesforce Password Reset for all users</a></li><li class="chapter-item expanded "><a href="video-editing-tips.html"><strong aria-hidden="true">8.</strong> Video editing tips</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="what-is-playwright.html"><strong aria-hidden="true">1.</strong> What is Playwrighlt?</a></li><li class="chapter-item expanded "><a href="hello-world-playwright.html"><strong aria-hidden="true">2.</strong> Hello World in Playwright</a></li><li class="chapter-item expanded "><a href="automating-thankyou-card.html"><strong aria-hidden="true">3.</strong> Automating Thank You Card Generation</a></li><li class="chapter-item expanded "><a href="salesforce-login.html"><strong aria-hidden="true">4.</strong> Salesforce Login</a></li><li class="chapter-item expanded "><a href="salesforce-add-accounts.html"><strong aria-hidden="true">5.</strong> Salesforce Add Accounts</a></li><li class="chapter-item expanded "><a href="salesforce-set-email-deliverability.html"><strong aria-hidden="true">6.</strong> Salesforce  Set Email Deliverability</a></li><li class="chapter-item expanded "><a href="salesforce-pwd-reset-forall.html"><strong aria-hidden="true">7.</strong> Salesforce Password Reset for all users</a></li><li class="chapter-item expanded "><a href="performance-measurement.html"><strong aria-hidden="true">8.</strong> Performance Measurement</a></li><li class="chapter-item expanded "><a href="video-editing-tips.html"><strong aria-hidden="true">9.</strong> Video editing tips</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -521,7 +521,77 @@ test(&quot;Security: PasswordReset for all users&quot;, async ({ page }) =&gt; {
 <video width="800" controls>
   <source src="videos/pw-sf-pwd-reset-forall.webm" type="video/webm">
   Your browser does not support the video tag.
-</video><div style="break-before: page; page-break-before: always;"></div><h1 id="video-editing-tips"><a class="header" href="#video-editing-tips">Video editing tips</a></h1>
+</video><div style="break-before: page; page-break-before: always;"></div><h1 id="performance-measurement"><a class="header" href="#performance-measurement">Performance Measurement</a></h1>
+<h2 id="setup-playwright"><a class="header" href="#setup-playwright">Setup Playwright</a></h2>
+<pre><code class="language-bash">mkdir playwright-performance-test
+cd playwright-performance-test
+npm init -y
+npm install @playwright/test
+
+</code></pre>
+<h2 id="urlsjson"><a class="header" href="#urlsjson">urls.json</a></h2>
+<pre><code class="language-json">[
+  &quot;https://mohan-chinnappan-n5.github.io/cards/ty/ty.html&quot; 
+
+]
+</code></pre>
+<h2 id="performancetestjs"><a class="header" href="#performancetestjs">performance.test.js</a></h2>
+<pre><code class="language-js">
+const { test, expect } = require('@playwright/test');
+const fs = require('fs');
+const path = require('path');
+
+test.describe('Performance Metrics', () =&gt; {
+  // Read URLs from urls.json
+  const urlsFilePath = path.join(__dirname, 'urls.json');
+  let urls = [];
+
+  try {
+    const data = fs.readFileSync(urlsFilePath, 'utf8');
+    urls = JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading or parsing urls.json:', error);
+    process.exit(1);
+  }
+
+  urls.forEach((url) =&gt; {
+    test(`Measure performance metrics for ${url}`, async ({ page }) =&gt; {
+      await page.goto(url);
+
+      // Wait for the page to fully load
+      await page.waitForLoadState('load');
+
+      // Extract performance metrics
+      const performanceTiming = await page.evaluate(() =&gt; JSON.stringify(window.performance.timing));
+      const resourceTiming = await page.evaluate(() =&gt; JSON.stringify(window.performance.getEntriesByType('resource')));
+      const jsonObject = JSON.parse(performanceTiming);
+      jsonObject.resources = JSON.parse(resourceTiming);
+      
+      // Add HTTP version and resource size
+      jsonObject.resources = jsonObject.resources.map(resource =&gt; {
+        return {
+          name: resource.name,
+          startTime: resource.startTime,
+          duration: resource.duration,
+          size: resource.encodedBodySize || resource.transferSize,
+          httpVersion: resource.nextHopProtocol
+        };
+      });
+
+      // Write the performance metrics to a file
+      fs.writeFileSync(`perf-${new URL(url).hostname}.json`, JSON.stringify(jsonObject, null, 2));
+    });
+  });
+});
+
+</code></pre>
+<h2 id="run-to-create-perf-mohan-chinnappan-n5githubiojson"><a class="header" href="#run-to-create-perf-mohan-chinnappan-n5githubiojson">Run to create perf-mohan-chinnappan-n5.github.io.json</a></h2>
+<pre><code class="language-bash">npx playwright test performance.test.js
+</code></pre>
+<h2 id="visualize-the-waterfall-for-this-json"><a class="header" href="#visualize-the-waterfall-for-this-json">Visualize the waterfall for this json</a></h2>
+<p><a href="https://mohanpwviz.streamlit.app/">Viz App</a></p>
+<p><img src="img/wf-pw-1.png" alt="Waterfall" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="video-editing-tips"><a class="header" href="#video-editing-tips">Video editing tips</a></h1>
 <p>To cut or trim a <code>webm</code> file using <code>ffmpeg</code>, you can use the <code>-ss</code> (start time) and <code>-t</code> (duration) or <code>-to</code> (end time) options. Here's a basic example:</p>
 <h3 id="steps-to-cut-a-webm-file"><a class="header" href="#steps-to-cut-a-webm-file">Steps to Cut a WebM File:</a></h3>
 <ol>

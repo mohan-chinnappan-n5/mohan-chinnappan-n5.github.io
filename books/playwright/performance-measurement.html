@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Automating Thank You Card Generation - Playwright for Salesforce Tutorial</title>
+        <title>Performance Measurement - Playwright for Salesforce Tutorial</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="what-is-playwright.html"><strong aria-hidden="true">1.</strong> What is Playwrighlt?</a></li><li class="chapter-item expanded "><a href="hello-world-playwright.html"><strong aria-hidden="true">2.</strong> Hello World in Playwright</a></li><li class="chapter-item expanded "><a href="automating-thankyou-card.html" class="active"><strong aria-hidden="true">3.</strong> Automating Thank You Card Generation</a></li><li class="chapter-item expanded "><a href="salesforce-login.html"><strong aria-hidden="true">4.</strong> Salesforce Login</a></li><li class="chapter-item expanded "><a href="salesforce-add-accounts.html"><strong aria-hidden="true">5.</strong> Salesforce Add Accounts</a></li><li class="chapter-item expanded "><a href="salesforce-set-email-deliverability.html"><strong aria-hidden="true">6.</strong> Salesforce  Set Email Deliverability</a></li><li class="chapter-item expanded "><a href="salesforce-pwd-reset-forall.html"><strong aria-hidden="true">7.</strong> Salesforce Password Reset for all users</a></li><li class="chapter-item expanded "><a href="performance-measurement.html"><strong aria-hidden="true">8.</strong> Performance Measurement</a></li><li class="chapter-item expanded "><a href="video-editing-tips.html"><strong aria-hidden="true">9.</strong> Video editing tips</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="what-is-playwright.html"><strong aria-hidden="true">1.</strong> What is Playwrighlt?</a></li><li class="chapter-item expanded "><a href="hello-world-playwright.html"><strong aria-hidden="true">2.</strong> Hello World in Playwright</a></li><li class="chapter-item expanded "><a href="automating-thankyou-card.html"><strong aria-hidden="true">3.</strong> Automating Thank You Card Generation</a></li><li class="chapter-item expanded "><a href="salesforce-login.html"><strong aria-hidden="true">4.</strong> Salesforce Login</a></li><li class="chapter-item expanded "><a href="salesforce-add-accounts.html"><strong aria-hidden="true">5.</strong> Salesforce Add Accounts</a></li><li class="chapter-item expanded "><a href="salesforce-set-email-deliverability.html"><strong aria-hidden="true">6.</strong> Salesforce  Set Email Deliverability</a></li><li class="chapter-item expanded "><a href="salesforce-pwd-reset-forall.html"><strong aria-hidden="true">7.</strong> Salesforce Password Reset for all users</a></li><li class="chapter-item expanded "><a href="performance-measurement.html" class="active"><strong aria-hidden="true">8.</strong> Performance Measurement</a></li><li class="chapter-item expanded "><a href="video-editing-tips.html"><strong aria-hidden="true">9.</strong> Video editing tips</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -171,84 +171,86 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="automating-thank-you-card-generation"><a class="header" href="#automating-thank-you-card-generation">Automating Thank You Card Generation</a></h1>
-<ul>
-<li>URL:
-<a href="https://mohan-chinnappan-n5.github.io/cards/ty/ty.html">Thank you card app</a></li>
-</ul>
-<h2 id="data-for-the-thank-you-card"><a class="header" href="#data-for-the-thank-you-card">Data for the Thank you card</a></h2>
-<pre><code class="language-js">
- const greetings = [
-    {
-      to: &quot;Dennis M Ritchie&quot;,
-      from: &quot;Mohan  Chinnappan&quot;,
-      msg: &quot; I am writing to express my heartfelt appreciation and gratitude to you for creating C Language,  Unix Operating System,  Plan9 OS and many others&quot;,
-      template: &quot;We stand on your shoulders! Thank you for your lovely and exceptional contributions.&quot;
-    },
-
-    {
-      to: &quot;Ken Thompson&quot;,
-      from: &quot;Mohan  Chinnappan&quot;,
-      msg: &quot; I am writing to express my heartfelt appreciation and gratitude to you for creating B Language,  Unix Operating System, ed, grep, UTF-8, Go Language and many others&quot;,
-      template: &quot;We stand on your shoulders! Thank you for your lovely and exceptional contributions.&quot;
-    },
-
-    {
-      to: &quot;Elon Musk&quot;,
-      from: &quot;Mohan  Chinnappan&quot;,
-      msg: &quot; I am writing to express my heartfelt appreciation and gratitude to you for efforts in Electric Vehicle Development, Rocket Technology&quot; ,
-      template: &quot;We stand on your shoulders! Thank you for your lovely and exceptional contributions.&quot;
-    },
-
-    {
-      to: &quot;Dr. Adbul Kalam&quot;,
-      from: &quot;Mohanasundaram  Chinnappan&quot;,
-      msg: &quot; I am writing to express my heartfelt appreciation and gratitude to you for efforts in guiding Indians to prepare for the future&quot; ,
-      template: &quot;We stand on your shoulders! Thank you for your lovely and exceptional contributions.&quot;
-    },
-
-
-  ];
-
+                        <h1 id="performance-measurement"><a class="header" href="#performance-measurement">Performance Measurement</a></h1>
+<h2 id="setup-playwright"><a class="header" href="#setup-playwright">Setup Playwright</a></h2>
+<pre><code class="language-bash">mkdir playwright-performance-test
+cd playwright-performance-test
+npm init -y
+npm install @playwright/test
 
 </code></pre>
-<h3 id="test-code"><a class="header" href="#test-code">Test code</a></h3>
-<pre><code class="language-js">test(&quot;ThankYouCardsGen&quot;, async ({ page }) =&gt; {
+<h2 id="urlsjson"><a class="header" href="#urlsjson">urls.json</a></h2>
+<pre><code class="language-json">[
+  &quot;https://mohan-chinnappan-n5.github.io/cards/ty/ty.html&quot; 
 
-  for (const greeting of greetings) {
-    await page.goto(&quot;https://mohan-chinnappan-n5.github.io/apps/2/index.html&quot;);
-    await page.getByRole(&quot;link&quot;, { name: &quot;Thank you! Card Generator&quot; }).click();
-    await expect(page).toHaveTitle(&quot;Letter of Appreciation Generator&quot;);
+]
+</code></pre>
+<h2 id="performancetestjs"><a class="header" href="#performancetestjs">performance.test.js</a></h2>
+<pre><code class="language-js">
+const { test, expect } = require('@playwright/test');
+const fs = require('fs');
+const path = require('path');
 
-    await page.getByLabel(&quot;Recipient's Name:&quot;).fill(greeting.to);
-    await page.getByLabel(&quot;Recipient's Name:&quot;).press(&quot;Tab&quot;);
-    await page.getByLabel(&quot;Sender's Name:&quot;).fill(greeting.from);
-    await page .getByLabel(&quot;Appreciation Message:&quot;) .fill(greeting.msg);
-    await page .getByLabel(&quot;Appreciation Template:&quot;) .fill(greeting.template); 
-    
-    
-    await page.getByRole(&quot;button&quot;, { name: &quot;Generate Appreciation&quot; }).click();
-    await page.getByRole(&quot;button&quot;, { name: &quot;Create Image&quot; }).click();
+test.describe('Performance Metrics', () =&gt; {
+  // Read URLs from urls.json
+  const urlsFilePath = path.join(__dirname, 'urls.json');
+  let urls = [];
 
-    await page.screenshot({ path: `${(greeting.to).replace(' ','_')}.png`, fullPage: true });
-    }
+  try {
+    const data = fs.readFileSync(urlsFilePath, 'utf8');
+    urls = JSON.parse(data);
+  } catch (error) {
+    console.error('Error reading or parsing urls.json:', error);
+    process.exit(1);
+  }
+
+  urls.forEach((url) =&gt; {
+    test(`Measure performance metrics for ${url}`, async ({ page }) =&gt; {
+      await page.goto(url);
+
+      // Wait for the page to fully load
+      await page.waitForLoadState('load');
+
+      // Extract performance metrics
+      const performanceTiming = await page.evaluate(() =&gt; JSON.stringify(window.performance.timing));
+      const resourceTiming = await page.evaluate(() =&gt; JSON.stringify(window.performance.getEntriesByType('resource')));
+      const jsonObject = JSON.parse(performanceTiming);
+      jsonObject.resources = JSON.parse(resourceTiming);
+      
+      // Add HTTP version and resource size
+      jsonObject.resources = jsonObject.resources.map(resource =&gt; {
+        return {
+          name: resource.name,
+          startTime: resource.startTime,
+          duration: resource.duration,
+          size: resource.encodedBodySize || resource.transferSize,
+          httpVersion: resource.nextHopProtocol
+        };
+      });
+
+      // Write the performance metrics to a file
+      fs.writeFileSync(`perf-${new URL(url).hostname}.json`, JSON.stringify(jsonObject, null, 2));
+    });
+  });
 });
 
 </code></pre>
-<video width="800" controls>
-  <source src="videos/pw-book-1.webm" type="video/webm">
-  Your browser does not support the video tag.
-</video>
+<h2 id="run-to-create-perf-mohan-chinnappan-n5githubiojson"><a class="header" href="#run-to-create-perf-mohan-chinnappan-n5githubiojson">Run to create perf-mohan-chinnappan-n5.github.io.json</a></h2>
+<pre><code class="language-bash">npx playwright test performance.test.js
+</code></pre>
+<h2 id="visualize-the-waterfall-for-this-json"><a class="header" href="#visualize-the-waterfall-for-this-json">Visualize the waterfall for this json</a></h2>
+<p><a href="https://mohanpwviz.streamlit.app/">Viz App</a></p>
+<p><img src="img/wf-pw-1.png" alt="Waterfall" /></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="hello-world-playwright.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="salesforce-pwd-reset-forall.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="salesforce-login.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="video-editing-tips.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -258,11 +260,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="hello-world-playwright.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="salesforce-pwd-reset-forall.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="salesforce-login.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="video-editing-tips.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
