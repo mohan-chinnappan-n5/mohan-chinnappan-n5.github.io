@@ -1,0 +1,420 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>1. What is Web Performance - All about Web Performance</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="web-perf.html" class="active"><strong aria-hidden="true">1.</strong> 1. What is Web Performance</a></li><li class="chapter-item expanded "><a href="cert.html"><strong aria-hidden="true">2.</strong> 2. What is inside a Server's Cert</a></li><li class="chapter-item expanded "><a href="async-defer.html"><strong aria-hidden="true">3.</strong> 3. async and defer</a></li><li class="chapter-item expanded "><a href="performance-api.html"><strong aria-hidden="true">4.</strong> 4. Performance API</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">All about Web Performance</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="1-what-is-web-performance"><a class="header" href="#1-what-is-web-performance">1. What is Web Performance?</a></h1>
+<h2 id="objective-measurements"><a class="header" href="#objective-measurements">Objective measurements</a></h2>
+<ul>
+<li>time to load</li>
+<li>frames per second</li>
+<li>time to become interactive</li>
+</ul>
+<h2 id="subjective-measurements"><a class="header" href="#subjective-measurements">Subjective measurements</a></h2>
+<ul>
+<li>how long it felt like it took the content to load</li>
+</ul>
+<h2 id="goals"><a class="header" href="#goals">Goals</a></h2>
+<ul>
+<li>
+<p>making the experience as available and interactive as possible, as soon as possible, while asynchronously loading in the longer tail parts of the experience.</p>
+</li>
+<li>
+<p>users want web experiences with content that is fast to load and smooth to interact with.</p>
+</li>
+</ul>
+<h2 id="issues"><a class="header" href="#issues">Issues</a></h2>
+<p>Two major issues in web performance are issues having to do with <strong>latency</strong> and issues having to do with the fact that for the most part, <strong>browsers are single-threaded</strong></p>
+<ul>
+<li>
+<p>Browsers execute a task from beginning to end before taking up another task.</p>
+<ul>
+<li>Minimize the main thread's responsibilities, where possible and appropriate, to ensure rendering is smooth and responses to interactions are immediate.</li>
+<li>Render time is key, ensuring the main thread can complete all the work we throw at it and still always be available to handle user interactions. </li>
+</ul>
+</li>
+<li>
+<p>The user gets the requested information as quickly as possible</p>
+</li>
+</ul>
+<h2 id="lazy-loading"><a class="header" href="#lazy-loading">Lazy Loading</a></h2>
+<ul>
+<li>Lazy loading is a strategy to <strong>identify resources as non-blocking (non-critical)</strong> and load these only when needed. 
+<ul>
+<li>It's a way to shorten the length of the critical rendering path, which translates into reduced page load times</li>
+</ul>
+</li>
+</ul>
+<h2 id="navigation-timing"><a class="header" href="#navigation-timing">Navigation timing</a></h2>
+<ul>
+<li>measures <strong>the main document's</strong> timings</li>
+</ul>
+<h2 id="resource-timing"><a class="header" href="#resource-timing">Resource timing</a></h2>
+<ul>
+<li>provides the times for all the assets or resources called in by the <strong>main document</strong> and the resources' requested resources.</li>
+</ul>
+<h2 id="two-approaches-for-monitoring-and-providing-insight-into-web-performance"><a class="header" href="#two-approaches-for-monitoring-and-providing-insight-into-web-performance">Two approaches for monitoring and providing insight into web performance</a></h2>
+<ul>
+<li>Synthetic monitoring 
+<ul>
+<li>very well suited to regression testing and mitigating shorter-term performance issues during development</li>
+</ul>
+</li>
+<li>Real user monitoring (RUM)
+<ul>
+<li>best suited for understanding long-term trends</li>
+</ul>
+</li>
+</ul>
+<h2 id="speculative-loading"><a class="header" href="#speculative-loading">Speculative loading</a></h2>
+<ul>
+<li>
+<p>practice of performing navigation actions (such as DNS fetching, fetching resources, or rendering documents)  before the associated pages are actually visited, based on predictions as to what pages the user is most likely to visit next.</p>
+</li>
+<li>
+<p><strong>DNS-prefetch</strong> is an attempt to resolve domain names before resources get requested. This could be a file loaded later or link target a user tries to follow.</p>
+</li>
+</ul>
+<h2 id="latency"><a class="header" href="#latency">Latency</a></h2>
+<ul>
+<li>time it takes for a packet of data to travel from source to a destination.</li>
+</ul>
+<h2 id="dns-lookup"><a class="header" href="#dns-lookup">DNS Lookup</a></h2>
+<p>Your browser requests a DNS lookup, which is eventually fielded by a <strong>name server</strong>, which in turn responds with an IP address</p>
+<p>After this initial request, the IP will likely be cached for a time, which speeds up subsequent requests by retrieving the IP address from the cache instead of contacting a name server again.</p>
+<p>If your fonts, images, scripts, ads, and metrics all have different hostnames, a DNS lookup will have to be made for each one.</p>
+<p>This can be problematic for performance, particularly on mobile networks. When a user is on a mobile network, each DNS lookup has to go from the phone to the cell tower to reach an authoritative DNS server. The distance between a phone, a cell tower, and the name server can add significant latency.</p>
+<h2 id="tcp-handshake"><a class="header" href="#tcp-handshake">TCP handshake</a></h2>
+<p>Once the IP address is known, the browser sets up a connection to the server via a TCP three-way handshake.</p>
+<p>This handshake step happens after a DNS lookup and before the TLS handshake, when creating a secure connection. </p>
+<p>DNS Lookup --- TCP handshake --- TLS handshake</p>
+<p>This mechanism is designed so that two entities attempting to communicate — in this case the browser and web server — can <strong>negotiate the parameters of the network TCP socket connection</strong> before transmitting data, often over HTTPS.</p>
+<p>There are three messages ( SYN-SYN-ACK ) transmitted by TCP to negotiate and start a TCP session between two computer
+Three messages back and forth between each server, and the request has yet to be made</p>
+<div class="table-wrapper"><table><thead><tr><th>No.</th><th>What it does</th></tr></thead><tbody>
+<tr><td>1</td><td>The initiator, generally the browser, sends a TCP SYNchronize packet to the other host, generally the server.</td></tr>
+<tr><td>2</td><td>The server receives the SYN and sends back a SYNchronize-ACKnowledgement.</td></tr>
+<tr><td>3</td><td>The initiator receives the server's SYN-ACK and sends an ACKnowledge. The server receives ACK and the TCP socket connection is established.</td></tr>
+</tbody></table>
+</div>
+<p><img src="img/tcp-3way-hankdshake.png" alt="TCP 3 way handshake" /></p>
+<h2 id="connection-termination---four-way-handshake"><a class="header" href="#connection-termination---four-way-handshake">Connection termination - four-way handshake</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>No.</th><th>What it does</th></tr></thead><tbody>
+<tr><td>1</td><td>The initiator, generally the browser, sends the  FIN packet to the other host</td></tr>
+<tr><td>2</td><td>The other host sends an ACK packet back to the initiator.</td></tr>
+<tr><td>3</td><td>Now, the connection is half-closed, and the other host can still send data. (For example, the server can finish off sending data to the client when the client has closed its connection to the server.)</td></tr>
+<tr><td>4</td><td>The other host sends a FIN packet to the initiator.</td></tr>
+<tr><td>5</td><td>The initiator sends an ACK packet back to the other host.</td></tr>
+</tbody></table>
+</div>
+<h2 id="tls-handshake"><a class="header" href="#tls-handshake">TLS handshake</a></h2>
+<p>For secure connections established over HTTPS, another &quot;handshake&quot; is required.</p>
+<p>This determines
+- which <strong>cipher will be used to encrypt the communication</strong>
+- verifies the server
+- establishes that a secure connection is in place before beginning the actual transfer of data</p>
+<p><img src="img/ssl.jpg" alt="SSL" /></p>
+<p>Server provides the Cert  which contains the <strong>public key of the server</strong>. This key is used by clients to encrypt data that can only be decrypted by the corresponding private key held by the server.</p>
+<p>While making the connection secure <strong>adds time to the page load</strong>, a secure connection is worth the latency expense, as the data transmitted between the browser and the web server cannot be decrypted by a third party.</p>
+<h2 id="response"><a class="header" href="#response">Response</a></h2>
+<p>Once we have an established connection to a web server, the browser sends an initial <strong>HTTP GET</strong> request on behalf of the user, which for websites is most often an HTML file. </p>
+<p>Once the server receives the request, it will reply with relevant response headers and the contents of the HTML.</p>
+<p>This response for this initial request contains the first byte of data received.</p>
+<p>Time to First Byte (TTFB) is the time between when the user made the request — say by clicking on a link — and the receipt of this first packet of HTML. The first chunk of content is usually 14KB of data.</p>
+<h2 id="tcp"><a class="header" href="#tcp">TCP</a></h2>
+<p>TCP packets are split into segments during transmission.
+Because TCP guarantees the sequence of packets, the server must receive an acknowledgment from the client in the form of an ACK packet after sending a certain number of segments.</p>
+<p>If the server waits for an ACK after each segment, that will result in frequent ACKs from the client and may increase transmission time, even in the case of a low-load network.</p>
+<p>On the other hand, sending too many segments at once can lead to the problem that in a busy network the client will not be able to receive the segments and will just keep responding with ACKs for a long time, and the server will have to keep re-sending the segments.</p>
+<p>In order to balance the number of transmitted segments, the TCP slow start algorithm is used to gradually increase the amount of transmitted data until the maximum network bandwidth can be determined, and to reduce the amount of transmitted data in case of high network load.</p>
+<p>The number of segments to be transmitted is controlled by the value of the congestion window (CWND), which can be initialized to 1, 2, 4, or 10 MSS (MSS is 1500 bytes over the Ethernet protocol). That value is the number of bytes to send, upon receipt of which the client must send an ACK.</p>
+<p>If an ACK is received, then the CWND value will be doubled, and so the server will be able to send more segments the next time. If instead no ACK is received, then the CWND value will be halved. That mechanism thus achieves a balance between sending too many segments, and sending too few.</p>
+<h2 id="parsing"><a class="header" href="#parsing">Parsing</a></h2>
+<p>Once the browser receives the first chunk of data, it can begin parsing the information received. Parsing is the step the browser takes to turn the data it receives over the network into the DOM and CSSOM, which is used by the renderer to paint a page to the screen.</p>
+<p>The DOM is the internal representation of the markup for the browser. The DOM is also exposed and can be manipulated through various APIs in JavaScript.</p>
+<p>Even if the requested page's HTML is larger than the initial 14KB packet, the browser will begin parsing and attempting to render an experience based on the data it has. This is why it's important for web performance optimization to include everything the browser needs to start rendering a page, or at least a template of the page — the CSS and HTML needed for the first render — in the first 14KB. But before anything is rendered to the screen, the HTML, CSS, and JavaScript have to be parsed.</p>
+<h2 id="dom-tree"><a class="header" href="#dom-tree">DOM Tree</a></h2>
+<p>The first step is processing the HTML markup and building the DOM tree. HTML parsing involves tokenization and tree construction. HTML tokens include start and end tags, as well as attribute names and values. If the document is well-formed, parsing it is straightforward and faster. The parser parses tokenized input into the document, building up the document tree.</p>
+<p>The DOM tree describes the content of the document. The html element is the first element and root node of the document tree. The tree reflects the relationships and hierarchies between different elements. Elements nested within other elements are child nodes. The greater the number of DOM nodes, the longer it takes to construct the DOM tree.</p>
+<p>When the parser finds non-blocking resources, such as an image, the browser will request those resources and continue parsing.</p>
+<p>Parsing can continue when a CSS file is encountered, but script elements — particularly those without an async or defer attribute — block rendering, and pause the parsing of HTML. Though the browser's preload scanner hastens this process, excessive scripts can still be a significant bottleneck.</p>
+<h2 id="preload-scanner"><a class="header" href="#preload-scanner">Preload scanner</a></h2>
+<p>While the browser builds the DOM tree, this process occupies the main thread. </p>
+<p>While the browser builds the DOM tree, this process occupies the main thread. As this happens, the preload scanner will parse through the content available and request high-priority resources like CSS, JavaScript, and web fonts. Thanks to the preload scanner, we don't have to wait until the parser finds a reference to an external resource to request it. It will retrieve resources in the background so that by the time the main HTML parser reaches the requested assets, they may already be in flight or have been downloaded. The optimizations the preload scanner provides reduce blockages.</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot; /&gt;
+&lt;script src=&quot;myscript.js&quot; async&gt;&lt;/script&gt;
+&lt;img src=&quot;myimage.jpg&quot; alt=&quot;image description&quot; /&gt;
+&lt;script src=&quot;anotherscript.js&quot; async&gt;&lt;/script&gt;
+
+</code></pre>
+<p>In this example, while the main thread is parsing the HTML and CSS, the preload scanner will find the scripts and image, and start downloading them as well. To ensure the script doesn't block the process, add the async attribute, or the defer attribute if JavaScript parsing and execution order is important.</p>
+<p>Waiting to obtain CSS doesn't block HTML parsing or downloading, but it does block JavaScript because JavaScript is often used to query CSS properties' impact on elements.</p>
+<h2 id="cssom-tree"><a class="header" href="#cssom-tree">CSSOM tree</a></h2>
+<p>The second step in the critical rendering path is processing CSS and building the CSSOM tree. The CSS object model is similar to the DOM. The DOM and CSSOM are both trees. They are independent data structures. The browser converts the CSS rules into a map of styles it can understand and work with. The browser goes through each rule set in the CSS, creating a tree of nodes with parent, child, and sibling relationships based on the CSS selectors.</p>
+<p>As with HTML, the browser needs to convert the received CSS rules into something it can work with. Hence, it repeats the HTML-to-object process, but for the CSS.</p>
+<p>The CSSOM tree includes styles from the user agent style sheet. The browser begins with the most general rule applicable to a node and recursively refines the computed styles by applying more specific rules. In other words, it cascades the property values.</p>
+<p>Building the CSSOM is very, very fast and is not displayed in a unique color in current developer tools. Rather, the &quot;Recalculate Style&quot; in developer tools shows the total time it takes to parse CSS, construct the CSSOM tree, and recursively calculate computed styles. In terms of web performance optimization, there are lower hanging fruit, as the total time to create the CSSOM is generally less than the time it takes for one DNS lookup.</p>
+<h2 id="javascript-compilation"><a class="header" href="#javascript-compilation">JavaScript compilation</a></h2>
+<p>While the CSS is being parsed and the CSSOM created, other assets, including JavaScript files, are downloading (thanks to the preload scanner). JavaScript is parsed, compiled, and interpreted. The scripts are parsed into abstract syntax trees. Some browser engines take the abstract syntax trees and pass them into a compiler, outputting bytecode. This is known as JavaScript compilation. Most of the code is interpreted on the main thread, but there are exceptions such as code run in web workers.</p>
+<h2 id="accessibility-tree-aom"><a class="header" href="#accessibility-tree-aom">Accessibility tree (AOM)</a></h2>
+<p>The browser also builds an accessibility tree that assistive devices use to parse and interpret content. The accessibility object model (AOM) is like a semantic version of the DOM. The browser updates the accessibility tree when the DOM is updated. The accessibility tree is not modifiable by assistive technologies themselves</p>
+<p>Until the AOM is built, the content is not accessible to screen readers.</p>
+<h2 id="render"><a class="header" href="#render">Render</a></h2>
+<p>Rendering steps include style, layout, paint, and in some cases compositing. The CSSOM and DOM trees created in the parsing step are combined into a render tree which is then used to compute the layout of every visible element, which is then painted to the screen. In some cases, content can be promoted to its own layer and composited, improving performance by painting portions of the screen on the GPU instead of the CPU, freeing up the main thread.</p>
+<h2 id="style"><a class="header" href="#style">Style</a></h2>
+<p>The third step in the critical rendering path is combining the DOM and CSSOM into a render tree. The computed style tree, or render tree, construction starts with the root of the DOM tree, traversing each visible node.</p>
+<p>Elements that aren't going to be displayed, like the head element and its children and any nodes with display: none, such as the script <code>{ display: none; }</code> you will find in user agent stylesheets, are not included in the render tree as they will not appear in the rendered output. Nodes with <code>visibility: hidden</code> applied are included in the render tree, as they do take up space. As we have not given any directives to override the user agent default, the script node in our code example above will not be included in the render tree.</p>
+<p>Each visible node has its CSSOM rules applied to it. The render tree holds all the visible nodes with content and computed styles — matching up all the relevant styles to every visible node in the DOM tree, and determining, based on the CSS cascade, what the computed styles are for each node.</p>
+<h2 id="layout"><a class="header" href="#layout">Layout</a></h2>
+<p>The fourth step in the critical rendering path is running layout on the render tree to compute the geometry of each node. Layout is the process by which the dimensions and location of all the nodes in the render tree are determined, plus the determination of the size and position of each object on the page. Reflow is any subsequent size and position determination of any part of the page or the entire document.</p>
+<p>Once the render tree is built, layout commences. The render tree identified which nodes are displayed (even if invisible) along with their computed styles, but not the dimensions or location of each node. To determine the exact size and position of each object, the browser starts at the root of the render tree and traverses it.</p>
+<p>On the web page, almost everything is a box. Different devices and different desktop preferences mean an unlimited number of differing viewport sizes. In this phase, taking the viewport size into consideration, the browser determines what the sizes of all the different boxes are going to be on the screen. Taking the size of the viewport as its base, layout generally starts with the body, laying out the sizes of all the body's descendants, with each element's box model properties, providing placeholder space for replaced elements it doesn't know the dimensions of, such as our image.</p>
+<p>The first time the size and position of each node is determined is called layout. Subsequent recalculations of are called reflows. In our example, suppose the initial layout occurs before the image is returned. Since we didn't declare the dimensions of our image, there will be a reflow once the image dimensions are known.</p>
+<h2 id="paint"><a class="header" href="#paint">Paint</a></h2>
+<p>The last step in the critical rendering path is painting the individual nodes to the screen, the first occurrence of which is called the first meaningful paint. In the painting or rasterization phase, the browser converts each box calculated in the layout phase to actual pixels on the screen. Painting involves drawing every visual part of an element to the screen, including text, colors, borders, shadows, and replaced elements like buttons and images. The browser needs to do this super quickly.</p>
+<p>To ensure smooth scrolling and animation, everything occupying the main thread, including calculating styles, along with reflow and paint, must take the browser less than 16.67ms to accomplish. At 2048 x 1536, the iPad has over 3,145,000 pixels to be painted to the screen. That is a lot of pixels that have to be painted very quickly. To ensure repainting can be done even faster than the initial paint, the drawing to the screen is generally broken down into several layers. If this occurs, then compositing is necessary.</p>
+<p>Painting can break the elements in the layout tree into layers. Promoting content into layers on the GPU (instead of the main thread on the CPU) improves paint and repaint performance. There are specific properties and elements that instantiate a layer, including video and canvas, and any element which has the CSS properties of opacity, a 3D transform, will-change, and a few others. These nodes will be painted onto their own layer, along with their descendants, unless a descendant necessitates its own layer for one (or more) of the above reasons.</p>
+<p>Layers do improve performance but are expensive when it comes to memory management, so should not be overused as part of web performance optimization strategies.</p>
+<h2 id="compositing"><a class="header" href="#compositing">Compositing</a></h2>
+<p>When sections of the document are drawn in different layers, overlapping each other, compositing is necessary to ensure they are drawn to the screen in the right order and the content is rendered correctly.</p>
+<p>As the page continues to load assets, reflows can happen (recall our example image that arrived late). A reflow sparks a repaint and a re-composite. Had we defined the dimensions of our image, no reflow would have been necessary, and only the layer that needed to be repainted would be repainted, and composited if necessary. But we didn't include the image dimensions! When the image is obtained from the server, the rendering process goes back to the layout steps and restarts from there.</p>
+<h2 id="interactivity"><a class="header" href="#interactivity">Interactivity</a></h2>
+<p>Once the main thread is done painting the page, you would think we would be &quot;all set.&quot; That isn't necessarily the case. If the load includes JavaScript, that was correctly deferred, and only executed after the onload event fires, the main thread might be busy, and not available for scrolling, touch, and other interactions.</p>
+<p>Time to Interactive (TTI) is the measurement of how long it took from that first request which led to the DNS lookup and TCP connection to when the page is interactive — interactive being the point in time after the First Contentful Paint when the page responds to user interactions within <strong>50ms</strong>. If the main thread is occupied parsing, compiling, and executing JavaScript, it is not available and therefore not able to respond to user interactions in a timely (less than 50ms) fashion.</p>
+<p>In our example, maybe the image loaded quickly, but perhaps the anotherscript.js file was 2MB and our user's network connection was slow. In this case, the user would see the page super quickly, but wouldn't be able to scroll without jank until the script was downloaded, parsed, and executed. That is not a good user experience. Avoid occupying the main thread, as demonstrated in this WebPageTest example:</p>
+<p><img src="img/waterfall.png" alt="Waterfall" /></p>
+<p>In this example, JavaScript execution took over 1.5 seconds, and the main thread was fully occupied that entire time, unresponsive to click events or screen taps.</p>
+<h2 id="references"><a class="header" href="#references">References</a></h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Performance">MDN - Web performance</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+                            <a rel="next prefetch" href="cert.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+                    <a rel="next prefetch" href="cert.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

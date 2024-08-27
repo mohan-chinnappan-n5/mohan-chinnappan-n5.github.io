@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter of Appreciation Generator</title>
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.js"
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+
+<body class="bg-gray-100 text-gray-900">
+    <nav class="bg-gray-800 p-4 shadow-lg">
+        <div class="container mx-auto flex items-center justify-between">
+            <a class="text-white text-lg font-bold" href="#">Letter of Appreciation Generator</a>
+            <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" onclick="downloadImage2()">Create Image</button>
+        </div>
+    </nav>
+
+    <div class="flex h-screen">
+        <div class="w-1/2 p-6 bg-white shadow-md overflow-auto">
+            <form id="appreciationForm" class="space-y-6">
+                <div>
+                    <label for="recipientName" class="block text-sm font-medium text-gray-700">Recipient's Name:</label>
+                    <input type="text" id="recipientName" name="recipientName" value="Ken Thompson" required
+                        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="senderName" class="block text-sm font-medium text-gray-700">Sender's Name:</label>
+                    <input type="text" id="senderName" name="senderName" value="Mohan Chinnappan" required
+                        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700">Appreciation Message:</label>
+                    <textarea id="message" name="message" required
+                        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        rows="4">I am writing to express my heartfelt appreciation and gratitude to you for creating B Language, Unix Operating System, ed, grep, UTF-8, Go Language and many others</textarea>
+                </div>
+                <div>
+                    <label for="template" class="block text-sm font-medium text-gray-700">Appreciation Template:</label>
+                    <textarea id="template" name="template" required
+                        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                        rows="2">We stand on your shoulders! Thank you for your exceptional contributions.</textarea>
+                </div>
+                <div>
+                    <input type="submit" id="submit" value="Generate Appreciation"
+                        class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 cursor-pointer">
+                </div>
+            </form>
+            <hr class="my-6">
+            <center>
+                <div id="output" class="p-4"></div>
+            </center>
+        </div>
+
+        <div class="w-1/2 p-6 bg-white shadow-md overflow-auto">
+            <div class="content-pane p-4" id="appreciationContent"></div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

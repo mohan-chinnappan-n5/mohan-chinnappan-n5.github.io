@@ -11,9 +11,9 @@
 }
 
 textarea {
-    height: 50px;
     width: 100%;
     resize: none2;
+    background-color: black; color:white; border-radius:10px;padding:10px;
 }
 
 .content-pane {
