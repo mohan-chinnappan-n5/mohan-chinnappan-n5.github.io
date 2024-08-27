@@ -813,6 +813,8 @@ export class Types {
       },
     },
 
+    
+
     MatchingRule: {
       folderName: "matchingRules",
       getFileAttributes: (member) => {
@@ -1125,6 +1127,64 @@ export class Types {
         };
       },
     },
+
+    RemoteSiteSetting: {
+      folderName: "remoteSiteSettings",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `remoteSiteSettings`,
+          fileNames: [`${member}.remoteSite-meta.xml`],
+
+        };
+      },
+    },
+
+    CustomIndex: {
+      folderName: "customindex",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `customindex`,
+          fileNames: [`${member}.indx-meta.xml`],
+
+        };
+      },
+    },
+
+    NetworkBranding: {
+      folderName: "networkBranding",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `networkBranding`,
+          fileNames: [`${member}.networkBranding`,`${member}.networkBranding-meta.xml`],
+
+        };
+      },
+    },
+
+
+
+    Index: {
+      folderName: "objects",
+      getFileAttributes: (member) => {
+        const parts = member.split(".");
+        if (parts.length === 2) {
+          const [folder, filename] = parts;
+          return {
+            folderName: `objects/${folder}/indexes`,
+            fileNames: [`${filename}.index-meta.xml`],
+          };
+        }
+        return {
+          folderName: "objects",
+          fileNames: [""],
+        };
+      },
+    },
+
+
+    
+
+
 
 
 
