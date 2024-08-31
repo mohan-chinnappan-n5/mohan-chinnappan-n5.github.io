@@ -262,6 +262,7 @@ function convertXmlToJson(xml, templateName, fromFolder, branchName, testClassLi
     };
   } catch (error) {
     console.error("Error converting XML to JSON:", error);
+    alert(`Error converting XML to JSON (check package.xml syntax):  ${error}`);
     return "Error converting XML to JSON";
   }
 }
