@@ -1,0 +1,3 @@
+### Safari support
+- Currently Chromium based browsers like Chrome, Brave, Edge are supported
+- Safari Support will be coming soon...
