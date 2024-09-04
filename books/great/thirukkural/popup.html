@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thirukkural Viewer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+    <script src="libs/papaparse.min.js"></script>
+</head>
+<body class="bg-gray-100 p-4">
+    <!-- Navbar -->
+    <nav class="bg-blue-500 text-white p-4 rounded mb-4">
+        <h1 class="text-center text-xl font-bold">Thirukkural</h1>
+    </nav>
+
+    <!-- Content Display -->
+    <div id="content" class="bg-white shadow-md rounded p-4 mb-4">
+        <h2 id="chapter-name" class="text-xl font-bold text-center"></h2>
+        <h3 id="section-name" class="text-lg text-center text-gray-600"></h3>
+
+        <p id="verse-number" class="text-center text-sm text-gray-500"></p>
+
+        
+        <p id="verse" class="text-lg mt-4 whitespace-pre-line"></p>
+        <p id="translation" class="mt-2 italic text-gray-700"></p>
+        <p id="explanation" class="mt-2 text-gray-800"></p>
+    </div>
+
+    <!-- Navigation and Search -->
+    <div class="flex justify-between">
+        <button id="prevBtn" class="bg-blue-500 text-white px-4 py-2 rounded">&lt; Prev</button>
+        <input id="searchInput" type="text" class="border px-4 py-2 rounded" placeholder="Search..." />
+	<button id="nextBtn" class="bg-blue-500 text-white px-4 py-2 rounded">Next &gt;</button>
+    </div>
+
+    <!-- Search Results -->
+    <div id="searchResults" class="mt-4"></div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
