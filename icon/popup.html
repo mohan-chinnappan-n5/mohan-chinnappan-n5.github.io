@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icon Generator</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+
+ <link rel="icon" href="icons/icon16.png" sizes="16x16">
+<link rel="icon" href="icons/icon48.png" sizes="48x48">
+<link rel="icon" href="icons/icon64.png" sizes="64x64">
+<link rel="icon" href="icons/icon128.png" sizes="128x128">
+<link rel="stylesheet" href="./styles.css">
+
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <nav class="bg-blue-600 p-4 text-white">
+    <h1 class="text-xl font-bold">Icon Generator</h1>
+  </nav>
+
+  <div class="container mx-auto p-4">
+    
+    <div class="mb-4">
+      <label for="iconText" class="block mb-2 font-medium">Enter Letter(s):</label>
+      <input type="text" id="iconText" maxlength="3" value="A" placeholder="Sam" class="w-full p-2 border border-gray-300 rounded">
+    </div>
+
+    <div class="mb-4">
+      <label for="fontSelect" class="block mb-2 font-medium">Font:</label>
+      <select id="fontSelect" class="w-full p-2 border border-gray-300 rounded">
+        <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Tahoma">Tahoma</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <!-- Add more fonts as needed -->
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label for="fontColor" class="block mb-2 font-medium">Font Color:</label>
+      <div class="flex items-center">
+        <input type="color" id="fontColor" value="#FFFFFF" >
+        <div id="fontColorDisplay" class="w-8 h-8 ml-2 border border-gray-300 rounded-lg"></div>
+        <span id="fontColorHex" class="ml-2 font-medium uppercase;">#FFFFFF</span>
+      </div>
+    </div>  
+    
+    <div class="mb-4">
+      <label for="bgColor" class="block mb-2 font-medium">Background Color:</label>
+      <div class="flex items-center">
+        <input type="color" id="bgColor" value="#2463eb" >
+        <div id="bgColorDisplay" class="w-8 h-8 ml-2 border border-gray-300 rounded-lg"></div>
+        <span id="bgColorHex" class="ml-2 font-medium">#2463EB</span>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="cornerRadius" class="block mb-2 font-medium">Corner Radius:</label>
+      <input type="number" disabled id="cornerRadius" value="4" min="0" class="w-full p-2 border border-gray-300 rounded">
+    </div>
+
+    <button id="generateBtn" class="w-full p-3 bg-blue-600 text-white rounded hover:bg-blue-700">Generate Icons</button>
+
+    <div id="output" class="mt-6">
+      <h2 class="text-lg font-semibold mb-4">Generated Icons:</h2>
+
+      <div class="flex justify-around items-center mb-4">
+        <canvas id="icon16" width="16" height="16" class="border border-gray-300 rounded-lg"></canvas>
+        <canvas id="icon48" width="48" height="48" class="border border-gray-300 rounded-lg"></canvas>
+        <canvas id="icon64" width="64" height="64" class="border border-gray-300 rounded-lg"></canvas>
+        <canvas id="icon128" width="128" height="128" class="border border-gray-300 rounded-lg"></canvas>
+      </div>
+      
+      <div class="flex justify-around">
+        <a id="download16" download="icon16.png" class="text-blue-600 hover:underline">Download 16x16</a>
+        <a id="download48" download="icon48.png" class="text-blue-600 hover:underline">Download 48x48</a>
+        <a id="download64" download="icon64.png" class="text-blue-600 hover:underline">Download 64x64</a>
+        <a id="download128" download="icon128.png" class="text-blue-600 hover:underline">Download 128x128</a>
+      </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="popup.js?v=2"></script>
+</body>
+</html>
