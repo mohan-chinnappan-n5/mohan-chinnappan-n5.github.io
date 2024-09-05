@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gita Viewer</title>
+  <!-- Link to Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="p-4 bg-gray-100">
+
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-2 text-white shadow-lg">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="text-lg font-bold">Gita</div>
+      </div>
+    </nav>
+
+
+  <div class="mb-8 flex justify-between items-center">
+    <input type="text" id="searchInput" placeholder="Search..." class="border border-gray-300 p-2 rounded w-2/3">
+    <div class="flex gap-2">
+      <button id="prevBtn" class="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-700">Previous</button>
+      <button id="nextBtn" class="bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-700">Next</button>
+    </div>
+  </div>
+  
+  <div id="content" class="bg-white p-4 rounded shadow">
+    <h1 id="title" class="text-xl font-bold mb-2"></h1>
+    <p id="text" class="text-lg mb-2"></p>
+    <p id="transliteration" class="text-gray-700 italic mb-2"></p>
+    <p id="word_meanings" class="text-sm text-gray-600"></p>
+  </div>
+  
+  <div id="searchResults" class="mt-4"></div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

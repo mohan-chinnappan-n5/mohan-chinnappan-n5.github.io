@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quran Viewer</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-green-600 p-4 text-white shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="text-lg font-bold">Quran Viewer</div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="p-4">
+    <div class="mb-4 flex justify-between items-center">
+      <input type="text" id="searchInput" placeholder="Search..." class="border border-gray-300 p-2 rounded w-2/3">
+      <div class="flex gap-2">
+        <button id="prevBtn" class="bg-green-500 text-white px-3 py-2 rounded hover:bg-green-700">Previous</button>
+        <button id="nextBtn" class="bg-green-500 text-white px-3 py-2 rounded hover:bg-green-700">Next</button>
+      </div>
+    </div>
+    
+    <div id="content" class="bg-white p-4 rounded shadow">
+      <h1 id="chapter-verse" class="text-xl font-bold mb-2"></h1>
+      <p id="text" class="text-lg mb-2"></p>
+    </div>
+    
+    <div id="searchResults" class="mt-4"></div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
