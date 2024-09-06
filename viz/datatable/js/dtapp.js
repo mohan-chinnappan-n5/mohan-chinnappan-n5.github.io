@@ -84,14 +84,45 @@ if (c === "csv") {
   input = JSON.stringify(d3.tsvParse(input));
 }
 
-const prepareData = (input) => {
+const prepareData2 = (input) => {
   const data = JSON.parse(input);
+  console.log(data);
   let columns = Object.keys(data[0]);
   let fieldsData = [];
   let ths = "";
   thsEle.innerHTML = "";
   for (const col of columns) {
     //console.log(col);
+    fieldsData.push({ data: col });
+    ths += `<th>${col}</th>`;
+  }
+  thsEle.innerHTML = ths;
+  return { data, fieldsData };
+};
+
+const prepareData = (input) => {
+  let data = JSON.parse(input);
+  console.log(data);
+
+  // Flatten object fields
+  data = data.map((item) => {
+    let flattenedItem = {};
+    for (let key in item) {
+      if (typeof item[key] === "object" && item[key] !== null) {
+        // Convert objects to JSON strings
+        flattenedItem[key] = JSON.stringify(item[key]);
+      } else {
+        flattenedItem[key] = item[key];
+      }
+    }
+    return flattenedItem;
+  });
+
+  let columns = Object.keys(data[0]);
+  let fieldsData = [];
+  let ths = "";
+  thsEle.innerHTML = "";
+  for (const col of columns) {
     fieldsData.push({ data: col });
     ths += `<th>${col}</th>`;
   }
