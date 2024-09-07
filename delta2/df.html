@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File  Diff</title>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+
+    <!-- Add Tailwind CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="monaco/vs/editor/editor.main.css" />
+    <link rel="stylesheet" href="df.css">
+
+    
+  </head>
+  <body class="bg-gray-100 font-sans h-screen">
+
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 shadow-lg">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-white text-2xl font-bold">File Diff </h1>
+        <div class="mb-6">
+            <input type="checkbox" id="themeToggle" class="mr-2 leading-tight ">
+            <span id="themeLabel" >Light Theme</span>
+          </div>    
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="w-full h-[calc(100vh-4rem)] p-4 bg-white shadow-md rounded-lg overflow-auto">
+      
+      <!-- File Upload Section -->
+      <div class="mb-6">
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <label class="block text-blue-700 font-medium mb-2">Upload Original File</label>
+            <input type="file" id="file1" class="block w-full text-md text-gray-500 border border-blue-300 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <textarea id="t1" class="w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mt-4">
+All Truly Great Things are Simple.
+All great projects have good configuration!
+
+"Kitchen sink" UI refers to a user interface design where a large number of features, options, 
+and information are crammed into a single screen or menu.
+"Kitchen sink" UI Overwhelms the User,Reduces Usability.
+            </textarea>
+          </div>
+
+          <div>
+            <label class="block text-green-700 font-medium mb-2">Upload Modified File</label>
+            <input type="file" id="file2" class="block w-full text-md text-gray-500 border border-green-300 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <textarea id="t2" class="w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mt-4">
+All Truly Great Things are Simple.  
+God plays dice with the world?
+            </textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Override Extension -->
+      <div class="mb-6">
+        <label class="block text-gray-700 font-medium mb-2">Override File Extension (optional)</label>
+        <input type="text" id="overrideExt" class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="e.g., xml,apex,python,java,javascript,json" />      </div>
+
+      <!-- Compare Button -->
+      <div class="text-center mb-6">
+        <button
+          id="compare"
+          class="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg shadow hover:bg-blue-500 transition-all"
+        >
+          Compare Texts
+        </button>
+      </div>
+
+      <!-- Monaco Editor Container -->
+      <div id="container" class="border border-gray-300 shadow-lg rounded-lg bg-gray-100"></div>
+
+         <!-- Footer -->
+         <footer class="footer">
+            Made with ❤️ in <a href="https://en.wikipedia.org/wiki/New_Hampshire" target="_blank">New Hampshire</a> 
+            by <a target="_blank" href="https://mohan-chinnappan-n.github.io/about/cv.html">mc</a>
+          </footer>
+    </div>
+
+   
+
+    <script src="monaco/vs/loader.js"></script>
+    <script src="df.js"></script>
+  
+  </body>
+</html>
