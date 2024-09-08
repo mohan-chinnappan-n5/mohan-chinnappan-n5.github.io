@@ -1,0 +1,26 @@
+.resizable {
+    resize: horizontal;
+    overflow: auto;
+    min-width: 200px;
+    max-width: 400px;
+    height: 100vh; /* Ensures full height */
+    transition: background-color 0.3s;
+  }
+  
+  .container {
+    display: flex;
+    height: 100vh; /* Makes sure the pane spans full height */
+  }
+  
+  .right-pane {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  body.dark .resizable {
+    background-color: #1a1a2e; /* Dark mode background color */
+  }
+  
+  body.dark .text-gray-200 {
+    color: #e5e7eb; /* Light text on dark mode */
+  }

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Videos Collection</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <!-- Navbar -->
+    <nav
+      class="sticky top-0 bg-blue-600 dark:bg-gray-800 p-4 flex justify-between items-center z-50"
+    >
+      <img src="img/logo.png" width="40" alt="Logo" />
+      <h1 class="text-white text-2xl font-bold">Favorite VIDs</h1>
+
+      <!-- Dark Theme Toggle -->
+      <div class="flex items-center space-x-2" style="display: none;">
+        <label for="dark-mode-toggle" class="text-white">Dark Mode</label>
+        <input type="checkbox" id="dark-mode-toggle" class="toggle-checkbox" />
+      </div>
+    </nav>
+
+    <!-- Container -->
+    <div class="flex h-screen">
+      <!-- Left Pane (Categories) -->
+      <div
+        class="resizable bg-white dark:bg-gray-800 shadow-lg p-4 overflow-y-auto"
+        id="left-pane"
+      >
+        <h2 class="text-xl font-semibold mb-4">Categories</h2>
+        <ul id="categories" class="space-y-3">
+          <!-- Categories will be dynamically populated here -->
+        </ul>
+      </div>
+
+      <!-- Main Content (Video List) -->
+      <div class="flex-grow p-6 overflow-y-auto">
+        <h2 class="text-2xl font-semibold mb-6" id="category-title">
+          Select a Category
+        </h2>
+        <div
+          id="video-list"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <!-- Videos will be dynamically populated here -->
+        </div>
+      </div>
+    </div>
+
+    <script src="vids.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
