@@ -21,7 +21,7 @@
     gh: {
       title: 'Github Tools',
       links: [
-        { text: 'GitHub PR Search Tool', href: '../../gh/github-app.html', icon: 'book' },
+        { text: 'GitHub PR Search Tool', href: '../../gh/github-app.html', icon: 'desktop' },
       ],
     },
 

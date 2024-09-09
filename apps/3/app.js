@@ -1,4 +1,4 @@
-import sections from './sections.js';
+import sections from './sections.js?v=2';
 
 // Function to create catalog content based on selected category
 function createCatalog(selectedCategoryKey) {
@@ -26,7 +26,7 @@ function createCatalog(selectedCategoryKey) {
         listItem.className = 'flex items-center space-x-2';
 
         const icon = document.createElement('img');
-        icon.src = `https://img.icons8.com/material-outlined/24/000000/${link.icon}.png`; // Use appropriate icon URL
+        icon.src = `img/${link.icon}.png`; 
         icon.className = 'w-5 h-5';
 
         const anchor = document.createElement('a');
@@ -64,7 +64,7 @@ function createCatalog(selectedCategoryKey) {
         listItem.className = 'flex items-center space-x-2';
 
         const icon = document.createElement('img');
-        icon.src = `https://img.icons8.com/material-outlined/24/000000/${link.icon}.png`; // Use appropriate icon URL
+        icon.src = `img/${link.icon}.png`; // Use appropriate icon URL
         icon.className = 'w-5 h-5';
 
         const anchor = document.createElement('a');
@@ -84,38 +84,7 @@ function createCatalog(selectedCategoryKey) {
   }
 }
 
-// Function to create catalog content
-function createCatalog2() {
-  const catalogContainer = document.getElementById('catalog');
-  catalogContainer.innerHTML = ''; // Clear existing content
 
-  Object.keys(sections).forEach(key => {
-    const section = sections[key];
-    const sectionDiv = document.createElement('div');
-    sectionDiv.className = 'catalog-item'; // Apply the new class
-
-    // Create and append thumbnail
-    const thumbnail = document.createElement('img');
-    thumbnail.src = section.thumbnail || 'https://via.placeholder.com/150'; // Placeholder if no thumbnail
-    thumbnail.alt = 'Item Thumbnail';
-    thumbnail.className = 'w-full h-40 object-cover rounded-lg mb-4';
-    sectionDiv.appendChild(thumbnail);
-
-    // Create and append title
-    const title = document.createElement('h3');
-    title.className = 'text-xl font-semibold text-blue-500 dark:text-blue-400 mb-2';
-    title.textContent = section.title;
-    sectionDiv.appendChild(title);
-
-    // Create and append description
-    const description = document.createElement('p');
-    description.className = 'text-gray-300 dark:text-gray-400';
-    description.textContent = section.description || 'No description available.';
-    sectionDiv.appendChild(description);
-
-    catalogContainer.appendChild(sectionDiv);
-  });
-}
 
 // Function to create category list
 function createCategories() {
@@ -137,11 +106,41 @@ function createCategories() {
 }
 
 // Function to filter categories based on search input
+function filterCategories2() {
+  const searchInput = document.getElementById('category-search');
+  const searchTerm = searchInput.value.toLowerCase();
+  const categoryItems = document.querySelectorAll('#categories li');
+  if (!searchInput) {
+    createCatalog();
+    return;
+  }
+
+  categoryItems.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    if (text.includes(searchTerm)) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+// Function to filter categories based on search input
 function filterCategories() {
   const searchInput = document.getElementById('category-search');
   const searchTerm = searchInput.value.toLowerCase();
   const categoryItems = document.querySelectorAll('#categories li');
 
+  // If the user enters 'all', show all categories
+  if (searchTerm === 'all') {
+    categoryItems.forEach(item => {
+      item.style.display = ''; // Show all categories
+    });
+    createCatalog(); // Display all categories in the catalog
+    return;
+  }
+
+  // Otherwise, filter categories based on the search term
   categoryItems.forEach(item => {
     const text = item.textContent.toLowerCase();
     if (text.includes(searchTerm)) {
@@ -160,10 +159,26 @@ function updateTotalLinks() {
   bubble.textContent = totalLinks + mediaAppsCount;
 }
 
+// Function to get query parameters from URL
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
 // Initialize the page
 function init() {
+
   createCategories();
-  createCatalog(); // Display all items initially
+  let categoryFromURL = getQueryParam('c');
+  if (categoryFromURL) categoryFromURL = categoryFromURL.replace(' ',''); // Get 'c' parameter from URL
+
+  if (categoryFromURL && sections[categoryFromURL]) {
+    document.getElementById('category-title').textContent = sections[categoryFromURL].title;
+    createCatalog(categoryFromURL); // Display the category passed in the URL
+  } else {
+    createCatalog(); // Display all items initially if no category is in the URL
+  }
+  
   document.getElementById('category-search').addEventListener('input', filterCategories);
   updateTotalLinks(); // Update total links bubble
 }
