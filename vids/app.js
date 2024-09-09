@@ -2,6 +2,7 @@ const categoriesElement = document.getElementById("categories");
 const videoListElement = document.getElementById("video-list");
 const categoryTitleElement = document.getElementById("category-title");
 const darkModeToggle = document.getElementById("dark-mode-toggle");
+const searchInput = document.getElementById("category-search"); // New element for search input
 
 // Handle category click event
 function loadVideos(category) {
@@ -30,8 +31,9 @@ function loadVideos(category) {
 }
 
 // Populate categories on the left pane and preload the first category
-function populateCategories() {
-  data.categories.forEach((category, index) => {
+function populateCategories(categories) {
+  categoriesElement.innerHTML = ""; // Clear existing categories
+  categories.forEach((category, index) => {
     const categoryItem = document.createElement("li");
     categoryItem.classList.add(
       "cursor-pointer",
@@ -52,6 +54,15 @@ function populateCategories() {
       loadVideos(category.name);
     }
   });
+}
+
+// Filter categories based on the search input
+function filterCategories() {
+  const query = searchInput.value.toLowerCase();
+  const filteredCategories = data.categories.filter((category) =>
+    category.name.toLowerCase().includes(query)
+  );
+  populateCategories(filteredCategories);
 }
 
 // Sync the dark mode state with the checkbox
@@ -80,10 +91,12 @@ function checkDarkModePreference() {
     document.body.classList.remove("dark");
   }
 }
-
 // Initialize the app
 window.addEventListener("DOMContentLoaded", () => {
   checkDarkModePreference(); // Apply stored dark mode preference
   syncDarkModeWithCheckbox(); // Sync checkbox with the current dark mode state
-  populateCategories(); // Populate categories and load the first one
+  populateCategories(data.categories); // Populate categories and load the first one
+
+  // Add event listener for the search input
+  searchInput.addEventListener("input", filterCategories);
 });

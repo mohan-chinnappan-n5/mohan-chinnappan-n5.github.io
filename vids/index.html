@@ -29,16 +29,25 @@
 
     <!-- Container -->
     <div class="flex h-screen">
-      <!-- Left Pane (Categories) -->
-      <div
-        class="resizable bg-white dark:bg-gray-800 shadow-lg p-4 overflow-y-auto"
-        id="left-pane"
-      >
-        <h2 class="text-xl font-semibold mb-4">Categories</h2>
-        <ul id="categories" class="space-y-3">
-          <!-- Categories will be dynamically populated here -->
-        </ul>
-      </div>
+    <!-- Left Pane (Categories) -->
+<div
+class="resizable bg-white dark:bg-gray-800 shadow-lg p-4 overflow-y-auto"
+id="left-pane"
+>
+<h2 class="text-xl font-semibold mb-4">Categories</h2>
+
+<!-- Search Input -->
+<input
+  type="text"
+  id="category-search"
+  placeholder="Search categories..."
+  class="w-full p-2 mb-4 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+/>
+
+<ul id="categories" class="space-y-3">
+  <!-- Categories will be dynamically populated here -->
+</ul>
+</div> 
 
       <!-- Main Content (Video List) -->
       <div class="flex-grow p-6 overflow-y-auto">
