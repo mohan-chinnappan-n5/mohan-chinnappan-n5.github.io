@@ -355,15 +355,17 @@
 
     },
 
+    LifeStyle: {
+      title: 'Life Style and related',
+      links: [
+         { text: 'Videos', href: '../../vids', icon: 'desktop' },
+         { text: 'Health', href: '../../heath', icon: 'desktop' },
 
 
+        // Add more links here
+      ],
 
-
-
-
-
-
-
+    },
 
 
     // Add more sections here
