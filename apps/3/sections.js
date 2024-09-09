@@ -304,6 +304,8 @@
         { text: 'Salesforce Metadata Deploy Status', href: 'https://chromewebstore.google.com/detail/lajgnappfocmnicbgkfalbkeeocfiibm', icon: 'desktop' },
         { text: 'Salesforce SOQL Query and Run Apex', href: 'https://chromewebstore.google.com/detail/ioelfaahincgpebnkogkabggcnhagpdl', icon: 'desktop' },
         { text: 'Page Performance', href: 'https://chromewebstore.google.com/detail/afhmplbnocjhbpmdfiefplmaliagpfch', icon: 'desktop' },
+        { text: 'File Diff', href: 'https://chromewebstore.google.com/detail/obmjlelfmcmimbppoijobhijppdchekg', icon: 'desktop' },
+
 
 
         { text: 'Thirukkural', href: 'https://chromewebstore.google.com/detail/jgcmcenfgepdlgccfmfhhfoeaooecokh', icon: 'desktop' },
@@ -359,7 +361,7 @@
       title: 'Life Style and related',
       links: [
          { text: 'Videos', href: '../../vids', icon: 'desktop' },
-         { text: 'Health', href: '../../heath', icon: 'desktop' },
+         { text: 'Health', href: '../../health', icon: 'desktop' },
 
 
         // Add more links here
