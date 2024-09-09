@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalog of Apps and Books</title>
+  <link
+    rel="icon"
+    type="image/x-icon"
+    href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+  <!-- Navbar -->
+  <nav class="sticky top-0 bg-blue-600 dark:bg-gray-800 p-4 flex justify-between items-center z-50">
+    <img src="img/logo.png" width="40" alt="Logo" />
+    <h1 class="text-white text-2xl font-bold">Catalog of Apps and Books</h1>
+
+       <!-- Total Links Bubble -->
+       <div
+       id="total-links-bubble"
+       class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-xs"
+     >
+       0
+     </div>
+
+    <!-- Dark Theme Toggle -->
+    <div class="flex items-center space-x-2" style="display:none;">
+      <label for="dark-mode-toggle" class="text-white">Dark Mode</label>
+      <input type="checkbox" id="dark-mode-toggle" class="toggle-checkbox" />
+    </div>
+  </nav>
+
+  <div class="flex h-screen">
+    <!-- Left Pane (Categories) -->
+    <div class="resizable bg-white dark:bg-gray-800 shadow-lg p-4 overflow-y-auto" id="left-pane">
+      <h2 class="text-xl font-semibold mb-4">Categories</h2>
+
+      <!-- Search Input -->
+      <input
+        type="text"
+        id="category-search"
+        placeholder="Search categories..."
+        class="w-full p-2 mb-4 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+      />
+
+      <ul id="categories" class="space-y-3">
+        <!-- Categories will be dynamically populated here -->
+      </ul>
+    </div>
+
+    <!-- Main Content (Links) -->
+    <div class="flex-grow p-6 overflow-y-auto">
+      <h2 class="text-2xl font-semibold mb-6" id="category-title">
+        Select a Category
+      </h2>
+      <div id="catalog" class="space-y-6">
+        <!-- Example Catalog Item -->
+        <div class="catalog-item bg-gray-800 dark:bg-gray-900 p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+          <img src="https://via.placeholder.com/150" alt="Item Thumbnail" class="w-full h-40 object-cover rounded-lg mb-4">
+          <h3 class="text-xl font-semibold text-blue-500 dark:text-blue-400 mb-2">Item Title</h3>
+          <p class="text-gray-300 dark:text-gray-400">Item description or additional details go here.</p>
+        </div>
+        <!-- More catalog items will be dynamically populated here -->
+      </div>
+    
+    </div>
+  </div>
+
+  <script src="sections.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
