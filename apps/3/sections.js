@@ -9,11 +9,7 @@
         { text: 'Playwright for Salesforce Tutorial', href: '../../books/playwright/index.html', icon: 'book' },
         { text: 'More Salesforce Notes ', href: 'https://mohan-chinnappan-n.github.io/', icon: 'book' },
         { text: 'Notes on Metadata Deploy Status Monitor', href: '../../deployments/deploy-status.html', icon: 'book' },
-
-
-
-
-
+        { text: 'Notes on Page Performance Chrome Extension', href: '../../pageperf/pageperf.html', icon: 'book' },
 
       ],
     },
