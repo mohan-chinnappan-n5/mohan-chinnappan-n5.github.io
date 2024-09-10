@@ -24,6 +24,29 @@ const data = {
       },
 
       {
+        name: "Computer Languages",
+        videos: [
+          { title: "Admiral Grace Hopper", youtubeId: "_bP14OzIJWI" },
+          { title: "TypeScript Keynote", youtubeId: "3dqZW_DqHIQ" },
+          { title: "Ken Thompson", youtubeId: "EY6q5dv_B-o" },
+          { title: "Meet the Go Team", youtubeId: "sln-gJaURzk" },
+          { title: "Ken Thompson is a singularity", youtubeId: "fL2QwyxcJ5s" },
+          { title: "Ken Thompson's UNIX Password", youtubeId: "yMDYgUFeztk" },
+          { title: "Rust 3 hrs course", youtubeId: "rQ_J9WH6CGk" },
+
+
+
+
+
+
+
+
+        ],
+      },
+
+
+
+      {
 
         name: "DBMS",
         videos: [
@@ -109,6 +132,11 @@ const data = {
           { title: "10 Vegetables" , youtubeId: "b3waibCUoKo" },
           { title: "300 Days Free Building Farm Life" , youtubeId: "odbiGuLImts" },
           { title: "Ginger Masterclass" , youtubeId: "2_mqJA_pol4" },
+          { title: "Grow Watermelon from Seed in Containers" , youtubeId: "KEJuRQCg6yw" },
+          { title: "Grow Turnips from Seed in Containers" , youtubeId: "l_L8Z5in_7A" },
+
+
+
 
 
 
