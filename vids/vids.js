@@ -22,6 +22,20 @@ const data = {
 
         ],
       },
+
+      {
+
+        name: "DBMS",
+        videos: [
+  
+          { title: "Relational Theory for Computer Professionals", youtubeId: "qx0F7TfA8CI" },
+          { title: "What Led to the Success of PotgreSQL ", youtubeId: "dTN3zLDPT38" },
+           { title: "Michael Stonebraker 2014 ACM A.M. Turing Award Lecture", youtubeId: "BbGeKi6T6QI" },
+        
+        ],
+      },
+
+
       {
 
       name: "LLMs",
@@ -33,6 +47,10 @@ const data = {
         { title: "How might LLMs store facts", youtubeId: "9-Jl0dxWQs8" },
       ],
     },
+
+  
+
+
 
     {name: "GenAI Hands-on",
     videos: [
@@ -107,6 +125,13 @@ const data = {
         name: "Sports",
         videos: [
           { title: "Intuitive Tennis" , youtubeId: "MMifAROm6F0" },
+          { title: "Roger Federer's Best Points at Wimbledon" , youtubeId: "fK2i-Jo3CNA" },
+          { title: "Roger Federer v Rafael Nadal " , youtubeId: "KTCDxjJvs2U" },
+          { title: "Bjorn Borg vs John McEnroe" , youtubeId: "UnwYdF8a5ws" },
+
+
+
+
 
 
 
