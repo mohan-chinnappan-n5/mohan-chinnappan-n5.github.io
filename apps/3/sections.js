@@ -10,6 +10,8 @@
         { text: 'More Salesforce Notes ', href: 'https://mohan-chinnappan-n.github.io/', icon: 'book' },
         { text: 'Notes on Metadata Deploy Status Monitor', href: '../../deployments/deploy-status.html', icon: 'book' },
         { text: 'Notes on Page Performance Chrome Extension', href: '../../pageperf/pageperf.html', icon: 'book' },
+        { text: 'Notes on SF Utils Chrome Extension', href: '../../queryperf/index.html', icon: 'book' },
+
 
       ],
     },
