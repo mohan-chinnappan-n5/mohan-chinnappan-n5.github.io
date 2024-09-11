@@ -29,7 +29,7 @@ Salesforce Query Explain provides detailed information about how a SOQL query is
    - **Indexes Used:** Lists the indexes that were used or could be used for your query. Efficient use of indexes can significantly improve performance.
    - **Row Counts:** Shows how many rows are being scanned and retrieved. This helps you understand if your query is retrieving more data than necessary.
 
-5. **Optimize Your Query**
+**Optimize Your Query**
 
    Based on the information from Query Explain, you can make the following adjustments to optimize your query:
 
@@ -38,7 +38,7 @@ Salesforce Query Explain provides detailed information about how a SOQL query is
    - **Reduce Field Retrieval:** Only select the fields you need to minimize the amount of data processed.
    - **Simplify Complex Queries:** Break down complex queries into simpler, more manageable parts if possible.
 
-6. **Test and Validate**
+**Test and Validate**
 
    After making changes, re-run the Query Explain to validate that your optimizations have improved the query performance. Test the query with real data to ensure it meets performance expectations.
 
