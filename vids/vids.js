@@ -124,6 +124,51 @@ const data = {
       },
 
       {
+        name: "Reality",
+        videos: [
+          { title: "Inside the Life of Titus", youtubeId: "BBXVSnegoY4" },
+          { title: "The Amish: Barn Raising Days", youtubeId: "vfKkuZmlx6U" },
+        ],
+      },
+
+      {
+        name: "Teamwork",
+        videos: [
+          { title: "The Amish: Shed Move", youtubeId: "hZL7TqSeDus" },
+
+        ],
+      },
+
+      {
+        name: "Greats",
+        videos: [
+          { title: "Abdul Kalam Inspiring Speech", youtubeId: "xE4azJ-wro4" },
+          { title: "Gandhi On God and Truth", youtubeId: "kBsUwIfL8kU" },
+          { title: "Godfather of AI", youtubeId: "qrvK_KuIeJk" },
+          { title: "Elon Musk", youtubeId: "vai3Vh234EE" },
+          { title: "Elon Musk Speech", youtubeId: "e7Qh-vwpYH8" },
+
+          { title: "Steve Jobs", youtubeId: "UF8uR6Z6KLc" },
+          { title: "Larry Ellison", youtubeId: "RuYCQy_5ho0" },
+
+
+
+
+          { title: "Nvidia CEO Jensen", youtubeId: "DpQQi2scsHo" },
+          { title: "Tim Berners-Lee", youtubeId: "GUrDI6OkJfU" },
+
+
+
+
+
+
+        ],
+      },
+
+
+ 
+
+      {
         name: "Gardening",
         videos: [
           { title: "Charles Dowding" , youtubeId: "HpSuB0Th3K8" },
