@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help for Chrome Extension Chatty for LLMs</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 dark:text-white transition-colors duration-500">
+
+  <!-- Navbar -->
+  <nav class="sticky top-0 bg-blue-600 dark:bg-gray-800 p-4 flex justify-between items-center z-50">
+    <div class="flex items-center space-x-4">
+      <!-- Logo and Title -->
+      <div class="text-2xl text-white font-extrabold">Chatty for LLMs</div>
+    </div>
+
+    <div class="ml-auto hidden md:flex">
+       <a  class="bg-red-500 hover:bg-yellow-600 text-white py-2 px-4 rounded mb-6"  href="https://chromewebstore.google.com/detail/mnecjkcdjdkgiklbmeodicgdfladfdan">Install</a>
+    </div>
+    
+  </nav>
+
+  <!-- Main Content -->
+  <main class="p-8">
+    <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+      <h1 class="text-3xl font-bold mb-4">About  Chatty for LLMs</h1>
+      <p class="text-lg mb-4">
+        Welcome to our  Chatty for LLMs! This tool is designed to help to chat with your LLMs running locally using Ollama
+     </p>
+     <div class="ml-auto hidden md:flex">
+      <a  class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mb-6"  href="https://chromewebstore.google.com/detail/mnecjkcdjdkgiklbmeodicgdfladfdan">Install</a>
+     </div>
+     <hr/>
+      
+
+      <h2 class="text-2xl font-semibold mb-2">Features</h2>
+      <ul class="list-disc pl-5 mb-4">
+        <li class="mb-2">🛠️You can select a LLM running on your local machine via Ollama</li>
+        <li class="mb-2">📈 You can run RAG ( Retrieval-Augmented Generation) on HTML page in your active tab. 
+            This will use your selected LLM for RAG   </li>
+
+      </ul>
+
+      <h2 class="text-2xl font-semibold mb-2">How to Use</h2>
+      <p class="text-lg mb-4">
+        To get started with our extension, follow these simple steps:
+      </p>
+      <ol class="list-decimal pl-5 mb-4">
+        <li class="mb-2">🔹 Step 1: Select your local LLM running using Ollama. You need run the following commands on local machine:
+
+            <pre>
+                export OLLAMA_ORIGINS=chrome-extension://* 
+                ollama serve
+            </pre>
+        </li>
+
+        <li class="mb-2">🔹Step:2 You can check the models running on your local machine by running
+            <pre>
+                ollama ls 
+                ---------------------------------------------------------
+                NAME                   	ID          	SIZE  	MODIFIED     
+                nomic-embed-text:latest	0a109f422b47	274 MB	4 months ago	
+                phi3:latest            	a2c89ceaed85	2.3 GB	4 months ago	
+                llama2:latest          	78e26419b446	3.8 GB	4 months ago	
+                llama3:latest          	a6990ed6be41	4.7 GB	4 months ago	
+                mistral:latest         	61e88e884507	4.1 GB	6 months ago	
+                tinyllama:latest       	2644915ede35	637 MB	6 months ago
+            </pre>
+
+        
+        <li class="mb-2">🔹 Step 3: Now you are all set to Ask LLM
+
+           <img src="img/chattyLLMs-00.png" alt="Ask LLM">
+           <img src="img/chattyLLMs-01.png" alt="Ask LLM">
+
+
+        </li>
+        <li class="mb-2">🔹 Step 4: To Run RAG you need to run a local server: Details are 
+            <a href="https://github.com/mohan-chinnappan-n5/chattyLLMServer" target="_blank">here</a>
+        </li>
+        <li class="mb-2">🔹 Step 5: Once RAG local server is running, you ask questions about html page in the active tab
+            <img src="img/chattyLLMs-1.png" alt="Ask LLM RAG">
+
+        </li>
+      </ol>
+
+    </div>
+  </main>
+
+
+</body>
+
+</html>
