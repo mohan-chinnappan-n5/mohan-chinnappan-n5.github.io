@@ -18,6 +18,7 @@ const siteContent = {
         description: 'Linux Kernel is the core of the Linux operating system, powering servers, desktops, and a wide range of devices.',
         language: 'C, Assembly',
         url: 'https://kernel.org'
+        icon: 'server'
       },
       {
         name: 'GNU',

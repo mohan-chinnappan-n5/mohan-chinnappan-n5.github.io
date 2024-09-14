@@ -12,6 +12,8 @@
         { text: 'Notes on Page Performance Chrome Extension', href: '../../pageperf/pageperf.html', icon: 'book' },
         { text: 'Notes on SF Utils Chrome Extension', href: '../../queryperf/index.html', icon: 'book' },
         { text: 'Notes on Chatty for LLMss Chrome Extension', href: '../../llms/chatty/help.html', icon: 'book' },
+        { text: 'Notes on Operating Systems', href: '../../pages/p1.html?c=https://mohan-chinnappan-n5.github.io/pages/os/content.js', icon: 'book' },
+
 
 
 

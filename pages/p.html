@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" id="theme-body">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sample Tailwind Page</title>
+
+    <!-- Import Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="app.js?v3"></script>
+
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+
+
+    <style>
+      /* Optional custom styles can go here */
+    </style>
+  </head>
+  <body class="bg-white text-gray-900 transition-all duration-300">
+    <!-- Navigation -->
+    <nav class="bg-white text-gray-900 p-4 shadow">
+      <div class="container mx-auto flex justify-between items-center">
+        <a id="title" href="/" class="text-2xl font-bold">
+          <!-- Content loaded from content.js -->
+        </a>
+
+        <a
+          id="about-me"
+          href="#"
+          target="_blank"
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-500"
+        >
+          About Me
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-black text-white py-8 rounded">
+      <div class="container mx-auto text-center">
+        <h1 id="headline" class="text-4xl font-bold">
+          <!-- Content loaded from content.js -->
+        </h1>
+        <p id="overview" class="mt-4 text-lg">
+          <!-- Content loaded from content.js -->
+        </p>
+      </div>
+    </header>
+
+    <!-- Featured Operating Systems Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto">
+        <div class="flex justify-between items-center mb-8">
+          <div>
+            <h2 id="featured-title" class="text-3xl font-bold">
+              <!-- Content loaded from content.js -->
+            </h2>
+            <p id="featured-description" class="mt-2 text-lg">
+              <!-- Content loaded from content.js -->
+            </p>
+          </div>
+        </div>
+
+        <!-- Operating Systems Grid -->
+        <div
+          id="project-grid"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <!-- Content loaded from content.js -->
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
