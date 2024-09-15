@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="web-perf.html"><strong aria-hidden="true">1.</strong> 1. What is Web Performance</a></li><li class="chapter-item expanded "><a href="cert.html"><strong aria-hidden="true">2.</strong> 2. What is inside a Server's Cert</a></li><li class="chapter-item expanded "><a href="async-defer.html"><strong aria-hidden="true">3.</strong> 3. async and defer</a></li><li class="chapter-item expanded "><a href="performance-api.html"><strong aria-hidden="true">4.</strong> 4. Performance API</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="web-perf.html"><strong aria-hidden="true">1.</strong> 1. What is Web Performance</a></li><li class="chapter-item expanded "><a href="cert.html"><strong aria-hidden="true">2.</strong> 2. What is inside a Server's Cert</a></li><li class="chapter-item expanded "><a href="async-defer.html"><strong aria-hidden="true">3.</strong> 3. async and defer</a></li><li class="chapter-item expanded "><a href="performance-api.html"><strong aria-hidden="true">4.</strong> 4. Performance API</a></li><li class="chapter-item expanded "><a href="networking/traceroute.html"><strong aria-hidden="true">5.</strong> 5. Traceroute</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking/mctr.html"><strong aria-hidden="true">5.1.</strong> mctr</a></li><li class="chapter-item expanded "><a href="networking/icmp.html"><strong aria-hidden="true">5.2.</strong> ICMP</a></li><li class="chapter-item expanded "><a href="networking/curl.html"><strong aria-hidden="true">5.3.</strong> Curl</a></li></ol></li><li class="chapter-item expanded "><a href="uiux/ui.html"><strong aria-hidden="true">6.</strong> 6. UI/UX</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="uiux/best-practices.html"><strong aria-hidden="true">6.1.</strong> Best Practices</a></li><li class="chapter-item expanded "><a href="uiux/accessibility.html"><strong aria-hidden="true">6.2.</strong> Accessibility</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -765,6 +765,924 @@ observer.observe({ entryTypes: ['mark', 'measure'] });
 </code></pre>
 <h3 id="conclusion-1"><a class="header" href="#conclusion-1"><strong>Conclusion</strong></a></h3>
 <p>Drawing a waterfall diagram using the Performance API can provide insightful visualizations for analyzing and optimizing resource loading on web pages. Whether you use a basic <code>&lt;canvas&gt;</code> approach or a more advanced library like D3.js, this method allows you to see how each resource contributes to the overall load time, helping you to identify and address performance bottlenecks.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="5-traceroute"><a class="header" href="#5-traceroute">5. Traceroute</a></h1>
+<p>traceroute utilizes the IP protocol <strong>time to live</strong> field and attempts to elicit an ICMP TIME_EXCEEDED response from each gateway along the path to some host.</p>
+<h2 id="man-page"><a class="header" href="#man-page">man page</a></h2>
+<pre><code>TRACEROUTE(8)                                                                  System Manager's Manual                                                                 TRACEROUTE(8)
+
+NAME
+     traceroute – print the route packets take to network host
+
+SYNOPSIS
+     traceroute [-adeEFISdNnrvx] [-A as_server] [-f first_ttl] [-g gateway] [-i iface] [-M first_ttl] [-m max_ttl] [-P proto] [-p port] [-q nqueries] [-s src_addr] [-t tos]
+                [-w waittime] [-z pausemsecs] host [packetsize]
+
+DESCRIPTION
+     The Internet is a large and complex aggregation of network hardware, connected together by gateways.  Tracking the route one's packets follow (or finding the miscreant gateway
+     that's discarding your packets) can be difficult.  traceroute utilizes the IP protocol `time to live' field and attempts to elicit an ICMP TIME_EXCEEDED response from each
+     gateway along the path to some host.
+
+     The only mandatory parameter is the destination host name or IP number.  The default probe datagram length is 40 bytes, but this may be increased by specifying a packet size
+     (in bytes) after the destination host name.
+
+     Other options are:
+
+     -a      Turn on AS# lookups for each hop encountered.
+
+     -A as_server
+             Turn  on  AS#  lookups  and  use the given server instead of the default.
+
+     -d      Enable socket level debugging.
+
+     -D      When an ICMP response to our probe datagram is received, print the differences between the transmitted packet and the packet quoted by the ICMP response.  A key
+             showing the location of fields within the transmitted packet is printed, followed by the original packet in hex, followed by the quoted packet in hex.  Bytes that are
+             unchanged in the quoted packet are shown as underscores.  Note, the IP checksum and the TTL of the quoted packet are not expected to match.  By default, only one probe
+             per hop is sent with this option.
+
+     -E      Detect ECN bleaching.  Set the IPTOS_ECN_ECT1 bit and report if that value has been bleached or mangled.
+
+     -e      Firewall evasion mode.  Use fixed destination ports for UDP and TCP probes.  The destination port does NOT increment with each packet sent.
+
+     -f first_ttl
+             Set the initial time-to-live used in the first outgoing probe packet.
+
+     -F      Set the &quot;don't fragment&quot; bit.
+
+     -g gateway
+             Specify a loose source route gateway (8 maximum).
+
+    -i iface
+             Specify a network interface to obtain the source IP address for outgoing probe packets. This is normally only useful on a multi-homed host. (See the -s flag for
+             another way to do this.)
+
+     -I      Use ICMP ECHO instead of UDP datagrams.  (A synonym for &quot;-P icmp&quot;).
+
+     -M first_ttl
+             Set the initial time-to-live value used in outgoing probe packets.  The default is 1, i.e., start with the first hop.
+
+     -m max_ttl
+             Set the max time-to-live (max number of hops) used in outgoing probe packets.  The default is net.inet.ip.ttl hops (the same default used for TCP connections).
+
+     -n      Print hop addresses numerically rather than symbolically and numerically (saves a nameserver address-to-name lookup for each gateway found on the path).
+
+     -P proto
+             Send packets of specified IP protocol. The currently supported protocols are: UDP , TCP , GRE and ICMP Other protocols may also be specified (either by name or by
+             number), though traceroute does not implement any special knowledge of their packet formats. This option is useful for determining which router along a path may be
+             blocking packets based on IP protocol number. But see BUGS below.
+
+     -p port
+             Protocol specific. For UDP and TCP, sets the base port number used in probes (default is 33434).  traceroute hopes that nothing is listening on UDP ports base to
+             base+nhops-1 at the destination host (so an ICMP PORT_UNREACHABLE message will be returned to terminate the route tracing).  If something is listening on a port in the
+             default range, this option can be used to pick an unused port range.
+
+     -q nqueries
+             Set the number of probes per ``ttl'' to nqueries (default is three probes).
+
+     -r      Bypass the normal routing tables and send directly to a host on an attached network.  If the host is not on a directly-attached network, an error is returned.  This
+             option can be used to ping a local host through an interface that has no route through it (e.g., after the interface was dropped by routed(8)).
+
+     -s src_addr
+             Use the following IP address (which must be given as an IP number, not a hostname) as the source address in outgoing probe packets.  On hosts with more than one IP
+             address, this option can be used to force the source address to be something other than the IP address of the interface the probe packet is sent on.  If the IP address
+             is not one of this machine's interface addresses, an error is returned and nothing is sent.  (See the -i flag for another way to do this.) 
+
+
+
+-S      Print a summary of how many probes were not answered for each hop.
+
+     -t tos  Set the type-of-service in probe packets to the following value (default zero).  The value must be a decimal integer in the range 0 to 255.  This option can be used to
+             see if different types-of-service result in different paths.  (If you are not running a 4.4BSD or later system, this may be academic since the normal network services
+             like telnet and ftp don't let you control the TOS).  Not all values of TOS are legal or meaningful - see the IP spec for definitions.  Useful values are probably ‘-t
+             16’ (low delay) and ‘-t 8’ (high throughput).
+
+     -v      Verbose output.  Received ICMP packets other than TIME_EXCEEDED and UNREACHABLEs are listed.
+
+     -w      Set the time (in seconds) to wait for a response to a probe (default 5 sec.).
+
+     -x      Toggle IP checksums. Normally, this prevents traceroute from calculating IP checksums. In some cases, the operating system can overwrite parts of the outgoing packet
+             but not recalculate the checksum (so in some cases the default is to not calculate checksums and using -x causes them to be calculated). Note that checksums are
+             usually required for the last hop when using ICMP ECHO probes ( -I ). So they are always calculated when using ICMP.
+
+     -z pausemsecs
+             Set the time (in milliseconds) to pause between probes (default 0).  Some systems such as Solaris and routers such as Ciscos rate limit ICMP messages. A good value to
+             use with this is 500 (e.g. 1/2 second).
+
+     This program attempts to trace the route an IP packet would follow to some internet host by launching UDP probe packets with a small ttl (time to live) then listening for an
+     ICMP &quot;time exceeded&quot; reply from a gateway.  We start our probes with a ttl of one and increase by one until we get an ICMP &quot;port unreachable&quot; (which means we got to &quot;host&quot;) or
+     hit a max (which defaults to net.inet.ip.ttl hops &amp; can be changed with the -m flag).  Three probes (changed with -q flag) are sent at each ttl setting and a line is printed
+     showing the ttl, address of the gateway and round trip time of each probe.  If the probe answers come from different gateways, the address of each responding system will be
+     printed.  If there is no response within a 5 sec. timeout interval (changed with the -w flag), a &quot;*&quot; is printed for that probe.
+
+     We don't want the destination host to process the UDP probe packets so the destination port is set to an unlikely value (if some clod on the destination is using that value,
+     it can be changed with the -p flag).
+
+     A sample use and output might be:
+
+     [yak 71]% traceroute nis.nsf.net.
+     traceroute to nis.nsf.net (35.1.1.48), 64 hops max, 38 byte packet
+     1  helios.ee.lbl.gov (128.3.112.1)  19 ms  19 ms  0 ms
+     2  lilac-dmc.Berkeley.EDU (128.32.216.1)  39 ms  39 ms  19 ms
+     3  lilac-dmc.Berkeley.EDU (128.32.216.1)  39 ms  39 ms  19 ms
+     4  ccngw-ner-cc.Berkeley.EDU (128.32.136.23)  39 ms  40 ms  39 ms
+     5  ccn-nerif22.Berkeley.EDU (128.32.168.22)  39 ms  39 ms  39 ms
+     6  128.32.197.4 (128.32.197.4)  40 ms  59 ms  59 ms
+     7  131.119.2.5 (131.119.2.5)  59 ms  59 ms  59 ms
+     8  129.140.70.13 (129.140.70.13)  99 ms  99 ms  80 ms
+     9  129.140.71.6 (129.140.71.6)  139 ms  239 ms  319 ms
+     10  129.140.81.7 (129.140.81.7)  220 ms  199 ms  199 ms
+     11  nic.merit.edu (35.1.1.48)  239 ms  239 ms  239 ms
+
+     Note that lines 2 &amp; 3 are the same.  This is due to a buggy kernel on the 2nd hop system - lbl-csam.arpa - that forwards packets with a zero ttl (a bug in the distributed
+     version of 4.3 BSD).  Note that you have to guess what path the packets are taking cross-country since the NSFNet (129.140) doesn't supply address-to-name translations for its
+     NSSes.
+
+     A more interesting example is:
+
+     [yak 72]% traceroute allspice.lcs.mit.edu.
+     traceroute to allspice.lcs.mit.edu (18.26.0.115), 64 hops max
+     1  helios.ee.lbl.gov (128.3.112.1)  0 ms  0 ms  0 ms
+     2  lilac-dmc.Berkeley.EDU (128.32.216.1)  19 ms  19 ms  19 ms
+     3  lilac-dmc.Berkeley.EDU (128.32.216.1)  39 ms  19 ms  19 ms
+     4  ccngw-ner-cc.Berkeley.EDU (128.32.136.23)  19 ms  39 ms  39 ms
+     5  ccn-nerif22.Berkeley.EDU (128.32.168.22)  20 ms  39 ms  39 ms
+     6  128.32.197.4 (128.32.197.4)  59 ms  119 ms  39 ms
+     7  131.119.2.5 (131.119.2.5)  59 ms  59 ms  39 ms
+     8  129.140.70.13 (129.140.70.13)  80 ms  79 ms  99 ms
+     9  129.140.71.6 (129.140.71.6)  139 ms  139 ms  159 ms
+
+     10  129.140.81.7 (129.140.81.7)  199 ms  180 ms  300 ms
+     11  129.140.72.17 (129.140.72.17)  300 ms  239 ms  239 ms
+     12  * * *
+     13  128.121.54.72 (128.121.54.72)  259 ms  499 ms  279 ms
+     14  * * *
+     15  * * *
+     16  * * *
+     17  * * *
+     18  ALLSPICE.LCS.MIT.EDU (18.26.0.115)  339 ms  279 ms  279 ms
+
+     Note that the gateways 12, 14, 15, 16 &amp; 17 hops away either don't send ICMP &quot;time exceeded&quot; messages or send them with a ttl too small to reach us.  14 - 17 are running the
+     MIT C Gateway code that doesn't send &quot;time exceeded&quot;s.  God only knows what's going on with 12.
+
+     The silent gateway 12 in the above may be the result of a bug in the 4.[23] BSD network code (and its derivatives):  4.x (x &lt;= 3) sends an unreachable message using whatever
+     ttl remains in the original datagram.  Since, for gateways, the remaining ttl is zero, the ICMP &quot;time exceeded&quot; is guaranteed to not make it back to us.  The behavior of this
+     bug is slightly more interesting when it appears on the destination system:
+
+     1  helios.ee.lbl.gov (128.3.112.1)  0 ms  0 ms  0 ms
+     2  lilac-dmc.Berkeley.EDU (128.32.216.1)  39 ms  19 ms  39 ms
+     3  lilac-dmc.Berkeley.EDU (128.32.216.1)  19 ms  39 ms  19 ms
+     4  ccngw-ner-cc.Berkeley.EDU (128.32.136.23)  39 ms  40 ms  19 ms
+     5  ccn-nerif35.Berkeley.EDU (128.32.168.35)  39 ms  39 ms  39 ms
+     6  csgw.Berkeley.EDU (128.32.133.254)  39 ms  59 ms  39 ms
+     7  * * *
+     8  * * *
+     9  * * *
+     10  * * *
+     11  * * *
+     12  * * *
+     13  rip.Berkeley.EDU (128.32.131.22)  59 ms !  39 ms !  39 ms !
+ Notice that there are 12 &quot;gateways&quot; (13 is the final destination) and exactly the last half of them are &quot;missing&quot;.  What's really happening is that rip (a Sun-3 running Sun
+     OS3.5) is using the ttl from our arriving datagram as the ttl in its ICMP reply.  So, the reply will time out on the return path (with no notice sent to anyone since ICMP's
+     aren't sent for ICMP's) until we probe with a ttl that's at least twice the path length.  I.e., rip is really only 7 hops away.  A reply that returns with a ttl of 1 is a clue
+     this problem exists.  traceroute prints a &quot;!&quot; after the time if the ttl is &lt;= 1.  Since vendors ship a lot of obsolete (DEC´s Ultrix, Sun 3.x) or non-standard (HPUX) software,
+     expect to see this problem frequently and/or take care picking the target host of your probes.
+
+     Other possible annotations after the time are !H, !N, or !P (host, network or protocol unreachable), !S (source route failed), (fragmentation needed - the RFC1191 Path MTU
+     Discovery value is displayed), !U or !W (destination network/host unknown), !I (source host is isolated), !A (communication with destination network administratively
+     prohibited), !Z (communication with destination host administratively prohibited), !Q (for this ToS the destination network is unreachable), !T (for this ToS the destination
+     host is unreachable), !X (communication administratively prohibited), !V (host precedence violation), !C (precedence cutoff in effect), or !&lt;num&gt; (ICMP unreachable code
+     &lt;num&gt;).  These are defined by RFC1812 (which supersedes RFC1716).  If almost all the probes result in some kind of unreachable, traceroute will give up and exit.
+
+     This program is intended for use in network testing, measurement and management.  It should be used primarily for manual fault isolation.  Because of the load it could impose
+     on the network, it is unwise to use traceroute during normal operations or from automated scripts.
+
+AUTHOR
+     Implemented by Van Jacobson from a suggestion by Steve Deering.  Debugged by a cast of thousands with particularly cogent suggestions or fixes from C. Philip Wood, Tim Seaver
+     and Ken Adelman.
+
+SEE ALSO
+     netstat(1), ping(8), traceroute6(8)
+
+BUGS
+     When using protocols other than UDP, functionality is reduced.  In particular, the last packet will often appear to be lost, because even though it reaches the destination
+     host, there's no way to know that because no ICMP message is sent back.  In the TCP case, traceroute should listen for a RST from the destination host (or an intermediate
+     router that's filtering packets), but this is not implemented yet.
+
+     The AS number capability reports information that may sometimes be inaccurate due to discrepancies between the contents of the routing database server and the current state of
+     the Internet.
+
+BSD 4.3                                                                             May 29, 2008                                                                             BSD 4.3
+
+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="51-mctr"><a class="header" href="#51-mctr">5.1 mctr</a></h1>
+<p>Here is my attempt on traceroute in python</p>
+<pre><code class="language-py">
+
+import os
+import socket
+import struct
+import time
+import argparse
+import csv
+from tabulate import tabulate
+
+#-------------------------------------------------------------
+# mctr.py
+#
+# author: mohan chinnappan
+# copyleft software, maintain authors info in your copies
+#_____________________________
+# requires
+# pip install tabulate
+#_____________________________
+# run it
+# sudo python3 mctr.py --max-hops 30 --target  salesforce.com 
+
+&quot;&quot;&quot;
+sudo python3 mctr.py --target salesforce.com
+Traceroute to salesforce.com (23.1.106.133), max 30 hops:
+Saving results to salesforce.com.csv...
++-----+-----------------+------------------------------------------------------+-----------------------------+
+| Hop |   IP Address    |                       Hostname                       |     Response Time (ms)      |
++-----+-----------------+------------------------------------------------------+-----------------------------+
+|  1  |   192.168.1.1   |                       Unknown                        |            2 ms             |
+|  2  |  100.93.14.67   |                       Unknown                        |            15 ms            |
+|  3  |  96.110.31.153  |    po-313-412-rur102.exeter.nh.boston.comcast.net    |            14 ms            |
+|  4  | 96.108.158.197  |       po-2-rur101.exeter.nh.boston.comcast.net       |            13 ms            |
+|  5  | 162.151.151.225 |      po-100-xar01.exeter.nh.boston.comcast.net       |            15 ms            |
+|  6  |        *        |                         N/A                          |     Request timed out.      |
+|  7  |  162.151.52.34  |      be-501-ar01.needham.ma.boston.comcast.net       |            19 ms            |
+|  8  |   68.86.90.66   |     be-1005-pe11.onesummer.ma.ibone.comcast.net      |            18 ms            |
+|  9  |        *        |                         N/A                          |     Request timed out.      |
+| 10  |  129.250.4.114  |         ae-6.r22.nwrknj03.us.bb.gin.ntt.net          |            26 ms            |
+| 11  |        *        |                         N/A                          |     Request timed out.      |
+| 12  |        *        |                         N/A                          |     Request timed out.      |
+| 13  |  129.250.2.125  |         ae-1.a04.asbnva02.us.bb.gin.ntt.net          |            30 ms            |
+| 14  | 129.250.194.70  |        ae-3.akamai.asbnva02.us.bb.gin.ntt.net        |            32 ms            |
+| 15  | 184.51.101.116  | a184-51-101-116.deploy.static.akamaitechnologies.com |            28 ms            |
+| 16  |        *        |                         N/A                          |     Request timed out.      |
+| 17  | 23.203.153.144  |        ae17.r21.iad04.ien.netarch.akamai.com         |            28 ms            |
+| 18  |  23.209.170.76  |         ae3.r22.iad04.mag.netarch.akamai.com         |            26 ms            |
+| 19  |  23.209.170.81  |         ae3.r21.iad04.icn.netarch.akamai.com         |            27 ms            |
+| 20  | 23.193.112.223  |        ae40.r01.ewr01.icn.netarch.akamai.com         |            32 ms            |
+| 21  |   23.32.62.64   |         ae8.r01.bos02.icn.netarch.akamai.com         |            38 ms            |
+| 22  |  23.203.149.43  |         ae8.r01.bos01.ien.netarch.akamai.com         |            51 ms            |
+| 23  |        *        |                         N/A                          |     Request timed out.      |
+| 24  |  23.1.106.133   |  a23-1-106-133.deploy.static.akamaitechnologies.com  | 29 ms (Destination Reached) |
++-----+-----------------+------------------------------------------------------+-----------------------------+
+Traceroute complete. Results saved to salesforce.com.csv
+#-------------------------------------------------------------
+&quot;&quot;&quot;
+
+ICMP_ECHO_REQUEST = 8  # ICMP type for Echo Request messages
+TIMEOUT = 2  # Timeout for each hop in seconds
+
+def checksum(packet):
+    &quot;&quot;&quot;
+    Calculate checksum of the packet.
+    
+    Args:
+        packet (bytes): The packet for which checksum is calculated.
+
+    Returns:
+        int: The computed checksum.
+    &quot;&quot;&quot;
+    if len(packet) % 2 != 0:
+        packet += b'\x00'
+
+    s = sum(struct.unpack(&quot;!%dH&quot; % (len(packet) // 2), packet))
+    s = (s &gt;&gt; 16) + (s &amp; 0xffff)
+    s += s &gt;&gt; 16
+    return ~s &amp; 0xffff
+
+
+def create_icmp_packet(seq):
+    &quot;&quot;&quot;
+    Create an ICMP Echo Request packet.
+
+    Args:
+        seq (int): The sequence number for the packet.
+
+    Returns:
+        bytes: The constructed ICMP packet.
+    &quot;&quot;&quot;
+    header = struct.pack('!BBHHH', ICMP_ECHO_REQUEST, 0, 0, os.getpid() &amp; 0xFFFF, seq)
+    data = struct.pack('d', time.time())  # Payload contains the current time
+    packet_without_checksum = header + data
+    packet_checksum = checksum(packet_without_checksum)
+    header = struct.pack('!BBHHH', ICMP_ECHO_REQUEST, 0, packet_checksum, os.getpid() &amp; 0xFFFF, seq)
+    return header + data
+
+
+def traceroute(target, max_hops=30, timeout=TIMEOUT):
+    &quot;&quot;&quot;
+    Perform traceroute to a specified target with a set maximum number of hops and timeout.
+    Output the result to both console and a CSV file.
+
+    Args:
+        target (str): The target hostname or IP address to trace.
+        max_hops (int): The maximum number of hops allowed. Default is 30.
+        timeout (int): Timeout in seconds for each hop. Default is 2.
+    &quot;&quot;&quot;
+    try:
+        target_ip = socket.gethostbyname(target)
+    except socket.gaierror as e:
+        print(f&quot;Cannot resolve {target}: {e}&quot;)
+        return
+
+    # Generate output CSV filename based on target
+    output_csv = f&quot;{target}.csv&quot;
+
+    print(f&quot;Traceroute to {target} ({target_ip}), max {max_hops} hops:&quot;)
+    print(f&quot;Saving results to {output_csv}...&quot;)
+
+    # Table to collect results
+    table = []
+    headers = [&quot;Hop&quot;, &quot;IP Address&quot;, &quot;Hostname&quot;, &quot;Response Time (ms)&quot;]
+
+    # CSV Output
+    with open(output_csv, mode='w', newline='') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        csv_writer.writerow(headers)  # Write the header row
+
+        # Create a raw socket
+        with socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP) as send_socket:
+            send_socket.settimeout(timeout)
+
+            for ttl in range(1, max_hops + 1):
+                # Set the TTL (time-to-live)
+                send_socket.setsockopt(socket.IPPROTO_IP, socket.IP_TTL, ttl)
+
+                # Create ICMP Echo Request packet
+                packet = create_icmp_packet(ttl)
+
+                # Send the packet
+                start_time = time.time()
+                send_socket.sendto(packet, (target_ip, 1))
+
+                try:
+                    # Wait for a response
+                    recv_socket = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP)
+                    recv_socket.settimeout(timeout)
+
+                    # Receive packet and sender address
+                    recv_packet, addr = recv_socket.recvfrom(1024)
+                    end_time = time.time()
+
+                    icmp_header = recv_packet[20:28]
+                    icmp_type, _, _, _, _ = struct.unpack(&quot;!BBHHH&quot;, icmp_header)
+
+                    response_time = int((end_time - start_time) * 1000)
+
+                    # Resolve hostname
+                    try:
+                        hostname = socket.gethostbyaddr(addr[0])[0]
+                    except socket.herror:
+                        hostname = &quot;Unknown&quot;
+
+                    if icmp_type == 11:  # TTL Exceeded
+                        row = [ttl, addr[0], hostname, f&quot;{response_time} ms&quot;]
+                    elif icmp_type == 0:  # Echo Reply (Reached target)
+                        row = [ttl, addr[0], hostname, f&quot;{response_time} ms (Destination Reached)&quot;]
+                        table.append(row)
+                        csv_writer.writerow(row)  # Write to CSV
+                        break
+                    else:
+                        row = [ttl, &quot;*&quot;, &quot;N/A&quot;, &quot;Request timed out.&quot;]
+                except socket.timeout:
+                    row = [ttl, &quot;*&quot;, &quot;N/A&quot;, &quot;Request timed out.&quot;]
+                finally:
+                    recv_socket.close()
+
+                # Add to both table and CSV
+                table.append(row)
+                csv_writer.writerow(row)
+
+    # Print the results in table format
+    print(tabulate(table, headers, tablefmt=&quot;pretty&quot;))
+    print(f&quot;Traceroute complete. Results saved to {output_csv}&quot;)
+
+
+def main():
+    &quot;&quot;&quot;
+    Main function to parse command line arguments and invoke the traceroute function.
+    &quot;&quot;&quot;
+    parser = argparse.ArgumentParser(description=&quot;Traceroute to a target with optional max hops and timeout.&quot;)
+    parser.add_argument('--target', type=str, required=True, help=&quot;Target IP address or hostname&quot;)
+    parser.add_argument('--max-hops', type=int, default=30, help=&quot;Maximum number of hops (default: 30)&quot;)
+    parser.add_argument('--timeout', type=int, default=TIMEOUT, help=&quot;Timeout for each hop in seconds (default: 2)&quot;)
+    args = parser.parse_args()
+
+    # Ensure we are running with root privileges (for raw socket use)
+    if os.geteuid() != 0:
+        print(&quot;This script requires root privileges. Please run as root.&quot;)
+        return
+
+    traceroute(args.target, args.max_hops, args.timeout)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<pre><code>sudo python3 mctr.py --target apple.com 
+Traceroute to apple.com (17.253.144.10), max 30 hops:
+Saving results to apple.com.csv...
++-----+-----------------+------------------------------------------------+-----------------------------+
+| Hop |   IP Address    |                    Hostname                    |     Response Time (ms)      |
++-----+-----------------+------------------------------------------------+-----------------------------+
+|  1  |   192.168.1.1   |                    Unknown                     |            2 ms             |
+|  2  |  100.93.14.66   |                    Unknown                     |            15 ms            |
+|  3  |  96.110.31.137  | po-313-411-rur101.exeter.nh.boston.comcast.net |            15 ms            |
+|  4  | 162.151.151.225 |   po-100-xar01.exeter.nh.boston.comcast.net    |            14 ms            |
+|  5  |        *        |                      N/A                       |     Request timed out.      |
+|  6  |  162.151.52.50  |   be-502-ar01.needham.ma.boston.comcast.net    |            21 ms            |
+|  7  |  68.86.90.173   |  be-1003-pe02.onesummer.ma.ibone.comcast.net   |            18 ms            |
+|  8  |        *        |                      N/A                       |     Request timed out.      |
+|  9  |  17.253.144.10  |                  apple.com.do                  | 22 ms (Destination Reached) |
++-----+-----------------+------------------------------------------------+-----------------------------+
+Traceroute complete. Results saved to apple.com.csv
+</code></pre>
+<pre><code>sudo python3 mctr.py --target facebook.com --timeout 5
+Traceroute to facebook.com (157.240.245.35), max 30 hops:
+Saving results to facebook.com.csv...
++-----+-----------------+------------------------------------------------+-----------------------------+
+| Hop |   IP Address    |                    Hostname                    |     Response Time (ms)      |
++-----+-----------------+------------------------------------------------+-----------------------------+
+|  1  |   192.168.1.1   |                    Unknown                     |            2 ms             |
+|  2  |  100.93.14.67   |                    Unknown                     |            19 ms            |
+|  3  |  96.110.31.153  | po-313-412-rur102.exeter.nh.boston.comcast.net |            19 ms            |
+|  4  | 96.108.158.197  |    po-2-rur101.exeter.nh.boston.comcast.net    |            13 ms            |
+|  5  | 162.151.151.225 |   po-100-xar01.exeter.nh.boston.comcast.net    |            14 ms            |
+|  6  |        *        |                      N/A                       |     Request timed out.      |
+|  7  |  162.151.52.34  |   be-501-ar01.needham.ma.boston.comcast.net    |            24 ms            |
+|  8  |  96.113.72.238  |                    Unknown                     |            17 ms            |
+|  9  |  129.134.33.76  |           po202.asw02.bos5.tfbnw.net           |            15 ms            |
+| 10  | 129.134.87.221  |              psw04.bos5.tfbnw.net              |            17 ms            |
+| 11  | 129.134.87.206  |            msw1aa.01.bos5.tfbnw.net            |            16 ms            |
+| 12  | 157.240.245.35  |    edge-star-mini-shv-01-bos5.facebook.com     | 24 ms (Destination Reached) |
++-----+-----------------+------------------------------------------------+-----------------------------+
+Traceroute complete. Results saved to facebook.com.csv
+
+</code></pre>
+<pre><code>sudo python3 mctr.py --target x.com --timeout 5
+Traceroute to x.com (104.244.42.129), max 30 hops:
+Saving results to x.com.csv...
++-----+-----------------+------------------------------------------------+-----------------------------+
+| Hop |   IP Address    |                    Hostname                    |     Response Time (ms)      |
++-----+-----------------+------------------------------------------------+-----------------------------+
+|  1  |   192.168.1.1   |                    Unknown                     |            2 ms             |
+|  2  |  100.93.14.67   |                    Unknown                     |            15 ms            |
+|  3  |  96.110.31.153  | po-313-412-rur102.exeter.nh.boston.comcast.net |            12 ms            |
+|  4  | 96.108.158.197  |    po-2-rur101.exeter.nh.boston.comcast.net    |            15 ms            |
+|  5  | 162.151.151.225 |   po-100-xar01.exeter.nh.boston.comcast.net    |            14 ms            |
+|  6  |        *        |                      N/A                       |     Request timed out.      |
+|  7  |  162.151.52.50  |   be-502-ar01.needham.ma.boston.comcast.net    |            30 ms            |
+|  8  |        *        |                      N/A                       |     Request timed out.      |
+|  9  |  4.69.227.138   |     ae1.3501.ear3.newyork6.net.lumen.tech      |            29 ms            |
+| 10  |   4.38.173.30   |      twitter-inc.ear3.newyork6.level3.net      |            49 ms            |
+| 11  |        *        |                      N/A                       |     Request timed out.      |
+| 12  | 104.244.42.129  |                    Unknown                     | 52 ms (Destination Reached) |
++-----+-----------------+------------------------------------------------+-----------------------------+
+</code></pre>
+<h2 id="flow"><a class="header" href="#flow">FLow</a></h2>
+<pre><code>+-------------------------+
+| Start                   |
+| (Run script)            |
++-------------------------+
+            |
+            v
++-------------------------+
+| Check Root Privileges   |
+| - Ensure script is run  |
+|   with root privileges  |
+|   (os.geteuid() != 0)   |
++-------------------------+
+            |
+            v
++-------------------------+
+| Parse Command Line      |
+| Arguments               |
+| - --target              |
+| - --max-hops            |
+| - --timeout             |
++-------------------------+
+            |
+            v
++-------------------------+
+| Resolve Target IP       |
+| - Use socket.gethostbyname |
++-------------------------+
+            |
+            v
++-------------------------+
+| Generate Output CSV     |
+| - Filename: &lt;target&gt;.csv|
++-------------------------+
+            |
+            v
++-------------------------+
+| Initialize Table and    |
+| CSV Writer              |
+| - Headers: Hop, IP Addr,|
+|   Hostname, Resp Time   |
++-------------------------+
+            |
+            v
++-------------------------+
+| For TTL from 1 to       |
+| max_hops                |
++-------------------------+
+            |
+            v
++-------------------------+
+| Set TTL and Create      |
+| ICMP Packet             |
++-------------------------+
+            |
+            v
++-------------------------+
+| Send ICMP Packet        |
+| - Use raw socket        |
++-------------------------+
+            |
+            v
++-------------------------+
+| Receive Response        |
+| - Use raw socket        |
++-------------------------+
+            |
+            v
++-------------------------+
+| Check ICMP Type         |
+| - TTL Exceeded (11)     |
+| - Echo Reply (0)        |
++-------------------------+
+            |
+            v
++-------------------------+
+| Process Response        |
+| - Calculate response    |
+|   time                 |
+| - Resolve Hostname      |
++-------------------------+
+            |
+            v
++-------------------------+
+| Append Row to Table and |
+| Write to CSV            |
+| - Add Hop, IP Addr,     |
+|   Hostname, Resp Time   |
++-------------------------+
+            |
+            v
++-------------------------+
+| Check Completion        |
+| - Echo Reply: Destination|
+|   Reached               |
++-------------------------+
+            |
+            v
++-------------------------+
+| Print Results           |
+| - Display Table         |
+| - Save CSV              |
++-------------------------+
+            |
+            v
++-------------------------+
+| End                     |
++-------------------------+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="52-icmp"><a class="header" href="#52-icmp">5.2 ICMP</a></h1>
+<p>ICMP (Internet Control Message Protocol) is a network protocol used for sending control messages and error reports between network devices. It operates at the network layer (Layer 3) of the OSI model and is an integral part of the IP protocol suite.</p>
+<h3 id="key-functions-of-icmp"><a class="header" href="#key-functions-of-icmp">Key Functions of ICMP</a></h3>
+<ol>
+<li>
+<p><strong>Error Reporting</strong>:</p>
+<ul>
+<li>ICMP is used to report errors and provide feedback about issues encountered during communication. For example, if a packet cannot reach its destination because the network is down or the destination is unreachable, ICMP will send a message back to the source to indicate the problem.</li>
+</ul>
+</li>
+<li>
+<p><strong>Network Diagnostics</strong>:</p>
+<ul>
+<li>ICMP is commonly used for network diagnostics and troubleshooting tools, such as <code>ping</code> and <code>traceroute</code>. These tools help determine whether a network host is reachable and trace the path taken by packets across a network.</li>
+</ul>
+</li>
+</ol>
+<h3 id="common-icmp-messages"><a class="header" href="#common-icmp-messages">Common ICMP Messages</a></h3>
+<ol>
+<li>
+<p><strong>Echo Request and Echo Reply</strong>:</p>
+<ul>
+<li><strong>Echo Request</strong>: Sent by the <code>ping</code> command to check if a host is reachable.</li>
+<li><strong>Echo Reply</strong>: Sent in response to an Echo Request, indicating that the host is reachable.</li>
+</ul>
+</li>
+<li>
+<p><strong>Destination Unreachable</strong>:</p>
+<ul>
+<li>Sent when a packet cannot be delivered to its destination. This message may indicate various types of issues, such as the destination network being unreachable, the destination host being unreachable, or the protocol or port being unreachable.</li>
+</ul>
+</li>
+<li>
+<p><strong>Time Exceeded</strong>:</p>
+<ul>
+<li>Sent when a packet's Time to Live (TTL) value expires. This is often used in tools like <code>traceroute</code> to determine the path taken by packets and measure the round-trip time to each hop.</li>
+</ul>
+</li>
+<li>
+<p><strong>Redirect</strong>:</p>
+<ul>
+<li>Sent by a router to inform the sender that a better route is available for a particular destination.</li>
+</ul>
+</li>
+</ol>
+<h3 id="example-use-cases"><a class="header" href="#example-use-cases">Example Use Cases</a></h3>
+<ul>
+<li><strong>Ping</strong>: Uses ICMP Echo Request and Echo Reply messages to check the availability of a host and measure round-trip time.</li>
+<li><strong>Traceroute</strong>: Uses ICMP Time Exceeded messages to determine the route taken by packets from source to destination and identify intermediate routers.</li>
+</ul>
+<h3 id="how-icmp-works"><a class="header" href="#how-icmp-works">How ICMP Works</a></h3>
+<p>When a network device, such as a router, receives a packet, it processes the packet and may generate an ICMP message if there are issues or specific conditions. For instance, if a router cannot forward a packet because its TTL has expired, it will send an ICMP Time Exceeded message back to the source of the packet.</p>
+<p>In summary, ICMP plays a crucial role in network management and troubleshooting by providing mechanisms to report errors and gather diagnostic information about network operations.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="53-using-curl-for-measuring-performance"><a class="header" href="#53-using-curl-for-measuring-performance">5.3 Using Curl for measuring performance</a></h1>
+<ul>
+<li>App is here: <a href="https://mohanperf.streamlit.app/">Curl Performance Metrics App</a></li>
+</ul>
+<p><img src="networking/../img/curl-perf-1.png" alt="Curl Performance Metrics App" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="6-uiux"><a class="header" href="#6-uiux">6. UI/UX</a></h1>
+<h2 id="notes-about-multiple-levels-tabs-in-a-single-page-in-spa"><a class="header" href="#notes-about-multiple-levels-tabs-in-a-single-page-in-spa">Notes about multiple levels tabs in a single page in SPA</a></h2>
+<p>Implementing multiple levels of tabs in a single page within a Single Page Application (SPA) can lead to various issues. Here are some common challenges and issues you might encounter:</p>
+<h3 id="1-complexity-in-design-and-navigation"><a class="header" href="#1-complexity-in-design-and-navigation">1. <strong>Complexity in Design and Navigation</strong></a></h3>
+<ul>
+<li><strong>User Confusion</strong>: Multiple levels of tabs can lead to confusion if the hierarchy is not intuitive. Users might struggle to understand where they are within the application and how to navigate back to previous levels.</li>
+<li><strong>Overwhelming UI</strong>: A complex tab structure can overwhelm users, especially if there are too many levels or the tabs are not clearly differentiated.</li>
+</ul>
+<h3 id="2-performance-concerns"><a class="header" href="#2-performance-concerns">2. <strong>Performance Concerns</strong></a></h3>
+<ul>
+<li><strong>Increased DOM Size</strong>: Deeply nested tabs can result in a large DOM structure, which might impact the performance of the page. This can lead to slower rendering times and reduced responsiveness.</li>
+<li><strong>JavaScript Performance</strong>: Managing multiple levels of tabs can lead to increased complexity in JavaScript code, which might affect performance and lead to potential bugs.</li>
+</ul>
+<h3 id="3-state-management"><a class="header" href="#3-state-management">3. <strong>State Management</strong></a></h3>
+<ul>
+<li><strong>Complex State Handling</strong>: Keeping track of the state across multiple levels of tabs can be challenging. You need to manage which tab is active at each level and ensure that the state is preserved correctly.</li>
+<li><strong>State Synchronization</strong>: Synchronizing state between different levels of tabs and ensuring consistency can be complex, particularly in applications with dynamic content.</li>
+</ul>
+<h3 id="4-accessibility-issues"><a class="header" href="#4-accessibility-issues">4. <strong>Accessibility Issues</strong></a></h3>
+<ul>
+<li><strong>Keyboard Navigation</strong>: Ensuring that keyboard navigation is smooth and intuitive across multiple levels of tabs can be difficult. Users relying on keyboard navigation might face challenges if the tab navigation is not well implemented.</li>
+<li><strong>Screen Reader Compatibility</strong>: Making sure that screen readers can correctly interpret and navigate through multiple levels of tabs is crucial for accessibility. Improper implementation might lead to a poor experience for users with disabilities.</li>
+</ul>
+<h3 id="5-responsiveness-and-mobile-experience"><a class="header" href="#5-responsiveness-and-mobile-experience">5. <strong>Responsiveness and Mobile Experience</strong></a></h3>
+<ul>
+<li><strong>Mobile Adaptation</strong>: Complex tab structures might not translate well to smaller screens. Managing multiple levels of tabs on mobile devices can lead to usability issues and require additional design considerations.</li>
+<li><strong>Touch Interaction</strong>: Ensuring that touch interactions are smooth and responsive across different levels of tabs can be challenging, particularly if the tabs are nested deeply.</li>
+</ul>
+<h3 id="6-user-experience"><a class="header" href="#6-user-experience">6. <strong>User Experience</strong></a></h3>
+<ul>
+<li><strong>Over-Nesting</strong>: Over-nesting tabs can lead to a deep navigation hierarchy that might be difficult for users to navigate. Users might find it hard to remember their place or navigate back to a previous level.</li>
+<li><strong>Content Visibility</strong>: Ensuring that content is visible and accessible at each level of tabs without excessive scrolling or searching can be challenging.</li>
+</ul>
+<h3 id="7-debugging-and-maintenance"><a class="header" href="#7-debugging-and-maintenance">7. <strong>Debugging and Maintenance</strong></a></h3>
+<ul>
+<li><strong>Complex Codebase</strong>: Managing a complex tab structure can result in a more complicated codebase, making it harder to debug and maintain. Code related to tab interactions and state management might become harder to follow and manage.</li>
+<li><strong>Testing</strong>: Testing interactions and ensuring that all edge cases are handled correctly becomes more complex with multiple levels of tabs.</li>
+</ul>
+<h3 id="best-practices-to-mitigate-issues"><a class="header" href="#best-practices-to-mitigate-issues">Best Practices to Mitigate Issues:</a></h3>
+<ol>
+<li><strong>Design for Clarity</strong>: Keep the tab hierarchy intuitive and easy to understand. Avoid deep nesting if possible and ensure that the tab structure aligns with the user's mental model.</li>
+<li><strong>Performance Optimization</strong>: Optimize performance by minimizing DOM complexity and using efficient JavaScript code. Lazy load content if necessary to improve page responsiveness.</li>
+<li><strong>State Management</strong>: Use state management libraries or frameworks that handle complex state interactions efficiently. Ensure that state transitions are smooth and predictable.</li>
+<li><strong>Accessibility</strong>: Follow best practices for accessibility, including proper keyboard navigation and screen reader support. Ensure that the tab structure is easily navigable for all users.</li>
+<li><strong>Responsive Design</strong>: Test the tab interface on various screen sizes and devices to ensure a good user experience across all platforms. Consider alternative designs for mobile devices if needed.</li>
+<li><strong>User Testing</strong>: Conduct user testing to identify potential usability issues and gather feedback on the tab interface. Iterate based on user feedback to improve the design.</li>
+</ol>
+<p>By addressing these issues and following best practices, you can create a more effective and user-friendly tab interface within your SPA.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="61-best-practices"><a class="header" href="#61-best-practices">6.1 Best Practices</a></h1>
+<p>Good UI/UX design is crucial for creating intuitive, user-friendly, and engaging experiences. Here are some best practices to follow:</p>
+<h3 id="1-understand-your-users"><a class="header" href="#1-understand-your-users">1. <strong>Understand Your Users</strong></a></h3>
+<ul>
+<li><strong>User Research</strong>: Conduct surveys, interviews, and usability testing to understand user needs, preferences, and behaviors.</li>
+<li><strong>User Personas</strong>: Create personas to represent different segments of your target audience.</li>
+</ul>
+<h3 id="2-keep-it-simple"><a class="header" href="#2-keep-it-simple">2. <strong>Keep It Simple</strong></a></h3>
+<ul>
+<li><strong>Minimalism</strong>: Avoid clutter. Focus on essential elements and remove anything unnecessary.</li>
+<li><strong>Consistency</strong>: Use consistent design patterns and language throughout the application.</li>
+</ul>
+<h3 id="3-design-for-usability"><a class="header" href="#3-design-for-usability">3. <strong>Design for Usability</strong></a></h3>
+<ul>
+<li><strong>Intuitive Navigation</strong>: Ensure that users can easily find what they need with clear, logical navigation.</li>
+<li><strong>Accessibility</strong>: Design for accessibility, including considerations for color blindness, screen readers, and keyboard navigation.</li>
+</ul>
+<h3 id="4-visual-hierarchy"><a class="header" href="#4-visual-hierarchy">4. <strong>Visual Hierarchy</strong></a></h3>
+<ul>
+<li><strong>Contrast and Color</strong>: Use contrast to highlight important elements and guide users’ attention.</li>
+<li><strong>Typography</strong>: Choose legible fonts and use size, weight, and spacing to create a clear hierarchy.</li>
+</ul>
+<h3 id="5-responsive-design"><a class="header" href="#5-responsive-design">5. <strong>Responsive Design</strong></a></h3>
+<ul>
+<li><strong>Mobile-First</strong>: Design for smaller screens first and scale up for larger devices.</li>
+<li><strong>Fluid Layouts</strong>: Use flexible grids and media queries to ensure your design works on various devices.</li>
+</ul>
+<h3 id="6-feedback-and-interaction"><a class="header" href="#6-feedback-and-interaction">6. <strong>Feedback and Interaction</strong></a></h3>
+<ul>
+<li><strong>Visual Feedback</strong>: Provide feedback for user actions, such as button clicks or form submissions, to confirm actions.</li>
+<li><strong>Error Handling</strong>: Display clear error messages and guide users on how to correct issues.</li>
+</ul>
+<h3 id="7-performance-optimization"><a class="header" href="#7-performance-optimization">7. <strong>Performance Optimization</strong></a></h3>
+<ul>
+<li><strong>Load Time</strong>: Optimize images, scripts, and other assets to reduce load times.</li>
+<li><strong>Smooth Interactions</strong>: Ensure animations and transitions are smooth and don’t hinder performance.</li>
+</ul>
+<h3 id="8-user-control"><a class="header" href="#8-user-control">8. <strong>User Control</strong></a></h3>
+<ul>
+<li><strong>Undo/Redo</strong>: Allow users to easily undo or redo actions.</li>
+<li><strong>Clear Actions</strong>: Provide users with clear options to proceed or cancel actions.</li>
+</ul>
+<h3 id="9-test-and-iterate"><a class="header" href="#9-test-and-iterate">9. <strong>Test and Iterate</strong></a></h3>
+<ul>
+<li><strong>Usability Testing</strong>: Regularly test with real users to identify issues and gather feedback.</li>
+<li><strong>A/B Testing</strong>: Use A/B testing to compare different design versions and determine which performs better.</li>
+</ul>
+<h3 id="10-aesthetic-integrity"><a class="header" href="#10-aesthetic-integrity">10. <strong>Aesthetic Integrity</strong></a></h3>
+<ul>
+<li><strong>Visual Appeal</strong>: Ensure your design is visually appealing and aligns with your brand identity.</li>
+<li><strong>Balance</strong>: Use visual balance to create a harmonious and engaging design.</li>
+</ul>
+<h3 id="11-data-driven-decisions"><a class="header" href="#11-data-driven-decisions">11. <strong>Data-Driven Decisions</strong></a></h3>
+<ul>
+<li><strong>Analytics</strong>: Use analytics to track user behavior and make data-driven design decisions.</li>
+<li><strong>User Feedback</strong>: Incorporate user feedback into design improvements.</li>
+</ul>
+<h3 id="12-security-and-privacy"><a class="header" href="#12-security-and-privacy">12. <strong>Security and Privacy</strong></a></h3>
+<ul>
+<li><strong>Data Protection</strong>: Ensure that user data is protected and that users are aware of privacy practices.</li>
+<li><strong>Secure Authentication</strong>: Implement secure authentication methods to protect user accounts.</li>
+</ul>
+<h3 id="13-provide-help-and-documentation"><a class="header" href="#13-provide-help-and-documentation">13. <strong>Provide Help and Documentation</strong></a></h3>
+<ul>
+<li><strong>Onboarding</strong>: Offer onboarding experiences for new users to familiarize them with your application.</li>
+<li><strong>Help Resources</strong>: Provide easily accessible help resources, such as FAQs and support options.</li>
+</ul>
+<h3 id="14-consistency-across-platforms"><a class="header" href="#14-consistency-across-platforms">14. <strong>Consistency Across Platforms</strong></a></h3>
+<ul>
+<li><strong>Unified Experience</strong>: Ensure that your design provides a consistent experience across different platforms and devices.</li>
+</ul>
+<h3 id="15-continuous-improvement"><a class="header" href="#15-continuous-improvement">15. <strong>Continuous Improvement</strong></a></h3>
+<ul>
+<li><strong>Stay Updated</strong>: Keep up with design trends and technological advancements.</li>
+<li><strong>Adapt and Evolve</strong>: Continuously update and improve your design based on user needs and feedback.</li>
+</ul>
+<p>By following these best practices, you can create designs that are not only visually appealing but also functional, user-friendly, and effective in meeting user needs.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="62-accessibility"><a class="header" href="#62-accessibility">6.2 Accessibility</a></h1>
+<p>Best practices for accessibility in UI/UX design ensure that digital products are usable and inclusive for all users, including those with disabilities. Following accessibility guidelines improves usability, reach, and compliance with legal standards (such as the Web Content Accessibility Guidelines (WCAG)).</p>
+<p>Here are the best practices for accessibility in UI/UX design:</p>
+<h3 id="1-use-semantic-html"><a class="header" href="#1-use-semantic-html">1. <strong>Use Semantic HTML</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Semantic HTML provides meaning to web content, making it easier for screen readers and assistive technologies to interpret the content.</li>
+<li><strong>How</strong>: Use appropriate HTML elements (e.g., <code>&lt;nav&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;button&gt;</code>) to structure your content clearly.
+<ul>
+<li>Example: Use <code>&lt;button&gt;</code> for clickable buttons rather than <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-ensure-keyboard-navigation"><a class="header" href="#2-ensure-keyboard-navigation">2. <strong>Ensure Keyboard Navigation</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Many users with motor impairments rely on keyboard navigation rather than a mouse or touchscreen.</li>
+<li><strong>How</strong>: Ensure that all interactive elements, such as links, buttons, and form fields, are accessible via the keyboard using <code>Tab</code>, <code>Enter</code>, and <code>Arrow</code> keys.
+<ul>
+<li>Example: Focus states should be visible and distinct to help users understand where they are navigating on the page.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-provide-text-alternatives-alt-text"><a class="header" href="#3-provide-text-alternatives-alt-text">3. <strong>Provide Text Alternatives (Alt Text)</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Users with visual impairments rely on screen readers, which read aloud alternative text for images and non-text content.</li>
+<li><strong>How</strong>: Add descriptive <code>alt</code> attributes for images that convey important information. For decorative images, use <code>alt=&quot;&quot;</code>.
+<ul>
+<li>Example: For a &quot;Buy Now&quot; button image, use <code>alt=&quot;Buy Now button&quot;</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-maintain-color-contrast"><a class="header" href="#4-maintain-color-contrast">4. <strong>Maintain Color Contrast</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Users with visual impairments, color blindness, or low vision may struggle with low contrast between text and background colors.</li>
+<li><strong>How</strong>: Ensure text has sufficient color contrast with its background. WCAG recommends a minimum contrast ratio of 4.5:1 for normal text and 3:1 for large text.
+<ul>
+<li>Example: Use a contrast checker tool to verify the readability of your color combinations.</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-avoid-using-color-alone-to-convey-information"><a class="header" href="#5-avoid-using-color-alone-to-convey-information">5. <strong>Avoid Using Color Alone to Convey Information</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Users with color blindness or visual impairments may not perceive colors as expected.</li>
+<li><strong>How</strong>: Use other visual indicators like icons, text labels, or patterns in addition to color to convey meaning.
+<ul>
+<li>Example: When using red to indicate an error, include an icon or text (e.g., &quot;Error: Please enter a valid email&quot;).</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-use-descriptive-link-text"><a class="header" href="#6-use-descriptive-link-text">6. <strong>Use Descriptive Link Text</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Screen readers read out link text, so descriptive link text improves context for visually impaired users.</li>
+<li><strong>How</strong>: Use meaningful link text that describes the link’s destination, rather than vague text like “Click here” or “Read more.”
+<ul>
+<li>Example: Instead of &quot;Click here,&quot; use &quot;Learn more about accessibility best practices.&quot;</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-label-form-elements-properly"><a class="header" href="#7-label-form-elements-properly">7. <strong>Label Form Elements Properly</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Users with assistive technologies need clear labels for form fields to understand their purpose.</li>
+<li><strong>How</strong>: Use the <code>&lt;label&gt;</code> element to associate form labels with input fields. Ensure placeholders do not replace proper labels, as placeholders disappear when users type.
+<ul>
+<li>Example: <code>&lt;label for=&quot;email&quot;&gt;Email Address:&lt;/label&gt; &lt;input id=&quot;email&quot; type=&quot;email&quot;&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="8-design-accessible-focus-states"><a class="header" href="#8-design-accessible-focus-states">8. <strong>Design Accessible Focus States</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Focus states help keyboard users identify which element is currently selected or actionable.</li>
+<li><strong>How</strong>: Ensure that focusable elements (e.g., buttons, links, inputs) have clear, visible focus styles that help users see where their focus is on the screen.
+<ul>
+<li>Example: Use an outline or border change when an element is in focus: <code>:focus { outline: 2px solid blue; }</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="9-provide-captions-and-transcripts-for-multimedia"><a class="header" href="#9-provide-captions-and-transcripts-for-multimedia">9. <strong>Provide Captions and Transcripts for Multimedia</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Deaf and hard-of-hearing users rely on captions or transcripts to understand audio or video content.</li>
+<li><strong>How</strong>: Add captions to videos and provide transcripts for audio content. Ensure that live audio streams have real-time captions when possible.
+<ul>
+<li>Example: For a video tutorial, include captions that describe both spoken content and relevant sounds.</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-test-for-screen-reader-compatibility"><a class="header" href="#10-test-for-screen-reader-compatibility">10. <strong>Test for Screen Reader Compatibility</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Screen readers are vital for visually impaired users, and your website or app needs to be usable with these tools.</li>
+<li><strong>How</strong>: Regularly test your website with screen readers (e.g., NVDA, JAWS, or VoiceOver) to ensure proper navigation, labeling, and content flow.
+<ul>
+<li>Example: Check if headings, buttons, and interactive elements are announced correctly by the screen reader.</li>
+</ul>
+</li>
+</ul>
+<h3 id="11-enable-resizable-text"><a class="header" href="#11-enable-resizable-text">11. <strong>Enable Resizable Text</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Some users may need to increase text size to read comfortably.</li>
+<li><strong>How</strong>: Ensure that your design allows users to resize text without breaking the layout. Avoid setting text size in pixels (px) and use relative units like <code>em</code> or <code>rem</code>.
+<ul>
+<li>Example: Instead of <code>font-size: 14px;</code>, use <code>font-size: 1rem;</code> to allow scalability.</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-implement-aria-accessible-rich-internet-applications-properly"><a class="header" href="#12-implement-aria-accessible-rich-internet-applications-properly">12. <strong>Implement ARIA (Accessible Rich Internet Applications) Properly</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: ARIA attributes help make dynamic or complex UI components accessible to assistive technologies.</li>
+<li><strong>How</strong>: Use ARIA attributes (like <code>aria-label</code>, <code>role</code>, <code>aria-expanded</code>, etc.) to provide additional information about interactive elements. However, avoid using ARIA when native HTML elements serve the same purpose.
+<ul>
+<li>Example: Use <code>role=&quot;alert&quot;</code> to inform assistive technologies of dynamic alerts without focusing the user on the element.</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-ensure-time-sensitive-content-is-accessible"><a class="header" href="#13-ensure-time-sensitive-content-is-accessible">13. <strong>Ensure Time-Sensitive Content is Accessible</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Some users need more time to interact with content, and fast changes or time-outs can make it difficult for them.</li>
+<li><strong>How</strong>: Avoid automatic content updates or time-outs without giving users a way to extend the time or control the updates.
+<ul>
+<li>Example: Provide a &quot;stay logged in&quot; option for time-sensitive forms to prevent session time-outs.</li>
+</ul>
+</li>
+</ul>
+<h3 id="14-provide-responsive-and-mobile-friendly-designs"><a class="header" href="#14-provide-responsive-and-mobile-friendly-designs">14. <strong>Provide Responsive and Mobile-Friendly Designs</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Many users rely on mobile devices or smaller screens, which can affect accessibility, especially for those with motor impairments.</li>
+<li><strong>How</strong>: Design responsive layouts that adapt to various screen sizes, and ensure touch targets (buttons, links) are large enough to be tapped easily.
+<ul>
+<li>Example: Make buttons at least 44x44 pixels for mobile devices to accommodate users with dexterity challenges.</li>
+</ul>
+</li>
+</ul>
+<h3 id="15-ensure-consistent-navigation-and-structure"><a class="header" href="#15-ensure-consistent-navigation-and-structure">15. <strong>Ensure Consistent Navigation and Structure</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Consistency helps all users, including those with cognitive disabilities, navigate and understand your site better.</li>
+<li><strong>How</strong>: Maintain a clear, consistent navigation structure across your pages, and use predictable patterns to reduce cognitive load.
+<ul>
+<li>Example: Place navigation menus in the same location on every page.</li>
+</ul>
+</li>
+</ul>
+<h3 id="16-test-with-real-users"><a class="header" href="#16-test-with-real-users">16. <strong>Test with Real Users</strong></a></h3>
+<ul>
+<li><strong>Why</strong>: Real user testing helps identify accessibility issues that may not be caught by automated tools.</li>
+<li><strong>How</strong>: Include users with disabilities in usability testing sessions to gain insight into how accessible your product is in real-world scenarios.</li>
+</ul>
+<h3 id="conclusion-2"><a class="header" href="#conclusion-2">Conclusion</a></h3>
+<p>By following these best practices, you can ensure that your UI/UX designs are accessible to a wide range of users, including those with disabilities. It enhances user satisfaction, improves reach, and aligns with legal accessibility standards.</p>
 
                     </main>
 

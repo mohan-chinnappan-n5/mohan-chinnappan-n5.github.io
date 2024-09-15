@@ -8,18 +8,23 @@ const data = {
           { title: "Managing Stress - Brainsmart - BBC", youtubeId: "hnpQrMqDoqE" },
         ],
       },
+
+       {
+        name: "GPU",
+        videos: [
+          { title: "GPU Explained", youtubeId: "LfdK-v0SbGI" },
+          { title: "GPU", youtubeId: "4Pi424VJgcE" },
+          { title: "NVIDIA GPU Computing", youtubeId: "98Xis1W1mMk" },
+
+        ],
+      },
       {
         name: "Technology",
         videos: [
           { title: "The most important AI trends in 2024", youtubeId: "sGZ6AlAnULc" },
           { title: "How does a blockchain work", youtubeId: "SSo_EIwHSd4" },
           { title: "Cryptocurrency", youtubeId: "1YyAzVmP9xQ" },
-          { title: "GPU", youtubeId: "4Pi424VJgcE" },
           { title: "EDA software", youtubeId: "ihz2WY-E2C8" },
-
-
-
-
         ],
       },
 

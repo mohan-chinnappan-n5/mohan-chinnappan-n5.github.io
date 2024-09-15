@@ -1,0 +1,622 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>mctr - All about Web Performance</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../web-perf.html"><strong aria-hidden="true">1.</strong> 1. What is Web Performance</a></li><li class="chapter-item expanded "><a href="../cert.html"><strong aria-hidden="true">2.</strong> 2. What is inside a Server's Cert</a></li><li class="chapter-item expanded "><a href="../async-defer.html"><strong aria-hidden="true">3.</strong> 3. async and defer</a></li><li class="chapter-item expanded "><a href="../performance-api.html"><strong aria-hidden="true">4.</strong> 4. Performance API</a></li><li class="chapter-item expanded "><a href="../networking/traceroute.html"><strong aria-hidden="true">5.</strong> 5. Traceroute</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../networking/mctr.html" class="active"><strong aria-hidden="true">5.1.</strong> mctr</a></li><li class="chapter-item expanded "><a href="../networking/icmp.html"><strong aria-hidden="true">5.2.</strong> ICMP</a></li><li class="chapter-item expanded "><a href="../networking/curl.html"><strong aria-hidden="true">5.3.</strong> Curl</a></li></ol></li><li class="chapter-item expanded "><a href="../uiux/ui.html"><strong aria-hidden="true">6.</strong> 6. UI/UX</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../uiux/best-practices.html"><strong aria-hidden="true">6.1.</strong> Best Practices</a></li><li class="chapter-item expanded "><a href="../uiux/accessibility.html"><strong aria-hidden="true">6.2.</strong> Accessibility</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">All about Web Performance</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="51-mctr"><a class="header" href="#51-mctr">5.1 mctr</a></h1>
+<p>Here is my attempt on traceroute in python</p>
+<pre><code class="language-py">
+
+import os
+import socket
+import struct
+import time
+import argparse
+import csv
+from tabulate import tabulate
+
+#-------------------------------------------------------------
+# mctr.py
+#
+# author: mohan chinnappan
+# copyleft software, maintain authors info in your copies
+#_____________________________
+# requires
+# pip install tabulate
+#_____________________________
+# run it
+# sudo python3 mctr.py --max-hops 30 --target  salesforce.com 
+
+&quot;&quot;&quot;
+sudo python3 mctr.py --target salesforce.com
+Traceroute to salesforce.com (23.1.106.133), max 30 hops:
+Saving results to salesforce.com.csv...
++-----+-----------------+------------------------------------------------------+-----------------------------+
+| Hop |   IP Address    |                       Hostname                       |     Response Time (ms)      |
++-----+-----------------+------------------------------------------------------+-----------------------------+
+|  1  |   192.168.1.1   |                       Unknown                        |            2 ms             |
+|  2  |  100.93.14.67   |                       Unknown                        |            15 ms            |
+|  3  |  96.110.31.153  |    po-313-412-rur102.exeter.nh.boston.comcast.net    |            14 ms            |
+|  4  | 96.108.158.197  |       po-2-rur101.exeter.nh.boston.comcast.net       |            13 ms            |
+|  5  | 162.151.151.225 |      po-100-xar01.exeter.nh.boston.comcast.net       |            15 ms            |
+|  6  |        *        |                         N/A                          |     Request timed out.      |
+|  7  |  162.151.52.34  |      be-501-ar01.needham.ma.boston.comcast.net       |            19 ms            |
+|  8  |   68.86.90.66   |     be-1005-pe11.onesummer.ma.ibone.comcast.net      |            18 ms            |
+|  9  |        *        |                         N/A                          |     Request timed out.      |
+| 10  |  129.250.4.114  |         ae-6.r22.nwrknj03.us.bb.gin.ntt.net          |            26 ms            |
+| 11  |        *        |                         N/A                          |     Request timed out.      |
+| 12  |        *        |                         N/A                          |     Request timed out.      |
+| 13  |  129.250.2.125  |         ae-1.a04.asbnva02.us.bb.gin.ntt.net          |            30 ms            |
+| 14  | 129.250.194.70  |        ae-3.akamai.asbnva02.us.bb.gin.ntt.net        |            32 ms            |
+| 15  | 184.51.101.116  | a184-51-101-116.deploy.static.akamaitechnologies.com |            28 ms            |
+| 16  |        *        |                         N/A                          |     Request timed out.      |
+| 17  | 23.203.153.144  |        ae17.r21.iad04.ien.netarch.akamai.com         |            28 ms            |
+| 18  |  23.209.170.76  |         ae3.r22.iad04.mag.netarch.akamai.com         |            26 ms            |
+| 19  |  23.209.170.81  |         ae3.r21.iad04.icn.netarch.akamai.com         |            27 ms            |
+| 20  | 23.193.112.223  |        ae40.r01.ewr01.icn.netarch.akamai.com         |            32 ms            |
+| 21  |   23.32.62.64   |         ae8.r01.bos02.icn.netarch.akamai.com         |            38 ms            |
+| 22  |  23.203.149.43  |         ae8.r01.bos01.ien.netarch.akamai.com         |            51 ms            |
+| 23  |        *        |                         N/A                          |     Request timed out.      |
+| 24  |  23.1.106.133   |  a23-1-106-133.deploy.static.akamaitechnologies.com  | 29 ms (Destination Reached) |
++-----+-----------------+------------------------------------------------------+-----------------------------+
+Traceroute complete. Results saved to salesforce.com.csv
+#-------------------------------------------------------------
+&quot;&quot;&quot;
+
+ICMP_ECHO_REQUEST = 8  # ICMP type for Echo Request messages
+TIMEOUT = 2  # Timeout for each hop in seconds
+
+def checksum(packet):
+    &quot;&quot;&quot;
+    Calculate checksum of the packet.
+    
+    Args:
+        packet (bytes): The packet for which checksum is calculated.
+
+    Returns:
+        int: The computed checksum.
+    &quot;&quot;&quot;
+    if len(packet) % 2 != 0:
+        packet += b'\x00'
+
+    s = sum(struct.unpack(&quot;!%dH&quot; % (len(packet) // 2), packet))
+    s = (s &gt;&gt; 16) + (s &amp; 0xffff)
+    s += s &gt;&gt; 16
+    return ~s &amp; 0xffff
+
+
+def create_icmp_packet(seq):
+    &quot;&quot;&quot;
+    Create an ICMP Echo Request packet.
+
+    Args:
+        seq (int): The sequence number for the packet.
+
+    Returns:
+        bytes: The constructed ICMP packet.
+    &quot;&quot;&quot;
+    header = struct.pack('!BBHHH', ICMP_ECHO_REQUEST, 0, 0, os.getpid() &amp; 0xFFFF, seq)
+    data = struct.pack('d', time.time())  # Payload contains the current time
+    packet_without_checksum = header + data
+    packet_checksum = checksum(packet_without_checksum)
+    header = struct.pack('!BBHHH', ICMP_ECHO_REQUEST, 0, packet_checksum, os.getpid() &amp; 0xFFFF, seq)
+    return header + data
+
+
+def traceroute(target, max_hops=30, timeout=TIMEOUT):
+    &quot;&quot;&quot;
+    Perform traceroute to a specified target with a set maximum number of hops and timeout.
+    Output the result to both console and a CSV file.
+
+    Args:
+        target (str): The target hostname or IP address to trace.
+        max_hops (int): The maximum number of hops allowed. Default is 30.
+        timeout (int): Timeout in seconds for each hop. Default is 2.
+    &quot;&quot;&quot;
+    try:
+        target_ip = socket.gethostbyname(target)
+    except socket.gaierror as e:
+        print(f&quot;Cannot resolve {target}: {e}&quot;)
+        return
+
+    # Generate output CSV filename based on target
+    output_csv = f&quot;{target}.csv&quot;
+
+    print(f&quot;Traceroute to {target} ({target_ip}), max {max_hops} hops:&quot;)
+    print(f&quot;Saving results to {output_csv}...&quot;)
+
+    # Table to collect results
+    table = []
+    headers = [&quot;Hop&quot;, &quot;IP Address&quot;, &quot;Hostname&quot;, &quot;Response Time (ms)&quot;]
+
+    # CSV Output
+    with open(output_csv, mode='w', newline='') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        csv_writer.writerow(headers)  # Write the header row
+
+        # Create a raw socket
+        with socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP) as send_socket:
+            send_socket.settimeout(timeout)
+
+            for ttl in range(1, max_hops + 1):
+                # Set the TTL (time-to-live)
+                send_socket.setsockopt(socket.IPPROTO_IP, socket.IP_TTL, ttl)
+
+                # Create ICMP Echo Request packet
+                packet = create_icmp_packet(ttl)
+
+                # Send the packet
+                start_time = time.time()
+                send_socket.sendto(packet, (target_ip, 1))
+
+                try:
+                    # Wait for a response
+                    recv_socket = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP)
+                    recv_socket.settimeout(timeout)
+
+                    # Receive packet and sender address
+                    recv_packet, addr = recv_socket.recvfrom(1024)
+                    end_time = time.time()
+
+                    icmp_header = recv_packet[20:28]
+                    icmp_type, _, _, _, _ = struct.unpack(&quot;!BBHHH&quot;, icmp_header)
+
+                    response_time = int((end_time - start_time) * 1000)
+
+                    # Resolve hostname
+                    try:
+                        hostname = socket.gethostbyaddr(addr[0])[0]
+                    except socket.herror:
+                        hostname = &quot;Unknown&quot;
+
+                    if icmp_type == 11:  # TTL Exceeded
+                        row = [ttl, addr[0], hostname, f&quot;{response_time} ms&quot;]
+                    elif icmp_type == 0:  # Echo Reply (Reached target)
+                        row = [ttl, addr[0], hostname, f&quot;{response_time} ms (Destination Reached)&quot;]
+                        table.append(row)
+                        csv_writer.writerow(row)  # Write to CSV
+                        break
+                    else:
+                        row = [ttl, &quot;*&quot;, &quot;N/A&quot;, &quot;Request timed out.&quot;]
+                except socket.timeout:
+                    row = [ttl, &quot;*&quot;, &quot;N/A&quot;, &quot;Request timed out.&quot;]
+                finally:
+                    recv_socket.close()
+
+                # Add to both table and CSV
+                table.append(row)
+                csv_writer.writerow(row)
+
+    # Print the results in table format
+    print(tabulate(table, headers, tablefmt=&quot;pretty&quot;))
+    print(f&quot;Traceroute complete. Results saved to {output_csv}&quot;)
+
+
+def main():
+    &quot;&quot;&quot;
+    Main function to parse command line arguments and invoke the traceroute function.
+    &quot;&quot;&quot;
+    parser = argparse.ArgumentParser(description=&quot;Traceroute to a target with optional max hops and timeout.&quot;)
+    parser.add_argument('--target', type=str, required=True, help=&quot;Target IP address or hostname&quot;)
+    parser.add_argument('--max-hops', type=int, default=30, help=&quot;Maximum number of hops (default: 30)&quot;)
+    parser.add_argument('--timeout', type=int, default=TIMEOUT, help=&quot;Timeout for each hop in seconds (default: 2)&quot;)
+    args = parser.parse_args()
+
+    # Ensure we are running with root privileges (for raw socket use)
+    if os.geteuid() != 0:
+        print(&quot;This script requires root privileges. Please run as root.&quot;)
+        return
+
+    traceroute(args.target, args.max_hops, args.timeout)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<pre><code>sudo python3 mctr.py --target apple.com 
+Traceroute to apple.com (17.253.144.10), max 30 hops:
+Saving results to apple.com.csv...
++-----+-----------------+------------------------------------------------+-----------------------------+
+| Hop |   IP Address    |                    Hostname                    |     Response Time (ms)      |
++-----+-----------------+------------------------------------------------+-----------------------------+
+|  1  |   192.168.1.1   |                    Unknown                     |            2 ms             |
+|  2  |  100.93.14.66   |                    Unknown                     |            15 ms            |
+|  3  |  96.110.31.137  | po-313-411-rur101.exeter.nh.boston.comcast.net |            15 ms            |
+|  4  | 162.151.151.225 |   po-100-xar01.exeter.nh.boston.comcast.net    |            14 ms            |
+|  5  |        *        |                      N/A                       |     Request timed out.      |
+|  6  |  162.151.52.50  |   be-502-ar01.needham.ma.boston.comcast.net    |            21 ms            |
+|  7  |  68.86.90.173   |  be-1003-pe02.onesummer.ma.ibone.comcast.net   |            18 ms            |
+|  8  |        *        |                      N/A                       |     Request timed out.      |
+|  9  |  17.253.144.10  |                  apple.com.do                  | 22 ms (Destination Reached) |
++-----+-----------------+------------------------------------------------+-----------------------------+
+Traceroute complete. Results saved to apple.com.csv
+</code></pre>
+<pre><code>sudo python3 mctr.py --target facebook.com --timeout 5
+Traceroute to facebook.com (157.240.245.35), max 30 hops:
+Saving results to facebook.com.csv...
++-----+-----------------+------------------------------------------------+-----------------------------+
+| Hop |   IP Address    |                    Hostname                    |     Response Time (ms)      |
++-----+-----------------+------------------------------------------------+-----------------------------+
+|  1  |   192.168.1.1   |                    Unknown                     |            2 ms             |
+|  2  |  100.93.14.67   |                    Unknown                     |            19 ms            |
+|  3  |  96.110.31.153  | po-313-412-rur102.exeter.nh.boston.comcast.net |            19 ms            |
+|  4  | 96.108.158.197  |    po-2-rur101.exeter.nh.boston.comcast.net    |            13 ms            |
+|  5  | 162.151.151.225 |   po-100-xar01.exeter.nh.boston.comcast.net    |            14 ms            |
+|  6  |        *        |                      N/A                       |     Request timed out.      |
+|  7  |  162.151.52.34  |   be-501-ar01.needham.ma.boston.comcast.net    |            24 ms            |
+|  8  |  96.113.72.238  |                    Unknown                     |            17 ms            |
+|  9  |  129.134.33.76  |           po202.asw02.bos5.tfbnw.net           |            15 ms            |
+| 10  | 129.134.87.221  |              psw04.bos5.tfbnw.net              |            17 ms            |
+| 11  | 129.134.87.206  |            msw1aa.01.bos5.tfbnw.net            |            16 ms            |
+| 12  | 157.240.245.35  |    edge-star-mini-shv-01-bos5.facebook.com     | 24 ms (Destination Reached) |
++-----+-----------------+------------------------------------------------+-----------------------------+
+Traceroute complete. Results saved to facebook.com.csv
+
+</code></pre>
+<pre><code>sudo python3 mctr.py --target x.com --timeout 5
+Traceroute to x.com (104.244.42.129), max 30 hops:
+Saving results to x.com.csv...
++-----+-----------------+------------------------------------------------+-----------------------------+
+| Hop |   IP Address    |                    Hostname                    |     Response Time (ms)      |
++-----+-----------------+------------------------------------------------+-----------------------------+
+|  1  |   192.168.1.1   |                    Unknown                     |            2 ms             |
+|  2  |  100.93.14.67   |                    Unknown                     |            15 ms            |
+|  3  |  96.110.31.153  | po-313-412-rur102.exeter.nh.boston.comcast.net |            12 ms            |
+|  4  | 96.108.158.197  |    po-2-rur101.exeter.nh.boston.comcast.net    |            15 ms            |
+|  5  | 162.151.151.225 |   po-100-xar01.exeter.nh.boston.comcast.net    |            14 ms            |
+|  6  |        *        |                      N/A                       |     Request timed out.      |
+|  7  |  162.151.52.50  |   be-502-ar01.needham.ma.boston.comcast.net    |            30 ms            |
+|  8  |        *        |                      N/A                       |     Request timed out.      |
+|  9  |  4.69.227.138   |     ae1.3501.ear3.newyork6.net.lumen.tech      |            29 ms            |
+| 10  |   4.38.173.30   |      twitter-inc.ear3.newyork6.level3.net      |            49 ms            |
+| 11  |        *        |                      N/A                       |     Request timed out.      |
+| 12  | 104.244.42.129  |                    Unknown                     | 52 ms (Destination Reached) |
++-----+-----------------+------------------------------------------------+-----------------------------+
+</code></pre>
+<h2 id="flow"><a class="header" href="#flow">FLow</a></h2>
+<pre><code>+-------------------------+
+| Start                   |
+| (Run script)            |
++-------------------------+
+            |
+            v
++-------------------------+
+| Check Root Privileges   |
+| - Ensure script is run  |
+|   with root privileges  |
+|   (os.geteuid() != 0)   |
++-------------------------+
+            |
+            v
++-------------------------+
+| Parse Command Line      |
+| Arguments               |
+| - --target              |
+| - --max-hops            |
+| - --timeout             |
++-------------------------+
+            |
+            v
++-------------------------+
+| Resolve Target IP       |
+| - Use socket.gethostbyname |
++-------------------------+
+            |
+            v
++-------------------------+
+| Generate Output CSV     |
+| - Filename: &lt;target&gt;.csv|
++-------------------------+
+            |
+            v
++-------------------------+
+| Initialize Table and    |
+| CSV Writer              |
+| - Headers: Hop, IP Addr,|
+|   Hostname, Resp Time   |
++-------------------------+
+            |
+            v
++-------------------------+
+| For TTL from 1 to       |
+| max_hops                |
++-------------------------+
+            |
+            v
++-------------------------+
+| Set TTL and Create      |
+| ICMP Packet             |
++-------------------------+
+            |
+            v
++-------------------------+
+| Send ICMP Packet        |
+| - Use raw socket        |
++-------------------------+
+            |
+            v
++-------------------------+
+| Receive Response        |
+| - Use raw socket        |
++-------------------------+
+            |
+            v
++-------------------------+
+| Check ICMP Type         |
+| - TTL Exceeded (11)     |
+| - Echo Reply (0)        |
++-------------------------+
+            |
+            v
++-------------------------+
+| Process Response        |
+| - Calculate response    |
+|   time                 |
+| - Resolve Hostname      |
++-------------------------+
+            |
+            v
++-------------------------+
+| Append Row to Table and |
+| Write to CSV            |
+| - Add Hop, IP Addr,     |
+|   Hostname, Resp Time   |
++-------------------------+
+            |
+            v
++-------------------------+
+| Check Completion        |
+| - Echo Reply: Destination|
+|   Reached               |
++-------------------------+
+            |
+            v
++-------------------------+
+| Print Results           |
+| - Display Table         |
+| - Save CSV              |
++-------------------------+
+            |
+            v
++-------------------------+
+| End                     |
++-------------------------+
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../networking/traceroute.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../networking/icmp.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../networking/traceroute.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../networking/icmp.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
