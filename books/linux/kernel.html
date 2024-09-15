@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Kernel - All about Linux</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="kernel.html" class="active"><strong aria-hidden="true">1.</strong> Kernel</a></li><li class="chapter-item expanded "><a href="filesystems.html"><strong aria-hidden="true">2.</strong> File Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zfs.html"><strong aria-hidden="true">2.1.</strong> ZFS</a></li><li class="chapter-item expanded "><a href="btrfs.html"><strong aria-hidden="true">2.2.</strong> Btrfs - B-tree File System</a></li></ol></li><li class="chapter-item expanded "><a href="deviceDriver.html"><strong aria-hidden="true">3.</strong> Device Driver</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">All about Linux</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="linux-kernel"><a class="header" href="#linux-kernel">Linux Kernel</a></h1>
+<p>The Linux kernel is a monolithic, Unix-like operating system kernel that is central to the functionality of Linux distributions. Its architecture is designed to manage system resources, interact with hardware, and provide essential services to user applications. Below is an overview of the key components and architecture of the Linux kernel:</p>
+<h3 id="1-monolithic-kernel-design"><a class="header" href="#1-monolithic-kernel-design">1. <strong>Monolithic Kernel Design</strong></a></h3>
+<ul>
+<li><strong>Monolithic Kernel</strong>: Unlike microkernels, which run most services in user space, Linux follows a monolithic design where all core system services (device drivers, file systems, networking) run in kernel space. This allows for efficient communication between components but makes the kernel larger and more complex.</li>
+<li><strong>Modular Structure</strong>: While the Linux kernel is monolithic, it supports loadable kernel modules (LKMs), allowing dynamic loading and unloading of drivers and features at runtime. This combines the performance of a monolithic kernel with the flexibility of a microkernel.</li>
+</ul>
+<h3 id="2-core-components"><a class="header" href="#2-core-components">2. <strong>Core Components</strong></a></h3>
+<p>The Linux kernel consists of several subsystems that manage hardware, processes, memory, and device communication:</p>
+<h4 id="a-process-management-scheduler"><a class="header" href="#a-process-management-scheduler">a. <strong>Process Management (Scheduler)</strong></a></h4>
+<ul>
+<li><strong>Role</strong>: Responsible for managing processes (tasks) and handling multitasking, process creation, and termination.</li>
+<li><strong>Components</strong>: 
+<ul>
+<li><strong>Process Scheduler</strong>: Allocates CPU time to processes based on scheduling policies (e.g., Completely Fair Scheduler (CFS)).</li>
+<li><strong>Context Switching</strong>: Manages the switching between processes, preserving state for suspended tasks.</li>
+<li><strong>Signals and Inter-process Communication (IPC)</strong>: Mechanisms like signals, pipes, and shared memory allow processes to communicate.</li>
+</ul>
+</li>
+</ul>
+<h4 id="b-memory-management"><a class="header" href="#b-memory-management">b. <strong>Memory Management</strong></a></h4>
+<ul>
+<li><strong>Role</strong>: Manages memory allocation, paging, and virtual memory.</li>
+<li><strong>Components</strong>:
+<ul>
+<li><strong>Virtual Memory</strong>: Provides an abstraction of memory so each process appears to have its own private memory space, enabling multitasking.</li>
+<li><strong>Paging and Swapping</strong>: The kernel moves inactive memory pages to disk (swap space) to free up physical memory.</li>
+<li><strong>Memory Allocation</strong>: Manages the allocation and deallocation of memory for processes and the kernel itself.</li>
+</ul>
+</li>
+</ul>
+<h4 id="c-file-system-management"><a class="header" href="#c-file-system-management">c. <strong>File System Management</strong></a></h4>
+<ul>
+<li><strong>Role</strong>: Manages access to files, directories, and file systems.</li>
+<li><strong>Components</strong>:
+<ul>
+<li><strong>Virtual File System (VFS)</strong>: Provides a unified interface for different file systems (e.g., ext4, XFS, Btrfs, FAT, NTFS).</li>
+<li><strong>File System Drivers</strong>: Drivers for specific file systems that enable interaction with storage devices.</li>
+<li><strong>Block I/O Layer</strong>: Handles block devices (e.g., hard drives, SSDs) and optimizes data access.</li>
+</ul>
+</li>
+</ul>
+<h4 id="d-device-drivers"><a class="header" href="#d-device-drivers">d. <strong>Device Drivers</strong></a></h4>
+<ul>
+<li><strong>Role</strong>: Abstract hardware devices and provide an interface for user programs to interact with the hardware.</li>
+<li><strong>Types</strong>:
+<ul>
+<li><strong>Character Device Drivers</strong>: For devices like serial ports and input devices that read and write data as streams of characters.</li>
+<li><strong>Block Device Drivers</strong>: For devices like hard drives that transfer data in blocks.</li>
+<li><strong>Network Device Drivers</strong>: For network interfaces (e.g., Ethernet, Wi-Fi cards) to manage network traffic.</li>
+</ul>
+</li>
+</ul>
+<h4 id="e-networking"><a class="header" href="#e-networking">e. <strong>Networking</strong></a></h4>
+<ul>
+<li><strong>Role</strong>: Implements protocols and manages network interfaces to facilitate communication over networks.</li>
+<li><strong>Components</strong>:
+<ul>
+<li><strong>Networking Stack</strong>: Implements protocols like TCP/IP, UDP, and SCTP.</li>
+<li><strong>Socket Interface</strong>: Provides an API for user-space programs to send and receive data over networks.</li>
+<li><strong>Netfilter/iptables</strong>: Handles packet filtering, network address translation (NAT), and firewall functionality.</li>
+</ul>
+</li>
+</ul>
+<h4 id="f-interrupts-and-system-calls"><a class="header" href="#f-interrupts-and-system-calls">f. <strong>Interrupts and System Calls</strong></a></h4>
+<ul>
+<li><strong>Role</strong>: Manages communication between the hardware and the software layers of the system.</li>
+<li><strong>Components</strong>:
+<ul>
+<li><strong>Interrupt Handlers</strong>: Respond to hardware interrupts, allowing devices to signal the CPU when they need attention (e.g., keyboard input, network packet).</li>
+<li><strong>System Calls (syscalls)</strong>: Provide an interface for user-space programs to request kernel services (e.g., file I/O, memory allocation).</li>
+</ul>
+</li>
+</ul>
+<h4 id="g-security"><a class="header" href="#g-security">g. <strong>Security</strong></a></h4>
+<ul>
+<li><strong>Role</strong>: Enforces access control and security policies within the system.</li>
+<li><strong>Components</strong>:
+<ul>
+<li><strong>User Privileges</strong>: Linux uses user and group IDs to control access to files, processes, and other resources.</li>
+<li><strong>Access Control Lists (ACLs)</strong>: Provides more granular control over resource permissions.</li>
+<li><strong>Linux Security Modules (LSM)</strong>: Allows integration of security frameworks like SELinux, AppArmor, and Seccomp for additional security policies.</li>
+</ul>
+</li>
+</ul>
+<h4 id="h-kernel-space-vs-user-space"><a class="header" href="#h-kernel-space-vs-user-space">h. <strong>Kernel Space vs. User Space</strong></a></h4>
+<ul>
+<li><strong>Kernel Space</strong>: Where the core of the operating system runs, including drivers, memory management, and process control. Code in kernel space has full access to system hardware.</li>
+<li><strong>User Space</strong>: Where user applications run. User space applications cannot directly interact with hardware and must make system calls to interact with the kernel.</li>
+</ul>
+<h3 id="3-kernel-modules"><a class="header" href="#3-kernel-modules">3. <strong>Kernel Modules</strong></a></h3>
+<ul>
+<li><strong>Loadable Kernel Modules (LKMs)</strong>: Modules can be dynamically loaded and unloaded into the kernel at runtime without rebooting the system. This feature is essential for adding new hardware support or filesystems.</li>
+<li><strong>Common Modules</strong>: Device drivers, filesystem drivers, and network protocols can be added as modules.</li>
+</ul>
+<h3 id="4-io-management"><a class="header" href="#4-io-management">4. <strong>I/O Management</strong></a></h3>
+<ul>
+<li><strong>Role</strong>: Manages input/output operations between devices and user applications.</li>
+<li><strong>Components</strong>:
+<ul>
+<li><strong>I/O Scheduling</strong>: Determines the order in which I/O operations are processed to improve performance and reduce latency.</li>
+<li><strong>Buffer Cache</strong>: Optimizes read/write operations by caching frequently accessed data.</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-architecture-support"><a class="header" href="#5-architecture-support">5. <strong>Architecture Support</strong></a></h3>
+<ul>
+<li><strong>Portability</strong>: The Linux kernel supports a wide range of hardware architectures (x86, ARM, RISC-V, etc.). This is achieved through architecture-specific code, making Linux one of the most widely supported operating systems.</li>
+</ul>
+<h3 id="6-concurrency-and-synchronization"><a class="header" href="#6-concurrency-and-synchronization">6. <strong>Concurrency and Synchronization</strong></a></h3>
+<ul>
+<li><strong>Role</strong>: Manages concurrent execution of processes and threads, ensuring safe access to shared resources.</li>
+<li><strong>Components</strong>:
+<ul>
+<li><strong>Spinlocks, Mutexes, Semaphores</strong>: Synchronization primitives to protect critical sections and ensure thread safety.</li>
+<li><strong>Atomic Operations</strong>: Low-level operations to manage data consistency in multi-core systems.</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-boot-process"><a class="header" href="#7-boot-process">7. <strong>Boot Process</strong></a></h3>
+<ul>
+<li><strong>Initialization</strong>: When the Linux system boots, the bootloader loads the kernel into memory. The kernel initializes the hardware, mounts the root filesystem, and starts the <code>init</code> process (or <code>systemd</code> in many distributions), which manages services and user processes.</li>
+</ul>
+<h3 id="8-kernel-versions"><a class="header" href="#8-kernel-versions">8. <strong>Kernel Versions</strong></a></h3>
+<ul>
+<li><strong>Stable and Long-Term Support (LTS)</strong>: The Linux kernel has regular stable releases with new features and bug fixes. LTS versions receive extended support and are used in enterprise environments.</li>
+</ul>
+<h3 id="9-development-and-maintenance"><a class="header" href="#9-development-and-maintenance">9. <strong>Development and Maintenance</strong></a></h3>
+<ul>
+<li><strong>Open Source</strong>: The Linux kernel is open-source and developed collaboratively by thousands of developers worldwide. Contributions are coordinated by maintainers for each subsystem, with Linus Torvalds overseeing the mainline kernel.</li>
+<li><strong>Version Control</strong>: The kernel source is managed using Git, allowing efficient collaboration and tracking of changes.</li>
+</ul>
+<h3 id="summary-diagram-simplified-linux-kernel-architecture"><a class="header" href="#summary-diagram-simplified-linux-kernel-architecture">Summary Diagram (Simplified Linux Kernel Architecture):</a></h3>
+<pre><code>+--------------------------------------+
+|           User Space                 |
+|  - Applications (user programs)      |
+|  - System Libraries (glibc, etc.)    |
++--------------------------------------+
+             |
+             | System Calls
+             v
++--------------------------------------+
+|            Kernel Space              |
+|                                      |
+| +-----------------+   +-----------+ |
+| | Process Manager  |   |  Memory    | | 
+| |   (Scheduler)    |   | Management | |
+| +-----------------+   +-----------+ |
+|                                      |
+| +-----------------+   +-----------+ |
+| |  File System     |   |   Device   | |
+| |    Management    |   |   Drivers  | |
+| +-----------------+   +-----------+ |
+|                                      |
+| +----------------------------------+ |
+| |        Networking Stack          | |
+| +----------------------------------+ |
++--------------------------------------+
+</code></pre>
+<h3 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h3>
+<p>The Linux kernel architecture is robust and modular, designed to efficiently manage system resources, hardware, and user applications. It supports a wide variety of hardware and provides mechanisms for memory management, process scheduling, I/O, security, and more. Its flexibility, along with modularity, makes it suitable for use in everything from smartphones to supercomputers.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+                            <a rel="next prefetch" href="filesystems.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+                    <a rel="next prefetch" href="filesystems.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

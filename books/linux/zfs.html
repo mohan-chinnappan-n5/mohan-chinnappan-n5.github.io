@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>3. async and defer - All about Web Performance</title>
+        <title>ZFS - All about Linux</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="web-perf.html"><strong aria-hidden="true">1.</strong> 1. What is Web Performance</a></li><li class="chapter-item expanded "><a href="cert.html"><strong aria-hidden="true">2.</strong> 2. What is inside a Server's Cert</a></li><li class="chapter-item expanded "><a href="async-defer.html" class="active"><strong aria-hidden="true">3.</strong> 3. async and defer</a></li><li class="chapter-item expanded "><a href="performance-api.html"><strong aria-hidden="true">4.</strong> 4. Performance API</a></li><li class="chapter-item expanded "><a href="networking/traceroute.html"><strong aria-hidden="true">5.</strong> 5. Traceroute</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking/mctr.html"><strong aria-hidden="true">5.1.</strong> mctr</a></li><li class="chapter-item expanded "><a href="networking/bsd-traceroute.html"><strong aria-hidden="true">5.2.</strong> bsd traceroute</a></li><li class="chapter-item expanded "><a href="networking/icmp.html"><strong aria-hidden="true">5.3.</strong> ICMP</a></li><li class="chapter-item expanded "><a href="networking/curl.html"><strong aria-hidden="true">5.4.</strong> Curl</a></li></ol></li><li class="chapter-item expanded "><a href="uiux/ui.html"><strong aria-hidden="true">6.</strong> 6. UI/UX</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="uiux/best-practices.html"><strong aria-hidden="true">6.1.</strong> Best Practices</a></li><li class="chapter-item expanded "><a href="uiux/accessibility.html"><strong aria-hidden="true">6.2.</strong> Accessibility</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="kernel.html"><strong aria-hidden="true">1.</strong> Kernel</a></li><li class="chapter-item expanded "><a href="filesystems.html"><strong aria-hidden="true">2.</strong> File Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zfs.html" class="active"><strong aria-hidden="true">2.1.</strong> ZFS</a></li><li class="chapter-item expanded "><a href="btrfs.html"><strong aria-hidden="true">2.2.</strong> Btrfs - B-tree File System</a></li></ol></li><li class="chapter-item expanded "><a href="deviceDriver.html"><strong aria-hidden="true">3.</strong> Device Driver</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -139,7 +139,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">All about Web Performance</h1>
+                    <h1 class="menu-title">All about Linux</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -171,82 +171,70 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="3-async-and-defer"><a class="header" href="#3-async-and-defer">3. async and defer</a></h1>
-<p>Using <code>async</code> in a <code>&lt;script&gt;</code> tag in HTML is a way to control how the browser loads and executes JavaScript files. It is particularly useful for optimizing the loading performance of a web page. Here's what <code>async</code> does and how it differs from other script loading techniques:</p>
-<h3 id="purpose-of-async-in-script-tag"><a class="header" href="#purpose-of-async-in-script-tag"><strong>Purpose of <code>async</code> in <code>&lt;script&gt;</code> Tag</strong></a></h3>
+                        <h1 id="zfs"><a class="header" href="#zfs">ZFS</a></h1>
+<p>ZFS (Zettabyte File System) is a robust and scalable file system originally developed by Sun Microsystems. It is known for its advanced features, data integrity checks, and integrated volume management. ZFS has become popular in enterprise storage, backups, and large-scale file servers due to its reliability and performance.</p>
+<h3 id="key-features-of-zfs"><a class="header" href="#key-features-of-zfs">Key Features of ZFS</a></h3>
+<h4 id="1-data-integrity"><a class="header" href="#1-data-integrity">1. <strong>Data Integrity</strong></a></h4>
+<p>One of the standout features of ZFS is its focus on data integrity. ZFS uses checksums to detect and correct silent data corruption, which is critical in environments where data reliability is paramount. Every block of data written to the disk is verified with a checksum, ensuring that any corruption can be detected and, if necessary, corrected using redundant data.</p>
+<h4 id="2-integrated-volume-manager"><a class="header" href="#2-integrated-volume-manager">2. <strong>Integrated Volume Manager</strong></a></h4>
+<p>ZFS combines a file system and volume manager, eliminating the need for separate software like Logical Volume Manager (LVM). This integration allows users to manage disks and storage pools (called &quot;zpools&quot;) more efficiently. Multiple physical disks can be combined into a single storage pool, with ZFS automatically distributing data across the disks for optimal performance and redundancy.</p>
+<h4 id="3-snapshots-and-clones"><a class="header" href="#3-snapshots-and-clones">3. <strong>Snapshots and Clones</strong></a></h4>
+<p>ZFS supports instantaneous snapshots, allowing users to capture the state of the file system at a specific point in time. Snapshots are read-only and highly space-efficient because they only store changes made since the snapshot was taken (copy-on-write). Clones, which are writable snapshots, allow users to create new versions of data without duplicating it, which is useful in development and testing environments.</p>
+<h4 id="4-compression"><a class="header" href="#4-compression">4. <strong>Compression</strong></a></h4>
+<p>ZFS supports multiple compression algorithms (e.g., LZ4, GZIP) to reduce the size of stored data. Compression is done transparently, saving space and improving performance in many cases since less data needs to be read from or written to the disk.</p>
+<h4 id="5-copy-on-write-cow"><a class="header" href="#5-copy-on-write-cow">5. <strong>Copy-on-Write (CoW)</strong></a></h4>
+<p>The copy-on-write mechanism ensures that data is never overwritten in place. Instead, new data is written to a different location, and the metadata is updated to point to the new data. This not only enhances data integrity but also facilitates efficient snapshot creation.</p>
+<h4 id="6-raid-and-redundancy"><a class="header" href="#6-raid-and-redundancy">6. <strong>RAID and Redundancy</strong></a></h4>
+<p>ZFS includes built-in RAID (Redundant Array of Independent Disks) functionality, supporting various levels such as RAIDZ1, RAIDZ2, and RAIDZ3. These are similar to traditional RAID levels but offer better handling of data integrity and allow for more efficient storage. With RAIDZ, ZFS can recover from disk failures while maintaining data availability.</p>
+<h4 id="7-scalability"><a class="header" href="#7-scalability">7. <strong>Scalability</strong></a></h4>
+<p>ZFS is designed to handle massive amounts of data, with theoretical limits far beyond what is required by most users:</p>
 <ul>
-<li>The <code>async</code> attribute allows the browser to load the script file in the background while it continues to parse the HTML document. Once the script is fully loaded, it is executed immediately, without waiting for the entire HTML to be parsed.</li>
+<li><strong>Maximum file size</strong>: 16 exabytes (EB)</li>
+<li><strong>Maximum volume size</strong>: 256 quadrillion zettabytes (ZB)</li>
+<li><strong>Maximum number of files</strong>: Unlimited (practically speaking)</li>
 </ul>
-<h3 id="how-async-works"><a class="header" href="#how-async-works"><strong>How <code>async</code> Works</strong></a></h3>
+<p>These capacities make ZFS ideal for large-scale storage systems and future-proof it for growing datasets.</p>
+<h4 id="8-deduplication"><a class="header" href="#8-deduplication">8. <strong>Deduplication</strong></a></h4>
+<p>ZFS offers data deduplication, where duplicate copies of data are stored only once, saving disk space. While this can reduce storage needs significantly, it requires considerable memory (RAM) to function efficiently and is typically recommended only for specific use cases, such as virtual machine storage.</p>
+<h4 id="9-self-healing"><a class="header" href="#9-self-healing">9. <strong>Self-Healing</strong></a></h4>
+<p>ZFS’s self-healing feature works in tandem with its checksumming and redundancy mechanisms. When ZFS detects corrupted data, it automatically retrieves the correct data from redundant copies (if available), fixing the corrupted data. This makes ZFS ideal for long-term archival storage where data integrity is critical.</p>
+<h4 id="10-snapshots-for-backups"><a class="header" href="#10-snapshots-for-backups">10. <strong>Snapshots for Backups</strong></a></h4>
+<p>ZFS’s snapshot capabilities make it an excellent choice for backup and disaster recovery solutions. Snapshots can be taken instantly and used for rolling back to previous states or creating full backups. The combination of snapshots with replication features allows administrators to create efficient, remote, or local backup solutions.</p>
+<h3 id="pros-of-zfs"><a class="header" href="#pros-of-zfs">Pros of ZFS</a></h3>
 <ul>
-<li>When a script is marked with <code>async</code>, the browser starts downloading the script as soon as it encounters the <code>&lt;script&gt;</code> tag.</li>
-<li>The HTML parsing continues while the script is being downloaded.</li>
-<li>As soon as the script is fully downloaded, the HTML parsing is paused, and the script is executed immediately.</li>
-<li>Once the script execution is complete, the browser resumes parsing the HTML.</li>
+<li><strong>Data Integrity</strong>: End-to-end checksums ensure data is safe from corruption.</li>
+<li><strong>Advanced Features</strong>: Snapshots, compression, deduplication, and RAID support.</li>
+<li><strong>Scalability</strong>: Handles extremely large volumes and files.</li>
+<li><strong>Self-Healing</strong>: Automatically repairs corrupted data.</li>
+<li><strong>Simplified Storage Management</strong>: Combines a file system and volume manager.</li>
 </ul>
-<h3 id="when-to-use-async"><a class="header" href="#when-to-use-async"><strong>When to Use <code>async</code></strong></a></h3>
+<h3 id="cons-of-zfs"><a class="header" href="#cons-of-zfs">Cons of ZFS</a></h3>
 <ul>
-<li>
-<p><strong>Independent Scripts</strong>: Use <code>async</code> for scripts that don't rely on other scripts or DOM elements that come after the script tag. For example, analytics scripts or tracking codes often use <code>async</code> because they don’t depend on the rest of the page’s content.</p>
-</li>
-<li>
-<p><strong>Performance Optimization</strong>: <code>async</code> can be used to speed up page load times by allowing scripts to load in parallel with the HTML parsing.</p>
-</li>
+<li><strong>Memory-Intensive</strong>: Features like deduplication require significant amounts of RAM. A general rule of thumb is to have 1GB of RAM for every terabyte of storage.</li>
+<li><strong>Write Overhead</strong>: Copy-on-write and data integrity checks can lead to higher write overhead compared to simpler file systems like EXT4.</li>
+<li><strong>Complexity</strong>: While ZFS offers many features, they come with a steeper learning curve. Managing pools, snapshots, and recovery might be more complex than with traditional file systems.</li>
+<li><strong>Licensing Issues</strong>: ZFS is licensed under the CDDL (Common Development and Distribution License), which has led to some compatibility issues with Linux distributions using the GPL (General Public License). As a result, ZFS is not natively included in some distributions and must be installed separately.</li>
 </ul>
-<h3 id="syntax"><a class="header" href="#syntax"><strong>Syntax</strong></a></h3>
-<pre><code class="language-html">&lt;script src=&quot;script.js&quot; async&gt;&lt;/script&gt;
-</code></pre>
-<h3 id="comparison-with-other-loading-strategies"><a class="header" href="#comparison-with-other-loading-strategies"><strong>Comparison with Other Loading Strategies</strong></a></h3>
+<h3 id="zfs-use-cases"><a class="header" href="#zfs-use-cases">ZFS Use Cases</a></h3>
 <ul>
-<li>
-<p><strong>Without <code>async</code> or <code>defer</code> (Default Behavior)</strong>:</p>
-<ul>
-<li>The browser stops HTML parsing to download the script and then executes it before continuing to parse the HTML. This can block the page from rendering quickly.</li>
+<li><strong>Enterprise Storage</strong>: ZFS’s redundancy, snapshots, and self-healing features make it ideal for enterprise storage systems, especially in mission-critical environments.</li>
+<li><strong>Backup Solutions</strong>: The ability to take instantaneous snapshots and the inherent data integrity features make ZFS excellent for backup and disaster recovery systems.</li>
+<li><strong>Large Databases and File Systems</strong>: ZFS’s scalability makes it suitable for use with large databases, file servers, and data-intensive applications.</li>
+<li><strong>Virtualization</strong>: ZFS is popular in virtualized environments, especially for managing virtual machine storage, thanks to its deduplication and snapshot capabilities.</li>
+<li><strong>Personal and Home NAS</strong>: Many home users and small businesses leverage ZFS in network-attached storage (NAS) devices for data safety, redundancy, and storage efficiency.</li>
 </ul>
-</li>
-<li>
-<p><strong>With <code>defer</code></strong>:</p>
-<ul>
-<li>Similar to <code>async</code>, the script is downloaded in parallel with HTML parsing. However, with <code>defer</code>, the script execution is deferred until after the HTML has been fully parsed. This ensures that the script does not block the rendering of the page, making it more predictable, especially for scripts that rely on the DOM.</li>
-</ul>
-</li>
-<li>
-<p><strong>With <code>async</code></strong>:</p>
-<ul>
-<li>The script is also downloaded in parallel with HTML parsing but is executed as soon as it’s ready, potentially before the HTML is fully parsed. This can lead to issues if the script relies on elements that haven’t been parsed yet.</li>
-</ul>
-</li>
-</ul>
-<h3 id="use-cases"><a class="header" href="#use-cases"><strong>Use Cases</strong></a></h3>
-<ul>
-<li><strong><code>async</code></strong> is ideal for scripts like analytics or advertisements that don’t depend on other content and where you want to minimize the impact on page load time.</li>
-<li><strong><code>defer</code></strong> is better for scripts that should run after the document has been fully parsed, like those manipulating DOM elements that appear later in the HTML.</li>
-</ul>
-<h3 id="example-usage"><a class="header" href="#example-usage"><strong>Example Usage</strong></a></h3>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Async Script Example&lt;/title&gt;
-    &lt;script src=&quot;analytics.js&quot; async&gt;&lt;/script&gt; &lt;!-- Independent script that runs as soon as it's ready --&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Async Script Demo&lt;/h1&gt;
-    &lt;p&gt;This content loads while the script is being fetched asynchronously.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>In this example, <code>analytics.js</code> will load in the background, allowing the rest of the page to be parsed and displayed without waiting for the script to finish downloading. Once <code>analytics.js</code> is ready, it will be executed immediately.</p>
+<h3 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h3>
+<p>ZFS is a powerful and advanced file system designed to address the challenges of modern data storage. Its emphasis on data integrity, combined with features like snapshots, compression, and integrated volume management, makes it a preferred choice for enterprise-level storage solutions. However, it comes with higher memory requirements and complexity, which might be overkill for some smaller, simpler use cases. For users who need reliable, scalable, and feature-rich storage, ZFS remains one of the most robust file systems available today.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="cert.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="filesystems.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="performance-api.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="btrfs.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -256,11 +244,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="cert.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="filesystems.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="performance-api.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="btrfs.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

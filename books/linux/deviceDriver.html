@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>3. async and defer - All about Web Performance</title>
+        <title>Device Driver - All about Linux</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="web-perf.html"><strong aria-hidden="true">1.</strong> 1. What is Web Performance</a></li><li class="chapter-item expanded "><a href="cert.html"><strong aria-hidden="true">2.</strong> 2. What is inside a Server's Cert</a></li><li class="chapter-item expanded "><a href="async-defer.html" class="active"><strong aria-hidden="true">3.</strong> 3. async and defer</a></li><li class="chapter-item expanded "><a href="performance-api.html"><strong aria-hidden="true">4.</strong> 4. Performance API</a></li><li class="chapter-item expanded "><a href="networking/traceroute.html"><strong aria-hidden="true">5.</strong> 5. Traceroute</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking/mctr.html"><strong aria-hidden="true">5.1.</strong> mctr</a></li><li class="chapter-item expanded "><a href="networking/bsd-traceroute.html"><strong aria-hidden="true">5.2.</strong> bsd traceroute</a></li><li class="chapter-item expanded "><a href="networking/icmp.html"><strong aria-hidden="true">5.3.</strong> ICMP</a></li><li class="chapter-item expanded "><a href="networking/curl.html"><strong aria-hidden="true">5.4.</strong> Curl</a></li></ol></li><li class="chapter-item expanded "><a href="uiux/ui.html"><strong aria-hidden="true">6.</strong> 6. UI/UX</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="uiux/best-practices.html"><strong aria-hidden="true">6.1.</strong> Best Practices</a></li><li class="chapter-item expanded "><a href="uiux/accessibility.html"><strong aria-hidden="true">6.2.</strong> Accessibility</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="kernel.html"><strong aria-hidden="true">1.</strong> Kernel</a></li><li class="chapter-item expanded "><a href="filesystems.html"><strong aria-hidden="true">2.</strong> File Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zfs.html"><strong aria-hidden="true">2.1.</strong> ZFS</a></li><li class="chapter-item expanded "><a href="btrfs.html"><strong aria-hidden="true">2.2.</strong> Btrfs - B-tree File System</a></li></ol></li><li class="chapter-item expanded "><a href="deviceDriver.html" class="active"><strong aria-hidden="true">3.</strong> Device Driver</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -139,7 +139,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">All about Web Performance</h1>
+                    <h1 class="menu-title">All about Linux</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -171,84 +171,167 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="3-async-and-defer"><a class="header" href="#3-async-and-defer">3. async and defer</a></h1>
-<p>Using <code>async</code> in a <code>&lt;script&gt;</code> tag in HTML is a way to control how the browser loads and executes JavaScript files. It is particularly useful for optimizing the loading performance of a web page. Here's what <code>async</code> does and how it differs from other script loading techniques:</p>
-<h3 id="purpose-of-async-in-script-tag"><a class="header" href="#purpose-of-async-in-script-tag"><strong>Purpose of <code>async</code> in <code>&lt;script&gt;</code> Tag</strong></a></h3>
-<ul>
-<li>The <code>async</code> attribute allows the browser to load the script file in the background while it continues to parse the HTML document. Once the script is fully loaded, it is executed immediately, without waiting for the entire HTML to be parsed.</li>
-</ul>
-<h3 id="how-async-works"><a class="header" href="#how-async-works"><strong>How <code>async</code> Works</strong></a></h3>
-<ul>
-<li>When a script is marked with <code>async</code>, the browser starts downloading the script as soon as it encounters the <code>&lt;script&gt;</code> tag.</li>
-<li>The HTML parsing continues while the script is being downloaded.</li>
-<li>As soon as the script is fully downloaded, the HTML parsing is paused, and the script is executed immediately.</li>
-<li>Once the script execution is complete, the browser resumes parsing the HTML.</li>
-</ul>
-<h3 id="when-to-use-async"><a class="header" href="#when-to-use-async"><strong>When to Use <code>async</code></strong></a></h3>
-<ul>
+                        <h1 id="device-driver"><a class="header" href="#device-driver">Device Driver</a></h1>
+<p>Writing a Linux device driver involves interacting with the kernel, hardware, and user-space applications. Below is a basic example of writing a <strong>character device driver</strong> in Linux, which reads and writes data to/from a user-space application. For this example, we'll implement a simple &quot;Hello, World!&quot; driver that responds with a fixed message when read from the user space.</p>
+<h3 id="steps-to-create-a-simple-character-device-driver"><a class="header" href="#steps-to-create-a-simple-character-device-driver">Steps to Create a Simple Character Device Driver:</a></h3>
+<ol>
 <li>
-<p><strong>Independent Scripts</strong>: Use <code>async</code> for scripts that don't rely on other scripts or DOM elements that come after the script tag. For example, analytics scripts or tracking codes often use <code>async</code> because they don’t depend on the rest of the page’s content.</p>
+<p><strong>Set up Development Environment</strong>: 
+Ensure you have the necessary kernel headers and development tools installed.</p>
+<ul>
+<li>Install kernel headers: <code>sudo apt-get install linux-headers-$(uname -r)</code></li>
+<li>Install build essentials: <code>sudo apt-get install build-essential</code></li>
+</ul>
 </li>
 <li>
-<p><strong>Performance Optimization</strong>: <code>async</code> can be used to speed up page load times by allowing scripts to load in parallel with the HTML parsing.</p>
+<p><strong>Create a C File for the Driver</strong>:
+We'll create a C file (<code>hello_driver.c</code>) that implements basic functionality, including <code>open</code>, <code>read</code>, and <code>close</code> system calls.</p>
 </li>
-</ul>
-<h3 id="syntax"><a class="header" href="#syntax"><strong>Syntax</strong></a></h3>
-<pre><code class="language-html">&lt;script src=&quot;script.js&quot; async&gt;&lt;/script&gt;
+</ol>
+<h3 id="hello_driverc"><a class="header" href="#hello_driverc"><code>hello_driver.c</code></a></h3>
+<pre><code class="language-c">#include &lt;linux/module.h&gt;
+#include &lt;linux/kernel.h&gt;
+#include &lt;linux/fs.h&gt;
+#include &lt;linux/uaccess.h&gt;
+
+#define DEVICE_NAME &quot;hello_device&quot;
+#define HELLO_MSG &quot;Hello, World!\n&quot;
+#define HELLO_MSG_LEN 13
+
+// Function prototypes for the character driver
+static int dev_open(struct inode *, struct file *);
+static int dev_release(struct inode *, struct file *);
+static ssize_t dev_read(struct file *, char *, size_t, loff_t *);
+
+// Global variables for the device
+static int major_number;
+static int device_open_count = 0;
+static char message[HELLO_MSG_LEN] = HELLO_MSG;
+
+// File operations struct
+static struct file_operations fops = {
+    .open = dev_open,
+    .read = dev_read,
+    .release = dev_release,
+};
+
+// Initialization function
+static int __init hello_init(void) {
+    // Register the device and get a major number
+    major_number = register_chrdev(0, DEVICE_NAME, &amp;fops);
+    if (major_number &lt; 0) {
+        printk(KERN_ALERT &quot;Failed to register device with %d\n&quot;, major_number);
+        return major_number;
+    }
+    printk(KERN_INFO &quot;hello_driver: registered with major number %d\n&quot;, major_number);
+    return 0;
+}
+
+// Exit function (cleanup)
+static void __exit hello_exit(void) {
+    unregister_chrdev(major_number, DEVICE_NAME);
+    printk(KERN_INFO &quot;hello_driver: unregistered device\n&quot;);
+}
+
+// Called when the device is opened
+static int dev_open(struct inode *inodep, struct file *filep) {
+    if (device_open_count &gt; 0) {
+        return -EBUSY;  // Device is already opened
+    }
+    device_open_count++;
+    printk(KERN_INFO &quot;hello_driver: device opened\n&quot;);
+    return 0;
+}
+
+// Called when the device is closed
+static int dev_release(struct inode *inodep, struct file *filep) {
+    device_open_count--;
+    printk(KERN_INFO &quot;hello_driver: device closed\n&quot;);
+    return 0;
+}
+
+// Called when the device is read from
+static ssize_t dev_read(struct file *filep, char *buffer, size_t len, loff_t *offset) {
+    int bytes_not_copied = copy_to_user(buffer, message, HELLO_MSG_LEN);
+    if (bytes_not_copied == 0) {
+        printk(KERN_INFO &quot;hello_driver: sent message to user\n&quot;);
+        return HELLO_MSG_LEN;
+    } else {
+        printk(KERN_ALERT &quot;hello_driver: failed to send message\n&quot;);
+        return -EFAULT;  // Failed to send data to user
+    }
+}
+
+// Define the init and exit functions
+module_init(hello_init);
+module_exit(hello_exit);
+
+// Module metadata
+MODULE_LICENSE(&quot;GPL&quot;);
+MODULE_AUTHOR(&quot;Your Name&quot;);
+MODULE_DESCRIPTION(&quot;A simple Hello World character device driver&quot;);
+MODULE_VERSION(&quot;1.0&quot;);
 </code></pre>
-<h3 id="comparison-with-other-loading-strategies"><a class="header" href="#comparison-with-other-loading-strategies"><strong>Comparison with Other Loading Strategies</strong></a></h3>
+<h3 id="explanation"><a class="header" href="#explanation">Explanation:</a></h3>
 <ul>
-<li>
-<p><strong>Without <code>async</code> or <code>defer</code> (Default Behavior)</strong>:</p>
-<ul>
-<li>The browser stops HTML parsing to download the script and then executes it before continuing to parse the HTML. This can block the page from rendering quickly.</li>
+<li><strong><code>module_init</code> and <code>module_exit</code></strong>: These macros define the entry and exit points for the driver. <code>hello_init()</code> is called when the module is loaded, and <code>hello_exit()</code> is called when it is removed.</li>
+<li><strong><code>register_chrdev</code> and <code>unregister_chrdev</code></strong>: These functions register and unregister the character device with the kernel, giving it a major number.</li>
+<li><strong><code>file_operations</code> struct</strong>: This struct maps file operations (like <code>open</code>, <code>read</code>, <code>release</code>) to the functions implemented in the driver.</li>
+<li><strong><code>dev_open</code></strong>: Handles when the device is opened.</li>
+<li><strong><code>dev_read</code></strong>: Handles reading data from the device (in this case, sends &quot;Hello, World!&quot; to the user).</li>
+<li><strong><code>dev_release</code></strong>: Handles when the device is closed.</li>
 </ul>
-</li>
-<li>
-<p><strong>With <code>defer</code></strong>:</p>
-<ul>
-<li>Similar to <code>async</code>, the script is downloaded in parallel with HTML parsing. However, with <code>defer</code>, the script execution is deferred until after the HTML has been fully parsed. This ensures that the script does not block the rendering of the page, making it more predictable, especially for scripts that rely on the DOM.</li>
-</ul>
-</li>
-<li>
-<p><strong>With <code>async</code></strong>:</p>
-<ul>
-<li>The script is also downloaded in parallel with HTML parsing but is executed as soon as it’s ready, potentially before the HTML is fully parsed. This can lead to issues if the script relies on elements that haven’t been parsed yet.</li>
-</ul>
-</li>
-</ul>
-<h3 id="use-cases"><a class="header" href="#use-cases"><strong>Use Cases</strong></a></h3>
-<ul>
-<li><strong><code>async</code></strong> is ideal for scripts like analytics or advertisements that don’t depend on other content and where you want to minimize the impact on page load time.</li>
-<li><strong><code>defer</code></strong> is better for scripts that should run after the document has been fully parsed, like those manipulating DOM elements that appear later in the HTML.</li>
-</ul>
-<h3 id="example-usage"><a class="header" href="#example-usage"><strong>Example Usage</strong></a></h3>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Async Script Example&lt;/title&gt;
-    &lt;script src=&quot;analytics.js&quot; async&gt;&lt;/script&gt; &lt;!-- Independent script that runs as soon as it's ready --&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Async Script Demo&lt;/h1&gt;
-    &lt;p&gt;This content loads while the script is being fetched asynchronously.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<h3 id="3-build-the-driver"><a class="header" href="#3-build-the-driver">3. <strong>Build the Driver</strong></a></h3>
+<p>Create a <code>Makefile</code> to compile the kernel module.</p>
+<h3 id="makefile"><a class="header" href="#makefile"><code>Makefile</code></a></h3>
+<pre><code class="language-make">obj-m += hello_driver.o
+
+all:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+
+clean:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
 </code></pre>
-<p>In this example, <code>analytics.js</code> will load in the background, allowing the rest of the page to be parsed and displayed without waiting for the script to finish downloading. Once <code>analytics.js</code> is ready, it will be executed immediately.</p>
+<h3 id="4-compile-the-driver"><a class="header" href="#4-compile-the-driver">4. <strong>Compile the Driver</strong></a></h3>
+<p>To compile the driver, run the following command in the directory where your <code>hello_driver.c</code> and <code>Makefile</code> are located:</p>
+<pre><code class="language-bash">make
+</code></pre>
+<p>This will create a <code>.ko</code> (kernel object) file, which is the compiled driver.</p>
+<h3 id="5-insert-the-module"><a class="header" href="#5-insert-the-module">5. <strong>Insert the Module</strong></a></h3>
+<p>Once the module is compiled, you can insert it into the kernel using the <code>insmod</code> command:</p>
+<pre><code class="language-bash">sudo insmod hello_driver.ko
+</code></pre>
+<p>You can verify that the module is loaded by checking the kernel log or using <code>lsmod</code>:</p>
+<pre><code class="language-bash">dmesg | tail
+</code></pre>
+<h3 id="6-create-a-device-file"><a class="header" href="#6-create-a-device-file">6. <strong>Create a Device File</strong></a></h3>
+<p>The module doesn’t create a device file by itself. You need to create one manually to interact with the device from user space:</p>
+<pre><code class="language-bash">sudo mknod /dev/hello_device c &lt;major_number&gt; 0
+</code></pre>
+<p>Replace <code>&lt;major_number&gt;</code> with the actual major number printed when the module was loaded (you can also find it in the <code>dmesg</code> output).</p>
+<h3 id="7-test-the-driver"><a class="header" href="#7-test-the-driver">7. <strong>Test the Driver</strong></a></h3>
+<p>Now that the device file is created, you can interact with it. For example, you can read from the device using <code>cat</code>:</p>
+<pre><code class="language-bash">cat /dev/hello_device
+</code></pre>
+<p>It should print &quot;Hello, World!&quot; to the terminal.</p>
+<h3 id="8-remove-the-module"><a class="header" href="#8-remove-the-module">8. <strong>Remove the Module</strong></a></h3>
+<p>When you're done, you can remove the driver using <code>rmmod</code>:</p>
+<pre><code class="language-bash">sudo rmmod hello_driver
+</code></pre>
+<p>Make sure to clean up the device file as well:</p>
+<pre><code class="language-bash">sudo rm /dev/hello_device
+</code></pre>
+<h3 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h3>
+<p>This is a basic &quot;Hello, World!&quot; character device driver for Linux. Writing more advanced drivers involves interacting with hardware, interrupts, I/O operations, and more. This example serves as an introduction to the Linux device driver model and gives you a foundation to build more complex drivers in the future.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="cert.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="btrfs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="performance-api.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -256,13 +339,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="cert.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="btrfs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="performance-api.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Btrfs - B-tree File System - All about Linux</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="kernel.html"><strong aria-hidden="true">1.</strong> Kernel</a></li><li class="chapter-item expanded "><a href="filesystems.html"><strong aria-hidden="true">2.</strong> File Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zfs.html"><strong aria-hidden="true">2.1.</strong> ZFS</a></li><li class="chapter-item expanded "><a href="btrfs.html" class="active"><strong aria-hidden="true">2.2.</strong> Btrfs - B-tree File System</a></li></ol></li><li class="chapter-item expanded "><a href="deviceDriver.html"><strong aria-hidden="true">3.</strong> Device Driver</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">All about Linux</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="btrfs---b-tree-file-system"><a class="header" href="#btrfs---b-tree-file-system">Btrfs - B-tree File System</a></h1>
+<p><strong>Btrfs (B-tree File System)</strong> is a modern, advanced file system developed for Linux. It was designed to address the limitations of older file systems like EXT4 while providing a variety of new features to improve scalability, data integrity, and performance. Created by Oracle, Btrfs has become increasingly popular in both enterprise and home NAS (Network-Attached Storage) environments.</p>
+<h3 id="key-features-of-btrfs"><a class="header" href="#key-features-of-btrfs">Key Features of Btrfs</a></h3>
+<h4 id="1-copy-on-write-cow"><a class="header" href="#1-copy-on-write-cow">1. <strong>Copy-on-Write (CoW)</strong></a></h4>
+<p>Btrfs employs a copy-on-write mechanism, where changes to files are not written over the original data. Instead, new data is written to a different location, and only after the data is successfully written, the metadata is updated to point to the new location. This ensures data integrity and makes features like snapshots easier and more efficient to implement.</p>
+<h4 id="2-snapshots"><a class="header" href="#2-snapshots">2. <strong>Snapshots</strong></a></h4>
+<p>Snapshots are a core feature of Btrfs, enabling users to create read-only or writable snapshots of the file system at any point in time. Snapshots are instantaneous and highly space-efficient, as they only store changes made after the snapshot is created (thanks to copy-on-write). This makes Btrfs an ideal choice for backup, recovery, and versioning use cases.</p>
+<h4 id="3-subvolumes"><a class="header" href="#3-subvolumes">3. <strong>Subvolumes</strong></a></h4>
+<p>Btrfs supports subvolumes, which are independently managed file system units within a Btrfs file system. Each subvolume behaves like an independent file system, but all subvolumes share the same storage pool. This flexibility is useful for managing disk space across different directories or users.</p>
+<h4 id="4-integrated-volume-management"><a class="header" href="#4-integrated-volume-management">4. <strong>Integrated Volume Management</strong></a></h4>
+<p>Like ZFS, Btrfs integrates file system and volume management, allowing users to create a storage pool from multiple devices (disks). Btrfs can automatically balance and distribute data across the devices in a way that improves redundancy and performance, similar to traditional RAID configurations.</p>
+<h4 id="5-raid-support"><a class="header" href="#5-raid-support">5. <strong>RAID Support</strong></a></h4>
+<p>Btrfs supports various RAID levels (RAID 0, RAID 1, RAID 10, RAID 5, and RAID 6) natively. Unlike traditional RAID setups, Btrfs can mix and match RAID levels within the same file system and offers more dynamic control over RAID configurations without requiring complex hardware controllers.</p>
+<h4 id="6-data-integrity"><a class="header" href="#6-data-integrity">6. <strong>Data Integrity</strong></a></h4>
+<p>Btrfs places a strong emphasis on data integrity by using checksums for both metadata and data. This ensures that the file system can detect and correct silent data corruption. If Btrfs detects a data corruption issue, it can use redundant copies of the data (from a RAID array or elsewhere) to fix the problem automatically, ensuring that your data remains intact.</p>
+<h4 id="7-compression"><a class="header" href="#7-compression">7. <strong>Compression</strong></a></h4>
+<p>Btrfs supports transparent compression, which can significantly reduce the size of data stored on disk. Popular compression algorithms like Zlib, LZO, and Zstd are supported, and compression happens automatically when data is written to the disk, saving space and improving I/O performance in many cases.</p>
+<h4 id="8-deduplication"><a class="header" href="#8-deduplication">8. <strong>Deduplication</strong></a></h4>
+<p>While not as robust as ZFS’s implementation, Btrfs provides support for deduplication, a feature that helps eliminate duplicate copies of the same data within the file system. Deduplication can reduce the amount of space used by duplicate files or blocks.</p>
+<h4 id="9-dynamic-resizing"><a class="header" href="#9-dynamic-resizing">9. <strong>Dynamic Resizing</strong></a></h4>
+<p>Btrfs allows dynamic resizing of file systems. You can increase or decrease the size of a Btrfs file system while it’s still mounted, making it more flexible in environments where storage needs frequently change. This feature is particularly useful for virtualized environments or cloud storage.</p>
+<h4 id="10-self-healing"><a class="header" href="#10-self-healing">10. <strong>Self-Healing</strong></a></h4>
+<p>With RAID configurations, Btrfs can self-heal data by automatically recovering corrupted data from a redundant copy. This self-healing feature, in combination with checksumming, ensures that data corruption can be detected and corrected without user intervention.</p>
+<h4 id="11-efficient-storage"><a class="header" href="#11-efficient-storage">11. <strong>Efficient Storage</strong></a></h4>
+<p>Btrfs is designed to make storage management easier and more efficient. By using subvolumes and snapshots, Btrfs reduces overhead, avoids duplication, and makes better use of available storage.</p>
+<h3 id="pros-of-btrfs"><a class="header" href="#pros-of-btrfs">Pros of Btrfs</a></h3>
+<ul>
+<li><strong>Data Integrity</strong>: Btrfs uses checksums to ensure that data corruption can be detected and repaired automatically.</li>
+<li><strong>Copy-on-Write</strong>: CoW provides performance advantages when working with snapshots and helps preserve data integrity.</li>
+<li><strong>Snapshots and Subvolumes</strong>: Native support for efficient snapshots and subvolumes allows flexible management of data and backups.</li>
+<li><strong>RAID and Volume Management</strong>: Btrfs integrates volume management and RAID, simplifying complex storage setups.</li>
+<li><strong>Compression and Deduplication</strong>: These features improve storage efficiency and performance.</li>
+<li><strong>Scalability</strong>: Btrfs is highly scalable, making it suitable for both small and large deployments, from personal laptops to enterprise servers.</li>
+</ul>
+<h3 id="cons-of-btrfs"><a class="header" href="#cons-of-btrfs">Cons of Btrfs</a></h3>
+<ul>
+<li><strong>Maturity of RAID5/6</strong>: While Btrfs supports RAID5 and RAID6, these RAID configurations have had known stability and performance issues in certain releases. Although improvements have been made, these RAID levels are still considered experimental by many.</li>
+<li><strong>Performance Overhead</strong>: Certain features of Btrfs, like CoW and data checksumming, can introduce performance overhead, particularly in write-heavy workloads.</li>
+<li><strong>Complexity</strong>: Btrfs’s advanced features can make it more complex to manage compared to simpler file systems like EXT4.</li>
+<li><strong>Limited Support in Some Areas</strong>: Although Btrfs is increasingly supported in the Linux ecosystem, it is not always the default or preferred choice, particularly in distributions where EXT4 is the default.</li>
+</ul>
+<h3 id="btrfs-use-cases"><a class="header" href="#btrfs-use-cases">Btrfs Use Cases</a></h3>
+<ul>
+<li><strong>Backups and Archival Storage</strong>: With its snapshot and subvolume features, Btrfs is well-suited for environments where frequent backups or archival versions of data are needed.</li>
+<li><strong>Home NAS Systems</strong>: Btrfs’s data integrity, compression, and snapshot capabilities make it popular for home NAS systems like Synology and QNAP.</li>
+<li><strong>Virtualization</strong>: Btrfs is useful in virtualized environments, particularly when managing multiple virtual machines or containers that need to share the same storage pool.</li>
+<li><strong>Cloud Storage</strong>: Dynamic resizing, data integrity, and RAID capabilities make Btrfs suitable for scalable cloud storage systems.</li>
+</ul>
+<h3 id="comparison-with-other-file-systems"><a class="header" href="#comparison-with-other-file-systems">Comparison with Other File Systems</a></h3>
+<h4 id="1-btrfs-vs-ext4"><a class="header" href="#1-btrfs-vs-ext4">1. <strong>Btrfs vs. EXT4</strong></a></h4>
+<ul>
+<li><strong>Features</strong>: Btrfs offers far more advanced features (snapshots, compression, subvolumes, RAID) than EXT4, which is a traditional file system without volume management.</li>
+<li><strong>Performance</strong>: EXT4 tends to perform better in write-heavy workloads due to its simplicity and lack of checksumming.</li>
+<li><strong>Maturity</strong>: EXT4 is considered more stable and mature in a broader range of scenarios, while Btrfs is still evolving.</li>
+</ul>
+<h4 id="2-btrfs-vs-zfs"><a class="header" href="#2-btrfs-vs-zfs">2. <strong>Btrfs vs. ZFS</strong></a></h4>
+<ul>
+<li><strong>Features</strong>: Both file systems offer advanced features such as checksumming, snapshots, and RAID. ZFS has more mature RAID implementations and additional features like deduplication.</li>
+<li><strong>Memory Usage</strong>: ZFS requires more RAM to function optimally, whereas Btrfs is less memory-intensive, making it more suitable for smaller systems.</li>
+<li><strong>Licensing</strong>: ZFS has licensing issues with the Linux kernel (due to CDDL and GPL conflicts), while Btrfs is GPL-licensed and included natively in the Linux kernel.</li>
+</ul>
+<h3 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h3>
+<p>Btrfs is a feature-rich, next-generation file system that offers many advanced features, including snapshots, compression, subvolumes, and integrated RAID support. It’s well-suited for modern storage environments that require flexible, scalable, and reliable file systems. While it has some limitations and is still evolving in certain areas (particularly RAID5/6), it offers a powerful alternative to traditional file systems like EXT4 and advanced systems like ZFS.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="zfs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="deviceDriver.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="zfs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="deviceDriver.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

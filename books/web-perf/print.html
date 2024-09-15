@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="web-perf.html"><strong aria-hidden="true">1.</strong> 1. What is Web Performance</a></li><li class="chapter-item expanded "><a href="cert.html"><strong aria-hidden="true">2.</strong> 2. What is inside a Server's Cert</a></li><li class="chapter-item expanded "><a href="async-defer.html"><strong aria-hidden="true">3.</strong> 3. async and defer</a></li><li class="chapter-item expanded "><a href="performance-api.html"><strong aria-hidden="true">4.</strong> 4. Performance API</a></li><li class="chapter-item expanded "><a href="networking/traceroute.html"><strong aria-hidden="true">5.</strong> 5. Traceroute</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking/mctr.html"><strong aria-hidden="true">5.1.</strong> mctr</a></li><li class="chapter-item expanded "><a href="networking/icmp.html"><strong aria-hidden="true">5.2.</strong> ICMP</a></li><li class="chapter-item expanded "><a href="networking/curl.html"><strong aria-hidden="true">5.3.</strong> Curl</a></li></ol></li><li class="chapter-item expanded "><a href="uiux/ui.html"><strong aria-hidden="true">6.</strong> 6. UI/UX</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="uiux/best-practices.html"><strong aria-hidden="true">6.1.</strong> Best Practices</a></li><li class="chapter-item expanded "><a href="uiux/accessibility.html"><strong aria-hidden="true">6.2.</strong> Accessibility</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="web-perf.html"><strong aria-hidden="true">1.</strong> 1. What is Web Performance</a></li><li class="chapter-item expanded "><a href="cert.html"><strong aria-hidden="true">2.</strong> 2. What is inside a Server's Cert</a></li><li class="chapter-item expanded "><a href="async-defer.html"><strong aria-hidden="true">3.</strong> 3. async and defer</a></li><li class="chapter-item expanded "><a href="performance-api.html"><strong aria-hidden="true">4.</strong> 4. Performance API</a></li><li class="chapter-item expanded "><a href="networking/traceroute.html"><strong aria-hidden="true">5.</strong> 5. Traceroute</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking/mctr.html"><strong aria-hidden="true">5.1.</strong> mctr</a></li><li class="chapter-item expanded "><a href="networking/bsd-traceroute.html"><strong aria-hidden="true">5.2.</strong> bsd traceroute</a></li><li class="chapter-item expanded "><a href="networking/icmp.html"><strong aria-hidden="true">5.3.</strong> ICMP</a></li><li class="chapter-item expanded "><a href="networking/curl.html"><strong aria-hidden="true">5.4.</strong> Curl</a></li></ol></li><li class="chapter-item expanded "><a href="uiux/ui.html"><strong aria-hidden="true">6.</strong> 6. UI/UX</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="uiux/best-practices.html"><strong aria-hidden="true">6.1.</strong> Best Practices</a></li><li class="chapter-item expanded "><a href="uiux/accessibility.html"><strong aria-hidden="true">6.2.</strong> Accessibility</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1354,6 +1354,1020 @@ Saving results to x.com.csv...
 +-------------------------+
 | End                     |
 +-------------------------+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bsd-traceroute"><a class="header" href="#bsd-traceroute">bsd traceroute</a></h1>
+<p>Here is the BSD <a href="https://github.com/openbsd/src/blob/master/usr.sbin/traceroute/traceroute.c">traceroute code</a>:</p>
+<pre><code class="language-c">/*	$OpenBSD: traceroute.c,v 1.170 2024/08/21 15:00:25 florian Exp $	*/
+/*	$NetBSD: traceroute.c,v 1.10 1995/05/21 15:50:45 mycroft Exp $	*/
+
+/*
+ * Copyright (C) 1995, 1996, 1997, and 1998 WIDE Project.
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the project nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE PROJECT OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+
+/*-
+ * Copyright (c) 1990, 1993
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * This code is derived from software contributed to Berkeley by
+ * Van Jacobson.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+
+/*
+ * traceroute host  - trace the route ip packets follow going to &quot;host&quot;.
+ *
+ * Attempt to trace the route an ip packet would follow to some
+ * internet host.  We find out intermediate hops by launching probe
+ * packets with a small ttl (time to live) then listening for an
+ * icmp &quot;time exceeded&quot; reply from a gateway.  We start our probes
+ * with a ttl of one and increase by one until we get an icmp &quot;port
+ * unreachable&quot; (which means we got to &quot;host&quot;) or hit a max (which
+ * defaults to 64 hops &amp; can be changed with the -m flag).  Three
+ * probes (change with -q flag) are sent at each ttl setting and a
+ * line is printed showing the ttl, address of the gateway and
+ * round trip time of each probe.  If the probe answers come from
+ * different gateways, the address of each responding system will
+ * be printed.  If there is no response within a 5 sec. timeout
+ * interval (changed with the -w flag), a &quot;*&quot; is printed for that
+ * probe.
+ *
+ * Probe packets are UDP format.  We don't want the destination
+ * host to process them so the destination port is set to an
+ * unlikely value (if some clod on the destination is using that
+ * value, it can be changed with the -p flag).
+ *
+ * A sample use might be:
+ *
+ *     [yak 71]% traceroute nis.nsf.net.
+ *     traceroute to nis.nsf.net (35.1.1.48), 64 hops max, 56 byte packet
+ *      1  helios.ee.lbl.gov (128.3.112.1)  19 ms  19 ms  0 ms
+ *      2  lilac-dmc.Berkeley.EDU (128.32.216.1)  39 ms  39 ms  19 ms
+ *      3  lilac-dmc.Berkeley.EDU (128.32.216.1)  39 ms  39 ms  19 ms
+ *      4  ccngw-ner-cc.Berkeley.EDU (128.32.136.23)  39 ms  40 ms  39 ms
+ *      5  ccn-nerif22.Berkeley.EDU (128.32.168.22)  39 ms  39 ms  39 ms
+ *      6  128.32.197.4 (128.32.197.4)  40 ms  59 ms  59 ms
+ *      7  131.119.2.5 (131.119.2.5)  59 ms  59 ms  59 ms
+ *      8  129.140.70.13 (129.140.70.13)  99 ms  99 ms  80 ms
+ *      9  129.140.71.6 (129.140.71.6)  139 ms  239 ms  319 ms
+ *     10  129.140.81.7 (129.140.81.7)  220 ms  199 ms  199 ms
+ *     11  nic.merit.edu (35.1.1.48)  239 ms  239 ms  239 ms
+ *
+ * Note that lines 2 &amp; 3 are the same.  This is due to a buggy
+ * kernel on the 2nd hop system -- lbl-csam.arpa -- that forwards
+ * packets with a zero ttl.
+ *
+ * A more interesting example is:
+ *
+ *     [yak 72]% traceroute allspice.lcs.mit.edu.
+ *     traceroute to allspice.lcs.mit.edu (18.26.0.115), 64 hops max
+ *      1  helios.ee.lbl.gov (128.3.112.1)  0 ms  0 ms  0 ms
+ *      2  lilac-dmc.Berkeley.EDU (128.32.216.1)  19 ms  19 ms  19 ms
+ *      3  lilac-dmc.Berkeley.EDU (128.32.216.1)  39 ms  19 ms  19 ms
+ *      4  ccngw-ner-cc.Berkeley.EDU (128.32.136.23)  19 ms  39 ms  39 ms
+ *      5  ccn-nerif22.Berkeley.EDU (128.32.168.22)  20 ms  39 ms  39 ms
+ *      6  128.32.197.4 (128.32.197.4)  59 ms  119 ms  39 ms
+ *      7  131.119.2.5 (131.119.2.5)  59 ms  59 ms  39 ms
+ *      8  129.140.70.13 (129.140.70.13)  80 ms  79 ms  99 ms
+ *      9  129.140.71.6 (129.140.71.6)  139 ms  139 ms  159 ms
+ *     10  129.140.81.7 (129.140.81.7)  199 ms  180 ms  300 ms
+ *     11  129.140.72.17 (129.140.72.17)  300 ms  239 ms  239 ms
+ *     12  * * *
+ *     13  128.121.54.72 (128.121.54.72)  259 ms  499 ms  279 ms
+ *     14  * * *
+ *     15  * * *
+ *     16  * * *
+ *     17  * * *
+ *     18  ALLSPICE.LCS.MIT.EDU (18.26.0.115)  339 ms  279 ms  279 ms
+ *
+ * (I start to see why I'm having so much trouble with mail to
+ * MIT.)  Note that the gateways 12, 14, 15, 16 &amp; 17 hops away
+ * either don't send ICMP &quot;time exceeded&quot; messages or send them
+ * with a ttl too small to reach us.  14 - 17 are running the
+ * MIT C Gateway code that doesn't send &quot;time exceeded&quot;s.  God
+ * only knows what's going on with 12.
+ *
+ * The silent gateway 12 in the above may be the result of a bug in
+ * the 4.[23]BSD network code (and its derivatives):  4.x (x &lt;= 3)
+ * sends an unreachable message using whatever ttl remains in the
+ * original datagram.  Since, for gateways, the remaining ttl is
+ * zero, the icmp &quot;time exceeded&quot; is guaranteed to not make it back
+ * to us.  The behavior of this bug is slightly more interesting
+ * when it appears on the destination system:
+ *
+ *      1  helios.ee.lbl.gov (128.3.112.1)  0 ms  0 ms  0 ms
+ *      2  lilac-dmc.Berkeley.EDU (128.32.216.1)  39 ms  19 ms  39 ms
+ *      3  lilac-dmc.Berkeley.EDU (128.32.216.1)  19 ms  39 ms  19 ms
+ *      4  ccngw-ner-cc.Berkeley.EDU (128.32.136.23)  39 ms  40 ms  19 ms
+ *      5  ccn-nerif35.Berkeley.EDU (128.32.168.35)  39 ms  39 ms  39 ms
+ *      6  csgw.Berkeley.EDU (128.32.133.254)  39 ms  59 ms  39 ms
+ *      7  * * *
+ *      8  * * *
+ *      9  * * *
+ *     10  * * *
+ *     11  * * *
+ *     12  * * *
+ *     13  rip.Berkeley.EDU (128.32.131.22)  59 ms !  39 ms !  39 ms !
+ *
+ * Notice that there are 12 &quot;gateways&quot; (13 is the final
+ * destination) and exactly the last half of them are &quot;missing&quot;.
+ * What's really happening is that rip (a Sun-3 running Sun OS3.5)
+ * is using the ttl from our arriving datagram as the ttl in its
+ * icmp reply.  So, the reply will time out on the return path
+ * (with no notice sent to anyone since icmp's aren't sent for
+ * icmp's) until we probe with a ttl that's at least twice the path
+ * length.  I.e., rip is really only 7 hops away.  A reply that
+ * returns with a ttl of 1 is a clue this problem exists.
+ * Traceroute prints a &quot;!&quot; after the time if the ttl is &lt;= 1.
+ * Since vendors ship a lot of obsolete (DEC's Ultrix, Sun 3.x) or
+ * non-standard (HPUX) software, expect to see this problem
+ * frequently and/or take care picking the target host of your
+ * probes.
+ *
+ * Other possible annotations after the time are !H, !N, !P (got a host,
+ * network or protocol unreachable, respectively), !S or !F (source
+ * route failed or fragmentation needed -- neither of these should
+ * ever occur and the associated gateway is busted if you see one).  If
+ * almost all the probes result in some kind of unreachable, traceroute
+ * will give up and exit.
+ *
+ * Notes
+ * -----
+ * This program must be run by root or be setuid.  (I suggest that
+ * you *don't* make it setuid -- casual use could result in a lot
+ * of unnecessary traffic on our poor, congested nets.)
+ *
+ * This program requires a kernel mod that does not appear in any
+ * system available from Berkeley:  A raw ip socket using proto
+ * IPPROTO_RAW must interpret the data sent as an ip datagram (as
+ * opposed to data to be wrapped in a ip datagram).  See the README
+ * file that came with the source to this program for a description
+ * of the mods I made to /sys/netinet/raw_ip.c.  Your mileage may
+ * vary.  But, again, ANY 4.x (x &lt; 4) BSD KERNEL WILL HAVE TO BE
+ * MODIFIED TO RUN THIS PROGRAM.
+ *
+ * The udp port usage may appear bizarre (well, ok, it is bizarre).
+ * The problem is that an icmp message only contains 8 bytes of
+ * data from the original datagram.  8 bytes is the size of a udp
+ * header so, if we want to associate replies with the original
+ * datagram, the necessary information must be encoded into the
+ * udp header (the ip id could be used but there's no way to
+ * interlock with the kernel's assignment of ip id's and, anyway,
+ * it would have taken a lot more kernel hacking to allow this
+ * code to set the ip id).  So, to allow two or more users to
+ * use traceroute simultaneously, we use this task's pid as the
+ * source port (the high bit is set to move the port number out
+ * of the &quot;likely&quot; range).  To keep track of which probe is being
+ * replied to (so times and/or hop counts don't get confused by a
+ * reply that was delayed in transit), we increment the destination
+ * port number before each probe.
+ *
+ * Don't use this as a coding example.  I was trying to find a
+ * routing problem and this code sort-of popped out after 48 hours
+ * without sleep.  I was amazed it ever compiled, much less ran.
+ *
+ * I stole the idea for this program from Steve Deering.  Since
+ * the first release, I've learned that had I attended the right
+ * IETF working group meetings, I also could have stolen it from Guy
+ * Almes or Matt Mathis.  I don't know (or care) who came up with
+ * the idea first.  I envy the originators' perspicacity and I'm
+ * glad they didn't keep the idea a secret.
+ *
+ * Tim Seaver, Ken Adelman and C. Philip Wood provided bug fixes and/or
+ * enhancements to the original distribution.
+ *
+ * I've hacked up a round-trip-route version of this that works by
+ * sending a loose-source-routed udp datagram through the destination
+ * back to yourself.  Unfortunately, SO many gateways botch source
+ * routing, the thing is almost worthless.  Maybe one day...
+ *
+ *  -- Van Jacobson (van@helios.ee.lbl.gov)
+ *     Tue Dec 20 03:50:13 PST 1988
+ */
+
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/sysctl.h&gt;
+#include &lt;sys/time.h&gt;
+#include &lt;sys/uio.h&gt;
+
+#include &lt;netinet/in.h&gt;
+#include &lt;netinet/ip.h&gt;
+#include &lt;netinet/ip6.h&gt;
+#include &lt;netinet/ip_icmp.h&gt;
+#include &lt;netinet/icmp6.h&gt;
+#include &lt;netinet/udp.h&gt;
+
+#include &lt;arpa/inet.h&gt;
+
+#include &lt;err.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;event.h&gt;
+#include &lt;limits.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;pwd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+
+#include &quot;traceroute.h&quot;
+
+int32_t	 sec_perturb;
+int32_t	 usec_perturb;
+
+u_char	 packet[512];
+u_char	*outpacket;	/* last inbound (icmp) packet */
+
+int	rcvsock;	/* receive (icmp) socket file descriptor */
+int	sndsock;	/* send (udp) socket file descriptor */
+
+int	rcvhlim;
+struct in6_pktinfo *rcvpktinfo;
+
+int	datalen;	/* How much data */
+
+char	*hostname;
+
+u_int16_t	srcport;
+
+void	usage(void);
+
+#define	TRACEROUTE_USER	&quot;_traceroute&quot;
+
+void	sock_read(int, short, void *);
+void	send_timer(int, short, void *);
+
+struct tr_conf		*conf;	/* configuration defaults */
+struct tr_result	*tr_results;
+struct sockaddr_in	 from4, to4;
+struct sockaddr_in6	 from6, to6;
+struct sockaddr		*from, *to;
+struct msghdr		 rcvmhdr;
+struct event		 timer_ev;
+int			 v6flag;
+int			*waiting_ttls;
+int			 last_tos = 0;
+
+int
+main(int argc, char *argv[])
+{
+	int	mib[4] = { CTL_NET, PF_INET, IPPROTO_IP, IPCTL_DEFTTL };
+	char	hbuf[NI_MAXHOST];
+
+	struct addrinfo		 hints, *res;
+	struct ip		*ip = NULL;
+	struct iovec		 rcviov[2];
+	static u_char		*rcvcmsgbuf;
+	struct passwd		*pw;
+	struct event		 sock_ev;
+	struct timeval		tv = {0, 0};
+
+	long		 l;
+	socklen_t	 len;
+	size_t		 size;
+
+	int		 ch;
+	int		 on = 1;
+	int		 error;
+	int		 headerlen;	/* How long packet's header is */
+	int		 i;
+	int		 packetlen;
+	int		 rcvcmsglen;
+	int		 rcvsock4, rcvsock6;
+	int		 sndsock4, sndsock6;
+	u_int32_t	 tmprnd;
+	int		 v4sock_errno, v6sock_errno;
+
+	char		*dest;
+	const char	*errstr;
+
+	uid_t		 ouid, uid;
+	gid_t		 gid;
+
+	/* Cannot pledge due to special setsockopt()s below */
+	if (unveil(&quot;/&quot;, &quot;r&quot;) == -1)
+		err(1, &quot;unveil /&quot;);
+	if (unveil(NULL, NULL) == -1)
+		err(1, &quot;unveil&quot;);
+
+	if ((conf = calloc(1, sizeof(*conf))) == NULL)
+		err(1,NULL);
+
+	conf-&gt;first_ttl = 1;
+	conf-&gt;proto = IPPROTO_UDP;
+	conf-&gt;max_ttl = IPDEFTTL;
+	conf-&gt;nprobes = 3;
+	conf-&gt;expected_responses = 2; /* icmp + DNS */
+
+	/* start udp dest port # for probe packets */
+	conf-&gt;port = 32768+666;
+
+	memset(&amp;rcvmhdr, 0, sizeof(rcvmhdr));
+	memset(&amp;rcviov, 0, sizeof(rcviov));
+
+	rcvsock4 = rcvsock6 = sndsock4 = sndsock6 = -1;
+	v4sock_errno = v6sock_errno = 0;
+
+	conf-&gt;waittime = 3 * 1000;
+
+	if ((rcvsock6 = socket(AF_INET6, SOCK_RAW, IPPROTO_ICMPV6)) == -1)
+		v6sock_errno = errno;
+	else if ((sndsock6 = socket(AF_INET6, SOCK_DGRAM, 0)) == -1)
+		v6sock_errno = errno;
+
+	if ((rcvsock4 = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP)) == -1)
+		v4sock_errno = errno;
+	else if ((sndsock4 = socket(AF_INET, SOCK_RAW, IPPROTO_RAW)) == -1)
+		v4sock_errno = errno;
+
+	/* revoke privs */
+	ouid = getuid();
+	if (ouid == 0 &amp;&amp; (pw = getpwnam(TRACEROUTE_USER)) != NULL) {
+		uid = pw-&gt;pw_uid;
+		gid = pw-&gt;pw_gid;
+	} else {
+		uid = getuid();
+		gid = getgid();
+	}
+	if (ouid &amp;&amp; (setgroups(1, &amp;gid) ||
+	    setresgid(gid, gid, gid) ||
+	    setresuid(uid, uid, uid)))
+		err(1, &quot;unable to revoke privs&quot;);
+
+	if (strcmp(&quot;traceroute6&quot;, __progname) == 0) {
+		v6flag = 1;
+		if (v6sock_errno != 0)
+			errc(5, v6sock_errno, rcvsock6 &lt; 0 ? &quot;socket(ICMPv6)&quot; :
+			    &quot;socket(SOCK_DGRAM)&quot;);
+		rcvsock = rcvsock6;
+		sndsock = sndsock6;
+		if (rcvsock4 &gt;= 0)
+			close(rcvsock4);
+		if (sndsock4 &gt;= 0)
+			close(sndsock4);
+	} else {
+		if (v4sock_errno != 0)
+			errc(5, v4sock_errno, rcvsock4 &lt; 0 ? &quot;icmp socket&quot; :
+			    &quot;raw socket&quot;);
+		rcvsock = rcvsock4;
+		sndsock = sndsock4;
+		if (rcvsock6 &gt;= 0)
+			close(rcvsock6);
+		if (sndsock6 &gt;= 0)
+			close(sndsock6);
+	}
+
+	if (v6flag) {
+		mib[1] = PF_INET6;
+		mib[2] = IPPROTO_IPV6;
+		mib[3] = IPV6CTL_DEFHLIM;
+		/* specify to tell receiving interface */
+		if (setsockopt(rcvsock, IPPROTO_IPV6, IPV6_RECVPKTINFO, &amp;on,
+		    sizeof(on)) == -1)
+			err(1, &quot;setsockopt(IPV6_RECVPKTINFO)&quot;);
+
+		/* specify to tell hoplimit field of received IP6 hdr */
+		if (setsockopt(rcvsock, IPPROTO_IPV6, IPV6_RECVHOPLIMIT, &amp;on,
+		    sizeof(on)) == -1)
+			err(1, &quot;setsockopt(IPV6_RECVHOPLIMIT)&quot;);
+	}
+
+	size = sizeof(i);
+	if (sysctl(mib, sizeof(mib)/sizeof(mib[0]), &amp;i, &amp;size, NULL, 0) == -1)
+		err(1, &quot;sysctl&quot;);
+	conf-&gt;max_ttl = i;
+
+	while ((ch = getopt(argc, argv, v6flag ? &quot;ADdf:Ilm:np:q:Ss:t:w:vV:&quot; :
+	    &quot;ADdf:g:Ilm:nP:p:q:Ss:t:V:vw:x&quot;)) != -1)
+		switch (ch) {
+		case 'A':
+			conf-&gt;Aflag = 1;
+			conf-&gt;expected_responses++;
+			break;
+		case 'd':
+			conf-&gt;dflag = 1;
+			break;
+		case 'D':
+			conf-&gt;dump = 1;
+			break;
+		case 'f':
+			conf-&gt;first_ttl = strtonum(optarg, 1, conf-&gt;max_ttl,
+			    &amp;errstr);
+			if (errstr)
+				errx(1, &quot;min ttl must be 1 to %u.&quot;,
+				    conf-&gt;max_ttl);
+			break;
+		case 'g':
+			if (conf-&gt;lsrr &gt;= MAX_LSRR)
+				errx(1, &quot;too many gateways; max %d&quot;, MAX_LSRR);
+			memset(&amp;hints, 0, sizeof(hints));
+			hints.ai_family = AF_INET;
+
+			if (getaddrinfo(optarg, NULL, &amp;hints, &amp;res) != 0)
+				errx(1, &quot;unknown host %s&quot;, optarg);
+
+			conf-&gt;gateway[conf-&gt;lsrr] =
+			    ((struct sockaddr_in *)res-&gt;ai_addr)-&gt;sin_addr;
+			freeaddrinfo(res);
+
+			if (++conf-&gt;lsrr == 1)
+				conf-&gt;lsrrlen = 4;
+			conf-&gt;lsrrlen += 4;
+			break;
+		case 'I':
+			if (conf-&gt;protoset)
+				errx(1, &quot;protocol already set with -P&quot;);
+			conf-&gt;protoset = 1;
+			conf-&gt;proto = IPPROTO_ICMP;
+			break;
+		case 'l':
+			conf-&gt;ttl_flag = 1;
+			break;
+		case 'm':
+			conf-&gt;max_ttl = strtonum(optarg, conf-&gt;first_ttl,
+			    MAXTTL, &amp;errstr);
+			if (errstr)
+				errx(1, &quot;max ttl must be %u to %u.&quot;,
+				    conf-&gt;first_ttl, MAXTTL);
+			break;
+		case 'n':
+			conf-&gt;nflag = 1;
+			conf-&gt;expected_responses--;
+			break;
+		case 'p':
+			conf-&gt;port = strtonum(optarg, 1, 65535, &amp;errstr);
+			if (errstr)
+				errx(1, &quot;port must be &gt;0, &lt;65536.&quot;);
+			break;
+		case 'P':
+			if (conf-&gt;protoset)
+				errx(1, &quot;protocol already set with -I&quot;);
+			conf-&gt;protoset = 1;
+			conf-&gt;proto = strtonum(optarg, 1, IPPROTO_MAX - 1,
+			    &amp;errstr);
+			if (errstr) {
+				struct protoent *pent;
+
+				pent = getprotobyname(optarg);
+				if (pent)
+					conf-&gt;proto = pent-&gt;p_proto;
+				else
+					errx(1, &quot;proto must be &gt;=1, or a &quot;
+					    &quot;name.&quot;);
+			}
+			break;
+		case 'q':
+			conf-&gt;nprobes = strtonum(optarg, 1, 1024, &amp;errstr);
+			if (errstr)
+				errx(1, &quot;nprobes must be &gt;0.&quot;);
+			break;
+		case 's':
+			/*
+			 * set the ip source address of the outbound
+			 * probe (e.g., on a multi-homed host).
+			 */
+			conf-&gt;source = optarg;
+			break;
+		case 'S':
+			conf-&gt;sump = 1;
+			break;
+		case 't':
+			if (!map_tos(optarg, &amp;conf-&gt;tos)) {
+				if (strlen(optarg) &gt; 1 &amp;&amp; optarg[0] == '0' &amp;&amp;
+				    optarg[1] == 'x') {
+					char *ep;
+					errno = 0;
+					ep = NULL;
+					l = strtol(optarg, &amp;ep, 16);
+					if (errno || !*optarg || *ep ||
+					    l &lt; 0 || l &gt; 255)
+						errx(1, &quot;illegal tos value %s&quot;,
+						    optarg);
+					conf-&gt;tos = (int)l;
+				} else {
+					conf-&gt;tos = strtonum(optarg, 0, 255,
+					    &amp;errstr);
+					if (errstr)
+						errx(1, &quot;illegal tos value %s&quot;,
+						    optarg);
+				}
+			}
+			conf-&gt;tflag = 1;
+			last_tos = conf-&gt;tos;
+			break;
+		case 'v':
+			conf-&gt;verbose = 1;
+			break;
+		case 'V':
+			conf-&gt;rtableid = (unsigned int)strtonum(optarg, 0,
+			    RT_TABLEID_MAX, &amp;errstr);
+			if (errstr)
+				errx(1, &quot;rtable value is %s: %s&quot;,
+				    errstr, optarg);
+			if (setsockopt(sndsock, SOL_SOCKET, SO_RTABLE,
+			    &amp;conf-&gt;rtableid, sizeof(conf-&gt;rtableid)) == -1)
+				err(1, &quot;setsockopt SO_RTABLE&quot;);
+			if (setsockopt(rcvsock, SOL_SOCKET, SO_RTABLE,
+			    &amp;conf-&gt;rtableid, sizeof(conf-&gt;rtableid)) == -1)
+				err(1, &quot;setsockopt SO_RTABLE&quot;);
+			break;
+		case 'w':
+			conf-&gt;waittime = strtonum(optarg, 1, INT_MAX, &amp;errstr);
+			if (errstr)
+				errx(1, &quot;wait must be &gt;=1 sec.&quot;);
+			conf-&gt;waittime *= 1000;
+			break;
+		case 'x':
+			conf-&gt;xflag = 1;
+			break;
+		default:
+			usage();
+		}
+
+	if (ouid == 0 &amp;&amp; (setgroups(1, &amp;gid) ||
+	    setresgid(gid, gid, gid) ||
+	    setresuid(uid, uid, uid)))
+		err(1, &quot;unable to revoke privs&quot;);
+
+	argc -= optind;
+	argv += optind;
+
+	if (argc &lt; 1 || argc &gt; 2)
+		usage();
+
+	tr_results = calloc(sizeof(struct tr_result), conf-&gt;max_ttl *
+	    conf-&gt;nprobes);
+	if (tr_results == NULL)
+		err(1, NULL);
+
+	waiting_ttls = calloc(sizeof(int), conf-&gt;max_ttl);
+	for (i = 0; i &lt; conf-&gt;max_ttl; i++)
+		waiting_ttls[i] = conf-&gt;nprobes * conf-&gt;expected_responses;
+
+	setvbuf(stdout, NULL, _IOLBF, 0);
+
+	conf-&gt;ident = (getpid() &amp; 0xffff) | 0x8000;
+	tmprnd = arc4random();
+	sec_perturb = (tmprnd &amp; 0x80000000) ? -(tmprnd &amp; 0x7ff) :
+	    (tmprnd &amp; 0x7ff);
+	usec_perturb = arc4random();
+
+	memset(&amp;to4, 0, sizeof(to4));
+	memset(&amp;to6, 0, sizeof(to6));
+
+	dest = *argv;
+
+	memset(&amp;hints, 0, sizeof(hints));
+	hints.ai_family = v6flag ? PF_INET6 : PF_INET;
+	hints.ai_socktype = SOCK_RAW;
+	hints.ai_protocol = 0;
+	hints.ai_flags = AI_CANONNAME;
+	if ((error = getaddrinfo(dest, NULL, &amp;hints, &amp;res)))
+		errx(1, &quot;%s&quot;, gai_strerror(error));
+
+	switch (res-&gt;ai_family) {
+	case AF_INET:
+		to = (struct sockaddr *)&amp;to4;
+		from = (struct sockaddr *)&amp;from4;
+		break;
+	case AF_INET6:
+		to = (struct sockaddr *)&amp;to6;
+		from = (struct sockaddr *)&amp;from6;
+		break;
+	default:
+		errx(1, &quot;unsupported AF: %d&quot;, res-&gt;ai_family);
+		break;
+	}
+
+	memcpy(to, res-&gt;ai_addr, res-&gt;ai_addrlen);
+
+	if (!hostname) {
+		hostname = res-&gt;ai_canonname ? strdup(res-&gt;ai_canonname) : dest;
+		if (!hostname)
+			errx(1, &quot;malloc&quot;);
+	}
+
+	if (res-&gt;ai_next) {
+		if (getnameinfo(res-&gt;ai_addr, res-&gt;ai_addrlen, hbuf,
+		    sizeof(hbuf), NULL, 0, NI_NUMERICHOST) != 0)
+			strlcpy(hbuf, &quot;?&quot;, sizeof(hbuf));
+		warnx(&quot;Warning: %s has multiple &quot;
+		    &quot;addresses; using %s&quot;, hostname, hbuf);
+	}
+	freeaddrinfo(res);
+
+	if (*++argv) {
+		datalen = strtonum(*argv, 0, INT_MAX, &amp;errstr);
+		if (errstr)
+			errx(1, &quot;datalen out of range&quot;);
+	}
+
+	switch (to-&gt;sa_family) {
+	case AF_INET:
+		switch (conf-&gt;proto) {
+		case IPPROTO_UDP:
+			headerlen = (sizeof(struct ip) + conf-&gt;lsrrlen +
+			    sizeof(struct udphdr) + sizeof(struct packetdata));
+			break;
+		case IPPROTO_ICMP:
+			headerlen = (sizeof(struct ip) + conf-&gt;lsrrlen +
+			    sizeof(struct icmp) + sizeof(struct packetdata));
+			break;
+		default:
+			headerlen = (sizeof(struct ip) + conf-&gt;lsrrlen +
+			    sizeof(struct packetdata));
+		}
+
+		if (datalen &lt; 0 || datalen &gt; IP_MAXPACKET - headerlen)
+			errx(1, &quot;packet size must be 0 to %d.&quot;,
+			    IP_MAXPACKET - headerlen);
+
+		datalen += headerlen;
+
+		if ((outpacket = calloc(1, datalen)) == NULL)
+			err(1, &quot;calloc&quot;);
+
+		rcviov[0].iov_base = (caddr_t)packet;
+		rcviov[0].iov_len = sizeof(packet);
+		rcvmhdr.msg_name = (caddr_t)&amp;from4;
+		rcvmhdr.msg_namelen = sizeof(from4);
+		rcvmhdr.msg_iov = rcviov;
+		rcvmhdr.msg_iovlen = 1;
+		rcvmhdr.msg_control = NULL;
+		rcvmhdr.msg_controllen = 0;
+
+		ip = (struct ip *)outpacket;
+		if (conf-&gt;lsrr != 0) {
+			u_char *p = (u_char *)(ip + 1);
+
+			*p++ = IPOPT_NOP;
+			*p++ = IPOPT_LSRR;
+			*p++ = conf-&gt;lsrrlen - 1;
+			*p++ = IPOPT_MINOFF;
+			conf-&gt;gateway[conf-&gt;lsrr] = to4.sin_addr;
+			for (i = 1; i &lt;= conf-&gt;lsrr; i++) {
+				memcpy(p, &amp;conf-&gt;gateway[i],
+				    sizeof(struct in_addr));
+				p += sizeof(struct in_addr);
+			}
+			ip-&gt;ip_dst = conf-&gt;gateway[0];
+		} else
+			ip-&gt;ip_dst = to4.sin_addr;
+		ip-&gt;ip_off = htons(0);
+		ip-&gt;ip_hl = (sizeof(struct ip) + conf-&gt;lsrrlen) &gt;&gt; 2;
+		ip-&gt;ip_p = conf-&gt;proto;
+		ip-&gt;ip_v = IPVERSION;
+		ip-&gt;ip_tos = conf-&gt;tos;
+
+		if (setsockopt(sndsock, IPPROTO_IP, IP_HDRINCL,
+		    &amp;on, sizeof(on)) == -1)
+			err(6, &quot;IP_HDRINCL&quot;);
+
+		if (conf-&gt;source) {
+			memset(&amp;from4, 0, sizeof(from4));
+			from4.sin_family = AF_INET;
+			if (inet_pton(AF_INET, conf-&gt;source, &amp;from4.sin_addr)
+			    != 1)
+				errx(1, &quot;unknown host %s&quot;, conf-&gt;source);
+			ip-&gt;ip_src = from4.sin_addr;
+			if (ouid != 0 &amp;&amp;
+			    (ntohl(from4.sin_addr.s_addr) &amp; 0xff000000U) ==
+			    0x7f000000U &amp;&amp; (ntohl(to4.sin_addr.s_addr) &amp;
+			    0xff000000U) != 0x7f000000U)
+				errx(1, &quot;source is on 127/8, destination is&quot;
+				    &quot; not&quot;);
+			if (ouid &amp;&amp; bind(sndsock, (struct sockaddr *)&amp;from4,
+			    sizeof(from4)) == -1)
+				err(1, &quot;bind&quot;);
+		}
+		packetlen = datalen;
+		break;
+	case AF_INET6:
+		/*
+		 * packetlen is the size of the complete IP packet sent and
+		 * reported in the first line of output.
+		 * For IPv4 this is equal to datalen since we are constructing
+		 * a raw packet.
+		 * For IPv6 we need to always add the size of the IP6 header
+		 * and for UDP packets the size of the UDP header since they
+		 * are prepended to the packet by the kernel
+		 */
+		packetlen = sizeof(struct ip6_hdr);
+		switch (conf-&gt;proto) {
+		case IPPROTO_UDP:
+			headerlen = sizeof(struct packetdata);
+			packetlen += sizeof(struct udphdr);
+			break;
+		case IPPROTO_ICMP:
+			headerlen = sizeof(struct icmp6_hdr) +
+			    sizeof(struct packetdata);
+			break;
+		default:
+			errx(1, &quot;Unsupported proto: %hhu&quot;, conf-&gt;proto);
+			break;
+		}
+
+		if (datalen &lt; 0 || datalen &gt; IP_MAXPACKET - headerlen)
+			errx(1, &quot;packet size must be 0 to %d.&quot;,
+			    IP_MAXPACKET - headerlen);
+
+		datalen += headerlen;
+		packetlen += datalen;
+
+		if ((outpacket = calloc(1, datalen)) == NULL)
+			err(1, &quot;calloc&quot;);
+
+		/* initialize msghdr for receiving packets */
+		rcviov[0].iov_base = (caddr_t)packet;
+		rcviov[0].iov_len = sizeof(packet);
+		rcvmhdr.msg_name = (caddr_t)&amp;from6;
+		rcvmhdr.msg_namelen = sizeof(from6);
+		rcvmhdr.msg_iov = rcviov;
+		rcvmhdr.msg_iovlen = 1;
+		rcvcmsglen = CMSG_SPACE(sizeof(struct in6_pktinfo)) +
+		    CMSG_SPACE(sizeof(int));
+
+		if ((rcvcmsgbuf = malloc(rcvcmsglen)) == NULL)
+			errx(1, &quot;malloc&quot;);
+		rcvmhdr.msg_control = (caddr_t) rcvcmsgbuf;
+		rcvmhdr.msg_controllen = rcvcmsglen;
+
+		/*
+		 * Send UDP or ICMP
+		 */
+		if (conf-&gt;proto == IPPROTO_ICMP) {
+			close(sndsock);
+			sndsock = rcvsock;
+		}
+
+		/*
+		 * Source selection
+		 */
+		memset(&amp;from6, 0, sizeof(from6));
+		if (conf-&gt;source) {
+			memset(&amp;hints, 0, sizeof(hints));
+			hints.ai_family = AF_INET6;
+			hints.ai_socktype = SOCK_DGRAM;	/*dummy*/
+			hints.ai_flags = AI_NUMERICHOST;
+			if ((error = getaddrinfo(conf-&gt;source, &quot;0&quot;, &amp;hints,
+			    &amp;res)))
+				errx(1, &quot;%s: %s&quot;, conf-&gt;source,
+				    gai_strerror(error));
+			memcpy(&amp;from6, res-&gt;ai_addr, res-&gt;ai_addrlen);
+			freeaddrinfo(res);
+		} else {
+			struct sockaddr_in6 nxt;
+			int dummy;
+
+			nxt = to6;
+			nxt.sin6_port = htons(DUMMY_PORT);
+			if ((dummy = socket(AF_INET6, SOCK_DGRAM, 0)) == -1)
+				err(1, &quot;socket&quot;);
+			if (conf-&gt;rtableid &gt; 0 &amp;&amp;
+			    setsockopt(dummy, SOL_SOCKET, SO_RTABLE,
+			    &amp;conf-&gt;rtableid, sizeof(conf-&gt;rtableid)) == -1)
+				err(1, &quot;setsockopt(SO_RTABLE)&quot;);
+			if (connect(dummy, (struct sockaddr *)&amp;nxt,
+			    nxt.sin6_len) == -1)
+				err(1, &quot;connect&quot;);
+			len = sizeof(from6);
+			if (getsockname(dummy, (struct sockaddr *)&amp;from6,
+			    &amp;len) == -1)
+				err(1, &quot;getsockname&quot;);
+			close(dummy);
+		}
+
+		from6.sin6_port = htons(0);
+		if (bind(sndsock, (struct sockaddr *)&amp;from6, from6.sin6_len) == -1)
+			err(1, &quot;bind sndsock&quot;);
+
+		if (conf-&gt;tflag) {
+			if (setsockopt(sndsock, IPPROTO_IPV6, IPV6_TCLASS,
+			    &amp;conf-&gt;tos, sizeof(conf-&gt;tos)) == -1)
+				err(6, &quot;IPV6_TCLASS&quot;);
+		}
+
+		len = sizeof(from6);
+		if (getsockname(sndsock, (struct sockaddr *)&amp;from6, &amp;len) == -1)
+			err(1, &quot;getsockname&quot;);
+		srcport = ntohs(from6.sin6_port);
+		break;
+	default:
+		errx(1, &quot;unsupported AF: %d&quot;, to-&gt;sa_family);
+		break;
+	}
+
+	if (conf-&gt;dflag) {
+		(void) setsockopt(rcvsock, SOL_SOCKET, SO_DEBUG,
+		    &amp;on, sizeof(on));
+		(void) setsockopt(sndsock, SOL_SOCKET, SO_DEBUG,
+		    &amp;on, sizeof(on));
+	}
+
+	if (setsockopt(sndsock, SOL_SOCKET, SO_SNDBUF,
+	    &amp;datalen, sizeof(datalen)) == -1)
+		err(6, &quot;SO_SNDBUF&quot;);
+
+	if (conf-&gt;nflag &amp;&amp; !conf-&gt;Aflag) {
+		if (pledge(&quot;stdio inet&quot;, NULL) == -1)
+			err(1, &quot;pledge&quot;);
+	} else {
+		if (pledge(&quot;stdio inet dns&quot;, NULL) == -1)
+			err(1, &quot;pledge&quot;);
+	}
+
+	if (getnameinfo(to, to-&gt;sa_len, hbuf,
+	    sizeof(hbuf), NULL, 0, NI_NUMERICHOST))
+		strlcpy(hbuf, &quot;(invalid)&quot;, sizeof(hbuf));
+	fprintf(stderr, &quot;%s to %s (%s)&quot;, __progname, hostname, hbuf);
+	if (conf-&gt;source)
+		fprintf(stderr, &quot; from %s&quot;, conf-&gt;source);
+	fprintf(stderr, &quot;, %u hops max, %d byte packets\n&quot;, conf-&gt;max_ttl,
+	    packetlen);
+	(void) fflush(stderr);
+
+	if (conf-&gt;first_ttl &gt; 1)
+		printf(&quot;Skipping %u intermediate hops\n&quot;, conf-&gt;first_ttl - 1);
+
+	event_init();
+
+	event_set(&amp;sock_ev, rcvsock, EV_READ | EV_PERSIST, sock_read, NULL);
+	event_add(&amp;sock_ev, NULL);
+	evtimer_set(&amp;timer_ev, send_timer, &amp;timer_ev);
+	evtimer_add(&amp;timer_ev, &amp;tv);
+	event_dispatch();
+}
+
+void
+usage(void)
+{
+	if (v6flag) {
+		fprintf(stderr, &quot;usage: %s &quot;
+		    &quot;[-ADdIlnSv] [-f first_hop] [-m max_hop] [-p port]\n&quot;
+		    &quot;\t[-q nqueries] [-s sourceaddr] [-t toskeyword] [-V rtable] &quot;
+		    &quot;[-w waittime]\n\thost [datalen]\n&quot;, __progname);
+	} else {
+		fprintf(stderr,
+		    &quot;usage: %s [-ADdIlnSvx] [-f first_ttl] [-g gateway_addr] &quot;
+		    &quot;[-m max_ttl]\n&quot;
+		    &quot;\t[-P proto] [-p port] [-q nqueries] [-s sourceaddr]\n&quot;
+		    &quot;\t[-t toskeyword] &quot;
+		    &quot;[-V rtable] [-w waittime] host [datalen]\n&quot;,
+		    __progname);
+	}
+	exit(1);
+}
+
+void
+sock_read(int fd, short events, void *arg)
+{
+	struct ip	*ip;
+	struct timeval	 t2, tv = {0, 0};
+	int		 pkg_ok, cc, recv_seq, recv_seq_row;
+	char		 hbuf[NI_MAXHOST];
+
+	cc = recvmsg(rcvsock, &amp;rcvmhdr, 0);
+
+	if (cc == 0)
+		return;
+
+	evtimer_add(&amp;timer_ev, &amp;tv);
+
+	gettime(&amp;t2);
+
+	pkg_ok = packet_ok(conf, to-&gt;sa_family, &amp;rcvmhdr, cc, &amp;recv_seq);
+
+	/* Skip wrong packet */
+	if (pkg_ok == 0)
+		goto out;
+
+	/* skip corrupt sequence number */
+	if (recv_seq &lt; 0 || recv_seq &gt;= conf-&gt;max_ttl * conf-&gt;nprobes)
+		goto out;
+
+	recv_seq_row = recv_seq / conf-&gt;nprobes;
+
+	/* skipping dup */
+	if (tr_results[recv_seq].dup++)
+		goto out;
+
+	switch (to-&gt;sa_family) {
+	case AF_INET:
+		ip = (struct ip *)packet;
+
+		print(conf, from, cc - (ip-&gt;ip_hl &lt;&lt; 2), inet_ntop(AF_INET,
+		    &amp;ip-&gt;ip_dst, hbuf, sizeof(hbuf)), &amp;tr_results[recv_seq]);
+		break;
+	case AF_INET6:
+		print(conf, from, cc, rcvpktinfo ? inet_ntop(AF_INET6,
+		    &amp;rcvpktinfo-&gt;ipi6_addr, hbuf, sizeof(hbuf)) : &quot;?&quot;,
+		    &amp;tr_results[recv_seq]);
+		break;
+	default:
+		errx(1, &quot;unsupported AF: %d&quot;, to-&gt;sa_family);
+	}
+
+	tr_results[recv_seq].t2 = t2;
+	tr_results[recv_seq].resp_ttl = v6flag ? rcvhlim : ip-&gt;ip_ttl;
+
+	waiting_ttls[recv_seq_row]--;
+
+	if (pkg_ok == -2) {
+		if ((v6flag &amp;&amp; rcvhlim &lt;= 1) ||
+		    (!v6flag &amp;&amp; ip-&gt;ip_ttl &lt;=1))
+			snprintf(tr_results[recv_seq].icmp_code,
+			    sizeof(tr_results[recv_seq].icmp_code), &quot;%s&quot;, &quot; !&quot;);
+		tr_results[recv_seq].got_there++;
+	} else {
+		if (to-&gt;sa_family == AF_INET &amp;&amp; conf-&gt;tflag)
+			check_tos(ip, &amp;last_tos, &amp;tr_results[recv_seq]);
+		if (pkg_ok != -1) {
+			icmp_code(to-&gt;sa_family, pkg_ok - 1,
+			    &amp;tr_results[recv_seq].got_there,
+			    &amp;tr_results[recv_seq].unreachable,
+			    &amp;tr_results[recv_seq]);
+		}
+	}
+
+	if (cc &amp;&amp; ((recv_seq + 1) % conf-&gt;nprobes) == 0 &amp;&amp;
+	    (conf-&gt;xflag || conf-&gt;verbose))
+		print_exthdr(packet, cc, &amp;tr_results[recv_seq]);
+ out:
+	catchup_result_rows(tr_results, conf);
+}
+
+void
+send_timer(int fd, short events, void *arg)
+{
+	static int	 seq;
+	struct timeval	 tv = {0, 30000}, t1;
+	struct event	*ev = arg;
+	int		 ttl;
+
+	evtimer_add(ev, &amp;tv);
+
+	ttl = conf-&gt;first_ttl + seq / conf-&gt;nprobes;
+	if (ttl &lt;= conf-&gt;max_ttl) {
+		gettime(&amp;t1);
+		tr_results[seq].seq = seq;
+		tr_results[seq].row = seq / conf-&gt;nprobes;
+		tr_results[seq].ttl = ttl;
+		tr_results[seq].t1 = t1;
+		send_probe(conf, seq, ttl, to);
+		seq++;
+	}
+
+	catchup_result_rows(tr_results, conf);
+
+}
+
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="52-icmp"><a class="header" href="#52-icmp">5.2 ICMP</a></h1>
 <p>ICMP (Internet Control Message Protocol) is a network protocol used for sending control messages and error reports between network devices. It operates at the network layer (Layer 3) of the OSI model and is an integral part of the IP protocol suite.</p>

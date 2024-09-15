@@ -3,7 +3,8 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>3. async and defer - All about Web Performance</title>
+        <title>Page not found - All about Linux</title>
+        <base href="/">
 
 
         <!-- Custom HTML head -->
@@ -88,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="web-perf.html"><strong aria-hidden="true">1.</strong> 1. What is Web Performance</a></li><li class="chapter-item expanded "><a href="cert.html"><strong aria-hidden="true">2.</strong> 2. What is inside a Server's Cert</a></li><li class="chapter-item expanded "><a href="async-defer.html" class="active"><strong aria-hidden="true">3.</strong> 3. async and defer</a></li><li class="chapter-item expanded "><a href="performance-api.html"><strong aria-hidden="true">4.</strong> 4. Performance API</a></li><li class="chapter-item expanded "><a href="networking/traceroute.html"><strong aria-hidden="true">5.</strong> 5. Traceroute</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking/mctr.html"><strong aria-hidden="true">5.1.</strong> mctr</a></li><li class="chapter-item expanded "><a href="networking/bsd-traceroute.html"><strong aria-hidden="true">5.2.</strong> bsd traceroute</a></li><li class="chapter-item expanded "><a href="networking/icmp.html"><strong aria-hidden="true">5.3.</strong> ICMP</a></li><li class="chapter-item expanded "><a href="networking/curl.html"><strong aria-hidden="true">5.4.</strong> Curl</a></li></ol></li><li class="chapter-item expanded "><a href="uiux/ui.html"><strong aria-hidden="true">6.</strong> 6. UI/UX</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="uiux/best-practices.html"><strong aria-hidden="true">6.1.</strong> Best Practices</a></li><li class="chapter-item expanded "><a href="uiux/accessibility.html"><strong aria-hidden="true">6.2.</strong> Accessibility</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="kernel.html"><strong aria-hidden="true">1.</strong> Kernel</a></li><li class="chapter-item expanded "><a href="filesystems.html"><strong aria-hidden="true">2.</strong> File Systems</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="zfs.html"><strong aria-hidden="true">2.1.</strong> ZFS</a></li><li class="chapter-item expanded "><a href="btrfs.html"><strong aria-hidden="true">2.2.</strong> Btrfs - B-tree File System</a></li></ol></li><li class="chapter-item expanded "><a href="deviceDriver.html"><strong aria-hidden="true">3.</strong> Device Driver</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -139,7 +140,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">All about Web Performance</h1>
+                    <h1 class="menu-title">All about Linux</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -171,84 +172,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="3-async-and-defer"><a class="header" href="#3-async-and-defer">3. async and defer</a></h1>
-<p>Using <code>async</code> in a <code>&lt;script&gt;</code> tag in HTML is a way to control how the browser loads and executes JavaScript files. It is particularly useful for optimizing the loading performance of a web page. Here's what <code>async</code> does and how it differs from other script loading techniques:</p>
-<h3 id="purpose-of-async-in-script-tag"><a class="header" href="#purpose-of-async-in-script-tag"><strong>Purpose of <code>async</code> in <code>&lt;script&gt;</code> Tag</strong></a></h3>
-<ul>
-<li>The <code>async</code> attribute allows the browser to load the script file in the background while it continues to parse the HTML document. Once the script is fully loaded, it is executed immediately, without waiting for the entire HTML to be parsed.</li>
-</ul>
-<h3 id="how-async-works"><a class="header" href="#how-async-works"><strong>How <code>async</code> Works</strong></a></h3>
-<ul>
-<li>When a script is marked with <code>async</code>, the browser starts downloading the script as soon as it encounters the <code>&lt;script&gt;</code> tag.</li>
-<li>The HTML parsing continues while the script is being downloaded.</li>
-<li>As soon as the script is fully downloaded, the HTML parsing is paused, and the script is executed immediately.</li>
-<li>Once the script execution is complete, the browser resumes parsing the HTML.</li>
-</ul>
-<h3 id="when-to-use-async"><a class="header" href="#when-to-use-async"><strong>When to Use <code>async</code></strong></a></h3>
-<ul>
-<li>
-<p><strong>Independent Scripts</strong>: Use <code>async</code> for scripts that don't rely on other scripts or DOM elements that come after the script tag. For example, analytics scripts or tracking codes often use <code>async</code> because they don’t depend on the rest of the page’s content.</p>
-</li>
-<li>
-<p><strong>Performance Optimization</strong>: <code>async</code> can be used to speed up page load times by allowing scripts to load in parallel with the HTML parsing.</p>
-</li>
-</ul>
-<h3 id="syntax"><a class="header" href="#syntax"><strong>Syntax</strong></a></h3>
-<pre><code class="language-html">&lt;script src=&quot;script.js&quot; async&gt;&lt;/script&gt;
-</code></pre>
-<h3 id="comparison-with-other-loading-strategies"><a class="header" href="#comparison-with-other-loading-strategies"><strong>Comparison with Other Loading Strategies</strong></a></h3>
-<ul>
-<li>
-<p><strong>Without <code>async</code> or <code>defer</code> (Default Behavior)</strong>:</p>
-<ul>
-<li>The browser stops HTML parsing to download the script and then executes it before continuing to parse the HTML. This can block the page from rendering quickly.</li>
-</ul>
-</li>
-<li>
-<p><strong>With <code>defer</code></strong>:</p>
-<ul>
-<li>Similar to <code>async</code>, the script is downloaded in parallel with HTML parsing. However, with <code>defer</code>, the script execution is deferred until after the HTML has been fully parsed. This ensures that the script does not block the rendering of the page, making it more predictable, especially for scripts that rely on the DOM.</li>
-</ul>
-</li>
-<li>
-<p><strong>With <code>async</code></strong>:</p>
-<ul>
-<li>The script is also downloaded in parallel with HTML parsing but is executed as soon as it’s ready, potentially before the HTML is fully parsed. This can lead to issues if the script relies on elements that haven’t been parsed yet.</li>
-</ul>
-</li>
-</ul>
-<h3 id="use-cases"><a class="header" href="#use-cases"><strong>Use Cases</strong></a></h3>
-<ul>
-<li><strong><code>async</code></strong> is ideal for scripts like analytics or advertisements that don’t depend on other content and where you want to minimize the impact on page load time.</li>
-<li><strong><code>defer</code></strong> is better for scripts that should run after the document has been fully parsed, like those manipulating DOM elements that appear later in the HTML.</li>
-</ul>
-<h3 id="example-usage"><a class="header" href="#example-usage"><strong>Example Usage</strong></a></h3>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Async Script Example&lt;/title&gt;
-    &lt;script src=&quot;analytics.js&quot; async&gt;&lt;/script&gt; &lt;!-- Independent script that runs as soon as it's ready --&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Async Script Demo&lt;/h1&gt;
-    &lt;p&gt;This content loads while the script is being fetched asynchronously.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>In this example, <code>analytics.js</code> will load in the background, allowing the rest of the page to be parsed and displayed without waiting for the script to finish downloading. Once <code>analytics.js</code> is ready, it will be executed immediately.</p>
+                        <h1 id="document-not-found-404"><a class="header" href="#document-not-found-404">Document not found (404)</a></h1>
+<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="cert.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
 
-                            <a rel="next prefetch" href="performance-api.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -256,13 +187,7 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="cert.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
 
-                    <a rel="next prefetch" href="performance-api.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
