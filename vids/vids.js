@@ -8,6 +8,7 @@ const data = {
            { title: "How Does Agentforce work?", youtubeId: "5GFGTuCONJc" }, 
            { title: "Agentforce - Intro", youtubeId: "d72HmDT8YaU" }, 
            { title: "AI Agents", youtubeId: "e7KwGR-vG04" }, 
+           { title: "Nvidia’s Jensen Huang Talk AI Agents", youtubeId: "kfe3ajUYSdc" }, 
  
         ],
       },

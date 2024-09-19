@@ -5,6 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Help for Chrome Extension Chatty for LLMs</title>
+  <link
+  rel="icon"
+  type="image/x-icon"
+  href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico"
+/>
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
 </head>
 
@@ -20,6 +26,7 @@
     <div class="ml-auto hidden md:flex">
        <a  class="bg-red-500 hover:bg-yellow-600 text-white py-2 px-4 rounded mb-6"  href="https://chromewebstore.google.com/detail/mnecjkcdjdkgiklbmeodicgdfladfdan">Install</a>
     </div>
+
     
   </nav>
 
@@ -28,19 +35,28 @@
     <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
       <h1 class="text-3xl font-bold mb-4">About  Chatty for LLMs</h1>
       <p class="text-lg mb-4">
-        Welcome to our  Chatty for LLMs! This tool is designed to help to chat with your LLMs running locally using Ollama
+        Welcome to our  Chatty for LLMs! This Chrome Extension is designed to help to chat with your LLMs running locally using Ollama and also support 
+        <a class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-1 rounded "  href='#rag'>RAG (Retrieval-Augmented Generation)</a>
      </p>
      <div class="ml-auto hidden md:flex">
-      <a  class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mb-6"  href="https://chromewebstore.google.com/detail/mnecjkcdjdkgiklbmeodicgdfladfdan">Install</a>
+      <a  class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded mb-6"  href="https://chromewebstore.google.com/detail/mnecjkcdjdkgiklbmeodicgdfladfdan">Install</a>
      </div>
      <hr/>
-      
 
-      <h2 class="text-2xl font-semibold mb-2">Features</h2>
+     <h2 class="text-2xl font-semibold mb-2">Demo of using this Chrome Extension</h2>
+
+     <iframe width="800" height="400" src="https://www.youtube.com/embed/bnzLoIHBnu0?si=gT7tZoAoN32CUr3T" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      
+      
+      <h2 class="text-2xl py-10 font-semibold mb-2">Features</h2>
       <ul class="list-disc pl-5 mb-4">
         <li class="mb-2">🛠️You can select a LLM running on your local machine via Ollama</li>
-        <li class="mb-2">📈 You can run RAG ( Retrieval-Augmented Generation) on HTML page in your active tab. 
-            This will use your selected LLM for RAG   </li>
+        <li class="mb-2">📈 You can run RAG (Retrieval-Augmented Generation) on HTML page in your active tab. 
+            This will use your selected LLM for RAG
+          
+            <img class="border-6 border-gray-300 rounded-lg shadow-lg" src="images/chattyLLMs-RAG1.png" alt="">          </li>
+
+
 
       </ul>
 
@@ -73,13 +89,13 @@
         
         <li class="mb-2">🔹 Step 3: Now you are all set to Ask LLM
 
-           <img src="images/chattyLLMs-00.png" alt="Ask LLM" >
-           <img src="images/chattyLLMs-01.png" alt="Ask LLM">
-
+           <img src="images/chattyLLMS2.png" alt="Ask LLM" >
 
         </li>
         <li class="mb-2">🔹 Step 4: To Run RAG you need to run a local server: Details are 
-            <a href="https://github.com/mohan-chinnappan-n5/chattyLLMServer" target="_blank">here</a>
+            <a href="https://github.com/mohan-chinnappan-n5/chattyLLMServer" target="_blank">HERE</a>
+
+            
         </li>
         <li class="mb-2">🔹 Step 5: Once RAG local server is running, you ask questions about html page in the active tab
             <img src="images/chattyLLMs-1.png" alt="Ask LLM RAG">
@@ -88,6 +104,52 @@
       </ol>
 
     </div>
+
+    <a name="rag"></a>
+
+        <!-- Container -->
+        <div class="max-w-4xl mx-auto p-6">
+
+          <!-- Header -->
+          <header class="mb-8">
+              <h1 class="text-4xl font-bold text-center text-blue-600"> About RAG</h1>
+          </header>
+  
+          <!-- Content Section -->
+          <section class="bg-white shadow-md rounded-lg p-6 mb-8">
+              <h2 class="text-2xl font-semibold mb-4 text-gray-700">What is RAG?</h2>
+              <p class="mb-4 leading-relaxed">
+                  <strong>Retrieval-Augmented Generation (RAG)</strong> is a technique in natural language processing (NLP) that combines the strengths of information retrieval and text generation models. It aims to improve the accuracy and relevance of generated responses or content by grounding the generation process in retrieved data.
+              </p>
+  
+              <h3 class="text-xl font-semibold mb-3 text-gray-700">How RAG Works:</h3>
+              <ol class="list-decimal list-inside mb-4">
+                  <li class="mb-2">
+                      <strong>Retrieval:</strong> 
+                      The system retrieves relevant documents or information from a large dataset based on the given query. This step is similar to how search engines find the most relevant results.
+                  </li>
+                  <li>
+                      <strong>Augmented Generation:</strong> 
+                      The retrieved information is then used by a text generation model to create a response or content. The model’s output is informed by both the query and the retrieved data, leading to more accurate and contextually relevant results.
+                  </li>
+              </ol>
+  
+              <h3 class="text-xl font-semibold mb-3 text-gray-700">Applications of RAG:</h3>
+              <ul class="list-disc list-inside mb-4">
+                  <li class="mb-2"><strong>Question Answering:</strong> Providing accurate answers to complex questions by using relevant documents.</li>
+                  <li class="mb-2"><strong>Chatbots:</strong> Enhancing chatbot responses with specific, relevant information.</li>
+                  <li><strong>Content Creation:</strong> Assisting in the generation of articles or summaries based on precise data.</li>
+              </ul>
+  
+              <h3 class="text-xl font-semibold mb-3 text-gray-700">Benefits of RAG:</h3>
+              <ul class="list-disc list-inside">
+                  <li class="mb-2"><strong>Contextual Accuracy:</strong> Produces factually correct and relevant content by grounding in actual data.</li>
+                  <li class="mb-2"><strong>Handling Specific Queries:</strong> Efficiently manages queries requiring specialized knowledge beyond the general training data of the model.</li>
+              </ul>
+          </section>
+  
+      </div>
+
   </main>
 
 
