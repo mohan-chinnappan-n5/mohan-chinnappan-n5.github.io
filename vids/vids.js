@@ -9,6 +9,20 @@ const data = {
            { title: "Agentforce - Intro", youtubeId: "d72HmDT8YaU" }, 
            { title: "AI Agents", youtubeId: "e7KwGR-vG04" }, 
            { title: "Nvidia’s Jensen Huang Talk AI Agents", youtubeId: "kfe3ajUYSdc" }, 
+           { title: "Agentforce Keynote", youtubeId: "5cHGtC_hjwE" }, 
+           { title: "How AMD Brings Its Winning CPU Playbook", youtubeId: "lJQDOjugZ0w" }, 
+           { title: "How Data Enables Trusted AI Agents", youtubeId: "KfQPtbXJa3Q" }, 
+           { title: "Slack Keynote", youtubeId: "wcP1Kndl6xI" },
+           { title: "Sales Cloud Keynote", youtubeId: "O1hU16FvAnc" }, 
+            { title: "Tableau Keynote", youtubeId: "CfEANeSzyWc" }, 
+            { title: "Eduction Keynote", youtubeId: "Dn3sjTmbE7M" }, 
+ 
+
+
+
+
+
+
  
         ],
       },
