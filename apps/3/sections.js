@@ -363,8 +363,8 @@
 
     },
 
-    LifeStyle: {
-      title: 'Life Style and related',
+    Videos: {
+      title: 'Videos on various topic',
       links: [
          { text: 'Videos', href: '../../vids', icon: 'desktop' },
          { text: 'Health', href: '../../health', icon: 'desktop' },
