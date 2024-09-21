@@ -166,6 +166,8 @@
         { text: 'HAR File Analysis' , href: 'https://mohanhar.streamlit.app', icon: 'desktop' },
         { text: 'Curl Performance Metrics App', href: 'https://mohanperf.streamlit.app', icon: 'desktop' },
         { text: 'Performance Visualizer', href: 'https://mohanpwviz.streamlit.app', icon: 'desktop' },
+        { text: 'Enhancing traceroute', href: '../../traceroute/index.html', icon: 'desktop' },
+
 
 
 
