@@ -1,4 +1,4 @@
-## Screenshots
+## Demo
 
 
 ### Usage

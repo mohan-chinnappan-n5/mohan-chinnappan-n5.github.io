@@ -13,8 +13,11 @@
         { text: 'Notes on SF Utils Chrome Extension', href: '../../queryperf/index.html', icon: 'book' },
         { text: 'Notes on Chatty for LLMs Chrome Extension', href: '../../llms/chatty/index.html', icon: 'book' },
         { text: 'Notes on Operating Systems', href: '../../pages/p.html?c=https://mohan-chinnappan-n5.github.io/pages/os/content.js', icon: 'book' },
+      	
+        { text: 'All About Linux', href: '../../books/linux/index.html', icon: 'book' },
+       
+	{ text: 'Tool Calling with LLMs', href: '../../agents/index.html', icon: 'book' },
 
-      { text: 'All About Linux', href: '../../books/linux/index.html', icon: 'book' },
 
 
 
