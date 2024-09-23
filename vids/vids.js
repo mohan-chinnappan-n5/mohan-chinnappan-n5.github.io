@@ -320,6 +320,22 @@ const data = {
         ],
       },
 
+      {
+        name: "Good Movies",
+        videos: [
+          { title: "A Stranger in Town - How to elect right govt.?" , youtubeId: "N-OFOAH88k0" },
+          { title: "The Farmers Daughter - Hardwork will win!" , youtubeId: "zprVVMuJlTk" },
+          { title: "It is a Wonderful Life " , youtubeId: "uAERYfeiYBc" },
+
+
+
+
+
+
+
+        ],
+      },
+
 
 
 

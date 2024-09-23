@@ -380,6 +380,17 @@
 
     },
 
+  Social: {
+      title: 'Life Inspirations',
+      links: [
+        { text: 'Great Folks', href: '../../pages/p.html?c=https://mohan-chinnappan-n5.github.io/pages/dedications/content.js', icon: 'book' },
+ 
+        // Add more links here
+      ],
+
+    },
+
+
 
     // Add more sections here
   };
