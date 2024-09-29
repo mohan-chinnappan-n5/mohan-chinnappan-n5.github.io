@@ -19,9 +19,7 @@
 	{ text: 'Tool Calling with LLMs', href: '../../agents/index.html', icon: 'book' },
 	{ text: 'git branch merge - locking branches', href: '../../git/index.html', icon: 'book' },
 
-
-
-
+        { text: 'Internet Notes', href: '../../books/internet/index.html', icon: 'book' },
 
 
       ],
