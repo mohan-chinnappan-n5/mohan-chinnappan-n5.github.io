@@ -20,6 +20,8 @@
 	{ text: 'git branch merge - locking branches', href: '../../git/index.html', icon: 'book' },
 
         { text: 'Internet Notes', href: '../../books/internet/index.html', icon: 'book' },
+        { text: 'Edge and SEC compare', href: '../../compare/edge-vs-sec.html', icon: 'book' },
+
 
 
       ],

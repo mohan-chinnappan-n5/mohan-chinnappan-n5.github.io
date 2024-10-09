@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Comparing Salesforce Edge and Salesforce Express Connect (SEC)
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  </head>
+
+  <body class="bg-gray-50 ">
+
+
+    <nav class="bg-blue-600 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white text-xl font-bold">Edge and Express Connect</a>
+           
+        </div>
+    </nav>
+
+
+    <header class="text-center mb-10">
+      <p class="text-gray-600 text-lg mt-4">
+        A comparison between Salesforce Edge and Salesforce Express Connect
+        (SEC)
+      </p>
+    </header>
+
+    <main class="container mx-auto">
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Salesforce Edge -->
+        <div class="border rounded-lg bg-white shadow-lg p-6">
+          <h2 class="text-2xl font-semibold text-blue-500 mb-4">
+            Salesforce Edge
+          </h2>
+          <p class="text-gray-700 mb-4">
+            Salesforce Edge provides faster access to Salesforce by reducing
+            network latency, enhancing performance for users distributed across
+            multiple regions.
+          </p>
+          <h3 class="text-xl font-medium text-green-600 mb-2">Pros</h3>
+          <ul class="list-disc list-inside text-gray-700 mb-4">
+            <li>
+              Improved application performance. Customers get benefits such as
+              faster download times no matter where their org is hosted in
+              Salesforce’s data centers.
+            </li>
+            <li>
+              Directs customer requests to the closest Salesforce location where
+              Salesforce Edge Network is deployed. At that location, Salesforce
+              Edge Network provides a range of services, including:
+              <ul class="list-disc list-inside text-gray-700 ml-8">
+                <li>
+                  TLS Termination - Brings TLS termination closer to the users.
+                </li>
+                <li>
+                  Static Content Caching - The static content is cached at
+                  closer to the user.
+                </li>
+                <li>
+                  Route Optimization - Edge will find the fastest route for you
+                  at that moment in time.
+                </li>
+                <li>
+                  Network TCP Optimization - helps to data move more quickly and
+                  efficiently across the network.
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <img
+                src="https://mohan-chinnappan-n2.github.io/2020/network/edge/img/wEdge.png"
+                alt=""
+              />
+            </li>
+          </ul>
+          <h3 class="text-xl font-medium text-red-600 mb-2">Cons</h3>
+          <ul class="list-disc list-inside text-gray-700">
+            <li>
+              Public Internet will be used between the user and the Edge Network
+            </li>
+          </ul>
+          <hr class="mt-10" />
+
+          <h3 class="text-xl font-medium text-blue-600 mb-2">References</h3>
+          <ul class="list-disc list-inside text-gray-700">
+            <li>
+              <a
+                href="https://mohan-chinnappan-n2.github.io/2020/network/edge/edge.html"
+                class="text-blue-500 hover:text-blue-700 underline font-medium"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Salesforce Edge</a>
+            </li>
+            <li>
+              <a
+                href="https://help.salesforce.com/s/articleView?id=000380380&type=1"
+                class="text-blue-500 hover:text-blue-700 underline font-medium"
+                target="_blank"
+                rel="noopener noreferrer"
+                >What is Salesforce Edge Network?
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Salesforce Express Connect -->
+        <div class="border rounded-lg bg-white shadow-lg p-6">
+          <h2 class="text-2xl font-semibold text-blue-500 mb-4">
+            Salesforce Express Connect
+          </h2>
+          <p class="text-gray-700 mb-4">
+            Salesforce Express Connect provides a direct, private connection
+            between Salesforce data centers and your organization's network,
+            bypassing the public internet for more secure and reliable
+            communication.
+          </p>
+          <h3 class="text-xl font-medium text-green-600 mb-2">Pros</h3>
+          <ul class="list-disc list-inside text-gray-700 mb-4">
+            <li>Increased security with private network connections.</li>
+            <li>More consistent and predictable performance.</li>
+            <li>Lower latency due to direct connections.</li>
+            <li>
+              Bypasses public internet, reducing risks of internet congestion.
+            </li>
+            <li>
+                Helps to meet industry regulatory and compliance demands. 
+            </li>
+          </ul>
+          <h3 class="text-xl font-medium text-red-600 mb-2">Cons</h3>
+          <ul class="list-disc list-inside text-gray-700">
+            <li>Requires setup and configuration of private lines.</li>
+            <li>Higher costs for dedicated network infrastructure.</li>
+            <li>
+              Does not provide direct network connectivity to Hyperforce or
+              non-Hyperforce Public Cloud environments
+            </li>
+          </ul>
+
+          <hr class="mt-10" />
+
+          <h3 class="text-xl font-medium text-blue-600 mb-2">References</h3>
+          <ul class="list-disc list-inside text-gray-700">
+            <li>
+              <a
+                href="https://www.salesforce.com/campaign/salesforce-express-connect/"
+                class="text-blue-500 hover:text-blue-700 underline font-medium"
+                target="_blank"
+                rel="noopener noreferrer"
+              > SEC</a
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
