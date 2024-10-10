@@ -755,6 +755,18 @@ export class Types {
       copyAllFiles: true,
     },
 
+    DashboardFolder: {
+      once:true,
+      folderName: "dashboards",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `dashboards`,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
     PathAssistant: {
       folderName: "pathAssistants",
       getFileAttributes: (member) => {
