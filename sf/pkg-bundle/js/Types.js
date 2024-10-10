@@ -362,6 +362,18 @@ export class Types {
       copyAllFiles: true,
     },
 
+    ReportFolder: {
+      once: true,
+      folderName: "reports",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `reports`,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
 
     ReportOld: {
       folderName: "reports",
