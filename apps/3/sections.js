@@ -148,13 +148,8 @@
 
         { text: 'REST API Data Fetcher', href: 'https://mohanrest.streamlit.app', icon: 'desktop' },
         { text: 'SOQL Query Executor  ', href: 'https://mohansoql.streamlit.app', icon: 'desktop' },
+	{ text: 'Admin Changes Implementor App', href: '../../admin-changes/index.html', icon: 'desktop' },
         { text: 'Territory Management Visualizer  ', href: 'https://mohantm.streamlit.app', icon: 'desktop' },
-
-
-
-
-
-
 
 
         // Add more links here
