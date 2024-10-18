@@ -1,0 +1,65 @@
+{
+  "pageTitle": "Comparing Salesforce Edge and Salesforce Express Connect (SEC)",
+  "navbar": {
+    "title": "Edge and Express Connect",
+    "href": "#"
+  },
+  "header": {
+    "text": "A comparison between Salesforce Edge and Salesforce Express Connect (SEC)"
+  },
+  "comparison": {
+    "items": [
+      {
+        "name": "Salesforce Edge",
+        "description": "Salesforce Edge provides faster access to Salesforce by reducing network latency, enhancing performance for users distributed across multiple regions.",
+        "pros": [
+          "Improved application performance. Customers get benefits such as faster download times no matter where their org is hosted in Salesforce’s data centers.",
+          "Directs customer requests to the closest Salesforce location where Salesforce Edge Network is deployed. At that location, Salesforce Edge Network provides a range of services, including:",
+          {
+            "nestedPros": [
+              "TLS Termination - Brings TLS termination closer to the users.",
+              "Static Content Caching - The static content is cached closer to the user.",
+              "Route Optimization - Edge will find the fastest route for you at that moment in time.",
+              "Network TCP Optimization - Helps data move more quickly and efficiently across the network."
+            ]
+          }
+        ],
+        "cons": [
+          "Public Internet will be used between the user and the Edge Network."
+        ],
+        "references": [
+          {
+            "text": "Salesforce Edge",
+            "url": "https://mohan-chinnappan-n2.github.io/2020/network/edge/edge.html"
+          },
+          {
+            "text": "What is Salesforce Edge Network?",
+            "url": "https://help.salesforce.com/s/articleView?id=000380380&type=1"
+          }
+        ]
+      },
+      {
+        "name": "Salesforce Express Connect",
+        "description": "Salesforce Express Connect provides a direct, private connection between Salesforce data centers and your organization's network, bypassing the public internet for more secure and reliable communication.",
+        "pros": [
+          "Increased security with private network connections.",
+          "More consistent and predictable performance.",
+          "Lower latency due to direct connections.",
+          "Bypasses public internet, reducing risks of internet congestion.",
+          "Helps to meet industry regulatory and compliance demands."
+        ],
+        "cons": [
+          "Requires setup and configuration of private lines.",
+          "Higher costs for dedicated network infrastructure.",
+          "Does not provide direct network connectivity to Hyperforce or non-Hyperforce Public Cloud environments."
+        ],
+        "references": [
+          {
+            "text": "Salesforce Express Connect",
+            "url": "https://www.salesforce.com/campaign/salesforce-express-connect/"
+          }
+        ]
+      }
+    ]
+  }
+}

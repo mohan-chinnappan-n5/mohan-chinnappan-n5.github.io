@@ -1,0 +1,76 @@
+{
+  "comparisonTitle": "Comparing HTTP/1.1, HTTP/2.0, and HTTP/3.0",
+  "items": [
+    {
+      "name": "HTTP/1.1",
+      "description": "HTTP/1.1 is the older version of the HTTP protocol. It introduced persistent connections, chunked transfer encoding, and more.",
+      "pros": [
+        "Widely supported across all devices and platforms.",
+        "Persistent connections allow for multiple requests over a single connection."
+      ],
+      "cons": [
+        "Increased latency due to head-of-line (HOL) blocking.",
+        "Inefficient for modern web applications that require multiple resources."
+      ],
+      "holBlockingDetails": {
+        "title": "Head-of-Line Blocking in HTTP/1.1",
+        "description": "In HTTP/1.1, only one request can be processed per connection at a time. Even though HTTP/1.1 introduced persistent connections (allowing multiple requests to be sent over the same TCP connection), these requests must be processed sequentially. This leads to Head-of-Line (HOL) blocking, where one slow or large response can block all subsequent requests until it is fully delivered. This becomes inefficient when multiple resources are needed to load a modern web page, causing delays in page load times."
+      },
+      "references": [
+        {
+          "text": "HTTP/1.1 Specification",
+          "url": "https://tools.ietf.org/html/rfc2616"
+        }
+      ]
+    },
+    {
+      "name": "HTTP/2.0",
+      "description": "HTTP/2.0 introduces multiplexing, header compression, and other performance improvements over HTTP/1.1.",
+      "pros": [
+        "Multiplexing allows multiple requests to be sent concurrently over a single connection.",
+        "Header compression reduces the overhead of large headers."
+      ],
+      "cons": [
+        "HOL blocking at the TCP level can still occur.",
+        "More complex to implement than HTTP/1.1."
+      ],
+      "holBlockingDetails": {
+        "title": "Head-of-Line Blocking in HTTP/2.0",
+        "description": "While HTTP/2 improves upon HTTP/1.1 by introducing multiplexing, it still suffers from Head-of-Line blocking at the TCP layer. Multiplexing allows multiple requests to be sent simultaneously over a single connection, but since all these requests share the same underlying TCP connection, any packet loss at the TCP level can block the delivery of subsequent packets for all streams, leading to HOL blocking at the transport layer. This can be mitigated by using HTTP/3, which operates over QUIC (Quick UDP Internet Connections), a protocol that eliminates HOL blocking by using independent streams over UDP."
+      },
+      "references": [
+        {
+          "text": "HTTP/2 Specification",
+          "url": "https://tools.ietf.org/html/rfc7540"
+        }
+      ]
+    },
+    {
+      "name": "HTTP/3.0",
+      "description": "HTTP/3.0 is the latest version of the HTTP protocol, designed to address the limitations of HTTP/2 and solve HOL blocking issues with QUIC.",
+      "pros": [
+        "No Head-of-Line blocking at the transport layer, thanks to QUIC.",
+        "Faster connection establishment due to the use of UDP instead of TCP."
+      ],
+      "cons": [
+        "Still in the process of being fully adopted and implemented.",
+        "Requires support for QUIC, which is more complex than TCP."
+      ],
+      "holBlockingDetails": {
+        "title": "Head-of-Line Blocking in HTTP/3.0",
+        "description": "HTTP/3.0 eliminates Head-of-Line blocking entirely by replacing TCP with QUIC, a transport protocol based on UDP. Unlike TCP, QUIC allows independent streams of data within a single connection, so packet loss on one stream doesn't block the others. This greatly improves performance and reduces latency in cases where network conditions are less than ideal."
+      },
+      "references": [
+        {
+          "text": "HTTP/3.0 and QUIC Specification",
+          "url": "https://datatracker.ietf.org/doc/html/rfc9000"
+        },
+ 	{
+          "text": "Video: The death of an end-to-end internet - Jana  Iyengar",
+          "url": "https://www.youtube.com/watch?v=hCm0-MUs5nk"
+        }
+
+      ]
+    }
+  ]
+}
