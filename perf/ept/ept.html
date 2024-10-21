@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experienced Page Time (EPT) - Salesforce</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+     <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <div class="text-white text-2xl font-semibold">
+                    EPT Performance Guide
+                </div>
+                <div>
+                    <a href="#about" class="text-white hover:text-blue-200 px-3">About EPT</a>
+                    <a href="#factors" class="text-white hover:text-blue-200 px-3">Factors</a>
+                    <a href="#measurement" class="text-white hover:text-blue-200 px-3">Measurement</a>
+                    <a href="#optimization" class="text-white hover:text-blue-200 px-3">Optimization</a>
+                    <a href="#references" class="text-white hover:text-blue-200 px-3">References</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto py-10 px-5">
+        
+        <!-- Title -->
+        <div id="about" class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">What is Experienced Page Time (EPT)?</h1>
+            <p class="text-gray-600 text-lg leading-relaxed">
+                Experienced Page Time (EPT) is a performance metric used in Salesforce Lightning to measure the time taken for a page to load into an interactive state.
+            </p>
+        </div>
+
+        <!-- Key Aspects -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-10">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5">Key Aspects of EPT</h2>
+            <ul class="list-disc list-inside text-gray-600 leading-loose">
+                <li><strong>Definition:</strong> EPT measures how long it takes for a page to reach a state where the user can meaningfully interact with it.</li>
+                <li><strong>Measurement Challenge:</strong> Due to the progressive loading in Lightning, determining when a page finishes loading isn't straightforward.</li>
+            </ul>
+        </div>
+
+        <!-- Factors Affecting EPT -->
+        <div id="factors" class="bg-white rounded-lg shadow-lg p-8 mb-10">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5">Factors Affecting EPT</h2>
+            <p class="text-gray-600 mb-4">EPT is influenced by both client-side and server-side factors:</p>
+
+            <!-- Client vs Server Table -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-300">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="py-3 px-6 text-left text-gray-700 font-bold">Client-Side Factors</th>
+                            <th class="py-3 px-6 text-left text-gray-700 font-bold">Server-Side Factors</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600">
+                        <tr>
+                            <td class="py-3 px-6 border-b border-gray-300">Browser performance</td>
+                            <td class="py-3 px-6 border-b border-gray-300">Apex processing</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 border-b border-gray-300">Hardware capabilities</td>
+                            <td class="py-3 px-6 border-b border-gray-300">API call handling</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 border-b border-gray-300">Network latency</td>
+                            <td class="py-3 px-6 border-b border-gray-300">XHR responses</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 border-b border-gray-300">Org complexity and custom components</td>
+                            <td class="py-3 px-6 border-b border-gray-300">Server-side errors and caching</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- EPT Measurement -->
+        <div id="measurement" class="bg-white rounded-lg shadow-lg p-8 mb-10">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5">Measuring EPT</h2>
+            <p class="text-gray-600 leading-relaxed mb-4">
+                EPT is calculated from the page start until there is no more activity for two frames (~33 ms). The table below provides an example of EPT calculation:
+            </p>
+
+            <!-- Example Table -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-300">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="py-3 px-6 text-left text-gray-700 font-bold">Action</th>
+                            <th class="py-3 px-6 text-left text-gray-700 font-bold">Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600">
+                        <tr>
+                            <td class="py-3 px-6 border-b border-gray-300">Initial page request</td>
+                            <td class="py-3 px-6 border-b border-gray-300">150 ms</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 border-b border-gray-300">First component loaded</td>
+                            <td class="py-3 px-6 border-b border-gray-300">350 ms</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 border-b border-gray-300">Additional component requested by the first</td>
+                            <td class="py-3 px-6 border-b border-gray-300">400 ms</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 border-b border-gray-300">Final XHR request completed</td>
+                            <td class="py-3 px-6 border-b border-gray-300">700 ms</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-6 border-b border-gray-300">Two idle frames (no activity)</td>
+                            <td class="py-3 px-6 border-b border-gray-300">33 ms</td>
+                        </tr>
+                        <tr class="font-bold">
+                            <td class="py-3 px-6 border-b border-gray-300">Total EPT</td>
+                            <td class="py-3 px-6 border-b border-gray-300">1,633 ms</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Best Practices for EPT Optimization -->
+        <div id="optimization" class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5">Best Practices to Improve EPT</h2>
+            <ul class="list-disc list-inside text-gray-600 leading-loose">
+                <li>Optimize components to minimize XHR requests.</li>
+                <li>Reduce the number of custom fields and unnecessary components on a page.</li>
+                <li>Cache frequently used data to avoid repetitive server-side processing.</li>
+                <li>Minimize client-side JavaScript work during page load.</li>
+            </ul>
+        </div>
+
+        <!-- References Section -->
+        <div id="references" class="bg-white rounded-lg shadow-lg p-8 mt-10">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-5">References</h2>
+            <ul class="list-disc list-inside text-gray-600 leading-loose">
+                <li>
+                    <a href="https://help.salesforce.com/s/articleView?id=sf.technical_requirements_ept.htm&type=5" 
+                       class="text-blue-600 hover:underline" 
+                       target="_blank">What Is EPT? - Salesforce Documentation</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-6 mt-10">
+        <div class="container mx-auto text-center">
+           PERF NOTES 
+        </div>
+    </footer>
+
+</body>
+</html>
