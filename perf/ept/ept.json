@@ -1,0 +1,95 @@
+{
+  "pageTitle": "Experienced Page Time (EPT) - Salesforce",
+  "navbar": {
+    "title": "EPT Performance Guide",
+    "links": [
+      { "name": "About EPT", "href": "#about" },
+      { "name": "Factors", "href": "#factors" },
+      { "name": "Measurement", "href": "#measurement" },
+      { "name": "Optimization", "href": "#optimization" },
+      { "name": "References", "href": "#references" }
+    ]
+  },
+  "sections": [
+    {
+      "id": "about",
+      "title": "What is Experienced Page Time (EPT)?",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Experienced Page Time (EPT) is a performance metric used in Salesforce Lightning to measure the time taken for a page to load into an interactive state."
+        }
+      ]
+    },
+
+    
+    {
+      "id": "factors",
+      "title": "Factors Affecting EPT",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "EPT is influenced by both client-side and server-side factors."
+        },
+        {
+          "type": "table",
+          "headers": ["Client-Side Factors", "Server-Side Factors"],
+          "rows": [
+            ["Browser performance", "Apex processing"],
+            ["Hardware capabilities", "API call handling"],
+            ["Network latency", "XHR responses"],
+            ["Org complexity and custom components", "Server-side errors and caching"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "measurement",
+      "title": "Measuring EPT",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "EPT is calculated from the page start until there is no more activity for two frames (~33 ms)."
+        },
+        {
+          "type": "table",
+          "headers": ["Action", "Duration"],
+          "rows": [
+            ["Initial page request", "150 ms"],
+            ["First component loaded", "350 ms"],
+            ["Additional component requested by the first", "400 ms"],
+            ["Final XHR request completed", "700 ms"],
+            ["Two idle frames (no activity)", "33 ms"],
+            ["Total EPT", "1,633 ms"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "optimization",
+      "title": "Best Practices to Improve EPT",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "Optimize components to minimize XHR requests.",
+            "Reduce the number of custom fields and unnecessary components on a page.",
+            "Cache frequently used data to avoid repetitive server-side processing.",
+            "Minimize client-side JavaScript work during page load."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "references",
+      "title": "References",
+      "content": [
+        {
+          "type": "link",
+          "href": "https://help.salesforce.com/s/articleView?id=sf.technical_requirements_ept.htm&type=5",
+          "text": "What Is EPT? - Salesforce Documentation"
+        }
+      ]
+    }
+  ]
+}

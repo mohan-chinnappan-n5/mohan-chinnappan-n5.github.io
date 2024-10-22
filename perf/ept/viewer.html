@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title"></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <div id="navbar-title" class="text-white text-2xl font-semibold"></div>
+                <div id="navbar-links"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto py-10 px-5" id="main-content">
+        <!-- Sections will be dynamically populated here -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-6 mt-10">
+        <div class="container mx-auto text-center">
+           MCDocs v0.7
+        </div>
+    </footer>
+
+    <script>
+        // Fetch content from the JSON file
+        const urlParams = new URLSearchParams(window.location.search);
+        const jsonUrl = urlParams.get('data');
+        
+        fetch(jsonUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Set page title
+                document.getElementById('page-title').innerText = data.pageTitle;
+                
+                // Set navbar title
+                document.getElementById('navbar-title').innerText = data.navbar.title;
+                
+                // Populate navbar links
+                const navbarLinks = document.getElementById('navbar-links');
+                data.navbar.links.forEach(link => {
+                    const anchor = document.createElement('a');
+                    anchor.href = link.href;
+                    anchor.innerText = link.name;
+                    anchor.className = "text-white hover:text-blue-200 px-3";
+                    navbarLinks.appendChild(anchor);
+                });
+                
+                // Populate sections
+                const mainContent = document.getElementById('main-content');
+                data.sections.forEach(section => {
+                    const sectionDiv = document.createElement('div');
+                    sectionDiv.id = section.id;
+                    sectionDiv.className = "bg-white rounded-lg shadow-lg p-8 mb-10";
+
+                    // Section title
+                    const sectionTitle = document.createElement('h2');
+                    sectionTitle.className = "text-2xl font-semibold text-gray-700 mb-5";
+                    sectionTitle.innerText = section.title;
+                    sectionDiv.appendChild(sectionTitle);
+                    
+                    // Section content
+                    section.content.forEach(contentItem => {
+                        if (contentItem.type === 'paragraph') {
+                            const p = document.createElement('p');
+                            p.className = "text-gray-600 mb-4";
+                            p.innerText = contentItem.text;
+                            sectionDiv.appendChild(p);
+                        } else if (contentItem.type === 'list') {
+                            const ul = document.createElement('ul');
+                            ul.className = "list-disc list-inside text-gray-600 leading-loose";
+                            contentItem.items.forEach(item => {
+                                const li = document.createElement('li');
+                                li.innerText = item;
+                                ul.appendChild(li);
+                            });
+                            sectionDiv.appendChild(ul);
+                        } else if (contentItem.type === 'table') {
+                            const table = document.createElement('table');
+                            table.className = "min-w-full bg-white border border-gray-300";
+                            const thead = document.createElement('thead');
+                            const trHead = document.createElement('tr');
+                            contentItem.headers.forEach(header => {
+                                const th = document.createElement('th');
+                                th.className = "py-3 px-6 text-left text-gray-700 font-bold";
+                                th.innerText = header;
+                                trHead.appendChild(th);
+                            });
+                            thead.appendChild(trHead);
+                            table.appendChild(thead);
+
+                            const tbody = document.createElement('tbody');
+                            contentItem.rows.forEach(row => {
+                                const tr = document.createElement('tr');
+                                row.forEach(cell => {
+                                    const td = document.createElement('td');
+                                    td.className = "py-3 px-6 border-b border-gray-300";
+                                    td.innerText = cell;
+                                    tr.appendChild(td);
+                                });
+                                tbody.appendChild(tr);
+                            });
+                            table.appendChild(tbody);
+                            sectionDiv.appendChild(table);
+                        } else if (contentItem.type === 'link') {
+                            const a = document.createElement('a');
+                            a.href = contentItem.href;
+                            a.innerText = contentItem.text;
+                            a.className = "text-blue-600 hover:underline";
+                            a.target = "_blank";
+                            sectionDiv.appendChild(a);
+                        }
+                    });
+
+                    mainContent.appendChild(sectionDiv);
+                });
+            })
+            .catch(error => console.error('Error loading JSON content:', error));
+    </script>
+</body>
+</html>
