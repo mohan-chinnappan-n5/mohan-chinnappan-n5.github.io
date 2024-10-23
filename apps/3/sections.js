@@ -28,7 +28,8 @@
 	 { text: 'HTTP1.1, 2.0 and 3.0 compare', href: '../../compare/compare3.html?data=https://raw.githubusercontent.com/mohan-chinnappan-n5/compares/refs/heads/main/http123.json', icon: 'book' },
 
 
-
+        { text: 'Einstein Solutions', href: '../../ai/einstein/viewer_md3.html?data=predictive.md&title=Einstein%20Solutions', icon: 'book' },
+ 
 
 
       ],

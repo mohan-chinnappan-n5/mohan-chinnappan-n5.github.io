@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading...</title> <!-- Default title -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom Tailwind configurations (if needed) */
+    .markdown-body ul {
+      list-style-type: disc;
+      padding-left: 1rem;
+    }
+    .hr-padding {
+      padding: 1rem 0; /* Adjust padding as needed */
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- To parse Markdown -->
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <!-- Navbar -->
+  <nav class="bg-blue-600 text-white sticky py-4 shadow-md">
+    <div class="max-w-6xl mx-auto flex justify-between items-center px-4">
+      <span id="navbar-title" class="text-xl font-bold">Loading...</span> <!-- Navbar title dynamically set -->
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto p-6">
+    <!-- Header Section -->
+    <header class="mb-6">
+      <h1 id="page-title" class="text-4xl font-bold text-center mb-4">Loading...</h1> <!-- Default text for loading -->
+    </header>
+
+    <!-- Content Section -->
+    <div id="markdown-content" class="markdown-body bg-white shadow-md rounded-lg p-6"></div>
+    
+    <!-- Footer Section -->
+    <footer class="mt-8 text-center bg-blue-600 py-4">
+      <p class="text-sm text-yellow-200">MCDocs v1.02 </p>
+    </footer>
+  </div>
+
+  <script>
+    // Function to get the value of a query parameter
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Function to set the page title and navbar title dynamically
+    function setPageTitle() {
+      const titleParam = getQueryParam('title');
+      const pageTitle = titleParam || 'Default Title'; // Fallback to 'Default Title' if title is not provided
+      document.title = pageTitle;
+      document.getElementById('page-title').textContent = pageTitle;
+      document.getElementById('navbar-title').textContent = pageTitle; // Set navbar title
+    }
+
+    // Function to fetch and display markdown content
+    async function loadMarkdownFromUrl(url) {
+      try {
+        const response = await fetch(url);
+        if (response.ok) {
+          const markdown = await response.text();
+          // Use the marked library to convert markdown to HTML
+          let htmlContent = marked.parse(markdown);
+          // Insert <div> with padding and <hr> after each <h1>, <h2>, <h3>, <h4>, <h5>, and <h6> tag
+          htmlContent = htmlContent.replace(/(<h[1-6][^>]*>.*?<\/h[1-6]>)/g, '$1<div class="hr-padding"><hr></div>');
+          document.getElementById('markdown-content').innerHTML = htmlContent;
+        } else {
+          document.getElementById('markdown-content').innerHTML = '<p class="text-red-600">Error loading markdown file.</p>';
+        }
+      } catch (error) {
+        document.getElementById('markdown-content').innerHTML = '<p class="text-red-600">Error fetching markdown file.</p>';
+      }
+    }
+
+    // Set the page title and navbar title based on URL parameter
+    setPageTitle();
+
+    // Get the markdown URL from the query parameter "data"
+    const markdownUrl = getQueryParam('data');
+    if (markdownUrl) {
+      loadMarkdownFromUrl(markdownUrl);
+    } else {
+      document.getElementById('markdown-content').innerHTML = '<p class="text-gray-600">No markdown file provided. Please provide a "data" URL parameter.</p>';
+    }
+  </script>
+</body>
+</html>
