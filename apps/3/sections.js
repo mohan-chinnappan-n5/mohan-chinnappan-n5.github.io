@@ -29,7 +29,9 @@
 
 
         { text: 'Einstein Solutions', href: '../../ai/einstein/viewer_md3.html?data=predictive.md&title=Einstein%20Solutions', icon: 'book' },
+        { text: 'ML tools ', href: '../../ai/einstein/viewer_md3.html?data=https://raw.githubusercontent.com/mohan-chinnappan-n5/compares/refs/heads/main/ml/ml_tools.md&title=ML tools', icon: 'book' },
  
+
 
 
       ],
