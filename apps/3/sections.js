@@ -15,6 +15,7 @@
         { text: 'Notes on Operating Systems', href: '../../pages/p.html?c=https://mohan-chinnappan-n5.github.io/pages/os/content.js', icon: 'book' },
       	
         { text: 'All About Linux', href: '../../books/linux/index.html', icon: 'book' },
+        { text: 'Linux for Global Empowerment', href: '../../linux/linux.html', icon: 'book' },
        
 	{ text: 'Tool Calling with LLMs', href: '../../agents/index.html', icon: 'book' },
 	{ text: 'git branch merge - locking branches', href: '../../git/index.html', icon: 'book' },
