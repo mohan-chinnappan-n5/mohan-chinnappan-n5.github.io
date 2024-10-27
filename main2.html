@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motivational Banner</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script>
+    // Redirect after 3 seconds
+    setTimeout(function() {
+      window.location.href = "https://mohan-chinnappan-n5.github.io/apps/2/index.html";
+    }, 3000);
+
+    // Function to parse URL parameters
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Load quotes from JSON file specified in "?data" parameter
+    async function loadQuotes() {
+      const dataUrl = getQueryParam("data");
+      if (!dataUrl) {
+        console.error("No data URL provided.");
+        return;
+      }
+
+      try {
+        const response = await fetch(dataUrl);
+        if (!response.ok) {
+          throw new Error("Failed to fetch quotes.");
+        }
+        
+        const quotes = await response.json();
+        displayRandomQuote(quotes);
+      } catch (error) {
+        console.error("Error loading quotes:", error);
+      }
+    }
+
+    // Display a random quote from the fetched quotes
+    function displayRandomQuote(quotes) {
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById("quote-title").innerText = randomQuote.title;
+      document.getElementById("quote-message").innerText = randomQuote.message;
+    }
+  </script>
+</head>
+<body onload="loadQuotes()" class="flex items-center justify-center min-h-screen bg-gray-100">
+
+  <!-- Banner Section -->
+  <div class="w-full max-w-2xl h-3/4 p-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-lg rounded-lg text-white text-center flex flex-col items-center justify-center">
+    <h1 id="quote-title" class="text-4xl font-bold mb-4"></h1>
+    <p id="quote-message" class="text-lg mb-4"></p>
+    <p class="mt-4 text-white text-opacity-75">Redirecting in 3 seconds...</p>
+  </div>
+
+</body>
+</html>
