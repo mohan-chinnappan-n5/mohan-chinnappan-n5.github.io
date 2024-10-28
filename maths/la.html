@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linear Algebra for Deep Learning</title>
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <!-- MathJax Configuration -->
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [["$", "$"], ["\\(", "\\)"]],
+      displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+      processEscapes: true
+    }
+  });
+</script>
+  <!-- Navbar -->
+
+  <!-- Navbar -->
+<header class="sticky top-0 bg-blue-900 text-white shadow-md z-10">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">Linear Algebra for Deep Learning</h1>
+    
+    <div class="relative">
+      <button id="navbar-toggle" class="md:hidden focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+      
+      <nav id="navbar" class="hidden md:flex space-x-8">
+        <a href="#chapter-1" class="hover:text-gray-300">Vectors</a>
+        <a href="#chapter-2" class="hover:text-gray-300">Matrices</a>
+        <a href="#chapter-3" class="hover:text-gray-300">Matrix Operations</a>
+        <a href="#chapter-4" class="hover:text-gray-300">Determinants</a>
+        <a href="#chapter-5" class="hover:text-gray-300">Eigenvalues & vectors</a>
+        <a href="#chapter-6" class="hover:text-gray-300">Vector Spaces</a>
+        <a href="#chapter-7" class="hover:text-gray-300">Linear Transformations</a>
+        <a href="#chapter-8" class="hover:text-gray-300">SVD</a>
+        <a href="#chapter-9" class="hover:text-gray-300">Norms</a>
+        <a href="#chapter-10" class="hover:text-gray-300">PCA</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navbar -->
+<div id="mobile-navbar" class="md:hidden bg-gray-800 p-4 hidden">
+  <a href="#chapter-1" class="block py-2 hover:text-gray-300">Vectors</a>
+  <a href="#chapter-2" class="block py-2 hover:text-gray-300">Matrices</a>
+  <a href="#chapter-3" class="block py-2 hover:text-gray-300">Matrix Operations</a>
+  <a href="#chapter-4" class="block py-2 hover:text-gray-300">Determinants</a>
+  <a href="#chapter-5" class="block py-2 hover:text-gray-300">Eigenvalues & vectors</a>
+  <a href="#chapter-6" class="block py-2 hover:text-gray-300">Vector Spaces</a>
+  <a href="#chapter-7" class="block py-2 hover:text-gray-300">Linear Transformations</a>
+  <a href="#chapter-8" class="block py-2 hover:text-gray-300">SVD</a>
+  <a href="#chapter-9" class="block py-2 hover:text-gray-300">Norms</a>
+  <a href="#chapter-10" class="block py-2 hover:text-gray-300">PCA</a>
+</div>
+
+<script>
+  // Toggle mobile navbar
+  const navbarToggle = document.getElementById('navbar-toggle');
+  const mobileNavbar = document.getElementById('mobile-navbar');
+
+  navbarToggle.addEventListener('click', () => {
+    mobileNavbar.classList.toggle('hidden');
+  });
+</script>
+
+    <!-- Hero Section -->
+  <section class="bg-blue-600 text-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-semibold">Understanding Linear Algebra for Deep Learning</h2>
+      <p class="mt-4 text-lg">Master essential Linear Algebra concepts that empower Deep Learning applications.</p>
+    </div>
+  </section>
+
+  <!-- Chapter Sections -->
+  <div class="container mx-auto px-6 py-12 space-y-12">
+
+    <!-- Chapter 1 -->
+    <section id="chapter-1" class="bg-white p-8 rounded-lg shadow">
+      <h3 class="text-2xl font-semibold">Chapter 1: Vectors</h3>
+      <p class="mt-4 text-gray-700">
+        In linear algebra, a <strong>vector</strong> is an ordered list of numbers. Vectors can represent quantities that have both direction and magnitude, such as displacement or velocity, or collections of features in machine learning. Vectors are foundational in deep learning as they represent data points, inputs, weights, and activations within models.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">1.1 Understanding Vectors</h4>
+      <p class="mt-2 text-gray-700">
+        Vectors are represented as columns or rows of numbers. A vector with <em>n</em> elements is called an <em>n-dimensional vector</em>. For example, a 3-dimensional vector could look like this:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{v} = \begin{bmatrix} 3 \\ 5 \\ -2 \end{bmatrix}
+        \]
+      </p>
+      <p class="mt-4 text-gray-700">
+        Here, \(\mathbf{v}\) has three components, representing different dimensions or features of a data point.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">1.2 Types of Vectors</h4>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Row Vectors</strong>: Represented in a single row, e.g., \([1, 2, 3]\).</li>
+        <li><strong>Column Vectors</strong>: Usually visualized in linear algebra as a column.</li>
+        <li><strong>Unit Vectors</strong>: Vectors with a magnitude of 1, often used to indicate direction.</li>
+        <li><strong>Zero Vectors</strong>: Vectors where all elements are zero, representing 'no movement' in any direction.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">1.3 Vector Operations</h4>
+      <p class="mt-2 text-gray-700">
+        Vectors support a variety of operations essential for data processing in deep learning:
+      </p>
+    
+      <h5 class="text-lg font-semibold mt-4">1.3.1 Addition and Subtraction</h5>
+      <p class="mt-2 text-gray-700">
+        Two vectors of the same dimension can be added or subtracted element-wise. For example, given vectors \(\mathbf{u} = \begin{bmatrix} 3 \\ 4 \\ 5 \end{bmatrix}\) and \(\mathbf{v} = \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix}\):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{u} + \mathbf{v} = \begin{bmatrix} 3 + 1 \\ 4 + 2 \\ 5 + 3 \end{bmatrix} = \begin{bmatrix} 4 \\ 6 \\ 8 \end{bmatrix}
+        \]
+      </p>
+    
+      <h5 class="text-lg font-semibold mt-4">1.3.2 Scalar Multiplication</h5>
+      <p class="mt-2 text-gray-700">
+        In scalar multiplication, each component of a vector is multiplied by a scalar (a single number). For example, multiplying vector \(\mathbf{v} = \begin{bmatrix} 2 \\ -3 \\ 4 \end{bmatrix}\) by \(3\):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        3 \cdot \mathbf{v} = 3 \cdot \begin{bmatrix} 2 \\ -3 \\ 4 \end{bmatrix} = \begin{bmatrix} 6 \\ -9 \\ 12 \end{bmatrix}
+        \]
+      </p>
+    
+      <h5 class="text-lg font-semibold mt-4">1.3.3 Dot Product</h5>
+      <p class="mt-2 text-gray-700">
+        The dot product (or inner product) is a fundamental operation where corresponding elements are multiplied, and the results are summed. For vectors \(\mathbf{a} = \begin{bmatrix} a_1 \\ a_2 \end{bmatrix}\) and \(\mathbf{b} = \begin{bmatrix} b_1 \\ b_2 \end{bmatrix}\), the dot product is:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{a} \cdot \mathbf{b} = a_1 \cdot b_1 + a_2 \cdot b_2
+        \]
+      </p>
+      <p class="mt-4 text-gray-700">
+        In machine learning, dot products are used to calculate similarities and in many neural network operations.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">1.4 Importance of Vectors in Deep Learning</h4>
+      <p class="mt-2 text-gray-700">
+        Vectors represent data points, weights, biases, and activations in deep learning. For example, an image can be represented as a vector where each element corresponds to a pixel's intensity, enabling deep learning models to process images, text, and structured data efficiently.
+      </p>
+    
+      <p class="mt-4 text-gray-700">
+        A solid understanding of vectors and vector operations is foundational for understanding complex topics like matrix operations and transformations in neural networks.
+      </p>
+    </section>
+    
+   
+
+    <!-- Chapter 2 -->
+    <section id="chapter-2" class="bg-white p-8 rounded-lg shadow mt-8">
+      <h3 class="text-2xl font-semibold">Chapter 2: Matrices</h3>
+      <p class="mt-4 text-gray-700">
+        A <strong>matrix</strong> is a rectangular array of numbers organized in rows and columns. Matrices play a crucial role in deep learning, representing weights, data, and transformations applied to data. In this chapter, we'll explore what matrices are, the types of matrices, and essential operations.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">2.1 Understanding Matrices</h4>
+      <p class="mt-2 text-gray-700">
+        A matrix with <em>m</em> rows and <em>n</em> columns is referred to as an <em>m x n</em> matrix, commonly written as \(\mathbf{A} \in \mathbb{R}^{m \times n}\), where \(\mathbb{R}\) denotes real numbers. For example, a \(3 \times 2\) matrix could look like this:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{A} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{bmatrix}
+        \]
+      </p>
+      <p class="mt-4 text-gray-700">
+        Here, \(\mathbf{A}\) has 3 rows and 2 columns, representing a set of values in two dimensions.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">2.2 Types of Matrices</h4>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Square Matrix</strong>: A matrix with the same number of rows and columns, e.g., \(2 \times 2\) or \(3 \times 3\).</li>
+        <li><strong>Diagonal Matrix</strong>: A square matrix where all elements outside the diagonal are zero, e.g., \(\begin{bmatrix} 4 & 0 \\ 0 & 5 \end{bmatrix}\).</li>
+        <li><strong>Identity Matrix</strong>: A diagonal matrix where all diagonal elements are 1, often denoted as \(\mathbf{I}\).</li>
+        <li><strong>Zero Matrix</strong>: A matrix with all elements equal to zero, useful as a neutral element in matrix addition.</li>
+        <li><strong>Transpose of a Matrix</strong>: Swapping rows and columns of a matrix. If \(\mathbf{A} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\), then \(\mathbf{A}^T = \begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}\).</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">2.3 Matrix Operations</h4>
+      <p class="mt-2 text-gray-700">
+        Matrices support various operations, which are integral to manipulating and transforming data in deep learning:
+      </p>
+    
+      <h5 class="text-lg font-semibold mt-4">2.3.1 Matrix Addition and Subtraction</h5>
+      <p class="mt-2 text-gray-700">
+        Two matrices of the same dimensions can be added or subtracted element-wise. For matrices \(\mathbf{A} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(\mathbf{B} = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{A} + \mathbf{B} = \begin{bmatrix} 1 + 5 & 2 + 6 \\ 3 + 7 & 4 + 8 \end{bmatrix} = \begin{bmatrix} 6 & 8 \\ 10 & 12 \end{bmatrix}
+        \]
+      </p>
+    
+      <h5 class="text-lg font-semibold mt-4">2.3.2 Scalar Multiplication</h5>
+      <p class="mt-2 text-gray-700">
+        Each element in a matrix can be multiplied by a scalar. For instance, multiplying matrix \(\mathbf{A} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) by \(3\):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        3 \cdot \mathbf{A} = 3 \cdot \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = \begin{bmatrix} 3 & 6 \\ 9 & 12 \end{bmatrix}
+        \]
+      </p>
+    
+      <h5 class="text-lg font-semibold mt-4">2.3.3 Matrix Multiplication</h5>
+      <p class="mt-2 text-gray-700">
+        Matrix multiplication, or the dot product of matrices, is a key operation in deep learning. To multiply two matrices, the number of columns in the first matrix must equal the number of rows in the second. For example, if \(\mathbf{A} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(\mathbf{B} = \begin{bmatrix} 2 & 0 \\ 1 & 3 \end{bmatrix}\), then:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{A} \cdot \mathbf{B} = \begin{bmatrix} (1 \cdot 2 + 2 \cdot 1) & (1 \cdot 0 + 2 \cdot 3) \\ (3 \cdot 2 + 4 \cdot 1) & (3 \cdot 0 + 4 \cdot 3) \end{bmatrix} = \begin{bmatrix} 4 & 6 \\ 10 & 12 \end{bmatrix}
+        \]
+      </p>
+      <p class="mt-2 text-gray-700">
+        Matrix multiplication is used extensively in neural networks for calculating the weighted sum of inputs.
+      </p>
+    
+      <h5 class="text-lg font-semibold mt-4">2.3.4 Matrix Transpose</h5>
+      <p class="mt-2 text-gray-700">
+        The transpose of a matrix is obtained by swapping its rows and columns. For matrix \(\mathbf{A} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{A}^T = \begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">2.4 Importance of Matrices in Deep Learning</h4>
+      <p class="mt-2 text-gray-700">
+        Matrices are essential for representing data batches, weights, and transformations in deep learning models. Operations like matrix multiplication allow for the computation of weighted sums, which are fundamental in layers of neural networks. A good grasp of matrix properties and operations helps in understanding model structures and computations.
+      </p>
+    </section>
+    
+  
+
+    <!-- Chapter 3 -->
+    <section id="chapter-3" class="bg-white p-8 rounded-lg shadow mt-8">
+      <h3 class="text-2xl font-semibold">Chapter 3: Matrix Operations</h3>
+      <p class="mt-4 text-gray-700">
+        A <strong>matrix</strong> is a two-dimensional array of numbers arranged in rows and columns. Matrices are fundamental in deep learning for representing data in batches, performing linear transformations, and building layer connections in neural networks.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">3.1 Matrix Basics</h4>
+      <p class="mt-2 text-gray-700">
+        Matrices are typically denoted by uppercase bold letters, such as \(\mathbf{A}\). A matrix with \(m\) rows and \(n\) columns is called an \(m \times n\) matrix. For example, a \(2 \times 3\) matrix is represented as:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{A} = \begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \end{bmatrix}
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">3.2 Types of Matrices</h4>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Square Matrix</strong>: A matrix with the same number of rows and columns, e.g., \(3 \times 3\).</li>
+        <li><strong>Identity Matrix</strong>: A square matrix with 1s on the diagonal and 0s elsewhere, denoted by \(\mathbf{I}\).</li>
+        <li><strong>Zero Matrix</strong>: A matrix in which all elements are 0, denoted by \(\mathbf{0}\).</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">3.3 Matrix Addition and Subtraction</h4>
+      <p class="mt-2 text-gray-700">
+        Matrices of the same dimension can be added or subtracted element-wise. For example, if \(\mathbf{A} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(\mathbf{B} = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{A} + \mathbf{B} = \begin{bmatrix} 1+5 & 2+6 \\ 3+7 & 4+8 \end{bmatrix} = \begin{bmatrix} 6 & 8 \\ 10 & 12 \end{bmatrix}
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">3.4 Scalar Multiplication</h4>
+      <p class="mt-2 text-gray-700">
+        Each element of a matrix can be multiplied by a scalar. If \( c = 3 \) and \(\mathbf{A} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        c \cdot \mathbf{A} = 3 \cdot \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = \begin{bmatrix} 3 & 6 \\ 9 & 12 \end{bmatrix}
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">3.5 Matrix Multiplication</h4>
+      <p class="mt-2 text-gray-700">
+        Matrix multiplication is defined when the number of columns of the first matrix equals the number of rows of the second matrix. For \(\mathbf{A} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(\mathbf{B} = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{A} \cdot \mathbf{B} = \begin{bmatrix} 1 \cdot 5 + 2 \cdot 7 & 1 \cdot 6 + 2 \cdot 8 \\ 3 \cdot 5 + 4 \cdot 7 & 3 \cdot 6 + 4 \cdot 8 \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">3.6 Matrix Transpose</h4>
+      <p class="mt-2 text-gray-700">
+        The transpose of a matrix \(\mathbf{A}\), denoted by \(\mathbf{A}^T\), is obtained by swapping its rows and columns. For \(\mathbf{A} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{A}^T = \begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">3.7 Matrix Inversion</h4>
+      <p class="mt-2 text-gray-700">
+        A matrix \(\mathbf{A}\) is invertible if there exists a matrix \(\mathbf{A}^{-1}\) such that \(\mathbf{A} \cdot \mathbf{A}^{-1} = \mathbf{I}\), where \(\mathbf{I}\) is the identity matrix. The inversion operation is crucial in solving linear equations but exists only for square, non-singular matrices.
+      </p>
+      <p class="mt-4 text-gray-700">
+        For a \(2 \times 2\) matrix \(\mathbf{A} = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\), the inverse is given by:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{A}^{-1} = \frac{1}{ad - bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">3.8 Special Matrix Properties</h4>
+      <p class="mt-2 text-gray-700">
+        Matrices in deep learning often have special properties, such as symmetry (\(\mathbf{A} = \mathbf{A}^T\)), sparsity (many elements are zero), and orthogonality (\(\mathbf{A} \cdot \mathbf{A}^T = \mathbf{I}\)). These properties can be exploited to optimize computations in machine learning.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">3.9 Importance of Matrices in Deep Learning</h4>
+      <p class="mt-2 text-gray-700">
+        Matrices are used extensively to represent data batches, weight parameters, and activations in neural networks. Operations such as matrix multiplication and transpose are essential for performing linear transformations, making matrix operations foundational in implementing and optimizing deep learning models.
+      </p>
+    </section>
+    
+  
+
+    <!-- Chapter 4 -->
+    <section id="chapter-4" class="bg-white p-8 rounded-lg shadow mt-8">
+      <h3 class="text-2xl font-semibold">Chapter 4: Determinants</h3>
+      <p class="mt-4 text-gray-700">
+        The <strong>determinant</strong> of a matrix is a scalar value that provides insights into certain properties of the matrix, such as invertibility and volume scaling in transformations. The determinant is particularly useful for square matrices and is denoted as \(\det(\mathbf{A})\) or \(|\mathbf{A}|\).
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">4.1 Determinant of a 2x2 Matrix</h4>
+      <p class="mt-2 text-gray-700">
+        For a \(2 \times 2\) matrix \(\mathbf{A} = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\), the determinant is calculated as:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \det(\mathbf{A}) = ad - bc
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">4.2 Determinant of a 3x3 Matrix</h4>
+      <p class="mt-2 text-gray-700">
+        For a \(3 \times 3\) matrix \(\mathbf{B} = \begin{bmatrix} a & b & c \\ d & e & f \\ g & h & i \end{bmatrix}\), the determinant is given by expanding along the first row:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \det(\mathbf{B}) = a(ei - fh) - b(di - fg) + c(dh - eg)
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">4.3 Properties of Determinants</h4>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Invertibility:</strong> A matrix \(\mathbf{A}\) is invertible if and only if \(\det(\mathbf{A}) \neq 0\).</li>
+        <li><strong>Multiplication:</strong> The determinant of the product of two matrices is the product of their determinants, i.e., \(\det(\mathbf{A} \cdot \mathbf{B}) = \det(\mathbf{A}) \cdot \det(\mathbf{B})\).</li>
+        <li><strong>Transpose:</strong> The determinant of a matrix is equal to the determinant of its transpose, i.e., \(\det(\mathbf{A}) = \det(\mathbf{A}^T)\).</li>
+        <li><strong>Row Operations:</strong> Swapping two rows of a matrix multiplies the determinant by -1, while adding a multiple of one row to another row leaves the determinant unchanged.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">4.4 Determinants and Linear Transformations</h4>
+      <p class="mt-2 text-gray-700">
+        The determinant of a transformation matrix gives the scale factor by which the transformation affects the area (in 2D) or volume (in 3D) of the geometric shape being transformed. If \(\det(\mathbf{A}) = 1\), the transformation preserves area/volume; if \(\det(\mathbf{A}) = 0\), the transformation collapses the space to a lower dimension.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">4.5 Determinant and Eigenvalues</h4>
+      <p class="mt-2 text-gray-700">
+        The determinant of a matrix can also be interpreted through its eigenvalues. For a square matrix \(\mathbf{A}\) with eigenvalues \(\lambda_1, \lambda_2, \dots, \lambda_n\), the determinant is the product of its eigenvalues:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \det(\mathbf{A}) = \lambda_1 \cdot \lambda_2 \cdot \dots \cdot \lambda_n
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">4.6 Importance of Determinants in Deep Learning</h4>
+      <p class="mt-2 text-gray-700">
+        Determinants are essential for understanding the stability and sensitivity of transformations in high-dimensional spaces. In deep learning, they are crucial in optimization methods, especially when working with complex transformations, where understanding the scaling and invertibility of matrices can aid in training more efficient models.
+      </p>
+    </section>
+    
+    
+
+    <!-- Chapter 5 -->
+    <section id="chapter-5" class="bg-white p-8 rounded-lg shadow mt-8">
+      <h3 class="text-2xl font-semibold">Chapter 5: Eigenvalues and Eigenvectors</h3>
+      <p class="mt-4 text-gray-700">
+        Eigenvalues and eigenvectors are powerful concepts in linear algebra, especially in understanding transformations in high-dimensional spaces. They provide insights into the "directions" that remain unchanged by a transformation and the "scaling" effect along these directions.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">5.1 Definition of Eigenvalues and Eigenvectors</h4>
+      <p class="mt-2 text-gray-700">
+        Given a square matrix \(\mathbf{A}\), an <strong>eigenvector</strong> \(\mathbf{v}\) is a non-zero vector such that when the matrix \(\mathbf{A}\) multiplies it, the vector’s direction remains unchanged. This can be expressed as:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \mathbf{A} \mathbf{v} = \lambda \mathbf{v}
+        \]
+      </p>
+      <p class="mt-2 text-gray-700">
+        where \(\lambda\) is the <strong>eigenvalue</strong> corresponding to the eigenvector \(\mathbf{v}\). In other words, multiplying \(\mathbf{v}\) by \(\mathbf{A}\) only scales \(\mathbf{v}\) by \(\lambda\) without changing its direction.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">5.2 Finding Eigenvalues</h4>
+      <p class="mt-2 text-gray-700">
+        To find the eigenvalues of a matrix \(\mathbf{A}\), we rearrange the equation as:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        (\mathbf{A} - \lambda \mathbf{I}) \mathbf{v} = 0
+        \]
+      </p>
+      <p class="mt-2 text-gray-700">
+        where \(\mathbf{I}\) is the identity matrix. For a non-trivial solution, the determinant of \((\mathbf{A} - \lambda \mathbf{I})\) must be zero:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \det(\mathbf{A} - \lambda \mathbf{I}) = 0
+        \]
+      </p>
+      <p class="mt-2 text-gray-700">
+        This equation, known as the <strong>characteristic polynomial</strong>, yields the eigenvalues \(\lambda\) when solved.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">5.3 Finding Eigenvectors</h4>
+      <p class="mt-2 text-gray-700">
+        Once eigenvalues are determined, substitute each eigenvalue \(\lambda\) back into \((\mathbf{A} - \lambda \mathbf{I}) \mathbf{v} = 0\) to solve for the corresponding eigenvector \(\mathbf{v}\).
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">5.4 Properties of Eigenvalues and Eigenvectors</h4>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Sum of Eigenvalues:</strong> The sum of the eigenvalues of a matrix is equal to its trace, i.e., the sum of its diagonal elements.</li>
+        <li><strong>Product of Eigenvalues:</strong> The product of the eigenvalues of a matrix is equal to its determinant.</li>
+        <li><strong>Eigenvalues of Diagonal Matrices:</strong> For a diagonal matrix, the eigenvalues are simply the diagonal entries.</li>
+        <li><strong>Eigenvalues of Symmetric Matrices:</strong> A symmetric matrix has real eigenvalues and orthogonal eigenvectors.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">5.5 Applications in Deep Learning</h4>
+      <p class="mt-2 text-gray-700">
+        Eigenvalues and eigenvectors are applied in dimensionality reduction (e.g., <strong>Principal Component Analysis</strong> or PCA) where they help identify the directions (principal components) that capture the most variance in the data. In deep learning, this is useful for:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Model Simplification:</strong> Reducing the number of input features while retaining essential information.</li>
+        <li><strong>Stability Analysis:</strong> Eigenvalues are used to assess stability in training, particularly in techniques like optimization and convergence analysis.</li>
+        <li><strong>Covariance Matrices:</strong> In PCA, eigenvalues and eigenvectors of the covariance matrix help capture the structure and variance of data.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">5.6 Practical Example: PCA for Dimensionality Reduction</h4>
+      <p class="mt-2 text-gray-700">
+        In PCA, the covariance matrix \(\mathbf{C}\) of the data matrix \(\mathbf{X}\) is formed, where each column of \(\mathbf{X}\) is a feature. The eigenvectors of \(\mathbf{C}\) represent the directions of maximum variance, and the eigenvalues indicate the magnitude of variance in each direction. Sorting eigenvalues in descending order and selecting the top \(k\) eigenvectors allows us to reduce the data to \(k\) dimensions while preserving most of its information.
+      </p>
+    </section>
+    
+  
+
+    <!-- Chapter 6 -->
+    <section id="chapter-6" class="bg-white p-8 rounded-lg shadow mt-8">
+      <h3 class="text-2xl font-semibold">Chapter 6: Vector Spaces</h3>
+      <p class="mt-4 text-gray-700">
+        A <strong>vector space</strong> is a collection of vectors, where vector addition and scalar multiplication satisfy certain properties. Vector spaces help in organizing data in a way that allows for meaningful transformations, projections, and decompositions—crucial for deep learning and many machine learning algorithms.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">6.1 Definition of a Vector Space</h4>
+      <p class="mt-2 text-gray-700">
+        A vector space \( V \) over a field \( F \) (commonly the real numbers \( \mathbb{R} \)) is a set of elements, called vectors, where two main operations are defined:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Vector Addition:</strong> For any two vectors \( \mathbf{u} \) and \( \mathbf{v} \) in \( V \), the sum \( \mathbf{u} + \mathbf{v} \) is also in \( V \).</li>
+        <li><strong>Scalar Multiplication:</strong> For any scalar \( c \in F \) and vector \( \mathbf{v} \in V \), the product \( c \mathbf{v} \) is also in \( V \).</li>
+      </ul>
+    
+      <p class="mt-2 text-gray-700">
+        Additionally, a vector space must satisfy certain properties, including commutativity, associativity, and distributive properties for vector addition and scalar multiplication.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">6.2 Examples of Vector Spaces</h4>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>\( \mathbb{R}^n \):</strong> The space of all \( n \)-dimensional vectors with real entries is a classic example. For instance, \( \mathbb{R}^2 \) represents all 2D vectors.</li>
+        <li><strong>Polynomial Vector Space:</strong> The set of all polynomials of a given degree forms a vector space since polynomial addition and scalar multiplication yield another polynomial of the same degree.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">6.3 Subspaces</h4>
+      <p class="mt-2 text-gray-700">
+        A <strong>subspace</strong> of a vector space \( V \) is a subset \( W \) of \( V \) that is also a vector space under the operations of \( V \). For example, in \( \mathbb{R}^3 \), the set of all vectors that lie on a plane through the origin forms a subspace.
+      </p>
+      <p class="mt-4 text-gray-700">
+        To be a subspace, \( W \) must satisfy:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li>Contain the zero vector.</li>
+        <li>Be closed under vector addition and scalar multiplication.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">6.4 Span and Basis</h4>
+      <p class="mt-2 text-gray-700">
+        The <strong>span</strong> of a set of vectors \( \{ \mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k \} \) in \( V \) is the set of all possible linear combinations of these vectors:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \text{span}\{ \mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k \} = \left\{ c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \ldots + c_k \mathbf{v}_k \mid c_i \in F \right\}
+        \]
+      </p>
+      <p class="mt-2 text-gray-700">
+        A <strong>basis</strong> of a vector space \( V \) is a set of vectors that are linearly independent and span \( V \). The number of vectors in any basis of \( V \) defines its <strong>dimension</strong>.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">6.5 Linear Independence</h4>
+      <p class="mt-2 text-gray-700">
+        A set of vectors \( \{ \mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k \} \) is <strong>linearly independent</strong> if no vector in the set can be written as a linear combination of the others. Mathematically, if:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \ldots + c_k \mathbf{v}_k = 0
+        \]
+      </p>
+      <p class="mt-2 text-gray-700">
+        implies \( c_1 = c_2 = \ldots = c_k = 0 \), then the vectors are linearly independent. Linear independence is crucial in defining the basis of a vector space.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">6.6 Applications in Deep Learning</h4>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Feature Space Representation:</strong> Vector spaces allow us to organize data points in high-dimensional spaces, which are then transformed or reduced to essential components during training.</li>
+        <li><strong>Dimensionality Reduction:</strong> Techniques like PCA rely on the basis of vector spaces to reduce the number of features while retaining most of the relevant information.</li>
+        <li><strong>Understanding Embeddings:</strong> In NLP and other areas, embeddings are vectors in high-dimensional spaces that capture semantic relationships between items like words or images.</li>
+      </ul>
+    </section>
+    
+ 
+  
+
+    <!-- Chapter 7 -->
+    <section id="chapter-7" class="bg-white p-8 rounded-lg shadow mt-8">
+      <h3 class="text-2xl font-semibold">Chapter 7: Linear Transformations</h3>
+      <p class="mt-4 text-gray-700">
+        A <strong>linear transformation</strong> is a function between two vector spaces that preserves vector addition and scalar multiplication. Given two vector spaces \( V \) and \( W \) over the same field \( F \), a function \( T: V \rightarrow W \) is a linear transformation if for all vectors \( \mathbf{u}, \mathbf{v} \in V \) and scalars \( c \in F \):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v}) \quad \text{and} \quad T(c \mathbf{u}) = c T(\mathbf{u})
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">7.1 Matrix Representation of Linear Transformations</h4>
+      <p class="mt-2 text-gray-700">
+        Every linear transformation from \( \mathbb{R}^n \) to \( \mathbb{R}^m \) can be represented by a matrix \( A \) such that:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        T(\mathbf{x}) = A \mathbf{x}
+        \]
+      </p>
+      <p class="mt-2 text-gray-700">
+        where \( A \) is an \( m \times n \) matrix and \( \mathbf{x} \) is a vector in \( \mathbb{R}^n \). This matrix representation is key for computational applications, as it allows us to perform linear transformations using matrix multiplication.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">7.2 Properties of Linear Transformations</h4>
+      <p class="mt-2 text-gray-700">
+        Some important properties of linear transformations include:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Linearity:</strong> By definition, linear transformations satisfy both the additivity and homogeneity properties.</li>
+        <li><strong>Composition:</strong> The composition of two linear transformations is also a linear transformation.</li>
+        <li><strong>Invertibility:</strong> A linear transformation \( T \) is invertible if there exists a transformation \( T^{-1} \) such that \( T(T^{-1}(\mathbf{v})) = \mathbf{v} \) and \( T^{-1}(T(\mathbf{u})) = \mathbf{u} \).</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">7.3 Examples of Linear Transformations</h4>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Scaling:</strong> Multiplying each component of a vector by a constant.</li>
+        <li><strong>Rotation:</strong> Rotating a vector in a given space (common in 2D or 3D spaces).</li>
+        <li><strong>Projection:</strong> Mapping vectors onto a subspace, such as projecting onto a line or a plane.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">7.4 Kernel and Range of a Linear Transformation</h4>
+      <p class="mt-2 text-gray-700">
+        The <strong>kernel</strong> of a linear transformation \( T: V \rightarrow W \) is the set of all vectors in \( V \) that map to the zero vector in \( W \):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \text{ker}(T) = \{ \mathbf{v} \in V \mid T(\mathbf{v}) = 0 \}
+        \]
+      </p>
+      <p class="mt-2 text-gray-700">
+        The <strong>range</strong> (or image) of \( T \) is the set of all vectors in \( W \) that can be expressed as \( T(\mathbf{v}) \) for some \( \mathbf{v} \in V \):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        \text{range}(T) = \{ T(\mathbf{v}) \mid \mathbf{v} \in V \}
+        \]
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">7.5 Applications in Deep Learning</h4>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Data Transformations:</strong> Linear transformations are used to normalize and scale data in pre-processing steps, making it easier for models to train.</li>
+        <li><strong>Weight Matrices in Neural Networks:</strong> In neural networks, the layers can be considered linear transformations where weights act as matrices transforming inputs to outputs.</li>
+        <li><strong>Principal Component Analysis (PCA):</strong> PCA is based on finding linear transformations that project data onto a lower-dimensional subspace while retaining variance.</li>
+      </ul>
+    </section>
+    
+     
+    </script>
+
+    <!-- Chapter 8 -->
+    <section id="chapter-8" class="bg-white p-8 rounded-lg shadow mt-8">
+      <h3 class="text-2xl font-semibold">Chapter 8: Singular Value Decomposition</h3>
+      <p class="mt-4 text-gray-700">
+        Singular Value Decomposition (SVD) is a method of decomposing a matrix into three other matrices. For a given matrix \( A \) of size \( m \times n \), SVD allows us to express it in the form:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        A = U \Sigma V^T
+        \]
+      </p>
+      <p class="mt-2 text-gray-700">
+        where:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li>\( U \) is an \( m \times m \) orthogonal matrix (the left singular vectors).</li>
+        <li>\( \Sigma \) is an \( m \times n \) diagonal matrix with non-negative real numbers (the singular values) on the diagonal.</li>
+        <li>\( V^T \) is the transpose of an \( n \times n \) orthogonal matrix (the right singular vectors).</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">8.1 Properties of SVD</h4>
+      <p class="mt-2 text-gray-700">
+        Some important properties of SVD include:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Existence:</strong> Every matrix \( A \) has a singular value decomposition.</li>
+        <li><strong>Uniqueness:</strong> The singular values are unique, but the singular vectors are not necessarily unique.</li>
+        <li><strong>Rank:</strong> The number of non-zero singular values equals the rank of the matrix \( A \).</li>
+        <li><strong>Approximation:</strong> SVD can be used to approximate a matrix by truncating small singular values, which is useful in data compression.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">8.2 Computing the SVD</h4>
+      <p class="mt-2 text-gray-700">
+        The SVD of a matrix can be computed using various algorithms, such as:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Jacobi Method:</strong> An iterative method that computes the eigenvalues and eigenvectors.</li>
+        <li><strong>Golub-Reinsch Algorithm:</strong> A more efficient algorithm for computing SVD, particularly for large matrices.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">8.3 Applications of SVD</h4>
+      <p class="mt-2 text-gray-700">
+        SVD has numerous applications in data science and machine learning, including:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Principal Component Analysis (PCA):</strong> SVD is used in PCA for dimensionality reduction by finding the principal components of the data.</li>
+        <li><strong>Image Compression:</strong> By keeping only the largest singular values and their corresponding singular vectors, we can effectively compress images.</li>
+        <li><strong>Recommender Systems:</strong> SVD can be used to factorize user-item matrices, helping to predict user preferences and make recommendations.</li>
+        <li><strong>Noisy Data Reduction:</strong> SVD helps in identifying and removing noise from datasets by truncating small singular values.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">8.4 Example of SVD</h4>
+      <p class="mt-2 text-gray-700">
+        Consider the following matrix \( A \):
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        A = \begin{bmatrix}
+        1 & 2 & 3 \\
+        4 & 5 & 6 \\
+        7 & 8 & 9
+        \end{bmatrix}
+        \]
+      </p>
+      <p class="mt-2 text-gray-700">
+        The SVD of \( A \) can be computed, resulting in matrices \( U \), \( \Sigma \), and \( V^T \). For illustration:
+      </p>
+      <p class="mt-4 text-gray-700">
+        \[
+        U = \begin{bmatrix}
+        -0.2148 & -0.8870 & 0.4082 \\
+        -0.5206 & -0.2496 & -0.7071 \\
+        -0.8264 & 0.3875 & 0.0000
+        \end{bmatrix}, \quad
+        \Sigma = \begin{bmatrix}
+        16.8481 & 0 & 0 \\
+        0 & 1.0684 & 0 \\
+        0 & 0 & 0
+        \end{bmatrix}, \quad
+        V^T = \begin{bmatrix}
+        -0.5045 & -0.5754 & -0.6453 \\
+        -0.7575 & -0.3016 & 0.5795 \\
+        -0.4082 & 0.7619 & -0.5050
+        \end{bmatrix}
+        \]
+      </p>
+      <p class="mt-2 text-gray-700">
+        The original matrix can be approximated by reconstructing it using a subset of singular values, providing a useful technique for reducing the complexity of the data while retaining significant information.
+      </p>
+    </section>
+    
+    
+
+    <!-- Chapter 9 -->
+    <section id="chapter-9" class="bg-white p-8 rounded-lg shadow mt-8">
+      <h3 class="text-2xl font-semibold">Chapter 9: Norms</h3>
+      <p class="mt-4 text-gray-700">
+        A norm on a vector space \( V \) is a function \( \| \cdot \|: V \to \mathbb{R} \) that satisfies the following properties for all vectors \( \mathbf{x}, \mathbf{y} \in V \) and scalar \( \alpha \):
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Non-negativity:</strong> \( \| \mathbf{x} \| \geq 0 \) and \( \| \mathbf{x} \| = 0 \) if and only if \( \mathbf{x} = 0 \).</li>
+        <li><strong>Scalar multiplication:</strong> \( \| \alpha \mathbf{x} \| = |\alpha| \| \mathbf{x} \| \).</li>
+        <li><strong>Triangle inequality:</strong> \( \| \mathbf{x} + \mathbf{y} \| \leq \| \mathbf{x} \| + \| \mathbf{y} \| \).</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">9.1 Common Types of Norms</h4>
+      <p class="mt-2 text-gray-700">
+        There are several types of norms commonly used in deep learning and linear algebra:
+      </p>
+      
+      <h5 class="text-lg font-semibold mt-4">9.1.1 L1 Norm (Manhattan Norm)</h5>
+      <p class="mt-2 text-gray-700">
+        The L1 norm, also known as the Manhattan norm, is defined as:
+        \[
+        \| \mathbf{x} \|_1 = \sum_{i=1}^{n} |x_i|
+        \]
+        where \( \mathbf{x} = [x_1, x_2, \ldots, x_n] \).
+      </p>
+    
+      <h5 class="text-lg font-semibold mt-4">9.1.2 L2 Norm (Euclidean Norm)</h5>
+      <p class="mt-2 text-gray-700">
+        The L2 norm, or Euclidean norm, is defined as:
+        \[
+        \| \mathbf{x} \|_2 = \sqrt{\sum_{i=1}^{n} x_i^2}
+        \]
+        This norm represents the Euclidean distance from the origin to the point \( \mathbf{x} \) in Euclidean space.
+      </p>
+    
+      <h5 class="text-lg font-semibold mt-4">9.1.3 Infinity Norm (Max Norm)</h5>
+      <p class="mt-2 text-gray-700">
+        The infinity norm is defined as:
+        \[
+        \| \mathbf{x} \|_\infty = \max_{i} |x_i|
+        \]
+        This norm measures the maximum absolute value of the elements of \( \mathbf{x} \).
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">9.2 Properties of Norms</h4>
+      <p class="mt-2 text-gray-700">
+        The following properties are characteristic of norms:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Homogeneity:</strong> For any scalar \( \alpha \) and vector \( \mathbf{x} \), \( \| \alpha \mathbf{x} \| = |\alpha| \| \mathbf{x} \| \).</li>
+        <li><strong>Triangle Inequality:</strong> For any vectors \( \mathbf{x} \) and \( \mathbf{y} \), \( \| \mathbf{x} + \mathbf{y} \| \leq \| \mathbf{x} \| + \| \mathbf{y} \| \).</li>
+        <li><strong>Subadditivity:</strong> For any vectors \( \mathbf{x} \) and \( \mathbf{y} \), \( \| \mathbf{x} + \mathbf{y} \|_p \leq \| \mathbf{x} \|_p + \| \mathbf{y} \|_p \) for \( p \geq 1 \).</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">9.3 Applications of Norms in Deep Learning</h4>
+      <p class="mt-2 text-gray-700">
+        Norms are extensively used in deep learning for various purposes:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Regularization:</strong> L1 and L2 norms are used in regularization techniques to prevent overfitting by penalizing large weights in model training.</li>
+        <li><strong>Distance Measurement:</strong> Norms are used to measure distances between data points or model parameters, influencing clustering algorithms and optimization techniques.</li>
+        <li><strong>Gradient Descent:</strong> Norms help in evaluating the convergence of optimization algorithms, such as tracking the change in loss function values.</li>
+        <li><strong>Normalization:</strong> Data normalization using L2 norms can improve the performance and convergence speed of machine learning models.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">9.4 Example of Norm Calculation</h4>
+      <p class="mt-2 text-gray-700">
+        Consider the vector \( \mathbf{x} = [3, -4, 2] \). We can calculate its norms as follows:
+      </p>
+      
+      <p class="mt-4 text-gray-700">
+        1. **L1 Norm:**
+        \[
+        \| \mathbf{x} \|_1 = |3| + |-4| + |2| = 3 + 4 + 2 = 9
+        \]
+        </p>
+      
+      <p class="mt-4 text-gray-700">
+        2. **L2 Norm:**
+        \[
+        \| \mathbf{x} \|_2 = \sqrt{3^2 + (-4)^2 + 2^2} = \sqrt{9 + 16 + 4} = \sqrt{29} \approx 5.385
+        \]
+        </p>
+      
+      <p class="mt-4 text-gray-700">
+        3. **Infinity Norm:**
+        \[
+        \| \mathbf{x} \|_\infty = \max(|3|, |-4|, |2|) = 4
+        \]
+        </p>
+    </section>
+    
+    
+
+    <section id="chapter-10" class="bg-white p-8 rounded-lg shadow mt-8">
+      <h3 class="text-2xl font-semibold">Chapter 10: Principal Component Analysis (PCA)</h3>
+      
+      <h4 class="text-xl font-semibold mt-6">10.1 Introduction to PCA</h4>
+      <p class="mt-2 text-gray-700">
+        Principal Component Analysis is a statistical method used for identifying patterns in data. It is often used for reducing the dimensionality of large datasets while preserving as much variance as possible. PCA can simplify the complexity in high-dimensional data while retaining trends and patterns.
+      </p>
+    
+      <h4 class="text-xl font-semibold mt-6">10.2 Mathematical Formulation</h4>
+      <p class="mt-2 text-gray-700">
+        The goal of PCA is to identify the directions (principal components) that maximize the variance of the data. The steps involved in PCA are as follows:
+      </p>
+      
+      <ol class="list-decimal list-inside mt-2 text-gray-700">
+        <li>
+          <strong>Standardization:</strong> Scale the data to have a mean of zero and a standard deviation of one.
+          \[
+          \mathbf{X}_{\text{scaled}} = \frac{\mathbf{X} - \mu}{\sigma}
+          \]
+        </li>
+        <li>
+          <strong>Covariance Matrix Calculation:</strong> Compute the covariance matrix of the scaled data.
+          \[
+          \mathbf{C} = \frac{1}{n-1} \mathbf{X}_{\text{scaled}}^T \mathbf{X}_{\text{scaled}}
+          \]
+        </li>
+        <li>
+          <strong>Eigenvalues and Eigenvectors:</strong> Compute the eigenvalues and eigenvectors of the covariance matrix.
+          \[
+          \mathbf{C} \mathbf{v} = \lambda \mathbf{v}
+          \]
+          where \( \lambda \) is an eigenvalue and \( \mathbf{v} \) is the corresponding eigenvector.
+        </li>
+        <li>
+          <strong>Principal Components:</strong> Sort the eigenvectors by their corresponding eigenvalues in descending order and select the top \( k \) eigenvectors to form the principal components.
+        </li>
+        <li>
+          <strong>Projection:</strong> Project the original data onto the new principal component space.
+          \[
+          \mathbf{Z} = \mathbf{X}_{\text{scaled}} \cdot \mathbf{W}
+          \]
+          where \( \mathbf{W} \) is the matrix of selected eigenvectors.
+        </li>
+      </ol>
+    
+      <h4 class="text-xl font-semibold mt-6">10.3 Properties of PCA</h4>
+      <p class="mt-2 text-gray-700">
+        PCA has several important properties:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Dimensionality Reduction:</strong> PCA reduces the number of features while retaining the most significant information.</li>
+        <li><strong>Variance Maximization:</strong> The principal components capture the directions of maximum variance in the data.</li>
+        <li><strong>Orthogonality:</strong> The principal components are orthogonal to each other, ensuring no redundancy in the captured information.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">10.4 Applications of PCA</h4>
+      <p class="mt-2 text-gray-700">
+        PCA is used in various applications, including:
+      </p>
+      <ul class="list-disc list-inside mt-2 text-gray-700">
+        <li><strong>Data Visualization:</strong> PCA helps visualize high-dimensional data by projecting it into lower dimensions (2D or 3D).</li>
+        <li><strong>Noise Reduction:</strong> By removing less significant components, PCA can help reduce noise in datasets.</li>
+        <li><strong>Feature Extraction:</strong> PCA can be used as a preprocessing step to extract features before applying machine learning algorithms.</li>
+        <li><strong>Facial Recognition:</strong> PCA is commonly used in image processing for facial recognition tasks, known as Eigenfaces.</li>
+      </ul>
+    
+      <h4 class="text-xl font-semibold mt-6">10.5 Example of PCA</h4>
+      <p class="mt-2 text-gray-700">
+        Consider a dataset with three features. After applying PCA, we might reduce this dataset to two principal components. The original data points in 3D space can be represented in a 2D space defined by the principal components, simplifying the complexity of the analysis.
+      </p>
+      <p class="mt-2 text-gray-700">
+        The steps can be summarized as:
+      </p>
+      <ol class="list-decimal list-inside mt-2 text-gray-700">
+        <li>Standardize the dataset.</li>
+        <li>Calculate the covariance matrix.</li>
+        <li>Find the eigenvalues and eigenvectors.</li>
+        <li>Select the top principal components.</li>
+        <li>Project the data onto the principal components.</li>
+      </ol>
+    </section>
+    
+ 
+    
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-blue-800 text-white py-6">
+    <div class="container mx-auto px-6 text-center">
+      <p class="text-sm">MCDocs -  Linear Algebra for Deep Learning</p>
+    </div>
+  </footer>
+
+</body>
+</html>
