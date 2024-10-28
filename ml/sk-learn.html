@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Scikit-Learn Documentation</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/components/prism-python.min.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+
+    <style>
+
+      pre {
+        background: #272822; /* Dark background for code blocks */
+        color: #f8f8f2; /* Light text for code */
+        padding: 15px;
+        border-radius: 5px;
+        overflow: auto; /* Enable scrolling for long code */
+        position: relative; /* For positioning the button */
+    }
+      button.copy-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #4CAF50; /* Green background */
+        color: white; /* White text */
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 0.9em;
+    }
+    button.copy-btn:hover {
+        background-color: #45a049; /* Darker green on hover */
+    }
+    </style>
+
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+<!-- Navbar -->
+<header class="sticky top-0 bg-blue-900 text-white shadow-md z-10">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">Scikit-Learn: Machine Learning in Python</h1>
+    
+    <div class="relative">
+      <button id="navbar-toggle" class="md:hidden focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+      
+      <nav id="navbar" class="hidden md:flex space-x-8">
+         <a href="#getting-started" class="hover:text-gray-300">Getting Started</a>
+        <a href="#classification" class="hover:text-gray-300">Classification</a>
+        <a href="#regression" class="hover:text-gray-300">Regression</a>
+        <a href="#clustering" class="hover:text-gray-300">Clustering</a>
+        <a href="#model-selection" class="hover:text-gray-300">Model Selection</a>
+        <a href="#preprocessing" class="hover:text-gray-300">Preprocessing</a>
+        <a href="#pipelines" class="hover:text-gray-300">Pipelines</a>
+        <a href="#model-evaluations" class="hover:text-gray-300">Model Evaluation</a>
+        <a href="#advanced-topics" class="hover:text-gray-300">Advanced Topics</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navbar -->
+<div id="mobile-navbar" class="md:hidden bg-gray-800 p-4 hidden">
+   <a href="#getting-started" class="block py-2 hover:text-gray-300">Getting Started</a>
+  <a href="#classification" class="block py-2 hover:text-gray-300">Classification</a>
+  <a href="#regression" class="block py-2 hover:text-gray-300">Regression</a>
+  <a href="#clustering" class="block py-2 hover:text-gray-300">Clustering</a>
+  <a href="#model-selection" class="block py-2 hover:text-gray-300">Model Selection</a>
+  <a href="#preprocessing" class="block py-2 hover:text-gray-300">Preprocessing</a>
+  <a href="#pipelines" class="block py-2 hover:text-gray-300">Pipelines</a>
+  <a href="#model-evaluations" class="block py-2 hover:text-gray-300">Model Evaluation</a>
+  <a href="#advanced-topics" class="block py-2 hover:text-gray-300">Advanced Topics</a>
+</div>
+
+<script>
+  // Toggle mobile navbar
+  const navbarToggle = document.getElementById('navbar-toggle');
+  const mobileNavbar = document.getElementById('mobile-navbar');
+
+  navbarToggle.addEventListener('click', () => {
+    mobileNavbar.classList.toggle('hidden');
+  });
+</script>
+
+   <!-- Hero Section -->
+   <section class="bg-blue-600 text-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-semibold">Scikit-Learn: Machine Learning in Python</h2>
+      <p class="mt-4 text-lg">Let us learn Scikit-Learn</p>
+    </div>
+  </section>
+
+
+  <!-- Chapter Sections -->
+  <div class="container mx-auto px-6 py-12 space-y-12">
+
+  
+
+
+    <section id="getting-started"  class="bg-white p-8 rounded-lg shadow">
+      <h2 class="text-2xl font-bold mt-6">Getting Started</h2>
+      <p class="mt-4">Scikit-Learn is a powerful and user-friendly machine learning library for Python. This section will guide you through the essential steps to get started with Scikit-Learn, including installation, loading data, and creating your first model.</p>
+    
+      <h3 class="text-xl font-semibold mt-4">1. Installation</h3>
+      <p class="mt-2">To use Scikit-Learn, you need to have Python installed on your machine. The recommended version is Python 3.6 or later. You can install Scikit-Learn via pip:</p>
+      <pre class="bg-gray-200 p-2 rounded">
+        <code class="language-bash" id="bash-code">
+          pip install scikit-learn
+        </code>
+        <button class="copy-btn" onclick="copyToClipboard('bash-code')">Copy</button>
+      </pre>
+      <p class="mt-2">If you are using Anaconda, you can install Scikit-Learn using conda:</p>
+      <pre class="bg-gray-200 p-2 rounded"><code class="language-bash">conda install scikit-learn</code></pre>
+    
+      <h3 class="text-xl font-semibold mt-4">2. Importing Scikit-Learn</h3>
+      <p class="mt-2">Once you have installed Scikit-Learn, you can import it in your Python scripts. Here’s how to import the library:</p>
+      <pre class="bg-gray-200 p-2 rounded"><code class="language-python" id="001">
+    import numpy as np
+    import pandas as pd
+    from sklearn.model_selection import train_test_split
+    from sklearn.ensemble import RandomForestClassifier
+  </code>
+  <button class="copy-btn" onclick="copyToClipboard('001')">Copy</button>
+
+</pre>
+
+ 
+
+    
+      <h3 class="text-xl font-semibold mt-4">3. Loading Data</h3>
+      <p class="mt-2">Before you can train a machine learning model, you need some data. You can load data from various sources, such as CSV files, databases, or built-in datasets provided by Scikit-Learn. Here’s an example of loading a CSV file using Pandas:</p>
+      <pre class="bg-gray-200 p-2 rounded"><code class="language-python">data = pd.read_csv('path_to_your_data.csv')</code></pre>
+      <p class="mt-2">Scikit-Learn also provides a few sample datasets that you can use for practice. For example:</p>
+      <pre class="bg-gray-200 p-2 rounded">
+        <code class="language-python">
+    from sklearn.datasets import load_iris
+    iris = load_iris()
+    X = iris.data
+    y = iris.target</code></pre>
+    
+      <h3 class="text-xl font-semibold mt-4">4. Preprocessing Data</h3>
+      <p class="mt-2">Before training your model, it is often necessary to preprocess your data. This might involve handling missing values, normalizing features, or encoding categorical variables. Scikit-Learn provides several utilities for preprocessing:</p>
+      <pre class="bg-gray-200 p-2 rounded">
+        
+        
+    <code class="language-python">
+    from sklearn.preprocessing import StandardScaler
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)</code></pre>
+    
+      <h3 class="text-xl font-semibold mt-4">5. Splitting the Dataset</h3>
+      <p class="mt-2">It’s important to split your dataset into training and testing sets to evaluate the performance of your model accurately. You can use the <code>train_test_split</code> function:</p>
+      <pre class="bg-gray-200 p-2 rounded"><code class="language-python">X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)</code></pre>
+    
+      <h3 class="text-xl font-semibold mt-4">6. Training a Model</h3>
+      <p class="mt-2">Now that you have your training data, you can create and train your model. Here’s how to train a Random Forest classifier:</p>
+      <pre class="bg-gray-200 p-2 rounded"><code class="language-python">
+    model = RandomForestClassifier(n_estimators=100, random_state=42)
+    model.fit(X_train, y_train)</code></pre>
+    
+      <h3 class="text-xl font-semibold mt-4">7. Making Predictions</h3>
+      <p class="mt-2">After training your model, you can use it to make predictions on the test set:</p>
+      <pre class="bg-gray-200 p-2 rounded"><code class="language-python">
+       y_pred = model.predict(X_test)</code></pre>
+      <h3 class="text-xl font-semibold mt-4">8. Evaluating the Model</h3>
+      <p class="mt-2">It’s crucial to evaluate your model’s performance using metrics like accuracy, precision, recall, and F1 score. Here’s how to compute accuracy:</p>
+      <pre class="bg-gray-200 p-2 rounded"><code class="language-python">
+    from sklearn.metrics import accuracy_score
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f'Accuracy: {accuracy:.2f}')</code></pre>
+    
+      <h3 class="text-xl font-semibold mt-4">9. Next Steps</h3>
+      <p class="mt-2">Congratulations! You’ve successfully trained your first machine learning model using Scikit-Learn. From here, you can explore more advanced topics such as hyperparameter tuning, cross-validation, and ensemble methods.</p>
+      <p class="mt-2">Refer to the sections below for deeper insights into each topic:</p>
+      <ul class="list-disc list-inside mt-2">
+        <li><a href="#classification" class="text-blue-600 hover:underline">Classification</a></li>
+        <li><a href="#regression" class="text-blue-600 hover:underline">Regression</a></li>
+        <li><a href="#clustering" class="text-blue-600 hover:underline">Clustering</a></li>
+        <li><a href="#model-selection" class="text-blue-600 hover:underline">Model Selection</a></li>
+        <li><a href="#advanced-topics" class="text-blue-600 hover:underline">Advanced Topics</a></li>
+      </ul>
+    </section>
+    
+
+    <section id="classification" class="bg-white p-8 rounded-lg shadow">
+      <h2 class="text-2xl font-bold mt-6">Classification</h2>
+      <p class="mt-4">Classification is a supervised learning approach where the model is trained to categorize data into predefined classes or labels. Scikit-Learn provides a wide range of classification algorithms, allowing you to implement various models with ease.</p>
+  
+      <h3 class="text-xl font-semibold mt-4">1. Logistic Regression</h3>
+      <p class="mt-2">Logistic Regression is a popular algorithm used for binary classification tasks. Here’s how you can implement it using Scikit-Learn:</p>
+      <pre class="bg-gray-200 p-2 rounded">
+          <code class="language-python" id="logistic-regression">
+  from sklearn.linear_model import LogisticRegression
+  from sklearn.datasets import load_iris
+  from sklearn.model_selection import train_test_split
+  from sklearn.metrics import accuracy_score
+  
+  # Load dataset
+  data = load_iris()
+  X = data.data
+  y = data.target
+  
+  # Split the dataset into training and testing sets
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+  
+  # Create and train the model
+  model = LogisticRegression(max_iter=200)
+  model.fit(X_train, y_train)
+  
+  # Make predictions
+  predictions = model.predict(X_test)
+  
+  # Evaluate the model
+  accuracy = accuracy_score(y_test, predictions)
+  print(f'Accuracy: {accuracy:.2f}')
+          </code>
+          <button class="copy-btn" onclick="copyToClipboard('logistic-regression')">Copy</button>
+      </pre>
+  
+      <h3 class="text-xl font-semibold mt-4">2. Decision Tree Classifier</h3>
+      <p class="mt-2">The Decision Tree Classifier is another popular choice for classification tasks. It works by creating a model based on a tree-like structure:</p>
+      <pre class="bg-gray-200 p-2 rounded">
+          <code class="language-python" id="decision-tree">
+  from sklearn.tree import DecisionTreeClassifier
+  
+  # Create and train the model
+  tree_model = DecisionTreeClassifier()
+  tree_model.fit(X_train, y_train)
+  
+  # Make predictions
+  tree_predictions = tree_model.predict(X_test)
+  
+  # Evaluate the model
+  tree_accuracy = accuracy_score(y_test, tree_predictions)
+  print(f'Decision Tree Accuracy: {tree_accuracy:.2f}')
+          </code>
+          <button class="copy-btn" onclick="copyToClipboard('decision-tree')">Copy</button>
+      </pre>
+  
+      <h3 class="text-xl font-semibold mt-4">3. Random Forest Classifier</h3>
+      <p class="mt-2">Random Forest is an ensemble method that combines multiple decision trees to improve classification performance:</p>
+      <pre class="bg-gray-200 p-2 rounded">
+          <code class="language-python" id="random-forest">
+  from sklearn.ensemble import RandomForestClassifier
+  
+  # Create and train the model
+  rf_model = RandomForestClassifier(n_estimators=100)
+  rf_model.fit(X_train, y_train)
+  
+  # Make predictions
+  rf_predictions = rf_model.predict(X_test)
+  
+  # Evaluate the model
+  rf_accuracy = accuracy_score(y_test, rf_predictions)
+  print(f'Random Forest Accuracy: {rf_accuracy:.2f}')
+          </code>
+          <button class="copy-btn" onclick="copyToClipboard('random-forest')">Copy</button>
+      </pre>
+  
+      <h3 class="text-xl font-semibold mt-4">4. Support Vector Machine (SVM)</h3>
+      <p class="mt-2">Support Vector Machines are powerful classifiers that work well on both linear and non-linear data:</p>
+      <pre class="bg-gray-200 p-2 rounded">
+          <code class="language-python" id="svm">
+  from sklearn.svm import SVC
+  
+  # Create and train the model
+  svm_model = SVC(kernel='linear')
+  svm_model.fit(X_train, y_train)
+  
+  # Make predictions
+  svm_predictions = svm_model.predict(X_test)
+  
+  # Evaluate the model
+  svm_accuracy = accuracy_score(y_test, svm_predictions)
+  print(f'SVM Accuracy: {svm_accuracy:.2f}')
+          </code>
+          <button class="copy-btn" onclick="copyToClipboard('svm')">Copy</button>
+      </pre>
+      
+      <h3 class="text-xl font-semibold mt-4">5. Model Evaluation</h3>
+      <p class="mt-2">To assess the performance of classification models, various metrics can be used, including accuracy, precision, recall, and F1 score:</p>
+      <pre class="bg-gray-200 p-2 rounded">
+          <code class="language-python" id="model-evaluation">
+  from sklearn.metrics import classification_report
+  
+  # Generate a classification report
+  report = classification_report(y_test, predictions)
+  print(report)
+          </code>
+          <button class="copy-btn" onclick="copyToClipboard('model-evaluation')">Copy</button>
+      </pre>
+  </section> 
+  <section id="regression" class="bg-white p-8 rounded-lg shadow">
+    <h2 class="text-2xl font-bold mt-6">Regression</h2>
+    <p class="mt-4">Regression is a type of supervised learning used to predict continuous values. Scikit-Learn offers various regression algorithms that can be easily implemented to fit your data.</p>
+
+    <h3 class="text-xl font-semibold mt-4">1. Linear Regression</h3>
+    <p class="mt-2">Linear Regression is one of the simplest forms of regression that assumes a linear relationship between input variables (X) and the single output variable (y):</p>
+    <pre class="bg-gray-200 p-2 rounded">
+        <code class="language-python" id="linear-regression">
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import make_regression
+from sklearn.metrics import mean_squared_error
+
+# Generate synthetic dataset
+X, y = make_regression(n_samples=100, n_features=1, noise=10, random_state=42)
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create and train the model
+lin_reg = LinearRegression()
+lin_reg.fit(X_train, y_train)
+
+# Make predictions
+y_pred = lin_reg.predict(X_test)
+
+# Evaluate the model
+mse = mean_squared_error(y_test, y_pred)
+print(f'Mean Squared Error: {mse:.2f}')
+        </code>
+        <button class="copy-btn" onclick="copyToClipboard('linear-regression')">Copy</button>
+    </pre>
+
+    <h3 class="text-xl font-semibold mt-4">2. Polynomial Regression</h3>
+    <p class="mt-2">Polynomial Regression is a form of regression analysis in which the relationship between the independent variable x and the dependent variable y is modeled as an nth degree polynomial:</p>
+    <pre class="bg-gray-200 p-2 rounded">
+        <code class="language-python" id="polynomial-regression">
+from sklearn.preprocessing import PolynomialFeatures
+
+# Transforming the features to polynomial features
+poly = PolynomialFeatures(degree=3)
+X_poly = poly.fit_transform(X_train)
+
+# Create and train the polynomial regression model
+poly_reg = LinearRegression()
+poly_reg.fit(X_poly, y_train)
+
+# Make predictions
+y_poly_pred = poly_reg.predict(poly.fit_transform(X_test))
+
+# Evaluate the model
+mse_poly = mean_squared_error(y_test, y_poly_pred)
+print(f'Polynomial Regression Mean Squared Error: {mse_poly:.2f}')
+        </code>
+        <button class="copy-btn" onclick="copyToClipboard('polynomial-regression')">Copy</button>
+    </pre>
+
+    <h3 class="text-xl font-semibold mt-4">3. Ridge Regression</h3>
+    <p class="mt-2">Ridge Regression is a type of linear regression that includes L2 regularization to prevent overfitting:</p>
+    <pre class="bg-gray-200 p-2 rounded">
+        <code class="language-python" id="ridge-regression">
+from sklearn.linear_model import Ridge
+
+# Create and train the model
+ridge_reg = Ridge(alpha=1.0)
+ridge_reg.fit(X_train, y_train)
+
+# Make predictions
+ridge_pred = ridge_reg.predict(X_test)
+
+# Evaluate the model
+mse_ridge = mean_squared_error(y_test, ridge_pred)
+print(f'Ridge Regression Mean Squared Error: {mse_ridge:.2f}')
+        </code>
+        <button class="copy-btn" onclick="copyToClipboard('ridge-regression')">Copy</button>
+    </pre>
+
+    <h3 class="text-xl font-semibold mt-4">4. Lasso Regression</h3>
+    <p class="mt-2">Lasso Regression is another form of regularized linear regression that includes L1 regularization to encourage sparsity in the model:</p>
+    <pre class="bg-gray-200 p-2 rounded">
+        <code class="language-python" id="lasso-regression">
+from sklearn.linear_model import Lasso
+
+# Create and train the model
+lasso_reg = Lasso(alpha=0.1)
+lasso_reg.fit(X_train, y_train)
+
+# Make predictions
+lasso_pred = lasso_reg.predict(X_test)
+
+# Evaluate the model
+mse_lasso = mean_squared_error(y_test, lasso_pred)
+print(f'Lasso Regression Mean Squared Error: {mse_lasso:.2f}')
+        </code>
+        <button class="copy-btn" onclick="copyToClipboard('lasso-regression')">Copy</button>
+    </pre>
+
+    <h3 class="text-xl font-semibold mt-4">5. Model Evaluation</h3>
+    <p class="mt-2">To assess the performance of regression models, the following metrics can be used:</p>
+    <ul class="mt-2">
+        <li>Mean Absolute Error (MAE)</li>
+        <li>Mean Squared Error (MSE)</li>
+        <li>R-squared (R²)</li>
+    </ul>
+    <pre class="bg-gray-200 p-2 rounded">
+        <code class="language-python" id="regression-evaluation">
+from sklearn.metrics import mean_absolute_error, r2_score
+
+# Evaluate the model
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+print(f'Mean Absolute Error: {mae:.2f}')
+print(f'R-squared: {r2:.2f}')
+        </code>
+        <button class="copy-btn" onclick="copyToClipboard('regression-evaluation')">Copy</button>
+    </pre>
+</section> 
+
+<section id="clustering" class="bg-white p-8 rounded-lg shadow">
+  <h2 class="text-2xl font-bold mt-6">Clustering</h2>
+  <p class="mt-4">Clustering is an unsupervised learning technique used to group similar data points together. Scikit-Learn offers several algorithms to perform clustering.</p>
+
+  <h3 class="text-xl font-semibold mt-4">1. K-Means Clustering</h3>
+  <p class="mt-2">K-Means is a popular clustering algorithm that partitions the dataset into K distinct clusters:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="kmeans-clustering">
+from sklearn.cluster import KMeans
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate synthetic dataset
+X = np.random.rand(100, 2)
+
+# Create and fit the K-Means model
+kmeans = KMeans(n_clusters=3, random_state=42)
+kmeans.fit(X)
+
+# Predict the clusters
+y_kmeans = kmeans.predict(X)
+
+# Plot the clusters
+plt.scatter(X[:, 0], X[:, 1], c=y_kmeans, s=50, cmap='viridis')
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='red', s=200, alpha=0.75, marker='X')
+plt.title('K-Means Clustering')
+plt.show()
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('kmeans-clustering')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">2. Hierarchical Clustering</h3>
+  <p class="mt-2">Hierarchical Clustering creates a tree of clusters and does not require the number of clusters to be specified beforehand:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="hierarchical-clustering">
+from sklearn.cluster import AgglomerativeClustering
+from scipy.cluster.hierarchy import dendrogram
+
+# Create and fit the Hierarchical Clustering model
+hierarchical = AgglomerativeClustering(n_clusters=3)
+y_hierarchical = hierarchical.fit_predict(X)
+
+# Plot the dendrogram
+plt.figure(figsize=(10, 7))
+dendrogram(linkage(X, method='ward'))
+plt.title('Hierarchical Clustering Dendrogram')
+plt.show()
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('hierarchical-clustering')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">3. DBSCAN</h3>
+  <p class="mt-2">DBSCAN (Density-Based Spatial Clustering of Applications with Noise) identifies clusters of varying shapes based on the density of points:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="dbscan">
+from sklearn.cluster import DBSCAN
+
+# Create and fit the DBSCAN model
+dbscan = DBSCAN(eps=0.3, min_samples=5)
+y_dbscan = dbscan.fit_predict(X)
+
+# Plot the clusters
+plt.scatter(X[:, 0], X[:, 1], c=y_dbscan, s=50, cmap='viridis')
+plt.title('DBSCAN Clustering')
+plt.show()
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('dbscan')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">4. Model Evaluation</h3>
+  <p class="mt-2">To assess the quality of clustering, metrics such as Silhouette Score and Davies-Bouldin Index can be used:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="clustering-evaluation">
+from sklearn.metrics import silhouette_score, davies_bouldin_score
+
+# Evaluate clustering
+silhouette_avg = silhouette_score(X, y_kmeans)
+davies_bouldin = davies_bouldin_score(X, y_kmeans)
+print(f'Silhouette Score: {silhouette_avg:.2f}')
+print(f'Davies-Bouldin Score: {davies_bouldin:.2f}')
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('clustering-evaluation')">Copy</button>
+  </pre>
+</section>
+
+<section id="model-selection" class="bg-white p-8 rounded-lg shadow">
+  <h2 class="text-2xl font-bold mt-6">Model Selection</h2>
+  <p class="mt-4">Model selection is the process of choosing a statistical model from a set of candidates based on the data. This involves selecting models that best explain the data and generalize well to unseen data.</p>
+
+  <h3 class="text-xl font-semibold mt-4">1. Cross-Validation</h3>
+  <p class="mt-2">Cross-validation is a technique for assessing how the results of a statistical analysis will generalize to an independent dataset. It is mainly used to estimate the skill of a model on unseen data.</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="cross-validation">
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import RandomForestClassifier
+
+# Create a model
+model = RandomForestClassifier()
+
+# Perform cross-validation
+scores = cross_val_score(model, X, y, cv=5)
+print(f'Cross-Validation Scores: {scores}')
+print(f'Mean Score: {scores.mean():.2f}')
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('cross-validation')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">2. Grid Search</h3>
+  <p class="mt-2">Grid Search is a technique to find the best hyperparameters for a model by evaluating a specified set of hyperparameters using cross-validation:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="grid-search">
+from sklearn.model_selection import GridSearchCV
+
+# Define hyperparameters to tune
+param_grid = {
+  'n_estimators': [10, 50, 100],
+  'max_depth': [None, 10, 20]
+}
+
+# Create a Grid Search model
+grid_search = GridSearchCV(estimator=model, param_grid=param_grid, cv=5)
+grid_search.fit(X, y)
+
+print(f'Best Hyperparameters: {grid_search.best_params_}')
+print(f'Best Cross-Validation Score: {grid_search.best_score_:.2f}')
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('grid-search')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">3. Randomized Search</h3>
+  <p class="mt-2">Randomized Search is a faster alternative to Grid Search that randomly samples from a set of hyperparameter values:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="randomized-search">
+from sklearn.model_selection import RandomizedSearchCV
+
+# Create a Randomized Search model
+random_search = RandomizedSearchCV(estimator=model, param_distributions=param_grid, n_iter=10, cv=5)
+random_search.fit(X, y)
+
+print(f'Best Hyperparameters (Randomized Search): {random_search.best_params_}')
+print(f'Best Cross-Validation Score: {random_search.best_score_:.2f}')
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('randomized-search')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">4. Model Comparison</h3>
+  <p class="mt-2">To compare different models, you can use metrics such as accuracy, precision, recall, and F1-score. Use cross-validation to ensure the results are reliable:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="model-comparison">
+from sklearn.metrics import accuracy_score, classification_report
+
+# Fit the best model
+best_model = grid_search.best_estimator_
+best_model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = best_model.predict(X_test)
+
+# Evaluate the model
+print(f'Accuracy: {accuracy_score(y_test, y_pred):.2f}')
+print(classification_report(y_test, y_pred))
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('model-comparison')">Copy</button>
+  </pre>
+</section>
+
+
+<section id="preprocessing" class="bg-white p-8 rounded-lg shadow">
+  <h2 class="text-2xl font-bold mt-6">Preprocessing</h2>
+  <p class="mt-4">Preprocessing is a crucial step in the machine learning pipeline. It involves transforming raw data into a suitable format that enhances the performance of machine learning models. Common preprocessing techniques include handling missing values, encoding categorical variables, feature scaling, and more.</p>
+
+  <h3 class="text-xl font-semibold mt-4">1. Handling Missing Values</h3>
+  <p class="mt-2">Missing values can adversely affect model performance. Here are some common strategies to handle them:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="handle-missing">
+import pandas as pd
+from sklearn.impute import SimpleImputer
+
+# Load data
+data = pd.read_csv('data.csv')
+
+# Create an imputer to fill missing values with the mean
+imputer = SimpleImputer(strategy='mean')
+data[['column_name']] = imputer.fit_transform(data[['column_name']])
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('handle-missing')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">2. Encoding Categorical Variables</h3>
+  <p class="mt-2">Machine learning algorithms require numerical input. Categorical variables need to be converted into numerical format using techniques like one-hot encoding:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="encode-categorical">
+from sklearn.preprocessing import OneHotEncoder
+
+# Example data
+data = pd.DataFrame({'category': ['A', 'B', 'A', 'C']})
+
+# Initialize OneHotEncoder
+encoder = OneHotEncoder(sparse=False)
+
+# Fit and transform the data
+encoded_data = encoder.fit_transform(data[['category']])
+print(encoded_data)
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('encode-categorical')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">3. Feature Scaling</h3>
+  <p class="mt-2">Feature scaling is important when features have different scales. Standardization and normalization are common methods:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="feature-scaling">
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
+# Sample data
+data = pd.DataFrame({'feature1': [1, 2, 3], 'feature2': [100, 200, 300]})
+
+# Standardization
+scaler = StandardScaler()
+standardized_data = scaler.fit_transform(data)
+print('Standardized Data:\n', standardized_data)
+
+# Normalization
+min_max_scaler = MinMaxScaler()
+normalized_data = min_max_scaler.fit_transform(data)
+print('Normalized Data:\n', normalized_data)
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('feature-scaling')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">4. Splitting Data</h3>
+  <p class="mt-2">Before training a model, it’s essential to split the dataset into training and testing sets to evaluate model performance:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="split-data">
+from sklearn.model_selection import train_test_split
+
+# Sample features and target variable
+X = data[['feature1', 'feature2']]
+y = data['target']
+
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+print('Training set:', X_train.shape, y_train.shape)
+print('Testing set:', X_test.shape, y_test.shape)
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('split-data')">Copy</button>
+  </pre>
+</section>
+
+
+<section id="pipelines" class="bg-white p-8 rounded-lg shadow">
+  <h2 class="text-2xl font-bold mt-6">Pipelines</h2>
+  <p class="mt-4">In machine learning, pipelines are a powerful tool that allows you to streamline the workflow of data preprocessing, feature engineering, and model training. They help ensure that the same preprocessing steps are applied consistently across training and test datasets and can simplify the process of hyperparameter tuning.</p>
+
+  <h3 class="text-xl font-semibold mt-4">1. Creating a Pipeline</h3>
+  <p class="mt-2">You can create a pipeline using the `Pipeline` class from the `sklearn.pipeline` module. A pipeline consists of a sequence of steps, where each step is either a transformer or an estimator:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="create-pipeline">
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+
+# Define the pipeline steps
+pipeline = Pipeline([
+  ('scaler', StandardScaler()),  # Step 1: Scaling
+  ('classifier', RandomForestClassifier())  # Step 2: Classifier
+])
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('create-pipeline')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">2. Fitting the Pipeline</h3>
+  <p class="mt-2">Once the pipeline is created, you can fit it to your training data. The pipeline will automatically apply the preprocessing steps before training the model:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="fit-pipeline">
+# Fit the pipeline to the training data
+pipeline.fit(X_train, y_train)
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('fit-pipeline')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">3. Making Predictions</h3>
+  <p class="mt-2">You can make predictions using the pipeline, which will handle the preprocessing automatically:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="predict-pipeline">
+# Make predictions on the test set
+y_pred = pipeline.predict(X_test)
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('predict-pipeline')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">4. Hyperparameter Tuning with Pipelines</h3>
+  <p class="mt-2">Pipelines can also be used with techniques like Grid Search and Randomized Search for hyperparameter tuning:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="tune-pipeline">
+from sklearn.model_selection import GridSearchCV
+
+# Define hyperparameter grid for the classifier
+param_grid = {
+  'classifier__n_estimators': [10, 50, 100],
+  'classifier__max_depth': [None, 10, 20]
+}
+
+# Create a Grid Search model with the pipeline
+grid_search = GridSearchCV(pipeline, param_grid, cv=5)
+grid_search.fit(X_train, y_train)
+
+print(f'Best Hyperparameters: {grid_search.best_params_}')
+print(f'Best Cross-Validation Score: {grid_search.best_score_:.2f}')
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('tune-pipeline')">Copy</button>
+  </pre>
+</section>
+
+
+<section id="model-evaluations" class="bg-white p-8 rounded-lg shadow">
+  <h2 class="text-2xl font-bold mt-6">Model Evaluation</h2>
+  <p class="mt-4">Model evaluation is a crucial step in the machine learning workflow. It involves assessing the performance of a model using various metrics and techniques to ensure it generalizes well to unseen data. Proper evaluation helps in selecting the best model and avoiding overfitting.</p>
+
+  <h3 class="text-xl font-semibold mt-4">1. Train-Test Split</h3>
+  <p class="mt-2">Before evaluating a model, it's important to split the dataset into training and testing sets. This helps to assess the model's performance on unseen data:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="train-test-split">
+from sklearn.model_selection import train_test_split
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('train-test-split')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">2. Evaluation Metrics</h3>
+  <p class="mt-2">Different metrics can be used to evaluate the model's performance depending on the type of problem:</p>
+
+  <h4 class="text-lg font-semibold mt-4">a. Classification Metrics</h4>
+  <p class="mt-2">For classification problems, common metrics include accuracy, precision, recall, and F1-score:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="classification-metrics">
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+# Fit the model
+model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+# Calculate metrics
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, average='weighted')
+recall = recall_score(y_test, y_pred, average='weighted')
+f1 = f1_score(y_test, y_pred, average='weighted')
+
+print(f'Accuracy: {accuracy:.2f}')
+print(f'Precision: {precision:.2f}')
+print(f'Recall: {recall:.2f}')
+print(f'F1 Score: {f1:.2f}')
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('classification-metrics')">Copy</button>
+  </pre>
+
+  <h4 class="text-lg font-semibold mt-4">b. Regression Metrics</h4>
+  <p class="mt-2">For regression problems, you can use metrics like Mean Absolute Error (MAE), Mean Squared Error (MSE), and R-squared:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="regression-metrics">
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+# Fit the model
+model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+# Calculate metrics
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print(f'Mean Absolute Error: {mae:.2f}')
+print(f'Mean Squared Error: {mse:.2f}')
+print(f'R-squared: {r2:.2f}')
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('regression-metrics')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">3. Confusion Matrix</h3>
+  <p class="mt-2">A confusion matrix provides insight into the classification performance, showing the true positives, true negatives, false positives, and false negatives:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="confusion-matrix">
+from sklearn.metrics import confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Calculate the confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+
+# Visualize the confusion matrix
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix')
+plt.show()
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('confusion-matrix')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">4. ROC Curve and AUC</h3>
+  <p class="mt-2">For binary classification problems, the ROC curve and Area Under the Curve (AUC) can be useful metrics to evaluate the model's performance:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="roc-auc">
+from sklearn.metrics import roc_curve, roc_auc_score
+
+# Calculate the probabilities of the positive class
+y_prob = model.predict_proba(X_test)[:, 1]
+
+# Calculate ROC curve and AUC
+fpr, tpr, thresholds = roc_curve(y_test, y_prob)
+roc_auc = roc_auc_score(y_test, y_prob)
+
+# Plot ROC curve
+plt.figure()
+plt.plot(fpr, tpr, color='blue', label=f'ROC Curve (AUC = {roc_auc:.2f})')
+plt.plot([0, 1], [0, 1], color='red', linestyle='--')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic (ROC) Curve')
+plt.legend(loc='lower right')
+plt.show()
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('roc-auc')">Copy</button>
+  </pre>
+</section>
+
+
+<section id="advanced-topics" class="bg-white p-8 rounded-lg shadow">
+  <h2 class="text-2xl font-bold mt-6">Advanced Topics</h2>
+  <p class="mt-4">This chapter covers advanced topics in machine learning, including ensemble methods, transfer learning, and hyperparameter optimization. These techniques can enhance model performance and allow for greater flexibility in addressing complex problems.</p>
+
+  <h3 class="text-xl font-semibold mt-4">1. Ensemble Methods</h3>
+  <p class="mt-2">Ensemble methods combine multiple models to improve performance. Common techniques include bagging, boosting, and stacking:</p>
+
+  <h4 class="text-lg font-semibold mt-4">a. Bagging</h4>
+  <p class="mt-2">Bagging, or Bootstrap Aggregating, reduces variance by training multiple models on different subsets of the training data:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="bagging">
+from sklearn.ensemble import BaggingClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+# Create a base model
+base_model = DecisionTreeClassifier()
+
+# Create a Bagging model
+bagging_model = BaggingClassifier(base_estimator=base_model, n_estimators=100)
+bagging_model.fit(X_train, y_train)
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('bagging')">Copy</button>
+  </pre>
+
+  <h4 class="text-lg font-semibold mt-4">b. Boosting</h4>
+  <p class="mt-2">Boosting combines weak learners to create a strong learner, focusing on instances that previous models misclassified:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="boosting">
+from sklearn.ensemble import AdaBoostClassifier
+
+# Create a Boosting model
+boosting_model = AdaBoostClassifier(base_estimator=base_model, n_estimators=100)
+boosting_model.fit(X_train, y_train)
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('boosting')">Copy</button>
+  </pre>
+
+  <h4 class="text-lg font-semibold mt-4">c. Stacking</h4>
+  <p class="mt-2">Stacking involves training multiple models and combining their predictions using a meta-model:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="stacking">
+from sklearn.ensemble import StackingClassifier
+
+# Define base models
+base_models = [
+  ('rf', RandomForestClassifier()),
+  ('dt', DecisionTreeClassifier())
+]
+
+# Create a Stacking model
+stacking_model = StackingClassifier(estimators=base_models, final_estimator=LogisticRegression())
+stacking_model.fit(X_train, y_train)
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('stacking')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">2. Transfer Learning</h3>
+  <p class="mt-2">Transfer learning leverages knowledge from pre-trained models to improve performance on a related task, often used in deep learning:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="transfer-learning">
+from sklearn.linear_model import LogisticRegression
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+# Example: Using a pre-trained TF-IDF vectorizer
+vectorizer = TfidfVectorizer()
+X_vectorized = vectorizer.fit_transform(new_data)
+
+# Train a model on the new data
+model = LogisticRegression()
+model.fit(X_vectorized, y_train)
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('transfer-learning')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">3. Hyperparameter Optimization</h3>
+  <p class="mt-2">Hyperparameter optimization improves model performance by tuning hyperparameters using techniques such as Bayesian optimization, grid search, or random search:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="hyperparameter-optimization">
+from skopt import BayesSearchCV
+
+# Define the search space
+search_space = {
+  'n_estimators': (10, 100),
+  'max_depth': (1, 20)
+}
+
+# Perform Bayesian Optimization
+opt = BayesSearchCV(estimator=RandomForestClassifier(), search_spaces=search_space, n_iter=50)
+opt.fit(X_train, y_train)
+
+print(f'Best Hyperparameters: {opt.best_params_}')
+print(f'Best Score: {opt.best_score_:.2f}')
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('hyperparameter-optimization')">Copy</button>
+  </pre>
+
+  <h3 class="text-xl font-semibold mt-4">4. Model Interpretability</h3>
+  <p class="mt-2">Understanding model decisions is essential, especially for complex models. Techniques like SHAP and LIME help explain predictions:</p>
+  <pre class="bg-gray-200 p-2 rounded">
+      <code class="language-python" id="model-interpretability">
+import shap
+
+# Fit the model
+model.fit(X_train, y_train)
+
+# Use SHAP to explain predictions
+explainer = shap.Explainer(model, X_train)
+shap_values = explainer(X_test)
+
+# Plot SHAP values
+shap.summary_plot(shap_values, X_test)
+      </code>
+      <button class="copy-btn" onclick="copyToClipboard('model-interpretability')">Copy</button>
+  </pre>
+</section>
+
+ 
+  </div>
+
+  <script>
+    function copyToClipboard(codeId) {
+        const codeElement = document.getElementById(codeId);
+        const codeText = codeElement.innerText;
+
+        // Create a temporary textarea to hold the code
+        const tempTextArea = document.createElement('textarea');
+        tempTextArea.value = codeText;
+        document.body.appendChild(tempTextArea);
+        tempTextArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempTextArea);
+
+        // Optionally, show an alert or message
+        alert('Code copied to clipboard!');
+    }
+</script>
+
+  <!-- Footer -->
+  <footer class="bg-blue-800 text-white py-6">
+    <div class="container mx-auto px-6 text-center">
+      <p class="text-sm">MCDocs -  Scikit-Learn: Machine Learning in Python</p>
+    </div>
+  </footer>
+
+</body>
+</html>

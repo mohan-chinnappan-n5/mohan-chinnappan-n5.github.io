@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Syntax Highlighting with Prism.js</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/themes/prism.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.0/prism.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        pre {
+            background: #272822; /* Dark background for code blocks */
+            color: #f8f8f2; /* Light text for code */
+            padding: 15px;
+            border-radius: 5px;
+            overflow: auto; /* Enable scrolling for long code */
+            position: relative; /* For positioning the button */
+        }
+        button.copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        button.copy-btn:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Code Syntax Highlighting Example</h1>
+
+    <h2>Python Example</h2>
+    <pre><code class="language-python" id="python-code">
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("World")
+    </code>
+    <button class="copy-btn" onclick="copyToClipboard('python-code')">Copy</button>
+    </pre>
+
+    <h2>JavaScript Example</h2>
+    <pre><code class="language-javascript" id="javascript-code">
+// Function to add two numbers
+function add(a, b) {
+    return a + b;
+}
+
+console.log(add(5, 3));
+    </code>
+    <button class="copy-btn" onclick="copyToClipboard('javascript-code')">Copy</button>
+    </pre>
+
+    <h2>HTML Example</h2>
+    <pre><code class="language-markup" id="html-code">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+</head>
+<body>
+    <h1>Welcome to My Page</h1>
+</body>
+</html>
+    </code>
+    <button class="copy-btn" onclick="copyToClipboard('html-code')">Copy</button>
+    </pre>
+
+    <h2>Bash Example</h2>
+    <pre><code class="language-bash" id="bash-code">
+#!/bin/bash
+echo "Hello, World!"
+    </code>
+    <button class="copy-btn" onclick="copyToClipboard('bash-code')">Copy</button>
+    </pre>
+
+    <script>
+        function copyToClipboard(codeId) {
+            const codeElement = document.getElementById(codeId);
+            const codeText = codeElement.innerText;
+
+            // Create a temporary textarea to hold the code
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            // Optionally, show an alert or message
+            alert('Code copied to clipboard!');
+        }
+    </script>
+
+</body>
+</html>

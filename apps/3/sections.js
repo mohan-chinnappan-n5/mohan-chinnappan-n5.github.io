@@ -24,6 +24,7 @@
         { text: 'Edge and SEC compare', href: '../../compare/edge-vs-sec.html', icon: 'book' },
         { text: 'About EPT', href: '../../perf/ept/viewer.html?data=https://raw.githubusercontent.com/mohan-chinnappan-n5/compares/refs/heads/main/ept.json', icon: 'book' },
       { text: 'Linear Algebra for Deep Learning', href: '../../maths/la.html', icon: 'book' },
+      { text: 'Scikit-Learn: Machine Learning in Python', href: '../../ml/sk-learn.htm', icon: 'book' },
    
 
 	{ text: 'HTTP1.1 and 2.0 compare', href: '../../compare/compare2.html?data=https://raw.githubusercontent.com/mohan-chinnappan-n5/compares/refs/heads/main/http.json', icon: 'book' },
