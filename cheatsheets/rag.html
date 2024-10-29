@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG Cheat Sheet</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <script type="module">
+    import mermaid from "https://unpkg.com/mermaid@10.9.0/dist/mermaid.esm.min.mjs";
+    document.addEventListener("DOMContentLoaded", function () {
+      mermaid.initialize({ startOnLoad: true });
+    });
+  </script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+  <!-- Navbar -->
+<!-- Navbar -->
+  <nav class="bg-blue-900 text-white p-4 fixed w-full z-10 top-0">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="#overview" class="text-lg font-semibold hover:text-gray-200">LLM Cheat Sheet</a>
+      <div class="flex space-x-4">
+        <a href="#overview" class="hover:text-gray-200">Overview</a>
+        <a href="#arch" class="hover:text-gray-200">Architecture</a>
+        <a href="#components" class="hover:text-gray-200">Components</a>
+ 
+        <a href="#papers" class="hover:text-gray-200">Papers</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Main Content -->
+  <div class="container mx-auto mt-16 px-6 py-8 space-y-12">
+  <!-- Content Section -->
+  <section class="p-6" id='overview'>
+    <h2 class="text-2xl font-bold mb-4 text-blue-900">Retrieval-Augmented Generation (RAG)</h2>
+    <p class="text-gray-700 mb-4">
+      RAG is a framework that enhances the generative capabilities of language models by incorporating external knowledge from a retrieval mechanism. It allows models to fetch relevant information from a knowledge base to improve the accuracy and relevance of generated text.
+    </p>
+   </section>
+
+    <section id='arch'>
+    <h2 class="text-2xl font-bold mb-4 text-blue-900">Architecture</h2>
+ 
+   <div class="flex items-center justify-center h-full">
+    <img src='img/RAG-1.png'  class="rounded-lg shadow-lg" width='800'>
+   </div>
+
+    <!-- Diagram for RAG -->
+    <div class="bg-white p-4 rounded shadow mb-6">
+      <div class="mermaid">
+        flowchart TB 
+	A[Reference Docs, Websites...] --> B[RAG System]  --> C[LLM] --> LLM[embeddings] --> VDB[Vector DB of embeddings]
+	Q[User Query] --> E[LLM] --> F[Query Vector ] --> B  --> G[Find the relevant context docs using cosine similarity] --> H[Context Chunks] --> HH[Augmented Query - Question and context]
+	HH --> I[LLM - Geneation] --> R[Response]
+	B --> VDB
+
+	style A fill:#f9f,stroke:#333,stroke-width:4px
+        style B fill:#9ff,stroke:#333,stroke-width:4px
+        style Q fill:#ff9,stroke:#333,stroke-width:4px
+        style R fill:#99ccff,stroke:#333,stroke-width:4px
+
+
+
+
+      </div>
+    </div>
+    </section>
+
+      <section id='components'>
+    <!-- Key Components -->
+    <h2 class="text-2xl font-bold mb-4 text-blue-900">Key Components of RAG</h2>
+    <ul class="list-disc list-inside mb-6 text-gray-700">
+      <li><strong>Retrieval System:</strong> Responsible for fetching relevant documents based on user queries.</li>
+      <li><strong>Knowledge Base:</strong> A Vector database of documents or information that can be queried for relevant data based on the user query.</li>
+      <li><strong>RAG Model:</strong> A generative model that incorporates retrieved documents as context to the query to generate responses for user queries.</li>
+    </ul>
+      </section>
+
+    <section id='papers'>
+    <!-- Research Papers Section -->
+    <h2 class="text-2xl font-bold mb-4 text-blue-900">Research Papers</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <iframe src="https://arxiv.org/pdf/2005.11401v4" title="Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" class="w-full h-96 rounded shadow"></iframe>      <iframe src="https://arxiv.org/pdf/2407.08223" title="Speculative RAG: Enhancing Retrieval Augmented Generation through Drafting" class="w-full h-96 rounded shadow"></iframe>
+ 
+    </div>
+
+  </section>
+  </div>
+  <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-6 mt-10">
+        <div class="container mx-auto text-center">
+           MCDocs v0.7
+	</div>
+   </footer>
+
+
+</body>
+</html>
