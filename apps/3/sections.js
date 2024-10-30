@@ -410,6 +410,16 @@
 
     },
 
+Greetings: {
+      title: 'Greetings',
+      links: [
+        { text: 'Happy Diwali!', href: '../../greetings/diwali.html', icon: 'book' },
+ 
+        // Add more links here
+      ],
+
+    },
+
 
 
     // Add more sections here
