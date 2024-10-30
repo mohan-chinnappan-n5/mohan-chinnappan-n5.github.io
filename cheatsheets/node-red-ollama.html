@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Node-RED and Ollama Integration Guide</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css" />
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+</head>
+<body class="bg-gray-100 font-sans leading-relaxed tracking-wide">
+
+  <!-- Navbar -->
+   <nav class="bg-blue-800 p-4 sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-white font-bold text-xl">Node-RED & Ollama -  Demo</h1>
+      <div>
+        <a href="#about" class="text-gray-300 hover:text-white px-3">About</a>
+        <a href="#setup" class="text-gray-300 hover:text-white px-3">Setup Guide</a>
+        <a href="#demo" class="text-gray-300 hover:text-white px-3">Demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- About Section -->
+  <section id="about" class="container mx-auto p-6 mt-6">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">About the Integration</h2>
+    <p class="text-gray-700 leading-relaxed">
+      This application demonstrates how to integrate <strong>Node-RED</strong> with <strong>Ollama</strong>, a Language Model API.
+      Using Node-RED, we can create flows that send prompts to an LLM and receive responses, which are then displayed or further processed in the Node-RED environment.
+    </p>
+  </section>
+
+  <!-- Setup Guide Section -->
+  <section id="setup" class="container mx-auto p-6 mt-6 bg-white shadow rounded">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Setup Guide</h2>
+    <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
+      <li>
+        <strong>Step 1:</strong> Create a Node-RED flow and add the custom <code>llm-query</code> node with the following code:
+        <pre class="bg-gray-100 p-4 rounded mt-2 language-javascript">
+<code class="language-javascript">module.exports = function (RED) {
+    function LLMQueryNode(config) {
+        RED.nodes.createNode(this, config);
+        const node = this;
+        node.prompt = config.prompt;
+        node.url = config.url || "http://localhost:11434/api/generate";
+        node.on('input', async function (msg) {
+            const prompt = msg.prompt || node.prompt;
+            if (!prompt) {
+                node.error("No prompt provided.");
+                return;
+            }
+            const payload = { prompt: prompt, model: "llama3.2" };
+            try {
+                const response = await fetch(node.url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) {
+                    node.error(`Error in call: ${response.statusText}`);
+                    return;
+                }
+                const result = await response.json();
+                msg.payload = result.response || "No response";
+                node.send(msg);
+            } catch (error) {
+                node.error("Failed to connect to the LLM endpoint", error);
+            }
+        });
+    }
+    RED.nodes.registerType("llm-query", LLMQueryNode);
+}
+</code>
+        </pre>
+      </li>
+      <li>
+        <strong>Step 2:</strong> Configure the <code>llm-query</code> node with the correct endpoint URL (default: <code>http://localhost:11434/api/generate</code>).
+      </li>
+      <li>
+        <strong>Step 3:</strong> Add a <code>Debug</code> node connected to <code>llm-query</code> to view the response in the Node-RED debug panel.
+      </li>
+      <li>
+        <strong>Step 4:</strong> Deploy and test the flow, and observe the responses in the debug panel.
+      </li>
+    </ol>
+  </section>
+
+  <!-- Demo Section -->
+  <section id="demo" class="container mx-auto p-6 mt-6 bg-white shadow rounded">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Demo</h2>
+    <p class="text-gray-700 mb-4">
+      Watch the demo video below to see how the Node-RED flow works with Ollama:
+    </p>
+    <div class="flex justify-center">
+      <video controls class="rounded-lg shadow-lg" style="max-width: 80%;">
+        <source src="https://github.com/mohan-chinnappan-n5/compares/raw/refs/heads/main/demos/node-red-ollama.webm" type="video/webm">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white p-4 mt-12">
+    <div class="container mx-auto text-center">
+      <p>MCDocs - LLMs </p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+</body>
+</html>

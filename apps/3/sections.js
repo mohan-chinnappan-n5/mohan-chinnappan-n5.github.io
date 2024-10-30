@@ -15,6 +15,7 @@
 	{ text: 'Notes on Chatty for LLMs Chrome Extension', href: '../../llms/chatty/index.html', icon: 'book' },
         { text: 'LLM Cheat Sheet', href: '../../cheatsheets/llm.html', icon: 'book' },
  	{ text: 'RAG Cheat Sheet', href: '../../cheatsheets/rag.html', icon: 'book' },
+   	{ text: 'Node-RED & Ollama - Demo', href: '../../cheatsheets/node-red-ollama.html', icon: 'book' },
    
         { text: 'Notes on Operating Systems', href: '../../pages/p.html?c=https://mohan-chinnappan-n5.github.io/pages/os/content.js', icon: 'book' },
       	
