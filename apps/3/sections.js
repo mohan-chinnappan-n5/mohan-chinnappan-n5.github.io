@@ -137,6 +137,7 @@
         { text: 'Thank you! Card Generator', href: '../../cards/ty/ty.html', icon: 'desktop' },
         { text: 'Trivia', href: '../../trivia/trivia.html', icon: 'desktop' },
         { text: 'Vanity License Plate Generator', href: '../../common/license-plate/index.html', icon: 'desktop' },
+        { text: 'US - Tax Calculator', href: 'https://mctaxes.streamlit.app', icon: 'desktop' },
 
 
 
