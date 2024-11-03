@@ -421,7 +421,7 @@ Greetings: {
 
     },
 
-Greetings: {
+Games: {
       title: 'Games',
       links: [
         { text: 'Chess', href: 'https://mcchess.streamlit.app/', icon: 'desktop' },
