@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greeting</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <script>
+    async function loadGreetingData() {
+      const params = new URLSearchParams(window.location.search);
+      const dataUrl = params.get('data');
+      
+      if (!dataUrl) {
+        alert('No data URL provided!');
+        return;
+      }
+      
+      try {
+        const response = await fetch(dataUrl);
+        const data = await response.json();
+        
+        // Set page title
+        document.title = data.title || "Greeting";
+
+        // Navbar
+        document.getElementById("navbar-title").textContent = data.navbar.title;
+        const navbarLinks = document.getElementById("navbar-links");
+        navbarLinks.innerHTML = "";
+        data.navbar.links.forEach(link => {
+          const a = document.createElement("a");
+          a.href = link.href;
+          a.className = "text-gray-200 hover:text-white px-3";
+          a.textContent = link.text;
+          navbarLinks.appendChild(a);
+        });
+
+        // Greeting Section
+        document.getElementById("greeting-heading").textContent = data.greeting.heading;
+        document.getElementById("greeting-message").textContent = data.greeting.message;
+        document.getElementById("greeting-section").style.backgroundImage = `url(${data.greeting.backgroundImage})`;
+
+        // About Section
+        document.getElementById("about-heading").textContent = data.about.heading;
+        document.getElementById("about-content").textContent = data.about.content;
+
+        // Footer
+        document.getElementById("footer-text").textContent = data.footer.text;
+
+      } catch (error) {
+        console.error("Error loading data:", error);
+        alert("Failed to load greeting data!");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadGreetingData);
+  </script>
+</head>
+<body class="bg-gray-100 font-sans leading-relaxed tracking-wide text-center">
+
+  <!-- Navbar -->
+  <nav class="bg-yellow-600 p-4 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 id="navbar-title" class="text-white font-bold text-xl">Loading...</h1>
+      <div id="navbar-links">
+        <!-- Links will be populated here -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Section with Greeting -->
+  <section id="greeting-section" class="relative h-screen bg-cover bg-center flex items-center justify-center">
+    <div class="bg-gradient-to-br from-yellow-500 via-red-500 to-purple-600 bg-opacity-80 p-6 rounded-lg shadow-lg">
+      <h2 id="greeting-heading" class="text-5xl font-extrabold text-white mb-4">Loading...</h2>
+      <p id="greeting-message" class="text-white text-xl">Loading...</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="container mx-auto p-6 mt-8">
+    <h3 id="about-heading" class="text-3xl font-semibold text-gray-800 mb-4">Loading...</h3>
+    <p id="about-content" class="text-gray-700 leading-relaxed">Loading...</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-yellow-600 text-white p-4 mt-12">
+    <div class="container mx-auto text-center">
+      <p id="footer-text">Loading...</p>
+    </div>
+  </footer>
+
+</body>
+</html>

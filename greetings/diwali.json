@@ -1,0 +1,22 @@
+{
+  "title": "Happy Diwali",
+  "navbar": {
+    "title": "Diwali Greetings",
+    "links": [
+      { "href": "#greeting", "text": "Greeting" },
+      { "href": "#about", "text": "About Diwali" }
+    ]
+  },
+  "greeting": {
+    "heading": "Happy Diwali!",
+    "message": "Wishing you a festival of joy, prosperity, and light!",
+    "backgroundImage": "img/The_Rangoli_of_Lights.jpg"
+  },
+  "about": {
+    "heading": "About Diwali",
+    "content": "Diwali, also known as the Festival of Lights, is one of the most important festivals, celebrated with enthusiasm and joy by millions of people around the world. It symbolizes the victory of light over darkness, good over evil, and knowledge over ignorance. Families come together to decorate their homes with lamps and rangoli and exchange sweets."
+  },
+  "footer": {
+    "text": "MCDocs - Festivals"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Happy Pongal",
+  "navbar": {
+    "title": "Pongal Greetings",
+    "links": [
+      { "href": "#greeting", "text": "Greeting" },
+      { "href": "#about", "text": "About Pongal" }
+    ]
+  },
+  "greeting": {
+    "heading": "Happy Pongal!",
+    "message": "Celebrate Pongal and rejoice the charm of our tradition!",
+    "backgroundImage": "img/Pongal.jpg"
+  },
+  "about": {
+    "heading": "About Pongal",
+    "content": "Pongal is more than just a festival; it’s a joyful celebration of life, gratitude, nature, and community. It serves as a reminder of the deep connection between humans and nature and the importance of thanking the land and livestock that sustain life."
+  },
+  "footer": {
+    "text": "MCDocs - Festivals"
+  }
+}

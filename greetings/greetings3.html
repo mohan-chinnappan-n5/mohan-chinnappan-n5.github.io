@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greeting Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+</head>
+<body class="bg-gray-100 font-sans leading-relaxed tracking-wide text-center" id="page-body">
+
+  <!-- Navbar -->
+  <nav id="navbar" class="bg-yellow-600 p-4 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-white font-bold text-xl" id="greeting-title">Greeting Page</h1>
+      <div>
+        <a href="#greeting" class="text-gray-200 hover:text-white px-3">Greeting</a>
+        <a href="#about" class="text-gray-200 hover:text-white px-3">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Section with Greeting -->
+  <section id="greeting" class="relative h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://mohan-chinnappan-n5.github.io/dfv/img/The_Rangoli_of_Lights.jpg');">
+    <div id="greeting-box" class="bg-gradient-to-br from-yellow-500 via-red-500 to-purple-600 bg-opacity-80 p-6 rounded-lg shadow-lg">
+      <h2 class="text-5xl font-extrabold text-white mb-4">Welcome!</h2>
+      <p class="text-white text-xl">Enjoy the vibrant colors and festive greetings!</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="container mx-auto p-6 mt-8">
+    <h3 class="text-3xl font-semibold text-gray-800 mb-4">About This Festival</h3>
+    <p class="text-gray-700 leading-relaxed">
+      This festival celebrates light, joy, and prosperity. Join in the festivities and enjoy the beauty of the season!
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer" class="bg-yellow-600 text-white p-4 mt-12">
+    <div class="container mx-auto text-center">
+      <p>Festival Greetings</p>
+    </div>
+  </footer>
+
+  <script>
+    // Function to generate a random color
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    // Function to apply random colors to specific elements
+    function applyRandomColors() {
+      document.getElementById("navbar").style.backgroundColor = getRandomColor();
+      document.getElementById("greeting-box").style.background = `linear-gradient(to bottom right, ${getRandomColor()}, ${getRandomColor()})`;
+      document.getElementById("footer").style.backgroundColor = getRandomColor();
+    }
+
+    // Set a timer to apply random colors after 1 minute (60,000 milliseconds)
+    setTimeout(() => {
+      applyRandomColors();
+      // Refresh colors every 30 seconds after the initial color change
+      setInterval(applyRandomColors, 30000);
+    }, 60000);
+  </script>
+
+</body>
+</html>
