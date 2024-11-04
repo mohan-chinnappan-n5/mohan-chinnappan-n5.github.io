@@ -431,6 +431,16 @@ Games: {
 
     },
 
+Chemistry: {
+      title: 'Chemistry',
+      links: [
+        { text: 'Periodic Table', href: '../../chemistry/pt/app.html', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
 
 
     // Add more sections here
