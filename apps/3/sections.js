@@ -92,7 +92,9 @@
       links: [
         { text: 'SQLite', href: '../../utils/sql/sql.html', icon: 'desktop' },
         { text: 'CSV - SQL Query', href: '../../csv/query.html', icon: 'desktop' },
+        { text: 'CSV - SQL Joins', href: 'https://mc-joins.streamlit.app', icon: 'desktop' },
  
+
         // Add more links here
       ],
     },
