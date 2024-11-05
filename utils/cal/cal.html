@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar To-Do App</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Navbar -->
+  <header class="bg-blue-500 text-white p-4">
+    <h1 class="text-2xl text-center">Calendar To-Do App</h1>
+  </header>
+
+  <!-- Main Content -->
+  <main class="p-6">
+    <!-- Month Navigation -->
+    <div class="flex justify-between items-center mb-4">
+      <button id="prev-month" class="text-blue-500 hover:underline">Previous</button>
+      <div id="month-year" class="text-xl font-bold"></div>
+      <button id="next-month" class="text-blue-500 hover:underline">Next</button>
+    </div>
+    
+    <!-- Calendar Grid -->
+    <div id="calendar" class="grid grid-cols-7 gap-4"></div>
+  </main>
+
+  <!-- To-Do Modal -->
+  <div id="todo-modal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+      <h2 id="modal-date" class="text-lg font-bold mb-4"></h2>
+      <div id="todo-list" class="mb-4"></div>
+      <input type="time" id="todo-time" class="w-full p-2 border border-gray-300 rounded-md mb-2" placeholder="Set time">
+      <textarea id="todo-input" class="w-full p-2 border border-gray-300 rounded-md" rows="2" placeholder="Enter your To-Do"></textarea>
+      <div class="flex justify-end mt-4">
+        <button id="close-modal" class="mr-2 text-gray-600 hover:underline">Cancel</button>
+        <button id="add-todo" class="bg-blue-500 text-white px-4 py-2 rounded-md">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-blue-500 text-white text-center p-4 mt-6">
+    <p>MCDocs -  Calendar App</p>
+  </footer>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
