@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesforce Apex Cheat Sheet</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom styles */
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-800 p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-2xl font-bold">Salesforce Apex Cheat Sheet</h1>
+            <ul class="flex space-x-4">
+                <li><a href="#" class="text-gray-300 hover:text-white">Home</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-white">About</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-white">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8 mt-4">
+        <p class="text-center mb-8 text-gray-600">Common Salesforce Apex commands and their usage.</p>
+
+        <table class="min-w-full border-collapse border border-gray-300">
+            <thead>
+                <tr class="bg-blue-200">
+                    <th class="border border-gray-300 px-4 py-2 text-left">Command</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Description</th>
+                    <th class="border border-gray-300 px-4 py-2 text-left">Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">`System.debug`</td>
+                    <td class="border border-gray-300 px-4 py-2">Logs debug information for troubleshooting.</td>
+                    <td class="border border-gray-300 px-4 py-2">`System.debug('Hello, Apex!');`</td>
+                </tr>
+                <tr class="bg-gray-50">
+                    <td class="border border-gray-300 px-4 py-2">`DML: insert`</td>
+                    <td class="border border-gray-300 px-4 py-2">Inserts a new record into Salesforce.</td>
+                    <td class="border border-gray-300 px-4 py-2">`insert new Account(Name='Test Account');`</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">`DML: update`</td>
+                    <td class="border border-gray-300 px-4 py-2">Updates an existing record.</td>
+                    <td class="border border-gray-300 px-4 py-2">`update accountRecord;`</td>
+                </tr>
+                <tr class="bg-gray-50">
+                    <td class="border border-gray-300 px-4 py-2">`DML: delete`</td>
+                    <td class="border border-gray-300 px-4 py-2">Deletes a record from Salesforce.</td>
+                    <td class="border border-gray-300 px-4 py-2">`delete accountRecord;`</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">`SOQL Query`</td>
+                    <td class="border border-gray-300 px-4 py-2">Query Salesforce records.</td>
+                    <td class="border border-gray-300 px-4 py-2">`[SELECT Id, Name FROM Account];`</td>
+                </tr>
+                <tr class="bg-gray-50">
+                    <td class="border border-gray-300 px-4 py-2">`SOSL Query`</td>
+                    <td class="border border-gray-300 px-4 py-2">Search across Salesforce records.</td>
+                    <td class="border border-gray-300 px-4 py-2">`FIND 'test' IN ALL FIELDS RETURNING Account(Name);`</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">`Try-Catch`</td>
+                    <td class="border border-gray-300 px-4 py-2">Handles exceptions and errors.</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <pre><code>try { /* Code */ } catch (Exception e) { System.debug(e); }</code></pre>
+                    </td>
+                </tr>
+                <tr class="bg-gray-50">
+                    <td class="border border-gray-300 px-4 py-2">`Future Method`</td>
+                    <td class="border border-gray-300 px-4 py-2">Runs code asynchronously.</td>
+                    <td class="border border-gray-300 px-4 py-2">`@future public static void myFutureMethod() { /* Code */ }`</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">`@InvocableMethod`</td>
+                    <td class="border border-gray-300 px-4 py-2">Expose methods to Process Builder/Flow.</td>
+                    <td class="border border-gray-300 px-4 py-2">`@InvocableMethod public static void myMethod(List&lt;String&gt; ids) { /* Code */ }`</td>
+                </tr>
+                <tr class="bg-gray-50">
+                    <td class="border border-gray-300 px-4 py-2">`Batch Apex`</td>
+                    <td class="border border-gray-300 px-4 py-2">Processes large amounts of data asynchronously.</td>
+                    <td class="border border-gray-300 px-4 py-2">`public class MyBatch implements Database.Batchable&lt;sObject&gt; { /* Code */ }`</td>
+                </tr>
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">`Test.startTest / Test.stopTest`</td>
+                    <td class="border border-gray-300 px-4 py-2">Defines a test block in Apex tests.</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <pre><code>Test.startTest(); /* Code */ Test.stopTest();</code></pre>
+                    </td>
+                </tr>
+                <tr class="bg-gray-50">
+                    <td class="border border-gray-300 px-4 py-2">`System.assertEquals`</td>
+                    <td class="border border-gray-300 px-4 py-2">Asserts equality in tests.</td>
+                    <td class="border border-gray-300 px-4 py-2">`System.assertEquals(expected, actual);`</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="mt-6">
+            <h2 class="text-xl font-semibold">Additional Resources</h2>
+            <ul class="list-disc list-inside mt-2">
+                <li><a href="https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/" class="text-blue-500 hover:underline">Apex Developer Guide</a></li>
+                <li><a href="https://trailhead.salesforce.com/en/content/learn/trails/force_com_dev_beginner" class="text-blue-500 hover:underline">Salesforce Trailhead: Apex Basics</a></li>
+                <li><a href="https://developer.salesforce.com/forums" class="text-blue-500 hover:underline">Salesforce Developer Forums</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white py-4 mt-10">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Salesforce Apex Cheat Sheet. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

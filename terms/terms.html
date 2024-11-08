@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossary of Terms</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    async function loadGlossaryData() {
+      const params = new URLSearchParams(window.location.search);
+      const dataUrl = params.get('data');
+
+      if (!dataUrl) {
+        document.getElementById('error').innerText = "Error: No data URL provided!";
+        return;
+      }
+
+      try {
+        const response = await fetch(dataUrl);
+        const data = await response.json();
+        displayGlossaryData(data);
+      } catch (error) {
+        document.getElementById('error').innerText = "Error: Unable to load data from provided URL.";
+      }
+    }
+
+    function displayGlossaryData(data) {
+      document.getElementById('topic').innerText = data.topic;
+      document.getElementById('notes').innerText = data.notes;
+
+      const termsContainer = document.getElementById('terms-container');
+      data.terms.forEach(item => {
+        const row = document.createElement('div');
+        row.className = "flex flex-col mb-4 p-4 bg-white rounded-lg shadow-md";
+
+        const term = document.createElement('h3');
+        term.className = "font-bold text-lg text-blue-600";
+        term.innerText = item.term;
+
+        const definition = document.createElement('p');
+        definition.className = "text-gray-700";
+        definition.innerText = item.definition;
+
+        row.appendChild(term);
+        row.appendChild(definition);
+        termsContainer.appendChild(row);
+      });
+
+      // Store the terms for later filtering
+      window.glossaryTerms = data.terms;
+    }
+
+    function filterTerms() {
+      const query = document.getElementById('search').value.toLowerCase();
+      const filteredTerms = window.glossaryTerms.filter(item => item.term.toLowerCase().includes(query) || item.definition.toLowerCase().includes(query));
+
+      const termsContainer = document.getElementById('terms-container');
+      termsContainer.innerHTML = ''; // Clear the current terms
+
+      filteredTerms.forEach(item => {
+        const row = document.createElement('div');
+        row.className = "flex flex-col mb-4 p-4 bg-white rounded-lg shadow-md";
+
+        const term = document.createElement('h3');
+        term.className = "font-bold text-lg text-blue-600";
+        term.innerText = item.term;
+
+        const definition = document.createElement('p');
+        definition.className = "text-gray-700";
+        definition.innerText = item.definition;
+
+        row.appendChild(term);
+        row.appendChild(definition);
+        termsContainer.appendChild(row);
+      });
+    }
+  </script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar (sticky) -->
+  <nav class="bg-blue-600 text-white p-4 sticky top-0 z-10 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-semibold">Glossary App</h1>
+      <input
+        id="search"
+        type="text"
+        class="p-2 rounded-lg shadow-md bg-white text-gray-800"
+        placeholder="Search terms..."
+        oninput="filterTerms()"
+      />
+   </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container mx-auto my-8 px-4">
+    <div id="error" class="text-red-500 text-lg font-semibold"></div>
+
+    <!-- Topic and Notes -->
+    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+      <h2 id="topic" class="text-2xl font-bold text-blue-600"></h2>
+      <p id="notes" class="text-gray-700 mt-2"></p>
+    </div>
+
+    <!-- Terms and Definitions -->
+    <div id="terms-container" class="space-y-4">
+      <!-- Glossary terms will be loaded here dynamically -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-4 mt-8">
+    <div class="container mx-auto text-center">
+      <p>MCDocs - Glossary</p>
+    </div>
+  </footer>
+
+  <!-- Load data on page load -->
+  <script>
+    window.onload = loadGlossaryData;
+  </script>
+
+</body>
+</html>

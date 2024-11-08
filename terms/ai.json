@@ -1,0 +1,122 @@
+{
+  "topic": "Glossary of AI Terms",
+  "notes": "A collection of important AI-related terms and definitions.",
+  "terms": [
+    {
+      "term": "Artificial intelligence (AI)",
+      "definition": "A branch of computer science in which computer systems use data to draw inferences, perform tasks, and solve problems with human-like reasoning."
+    },
+    {
+      "term": "Machine learning (ML)",
+      "definition": "A subset of AI that enables systems to automatically learn and improve from experience without being explicitly programmed."
+    },
+    {
+      "term": "Neural network",
+      "definition": "A series of algorithms that mimic the operations of a human brain to recognize relationships in a set of data."
+    },
+    {
+      "term": "Deep learning",
+      "definition": "A subset of ML where algorithms are structured in layers to create artificial neural networks that can learn and make intelligent decisions on their own."
+    },
+    {
+      "term": "Natural language processing (NLP)",
+      "definition": "A field of AI focused on enabling computers to understand, interpret, and respond to human language."
+    },
+    {
+      "term": "Training data",
+      "definition": "Data used to train machine learning models to recognize patterns or make decisions."
+    },
+    {
+      "term": "Overfitting",
+      "definition": "A modeling error that occurs when a machine learning model fits the training data too closely, limiting its ability to generalize to new data."
+    },
+    {
+      "term": "Bias",
+      "definition": "Systematic and repeatable errors in a computer system that create unfair outcomes due to inaccurate assumptions in the machine learning process."
+    },
+    {
+      "term": "Corpus",
+      "definition": "A large collection of textual datasets used to train an LLM."
+    },
+    {
+      "term": "Algorithm",
+      "definition": "A set of rules or instructions given to an AI, neural network, or machine learning program to help it learn on its own."
+    },
+    {
+      "term": "Classification",
+      "definition": "A process in machine learning used to categorize data into predefined classes or groups."
+    },
+    {
+      "term": "Regression",
+      "definition": "A type of predictive modeling technique in machine learning, used to predict a continuous outcome based on input variables."
+    },
+    {
+      "term": "Supervised learning",
+      "definition": "A machine learning approach where models are trained on labeled data, meaning each input has a corresponding output."
+    },
+    {
+      "term": "Unsupervised learning",
+      "definition": "A type of machine learning that works with unlabeled data, aiming to uncover patterns or groupings within the data."
+    },
+    {
+      "term": "Reinforcement learning",
+      "definition": "An area of machine learning where agents learn by performing actions and receiving rewards or penalties."
+    },
+    {
+      "term": "Domain adaptation",
+      "definition": "The process through which organization-specific knowledge is added into the prompt and the foundation model."
+    },
+    {
+      "term": "Data augmentation",
+      "definition": "The technique of creating new data points from existing data by applying transformations to increase the amount of training data."
+    },
+    {
+      "term": "Computer vision",
+      "definition": "A field of AI that enables machines to interpret and make decisions based on visual data, such as images or videos."
+    },
+    {
+      "term": "Embedding",
+      "definition": "A mathematical representation of words, sentences, or data points as vectors, used to capture semantic meaning."
+    },
+    {
+      "term": "Hyperparameter",
+      "definition": "A parameter whose value is set before the learning process begins, influencing the behavior and accuracy of a machine learning model."
+    },
+    {
+      "term": "Feature engineering",
+      "definition": "The process of selecting, modifying, or creating features that improve the performance of a machine learning model."
+    },
+    {
+      "term": "Transfer learning",
+      "definition": "A machine learning technique where a model trained on one task is adapted for a similar but different task."
+    },
+    {
+      "term": "Gradient descent",
+      "definition": "An optimization algorithm used to minimize the error in machine learning models by adjusting the model parameters."
+    },
+    {
+      "term": "Activation function",
+      "definition": "A function in neural networks that determines if a neuron should be activated, adding non-linear properties to the model."
+    },
+    {
+      "term": "Parameter tuning",
+      "definition": "The process of finding the optimal settings for a machine learning model to achieve the best performance."
+    },
+    {
+      "term": "ROC curve",
+      "definition": "A graphical plot that illustrates the diagnostic ability of a binary classifier as its discrimination threshold varies."
+    },
+    {
+      "term": "Precision",
+      "definition": "A metric that measures the accuracy of positive predictions in a classification model."
+    },
+    {
+      "term": "Recall",
+      "definition": "A metric that measures the ability of a model to identify all relevant instances within a dataset."
+    },
+    {
+      "term": "F1 score",
+      "definition": "The harmonic mean of precision and recall, used to evaluate a model's accuracy on a specific class."
+    }
+  ]
+}

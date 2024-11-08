@@ -1,0 +1,143 @@
+{
+  "topic": "Einstein Generative AI Glossary of Terms",
+  "notes": "Learn more about generative AI terminology and better understand Einstein.  ",
+  "terms": [
+
+  {
+    "term": "Artificial intelligence (AI)",
+    "definition": "A branch of computer science in which computer systems use data to draw inferences, perform tasks, and solve problems with human-like reasoning."
+  },
+  {
+    "term": "Bias",
+    "definition": "Systematic and repeatable errors in a computer system that create unfair outcomes, in ways different from the intended function of the system, due to inaccurate assumptions in the machine learning process."
+  },
+  {
+    "term": "Corpus",
+    "definition": "A large collection of textual datasets used to train an LLM."
+  },
+  {
+    "term": "Domain adaptation",
+    "definition": "The process through which organization-specific knowledge is added into the prompt and the foundation model."
+  },
+  {
+    "term": "Fine-tuning",
+    "definition": "The process of adapting a pre-trained language model for a specific task by training it on a smaller, task-specific dataset."
+  },
+  {
+    "term": "Generative AI gateway",
+    "definition": "The gateway exposes normalized APIs to interact with foundation models and services provided by different vendors, internally and from the partner ecosystem."
+  },
+  {
+    "term": "Generative Pre-Trained Transformer (GPT)",
+    "definition": "A family of language models that’s trained on a large body of text data so that they can generate human-like text."
+  },
+  {
+    "term": "Grounding",
+    "definition": "The process through which domain-specific knowledge and customer information is added to the prompt to give the model the context it needs to respond more accurately."
+  },
+  {
+    "term": "Hallucination",
+    "definition": "A type of output where the model generates semantically correct text that is factually incorrect or makes little to no sense, given the context."
+  },
+  {
+    "term": "Human in the loop (HITL)",
+    "definition": "A model that requires human interaction."
+  },
+  {
+    "term": "Hyperparameter",
+    "definition": "A parameter used to control the training process. Hyperparameters sit outside the generated model."
+  },
+  {
+    "term": "Inference",
+    "definition": "The process of requesting a model to generate content."
+  },
+  {
+    "term": "Inference pipelines",
+    "definition": "A sequence of reusable generative steps stitched together to accomplish a generation task. This includes resolving prompt instructions, passing it to an LLM, moderating the results, and sending results back to the user."
+  },
+  {
+    "term": "Intent",
+    "definition": "An end user’s goal for interacting with an AI assistant."
+  },
+  {
+    "term": "Large language model (LLM)",
+    "definition": "A language model consisting of a neural network with many parameters trained on large quantities of text."
+  },
+  {
+    "term": "Machine learning",
+    "definition": "A subfield of AI specializing in computer systems that are designed to learn, adapt, and improve based on feedback and inferences from data, rather than explicit instruction."
+  },
+  {
+    "term": "Model cards",
+    "definition": "Documents details about the model’s performance as well as inputs, outputs, training method, conditions under which the model works best, and ethical considerations in use."
+  },
+  {
+    "term": "Natural Language Processing (NLP)",
+    "definition": "A branch of AI that uses machine learning to understand language as written by people. Large language models are one of many approaches to NLP."
+  },
+  {
+    "term": "Parameter size",
+    "definition": "The number of parameters the model uses to process and generate data."
+  },
+  {
+    "term": "Prompt",
+    "definition": "A natural language description of the task to be accomplished. An input to the LLM."
+  },
+  {
+    "term": "Prompt chaining",
+    "definition": "The method of breaking up complex tasks into several intermediate steps and then tying it back together so that the AI generates a more concrete, customized, and better result."
+  },
+  {
+    "term": "Prompt design",
+    "definition": "Prompt design is the process of creating prompts that improve the quality and accuracy of the model’s responses. Many models expect a certain prompt structure, so it’s important to test and iterate them on the model you’re using. After you understand what structure works best for a model, you can optimize your prompts for the given use case."
+  },
+  {
+    "term": "Prompt engineering",
+    "definition": "An emerging discipline within AI focused on maximizing the performance and reliability of models by crafting prompts in a systematic and scientifically rigorous way."
+  },
+
+  {
+    "term": "Prompt injection",
+    "definition": "A method used to control or manipulate the model's output by giving it certain prompts. With this method, users and third parties attempt to get around restrictions and perform tasks that the model wasn't designed for."
+  },
+  {
+    "term": "Prompt instructions",
+    "definition": "Prompt instructions are natural language instructions entered into a prompt template. Your user just has to send an instruction to Einstein. Instructions have a verb-noun structure and a task for the LLM, such as 'Write a description no longer than 500 characters.' Your user’s instructions are added to the app’s prompt template, and then relevant CRM data replaces the template’s placeholders. The prompt template is now a grounded prompt and is sent to the LLM."
+  },
+  {
+    "term": "Prompt management",
+    "definition": "The suite of tools used to effectively build, manage, package, and share prompts."
+  },
+  {
+    "term": "Prompt template",
+    "definition": "A string with placeholders that are replaced with business data values to generate a final text instruction that is sent to the LLM."
+  },
+  {
+    "term": "Retrieval-augmented generation (RAG)",
+    "definition": "A form of grounding that uses an information retrieval system like a knowledge base to enrich a prompt with relevant context, for inference or training."
+  },
+  {
+    "term": "Semantic retrieval",
+    "definition": "A scenario that allows an LLM to use similar and relevant historical business data that exists in a customer's CRM data."
+  },
+  {
+    "term": "System cards",
+    "definition": "An expansion of the concepts within, and application of, model cards to address the complexity of an overall AI system, which may integrate multiple models. For LLM-based systems this includes the core components of model cards (for example, performance, use cases, ethical considerations) plus how the system operates, what models it uses, as well as how content is chosen, generated, and delivered."
+  },
+  {
+    "term": "Temperature",
+    "definition": "A parameter that controls how predictable and varied the model's outputs are. A model with a high temperature generates random and diverse responses. A model with a low temperature generates focused and more consistent responses."
+  },
+  {
+    "term": "Toxicity",
+    "definition": "A term describing many types of discourse, including but not limited to offensive, unreasonable, disrespectful, unpleasant, harmful, abusive, or hateful language."
+  },
+  {
+    "term": "Trusted AI",
+    "definition": "Guidelines created by Salesforce that are focused on the responsible development and implementation of AI."
+  }
+]
+
+
+  
+}
