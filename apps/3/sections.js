@@ -400,7 +400,8 @@
       links: [
          { text: 'Videos', href: '../../vids', icon: 'desktop' },
          { text: 'Health', href: '../../health', icon: 'desktop' },
-
+         { text: 'Heart', href: '../../health/hdocs.html?data=heart.json', icon: 'desktop' },
+         { text: 'Lungs', href: '../../health/hdocs.html?data=lungs.json', icon: 'desktop' },
 
         // Add more links here
       ],

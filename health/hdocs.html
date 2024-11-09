@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make Everyone Healthy!</title>
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- marked.js for Markdown conversion -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@4.0.12/marked.min.js"></script>
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+
+  <style>
+    body {
+      background-color: #eee;
+      font-family: 'Open Sans', sans-serif;
+    }
+    h2 {
+      font-family: 'Lora', serif;
+    }
+  </style>
+</head>
+<body class="text-gray-800 font-sans leading-relaxed">
+
+  <!-- Navbar -->
+  <header class="bg-blue-800 text-white p-4 sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 id="pageTitle" class="text-2xl font-bold">Make Everyone Healthy!</h1>
+      <nav id="navbarLinks" class="space-x-4"></nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto py-10 px-4">
+    <p id="pageDescription" class="text-lg text-center mb-8"></p>
+
+    <!-- Sections -->
+    <div id="contentSections" class="space-y-10"></div>
+
+    <!-- Video Embed Section -->
+    <div class="my-10">
+      <h2 class="text-xl font-bold mb-4">Related Videos</h2>
+      <div id="videoSection" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+    </div>
+
+    <!-- References -->
+    <div id="references" class="text-sm mt-10">
+      <h2 class="text-xl font-bold mb-4">References</h2>
+      <ul class="list-disc ml-6"></ul>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-800 text-white p-4">
+    <div class="container mx-auto text-center">MCDoc - Health </div>
+  </footer>
+
+  <!-- Script to load JSON data and render markdown -->
+  <script>
+    async function loadContent() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const dataUrl = urlParams.get('data') || 'data.json';
+
+      const response = await fetch(dataUrl);
+      const data = await response.json();
+
+      // Populate page title and description
+      document.getElementById('pageTitle').innerText = data.title;
+      document.getElementById('pageDescription').innerText = data.description;
+
+      // Generate navbar links from sections
+      const navbarLinks = document.getElementById('navbarLinks');
+      data.sections.forEach(section => {
+        const navLink = document.createElement('a');
+        navLink.href = `#${section.id}`;
+        navLink.classList.add('hover:underline');
+        navLink.innerText = section.title;
+        navbarLinks.appendChild(navLink);
+      });
+
+      // Populate sections with formatted content, using marked.js for Markdown
+      const contentSections = document.getElementById('contentSections');
+      data.sections.forEach(section => {
+        const sectionDiv = document.createElement('section');
+        sectionDiv.id = section.id;
+        sectionDiv.classList.add('bg-white', 'p-6', 'rounded-lg', 'shadow-md');
+
+        const title = document.createElement('h2');
+        title.classList.add('text-2xl', 'font-semibold', 'mb-4');
+        title.innerText = section.title;
+
+        // Convert Markdown content to HTML using marked.js
+        const contentHtml = section.content.map(line => marked.marked(line)).join('');
+
+        sectionDiv.innerHTML = `
+          <div class="space-y-2">${title.outerHTML}<div class="prose">${contentHtml}</div></div>
+        `;
+
+        contentSections.appendChild(sectionDiv);
+      });
+
+      // Populate video section
+      const videoSection = document.getElementById('videoSection');
+      data.videos.forEach(video => {
+        const videoDiv = document.createElement('div');
+        videoDiv.classList.add('flex', 'flex-col', 'items-center', 'space-y-2');
+        videoDiv.innerHTML = `
+          <h3 class="text-lg font-semibold text-center">${video.title}</h3>
+          <iframe class="w-full h-64 rounded-lg shadow-lg" src="${video.url}" frameborder="0" allowfullscreen></iframe>
+        `;
+        videoSection.appendChild(videoDiv);
+      });
+
+      // Populate references
+      const referencesList = document.getElementById('references').querySelector('ul');
+      data.references.forEach(ref => {
+        const refItem = document.createElement('li');
+        refItem.innerHTML = `<a href="${ref}" target="_blank" class="text-blue-600 underline">${ref}</a>`;
+        referencesList.appendChild(refItem);
+      });
+    }
+
+    // Load content on page load
+    window.onload = loadContent;
+  </script>
+</body>
+</html>
