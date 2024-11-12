@@ -1206,6 +1206,19 @@ export class Types {
     },
 
 
+
+    AccountRelationshipShareRule: {
+      folderName: "accountRelationshipShareRules",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `accountRelationshipShareRules`,
+          fileNames: [`${member}.accountRelationshipShareRule-meta.xml`],
+
+        };
+      },
+    },
+
+
     
 
 
