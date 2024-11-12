@@ -1,0 +1,168 @@
+
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  th {
+    background-color: #007BFF;
+    color: #fff;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  tr:hover {
+    background-color: #ddd;
+  }
+
+   /* Styling for h2 */
+   h2 {
+    font-size: 2em;
+    color: #343a40; /* Dark gray color */
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-family: 'Georgia', serif; /* Elegant serif font */
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+
+   /* Styling for h3 */
+   h3 {
+    font-size: 1.5em;
+    color: #007BFF; /* Blue color */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 5px;
+    font-family: 'Arial', sans-serif;
+  } 
+
+
+
+  /* General List Styles */
+ul, ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333; /* Neutral color for text */
+  }
+  
+  /* Unordered List Styles */
+  ul {
+    list-style-type: disc; /* Default bullet points */
+  }
+  
+  ul li {
+    margin-bottom: 0.5rem; /* Space between list items */
+  }
+  
+  /* Ordered List Styles */
+  ol {
+    list-style-type: decimal; /* Default numbering */
+  }
+  
+  ol li {
+    margin-bottom: 0.5rem; /* Space between list items */
+  }
+  
+  /* Nested List Styles */
+  ul ul, ol ul, ul ol, ol ol {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    list-style-type: circle; /* Different bullet style for nested UL */
+  }
+  
+  ol ol {
+    list-style-type: lower-alpha; /* Lowercase alphabet for nested OL */
+  }
+  
+  /* Customizing Bullet Points */
+  ul.custom-bullets li {
+    list-style-type: none; /* Remove default bullets */
+    position: relative;
+    padding-left: 1.5rem; /* Add space for custom bullet */
+  }
+  
+  ul.custom-bullets li::before {
+    content: '•'; /* Custom bullet character */
+    position: absolute;
+    left: 0;
+    color: #0078D7; /* Bullet color */
+    font-size: 1.2rem;
+  }
+  
+  /* Adding Hover Effects */
+  ul li:hover, ol li:hover {
+    color: #0056b3; /* Change text color on hover */
+    cursor: pointer; /* Show pointer cursor */
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    ul, ol {
+      font-size: 0.9rem; /* Slightly smaller font for mobile screens */
+      padding-left: 1rem;
+    }
+  }
+
+
+  /* Grid container for 2 columns */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 20px; /* Space between grid items */
+    margin: 0 auto;
+    max-width: 1200px; /* Adjust max width if needed */
+    padding: 20px;
+  }
+
+  /* Individual video item */
+  .video-item {
+    background: #f9f9f9; /* Optional background color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center;
+  }
+
+  /* Responsive layout for smaller screens (stack in one column) */
+  @media (max-width: 768px) {
+    .video-grid {
+      grid-template-columns: 1fr; /* One column for small screens */
+    }
+  }
+
+  /* floating pane */
+  .floating-pane {
+    position: fixed; /* Ensures it stays fixed in the viewport */
+    top: 20px; /* Adjust distance from the top */
+    right: 20px; /* Adjust distance from the right */
+    z-index: 1000; /* Keeps it above other content */
+    max-width: 250px; /* Restricts width of the pane */
+
+  }
+
+  /* Add hover effects and styling for links */
+  .floating-pane a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .floating-pane a:hover {
+    color: #38bdf8; /* Tailwind's sky-500 color */
+  }

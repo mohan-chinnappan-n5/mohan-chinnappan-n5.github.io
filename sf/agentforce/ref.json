@@ -1,0 +1,41 @@
+{
+    "references": [
+        {
+            "title": "Salesforce: What is a Reasoning Engine?",
+            "url": "https://www.salesforce.com/agentforce/what-is-a-reasoning-engine/"
+        },
+        {
+            "title": "How the Atlas Reasoning Engine Powers Agentforce",
+            "url": "https://www.salesforce.com/agentforce/what-is-a-reasoning-engine/atlas/"
+        },
+        {
+            "title": "Google Research, Brain Team: Chain-of-Thought (CoT) Prompting Elicits Reasoning in LLMs",
+            "url": "https://arxiv.org/pdf/2201.11903"
+        },
+        {
+            "title": "Princeton University and Google Research: REaCT: Synergizing reasoning and acting in language models",
+            "url": "https://arxiv.org/pdf/2210.03629"
+        },
+        {
+            "title": "Princeton University and Google Research: Tree of Thoughts: Deliberate Problem Solving with Large Language Model",
+            "url": "https://arxiv.org/pdf/2305.10601"
+        },
+        {
+            "title": "Salesforce Blog: Vector Database",
+            "url": "https://www.salesforce.com/blog/vector-database/"
+        },
+        {
+            "title": "Salesforce Blog: AI Prompts: 6 Tips For Writing Generative AI Prompts",
+            "url": "https://www.salesforce.com/artificial-intelligence/generative-ai-prompts/"
+        },
+        {
+            "title": "Salesforce Blog: The Generative AI Glossary for Business Leaders",
+            "url": "https://www.salesforce.com/artificial-intelligence/generative-ai-glossary/#artificial-intelligence"
+        },
+
+        {
+            "title": "Data Cloud Basic Series",
+            "url": "https://salesforcedatacloud.hubs.vidyard.com"
+        }
+    ]
+}
