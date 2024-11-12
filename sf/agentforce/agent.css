@@ -1,4 +1,12 @@
-
+ 
+img {
+  margin-left: auto; /* mx-auto */
+  margin-right: auto; /* mx-auto */
+  width: 80%; /* w-full */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
+  border: 1px solid #d1d5db; /* border border-gray-300 */
+  border-radius: 0.375rem; /* rounded-md (6px) */
+}
 
 /* Table styling */
 table {

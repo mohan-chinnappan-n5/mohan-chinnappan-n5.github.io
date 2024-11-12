@@ -209,7 +209,7 @@ For more details, you can read the paper [here](https://arxiv.org/abs/2210.03629
 ---
 <a name='TOT'></a>
 ## Tree of Thoughts (ToT)
-
+![TOT](https://raw.githubusercontent.com/princeton-nlp/tree-of-thought-llm/master/pics/teaser.png)
 
 **Tree of Thoughts (ToT)** is a reasoning framework that extends the traditional linear "Chain of Thought" (CoT) approach by introducing **tree-based exploration** for solving complex problems. Instead of proceeding step-by-step in a single path, the model explores multiple possible reasoning paths simultaneously, evaluating and selecting the best one dynamically.
 
