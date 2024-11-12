@@ -1,6 +1,20 @@
 // agent-app.js
 // mohan chinnappan
 
+
+document.getElementById('toggle-pane').addEventListener('click', function () {
+  const pane = document.querySelector('.floating-pane');
+  const icon = document.getElementById('toggle-icon');
+
+  if (pane.classList.contains('collapsed')) {
+    pane.classList.remove('collapsed');
+    icon.classList.replace('fa-chevron-up', 'fa-chevron-down'); // Change icon to 'expand'
+  } else {
+    pane.classList.add('collapsed');
+    icon.classList.replace('fa-chevron-down', 'fa-chevron-up'); // Change icon to 'collapse'
+  }
+});
+
 function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
