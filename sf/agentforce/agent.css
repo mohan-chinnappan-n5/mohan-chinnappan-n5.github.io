@@ -162,7 +162,7 @@ ul, ol {
     width: 300px;
     z-index: 1000;
     transition: max-height 0.3s ease, opacity 0.3s ease;
-    max-height: 400px; /* Fully expanded height */
+    max-height: 600px; /* Fully expanded height */
     overflow: hidden;
   }
 

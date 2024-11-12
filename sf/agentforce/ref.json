@@ -1,6 +1,16 @@
 {
     "references": [
         {
+            "title": "RAG cheatsheet",
+            "url": "https://mohan-chinnappan-n5.github.io/cheatsheets/rag.html"
+        },
+ 
+        {
+            "title": "LLM cheatsheet",
+            "url": "https://mohan-chinnappan-n5.github.io/cheatsheets/llm.html"
+        },
+ 
+        {
             "title": "Salesforce: What is a Reasoning Engine?",
             "url": "https://www.salesforce.com/agentforce/what-is-a-reasoning-engine/"
         },

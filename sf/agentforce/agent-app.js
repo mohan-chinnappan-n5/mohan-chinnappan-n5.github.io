@@ -211,3 +211,43 @@ console.error("Failed to fetch video details:", error);
 // Call the render function
 renderVideos();
 
+
+// Function to render YouTube videos
+async function renderYouTubeVideos() {
+  const videoGridYT = document.getElementById("video-grid-yt");
+  const videosParam = getQueryParam("youtubeVideos") || "vids2.json"; // Default to _vids2.json
+  try {
+    // Fetch the YouTube video details from JSON
+    const response = await fetch(videosParam);
+    const videos = await response.json();
+
+    // Loop through YouTube videos and append to the container
+    videos.forEach((video) => {
+      const videoBlock = document.createElement("div");
+      videoBlock.classList.add("video-item");
+
+      videoBlock.innerHTML = `
+        <h3 class="text-xl font-bold text-center mb-4">${video.title}</h3>
+        <div class="youtube-player-container" uuid="${video.uuid}" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
+          <iframe width="100%" height="100%" 
+                  src="https://www.youtube.com/embed/${video.uuid}?autoplay=0&rel=0" 
+                  frameborder="0" 
+                  allow="autoplay; fullscreen; picture-in-picture" 
+                  allowfullscreen
+                  title="${video.title}" 
+                  style="opacity: 1; background-color: transparent; position: absolute; top: 0; left: 0;">
+          </iframe>
+        </div>
+      `;
+      videoGridYT.appendChild(videoBlock);
+    });
+  } catch (error) {
+    console.error("Failed to fetch YouTube video details:", error);
+  }
+}
+
+// Call the render function
+renderYouTubeVideos();
+
+
+
