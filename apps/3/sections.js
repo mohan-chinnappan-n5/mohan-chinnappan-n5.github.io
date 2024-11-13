@@ -244,6 +244,7 @@
         { text: 'GraphViz', href: 'https://mohan-chinnappan-n.github.io/viz/viz.html', icon: 'desktop' },
 
        { text: 'SVG2PNG', href: '../../image/svg2png/svg2png.html', icon: 'desktop' },
+       { text: 'Mermaid Editor', href: '../../graphs/mmd.html', icon: 'desktop' },
         
 
         // Add more links here
