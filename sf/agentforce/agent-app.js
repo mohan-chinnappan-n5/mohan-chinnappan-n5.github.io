@@ -8,10 +8,10 @@ document.getElementById('toggle-pane').addEventListener('click', function () {
 
   if (pane.classList.contains('collapsed')) {
     pane.classList.remove('collapsed');
-    icon.classList.replace('fa-chevron-up', 'fa-chevron-down'); // Change icon to 'expand'
+    icon.classList.replace('fa-chevron-down', 'fa-chevron-up'); // Change icon to 'collapse'
   } else {
     pane.classList.add('collapsed');
-    icon.classList.replace('fa-chevron-down', 'fa-chevron-up'); // Change icon to 'collapse'
+    icon.classList.replace('fa-chevron-up', 'fa-chevron-down'); // Change icon to 'expand'
   }
 });
 
