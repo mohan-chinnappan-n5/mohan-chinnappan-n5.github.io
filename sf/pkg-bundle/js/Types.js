@@ -755,6 +755,18 @@ export class Types {
       copyAllFiles: true,
     },
 
+    EmailTemplateFolder: {
+      once:true,
+      folderName: "email",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `email`,
+          fileNames: [``],
+        };
+      },
+      copyAllFiles: true,
+    },
+
     Dashboard: {
       once:true,
       folderName: "dashboards",
