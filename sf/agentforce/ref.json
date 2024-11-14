@@ -1,5 +1,11 @@
 {
     "references": [
+
+        {
+            "title": "Gen AI glossary",
+            "url": ""https://mohan-chinnappan-n5.github.io/terms/terms.html?data=eai.json"
+        },
+ 
         {
             "title": "RAG cheatsheet",
             "url": "https://mohan-chinnappan-n5.github.io/cheatsheets/rag.html"
