@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexipage Complexity Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+    <style>
+        .splitter {
+            width: 5px;
+            background-color: #e5e7eb; /* Tailwind gray-200 */
+            cursor: col-resize;
+        }
+
+        .splitter:hover {
+            background-color: #cbd5e1; /* Tailwind gray-300 */
+        }
+
+        
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="#" class="text-lg font-semibold">Flexipage Complexity Analyzer</a>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-10 px-4">
+        <h1 class="text-2xl font-bold mb-4">Upload Flexipage Metadata</h1>
+
+        <p class="mb-4">Analyze the complexity of your Salesforce Flexipage based on its components. The complexity is categorized as follows:</p>
+    
+
+       <!-- Complexity Threshold Inputs -->
+       <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+        <h3 class="font-semibold text-lg">Set Complexity Thresholds:</h3>
+        <div class="mb-4">
+            <label for="minimalThreshold" class="block">Minimal Complexity (Number of Components)</label>
+            <input type="number" id="minimalThreshold" value="10" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+        <div class="mb-4">
+            <label for="mediumThreshold" class="block">Medium Complexity (Number of Components)</label>
+            <input type="number" id="mediumThreshold" value="50" class="w-full p-2 border border-gray-300 rounded">
+        </div>
+    </div>
+
+
+        <!-- File Upload -->
+        <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+            <input type="file" id="fileInput" accept=".xml" class="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100">
+            <button  id="analyzeBtn" onclick="analyzeFlexipage()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" >Analyze</button>
+        </div>
+
+        <!-- Resizable Splitter Layout -->
+        <div id="split-container" class="grid grid-cols-[20%_5px_75%] gap-0" style="height: 400px;">
+            <!-- Left Pane: Analysis Results -->
+            <div id="result" class="p-4 bg-gray-100 hidden overflow-auto">
+                <h2 class="text-lg font-semibold mb-2">Analysis Result</h2>
+                <p id="complexity">Complexity: </p>
+                <p id="regionCount">Regions: </p>
+                <p id="componentCount">Components: </p>
+            </div>
+
+            <!-- Splitter -->
+            <div id="splitter" class="splitter"></div>
+
+            <!-- Right Pane: Transformed Content (HTML) -->
+            <div id="transformed-content" class="p-4 bg-white shadow-md hidden overflow-auto">
+                <h2 class="text-lg font-semibold mb-2">HTML Representation</h2>
+                <div id="html-output" class="border border-gray-200 p-4 bg-gray-50 max-h-[400px] overflow-auto" disabled></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-4 mt-10">
+        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 text-center">
+            <p>MCDocs - Flexipage</p>
+        </div>
+    </footer>
+
+    <script src="./fp.js"></script>
+
+</body>
+
+</html>

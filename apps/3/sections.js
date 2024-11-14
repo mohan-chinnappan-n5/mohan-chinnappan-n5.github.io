@@ -114,7 +114,8 @@
       links: [
         { text: 'SF-LAND :: XSLT', href: '../../xml/sfl-xslt.html', icon: 'desktop' },
         { text: 'XML2JSON', href: '../../xml2json/xml2json.html', icon: 'desktop' },
-        { text: 'FlexiPage Analyser', href: '../../fp/index.html', icon: 'desktop' },
+        { text: 'FlexiPage Analyzer', href: '../../fp/index.html', icon: 'desktop' },
+        { text: 'FlexiPage Complexity Analyzer', href: '../../sf/flexi/fp.html', icon: 'desktop' },
         { text: 'FlexiPage Structure', href: '../../flows/fp/index.html', icon: 'desktop' },
         // Add more links here
       ],
