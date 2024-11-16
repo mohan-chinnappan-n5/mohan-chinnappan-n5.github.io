@@ -19,6 +19,11 @@
             "title": "LLM cheatsheet",
             "url": "https://mohan-chinnappan-n5.github.io/cheatsheets/llm.html"
         },
+
+        {
+            "title": "The Ultimate Guide to Fine-Tuning LLM",
+            "url": "https://arxiv.org/html/2408.13296v1"
+        },
  
         {
             "title": "Salesforce: What is a Reasoning Engine?",
