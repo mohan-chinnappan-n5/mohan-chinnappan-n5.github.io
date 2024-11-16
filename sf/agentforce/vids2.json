@@ -9,5 +9,10 @@
       "title": "RAG in Chrome Extension",
       "uuid": "bnzLoIHBnu0",
       "iframeTitle": "Chatty for LLMs"
+    },
+    {
+      "title": "Einstein Bot - Simple - Appointment Scheduler",
+      "uuid": "3wDpNNMu6Y0",
+      "iframeTitle": "Einstein Bot - Simple - Appointment Scheduler"
     }
 ]
