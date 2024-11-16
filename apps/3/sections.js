@@ -43,7 +43,7 @@
       { text: 'JMeter and SPA', href: '../../ai/einstein/viewer_md3.html?title=JMeter and SPA&data=https://raw.githubusercontent.com/mohan-chinnappan-n5/compares/refs/heads/main/perf/jmeter.md', icon: 'book' },
 
 
-
+    { text: 'A Mathematical Perspective on Transformer-Based Large Language Models (LLMs)', href: '../../llm/docs/mathdoc.html?data=llm-math.md', icon: 'book' },
 
 
 

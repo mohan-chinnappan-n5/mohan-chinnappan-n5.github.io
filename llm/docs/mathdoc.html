@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Math Doc Viewer</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  
+  <!-- MathJax Configuration (using MathJax 2.7.7) -->
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+        processEscapes: true
+      }
+    });
+  </script>
+
+  <link rel="stylesheet" href="./styles.css?v=2">
+
+
+</head>
+<body class="bg-gray-100 text-gray-800">
+  
+<!-- Navbar -->
+<nav class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-xl font-bold">Math Doc Viewer</h1>
+  </div>
+</nav>
+
+  <!-- Content Section -->
+  <main class="container mx-auto my-8 p-4 bg-white shadow rounded">
+    <div id="markdown-content" class="prose lg:prose-xl mx-auto"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-800 text-white py-2">
+    <div class="container mx-auto text-center">
+      <p>MCDoc - Math Doc Viewer</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
