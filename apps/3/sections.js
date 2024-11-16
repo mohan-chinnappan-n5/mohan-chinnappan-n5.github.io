@@ -40,10 +40,13 @@
         { text: 'ML tools ', href: '../../ai/einstein/viewer_md3.html?data=https://raw.githubusercontent.com/mohan-chinnappan-n5/compares/refs/heads/main/ml/ml_tools.md&title=ML tools', icon: 'book' },
        { text: 'Encryption', href: '../../ai/einstein/viewer_md3.html?title=Encryption&data=https://raw.githubusercontent.com/mohan-chinnappan-n5/compares/refs/heads/main/encryption/encryption.md', icon: 'book' },
 
-      { text: 'JMeter and SPA', href: '../../ai/einstein/viewer_md3.html?title=JMeter and SPA&data=https://raw.githubusercontent.com/mohan-chinnappan-n5/compares/refs/heads/main/perf/jmeter.md', icon: 'book' },
+      { text: 'JMeter and SPA', href: '../../llm/docs/mathdoc.html?title=JMeter and SPA&data=https://raw.githubusercontent.com/mohan-chinnappan-n5/compares/refs/heads/main/perf/jmeter.md', icon: 'book' },
 
 
     { text: 'A Mathematical Perspective on Transformer-Based Large Language Models (LLMs)', href: '../../llm/docs/mathdoc.html?data=llm-math.md', icon: 'book' },
+
+    { text: 'LLM Training', href: '../../llm/docs/mathdoc.html?data=llm-training.md', icon: 'book' },
+
 
 
 
