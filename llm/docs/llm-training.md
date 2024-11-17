@@ -2,11 +2,11 @@
 
 ### Thinking About Archimedes
 
-	“Give me a lever long enough and a fulcrum on which to place it, and I shall move the Earth.” – Archimedes
+Give me a lever long enough and a fulcrum on which to place it, and I shall move the Earth. – Archimedes
 
 A Modern Twist
 
-	“Give me enough GPU clusters and computing power, and I will build AGI.”
+Give me enough GPU clusters and computing power, and I will build AGI.
 
 This contemporary adaptation of Archimedes’ timeless assertion humorously captures the essence of today’s technological aspirations. It reflects the monumental computational requirements for developing Artificial General Intelligence (AGI) and emphasizes the pivotal role of:
 	-	Massive Parallelism: Leveraging thousands of GPU cores for training models.
