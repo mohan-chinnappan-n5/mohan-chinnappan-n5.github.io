@@ -62,8 +62,24 @@ While this is a plausible explanation, it is not necessarily the only explanatio
 In Salesforce, reasoning engines often use large language models (LLMs) to process information and generate logical inferences. For example, an LLM could help a business owner calculate the number of products they need to sell to break even by applying a set of known rules and mathematical formulas. LLMs can also employ advanced reasoning strategies such as [**Chain-of-Thought (CoT)**](https://arxiv.org/pdf/2201.11903) or [**Reasoning and Acting (ReAct)**](https://arxiv.org/pdf/2210.03629), which break down complex problems into manageable steps.
 
 ---
----
+### Comparing Chain-of-Thoughts, ReAct, and Tree of Thoughts (with an Example)
 
+| Feature                  | Chain-of-Thoughts (CoT)                              | ReAct                                         | Tree of Thoughts (ToT)                           |
+|--------------------------|-----------------------------------------------------|----------------------------------------------|-------------------------------------------------|
+| **Definition**           | Sequential reasoning with explicit steps.           | Reasoning interleaved with actions.          | Branching exploration of reasoning paths.       |
+| **Strength**             | Encourages structured reasoning, reducing errors.   | Combines reasoning with external interaction.| Explores multiple paths for optimal decisions.  |
+| **Weakness**             | Limited to sequential reasoning; less interactive.  | May lack depth in reasoning.                 | Computationally expensive for deep exploration. |
+| **Use Cases**            | Arithmetic, logical puzzles, structured reasoning.  | Interactive tasks, dynamic problem-solving.  | Planning, strategy, complex problem-solving.    |
+| **Key Concept**          | Step-by-step reasoning.                             | Interleaving reasoning and action.           | Decision tree exploration.                      |
+| **Reasoning Style**      | Linear and sequential.                              | Iterative with dynamic interaction.          | Divergent and comparative.                      |
+| **Example Problem**      | Calculate ( (23 + 15) times 2 - 4 ).             | Navigate a maze to reach a target location.  | Decide on the best marketing campaign strategy. |
+| **Example Process**      | 1. Add (23 + 15 = 38\).                            | 1. Identify possible moves in the maze.      | 1. Branch 1: Focus on social media ads.         |
+|                          | 2. Multiply (38 times 2 = 76).                   | 2. Reason: Which move minimizes distance?    | 2. Branch 2: Invest in TV ads.                  |
+|                          | 3. Subtract (76 - 4 = 72).                        | 3. Take an action: Move one step forward.    | 3. Evaluate effectiveness of each branch.       |
+|                          | 4. Answer: (72).                                  | 4. Repeat reasoning and acting until solved. | 4. Select the branch with the best outcome.     |
+| **Example Output**       | Final Answer: (72).                               | Goal Achieved: Exit the maze.                | Optimal Strategy: Invest in social media ads.   |
+
+---
 <a name='CoT'></a>
 ## Chain-of-Thought (CoT) reasoning
 
