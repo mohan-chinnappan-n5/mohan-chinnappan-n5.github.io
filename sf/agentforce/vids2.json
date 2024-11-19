@@ -5,6 +5,13 @@
       "uuid": "vGDIMhv5OL0",
       "iframeTitle": "Design of LLM"
     },
+
+    {
+      "title": "Using LLM to summarize Salesforce Contacts owned by a given user",
+      "uuid": "h9eH7ahq-AY",
+      "iframeTitle": "Using LLM to summarize Salesforce Contacts owned by a given user"
+    },
+ 
     {
       "title": "RAG in Chrome Extension",
       "uuid": "bnzLoIHBnu0",
