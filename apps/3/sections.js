@@ -466,7 +466,7 @@ Chemistry: {
     },
 
 SFAI: {
-      title: 'agentforce',
+      title: 'Agentforce',
       links: [
         { text: 'Agentforce Notes', href: '../../sf/agentforce/agentforce.html?data=agentforce.md&ref=ref.json&vids=vids.json', icon: 'desktop' },
         { text: 'Glossary', href: '../../terms/terms.html?data=eai.json', icon: 'desktop' },
@@ -476,6 +476,16 @@ SFAI: {
 
     },
 
+Agri: {
+      title: 'Agriculture',
+      links: [
+        { text: 'AgriRevolution', href: '../../agri/us.html', icon: 'desktop' },
+        { text: 'Organic Farming', href: '../../agri/organic.html', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
 
 
     // Add more sections here
