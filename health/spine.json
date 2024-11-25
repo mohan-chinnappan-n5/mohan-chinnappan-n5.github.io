@@ -1,0 +1,45 @@
+{
+  "title": "Spine Health: Stay Strong and Flexible!",
+  "description": "Learn about spine anatomy, its function, and tips for maintaining a healthy and flexible spine.",
+  "sections": [
+    {
+      "id": "spine-anatomy",
+      "title": "Spine Anatomy: The Backbone of Your Body",
+      "content": [
+        "The spine is a complex structure that provides support and flexibility. It is composed of **33 vertebrae** divided into **cervical**, **thoracic**, **lumbar**, **sacral**, and **coccygeal** regions.",
+        "Key components include the **vertebrae**, **intervertebral discs**, **spinal cord**, and **ligaments**. Together, these elements enable movement, protect the spinal cord, and support the body."
+      ]
+    },
+    {
+      "id": "spine-function",
+      "title": "How the Spine Works",
+      "content": [
+        "The spine serves three primary functions: structural support, protection of the spinal cord, and enabling movement. It also absorbs shocks through the intervertebral discs, ensuring a smooth motion during activities."
+      ]
+    },
+    {
+      "id": "healthy-spine-tips",
+      "title": "Tips for a Healthy Spine",
+      "content": [
+        "1. **Practice Good Posture**: Sit and stand with a straight back to reduce strain on your spine.",
+        "2. **Exercise Regularly**: Activities like yoga and swimming strengthen the spine and improve flexibility.",
+        "3. **Lift Properly**: Always bend your knees and keep your back straight when lifting heavy objects.",
+        "4. **Sleep on a Supportive Mattress**: Ensure your mattress provides proper back support.",
+        "5. **Stay Active**: Prolonged sitting can harm your spine. Take breaks to stretch and move around."
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "title": "Spine Anatomy",
+      "url": "https://www.youtube.com/embed/gUG_zbKqlaU"
+    },
+    {
+      "title": "Yoga for Spine Health",
+      "url": "https://www.youtube.com/embed/3W3iWjTgzhw"
+    }
+  ],
+  "references": [
+    "WebMD: https://www.webmd.com/back-pain/ss/slideshow-spine-problems"
+  ]
+}

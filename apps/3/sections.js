@@ -418,6 +418,8 @@
       links: [
          { text: 'Heart', href: '../../health/hdocs.html?data=heart.json', icon: 'desktop' },
          { text: 'Lungs', href: '../../health/hdocs.html?data=lungs.json', icon: 'desktop' },
+         { text: 'Spine', href: '../../health/hdocs.html?data=spine.json', icon: 'desktop' },
+
 
         // Add more links here
       ],
