@@ -434,6 +434,9 @@
  
          { text: 'Reinforcement Learning', href: '../../health/hdocs.html?data=rl.json', icon: 'desktop' },
          { text: 'Reinforcement Learning with Human Feedback', href: '../../health/hdocs.html?data=rlhf.json', icon: 'desktop' },
+        { text: 'LLM Cheat Sheet', href: '../../cheatsheets/llm.html', icon: 'book' },
+        { text: 'LLM Training', href: '../../llm/docs/mathdoc.html?data=llm-training.md', icon: 'book' },
+
 
 
 
