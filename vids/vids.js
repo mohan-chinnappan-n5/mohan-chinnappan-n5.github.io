@@ -18,12 +18,6 @@ const data = {
             { title: "Eduction Keynote", youtubeId: "Dn3sjTmbE7M" }, 
  
 
-
-
-
-
-
- 
         ],
       },
 
@@ -332,6 +326,15 @@ const data = {
 
 
 
+
+        ],
+      },
+
+      {
+        name: "CS and AI",
+        videos: [
+          { title: "How Could Machines Reach Human-Level Intelligence" , youtubeId: "xL6Y0dpXEwc" },
+          { title: "Harvard CS50’s Artificial Intelligence " , youtubeId: "5NgNicANyqM" },
 
         ],
       },
