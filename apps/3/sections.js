@@ -426,6 +426,23 @@
 
     },
 
+    LLM: {
+      title: 'LLM',
+      links: [
+         { text: 'Transformer', href: '../../health/hdocs.html?data=llm-transformer.json', icon: 'desktop' },
+         { text: 'Finetuning', href: '../../health/hdocs.html?data=llm-ft.json', icon: 'desktop' },
+ 
+         { text: 'Reinforcement Learning', href: '../../health/hdocs.html?data=rl.json', icon: 'desktop' },
+         { text: 'Reinforcement Learning with Human Feedback', href: '../../health/hdocs.html?data=rlhf.json', icon: 'desktop' },
+
+
+
+
+        // Add more links here
+      ],
+
+    },
+
 
   Social: {
       title: 'Life Inspirations',
