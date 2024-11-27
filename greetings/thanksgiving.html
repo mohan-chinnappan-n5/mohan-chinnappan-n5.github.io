@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Thanksgiving</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <style>
+    /* Animation for the Main Section */
+    @keyframes moveBackForth {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(20px); }
+      100% { transform: translateX(0); }
+    }
+
+    #greeting {
+      animation: moveBackForth 8s infinite ease-in-out; /* Smooth back-and-forth motion */
+    }
+  </style>
+</head>
+<body class="bg-orange-100 font-sans leading-relaxed tracking-wide text-center">
+
+  <!-- Navbar -->
+  <nav class="bg-yellow-700 p-4 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-white font-bold text-xl">Thanksgiving Greetings</h1>
+      <div>
+        <a href="#greeting" class="nav-link text-gray-200 hover:text-white px-3">Greeting</a>
+        <a href="#about" class="nav-link text-gray-200 hover:text-white px-3">About Thanksgiving</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Section with Greeting -->
+  <section id="greeting" class="relative h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('img/turkey.jpg');">
+    <div class="bg-gradient-to-br from-green-500 via-yellow-500 to-red-600 bg-opacity-80 p-6 rounded-lg shadow-lg">
+      <h2 class="text-5xl font-extrabold text-white mb-4">Happy Thanksgiving!</h2>
+      <p class="text-white text-xl">Wishing you a day filled with gratitude, joy, and togetherness!</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="container mx-auto p-6 mt-8 bg-gradient-to-r from-yellow-100 via-orange-100 to-red-100 rounded-lg shadow-md">
+    <h3 class="text-3xl font-semibold text-gray-800 mb-4">About Thanksgiving</h3>
+    <p class="text-gray-700 leading-relaxed">
+      Thanksgiving traces back to 1621 when Pilgrims and the Wampanoag Native Americans shared a feast to celebrate the Pilgrims
+      first successful harvest in Plymouth, Massachusetts. 
+      <b>It symbolizes the coming together of different communities and gratitude for survival and prosperity.</b>
+      <hr/>
+      Thanksgiving is a time to reflect on our blessings and express gratitude for the love, support, 
+      and joy in our lives. Families and friends gather to share a festive meal, traditionally featuring turkey (<i>if possible, please pardon this bird!</i>),
+      and to celebrate the spirit of thankfulness and togetherness.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-yellow-700 text-white p-4 mt-12">
+    <div class="container mx-auto text-center">
+      <p>MCDocs - Festivals</p>
+    </div>
+  </footer>
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    // Trigger confetti animation on page load
+    window.onload = function() {
+      confetti({
+        particleCount: 300,
+        spread: 70,
+        origin: { y: 0.7 },
+        colors: ['#FF7518', '#FFD700', '#D2691E'], // Thanksgiving colors
+      });
+    };
+
+    // Function to trigger confetti on navbar link click
+    function triggerConfetti() {
+      confetti({
+        particleCount: 150,
+        spread: 50,
+        origin: { x: Math.random(), y: Math.random() }, // Randomize confetti origin
+        colors: ['#FF7518', '#FFD700', '#D2691E'],
+      });
+    }
+
+    // Add click event listeners to navbar links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', triggerConfetti);
+    });
+  </script>
+</body>
+</html>

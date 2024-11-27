@@ -79,5 +79,19 @@
 
   <script src="sections.js?v=4"></script>
   <script type="module" src="app.js?v=7"></script>
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    // Trigger confetti animation on page load
+    window.onload = function() {
+      // Confetti burst
+      confetti({
+        particleCount: 500,
+        spread: 100,
+        origin: { y: 0.8 },
+      });
+    };
+  </script>
 </body>
 </html>
