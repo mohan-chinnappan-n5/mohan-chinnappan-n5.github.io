@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Streamlit App Documentation</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css" />
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  
+
+</head>
+<body class="bg-gray-100 font-sans leading-relaxed tracking-wide">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-800 p-4 sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-white font-bold text-xl">Using Ollama Python library 0.4 with function calling</h1>
+      <div>
+        <a href="#about" class="text-gray-300 hover:text-white px-3">About</a>
+        <a href="#code" class="text-gray-300 hover:text-white px-3">Code</a>
+        <a href="#usage" class="text-gray-300 hover:text-white px-3">Usage</a>
+        <a href="#demo" class="text-gray-300 hover:text-white px-3">Demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- About Section -->
+  <section id="about" class="container mx-auto p-6 mt-6">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">About this App</h2>
+    <p class="text-gray-700 leading-relaxed">
+      We use  Ollama Python library 0.4 for getting the stock quote and total records in given Salesforce Sales Cloud objects 
+    </p>
+  </section>
+
+  <!-- Setup Section -->
+  <section id="code" class="container mx-auto p-6 mt-6 bg-white shadow rounded">
+   <h2 class="text-2xl font-semibold text-gray-800 mb-4">Code</h2>
+    <pre class="bg-gray-100 p-4 rounded mt-2 language-python">
+    <code class="language-python">
+#---------------------------------------------------
+st.header("Get Total Records in Salesforce Org")
+# With a dropdown (combobox) for selecting the object name
+predefined_objects = ["Account", "Contact", "Opportunity", "Lead", "Case"]
+selected_object = st.selectbox("Select a predefined Object", options=predefined_objects)
+custom_object = st.text_input("Or enter a custom Object name")
+# Use the custom object if provided, otherwise fallback to the selected object
+object_name = custom_object if custom_object.strip() else selected_object
+org_name = st.text_input("Enter Salesforce org username or alias", value="username")
+if st.button("Get Total Records"):
+    if org_name.strip():
+        prompt = f"What is the total number of {object_name} in the Salesforce org {org_name}?"
+        st.write("Prompt:", prompt)
+
+        available_functions: Dict[str, Callable] = {
+            'get_total_records_in_org': get_total_records_in_org,
+        }
+
+        # Call Ollama API
+        with st.spinner("Processing your request..."):
+            try:
+                response = ollama.chat(
+                    'llama3.2',
+                    messages=[{'role': 'user', 'content': prompt}],
+                    tools=[get_total_records_in_org],
+                )
+                
+                # Check for tool calls in the response
+                if response.message.tool_calls:
+                    for tool in response.message.tool_calls:
+                        function_to_call = available_functions.get(tool.function.name)
+                        if function_to_call:
+                            st.write(f"Calling function: `{tool.function.name}`")
+                            st.write(f"Arguments: {tool.function.arguments}")
+                            result = function_to_call(**tool.function.arguments)
+                            st.success(f"The total number of records of {object_name} in {org_name} is: {result}")
+                        else:
+                            st.error(f"Function `{tool.function.name}` not found")
+                else:
+                    st.warning("No tool calls found in the response.")
+            except Exception as e:
+                st.error(f"Error: {e}")
+    else:
+        st.error("Please enter a valid Salesforce org username or alias.")
+    </code>
+    </pre>
+  </section>
+
+  <!-- Usage Section -->
+  <section id="usage" class="container mx-auto p-6 mt-6 bg-white shadow rounded">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">How to Use the App</h2>
+    <ol class="list-decimal list-inside text-gray-700 leading-relaxed">
+      <li>
+        <strong>Step 1:</strong> Enter your Salesforce Org's username or alias.
+      </li>
+      <li>
+        <strong>Step 2:</strong> Select or type the Salesforce object name using the combobox.
+      </li>
+      <li>
+        <strong>Step 3:</strong> Click the "Get Total Records" button to query the total records for the selected object.
+      </li>
+      <li>
+        <strong>Step 4:</strong> View the total record count displayed in the app interface.
+      </li>
+    </ol>
+  </section>
+
+  <!-- Demo Section -->
+  <section id="demo" class="container mx-auto p-6 mt-6 bg-white shadow rounded">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Demo</h2>
+    <p class="text-gray-700 mb-4">
+      Watch the demo videos to see how the Streamlit app works:
+    </p>
+    <div class="flex justify-center">
+      <video controls class="rounded-lg shadow-lg" style="max-width: 80%;">
+        <source src="https://github.com/mohan-chinnappan-n5/compares/raw/refs/heads/main/demos/ollama-func-calling-demo1.webm" type="video/webm">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white p-4 mt-12">
+    <div class="container mx-auto text-center">
+      <p>MCDocs - Ollama Function Calling</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-python.min.js"></script>
+
+</body>
+</html>

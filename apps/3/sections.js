@@ -47,6 +47,8 @@
 
     { text: 'LLM Training', href: '../../llm/docs/mathdoc.html?data=llm-training.md', icon: 'book' },
 
+    { text: 'Ollama Function Calling', href: '../../cheatsheets/ollama-func-calling.html', icon: 'book' },
+
 
 
 
