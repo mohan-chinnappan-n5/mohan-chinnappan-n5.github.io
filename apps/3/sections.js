@@ -144,12 +144,14 @@
         { text: 'Clock', href: '../..//utils/clock/clockapp.html', icon: 'desktop' },
         { text: 'Calendar', href: '../..//utils/cal/cal.html', icon: 'desktop' },
   
+        { text: 'Scientific Calculator', href: '../../calc/c.html', icon: 'desktop' },
 
 	{ text: 'Thank you! Card Generator', href: '../../cards/ty/ty.html', icon: 'desktop' },
         { text: 'Trivia', href: '../../trivia/trivia.html', icon: 'desktop' },
         { text: 'Vanity License Plate Generator', href: '../../common/license-plate/index.html', icon: 'desktop' },
         { text: 'US - Tax Calculator', href: 'https://mctaxes.streamlit.app', icon: 'desktop' },
         { text: 'Iframes viewer', href: '../../frames/iframes.html?data=frames.json', icon: 'desktop' },
+
 
 
 

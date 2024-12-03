@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.6.0/lib/browser/math.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <link
+    rel="icon"
+    type="image/x-icon"
+    href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico"
+  />
+</head>
+<body class="bg-gray-900 font-sans">
+
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 p-4 text-white sticky top-0 z-50 shadow-lg">
+        <div class="flex justify-between items-center">
+            <a href="#" class="text-xl font-bold tracking-wider">Scientific Calculator</a>
+        </div>
+    </nav>
+
+    <!-- Calculator Section -->
+    <div class="container mx-auto mt-12 px-4">
+        <div class="bg-white shadow-lg rounded-lg p-8 max-w-xl mx-auto">
+            <div class="mb-6">
+                <!-- Editable display input -->
+                <input type="text" id="display" class="w-full text-right text-3xl p-4 border-2 border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                value="x=10; y=200; z=x/y; z" placeholder="Enter your equation" />
+            </div>
+            
+            <!-- Result Display (Smooth Transition) -->
+            <div id="resultDisplay" class="text-right text-2xl text-gray-800 mt-6 opacity-0 transition-opacity duration-500 ease-out"></div>
+
+            <div class="grid grid-cols-4 gap-4 mt-4">
+                <!-- Calculator Buttons -->
+                <button class="btn" onclick="appendToDisplay('7')">7</button>
+                <button class="btn" onclick="appendToDisplay('8')">8</button>
+                <button class="btn" onclick="appendToDisplay('9')">9</button>
+                <button class="btn btn-operation" onclick="appendToDisplay('/')">/</button>
+
+                <button class="btn" onclick="appendToDisplay('4')">4</button>
+                <button class="btn" onclick="appendToDisplay('5')">5</button>
+                <button class="btn" onclick="appendToDisplay('6')">6</button>
+                <button class="btn btn-operation" onclick="appendToDisplay('*')">*</button>
+
+                <button class="btn" onclick="appendToDisplay('1')">1</button>
+                <button class="btn" onclick="appendToDisplay('2')">2</button>
+                <button class="btn" onclick="appendToDisplay('3')">3</button>
+                <button class="btn btn-operation" onclick="appendToDisplay('-')">-</button>
+
+                <button class="btn" onclick="appendToDisplay('0')">0</button>
+                <button class="btn" onclick="appendToDisplay('.')">.</button>
+                <button class="btn btn-operation" onclick="appendToDisplay('+')">+</button>
+                <button class="btn btn-equal" onclick="calculate()">=</button>
+
+                <!-- Scientific Functions -->
+                <button class="btn btn-function" onclick="appendToDisplay('ln(')">ln</button>
+                <button class="btn btn-function" onclick="appendToDisplay('log10(')">log</button>
+                <button class="btn btn-function" onclick="appendToDisplay('sin(')">sin</button>
+                <button class="btn btn-function" onclick="appendToDisplay('cos(')">cos</button>
+
+                <button class="btn btn-function" onclick="appendToDisplay('tan(')">tan</button>
+                <button class="btn btn-function" onclick="appendToDisplay('e')">e</button>
+                <button class="btn btn-function" onclick="appendToDisplay('^(')">^</button>
+                <button class="btn btn-clear" onclick="clearDisplay()">C</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 p-4 text-center text-white mt-8">
+        <p>MCDoc -  Scientific Calculator</p>
+    </footer>
+
+    <script>
+        let context = {};
+
+        // Function to append values to the display
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        // Function to clear the display
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+            document.getElementById('resultDisplay').innerText = '';
+            document.getElementById('resultDisplay').classList.remove('opacity-100');
+            document.getElementById('resultDisplay').classList.add('opacity-0');
+            context = {}; // Clear context (variables)
+        }
+
+        // Function to calculate the expression
+        function calculate() {
+            const display = document.getElementById('display');
+            const resultDisplay = document.getElementById('resultDisplay');
+            try {
+                // Split the input string by semicolons for multiple expressions
+                let statements = display.value.split(';');
+                let result = null;
+
+                // Loop through each statement and evaluate it
+                statements.forEach(function(statement) {
+                    statement = statement.trim();
+                    if (statement) {
+                        // If the statement is an assignment (e.g., x = 10)
+                        if (statement.includes('=')) {
+                            let [varName, expr] = statement.split('=');
+                            varName = varName.trim();
+                            expr = expr.trim();
+                            // Evaluate the expression and store the result in the context
+                            context[varName] = math.evaluate(expr, context);
+                        } else {
+                            // Evaluate a simple expression using the context (variables)
+                            result = math.evaluate(statement, context);
+                        }
+                    }
+                });
+
+                // Display the result of the last statement
+                resultDisplay.innerText = `Result: ${result}`;
+
+                // Show the result smoothly
+                resultDisplay.classList.remove('opacity-0');
+                resultDisplay.classList.add('opacity-100');
+            } catch (error) {
+                resultDisplay.innerText = 'Error';
+                resultDisplay.classList.remove('opacity-0');
+                resultDisplay.classList.add('opacity-100');
+            }
+        }
+    </script>
+
+    <style>
+        /* Button styling */
+        .btn {
+            background-color: #f3f4f6;
+            padding: 20px;
+            font-size: 1.5rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .btn:hover {
+            background-color: #e5e7eb;
+            transform: translateY(-2px);
+        }
+
+        .btn-operation {
+            background-color: #60a5fa;
+            color: white;
+        }
+
+        .btn-operation:hover {
+            background-color: #3b82f6;
+        }
+
+        .btn-equal {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .btn-equal:hover {
+            background-color: #059669;
+        }
+
+        .btn-function {
+            background-color: #9333ea;
+            color: white;
+        }
+
+        .btn-function:hover {
+            background-color: #7e22ce;
+        }
+
+        .btn-clear {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .btn-clear:hover {
+            background-color: #dc2626;
+        }
+    </style>
+</body>
+</html>
