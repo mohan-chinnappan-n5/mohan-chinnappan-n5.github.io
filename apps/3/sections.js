@@ -405,7 +405,7 @@
     },
 
     Videos: {
-      title: 'Videos on various topic',
+      title: 'Videos on various topics',
       links: [
          { text: 'Videos', href: '../../vids', icon: 'desktop' },
          { text: 'Health', href: '../../health', icon: 'desktop' },

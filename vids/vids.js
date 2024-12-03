@@ -339,6 +339,14 @@ const data = {
         ],
       },
 
+    {
+        name: "VS Code Extensions",
+        videos: [
+          { title: "Salesforce package.xml splitter - VS Code Extension" , youtubeId: "JyJ6eILZuRU" },
+
+        ],
+      },
+
 
 
 

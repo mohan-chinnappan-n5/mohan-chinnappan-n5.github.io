@@ -1,0 +1,84 @@
+{
+  "title": "Salesforce Einstein Product Offerings",
+  "description": "Explore Salesforce Einstein's AI-powered tools, enhancing productivity, decision-making, and customer experience across Salesforce platforms.",
+  "sections": [
+    {
+      "id": "sales-cloud",
+      "title": "Sales Cloud Einstein",
+      "content": [
+        "### Einstein Lead Scoring",
+        "Predict the likelihood of lead conversion with AI-driven insights.",
+        "- Prioritize leads effectively.",
+        "- Focus on high-conversion opportunities.",
+        "",
+        "### Einstein Opportunity Scoring",
+        "Score opportunities based on their likelihood to close.",
+        "- Gain actionable deal insights.",
+        "- Improve decision-making efficiency."
+      ]
+    },
+    {
+      "id": "service-cloud",
+      "title": "Service Cloud Einstein",
+      "content": [
+        "### Einstein Bots",
+        "Automate service tasks with intelligent chatbots.",
+        "- Provide instant responses to common queries.",
+        "- Personalize customer interactions.",
+        "",
+        "### Einstein Case Classification",
+        "Use AI to classify and route service cases efficiently.",
+        "- Automate repetitive tasks.",
+        "- Improve case resolution times."
+      ]
+    },
+    {
+      "id": "marketing-cloud",
+      "title": "Marketing Cloud Einstein",
+      "content": [
+        "### Einstein Engagement Scoring",
+        "Tailor campaigns based on engagement predictions.",
+        "- Predict email, SMS, and push engagement.",
+        "- Optimize marketing strategies.",
+        "",
+        "### Einstein Content Tagging",
+        "Organize content with AI-driven tags.",
+        "- Enhance searchability.",
+        "- Simplify content management."
+      ]
+    },
+    {
+      "id": "commerce-cloud",
+      "title": "Commerce Cloud Einstein",
+      "content": [
+        "### Einstein Product Recommendations",
+        "Offer personalized product suggestions to customers.",
+        "- Boost sales with dynamic recommendations.",
+        "- Tailor suggestions based on browsing behavior.",
+        "",
+        "### Einstein Commerce Insights",
+        "Analyze shopping patterns with AI.",
+        "- Optimize product assortments.",
+        "- Drive strategic inventory decisions."
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "title": "Introduction to Salesforce Einstein",
+      "url": "https://www.youtube.com/embed/XYZ123"
+    },
+    {
+      "title": "Einstein Bots Overview",
+      "url": "https://www.youtube.com/embed/ABC456"
+    },
+    {
+      "title": "Einstein Predictions in Action",
+      "url": "https://www.youtube.com/embed/DEF789"
+    }
+  ],
+  "references": [
+    "https://www.salesforce.com/products/einstein/overview/",
+    "https://help.salesforce.com/articleView?id=einstein_features.htm"
+  ]
+}

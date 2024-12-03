@@ -1,0 +1,181 @@
+{
+  "title": "Salesforce Einstein Product Offerings",
+  "description": "Discover Salesforce Einstein's AI-powered tools that enhance productivity, decision-making, and customer experience across various Salesforce clouds.",
+  "navbar": [
+    { "id": "home", "title": "Home" },
+    { "id": "about", "title": "About" },
+    { "id": "crypto-introduction", "title": "Introduction" },
+    { "id": "crypto-how-it-works", "title": "How It Works" },
+    { "id": "crypto-security-tips", "title": "Security Tips" },
+    { "id": "videos", "title": "Videos" },
+    { "id": "references", "title": "References" }
+  ],
+  "sections": [
+    {
+      "id": "sales-cloud",
+      "title": "Sales Cloud Einstein",
+      "products": [
+        {
+          "name": "Einstein Lead Scoring",
+          "description": "Prioritize leads by predicting their likelihood to convert based on AI analysis of historical data.",
+          "features": [
+            "Predictive lead scoring.",
+            "Smart insights into lead attributes that impact conversion."
+          ]
+        },
+        {
+          "name": "Einstein Opportunity Scoring",
+          "description": "Get AI-generated scores for opportunities to focus on deals most likely to close.",
+          "features": [
+            "Opportunity insights for better decision-making.",
+            "Scoring based on CRM data."
+          ]
+        },
+        {
+          "name": "Einstein Activity Capture",
+          "description": "Automatically log emails and events to Salesforce and analyze sales activity trends.",
+          "features": [
+            "Email and calendar synchronization.",
+            "Activity analytics."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "service-cloud",
+      "title": "Service Cloud Einstein",
+      "products": [
+        {
+          "name": "Einstein Bots",
+          "description": "Automate routine service requests and deliver instant responses with intelligent chatbots.",
+          "features": [
+            "Pre-built templates for service scenarios.",
+            "Integration with customer data for personalized responses."
+          ]
+        },
+        {
+          "name": "Einstein Case Classification",
+          "description": "Automate case triaging by using AI to classify and route cases to the right agents.",
+          "features": [
+            "Automatic case field prediction.",
+            "Improved case resolution time."
+          ]
+        },
+        {
+          "name": "Einstein Case Wrap-Up",
+          "description": "Speed up case resolution by providing AI-powered case summaries.",
+          "features": [
+            "Automatically suggest case summaries.",
+            "Reduce agent effort on repetitive tasks."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "marketing-cloud",
+      "title": "Marketing Cloud Einstein",
+      "products": [
+        {
+          "name": "Einstein Engagement Scoring",
+          "description": "Use AI to predict customer engagement and tailor campaigns for better outcomes.",
+          "features": [
+            "Engagement predictions for emails, push, and SMS.",
+            "Segmentation based on engagement likelihood."
+          ]
+        },
+        {
+          "name": "Einstein Content Tagging",
+          "description": "Automatically tag content with AI-driven labels for better search and management.",
+          "features": [
+            "AI-powered content categorization.",
+            "Improved asset searchability."
+          ]
+        },
+        {
+          "name": "Einstein Send Time Optimization",
+          "description": "Identify the best time to send marketing messages for maximum engagement.",
+          "features": [
+            "Delivery time optimization.",
+            "Improved campaign effectiveness."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "commerce-cloud",
+      "title": "Commerce Cloud Einstein",
+      "products": [
+        {
+          "name": "Einstein Product Recommendations",
+          "description": "Provide personalized product recommendations to boost sales.",
+          "features": [
+            "AI-based personalized suggestions.",
+            "Dynamic recommendations based on user behavior."
+          ]
+        },
+        {
+          "name": "Einstein Commerce Insights",
+          "description": "Leverage AI to analyze shopping behavior and optimize product assortments.",
+          "features": [
+            "Insights into customer preferences.",
+            "Optimize inventory and promotions."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "analytics",
+      "title": "Einstein Analytics (Tableau CRM)",
+      "products": [
+        {
+          "name": "Einstein Discovery",
+          "description": "Get AI-powered insights, predictions, and recommendations to drive smarter decisions.",
+          "features": [
+            "Automated data analysis.",
+            "Predictive modeling."
+          ]
+        },
+        {
+          "name": "Einstein Predictions",
+          "description": "Create custom predictive models using Salesforce data.",
+          "features": [
+            "No-code model creation.",
+            "Integration with Salesforce workflows."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "general",
+      "title": "General Einstein Features",
+      "products": [
+        {
+          "name": "Einstein Voice Assistant",
+          "description": "Use voice commands to interact with Salesforce and get work done faster.",
+          "features": [
+            "Create tasks, update records, and access reports via voice.",
+            "AI-powered natural language understanding."
+          ]
+        },
+        {
+          "name": "Einstein Search",
+          "description": "Search Salesforce smarter with AI-enhanced search capabilities.",
+          "features": [
+            "Personalized search results.",
+            "Natural language search."
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "name": "Salesforce Einstein Overview",
+      "url": "https://www.salesforce.com/products/einstein/overview/"
+    },
+    {
+      "name": "Einstein AI Features Documentation",
+      "url": "https://help.salesforce.com/articleView?id=einstein_features.htm"
+    }
+  ]
+}
