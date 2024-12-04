@@ -8,6 +8,7 @@
 
   <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
 
+
 </head>
 <body class="bg-gray-100 text-gray-800">
 
@@ -22,6 +23,8 @@
   <main class="py-8 flex max-w-7xl mx-auto">
     <section class="w-full p-4">
       <div id="mermaid-diagram" class="bg-white p-6 rounded shadow"></div>
+
+      <button onclick="downloadSVG()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" > Download as SVG </button>
     </section>
   </main>
 
@@ -66,6 +69,62 @@
 
     // Load the diagram when the page loads
     window.onload = loadDiagram;
+
+  
+
+  </script>
+
+  <script>
+
+    function downloadSVG() {
+      const svg = document.querySelector('#mermaid-diagram svg');
+      
+      if (!svg) {
+        alert('No diagram found!');
+        return;
+      }
+    
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const blob = new Blob([svgData], { type: 'image/svg+xml' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'diagram.svg';
+      link.click();
+    }
+    function downloadPNG() {
+      const svg = document.querySelector('#mermaid-diagram svg');
+      
+      // Ensure the SVG exists
+      if (!svg) {
+        alert('No diagram found!');
+        return;
+      }
+    
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+    
+      // Set canvas dimensions based on the SVG's size
+      canvas.width = svg.clientWidth;
+      canvas.height = svg.clientHeight;
+    
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const svgUrl = 'data:image/svg+xml;base64,' + window.btoa(svgData);
+    
+      const img = new Image();
+      img.onload = function() {
+        // Draw the image once it's loaded
+        ctx.drawImage(img, 0, 0);
+        const pngData = canvas.toDataURL('image/png');
+        
+        const link = document.createElement('a');
+        link.href = pngData;
+        link.download = 'diagram.png';
+        link.click();
+      };
+      
+      // Make sure the image source is set properly
+      img.src = svgUrl;
+    }
   </script>
 
 </body>
