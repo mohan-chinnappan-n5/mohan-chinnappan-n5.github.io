@@ -443,6 +443,9 @@
     
          { text: 'GPU', href: '../../health/hdocs.html?data=gpu.json', icon: 'desktop' },
 
+         { text: 'COT Prompts', href: 'https://mohan-chinnappan-n5.github.io/dfv/dfv.html?d=https://raw.githubusercontent.com/mohan-chinnappan-n5/llm-prompts/refs/heads/main/cot.csv', icon: 'desktop' },
+
+
 
 
 
