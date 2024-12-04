@@ -1,0 +1,41 @@
+ graph LR
+        A[AI Agents] --> B[Perception and Data Collection]
+        B --> C[Gather data from customer interactions, transaction histories, social media]
+        B --> D[Integrate and process data in real-time]
+        A --> E[Decision Making]
+        E --> F[Analyze collected data with ML models]
+        E --> G[Identify patterns and make decisions]
+        E --> H[Learn from past experiences]
+        A --> I[Action Execution]
+        I --> J[Answer customer queries]
+        I --> K[Process requests]
+        I --> L[Escalate complex issues]
+        A --> M[Learning and Adaptation]
+        M --> N[Refine algorithms from feedback]
+        M --> O[Update knowledge base]
+        M --> P[Enhance future interactions]
+        M --> Q[Handle tasks autonomously]
+        Q --> R[Make recommendations]
+        Q --> S[Troubleshoot problems]
+        Q --> T[Engage in follow-ups]
+
+    style A fill:#ffcc00,stroke:#ff9900,stroke-width:2px
+    style B fill:#66ccff,stroke:#3399cc,stroke-width:2px
+    style E fill:#99ff99,stroke:#66cc66,stroke-width:2px
+    style I fill:#ff6666,stroke:#cc3333,stroke-width:2px
+    style M fill:#ffff66,stroke:#cccc33,stroke-width:2px
+    style C fill:#e6f7ff,stroke:#b3e0ff,stroke-width:2px
+    style D fill:#e6f7ff,stroke:#b3e0ff,stroke-width:2px
+    style F fill:#e6f7ff,stroke:#b3e0ff,stroke-width:2px
+    style G fill:#e6f7ff,stroke:#b3e0ff,stroke-width:2px
+    style H fill:#e6f7ff,stroke:#b3e0ff,stroke-width:2px
+    style J fill:#ffcccc,stroke:#ff9999,stroke-width:2px
+    style K fill:#ffcccc,stroke:#ff9999,stroke-width:2px
+    style L fill:#ffcccc,stroke:#ff9999,stroke-width:2px
+    style N fill:#ffffcc,stroke:#ffff99,stroke-width:2px
+    style O fill:#ffffcc,stroke:#ffff99,stroke-width:2px
+    style P fill:#ffffcc,stroke:#ffff99,stroke-width:2px
+    style Q fill:#ffffcc,stroke:#ffff99,stroke-width:2px
+    style R fill:#e6ffe6,stroke:#b3ffb3,stroke-width:2px
+    style S fill:#e6ffe6,stroke:#b3ffb3,stroke-width:2px
+    style T fill:#e6ffe6,stroke:#b3ffb3,stroke-width:2px

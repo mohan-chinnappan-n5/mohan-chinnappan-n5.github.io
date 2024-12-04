@@ -517,6 +517,15 @@ Agri: {
 
     },
 
+Dwg: {
+      title: 'Diagrams',
+      links: [
+        { text: 'Agent - How they work?', href: '../../dwg/dwg.html?data=agents.txt&title=Agents:%20How%20they%20work', icon: 'desktop' },
+        // Add more links here
+      ],
+
+    },
+
 
     // Add more sections here
   };

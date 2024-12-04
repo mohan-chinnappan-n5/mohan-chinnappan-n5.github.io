@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent Diagram</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({startOnLoad:true});
+  </script>
+</head>
+<body>
+  <div class="mermaid">
+    graph LR
+        A[AI Agents] --> B[Perception and Data Collection]
+        B --> C[Gather data from customer interactions, transaction histories, social media]
+        B --> D[Integrate and process data in real-time]
+        A --> E[Decision Making]
+        E --> F[Analyze collected data with ML models]
+        E --> G[Identify patterns and make decisions]
+        E --> H[Learn from past experiences]
+        A --> I[Action Execution]
+        I --> J[Answer customer queries]
+        I --> K[Process requests]
+        I --> L[Escalate complex issues]
+        A --> M[Learning and Adaptation]
+        M --> N[Refine algorithms from feedback]
+        M --> O[Update knowledge base]
+        M --> P[Enhance future interactions]
+        M --> Q[Handle tasks autonomously]
+        Q --> R[Make recommendations]
+        Q --> S[Troubleshoot problems]
+        Q --> T[Engage in follow-ups]
+  </div>
+</body>
+</html>

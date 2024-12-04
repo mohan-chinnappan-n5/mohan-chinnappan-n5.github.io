@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="title">Mermaid Diagram</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <header class="bg-blue-600 text-white sticky top-0 shadow z-10">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold" id="diagram-title"></a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="py-8 flex max-w-7xl mx-auto">
+    <section class="w-full p-4">
+      <div id="mermaid-diagram" class="bg-white p-6 rounded shadow"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white mt-8">
+    <div class="max-w-7xl mx-auto px-4 py-6 text-center">
+      <p>MCDoc - Diagrams</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    // Initialize Mermaid
+    mermaid.initialize({startOnLoad:true});
+
+    // Load the diagram from the URL
+    function loadDiagram() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const dataUrl = urlParams.get('data');
+      const title = urlParams.get('title') || 'Mermaid Diagram';
+
+      // Set the title dynamically
+      document.getElementById('diagram-title').innerText = title;
+
+      if (!dataUrl) {
+        alert('No data URL provided!');
+        return;
+      }
+
+      fetch(dataUrl)
+        .then((response) => response.text())
+        .then((data) => {
+          const diagramContainer = document.getElementById('mermaid-diagram');
+          diagramContainer.innerHTML = data;
+          mermaid.init(undefined, diagramContainer);
+        })
+        .catch(() => alert('Failed to load the diagram data!'));
+    }
+
+    // Load the diagram when the page loads
+    window.onload = loadDiagram;
+  </script>
+
+</body>
+</html>

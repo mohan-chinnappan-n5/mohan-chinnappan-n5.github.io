@@ -1,0 +1,36 @@
+[
+  {
+    "topic": "AI Agent",
+    "desc": "AI agents are a type of artificial intelligence (AI) system that can understand and respond to customer inquiries without human intervention.\n\nThey are created using an agent builder, like Agentforce.\n\nAI Agents can include anything from answering simple questions to resolving complex issues.\n\nCan continuously improve their own performance through self-learning.",
+    "more": [
+      {
+        "name": "Agentforce",
+        "url": "https://www.agentforce.com"
+      },
+      {
+        "name": "Salesforce",
+        "url": "https://www.Salesforce.com"
+      }
+    ]
+  },
+  {
+    "topic": "Machine Learning",
+    "desc": "Machine learning is a subset of artificial intelligence that provides systems the ability to automatically learn and improve from experience without being explicitly programmed.",
+    "more": [
+      {
+        "name": "Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Machine_learning"
+      }
+    ]
+  },
+  {
+    "topic": "Natural Language Processing",
+    "desc": "Natural language processing (NLP) is a branch of AI that focuses on the interaction between computers and humans using natural language.",
+    "more": [
+      {
+        "name": "NLP Guide",
+        "url": "https://nlp.com"
+      }
+    ]
+  }
+]
