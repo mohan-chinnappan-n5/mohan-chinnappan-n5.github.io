@@ -521,6 +521,7 @@ Dwg: {
       title: 'Diagrams',
       links: [
         { text: 'Agent - How they work?', href: '../../dwg/dwg.html?data=agents.txt&title=Agents:%20How%20they%20work', icon: 'desktop' },
+        { text: 'Agentforce ', href: '../../dwg/dwg.html?data=agentforce.txt&title=Agentforce', icon: 'desktop' },
         // Add more links here
       ],
 

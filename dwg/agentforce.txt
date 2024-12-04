@@ -1,0 +1,14 @@
+graph LR
+    style User fill:#f9f9f9,stroke:#333,stroke-width:2
+    style AtlasRules fill:#ffcccb,stroke:#333,stroke-width:2
+    style DataCloud fill:#b3d9ff,stroke:#333,stroke-width:2
+    style SalesCloud fill:#ccffcc,stroke:#333,stroke-width:2
+    style ServiceCloud fill:#f3e2a9,stroke:#333,stroke-width:2
+    style MarketingCloud fill:#d5a6bd,stroke:#333,stroke-width:2
+
+    User["User"] --> AtlasRules["Atlas Reasoning Engine<br>(Reinforcement Learning)"]
+    AtlasRules --> DataCloud["Data Cloud<br>(360° View + RAG)"]
+    DataCloud --> SalesCloud["Sales Cloud"]
+    DataCloud --> ServiceCloud["Service Cloud"]
+    DataCloud --> MarketingCloud["Marketing Cloud"]
+    AtlasRules --> User
