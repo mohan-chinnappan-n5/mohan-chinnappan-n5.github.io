@@ -527,6 +527,8 @@ Dwg: {
         { text: 'Agentforce ', href: '../../dwg/dwg.html?data=agentforce.txt&title=Agentforce', icon: 'desktop' },
         { text: 'Tree of Thoughts (TOT) ', href: '../../dwg/dwg.html?data=https://raw.githubusercontent.com/mohan-chinnappan-n5/llm-prompts/refs/heads/main/dwg/tot2.txt&title=Tree of Thoughts - TOT', icon: 'desktop' },
 
+        { text: 'ReAct - Reasoning and Acting ', href: '../../dwg/dwg.html?data=https://raw.githubusercontent.com/mohan-chinnappan-n5/llm-prompts/refs/heads/main/dwg/react1.txt&title= Reasoning and Acting - ReAct', icon: 'desktop' },
+
 
 	      // Add more links here
       ],
