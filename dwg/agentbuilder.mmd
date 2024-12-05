@@ -1,0 +1,20 @@
+flowchart LR
+    A[Agent Builder]:::main
+    A --> B[Customization]:::feature
+    A --> C[Task Definition]:::feature
+    A --> D[Observation and Testing]:::feature
+
+    B --> E[Customize Out-of-the-Box Agents]:::process
+    B --> F[Build New Agents for Any Role or Use Case]:::process
+    B --> G[Use Tools: Flows, Prompts, Apex, MuleSoft APIs]:::process
+
+    C --> H[Define Topics]:::process
+    C --> I[Write Natural Language Instructions]:::process
+    C --> J[Create Library of Actions]:::process
+
+    D --> K[Observe Agent's Plan of Action]:::process
+    D --> L[Test Agent's Responses]:::process
+
+    classDef main fill:#4c78a8,stroke:#000,stroke-width:2px,color:#fff;
+    classDef feature fill:#f58518,stroke:#000,stroke-width:1px,color:#000;
+    classDef process fill:#54a24b,stroke:#000,stroke-width:1px,color:#000;
