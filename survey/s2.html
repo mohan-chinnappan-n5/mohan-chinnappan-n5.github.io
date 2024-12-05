@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Survey App</title>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <header class="bg-blue-600 text-white sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold">Survey App</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="py-8 flex max-w-7xl mx-auto">
+    <section class="w-full p-4 bg-white rounded shadow">
+      <h1 class="text-xl font-bold mb-4">Survey</h1>
+      <div id="survey-container" class="space-y-4"></div>
+      <button id="submit-btn" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Submit</button>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white mt-8">
+    <div class="max-w-7xl mx-auto px-4 py-6 text-center">
+      <p>&copy; 2024 Survey App</p>
+    </div>
+  </footer>
+
+  <!-- Firebase Modular SDK Integration -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+
+    
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCDgA4vdnECPkoVTBPipPxy8uDS8Mc1hUI",
+        authDomain: "mcsurvey-51a04.firebaseapp.com",
+        projectId: "mcsurvey-51a04",
+        storageBucket: "mcsurvey-51a04.firebasestorage.app",
+        messagingSenderId: "350671439494",
+        appId: "1:350671439494:web:ccf5bdc95a4079aa81f307",
+        measurementId: "G-PDS35WKH5N"
+      };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // Load survey data from URL
+    function loadSurveyData() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const dataUrl = urlParams.get('data');
+
+      if (dataUrl) {
+        fetch(dataUrl)
+          .then(response => response.json())
+          .then(data => renderSurvey(data))
+          .catch(error => console.error('Error loading survey data:', error));
+      }
+    }
+
+    // Render survey with checkboxes
+    function renderSurvey(data) {
+      const surveyContainer = document.getElementById('survey-container');
+      surveyContainer.innerHTML = ''; // Clear container
+
+      data.forEach((question, index) => {
+        const questionElement = document.createElement('div');
+        questionElement.classList.add('p-4', 'mb-4', 'border-b');
+
+        // Question text
+        const questionText = document.createElement('h3');
+        questionText.classList.add('text-lg', 'font-bold', 'mb-2');
+        questionText.innerText = question.name;
+        questionElement.appendChild(questionText);
+
+        // Feedback options
+        const feedbackOptions = document.createElement('div');
+        feedbackOptions.classList.add('space-y-2');
+
+        question.feedback.forEach(option => {
+          const optionWrapper = document.createElement('div');
+          optionWrapper.classList.add('flex', 'items-center', 'space-x-2');
+
+          const optionInput = document.createElement('input');
+          optionInput.type = 'checkbox';
+          optionInput.value = option;
+          optionInput.name = `question-${index}`;
+          optionInput.classList.add('h-4', 'w-4', 'text-blue-600', 'focus:ring-blue-500', 'border-gray-300', 'rounded');
+
+          const optionLabel = document.createElement('label');
+          optionLabel.innerText = option;
+          optionLabel.classList.add('text-gray-700');
+
+          optionWrapper.appendChild(optionInput);
+          optionWrapper.appendChild(optionLabel);
+          feedbackOptions.appendChild(optionWrapper);
+        });
+
+        questionElement.appendChild(feedbackOptions);
+        surveyContainer.appendChild(questionElement);
+      });
+    }
+
+    function submitSurvey() {
+        const surveyData = [];
+        const surveyContainer = document.getElementById('survey-container');
+        const questions = surveyContainer.querySelectorAll('div');
+      
+        questions.forEach((question, index) => {
+          const questionTextElement = question.querySelector('h3');
+          
+          if (!questionTextElement) {
+            console.error(`Question text not found for question at index ${index}`);
+            return; // Skip this question
+          }
+      
+          const questionText = questionTextElement.innerText;
+          const selectedOptions = [];
+          const checkboxes = question.querySelectorAll(`input[name="question-${index}"]:checked`);
+      
+          checkboxes.forEach(checkbox => selectedOptions.push(checkbox.value));
+      
+          if (selectedOptions.length > 0) {
+            surveyData.push({
+              question: questionText,
+              answers: selectedOptions
+            });
+          }
+        });
+      
+        // Save to Firebase
+        if (surveyData.length > 0) {
+          const surveyId = Date.now(); // Unique ID
+          set(ref(database, `survey-responses/${surveyId}`), surveyData)
+            .then(() => {
+              alert('Survey submitted successfully!');
+            })
+            .catch(error => {
+              console.error('Error submitting survey:', error);
+            });
+        } else {
+          alert('Please answer at least one question.');
+        }
+      }
+    // Attach event listener to Submit button
+    document.getElementById('submit-btn').addEventListener('click', submitSurvey);
+
+    // Initialize survey on page load
+    window.onload = loadSurveyData;
+  </script>
+
+</body>
+</html>
