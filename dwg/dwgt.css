@@ -1,0 +1,46 @@
+
+main {
+  display: flex;
+  align-items: stretch;
+  height: calc(100vh - 100px); /* Adjust based on header/footer height */
+}
+
+.markdown-pane,
+.mermaid-pane {
+  overflow-y: auto;
+  transition: width 0.2s ease;
+}
+
+.divider {
+  cursor: col-resize;
+  user-select: none;
+  background-color: #99ccff;
+}
+
+ /* Base styles for light and dark themes */
+body.light {
+background-color: #f9fafb; /* Light background */
+color: #1a202c; /* Dark text */
+}
+
+body.dark {
+background-color: #1a202c; /* Dark background */
+color: #f9fafb; /* Light text */
+}
+
+.dark .markdown-pane,
+.dark .mermaid-pane,
+.dark .divider {
+background-color: #2d3748; /* Darker background for content */
+color: #e2e8f0; /* Light text */
+}
+
+.dark .divider {
+background-color: #4a5568; /* Slightly different divider color */
+}
+
+.dark button {
+background-color: #4a5568; /* Darker button */
+color: #e2e8f0; /* Light text for buttons */
+}
+

@@ -1,0 +1,130 @@
+  /* Container for Markdown content */
+  .markdown-content {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+
+  /* Headings */
+  .markdown-content h1 {
+    font-size: 2rem;
+    color: #1e40af;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #d1d5db;
+    padding-bottom: 8px;
+  }
+
+  .markdown-content h2 {
+    font-size: 1.75rem;
+    color: #1e3a8a;
+    margin-bottom: 12px;
+  }
+
+  .markdown-content h3 {
+    font-size: 1.5rem;
+    color: #2563eb;
+    margin-bottom: 8px;
+  }
+
+  .markdown-content h4, .markdown-content h5, .markdown-content h6 {
+    font-size: 1.25rem;
+    color: #1d4ed8;
+    margin-bottom: 6px;
+  }
+
+  /* Paragraphs */
+  .markdown-content p {
+    margin-bottom: 16px;
+    font-size: 1rem;
+  }
+
+  /* Links */
+  .markdown-content a {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+
+  .markdown-content a:hover {
+    color: #1e3a8a;
+    text-decoration: none;
+  }
+
+  /* Lists */
+  .markdown-content ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 16px;
+  }
+
+  .markdown-content ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+    margin-bottom: 16px;
+  }
+
+  .markdown-content li {
+    margin-bottom: 8px;
+  }
+
+  /* Code Blocks */
+  .markdown-content pre {
+    background-color: #f3f4f6;
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.95rem;
+    font-family: 'Courier New', Courier, monospace;
+    margin-bottom: 16px;
+  }
+
+  .markdown-content code {
+    background-color: #f3f4f6;
+    color: #d97706;
+    padding: 4px 6px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+  }
+
+  /* Blockquotes */
+  .markdown-content blockquote {
+    border-left: 4px solid #1d4ed8;
+    padding-left: 16px;
+    color: #4b5563;
+    font-style: italic;
+    background-color: #f9fafb;
+    margin: 16px 0;
+  }
+
+  /* Tables */
+  .markdown-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+  }
+
+  .markdown-content th, .markdown-content td {
+    border: 1px solid #d1d5db;
+    padding: 12px;
+    text-align: left;
+  }
+
+  .markdown-content th {
+    background-color: #f3f4f6;
+    font-weight: bold;
+  }
+
+  .markdown-content td {
+    background-color: #ffffff;
+  }
+
+  /* Images */
+  .markdown-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
