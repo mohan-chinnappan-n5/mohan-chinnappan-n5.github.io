@@ -1,0 +1,17 @@
+flowchart LR
+    A[Einstein Trust Layer]:::main
+    A --> B[Dynamic Grounding]:::feature
+    A --> C[Zero Data Retention]:::feature
+    A --> D[Toxicity Detection]:::feature
+
+    B --> E[Ensures AI Models Use Relevant Data]:::process
+    B --> F[Improves Accuracy of AI Results]:::process
+
+    C --> G[No Data Retained by AI Models]:::process
+
+    D --> H[Identifies Harmful Content]:::process
+    D --> I[Mitigates Risks of Toxic Content]:::process
+
+    classDef main fill:#4c78a8,stroke:#000,stroke-width:2px,color:#fff;
+    classDef feature fill:#f58518,stroke:#000,stroke-width:1px,color:#000;
+    classDef process fill:#54a24b,stroke:#000,stroke-width:1px,color:#000;

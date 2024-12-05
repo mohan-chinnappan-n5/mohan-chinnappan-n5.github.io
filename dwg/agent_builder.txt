@@ -1,0 +1,26 @@
+flowchart LR
+    A[Agent Builder in Agentforce]:::main
+    A --> B[Customization]:::custom
+    A --> C[Task Definition]:::task
+    A --> D[Testing and Monitoring]:::test
+    A --> E[Integration]:::integration
+
+    B --> F[Customize Out-of-the-Box Agents]:::process
+    B --> G[Build New Agents for Any Use Case]:::process
+    B --> H[Use Tools: Flows, Prompts, Apex, MuleSoft APIs]:::process
+
+    C --> I[Set Natural Language Topics]:::process
+    C --> J[Define Instructions and Actions]:::process
+
+    D --> K[Observe Agent's Plan of Action]:::process
+    D --> L[Test Responses]:::process
+
+    E --> M[Connect to Data Sources]:::process
+    E --> N[Ensure Access to Necessary Information]:::process
+
+    classDef main fill:#1f77b4,stroke:#000,stroke-width:2px,color:#fff;
+    classDef custom fill:#ff7f0e,stroke:#000,stroke-width:1px,color:#000;
+    classDef task fill:#2ca02c,stroke:#000,stroke-width:1px,color:#000;
+    classDef test fill:#d62728,stroke:#000,stroke-width:1px,color:#fff;
+    classDef integration fill:#9467bd,stroke:#000,stroke-width:1px,color:#fff;
+    classDef process fill:#f28e2b,stroke:#000,stroke-width:1px,color:#000;

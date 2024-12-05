@@ -1,0 +1,22 @@
+flowchart LR
+    A[Policies in Topics]:::main
+    A --> B[Role Definition]:::feature
+    A --> C[Data Access]:::feature
+    A --> D[Action Execution]:::feature
+    A --> E[Security and Compliance]:::feature
+
+    B --> F[Define Agent's Role]:::process
+    B --> G[Align with Broader Goals]:::process
+
+    C --> H[Specify Accessible Data]:::process
+    C --> I[Set Conditions for Access]:::process
+
+    D --> J[Outline Permitted Actions]:::process
+    D --> K[Restrict Certain Actions]:::process
+
+    E --> L[Ensure Security Standards]:::process
+    E --> M[Maintain Regulatory Compliance]:::process
+
+    classDef main fill:#4c78a8,stroke:#000,stroke-width:2px,color:#fff;
+    classDef feature fill:#f58518,stroke:#000,stroke-width:1px,color:#000;
+    classDef process fill:#54a24b,stroke:#000,stroke-width:1px,color:#000;

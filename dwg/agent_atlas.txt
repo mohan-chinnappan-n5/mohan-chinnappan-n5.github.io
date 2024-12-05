@@ -1,0 +1,22 @@
+flowchart LR
+    A[Atlas Reasoning Engine]:::main
+    A --> B[Reasoning and Acting - ReAct]:::feature
+    A --> C[Topic Classification]:::feature
+    A --> D[Dynamic Information Retrieval]:::feature
+    A --> E[Human Transfer]:::feature
+
+    B --> F[Loop of Reasoning, Acting, and Observing]:::process
+    B --> G[Fulfills User Goals for Natural Conversations]:::process
+
+    C --> H[Maps User Input to Topics]:::process
+    C --> I[Topics Contain Instructions, Policies, and Actions]:::process
+
+    D --> J[Supports Retrieval Augmented Generation RAG]:::process
+    D --> K[Accesses Dynamic Information from Various Sources]:::process
+
+    E --> L[Seamless Transfer to Human Agents]:::process
+    E --> M[Handles Critical Scenarios]:::process
+
+    classDef main fill:#4c78a8,stroke:#000,stroke-width:2px,color:#fff;
+    classDef feature fill:#f58518,stroke:#000,stroke-width:1px,color:#000;
+    classDef process fill:#54a24b,stroke:#000,stroke-width:1px,color:#000;

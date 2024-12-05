@@ -1,0 +1,22 @@
+flowchart LR
+    A[Data Cloud for Agentforce]:::main
+    A --> B[Intelligent Agents]:::agents
+    A --> C[Grounded AI]:::ai
+    A --> D[Data Integration]:::integration
+    A --> E[Security]:::security
+
+    B --> F[Build, Launch, Monitor Agents]:::process
+    B --> G[Provide Proactive 24/7 Support]:::process
+    C --> H[Unified Data Ensures Accuracy]:::process
+    C --> I[Deliver Relevant Outcomes]:::process
+    D --> J[Comprehensive Customer Data Access]:::process
+    D --> K[Personalized Interactions]:::process
+    E --> L[Einstein Trust Layer]:::process
+    E --> M[Safe and Secure Data Use]:::process
+
+    classDef main fill:#4c78a8,stroke:#000,stroke-width:2px,color:#fff;
+    classDef agents fill:#f58518,stroke:#000,stroke-width:1px,color:#000;
+    classDef ai fill:#54a24b,stroke:#000,stroke-width:1px,color:#000;
+    classDef integration fill:#e45756,stroke:#000,stroke-width:1px,color:#fff;
+    classDef security fill:#9467bd,stroke:#000,stroke-width:1px,color:#fff;
+    classDef process fill:#f28e2b,stroke:#000,stroke-width:1px,color:#000;

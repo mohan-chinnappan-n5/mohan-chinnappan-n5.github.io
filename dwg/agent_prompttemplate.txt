@@ -1,0 +1,18 @@
+flowchart LR
+    A[Prompt Template in Salesforce]:::main
+    A --> B[Customization]:::feature
+    A --> C[Data Grounding]:::feature
+    A --> D[Integration]:::feature
+
+    B --> E[Build Prompt Templates]:::process
+    B --> F[Customize for Business Needs]:::process
+
+    C --> G[Ground Prompts with Your Data]:::process
+    C --> H[Ensure Accurate and Relevant Responses]:::process
+
+    D --> I[Use Across Salesforce Tools]:::process
+    D --> J[Integrate with Agentforce and Flow Builder]:::process
+
+    classDef main fill:#4c78a8,stroke:#000,stroke-width:2px,color:#fff;
+    classDef feature fill:#f58518,stroke:#000,stroke-width:1px,color:#000;
+    classDef process fill:#54a24b,stroke:#000,stroke-width:1px,color:#000;

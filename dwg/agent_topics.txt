@@ -1,0 +1,21 @@
+flowchart LR
+    A[Agentforce Topics]:::main --> B[Task Definition]:::task
+    A --> C[Natural Language Instructions]:::nlp
+    A --> D[Action Library]:::action
+    A --> E[Customization]:::custom
+    A --> F[Monitoring and Testing]:::monitor
+
+    B --> G[Examples: Customer Support, Order Processing, Appointment Scheduling]:::example
+    D --> H[Workflows, Automations, API Calls]:::example
+    E --> I[Agent Builder for Customization]:::builder
+    F --> J[Ensure Responses and Actions are Effective]:::testing
+
+    classDef main fill:#1f77b4,stroke:#000,stroke-width:2px,color:#fff;
+    classDef task fill:#ff7f0e,stroke:#000,stroke-width:1px,color:#000;
+    classDef nlp fill:#2ca02c,stroke:#000,stroke-width:1px,color:#000;
+    classDef action fill:#d62728,stroke:#000,stroke-width:1px,color:#000;
+    classDef custom fill:#9467bd,stroke:#000,stroke-width:1px,color:#000;
+    classDef monitor fill:#8c564b,stroke:#000,stroke-width:1px,color:#fff;
+    classDef example fill:#e377c2,stroke:#000,stroke-width:1px,color:#000;
+    classDef builder fill:#7f7f7f,stroke:#000,stroke-width:1px,color:#000;
+    classDef testing fill:#bcbd22,stroke:#000,stroke-width:1px,color:#000;

@@ -1,0 +1,17 @@
+flowchart LR
+    A[Agent Action in Salesforce]:::main
+    A --> B[Predefined Tasks]:::feature
+    A --> C[Execution]:::feature
+    A --> D[Customization]:::feature
+
+    B --> E[Specific Tasks Based on Triggers or Instructions]:::process
+
+    C --> F[Execute Logic]:::process
+    C --> G[Integrate with External Systems]:::process
+
+    D --> H[Build Custom Actions Using Code]:::process
+    D --> I[Use APIs, Flows, and Prompt Templates]:::process
+
+    classDef main fill:#4c78a8,stroke:#000,stroke-width:2px,color:#fff;
+    classDef feature fill:#f58518,stroke:#000,stroke-width:1px,color:#000;
+    classDef process fill:#54a24b,stroke:#000,stroke-width:1px,color:#000;
