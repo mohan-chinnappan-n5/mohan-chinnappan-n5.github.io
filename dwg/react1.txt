@@ -1,0 +1,19 @@
+graph TD;
+    A[Customer Input: I forgot my password and can't access my account.] --> B[Reasoning: Analyze customer message];
+    B --> C[Identify keywords: password reset, account blocked];
+    C --> D[Check relevant data: account status, password reset request];
+    D --> E{Is account active?};
+    E -->|Yes| F[Send password reset link to the registered email];
+    E -->|No| G[Offer to connect with support agent];
+    F --> H[Action: Customer receives password reset link];
+    G --> I[Action: Connect customer with support agent];
+
+    style A fill:#f9f9f9,stroke:#333,stroke-width:2
+    style B fill:#f3e2a9,stroke:#333,stroke-width:2
+    style C fill:#b3d9ff,stroke:#333,stroke-width:2
+    style D fill:#ccffcc,stroke:#333,stroke-width:2
+    style E fill:#ffcccb,stroke:#333,stroke-width:2
+    style F fill:#b3e0ff,stroke:#333,stroke-width:2
+    style G fill:#d5a6bd,stroke:#333,stroke-width:2
+    style H fill:#ccffcc,stroke:#333,stroke-width:2
+    style I fill:#f3e2a9,stroke:#333,stroke-width:2

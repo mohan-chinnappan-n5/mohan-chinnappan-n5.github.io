@@ -527,7 +527,14 @@ Dwg: {
         { text: 'Agentforce ', href: '../../dwg/dwg.html?data=agentforce.txt&title=Agentforce', icon: 'desktop' },
         { text: 'Tree of Thoughts (TOT) ', href: '../../dwg/dwg.html?data=https://raw.githubusercontent.com/mohan-chinnappan-n5/llm-prompts/refs/heads/main/dwg/tot2.txt&title=Tree of Thoughts - TOT', icon: 'desktop' },
 
-        { text: 'ReAct - Reasoning and Acting ', href: '../../dwg/dwg.html?data=https://raw.githubusercontent.com/mohan-chinnappan-n5/llm-prompts/refs/heads/main/dwg/react1.txt&title= Reasoning and Acting - ReAct', icon: 'desktop' },
+        { text: 'ReAct - Reasoning and Acting ', href: '../../dwg/dwgt.html?data=react1.txt&title=ReAct&text=react.md', 
+		icon: 'desktop' },
+
+{ text: 'Einstein Trust Layer ', href: '../../dwg/dwgt.html?data=agent_trustlayer.txt&text=agent_trustlayer.md&title=Einstein%20Trust%20Layer', icon: 'desktop' },
+
+{ text: 'Atlas Reasoning Engine', href: '../../dwg/dwgt.html?data=agent_atlas.txt&text=agent_atlas.md&title=Altas%20Resoning%20Engine', icon: 'desktop' },
+
+
 
 
 	      // Add more links here
