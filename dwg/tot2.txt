@@ -1,0 +1,35 @@
+graph LR 
+    Start[Start: Planning a weekend trip] -->|Select Option| Beach[Beach]
+    Start -->|Select Option| Mountains[Mountains]
+    Start -->|Select Option| StayHome[Stay at Home]
+    
+    Beach --> BeachCost[Cost: High]
+    Beach --> BeachWeather[Weather: Sunny]
+    Beach --> BeachPreference[Preference: Love water activities]
+
+    Mountains --> MountainsCost[Cost: Moderate]
+    Mountains --> MountainsWeather[Weather: Cooler, may rain]
+    Mountains --> MountainsPreference[Preference: Love hiking and fresh air]
+
+    StayHome --> StayHomeCost[Cost: None]
+    StayHome --> StayHomeWeather[Weather: Irrelevant]
+    StayHome --> StayHomePreference[Preference: Relaxing but not exciting]
+
+    Conclusion[Conclusion: Beach is the best choice if the weather is guaranteed to stay sunny]
+    Beach --> Conclusion
+
+    %% Node styles
+    style Start fill:#f9f9f9,stroke:#333,stroke-width:2
+    style Beach fill:#a2d9ff,stroke:#333,stroke-width:2
+    style Mountains fill:#98fb98,stroke:#333,stroke-width:2
+    style StayHome fill:#ffcc99,stroke:#333,stroke-width:2
+    style BeachCost fill:#a2d9ff,stroke:#333,stroke-width:2
+    style BeachWeather fill:#a2d9ff,stroke:#333,stroke-width:2
+    style BeachPreference fill:#a2d9ff,stroke:#333,stroke-width:2
+    style MountainsCost fill:#98fb98,stroke:#333,stroke-width:2
+    style MountainsWeather fill:#98fb98,stroke:#333,stroke-width:2
+    style MountainsPreference fill:#98fb98,stroke:#333,stroke-width:2
+    style StayHomeCost fill:#ffcc99,stroke:#333,stroke-width:2
+    style StayHomeWeather fill:#ffcc99,stroke:#333,stroke-width:2
+    style StayHomePreference fill:#ffcc99,stroke:#333,stroke-width:2
+    style Conclusion fill:#f9e79f,stroke:#333,stroke-width:2

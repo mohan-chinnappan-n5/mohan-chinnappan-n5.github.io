@@ -525,7 +525,7 @@ Dwg: {
       links: [
         { text: 'Agent - How they work?', href: '../../dwg/dwg.html?data=agents.txt&title=Agents:%20How%20they%20work', icon: 'desktop' },
         { text: 'Agentforce ', href: '../../dwg/dwg.html?data=agentforce.txt&title=Agentforce', icon: 'desktop' },
-        { text: 'Tree of Thoughts (TOT) ', href: '../../dwg/dwg.html?data=https://raw.githubusercontent.com/mohan-chinnappan-n5/llm-prompts/refs/heads/main/dwg/tot2.txt&title=Tree of Thoughts - TOT', icon: 'desktop' },
+        { text: 'Tree of Thoughts (TOT) ', href: '../../dwg/dwg.html?data=tot2.txt&text=tot.md&title=Tree of Thoughts - TOT', icon: 'desktop' },
 
         { text: 'ReAct - Reasoning and Acting ', href: '../../dwg/dwgt.html?data=react1.txt&title=ReAct&text=react.md', 
 		icon: 'desktop' },
