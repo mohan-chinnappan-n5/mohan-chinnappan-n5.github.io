@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Dynamic Slides from Markdown</title>
+  
+  
+  <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+  <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/devops/slides/css/pd.css">
+
+  <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/mc/css/enhance.css">
+</head>
+<body>
+  <google-codelab id="dynamic-markdown-slides" title="" environment="web">
+
+
+  <google-codelab-step label=' Resources'>
+    <div id='s9-md' class='md' data-trim='false'>
+  
+  |Resource|
+  |---|
+  |[Salesforce Development Notes](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/)|
+  |[Notes on Code Quality](https://mohan-chinnappan-n5.github.io/code-quality/cq.md.html#0)|
+  |[Notes on Design](https://mohan-chinnappan-n2.github.io/2021/wp/design/design.md.html#0)|
+  |[Apps and Books](https://mohan-chinnappan-n5.github.io/apps/)| 
+  |[PMD Code Scan - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner#overview)|
+  |[SF-LAND - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-land)|
+  |[Mohan's SFDX plugin for Analytics](https://www.salesforceblogger.com/2020/11/17/mohans-sfdx-plugin-for-analytics/)|
+  |[Lightning Experience Performance](https://mohan-chinnappan-n2.github.io/2019/lex/perf.html)|
+  
+    </div>
+    </google-codelab-step>
+
+
+  </google-codelab>
+
+  <script>
+    // Utility function to fetch the Markdown content
+    async function fetchMarkdown(url) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Error fetching markdown: ${response.statusText}`);
+        return response.text();
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    }
+
+    // Function to split Markdown into topics based on headers
+    function splitMarkdownToSlides(markdown) {
+      console.log(markdown)
+      const sections = markdown.split(/^#\s+/gm).filter(section => section.trim() !== "");
+      console.log(sections);
+      const slides = sections.map(section => {
+        const [title, ...content] = section.split("\n");
+        console.log(title)
+        console.log(content)
+        return { title: title.trim(), content: content.join("\n").trim() };
+      });
+      console.log(slides);
+      return slides;
+    }
+
+    // Function to render slides into the DOM
+    async function renderSlides(slides) {
+      const codelab = document.querySelector('google-codelab');
+      slides.forEach((slide, index) => {
+        const step = document.createElement('google-codelab-step');
+        step.setAttribute('label', slide.title);
+
+        const div = document.createElement('div');
+        div.id = `slide-${index + 1}-md`;
+        div.className = 'md';
+        div.setAttribute('data-trim', 'false');
+
+        // Convert markdown to HTML
+        const converter = new showdown.Converter();
+        div.innerHTML = converter.makeHtml(slide.content);
+
+        step.appendChild(div);
+        codelab.appendChild(step);
+      });
+    }
+
+    // Main function to load and process markdown
+    async function init() {
+      console.log('init');
+      const urlParams = new URLSearchParams(window.location.search);
+      const markdownUrl = urlParams.get('data');
+      const slideTitle = urlParams.get('title'); // Get title from URL parameters
+
+      if (!markdownUrl) {
+        console.error("No data parameter provided in URL.");
+        return;
+      }
+
+      // Set the title of the codelab dynamically
+      if (slideTitle) {
+        document.querySelector('google-codelab').setAttribute('title', slideTitle);
+      }
+
+      const markdown = await fetchMarkdown(markdownUrl);
+      console.log(markdown);
+      if (markdown) {
+        const slides = splitMarkdownToSlides(markdown);
+
+        await renderSlides(slides);
+      }
+    }
+
+    // Initialize the script
+    init();
+  </script>
+
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
+
+
+  <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/native-shim.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
+  <script src="https://mohan-chinnappan-n5.github.io/devops/slides/js/utils.js"></script>
+
+
+  <script>
+    addLinks('Book', 'https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/');
+    addLinks('Apps', 'https://mohan-chinnappan-n5.github.io/apps');
+  
+    const drawer = document.getElementById('drawer');
+    drawer.classList.add('split', 'split-horizontal');
+  
+    const main = document.getElementById('main');
+    main.classList.add('split', 'split-horizontal');
+
+    Split(["#drawer", "#main"], {
+      sizes: [20, 80],
+    });
+  </script>
+</body>
+</html>

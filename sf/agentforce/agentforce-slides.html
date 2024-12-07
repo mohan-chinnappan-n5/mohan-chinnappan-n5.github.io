@@ -1,0 +1,178 @@
+
+
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+  <meta charset="UTF-8">
+  <title>Agentforce</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
+
+  <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+  <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/devops/slides/css/pd.css">
+
+   <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/mc/css/enhance.css">
+   <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+   <script src="https://cdn.jsdelivr.net/npm/marked@4.0.12/marked.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/marked@4.0.12/marked.min.js"></script>
+
+   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+  </head>
+<body>
+<google-codelab id="Agentforce" title="Agentforce" environment="web" >
+  <google-codelab-step label='About Agentforce'>
+    <div id='sample-100-md' class='md'   data-trim='false'> 
+[![About](img/agentforce-1.webp)](img/agentforce-1.webp)
+
+
+## What is an AI agent?
+- An AI agent is an intelligent system that can get work done **proactively and autonomously**, 
+meaning it doesn't require human input.
+-  Agents can be triggered by **changes in data and automations**. 
+- They can understand and respond to human conversation **dynamically**. 
+- They rely on machine learning and natural language processing (NLP) to reason and handle a wide range of tasks, 
+from **answering simple questions to resolving complex issues**.
+
+---
+
+
+</div>
+ <div id="samaple-100-mmd" class="mmd-file" data-url="../../dwg/agent.mmd" > </div>
+  <button onclick="downloadSVG()"  data-ref='samaple-100-mmd' class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" > Download as SVG </button>
+
+
+
+  </google-codelab-step>
+
+<google-codelab-step label='Topics'>
+  <div id='sample-99-md' class='md-file'  data-url="../../dwg/agent_topics.md" data-trim='false'> </div>
+  <div id='sample-99a-md'  class='md'   data-trim='false'>
+  [![Topics](img/agent-topics-1.png)](img/agent-topics-1.png")
+  </div>
+
+  
+</google-codelab-step>
+
+ 
+<google-codelab-step label=' Resources'>
+	<div id='s9-md' class='md' data-trim='false'>
+|Resource|
+|---|
+|[Salesforce Development Notes](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/)|
+|[Notes on Code Quality](https://mohan-chinnappan-n5.github.io/code-quality/cq.md.html#0)|
+|[Notes on Design](https://mohan-chinnappan-n2.github.io/2021/wp/design/design.md.html#0)|
+|[Apps and Books](https://mohan-chinnappan-n5.github.io/apps/)| 
+|[PMD Code Scan - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner#overview)|
+|[SF-LAND - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-land)|
+|[Mohan's SFDX plugin for Analytics](https://www.salesforceblogger.com/2020/11/17/mohans-sfdx-plugin-for-analytics/)|
+|[Lightning Experience Performance](https://mohan-chinnappan-n2.github.io/2019/lex/perf.html)|
+
+	</div>
+	</google-codelab-step>
+
+
+</google-codelab>
+
+  <script src="https://mohan-chinnappan-n2.github.io/2019/stats/js/md2html.js?v=2"> </script> 
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/native-shim.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/custom-elements.min.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/codelab-elements.js"></script>
+  <script src="https://mohan-chinnappan-n2.github.io/2020/cust-ele/js/prettify.js"></script>
+  <script src="https://mohan-chinnappan-n5.github.io/devops/slides/js/utils.js"></script>
+
+
+  <script>
+
+	addLinks('Book','https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/' );
+  addLinks('Apps','https://mohan-chinnappan-n5.github.io/apps' );
+  
+	const drawer = document.getElementById('drawer');
+    // Add a CSS class to the element
+    drawer.classList.add('split');
+    drawer.classList.add('split-horizontal');
+	const main = document.getElementById('main');
+    // Add a CSS class to the element
+    main.classList.add('split');
+    main.classList.add('split-horizontal');
+	Split(["#drawer", "#main" ], {
+		sizes: [20, 80],
+	});
+
+  console.log(fileMds);
+
+  fileMds.forEach( (id) => {
+    const htmlEle = document.getElementById(id);
+    const url = htmlEle.getAttribute('data-url');
+    const mdContent =  readURL(url);
+    mdContent.then ( (mdTxt) => {
+      const html = marked.parse(mdTxt);
+      htmlEle.innerHTML = html; 
+
+    });
+  });
+
+  // mmd support
+
+  const mmdFileElements = document.getElementsByClassName('mmd-file');
+  let fileMmds = [];
+  for (let i = 0; i < mmdFileElements.length; i++) {
+      const ele = mmdFileElements[i];
+      fileMmds.push(ele.getAttribute('id'));
+  };
+
+  function downloadSVG() {
+    console.log(event.target)
+    const eleId =  event.target.getAttribute('data-ref');
+    const svg = document.querySelector(`#${eleId} svg`);
+    
+    if (!svg) {
+      alert('No diagram found!');
+      return;
+    }
+  
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const blob = new Blob([svgData], { type: 'image/svg+xml' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'diagram.svg';
+    link.click();
+    // document.getElementById(eleId).append(link);
+  }
+</script>
+
+<script type="module">
+
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+
+  fileMmds.forEach( (id) => {
+    const htmlEle = document.getElementById(id);
+    const url = htmlEle.getAttribute('data-url');
+    const mmdContent =  readURL(url);
+    mmdContent.then ( (mmdTxt) => {
+      htmlEle.innerHTML = mmdTxt;
+      console.log(mmdTxt);
+      mermaid.init(undefined, htmlEle);
+
+
+    });
+  });
+</script>
+
+
+
+  
+
+</body>
+</html>
