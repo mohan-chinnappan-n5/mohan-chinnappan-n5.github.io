@@ -26,7 +26,33 @@
   {
     "term": "What platforms does Agentforce integrate with?",
     "definition": "Agentforce is deeply integrated with the Salesforce Platform, which brings together all the data and context agents need from internal and external sources, with the Einstein Trust Layer built in. This enables agents to take accurate, relevant actions, which are faster to implement thanks to our low-code framework. You can reuse Platform tools like flows and Apex, and build your agent on top of them.  Agentforce also connects to all the channels where your employees and customers already interact, including CRM, WhatsApp, Messenger, and your website. There’s no need to go to another application to talk to an agent because they're bringing value to the existing flow of work."
+  },
+  {
+    "term": "Role",
+    "definition": "The role is the agent's purpose. It defines the job to be done and the broader goals the agent should achieve on your team."
+  },
+{
+    "term": "Agent’s trusted data",
+    "definition": "Trusted data is the information the agent needs to carry out its role. This could include company knowledge articles, CRM data, external data via Data Cloud, public websites, and so on."
+  },
+{
+    "term": "Agent’s Actions",
+    "definition": "Actions are the predefined tasks an agent can execute to do its job based on a trigger or instruction. For example, it could run a flow, prompt template, or Apex."
+  },
+
+{
+    "term": "Agent’s Guardrails",
+    "definition": "Guardrails define what the agent can and cannot do. These can be natural-language instructions to escalate to a human, or could come from built-in security features in the Einstein Trust Layer."
   }
+
+{
+    "term": "Agent’s Channels",
+    "definition": "Channels are the applications where agents can do work. This can be your website, CRM, mobile app, Slack, and more."
+  }
+
+
+
+   
    
 ]
 
