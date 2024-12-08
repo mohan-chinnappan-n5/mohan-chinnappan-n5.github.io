@@ -43,7 +43,7 @@
 {
     "term": "Agent’s Guardrails",
     "definition": "Guardrails define what the agent can and cannot do. These can be natural-language instructions to escalate to a human, or could come from built-in security features in the Einstein Trust Layer."
-  }
+  },
 
 {
     "term": "Agent’s Channels",
