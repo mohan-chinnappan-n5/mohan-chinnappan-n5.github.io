@@ -51,39 +51,40 @@ This mechanism determines how much focus each token should place on others.
 
 ## Advantages of the Transformer
 
-1.	Parallelization:
+-	Parallelization:
 	•	Processes the entire sequence simultaneously, unlike RNNs that rely on sequential processing.
-2.	Long-Range Dependencies:
+-	Long-Range Dependencies:
 	•	Captures relationships between distant tokens more effectively using self-attention.
-3.	Scalability:
+-	Scalability:
 	•	Scales better with increasing data and computational resources.
-4.	Generalization:
+-	Generalization:
 	•	Forms the basis for large pre-trained models like BERT, GPT, and T5.
 
-Challenges Compared to RNNs
+## Challenges Compared to RNNs
 
-Aspect	Transformer	RNNs
-Memory Requirements	Requires significant memory due to self-attention’s quadratic complexity.	Less memory-intensive due to sequential processing.
-Sequential Order	Positional encoding is needed as the model lacks built-in sequential awareness.	Naturally incorporates sequence order in its architecture.
-Training Speed	Faster due to parallelization.	Slower, as tokens must be processed in order.
-Inference Efficiency	Requires additional computation for autoregressive tasks.	More straightforward for tasks like time-series prediction.
+|Aspect|Transformer|RNNs|
+|---|---|---|
+|Memory Requirements|Requires significant memory due to self-attention’s quadratic complexity.|	Less memory-intensive due to sequential processing.|
+|Sequential Order|Positional encoding is needed as the model lacks built-in sequential awareness.|Naturally incorporates sequence order in its architecture.|
+|Training Speed|Faster due to parallelization|Slower, as tokens must be processed in order.|
+|Inference Efficiency|Requires additional computation for autoregressive tasks.|More straightforward for tasks like time-series prediction.|
 
-Transformers vs. Large Language Models (LLMs)
+## Transformers vs. Large Language Models (LLMs)
 
 Transformers are the foundation of LLMs, such as GPT, BERT, and T5. These models enhance the original Transformer by scaling parameters, adding layers, and using vast datasets for pretraining. Key differences include:
-•	Training Scale: LLMs are trained on billions of parameters, enabling richer representations.
-•	Transfer Learning: LLMs can generalize across tasks through fine-tuning.
-•	Efficiency: Modern techniques (e.g., sparse attention) mitigate the memory and computational costs of vanilla Transformers.
+-	**Training Scale**: LLMs are trained on billions of parameters, enabling richer representations.
+-	**Transfer Learning**: LLMs can generalize across tasks through fine-tuning.
+-	**Efficiency**: Modern techniques (e.g., sparse attention) mitigate the memory and computational costs of vanilla Transformers.
 
-Applications of the Transformer
+## Applications of the Transformer
 
 The Transformer architecture has revolutionized various domains, including:
-•	Machine Translation: State-of-the-art performance in language translation tasks.
-•	Text Summarization: Condenses documents into concise summaries.
-•	Question Answering: Powers conversational AI systems like chatbots.
-•	Code Generation: Helps generate programming code from natural language prompts.
+-	**Machine Translation**: State-of-the-art performance in language translation tasks.
+-	**Text Summarization**: Condenses documents into concise summaries.
+-	**Question Answering**: Powers conversational AI systems like chatbots.
+-	**Code Generation**: Helps generate programming code from natural language prompts.
 
-Conclusion
+## Conclusion
 
 The Transformer has redefined the landscape of deep learning, addressing limitations of earlier architectures like RNNs and enabling unprecedented advances in NLP. Its influence continues to grow, forming the backbone of modern AI systems and paving the way for even more powerful models in the future.
 

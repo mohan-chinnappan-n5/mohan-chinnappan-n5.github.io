@@ -1,0 +1,38 @@
+flowchart LR
+    A[Early Chatbots] --> B[Rule-based Systems]
+    B --> C[ELIZA]
+    B --> D[ALICE]
+    C --> E[Limited Pattern Matching]
+    D --> E[Limited Pattern Matching]
+    A --> F[Early Voice Assistants]
+    F --> G[Speech Recognition]
+    G --> H[Intent Recognition]
+    H --> I[Amazon Echo Alexa]
+    I --> J[Predefined Intents and Skills]
+    J --> K[Limited Conversation Depth]
+    A --> L[NLP Advances]
+    L --> M[Word Embeddings]
+    M --> N[Word2Vec and GloVe]
+    N --> O[Better Understanding of Context]
+    O --> P[Deep Learning and Transformers]
+    P --> Q[GPT, BERT, and LLMs]
+    Q --> R[Contextual Understanding and Dynamic Responses]
+    
+    %% Key Figures
+    A -.-> Z1[Joseph Weizenbaum ELIZA]
+    B -.-> Z2[Richard Wallace ALICE]
+    F -.-> Z3[Amazon Echo Development]
+    P -.-> Z4[Google Brain Transformer Model]
+    
+    classDef main fill:#1f77b4,stroke:#000,stroke-width:2px,color:#fff;
+    classDef rule fill:#ff7f0e,stroke:#000,stroke-width:1px,color:#000;
+    classDef nlp fill:#2ca02c,stroke:#000,stroke-width:1px,color:#000;
+    classDef speech fill:#d62728,stroke:#000,stroke-width:1px,color:#000;
+    classDef deepLearning fill:#9467bd,stroke:#000,stroke-width:1px,color:#000;
+    classDef lms fill:#8c564b,stroke:#000,stroke-width:1px,color:#fff;
+    
+    class A,B,C,D,E rule;
+    class F,G,H,I,J speech;
+    class L,M,N,O,P deepLearning;
+    class Q,R lms;
+    class Z1,Z2,Z3,Z4 main;
