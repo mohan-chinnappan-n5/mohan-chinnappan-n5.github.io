@@ -45,14 +45,9 @@ meaning it doesn't require human input.
 from **answering simple questions to resolving complex issues**.
 
 ---
-
-
 </div>
  <div id="samaple-100-mmd" class="mmd-file" data-url="../../dwg/agent.mmd" > </div>
   <button onclick="downloadSVG()"  data-ref='samaple-100-mmd' class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" > Download as SVG </button>
-
-
-
   </google-codelab-step>
 
 <google-codelab-step label='Topics'>
@@ -60,23 +55,49 @@ from **answering simple questions to resolving complex issues**.
   <div id='sample-99a-md'  class='md'   data-trim='false'>
   [![Topics](img/agent-topics-1.png)](img/agent-topics-1.png")
   </div>
-
-  
 </google-codelab-step>
+
+<google-codelab-step label='How we got here?'>
+  <div id="ai-roadmap-mmd" class="mmd-file" data-url="mmd/ai-roadmap.mmd" > </div>
+  <button onclick="downloadSVG()"  data-ref='ai-roadmap-mmd' class="mt-4 bg-blue-600 text-white px-4 py-2 rounded" > Download as SVG </button>
+
+</google-codelab-step>
+
+
+
+<google-codelab-step label='RNN'>
+  <div id="rnn1-md" class="md-file" data-trim="false" data-url="./content/rnn.md">
+  </div>
+</google-codelab-step>
+
+<google-codelab-step label='Transformer'>
+  <div id="transformer1-md" class="md-file" data-trim="false" data-url="./content/transformer.md">
+  </div>
+</google-codelab-step>
+
+
+<google-codelab-step label='Glossary'>
+  <div id="glossary1"  data-trim="false" >
+    <iframe src="https://mohan-chinnappan-n5.github.io/terms/terms.html?data=eai.json"
+    width="720" height="1000"
+    ></iframe>
+    <a href="https://mohan-chinnappan-n5.github.io/terms/terms.html?data=eai.json"
+     class="text-blue-600 hover:text-blue-800 font-medium underline transition duration-200 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" >
+     Full View</a>
+  </div>
+</google-codelab-step>
+
+
+
+
+
 
  
 <google-codelab-step label=' Resources'>
 	<div id='s9-md' class='md' data-trim='false'>
 |Resource|
 |---|
-|[Salesforce Development Notes](https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/)|
-|[Notes on Code Quality](https://mohan-chinnappan-n5.github.io/code-quality/cq.md.html#0)|
-|[Notes on Design](https://mohan-chinnappan-n2.github.io/2021/wp/design/design.md.html#0)|
-|[Apps and Books](https://mohan-chinnappan-n5.github.io/apps/)| 
-|[PMD Code Scan - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner#overview)|
-|[SF-LAND - VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-land)|
-|[Mohan's SFDX plugin for Analytics](https://www.salesforceblogger.com/2020/11/17/mohans-sfdx-plugin-for-analytics/)|
-|[Lightning Experience Performance](https://mohan-chinnappan-n2.github.io/2019/lex/perf.html)|
+|[Draw Tool](https://mohan-chinnappan-n5.github.io/draw/excalidraw/index.html)|
 
 	</div>
 	</google-codelab-step>
@@ -96,6 +117,16 @@ from **answering simple questions to resolving complex issues**.
 
 	addLinks('Book','https://mohan-chinnappan-n5.github.io/sfbooks/sfdevnotes/' );
   addLinks('Apps','https://mohan-chinnappan-n5.github.io/apps' );
+
+  // Get the div element by ID
+  const mainDiv = document.getElementById('main');
+
+  // Increase the width
+  mainDiv.style.width = '1200px'; // Set desired width
+
+  // Make it scrollable
+  mainDiv.style.overflowX = 'auto'; // Horizontal scroll
+  mainDiv.style.overflowY = 'auto'; // Vertical scroll (optional)
   
 	const drawer = document.getElementById('drawer');
     // Add a CSS class to the element
@@ -106,10 +137,9 @@ from **answering simple questions to resolving complex issues**.
     main.classList.add('split');
     main.classList.add('split-horizontal');
 	Split(["#drawer", "#main" ], {
-		sizes: [20, 80],
+		sizes: [15, 85],
 	});
 
-  console.log(fileMds);
 
   fileMds.forEach( (id) => {
     const htmlEle = document.getElementById(id);

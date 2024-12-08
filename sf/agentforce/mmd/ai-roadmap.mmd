@@ -1,0 +1,24 @@
+graph TD
+    classDef milestone fill:#1f77b4,stroke:#000,stroke-width:2px,color:#fff;
+    classDef progress fill:#ff7f0e,stroke:#000,stroke-width:1px,color:#000;
+    classDef future fill:#2ca02c,stroke:#000,stroke-width:1px,color:#fff;
+    classDef winter fill:#a6a6a6,stroke:#000,stroke-width:1px,color:#000;
+
+    ML["Humble Beginnings: Machine Learning (1950s)\n[Alan Turing]"]:::milestone
+    AI["Artificial Intelligence (1960s)\n[John McCarthy]"]:::milestone
+    Winter["AI Winter (1970s-1980s)\n[Funding Cuts & Research Setbacks]"]:::winter
+    NN["Neural Networks Revival (1980s)\n[Geoffrey Hinton]"]:::progress
+    RNN["Recurrent Neural Networks (1990s)\n[Sepp Hochreiter]"]:::progress
+    LSTM["LSTM and GRU Improvements (1997)\n[Sepp Hochreiter & Jürgen Schmidhuber]"]:::progress
+    Transformer["Transformers Architecture (2017)\n[Ashish Vaswani]"]:::milestone
+    GPT["GPT and Large Language Models (2018+)\n[Ilya Sutskever]"]:::milestone
+    AGI["Towards Artificial General Intelligence\n[Open Research Community]"]:::future
+
+    ML --> AI
+    AI --> Winter
+    Winter --> NN
+    NN --> RNN
+    RNN --> LSTM
+    LSTM --> Transformer
+    Transformer --> GPT
+    GPT --> AGI
