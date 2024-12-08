@@ -1,0 +1,35 @@
+{
+  "topic": "Agentforce FAQs",
+  "notes": "",
+  "terms": [
+
+  {
+    "term": "What is an AI agent?",
+    "definition": "An AI agent is an intelligent system that can get work done proactively and autonomously, meaning it doesn't require human input. Agents can be triggered by changes in data and automations. They can understand and respond to human conversation dynamically. And they rely on machine learning and natural language processing (NLP) to reason and handle a wide range of tasks, from answering simple questions to resolving complex issues."
+  },
+  {
+    "term": "How is an AI agent different from a chatbot?",
+    "definition": "Traditional chatbots require pre-determined conversation trees to respond to inquiries. In contrast, agents are dynamic. They can adapt to human language and conversation, and they have the ability to reason. They make sense of the conversation, build a plan to address it, understand the tools available to them, and then take the best course of action."
+  },
+  {
+    "term": "What can an AI agent be used for?",
+    "definition": "You can customize an AI agent to fit any use case and any industry. Salesforce offers a range of out-of-the-box agents for service, sales, marketing, and commerce, so you can get started in minutes. These are just some examples of how agents can support your business: Service agents can automatically help a customer troubleshoot an issue with personalized, branded advice based on their purchase history and company knowledge documents SDR agents can send a personalized introductory email to a lead, respond to a question on pricing, and access an account executive’s calendar to schedule a follow-up call Marketing agents can generate campaigns, briefs, audience segments, emails, and end-to-end journeys based on your company's goals Ecommerce agents can manage your websites and generate personalized promotions"
+  },
+  {
+    "term": "How secure is Agentforce?",
+    "definition": "The Einstein Trust Layer protects customer data through robust security features and guardrails, like zero data retention, toxicity detection, secure data retrieval, and dynamic grounding. It improves the safety and accuracy of outputs while ensuring the responsible use of AI agents across the Salesforce ecosystem.  For example, the Audit Trail feature provides the data you need to track AI agent actions and outputs, ensuring AI usage complies with your organization’s security, privacy, regulatory, and AI governance policies."
+  },
+  {
+    "term": "Can I customize Agentforce workflows?",
+    "definition": "While other agent platforms require complex data integration and custom automation builds, Agentforce is already built into the Salesforce Platform. You can instantly turn your existing workflows, prompt templates, Apex, and APIs into agent actions — with the added power of native tools, like Data Cloud, Slack, and MuleSoft. Agent Builder enables Salesforce admins and developers to use natural language to create jobs to be done, instructions, actions, and guardrails for their agents."
+  },
+  {
+    "term": "What platforms does Agentforce integrate with?",
+    "definition": "Agentforce is deeply integrated with the Salesforce Platform, which brings together all the data and context agents need from internal and external sources, with the Einstein Trust Layer built in. This enables agents to take accurate, relevant actions, which are faster to implement thanks to our low-code framework. You can reuse Platform tools like flows and Apex, and build your agent on top of them.  Agentforce also connects to all the channels where your employees and customers already interact, including CRM, WhatsApp, Messenger, and your website. There’s no need to go to another application to talk to an agent because they're bringing value to the existing flow of work."
+  }
+   
+]
+
+
+  
+}

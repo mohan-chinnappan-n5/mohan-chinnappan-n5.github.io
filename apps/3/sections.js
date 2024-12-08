@@ -503,6 +503,7 @@ SFAI: {
       links: [
         { text: 'Agentforce Notes', href: '../../sf/agentforce/agentforce.html?data=agentforce.md&ref=ref.json&vids=vids.json', icon: 'desktop' },
         { text: 'Glossary', href: '../../terms/terms.html?data=eai.json', icon: 'desktop' },
+         { text: 'Agentforce FAQ', href: '../../terms/terms.html?data=af.json', icon: 'desktop' },
  
         // Add more links here
       ],
