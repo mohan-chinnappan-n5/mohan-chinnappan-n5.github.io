@@ -1,0 +1,25 @@
+
+flowchart TD
+    title[Daily UAT Deployment]:::title
+
+    step1[Collect approved PRs from SIT team]:::step1 --> step2[Check for post-deployment steps required for these PRs]:::step2
+    step2 --> step3[Prepare package.xml and destructiveChanges.xml for UAT deployment]:::step3
+    step3 --> step4[Prepare the deployment bundle]:::step4
+    step4 --> step5[Deploy to UAT]:::step5
+    step5 --> step6[Perform post-deployment steps as identified in Step 2]:::step6
+
+    classDef title fill:#ffa500,stroke:#333,stroke-width:2px,font-size:18px,font-weight:bold,color:#000;
+    classDef step1 fill:#c6e48b,stroke:#22863a,stroke-width:1px,font-size:14px,color:#000;
+    classDef step2 fill:#ffd700,stroke:#b8860b,stroke-width:1px,font-size:14px,color:#000;
+    classDef step3 fill:#add8e6,stroke:#0366d6,stroke-width:1px,font-size:14px,color:#000;
+    classDef step4 fill:#d1bcf3,stroke:#6f42c1,stroke-width:1px,font-size:14px,color:#000;
+    classDef step5 fill:#fdaeb7,stroke:#d73a49,stroke-width:1px,font-size:14px,color:#000;
+    classDef step6 fill:#ffebcd,stroke:#8b4513,stroke-width:1px,font-size:14px,color:#000;
+
+    class title title;
+    class step1 step1;
+    class step2 step2;
+    class step3 step3;
+    class step4 step4;
+    class step5 step5;
+    class step6 step6;
