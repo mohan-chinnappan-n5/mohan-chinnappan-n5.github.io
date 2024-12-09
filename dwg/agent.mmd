@@ -1,0 +1,45 @@
+erDiagram
+    Agent {
+        int id PK
+        string name
+    }
+    Topic {
+        int id PK
+        string title
+        int agent_id FK
+    }
+    Action {
+        int id PK
+        string description
+        int topic_id FK
+    }
+    Automation {
+        int id PK
+        string name
+        int action_id FK
+    }
+    Flow {
+        int id PK
+        string name
+        int action_id FK
+    }
+    APICall {
+        int id PK
+        string endpoint
+        int action_id FK
+    }
+    ApexExecution {
+        int id PK
+        string method
+        int action_id FK
+    }
+
+    Agent ||--o{ Topic : "has multiple"
+    Topic ||--o{ Action : "has multiple"
+    Action ||--o{ Automation : "can have multiple"
+    Action ||--o{ Flow : "can have multiple"
+    Action ||--o{ APICall : "can have multiple"
+    Action ||--o{ ApexExecution : "can have multiple"
+
+
+

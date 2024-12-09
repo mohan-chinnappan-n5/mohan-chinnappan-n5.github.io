@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Test App</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+        }
+        .gauge-container {
+            margin: 50px auto;
+        }
+        .metrics {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Speed Test</h1>
+    <div class="gauge-container" id="gauge"></div>
+    <div class="metrics">
+        <p id="speed">Speed: -- Mbps</p>
+        <p id="upload">Upload: -- Mbps</p>
+        <p id="latency">Latency: -- ms</p>
+    </div>
+    <button onclick="startTest()">Start Test</button>
+    <p style="margin-top: 20px; font-size: 14px;">
+        To test with a specific URL, pass the file URL as a <code>url</code> parameter in the query string (e.g., <code>?url=https://example.com/testfile</code>).
+    </p>
+
+    <script src="speedtest.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Dynamic Slides from Markdown</title>
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/codelab-elements.css">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n2.github.io/2020/cust-ele/css/app.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.js"></script>
+
+  <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+  <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/devops/slides/css/pd.css">
+
+  <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/mc/css/enhance.css">
+</head>
+<body>
+  <script>
+    // Utility function to fetch the Markdown content
+    async function fetchMarkdown(url) {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Error fetching markdown: ${response.statusText}`);
+        return response.text();
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    }
+
+    // Function to split Markdown into topics based on headers
+    function splitMarkdownToSlides(markdown) {
+      const sections = markdown.split(/^#\s+/gm).filter(section => section.trim() !== "");
+      const slides = sections.map(section => {
+        const [title, ...content] = section.split("\n");
+        return { title: title.trim(), content: content.join("\n").trim() };
+      });
+      return slides;
+    }
+
+    // Function to render slides into the dynamically added <google-codelab> element
+    function renderSlides(slides, codelab) {
+      slides.forEach((slide, index) => {
+        const step = document.createElement('google-codelab-step');
+        step.setAttribute('label', slide.title);
+
+        const div = document.createElement('div');
+        div.id = `unique-slide-${index + 1}`;
+        div.className = 'md';
+        div.setAttribute('data-trim', 'false');
+
+        // Convert markdown to HTML
+        const converter = new showdown.Converter();
+        const htmlContent = converter.makeHtml(slide.content);
+        console.log(`Rendering Slide ${index + 1}:`, slide.title, htmlContent); // Debug each slide content
+        div.innerHTML = htmlContent;
+
+        step.appendChild(div);
+        codelab.appendChild(step);
+      });
+    }
+
+    // Main function to dynamically create <google-codelab> and process markdown
+    async function init() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const markdownUrl = urlParams.get('data');
+      const slideTitle = urlParams.get('title'); // Get title from URL parameters
+
+      if (!markdownUrl) {
+        console.error("No data parameter provided in URL.");
+        return;
+      }
+
+      // Dynamically create the <google-codelab> element
+      const codelab = document.createElement('google-codelab');
+      codelab.id = 'dynamic-markdown-slides';
+      codelab.setAttribute('environment', 'web');
+      if (slideTitle) {
+        codelab.setAttribute('title', slideTitle);
+      }
+      document.body.appendChild(codelab);
+
+      const markdown = await fetchMarkdown(markdownUrl);
+      if (markdown) {
+        console.log("Fetched Markdown:", markdown); // Debugging fetched Markdown
+        const slides = splitMarkdownToSlides(markdown);
+        console.log("Slides Generated:", slides); // Debugging slide generation
+
+        customElements.whenDefined('google-codelab').then(() => {
+          renderSlides(slides, codelab);
+        });
+      } else {
+        console.error("Failed to fetch or process Markdown content.");
+      }
+    }
+
+    // Initialize the script
+    init();
+  </script>
+
+
+</body>
+</html>

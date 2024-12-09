@@ -1,0 +1,3083 @@
+<html
+  lang="en-US"
+  style="
+    --primaryColor: #0176d3;
+    --secondaryColor: #005290;
+    --contrastPrimaryColor: #032d60;
+    --headerColor: #0176d3;
+    --headerAlternateColor: #c23934;
+    --headerTextColor: #ffffff;
+    --font: 'Salesforce Sans', sans-serif;
+    --baseFontSize: medium;
+  "
+>
+<base href="https://salesforce.com/">
+
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://service.force.com/embeddedservice/ https://cdn.content.aws-dev2-uswest2.aws.sfdc.cl/ https://cdn.content.aws-prod1-useast1.aws.sfdc.cl/ https://payments.salesforce.com/ https://js.stripe.com/ https://www.paypal.com/sdk/js https://checkoutshopper-live.adyen.com/ https://checkoutshopper-test.adyen.com/ https://pal-test.adyen.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://pay.google.com import: blob: https://uip.canary.lwc.dev https://org62.my.salesforce-scrt.com; object-src 'self' www.google.com; style-src 'self' 'unsafe-inline' https://service.force.com/embeddedservice/ https://fonts.googleapis.com/css2 https://fonts.googleapis.com/css https://checkoutshopper-live.adyen.com/ https://checkoutshopper-test.adyen.com/ blob: https://ac-2040010002.awsapps.com https://ac-2040030002.awsapps.com https://concierge.it.salesforce.com https://cloudplatform.coveo.com https://platform.cloud.coveo.com https://usageanalytics.coveo.com https://salesforce.quip.com https://org62.my.salesforce.com https://app.pendo.io https://cdn.pendo.io https://pendo-static-5739745074479104.storage.googleapis.com https://fonts.gstatic.com https://fonts.googleapis.com https://globalplatform.cloud.coveo.com https://content.analytics.apttus.com https://data.analytics.apttus.com https://yourquipsite.quip.com https://*.salesforce-communities.com https://*.force.com https://*.salesforce.com https://a.sfdcstatic.com https://iis.digital.salesforce.com https://trailblazerid.force.com https://profile.digital.salesforce.com https://trailblazer.me https://api.status.salesforce.com https://max-azprod.apttuscloud.com https://max-azsandbox.apttuscloud.com https://*.sfdcdigital.com https://www.salesforce.com https://trailblazer-identity.my.site.com https://billing.salesforce.com https://*.highspot.com https://ajax.googleapis.com *.crazyegg.com https://*.onetrust.com https://widget.surveymonkey.com https://www.google.com https://www.gstatic.com; img-src 'self' data: blob: https://org62.my.salesforce.com https://org62.file.force.com https://img.youtube.com https://i.ytimg.com https://i.vimeocdn.com https://login.salesforce.com/icons/ https://payments.salesforce.com/icons/ https://cdn.content.aws-prod1-useast1.aws.sfdc.cl/icons/ https://cdn.content.aws-dev2-uswest2.aws.sfdc.cl/icons/ https://checkoutshopper-live.adyen.com/ https://checkoutshopper-test.adyen.com/ https://www.sandbox.paypal.com https://www.paypal.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://usa1000.sfdc-8tgtt5.salesforce.com/icons/ https://ac-2040010002.awsapps.com https://ac-2040030002.awsapps.com https://concierge.it.salesforce.com https://cloudplatform.coveo.com https://platform.cloud.coveo.com https://usageanalytics.coveo.com https://salesforce.quip.com https://app.pendo.io https://cdn.pendo.io https://pendo-static-5739745074479104.storage.googleapis.com https://fonts.gstatic.com https://fonts.googleapis.com https://globalplatform.cloud.coveo.com https://content.analytics.apttus.com https://data.analytics.apttus.com https://yourquipsite.quip.com https://*.salesforce-communities.com https://*.force.com https://*.salesforce.com https://a.sfdcstatic.com https://iis.digital.salesforce.com https://trailblazerid.force.com https://profile.digital.salesforce.com https://trailblazer.me https://opengraph.io https://*.google-analytics.com https://*.analytics.google.com https://api.status.salesforce.com https://max-azprod.apttuscloud.com https://max-azsandbox.apttuscloud.com https://www.googletagmanager.com https://ironcladapp.com https://www.linkedin.com https://salesforce.okta.com https://*.sfdcdigital.com https://www.salesforce.com https://trailblazer-identity.my.site.com https://billing.salesforce.com https://*.highspot.com https://ajax.googleapis.com https://cdn.cookielaw.org https://cookie-cdn.cookiepro.com *.crazyegg.com https://*.googletagmanager.com https://prod.smassets.net https://widget.surveymonkey.com https://*.sfdcstatic.com https://www.google.com https://www.gstatic.com; media-src 'self' blob: https://ac-2040010002.awsapps.com https://ac-2040030002.awsapps.com https://concierge.it.salesforce.com https://cloudplatform.coveo.com https://platform.cloud.coveo.com https://usageanalytics.coveo.com https://salesforce.quip.com https://org62.my.salesforce.com https://app.pendo.io https://cdn.pendo.io https://pendo-static-5739745074479104.storage.googleapis.com https://fonts.gstatic.com https://fonts.googleapis.com https://globalplatform.cloud.coveo.com https://content.analytics.apttus.com https://data.analytics.apttus.com https://yourquipsite.quip.com https://*.salesforce-communities.com https://*.force.com https://*.salesforce.com https://a.sfdcstatic.com https://iis.digital.salesforce.com https://trailblazerid.force.com https://profile.digital.salesforce.com https://trailblazer.me https://api.status.salesforce.com https://max-azprod.apttuscloud.com https://max-azsandbox.apttuscloud.com https://*.sfdcdigital.com https://billing.salesforce.com https://*.highspot.com https://widget.surveymonkey.com;  frame-src 'self' https://service.force.com/embeddedservice/ https://usa1000.sfdc-8tgtt5.salesforce.com https://sfdc-link-preview-staging.sfdc.sh https://sfdc-link-preview.hk.salesforce.com https://cdn.embedly.com https://www.youtube.com https://player.vimeo.com https://play.vidyard.com https://player.cloudinary.com https://fast.wistia.net https://players.brightcove.net https://s1.adis.ws https://scormanywhere.secure.force.com https://appiniummastertrial.secure.force.com https://js.stripe.com/ https://www.paypal.com https://www.sandbox.paypal.com https://checkoutshopper-live.adyen.com/ https://checkoutshopper-test.adyen.com/ https://pal-test.adyen.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://pay.google.com https://*.a.forceusercontent.com/lightningmaps/ https://*.a.forceusercontent.com https://location.force.com https://org62.file.force.com https://ac-2040010002.awsapps.com https://ac-2040030002.awsapps.com https://concierge.it.salesforce.com https://cloudplatform.coveo.com https://platform.cloud.coveo.com https://usageanalytics.coveo.com https://salesforce.quip.com https://org62.my.salesforce.com https://app.pendo.io https://cdn.pendo.io https://pendo-static-5739745074479104.storage.googleapis.com https://fonts.gstatic.com https://fonts.googleapis.com https://globalplatform.cloud.coveo.com https://content.analytics.apttus.com https://data.analytics.apttus.com https://yourquipsite.quip.com https://*.salesforce-communities.com https://*.force.com https://*.salesforce.com https://a.sfdcstatic.com https://iis.digital.salesforce.com https://trailblazerid.force.com https://profile.digital.salesforce.com https://trailblazer.me https://api.status.salesforce.com https://max-azprod.apttuscloud.com https://max-azsandbox.apttuscloud.com https://ironcladapp.com https://www.linkedin.com https://salesforce.okta.com https://*.sfdcdigital.com https://www.salesforce.com https://*.highspot.com *.crazyegg.com https://www.surveymonkey.com https://widget.surveymonkey.com; font-src 'self' data: https://fonts.gstatic.com/ https://ac-2040010002.awsapps.com https://ac-2040030002.awsapps.com https://concierge.it.salesforce.com https://cloudplatform.coveo.com https://platform.cloud.coveo.com https://usageanalytics.coveo.com https://salesforce.quip.com https://org62.my.salesforce.com https://app.pendo.io https://cdn.pendo.io https://pendo-static-5739745074479104.storage.googleapis.com https://fonts.gstatic.com https://fonts.googleapis.com https://globalplatform.cloud.coveo.com https://content.analytics.apttus.com https://data.analytics.apttus.com https://yourquipsite.quip.com https://*.salesforce-communities.com https://*.force.com https://*.salesforce.com https://a.sfdcstatic.com https://iis.digital.salesforce.com https://trailblazerid.force.com https://profile.digital.salesforce.com https://trailblazer.me https://api.status.salesforce.com https://max-azprod.apttuscloud.com https://max-azsandbox.apttuscloud.com https://www.linkedin.com https://*.sfdcdigital.com https://www.salesforce.com https://trailblazer-identity.my.site.com https://billing.salesforce.com https://*.highspot.com https://ajax.googleapis.com https://widget.surveymonkey.com https://www.google.com https://www.gstatic.com; connect-src 'self' https://www.paypal.com https://www.sandbox.paypal.com https://org62.my.salesforce-scrt.com https://fonts.googleapis.com/css2 https://payments.salesforce.com/ https://cdn.content.aws-dev2-uswest2.aws.sfdc.cl/ https://checkoutshopper-live.adyen.com/ https://checkoutshopper-test.adyen.com/ https://o11y.sfproxy-core1.sfdc-8tgtt5.svc.sfdcfc.net/ui-telemetry https://ac-2040010002.awsapps.com https://ac-2040030002.awsapps.com https://concierge.it.salesforce.com https://cloudplatform.coveo.com https://platform.cloud.coveo.com https://usageanalytics.coveo.com https://salesforce.quip.com https://org62.my.salesforce.com https://app.pendo.io https://cdn.pendo.io https://pendo-static-5739745074479104.storage.googleapis.com https://fonts.gstatic.com https://fonts.googleapis.com https://globalplatform.cloud.coveo.com https://content.analytics.apttus.com https://data.analytics.apttus.com https://yourquipsite.quip.com https://*.salesforce-communities.com https://*.force.com https://*.salesforce.com https://*.coveo.com https://a.sfdcstatic.com https://iis.digital.salesforce.com https://trailblazerid.force.com https://profile.digital.salesforce.com https://trailblazer.me https://*.google-analytics.com https://*.analytics.google.com https://api.status.salesforce.com https://max-azprod.apttuscloud.com https://max-azsandbox.apttuscloud.com https://www.googletagmanager.com https://salesforce.vidyard.com https://salesforce.okta.com https://*.sfdcdigital.com https://www.salesforce.com https://trailblazer-identity.my.site.com https://billing.salesforce.com https://*.highspot.com https://ajax.googleapis.com https://cdn.cookielaw.org https://cookie-cdn.cookiepro.com *.crazyegg.com https://*.googletagmanager.com https://*.onetrust.com https://widget.surveymonkey.com https://www.google.com https://www.gstatic.com; "
+    />
+    <meta charset="UTF-8" />
+    <meta name="lwr-revised" content="240.0" />
+    <script type="text/javascript">
+      function launchModal(_ref) {
+        var id = _ref.id,
+          titleLabel = _ref.titleLabel,
+          contentLabel = _ref.contentLabel,
+          buttonLabel = _ref.buttonLabel,
+          callback = _ref.callback;
+        var modalTemplate = '<div id="'
+          .concat(
+            id,
+            '">\n          <section\n          role="alertdialog"\n          tabindex="-1"\n          aria-labelledby="prompt-heading-id"\n          aria-describedby="prompt-message-wrapper"\n          class="slds-modal slds-fade-in-open slds-modal_prompt"\n          aria-modal="true"\n          style="color: rgb(62, 62, 60)"\n          >\n              <div class="slds-modal__container">\n                  <header class="slds-modal__header slds-theme_info slds-theme_alert-texture">\n                      <h2 class="slds-text-heading_medium">'
+          )
+          .concat(
+            titleLabel,
+            '</h2>\n                  </header>\n                  <div class="slds-modal__content slds-p-around_medium">\n                      <p id="prompt-message-id">'
+          )
+          .concat(
+            contentLabel,
+            '</p>\n                  </div>\n                  <footer class="slds-modal__footer slds-theme_default">\n                      <button class="slds-button slds-button_neutral js-button">'
+          )
+          .concat(
+            buttonLabel,
+            '</button>\n                  </footer>\n              </div>\n          </section>\n          <div class="slds-backdrop slds-backdrop_open"></div>\n      </div>'
+          );
+        var div = document.createElement("div");
+        div.innerHTML = modalTemplate;
+        div.querySelector(".js-button").addEventListener("click", callback);
+        if (!document.body) {
+          document.createElement("body");
+        }
+        document.body.appendChild(div.querySelector("#".concat(id)));
+      }
+      window.onload = function () {
+        if (!window.isBrowserSupportedByWebruntime) {
+          var WEBRUNTIME_UNSUPPORTED_BROWSER_MODAL_ID =
+            "webruntime-browser-not-supported-message";
+          launchModal({
+            id: WEBRUNTIME_UNSUPPORTED_BROWSER_MODAL_ID,
+            titleLabel: "Your browser isn't supported",
+            contentLabel:
+              "Your browser doesn\u2019t support some features on this site. For the best experience, update your browser to the latest version, or switch to another browser.",
+            buttonLabel: "Got It",
+            callback: function callback() {
+              var modal = document.querySelector(
+                "#".concat(WEBRUNTIME_UNSUPPORTED_BROWSER_MODAL_ID)
+              );
+              document.body.removeChild(modal);
+            },
+          });
+        }
+      };
+      window.document.addEventListener("client-error", function (error) {
+        if (error.detail.type === "FAILED_TO_LOAD_RESOURCE") {
+          launchModal({
+            id: "webruntime-client-error-failed-to-load-resource",
+            titleLabel: "Oops!",
+            contentLabel: "Something went wrong. Please try refreshing the app",
+            buttonLabel: "Refresh",
+            callback: function callback() {
+              var url = new URL(window.location);
+              url.searchParams.set("lwr.cachebust", new Date().getTime());
+              window.location = url.href;
+            },
+          });
+        }
+      });
+    </script>
+
+    <script type="text/javascript">
+      !(function () {
+        const e = {
+          documentCreateElement: Document.prototype.createElement,
+          elementSetAttribute: Element.prototype.setAttribute,
+          elementAttachShadow: Element.prototype.attachShadow,
+          elementAppendChild: Element.prototype.appendChild,
+          htmlelementAddEventListener: Element.prototype.addEventListener,
+          iframeContentDocumentGet: Object.getOwnPropertyDescriptor(
+            HTMLIFrameElement.prototype,
+            "contentDocument"
+          ).get,
+          iframeContentWindowGet: Object.getOwnPropertyDescriptor(
+            HTMLIFrameElement.prototype,
+            "contentWindow"
+          ).get,
+        };
+        Object.freeze(e),
+          Object.defineProperty(window, "originalDomApis", {
+            writable: !1,
+            value: e,
+          });
+        const t = window.frames;
+        Object.defineProperty(window, "frames", {
+          get: function () {
+            const e = [];
+            for (let n = 0; n < t.length; n++)
+              try {
+                t[n].frameElement.getRootNode().nodeType ===
+                  Node.DOCUMENT_FRAGMENT_NODE || e.push(t[n]);
+              } catch (o) {
+                e.push(t[n]);
+              }
+            return e.length === t.length ? t : e;
+          },
+        });
+      })();
+    </script>
+    <script type="text/javascript">
+      !(function () {
+        "use strict";
+        window.isBrowserSupportedByWebruntime = (function () {
+          const n = "performance" in window && "mark" in window.performance,
+            e = "customElements" in window;
+          return n && e;
+        })();
+      })();
+    </script>
+    <script type="text/javascript">
+      globalThis.lwcRuntimeFlags = {
+        ...globalThis.lwcRuntimeFlags,
+        ENABLE_SLOT_FORWARDING_FIX: true,
+      };
+      globalThis.lwcRuntimeFlags = globalThis.lwcRuntimeFlags || {};
+      globalThis.lwcRuntimeFlags.DISABLE_NATIVE_CUSTOM_ELEMENT_LIFECYCLE = true;
+      globalThis.LWR = globalThis.LWR || {};
+      globalThis.LWR.customInit = (lwr) => {
+        LWR.define("@app/apexApiBasePath", [], function () {
+          return "/ESWAgentAstro1728468759675/webruntime/api";
+        });
+        LWR.define("@app/apiBasePath", [], function () {
+          return "/ESWAgentAstro1728468759675/webruntime/api";
+        });
+        LWR.define("@app/basePath", [], function () {
+          return "/ESWAgentAstro1728468759675";
+        });
+        LWR.define("@app/deployTarget", [], function () {
+          return "CORE";
+        });
+        LWR.define("@app/guestUuidCookieName", [], function () {
+          return null;
+        });
+        LWR.define("@app/isDesignMode", [], function () {
+          return false;
+        });
+        LWR.define("@app/isPreviewMode", [], function () {
+          return false;
+        });
+        LWR.define("@app/routes", [], function () {
+          return [
+            {
+              label: "Error",
+              isPublic: true,
+              viewId: "6c884031-ecde-4a68-8f87-bac2dbc36261",
+              hasVanityURL: false,
+              patternMap: {},
+              id: "9912e3e2-f876-45b2-81a7-ee45257b9d75",
+              path: "/error",
+              view: "error",
+              isRoot: false,
+              isDefault: true,
+              page: { type: "comm__namedPage", attributes: { name: "Error" } },
+            },
+            {
+              label: "News Detail",
+              isPublic: true,
+              viewId: "5f71bc6a-7e41-40db-b9d3-3bd54eb7bb45",
+              hasVanityURL: true,
+              patternMap: { urlAlias: "([^\\/\\s]+)" },
+              id: "aea16345-4318-408c-a0c1-a1104dbe0d66",
+              path: "/news/:urlAlias",
+              view: "newsDetail",
+              isRoot: false,
+              isDefault: false,
+              page: {
+                type: "standard__managedContentPage",
+                attributes: { contentTypeName: "sfdc_cms__news" },
+              },
+            },
+            {
+              label: "Home",
+              isPublic: true,
+              viewId: "3b77f37b-7ef0-44bc-8672-95fe1c63e7d3",
+              hasVanityURL: false,
+              patternMap: {},
+              id: "c2ed1f51-48f6-46d7-aaab-442fb275331b",
+              path: "/",
+              view: "home",
+              isRoot: true,
+              isDefault: false,
+              page: { type: "comm__namedPage", attributes: { name: "Home" } },
+            },
+          ];
+        });
+        LWR.define("@app/templateDevName", [], function () {
+          return "esw-template-frame";
+        });
+        LWR.define("@app/uiBasePath", [], function () {
+          return "/ESWAgentAstro1728468759675";
+        });
+        LWR.define("@app/versionKey", [], function () {
+          return "ea304ff436";
+        });
+        LWR.define("@app/viewToThemeLayoutMap", [], function () {
+          return { newsDetail: "frame", error: "frame", home: "frame" };
+        });
+        LWR.define("@salesforce/i18n/lang", [], function () {
+          return "en-US";
+        });
+        LWR.define("@salesforce/site/Id", [], function () {
+          return "0DMed00000002pqGAA";
+        });
+        LWR.define("@salesforce/webstore/Id", [], function () {
+          return null;
+        });
+        lwr.define("webruntime/dispatcher", [], function () {
+          return function o11yDipatcherInit(dispatcher) {
+            typeof lwr !== "undefined" && lwr.attachDispatcher(dispatcher);
+          };
+        });
+        LWR.define("@salesforce/user/Id", ["@app/user"], function (m) {
+          return (
+            m && typeof m === "object" && "default" in m ? m.default : m
+          )["id"];
+        });
+        LWR.define("@salesforce/user/isGuest", ["@app/user"], function (m) {
+          return (
+            m && typeof m === "object" && "default" in m ? m.default : m
+          )["isGuest"];
+        });
+        lwr.initializeApp();
+        globalThis.process = { env: { NODE_ENV: "dev" } };
+      };
+    </script>
+    <script type="text/javascript">
+      globalThis.LWR = globalThis.LWR || {};
+      Object.assign(globalThis.LWR, {
+        bootstrapModule:
+          "@lwrjs/app-service/communities_app/module/amd/v/0_13_10",
+        autoBoot: false,
+        rootComponents: ["webruntime/app/v/1"],
+        requiredModules: [
+          "lwc/v/7_1_5",
+          "@lwrjs/app-service/communities_app/module/amd/v/0_13_10",
+        ],
+        importMappings: {
+          default:
+            "/ESWAgentAstro1728468759675/webruntime/component/latest/prod/en-US/",
+          imports: {
+            "/webruntime/component/latest/prod/en-US/lwc":
+              "/ESWAgentAstro1728468759675/webruntime/framework/6a3c3d3354/prod/lwr_lwc",
+            "@app/csrfToken":
+              "/ESWAgentAstro1728468759675/webruntime/module/@app/csrfToken",
+            "@app/loginPath":
+              "/ESWAgentAstro1728468759675/webruntime/module/@app/loginPath",
+            "@app/user":
+              "/ESWAgentAstro1728468759675/webruntime/module/@app/user",
+            "@perm/": "/ESWAgentAstro1728468759675/webruntime/perm/",
+            "@salesforce/client/formFactor":
+              "/ESWAgentAstro1728468759675/webruntime/module/@salesforce/client/formFactor",
+            "@salesforce/customPermission/":
+              "/ESWAgentAstro1728468759675/webruntime/perm/custom/",
+            "@salesforce/featureFlag/":
+              "/ESWAgentAstro1728468759675/webruntime/module/@salesforce/featureFlag/",
+            "@salesforce/user/Id":
+              "/ESWAgentAstro1728468759675/webruntime/module/@salesforce/user/Id",
+            "@salesforce/user/isGuest":
+              "/ESWAgentAstro1728468759675/webruntime/module/@salesforce/user/isGuest",
+            "@salesforce/userPermission/":
+              "/ESWAgentAstro1728468759675/webruntime/perm/",
+            "@udd/": "/ESWAgentAstro1728468759675/webruntime/module/@udd/",
+            "@view/error":
+              "/ESWAgentAstro1728468759675/webruntime/view/45f88c0e0e87bae9adb5b850641e09a7/prod/en-US/error_view",
+            "@view/frame":
+              "/ESWAgentAstro1728468759675/webruntime/view/8e44f949c699a824c564068337acbd32/prod/en-US/frame_view",
+            "@view/home":
+              "/ESWAgentAstro1728468759675/webruntime/view/5736ec51deed19a8c73fc3d1912fe26b/prod/en-US/home_view",
+            "@view/newsDetail":
+              "/ESWAgentAstro1728468759675/webruntime/view/88fb33261ec8fd7c899e9d3e4f03b5d7/prod/en-US/newsDetail_view",
+            "force/luvioLwcBindings":
+              "/ESWAgentAstro1728468759675/webruntime/component/f73cfbd9d488458309ccf44ab292030e/prod/en-US/force/luvioLwcBindings_cmp",
+            "force/luvioRuntimeWebruntime":
+              "/ESWAgentAstro1728468759675/webruntime/component/89aed88bb630f96ff5cde51c8f418dfc/prod/en-US/force/luvioRuntimeWebruntime_cmp",
+            "lightning/iconSvgTemplatesAction":
+              "/ESWAgentAstro1728468759675/webruntime/component/511fcd61a806c0af605907b9b001fffd/prod/en-US/lightning/iconSvgTemplatesAction_cmp",
+            "lightning/iconSvgTemplatesActionRtl":
+              "/ESWAgentAstro1728468759675/webruntime/component/1d957e7186f240e97cd0e1416eb511d2/prod/en-US/lightning/iconSvgTemplatesActionRtl_cmp",
+            "lightning/iconSvgTemplatesCustom":
+              "/ESWAgentAstro1728468759675/webruntime/component/5b796e6461c5030ba4e5bbab8696b12c/prod/en-US/lightning/iconSvgTemplatesCustom_cmp",
+            "lightning/iconSvgTemplatesCustomRtl":
+              "/ESWAgentAstro1728468759675/webruntime/component/67d65cfd9c91da365d36a591dfea9fca/prod/en-US/lightning/iconSvgTemplatesCustomRtl_cmp",
+            "lightning/iconSvgTemplatesDoctype":
+              "/ESWAgentAstro1728468759675/webruntime/component/dcea007bd2f350cb663d39565b9a7b58/prod/en-US/lightning/iconSvgTemplatesDoctype_cmp",
+            "lightning/iconSvgTemplatesDoctypeRtl":
+              "/ESWAgentAstro1728468759675/webruntime/component/fbb50de7c535968af91dff1494307c1f/prod/en-US/lightning/iconSvgTemplatesDoctypeRtl_cmp",
+            "lightning/iconSvgTemplatesStandard":
+              "/ESWAgentAstro1728468759675/webruntime/component/27c7802ce8a02ac691c572130e4a7692/prod/en-US/lightning/iconSvgTemplatesStandard_cmp",
+            "lightning/iconSvgTemplatesStandardRtl":
+              "/ESWAgentAstro1728468759675/webruntime/component/0a7276f6e3c1e0b2b679a435e5fc40cf/prod/en-US/lightning/iconSvgTemplatesStandardRtl_cmp",
+            "lightning/iconSvgTemplatesUtility":
+              "/ESWAgentAstro1728468759675/webruntime/component/281dd28500334d94f509534b767624f2/prod/en-US/lightning/iconSvgTemplatesUtility_cmp",
+            "lightning/iconSvgTemplatesUtilityRtl":
+              "/ESWAgentAstro1728468759675/webruntime/component/46cbd13368201b1fa86b08198bd948e6/prod/en-US/lightning/iconSvgTemplatesUtilityRtl_cmp",
+            "mobileruntime/hybridAppManager":
+              "/ESWAgentAstro1728468759675/webruntime/framework/39b4ba9890/prod/lwr_mobile",
+            "o11y/collectors":
+              "/ESWAgentAstro1728468759675/webruntime/component/75a3386fcd3b62a11beb274c29ca0925/prod/en-US/o11y/collectors_cmp",
+            "o11y/simple_collector":
+              "/ESWAgentAstro1728468759675/webruntime/component/8afd643882253eddd321233169c9db43/prod/en-US/o11y/simple_collector_cmp",
+          },
+        },
+      });
+    </script>
+    <script src="/ESWAgentAstro1728468759675/webruntime/framework/f6ea60171e/prod/lwr_loader"></script>
+    <script id="storageSync" type="application/json">
+      {
+        "aura": {
+          "activeFrame": "top",
+          "captureComponentDefinitions": true,
+          "collectAuraCycleData": true,
+          "collectComponentLifeCycleData": true,
+          "collectTransactionData": true,
+          "collectTransactionMetrics": true,
+          "filterActions": false,
+          "increaseMaxXHRs": false,
+          "logToConsole": false,
+          "managePageView": false,
+          "preventActionBoxCarring": false,
+          "showActionsInTimeline": true,
+          "showAuraCyclesInTimeline": false,
+          "showComponentLifeCycleInTimeline": true,
+          "showEventsInTimeline": true,
+          "showIntervalsInTimeline": false,
+          "showLWCComponentLifeCycleInTimeline": false,
+          "showMarksInTimeline": true,
+          "showTimeoutsInTimeline": false,
+          "showTransactionsInTimeine": true,
+          "stopUnloadEvents": false,
+          "timelineMode": "external",
+          "workspaceFont": "9"
+        },
+        "ccrz": {},
+        "default": {},
+        "lwc": {}
+      }
+    </script>
+     
+    <script src="/ESWAgentAstro1728468759675/webruntime/framework/3ae27cd198/prod/lwr_bootstrap"></script>
+    <script src="/ESWAgentAstro1728468759675/webruntime/framework/294fb30cde/prod/lwr_app_bootstrap_hook"></script>
+    <script src="/ESWAgentAstro1728468759675/webruntime/framework/6a3c3d3354/prod/lwr_lwc"></script>
+    <script src="/ESWAgentAstro1728468759675/webruntime/framework/ba22f7bedc/prod/lwr_app"></script>
+    <script type="text/javascript">
+      LWR.define("lwc", ["lwc/v/7_1_5"], function (m) {
+        return m && typeof m === "object" && "default" in m ? m.default : m;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define("@app/authenticationCookieName", [], function () {
+        return "__Secure-has-sid";
+      });
+      LWR.define("@app/extraRouteParams", [], function () {
+        return {};
+      });
+      LWR.define("@app/imageOpt", [], function () {
+        return "none";
+      });
+      LWR.define("@app/isMobileAppMode", [], function () {
+        return false;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/apexApiBasePath/v/1",
+        ["@app/apexApiBasePath"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define("@app/apiBasePath/v/1", ["@app/apiBasePath"], function (m) {
+        return m && typeof m === "object" && "default" in m ? m.default : m;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/authenticationCookieName/v/1",
+        ["@app/authenticationCookieName"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define("@app/basePath/v/1", ["@app/basePath"], function (m) {
+        return m && typeof m === "object" && "default" in m ? m.default : m;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define("@app/csrfToken/v/1", ["@app/csrfToken"], function (m) {
+        return m && typeof m === "object" && "default" in m ? m.default : m;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define("@app/deployTarget/v/1", ["@app/deployTarget"], function (m) {
+        return m && typeof m === "object" && "default" in m ? m.default : m;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/extraRouteParams/v/1",
+        ["@app/extraRouteParams"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/guestUuidCookieName/v/1",
+        ["@app/guestUuidCookieName"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define("@app/imageOpt/v/1", ["@app/imageOpt"], function (m) {
+        return m && typeof m === "object" && "default" in m ? m.default : m;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define("@app/isDesignMode/v/1", ["@app/isDesignMode"], function (m) {
+        return m && typeof m === "object" && "default" in m ? m.default : m;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/isMobileAppMode/v/1",
+        ["@app/isMobileAppMode"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/isPreviewMode/v/1",
+        ["@app/isPreviewMode"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/o11yApiEndpoint/v/1",
+        ["@app/o11yApiEndpoint"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/o11yConfiguration/v/1",
+        ["@app/o11yConfiguration"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/o11yFalconEnabled/v/1",
+        ["@app/o11yFalconEnabled"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/o11yGuestToken/v/1",
+        ["@app/o11yGuestToken"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/o11ySamplingRate/v/1",
+        ["@app/o11ySamplingRate"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define("@app/routes/v/1", ["@app/routes"], function (m) {
+        return m && typeof m === "object" && "default" in m ? m.default : m;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/templateDevName/v/1",
+        ["@app/templateDevName"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define("@app/uiBasePath/v/1", ["@app/uiBasePath"], function (m) {
+        return m && typeof m === "object" && "default" in m ? m.default : m;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define("@app/user/v/1", ["@app/user"], function (m) {
+        return m && typeof m === "object" && "default" in m ? m.default : m;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define("@app/versionKey/v/1", ["@app/versionKey"], function (m) {
+        return m && typeof m === "object" && "default" in m ? m.default : m;
+      });
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@app/viewToThemeLayoutMap/v/1",
+        ["@app/viewToThemeLayoutMap"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@salesforce/i18n/lang/v/1",
+        ["@salesforce/i18n/lang"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@salesforce/site/Id/v/1",
+        ["@salesforce/site/Id"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "@salesforce/webstore/Id/v/1",
+        ["@salesforce/webstore/Id"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script type="text/javascript">
+      LWR.define(
+        "webruntime/dispatcher/v/1",
+        ["webruntime/dispatcher"],
+        function (m) {
+          return m && typeof m === "object" && "default" in m ? m.default : m;
+        }
+      );
+    </script>
+    <script src="/ESWAgentAstro1728468759675/webruntime/view/5736ec51deed19a8c73fc3d1912fe26b/prod/en-US/home_view"></script>
+    <script src="/ESWAgentAstro1728468759675/webruntime/component/f73cfbd9d488458309ccf44ab292030e/prod/en-US/force/luvioLwcBindings_cmp"></script>
+    <script src="/ESWAgentAstro1728468759675/webruntime/component/89aed88bb630f96ff5cde51c8f418dfc/prod/en-US/force/luvioRuntimeWebruntime_cmp"></script>
+    <script src="/ESWAgentAstro1728468759675/webruntime/view/8e44f949c699a824c564068337acbd32/prod/en-US/frame_view"></script>
+    <style type="text/css" id="webruntime-branding">
+      :root {
+        --dxp-g-success: #4bca81;
+        --dxp-g-brand: #005fb2;
+        --dxp-s-text-heading-medium-letter-spacing: 0em;
+        --dxp-s-text-heading-small-text-decoration: none;
+        --dxp-s-dropdown-text-color: var(--dxp-g-root-contrast);
+        --dxp-s-text-heading-extra-large-line-height: 1.25;
+        --dxp-s-button-large-font-size: 1.25rem;
+        --dxp-g-warning-contrast-3: #ffffff;
+        --dxp-s-button-small-radius-border: 4px;
+        --dxp-s-body-font-size: 1rem;
+        --dxp-s-dropdown-color-background: var(--dxp-g-root);
+        --dxp-s-body-small-text-decoration: none;
+        --dxp-s-text-heading-large-line-height: 1.25;
+        --dxp-g-neutral-contrast-3: #ffffff;
+        --dxp-s-button-color-hover: var(--dxp-s-button-color-1);
+        --dxp-s-text-heading-medium-text-transform: none;
+        --dxp-g-neutral-contrast-2: #000000;
+        --dxp-g-neutral-contrast-1: #000000;
+        --dxp-s-button-font-size: 1rem;
+        --dxp-s-button-letter-spacing: 0em;
+        --dxp-s-button-color-focus-contrast: var(--dxp-g-brand-contrast-1);
+        --dxp-g-warning-contrast-2: #000000;
+        --dxp-g-warning-contrast-1: #000000;
+        --dxp-s-link-text-color-1: var(--dxp-g-brand-1);
+        --dxp-g-info: #16325c;
+        --dxp-g-root: #ffffff;
+        --dxp-g-root-contrast-1: #000000;
+        --dxp-g-root-contrast: #1a1b1e;
+        --dxp-g-root-contrast-2: #000000;
+        --dxp-g-root-contrast-3: #000000;
+        --dxp-s-header-content-max-width: 1800px;
+        --dxp-s-section-columns-max-width: 1800px;
+        --dxp-s-button-text-transform: none;
+        --dxp-s-body-line-height: 1.5;
+        --dxp-s-body-text-decoration: none;
+        --dxp-s-body-text-transform: none;
+        --dxp-s-text-heading-medium-font-style: normal;
+        --dxp-g-warning-2: #e27d00;
+        --dxp-g-warning-3: #673900;
+        --dxp-s-form-element-color-border: var(--dxp-g-neutral-1);
+        --dxp-g-warning-1: #ffa534;
+        --dxp-s-header-content-max-width-mobile: none;
+        --dxp-s-text-heading-large-letter-spacing: 0em;
+        --dxp-s-body-font-style: normal;
+        --dxp-s-body-letter-spacing: 0em;
+        --dxp-g-warning-contrast: #000000;
+        --dxp-s-body-small-font-style: normal;
+        --dxp-s-text-heading-small-font-style: normal;
+        --dxp-s-text-heading-medium-line-height: 1.25;
+        --dxp-s-column-spacer-size: 1rem;
+        --dxp-s-text-heading-extra-large-letter-spacing: 0em;
+        --dxp-s-text-heading-large-text-transform: none;
+        --dxp-s-text-heading-large-font-size: 1.75rem;
+        --dxp-s-text-heading-small-color: var(--dxp-g-root-contrast);
+        --dxp-s-section-content-spacing-block-start: 1rem;
+        --dxp-s-html-font-size-mobile: 1rem;
+        --dxp-s-body-small-font-weight: 400;
+        --dxp-s-button-font-family: "Salesforce Sans";
+        --dxp-s-form-element-color-background: var(--dxp-g-root);
+        --dxp-g-offline-3: #000000;
+        --dxp-g-offline-2: #070707;
+        --dxp-g-offline-1: #303030;
+        --dxp-s-button-font-weight: 400;
+        --dxp-s-body-font-weight: 400;
+        --dxp-s-body-small-line-height: 1.25;
+        --dxp-g-offline: #444444;
+        --dxp-s-button-small-font-size: 0.75rem;
+        --dxp-s-text-heading-extra-large-text-decoration: none;
+        --dxp-s-button-radius-border: 4px;
+        --dxp-g-success-contrast: #000000;
+        --dxp-s-text-heading-small-font-size: 1.125rem;
+        --dxp-s-button-font-style: normal;
+        --dxp-s-body-small-text-transform: none;
+        --dxp-g-brand-contrast-1: #ffffff;
+        --dxp-s-component-wrapper-spacer-size-mobile: 1.5rem;
+        --dxp-s-text-heading-small-line-height: 1.25;
+        --dxp-s-section-content-spacing-block-end: 1rem;
+        --dxp-g-brand-contrast-3: #ffffff;
+        --dxp-s-button-color-hover-contrast: var(--dxp-g-brand-contrast-1);
+        --dxp-g-brand-contrast-2: #ffffff;
+        --dxp-g-brand-1: #004989;
+        --dxp-g-brand-2: #001e38;
+        --dxp-g-warning: #ffb75d;
+        --dxp-g-success-3: #07190f;
+        --dxp-g-brand-3: #000000;
+        --dxp-g-success-2: #237747;
+        --dxp-g-success-1: #36b66c;
+        --dxp-s-link-text-color-hover: var(--dxp-s-link-text-color-1);
+        --dxp-s-text-heading-small-font-family: "Salesforce Sans";
+        --dxp-s-column-spacer-size-mobile: 0.75rem;
+        --dxp-g-offline-contrast-3: #ffffff;
+        --dxp-s-text-heading-large-font-style: normal;
+        --dxp-g-offline-contrast-2: #ffffff;
+        --dxp-g-info-contrast-3: #ffffff;
+        --dxp-s-body-small-font-size: 0.75rem;
+        --dxp-g-destructive-1: #a2302b;
+        --dxp-s-button-color-active: var(--dxp-s-button-color-1);
+        --dxp-s-text-heading-small-text-transform: none;
+        --dxp-g-offline-contrast-1: #ffffff;
+        --dxp-s-section-content-spacing-block-end-mobile: 0.75rem;
+        --dxp-g-info-contrast: #ffffff;
+        --dxp-s-html-font-size: 16px;
+        --dxp-s-body-font-family: "Salesforce Sans";
+        --dxp-s-link-text-color: var(--dxp-g-brand);
+        --dxp-s-link-text-decoration-focus: underline;
+        --dxp-g-destructive-2: #611d1a;
+        --dxp-g-neutral: #ecebea;
+        --dxp-g-destructive-3: #010000;
+        --dxp-g-info-contrast-1: #ffffff;
+        --dxp-s-dropdown-text-color-hover: var(--dxp-g-neutral-contrast);
+        --dxp-g-info-contrast-2: #ffffff;
+        --dxp-s-text-heading-extra-large-font-family: "Salesforce Sans";
+        --dxp-s-form-element-label-color: var(--dxp-g-root-contrast);
+        --dxp-s-text-heading-large-font-family: "Salesforce Sans";
+        --dxp-s-text-heading-extra-large-font-weight: 300;
+        --dxp-s-text-heading-medium-text-decoration: none;
+        --dxp-s-text-heading-extra-large-font-style: normal;
+        --dxp-s-button-large-padding: 1.25rem;
+        --dxp-s-text-heading-small-font-weight: 300;
+        --dxp-s-text-heading-large-font-weight: 300;
+        --dxp-g-info-2: #000000;
+        --dxp-s-form-element-text-color: var(--dxp-g-root-contrast);
+        --dxp-g-info-3: #000000;
+        --dxp-g-destructive-contrast: #ffffff;
+        --dxp-s-text-heading-medium-font-weight: 300;
+        --dxp-g-info-1: #0e203b;
+        --dxp-g-destructive-contrast-1: #ffffff;
+        --dxp-g-neutral-contrast: #000000;
+        --dxp-s-dropdown-color-background-hover: var(--dxp-g-neutral);
+        --dxp-g-destructive-contrast-2: #ffffff;
+        --dxp-g-root-1: #ebebeb;
+        --dxp-g-destructive-contrast-3: #ffffff;
+        --dxp-g-root-2: #c2c2c2;
+        --dxp-g-root-3: #858585;
+        --dxp-s-button-color-1: var(--dxp-g-brand-1);
+        --dxp-s-body-text-color: var(--dxp-g-root-contrast);
+        --dxp-s-footer-content-max-width-mobile: none;
+        --dxp-g-brand-contrast: #ffffff;
+        --dxp-s-button-color: var(--dxp-g-brand);
+        --dxp-s-form-element-width-border: 1px;
+        --dxp-g-neutral-3: #76716b;
+        --dxp-s-body-small-text-color: var(--dxp-g-root-contrast);
+        --dxp-g-neutral-2: #b2aeaa;
+        --dxp-s-text-heading-extra-large-color: var(--dxp-g-root-contrast);
+        --dxp-g-neutral-1: #d9d7d5;
+        --dxp-s-button-color-active-contrast: var(--dxp-g-brand-contrast-1);
+        --dxp-g-success-contrast-3: #ffffff;
+        --dxp-g-success-contrast-2: #ffffff;
+        --dxp-s-button-line-height: 2;
+        --dxp-s-text-heading-extra-large-font-size: 2.5rem;
+        --dxp-s-button-large-radius-border: 4px;
+        --dxp-g-success-contrast-1: #000000;
+        --dxp-s-form-element-radius-border: 4px;
+        --dxp-s-component-wrapper-spacer-size: 1.5rem;
+        --dxp-s-link-text-decoration: none;
+        --dxp-s-text-heading-medium-font-size: 1.25rem;
+        --dxp-g-destructive: #c23934;
+        --dxp-s-dropdown-color-border: var(--dxp-g-neutral);
+        --dxp-s-button-color-contrast: var(--dxp-g-brand-contrast);
+        --dxp-s-section-columns-max-width-mobile: none;
+        --dxp-g-offline-contrast: #ffffff;
+        --dxp-s-text-heading-medium-color: var(--dxp-g-root-contrast);
+        --dxp-s-button-small-padding: 0.75rem;
+        --dxp-s-text-heading-large-color: var(--dxp-g-root-contrast);
+        --dxp-s-text-heading-large-text-decoration: none;
+        --dxp-s-link-text-decoration-hover: underline;
+        --dxp-s-button-color-focus: var(--dxp-s-button-color-1);
+        --dxp-s-button-padding: 1rem;
+        --dxp-s-text-heading-medium-font-family: "Salesforce Sans";
+        --dxp-s-footer-content-max-width: 1800px;
+        --dxp-s-body-small-font-family: "Salesforce Sans";
+        --dxp-s-text-heading-small-letter-spacing: 0em;
+        --dxp-s-body-small-letter-spacing: 0em;
+        --dxp-s-section-content-spacing-block-start-mobile: 0.75rem;
+        --dxp-s-text-heading-extra-large-text-transform: none;
+        --dxp-g-success-h: 146;
+        --dxp-g-success-s: 55%;
+        --dxp-g-success-l: 54%;
+        --dxp-g-success-a: 1;
+        --dxp-g-brand-h: 208;
+        --dxp-g-brand-s: 100%;
+        --dxp-g-brand-l: 35%;
+        --dxp-g-brand-a: 1;
+        --dxp-g-info-h: 216;
+        --dxp-g-info-s: 61%;
+        --dxp-g-info-l: 22%;
+        --dxp-g-info-a: 1;
+        --dxp-g-root-h: 0;
+        --dxp-g-root-s: 0%;
+        --dxp-g-root-l: 100%;
+        --dxp-g-root-a: 1;
+        --dxp-g-root-contrast-h: 225;
+        --dxp-g-root-contrast-s: 7%;
+        --dxp-g-root-contrast-l: 11%;
+        --dxp-g-root-contrast-a: 1;
+        --dxp-g-warning-contrast-h: 0;
+        --dxp-g-warning-contrast-s: 0%;
+        --dxp-g-warning-contrast-l: 0%;
+        --dxp-g-warning-contrast-a: 1;
+        --dxp-g-offline-h: 0;
+        --dxp-g-offline-s: 0%;
+        --dxp-g-offline-l: 27%;
+        --dxp-g-offline-a: 1;
+        --dxp-g-success-contrast-h: 0;
+        --dxp-g-success-contrast-s: 0%;
+        --dxp-g-success-contrast-l: 0%;
+        --dxp-g-success-contrast-a: 1;
+        --dxp-g-warning-h: 33;
+        --dxp-g-warning-s: 100%;
+        --dxp-g-warning-l: 68%;
+        --dxp-g-warning-a: 1;
+        --dxp-g-info-contrast-h: 0;
+        --dxp-g-info-contrast-s: 0%;
+        --dxp-g-info-contrast-l: 100%;
+        --dxp-g-info-contrast-a: 1;
+        --dxp-g-neutral-h: 30;
+        --dxp-g-neutral-s: 5%;
+        --dxp-g-neutral-l: 92%;
+        --dxp-g-neutral-a: 1;
+        --dxp-g-destructive-contrast-h: 0;
+        --dxp-g-destructive-contrast-s: 0%;
+        --dxp-g-destructive-contrast-l: 100%;
+        --dxp-g-destructive-contrast-a: 1;
+        --dxp-g-neutral-contrast-h: 0;
+        --dxp-g-neutral-contrast-s: 0%;
+        --dxp-g-neutral-contrast-l: 0%;
+        --dxp-g-neutral-contrast-a: 1;
+        --dxp-g-brand-contrast-h: 0;
+        --dxp-g-brand-contrast-s: 0%;
+        --dxp-g-brand-contrast-l: 100%;
+        --dxp-g-brand-contrast-a: 1;
+        --dxp-g-destructive-h: 2;
+        --dxp-g-destructive-s: 58%;
+        --dxp-g-destructive-l: 48%;
+        --dxp-g-destructive-a: 1;
+        --dxp-g-offline-contrast-h: 0;
+        --dxp-g-offline-contrast-s: 0%;
+        --dxp-g-offline-contrast-l: 100%;
+        --dxp-g-offline-contrast-a: 1;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="/ESWAgentAstro1728468759675/assets/styles/embedded-messaging-styling.min.css?ea304ff436"
+    />
+
+    <!-- webruntime-branding-shared stylesheets -->
+    <link
+      rel="stylesheet"
+      href="/ESWAgentAstro1728468759675/assets/styles/salesforce-lightning-design-system.min.css?ea304ff436"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/ESWAgentAstro1728468759675/sfsites/c/resource/Agentforce?ea304ff436"
+    />
+
+    <!-- webruntime-branding-shared stylesheets -->
+    <title>Home</title>
+    <style type="text/css">
+      [data-f6-region].f6-highlight {
+        position: relative;
+      }
+      [data-f6-region].f6-highlight::after {
+        width: 100%;
+        height: 100%;
+        content: "";
+        outline: rgb(94, 158, 214) 3px solid;
+        outline-offset: -3px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      span.router-title {
+        position: absolute;
+        margin: -1px;
+        border: 0;
+        padding: 0;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        text-transform: none;
+        white-space: nowrap;
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      [lwc-64un2jbuqj8-host] {
+        font-family: var(--font, Arial, sans-serif), "Twemoji Mozilla",
+          "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+          "Android Emoji", "Noto Color Emoji", "EmojiOne Color";
+        font-size: var(--baseFontSize, medium);
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+        outline: none;
+        position: relative;
+      }
+      .containerArea.minimized[lwc-64un2jbuqj8] {
+        display: none;
+      }
+      .notificationArea.maximized[lwc-64un2jbuqj8] {
+        display: none;
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      :host {
+        display: none;
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      [lwc-1j18phjg883-host] {
+        display: none;
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      .accessibleText[lwc-2vma9s18e7s] {
+        position: absolute;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+        clip: rect(1px, 1px, 1px, 1px);
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      .minimizedNotification[lwc-2tu55qmbbaf] {
+        display: block;
+        position: fixed;
+        pointer-events: all;
+        text-decoration: none;
+        overflow: visible;
+        cursor: pointer;
+        bottom: 77px;
+        right: 3px;
+        min-width: 200px;
+        max-width: 275px;
+        min-height: 120px;
+        height: auto;
+        padding: 6px 6px;
+        color: var(--slds-g-color-neutral-base-10, #000000);
+        background: var(--slds-g-color-neutral-base-100, #ffffff);
+        background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+        border: 1px solid var(--slds-g-color-neutral-base-90, #dedede);
+        border-radius: 3px;
+        box-shadow: 2px 2px 5px 0
+          var(--slds-g-color-palette-neutral-20, rgba(45, 45, 45, 0.5));
+        outline: 0;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .minimizedButton[lwc-2tu55qmbbaf]::-moz-focus-inner,
+      .minimizedNotification[lwc-2tu55qmbbaf]::-moz-focus-inner,
+      .dismissButton[lwc-2tu55qmbbaf]::-moz-focus-inner {
+        border: 0;
+        outline: 0;
+        outline-style: none;
+        -moz-outline-style: none;
+      }
+      .dismissButton.hide[lwc-2tu55qmbbaf],
+      .minimizedNotification.hide[lwc-2tu55qmbbaf] {
+        display: none;
+      }
+      .minimizedTextWrapper[lwc-2tu55qmbbaf] {
+        width: 165px;
+        position: relative;
+        margin: 12px;
+        display: flex;
+        align-items: flex-start;
+        align-self: flex-start;
+        flex: 1 1 auto;
+        flex-wrap: wrap;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .minimizedTextWrapper[lwc-2tu55qmbbaf] > .minimizedText[lwc-2tu55qmbbaf] {
+        overflow: hidden;
+        white-space: normal;
+        text-overflow: ellipsis;
+        text-align: left;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+      .dismissButton[lwc-2tu55qmbbaf] {
+        color: var(--slds-g-color-brand-base-30, #005290);
+        background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        font-weight: 500;
+        position: fixed;
+        bottom: 86px;
+        right: 15px;
+        width: 70px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-radius: 3px;
+      }
+      [dir="rtl"] .dismissButton[lwc-2tu55qmbbaf] {
+        left: 15px;
+        right: 0;
+      }
+      .dismissButton:focus[lwc-2tu55qmbbaf] {
+        outline: 0;
+        box-shadow: 0 0 3px var(--secondaryColor, #005290);
+      }
+      .dismissButtonText[lwc-2tu55qmbbaf] {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .minimizedButtonWrapper[lwc-2tu55qmbbaf] {
+        display: block;
+        position: fixed;
+        background: transparent;
+        overflow: visible;
+        font-family: sans-serif;
+        top: 0;
+        left: 0;
+      }
+      .minimizedButtonWrapper[lwc-2tu55qmbbaf]
+        .minimizedButton[lwc-2tu55qmbbaf] {
+        background-color: var(--headerColor, var(--lwc-brandContrast, #1a1b1e));
+        color: var(--slds-g-color-neutral-base-100, #ffffff);
+        outline: 0;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        overflow: hidden;
+        pointer-events: all;
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: 2px 2px 5px 0
+          var(--slds-g-color-palette-neutral-20, rgba(45, 45, 45, 0.5));
+        position: fixed;
+        bottom: 3px;
+        right: 3px;
+        width: 56px;
+        height: 56px;
+      }
+      [dir="rtl"]
+        .minimizedButtonWrapper[lwc-2tu55qmbbaf]
+        .minimizedButton[lwc-2tu55qmbbaf] {
+        right: 0;
+        left: 3px;
+      }
+      .minimizedButton:focus[lwc-2tu55qmbbaf] {
+        box-shadow: 0 0 3px 3px var(--secondaryColor, #005290);
+        outline: 0;
+      }
+      .minimizedButton[lwc-2tu55qmbbaf]
+        div[class="minimizedButtonIconContainer"][lwc-2tu55qmbbaf] {
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 100%;
+        max-height: 100%;
+        position: relative;
+      }
+      [dir="rtl"]
+        .minimizedButton[lwc-2tu55qmbbaf]
+        div[class="minimizedButtonIconContainer"][lwc-2tu55qmbbaf] {
+        margin-right: 1.6rem;
+        transform: scaleX(-1);
+        left: 25px;
+      }
+      .minimizedButton[lwc-2tu55qmbbaf]
+        div[class="minimizedButtonIconContainer"][lwc-2tu55qmbbaf]
+        > svg.minimizedButtonIconChat[lwc-2tu55qmbbaf] {
+        width: 100%;
+        height: 100%;
+        max-height: 30px;
+        max-width: 30px;
+        fill: var(--slds-g-color-neutral-base-100, #ffffff);
+        transform: scale(1) translate(13px, 1px);
+        overflow: visible;
+      }
+      .minimizedButton[lwc-2tu55qmbbaf]
+        div[class="minimizedButtonIconContainer"][lwc-2tu55qmbbaf]
+        > span.unseenMessageCountText[lwc-2tu55qmbbaf] {
+        color: var(--headerColor, var(--lwc-brandContrast, #1a1b1e));
+        position: absolute;
+        font-weight: bold;
+        left: 80%;
+      }
+      [dir="rtl"]
+        .minimizedButton[lwc-2tu55qmbbaf]
+        div[class="minimizedButtonIconContainer"][lwc-2tu55qmbbaf]
+        > span.unseenMessageCountText[lwc-2tu55qmbbaf] {
+        transform: scaleX(-1);
+      }
+      .minimizedButton[lwc-2tu55qmbbaf]
+        div[class="minimizedButtonIconContainer"][lwc-2tu55qmbbaf]
+        > span.nine-plus[lwc-2tu55qmbbaf] {
+        left: 65%;
+      }
+      .spinning[lwc-2tu55qmbbaf] {
+        animation: spin-lwc-2tu55qmbbaf 2.5s infinite linear;
+      }
+      @keyframes spin-lwc-2tu55qmbbaf {
+        from {
+          transform: scale(1) translate(13px, 1px) rotate(0deg);
+        }
+        to {
+          transform: scale(1) translate(13px, 1px) rotate(360deg);
+        }
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      [lwc-67djd267s8u-host] {
+        width: 100%;
+        position: relative;
+        background: var(--slds-g-color-neutral-base-100, #ffffff);
+        overflow: hidden;
+        justify-content: space-between;
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+      }
+      .conversationState.webviewOverlay[lwc-67djd267s8u] {
+        display: none;
+      }
+      .conversationState.sessionPrechatForm[lwc-67djd267s8u] {
+        display: none;
+      }
+      .conversationState.secureForm[lwc-67djd267s8u] {
+        display: none;
+      }
+      embeddedmessaging-secure-form[lwc-67djd267s8u] {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: calc(100vh - 50px);
+        width: 100%;
+        position: absolute;
+        background: var(--slds-g-color-neutral-base-100, #ffffff);
+        overflow: auto;
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      [lwc-2itfp6ba1pc-host] {
+        height: inherit;
+        width: inherit;
+        position: relative;
+        align-self: stretch;
+        flex: 1 1 auto;
+        overflow: hidden;
+      }
+      [lwc-2itfp6ba1pc-host]:focus {
+        border: 1px solid var(--secondaryColor, #005290);
+        outline: none;
+      }
+      li[lwc-2itfp6ba1pc] > div.embedded-messaging-bookend[lwc-2itfp6ba1pc] {
+        border: none;
+        color: var(--contrastPrimaryColor, #333333);
+        text-align: center;
+        font-size: 0.75em;
+      }
+      section.slds-chat[lwc-2itfp6ba1pc] {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+      }
+      ul.slds-chat-list[lwc-2itfp6ba1pc] {
+        flex: 0 1 auto;
+        width: 100%;
+        overflow-y: auto;
+        padding: 5px 14px 0 14px;
+      }
+      ul[lwc-2itfp6ba1pc]
+        > div.chat-typing-indicator[lwc-2itfp6ba1pc]
+        > embeddedmessaging-chat-typing-indicator[lwc-2itfp6ba1pc] {
+        position: relative;
+        top: 5px;
+        display: flex;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        pointer-events: auto;
+        background-color: var(--contrastPrimaryColor, #333333);
+        margin-bottom: 5px;
+      }
+      ul[lwc-2itfp6ba1pc]
+        > div.chat-typing-indicator[lwc-2itfp6ba1pc]
+        > span.typing-indicator-text[lwc-2itfp6ba1pc] {
+        color: var(--contrastPrimaryColor, #333333);
+        font-size: 0.625em;
+      }
+      embeddedmessaging-spinner[lwc-2itfp6ba1pc] {
+        position: absolute;
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      [lwc-64sju2rf0mv-host] {
+        height: inherit;
+        width: 100%;
+        --sds-c-textarea-color-border: var(
+          --slds-g-color-neutral-base-60,
+          #939393
+        );
+        --sds-c-pill-color-border: var(--slds-g-color-neutral-base-60, #939393);
+        padding: 0 2px 0 2px;
+      }
+      textarea[lwc-64sju2rf0mv] {
+        font-size: 0.875em;
+      }
+      .embeddedMessagingInputTextAreaWrapper[lwc-64sju2rf0mv] {
+        width: inherit;
+        height: inherit;
+        background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+        border: none;
+        box-shadow: none;
+        flex-grow: 1;
+      }
+      .embeddedMessagingInputFooterTextArea[lwc-64sju2rf0mv] {
+        width: 100%;
+        resize: none;
+        padding-right: 2.5rem;
+        color: var(--contrastPrimaryColor, #333333);
+        overflow-x: hidden;
+      }
+      [dir="rtl"] .embeddedMessagingInputFooterTextArea[lwc-64sju2rf0mv] {
+        padding-left: 2.5rem;
+        padding-right: 0.5rem;
+      }
+      .embeddedMessagingInputFooterTextArea:focus[lwc-64sju2rf0mv] {
+        box-shadow: none;
+        border: 1px solid var(--secondaryColor, #005290);
+      }
+      .embeddedMessagingSendButtonWrapper[lwc-64sju2rf0mv] {
+        max-width: 100%;
+        right: 0;
+        bottom: 1.25rem;
+      }
+      [dir="rtl"] .embeddedMessagingSendButtonWrapper[lwc-64sju2rf0mv] {
+        left: 1.5rem;
+        right: inherit;
+        transform: scaleX(-1);
+      }
+      .embeddedMessagingSendButtonWrapper:hover[lwc-64sju2rf0mv] {
+        opacity: 0.6;
+        outline: 0;
+        transition-timing-function: ease-in-out;
+        transition: all 0.2s;
+      }
+      .embeddedMessagingSendButton[lwc-64sju2rf0mv] {
+        padding: 8px 0;
+      }
+      .fileAttachmentButtonWrapper[lwc-64sju2rf0mv],
+      .emojiButtonWrapper[lwc-64sju2rf0mv] {
+        height: 100%;
+        padding: 1rem 0 1rem 0.75rem;
+        display: flex;
+        align-items: center;
+        flex: 0 1 auto;
+        margin-bottom: 0;
+      }
+      [dir="rtl"] .fileAttachmentButtonWrapper[lwc-64sju2rf0mv],
+      [dir="rtl"] .emojiButtonWrapper[lwc-64sju2rf0mv] {
+        padding: 1rem 0.75rem 1rem 0;
+      }
+      .fileAttachmentButtonWrapper:hover[lwc-64sju2rf0mv],
+      .emojiButtonWrapper:hover[lwc-64sju2rf0mv] {
+        outline: 0;
+        transition-timing-function: ease-in-out;
+        transition: all 0.2s;
+      }
+      .attachmentsContainer[lwc-64sju2rf0mv] {
+        position: relative;
+        flex-grow: 1;
+        border: none;
+        padding-left: 1rem;
+        background: transparent;
+      }
+      .attachmentPill[lwc-64sju2rf0mv] {
+        max-width: 150px;
+      }
+      .removeAttachmentButton[lwc-64sju2rf0mv] {
+        background: transparent;
+        pointer-events: all;
+        cursor: pointer;
+      }
+      .attachmentErrorsContainer[lwc-64sju2rf0mv] {
+        height: inherit;
+        width: 40px;
+        transform: scale(0.65) translateY(3rem);
+      }
+      .attachmentErrorsContainer[lwc-64sju2rf0mv] {
+        -webkit-animation: attachment-error-toast-fade-out-lwc-64sju2rf0mv 5s
+          linear forwards;
+        animation: attachment-error-toast-fade-out-lwc-64sju2rf0mv 5s linear
+          forwards;
+      }
+      @keyframes attachment-error-toast-fade-out-lwc-64sju2rf0mv {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      @-webkit-keyframes attachment-error-toast-fade-out {
+        from[lwc-64sju2rf0mv] {
+          opacity: 1;
+        }
+        to[lwc-64sju2rf0mv] {
+          opacity: 0;
+        }
+      }
+      .attachmentErrorsToast[lwc-64sju2rf0mv] {
+        background-color: white;
+        border: 2px solid red;
+      }
+      .attachmentErrorsTextContainer[lwc-64sju2rf0mv] {
+        color: red;
+      }
+      .attachmentErrorsText[lwc-64sju2rf0mv] {
+        font-weight: bold;
+      }
+      .attachmentErrorsIconContainer[lwc-64sju2rf0mv] {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .errorMessageTextItem[lwc-64sju2rf0mv] {
+        margin-left: 0.75rem;
+      }
+      .errorMessageTextItemContainer[lwc-64sju2rf0mv] {
+        padding-left: 10px;
+      }
+      .attachmentsDiv[lwc-64sju2rf0mv] {
+        z-index: 999;
+      }
+      .footerItemsContainer[lwc-64sju2rf0mv] {
+        width: inherit;
+        display: flex;
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      [lwc-2eenglaejop-host] {
+        --slds-c-toast-sizing-min-width: 100vw;
+        --slds-c-toast-radius-border: 0;
+      }
+      [dir="ltr"] [lwc-2eenglaejop-host] {
+        --slds-c-toast-spacing-inline-start: 1rem;
+      }
+      [dir="rtl"] [lwc-2eenglaejop-host] {
+        --slds-c-toast-spacing-inline-start: 3rem;
+        --slds-c-toast-spacing-inline-end: 1rem;
+      }
+      .slds-notify_container[lwc-2eenglaejop] {
+        z-index: 99;
+      }
+      .notificationText[lwc-2eenglaejop] {
+        font-size: 0.8rem;
+        line-height: 1.25;
+      }
+      .slds-notify--toast[lwc-2eenglaejop],
+      .slds-notify_toast[lwc-2eenglaejop] {
+        margin: 0;
+      }
+      .iconContainer[lwc-2eenglaejop] {
+        margin: 0 0.75rem 0 0.75rem;
+      }
+      .closeButton[lwc-2eenglaejop] {
+        border: none;
+        background-color: inherit;
+        text-decoration: underline;
+        font-size: 0.8rem;
+        position: fixed;
+      }
+      [dir="ltr"] .closeButton[lwc-2eenglaejop] {
+        right: 1rem;
+      }
+      [dir="rtl"] .closeButton[lwc-2eenglaejop] {
+        left: 1rem;
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      [lwc-c5th8h1hm8-host] {
+        flex: 0 1 auto;
+        height: 50px;
+        min-height: 50px;
+        color: var(
+          --headerTextColor,
+          var(--slds-g-color-neutral-base-100, #ffffff)
+        );
+        background-color: var(--headerColor, var(--lwc-brandContrast, #1a1b1e));
+      }
+      .chatHeader[lwc-c5th8h1hm8],
+      .headerAnnouncement[lwc-c5th8h1hm8] {
+        width: 100%;
+        max-width: 100%;
+        background-color: inherit;
+        transition: background-color 1s ease;
+      }
+      .chatHeader[lwc-c5th8h1hm8] {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        position: relative;
+        height: 100%;
+        padding-left: 0.55rem;
+        padding-right: 0.55rem;
+      }
+      .headerAnnouncement[lwc-c5th8h1hm8] {
+        z-index: 6;
+        position: absolute;
+        right: 0;
+        font-size: 0.75em;
+        height: fit-content;
+        text-align: center;
+      }
+      img[lwc-c5th8h1hm8] {
+        margin-left: 10px;
+        max-height: 36px;
+        max-width: 36px;
+      }
+      [dir="rtl"] img[lwc-c5th8h1hm8] {
+        margin-right: 10px;
+        margin-left: 0;
+      }
+      h2[lwc-c5th8h1hm8] {
+        margin: 0.1rem 0.55rem 0 0.55rem;
+        align-self: center;
+        flex-grow: 1;
+        text-align: left;
+        vertical-align: middle;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: normal;
+        letter-spacing: 0.025em;
+        font-size: var(--baseFontSize, medium);
+        color: var(
+          --headerTextColor,
+          var(--slds-g-color-neutral-base-100, #ffffff)
+        );
+      }
+      [dir="rtl"] h2[lwc-c5th8h1hm8] {
+        text-align: right;
+      }
+      .headerButton[lwc-c5th8h1hm8] {
+        height: 32px;
+        min-height: 32px;
+        width: 32px;
+        min-width: 32px;
+        cursor: default;
+      }
+      .headerButton:focus[lwc-c5th8h1hm8] {
+        box-shadow: 0 0 3px var(--secondaryColor, #005290);
+        outline: 0;
+      }
+      .headerButton:hover[lwc-c5th8h1hm8]:before {
+        content: " ";
+        position: absolute;
+        width: 32px;
+        height: 32px;
+        background-color: var(--slds-g-color-neutral-base-100, #ffffff);
+        opacity: 0.2;
+        border-radius: 4px;
+      }
+      .slds-button[lwc-c5th8h1hm8] + .slds-button[lwc-c5th8h1hm8] {
+        margin-left: 0;
+      }
+      .minimizeButton[lwc-c5th8h1hm8] > .slds-icon_container[lwc-c5th8h1hm8] {
+        padding-bottom: 4px;
+      }
+      .optionsMenu[lwc-c5th8h1hm8] {
+        width: 100vw;
+      }
+      .optionsMenu[lwc-c5th8h1hm8] > .slds-dropdown__list[lwc-c5th8h1hm8] {
+        max-height: 20rem;
+        overflow-y: auto;
+      }
+      .chatOverlay[lwc-c5th8h1hm8] {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(147, 147, 147, 0.5);
+        position: fixed;
+        left: 0;
+        top: 55px;
+        right: 0;
+        bottom: 0;
+        z-index: 99;
+      }
+      .slds-dropdown-trigger[lwc-c5th8h1hm8]
+        > [class*="slds-button_icon"][lwc-c5th8h1hm8]
+        ~ .slds-dropdown_right[class*="slds-nubbin"][lwc-c5th8h1hm8] {
+        right: -0.55rem;
+      }
+      .slds-dropdown-trigger[lwc-c5th8h1hm8]
+        > [class*="slds-button_icon"][lwc-c5th8h1hm8]
+        ~ .slds-dropdown_right[class~="backButtonPresent"][lwc-c5th8h1hm8] {
+        right: -2.55rem;
+      }
+      .slds-dropdown-trigger[lwc-c5th8h1hm8]
+        > [class*="slds-button_icon"][lwc-c5th8h1hm8]
+        ~ .slds-dropdown_left[class*="slds-nubbin"][lwc-c5th8h1hm8] {
+        left: -0.55rem;
+      }
+      .slds-dropdown-trigger[lwc-c5th8h1hm8]
+        > [class*="slds-button_icon"][lwc-c5th8h1hm8]
+        ~ .slds-dropdown_left[class~="backButtonPresent"][lwc-c5th8h1hm8] {
+        left: -2.55rem;
+      }
+      .backButtonPresent.slds-nubbin--top-left[lwc-c5th8h1hm8]:after,
+      .backButtonPresent.slds-nubbin--top-left[lwc-c5th8h1hm8]:before,
+      .backButtonPresent.slds-nubbin_top-left-corner[lwc-c5th8h1hm8]:after,
+      .backButtonPresent.slds-nubbin_top-left-corner[lwc-c5th8h1hm8]:before,
+      .backButtonPresent.slds-nubbin_top-left[lwc-c5th8h1hm8]:after,
+      .backButtonPresent.slds-nubbin_top-left[lwc-c5th8h1hm8]:before {
+        left: 3.5rem;
+      }
+      .backButtonPresent.slds-nubbin--top-right[lwc-c5th8h1hm8]:after,
+      .backButtonPresent.slds-nubbin--top-right[lwc-c5th8h1hm8]:before,
+      .backButtonPresent.slds-nubbin_top-right-corner[lwc-c5th8h1hm8]:after,
+      .backButtonPresent.slds-nubbin_top-right-corner[lwc-c5th8h1hm8]:before,
+      .backButtonPresent.slds-nubbin_top-right[lwc-c5th8h1hm8]:after,
+      .backButtonPresent.slds-nubbin_top-right[lwc-c5th8h1hm8]:before {
+        right: 3.5rem;
+      }
+      .slds-dropdown[lwc-c5th8h1hm8] {
+        max-width: 30rem;
+      }
+      .slds-dropdown__item[lwc-c5th8h1hm8]
+        > .closeConversationOption[lwc-c5th8h1hm8],
+      .slds-dropdown__item[lwc-c5th8h1hm8]
+        > .requestTranscriptOption[lwc-c5th8h1hm8],
+      .slds-dropdown__item[lwc-c5th8h1hm8]
+        > .chatbotMenuOption[lwc-c5th8h1hm8] {
+        position: relative;
+        z-index: 100;
+        padding: 0.75rem 1rem;
+        background-color: #ffffff;
+        border: 0;
+        display: flex;
+        width: 100%;
+        font-size: 0.8rem;
+      }
+      .slds-dropdown__item[lwc-c5th8h1hm8]
+        > .closeConversationOption:focus[lwc-c5th8h1hm8],
+      .slds-dropdown__item[lwc-c5th8h1hm8]
+        > .closeConversationOption:hover[lwc-c5th8h1hm8],
+      .slds-dropdown__item[lwc-c5th8h1hm8]
+        > .requestTranscriptOption:focus[lwc-c5th8h1hm8],
+      .slds-dropdown__item[lwc-c5th8h1hm8]
+        > .requestTranscriptOption:hover[lwc-c5th8h1hm8],
+      .slds-dropdown__item[lwc-c5th8h1hm8]
+        > .chatbotMenuOption:focus[lwc-c5th8h1hm8],
+      .slds-dropdown__item[lwc-c5th8h1hm8]
+        > .chatbotMenuOption:hover[lwc-c5th8h1hm8] {
+        outline: 0;
+        text-decoration: none;
+        background-color: var(--slds-g-color-neutral-base-95, #f3f3f3);
+      }
+      .slds-dropdown__list[lwc-c5th8h1hm8]
+        > .slds-dropdown__item:not(:first-child)[lwc-c5th8h1hm8] {
+        border-top: #e2e2e2 1px solid;
+      }
+      .slds-dropdown__item[lwc-c5th8h1hm8]
+        .slds-truncate:not(.closeConversation)[lwc-c5th8h1hm8] {
+        color: var(--secondaryColor, #005290);
+      }
+      .closeConversation[lwc-c5th8h1hm8] {
+        color: var(--slds-g-color-error-base-40, #ba0517);
+      }
+      .slds-dropdown__item[lwc-c5th8h1hm8]
+        > .closeConversationOption[aria-disabled="true"][lwc-c5th8h1hm8] {
+        outline: 0;
+        text-decoration: none;
+        background-color: #c9c9c9;
+        cursor: not-allowed;
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc=""></style>
+    <style type="text/css" data-rendered-by-lwc="">
+      [lwc-7k5g5qoesmg-host] {
+        display: flex;
+        flex-direction: column;
+        visibility: hidden;
+      }
+      p[lwc-7k5g5qoesmg] {
+        background-color: inherit;
+        width: 100%;
+        visibility: visible;
+        padding: 12px;
+        margin: 0;
+        top: 0;
+        right: 0;
+        overflow-y: scroll;
+        word-wrap: break-word;
+        box-sizing: border-box;
+        display: inline-table;
+        z-index: inherit;
+      }
+      .text[lwc-7k5g5qoesmg] {
+        animation: slide-lwc-7k5g5qoesmg 2s;
+      }
+      .loadingAnimation[lwc-7k5g5qoesmg] {
+        animation: slide-lwc-7k5g5qoesmg 1.85s;
+      }
+      .temporary[lwc-7k5g5qoesmg] {
+        visibility: hidden;
+        animation: temporary-lwc-7k5g5qoesmg 2s;
+      }
+      .announcement[lwc-7k5g5qoesmg] {
+        visibility: hidden;
+        animation: announcement-lwc-7k5g5qoesmg 6.5s;
+      }
+      @keyframes slide-lwc-7k5g5qoesmg {
+        0% {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        85% {
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes temporary-lwc-7k5g5qoesmg {
+        0% {
+          visibility: visible;
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      @keyframes announcement-lwc-7k5g5qoesmg {
+        0% {
+          visibility: visible;
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        15% {
+          transform: translateY(0);
+        }
+        18% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      [lwc-2kir59ntf7a-host] {
+        position: relative;
+      }
+      [lwc-2kir59ntf7a-host].showLoadingAnimation {
+        opacity: 1;
+        display: block;
+        visibility: visible;
+        background-color: inherit;
+        animation: appear-lwc-2kir59ntf7a 0.5s linear;
+      }
+      [lwc-2kir59ntf7a-host].hideLoadingAnimation {
+        opacity: 0;
+        display: none;
+        animation: disappear-lwc-2kir59ntf7a 0.5s linear;
+      }
+      @keyframes appear-lwc-2kir59ntf7a {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes disappear-lwc-2kir59ntf7a {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      span.loadingBall[lwc-2kir59ntf7a] {
+        font-size: 8px;
+        text-align: center;
+        margin: 3px;
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        vertical-align: middle;
+      }
+      span.loadingBall.first[lwc-2kir59ntf7a] {
+        animation: ballanimate-lwc-2kir59ntf7a 2.25s infinite ease-in-out;
+      }
+      span.loadingBall.second[lwc-2kir59ntf7a] {
+        animation: ballanimate-2-lwc-2kir59ntf7a 2.25s infinite ease-in-out;
+      }
+      span.loadingBall.third[lwc-2kir59ntf7a] {
+        animation: ballanimate-3-lwc-2kir59ntf7a 2.25s infinite ease-in-out;
+      }
+      @keyframes ballanimate-lwc-2kir59ntf7a {
+        0% {
+          transform: scale(1);
+        }
+        16% {
+          transform: scale(1.5);
+        }
+        32% {
+          transform: scale(1);
+        }
+      }
+      @keyframes ballanimate-2-lwc-2kir59ntf7a {
+        32% {
+          transform: scale(1);
+        }
+        48% {
+          transform: scale(1.5);
+        }
+        64% {
+          transform: scale(1);
+        }
+      }
+      @keyframes ballanimate-3-lwc-2kir59ntf7a {
+        64% {
+          transform: scale(1);
+        }
+        80% {
+          transform: scale(1.5);
+        }
+        96% {
+          transform: scale(1);
+        }
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      [lwc-3cjfrt9r4ka-host] {
+        --slds-c-avatar-color-background: var(--secondaryColor, #005290);
+      }
+      div.slds-chat-event[lwc-3cjfrt9r4ka] {
+        font-size: 0.75em;
+      }
+      div.embedded-messaging-system-event-avatar[lwc-3cjfrt9r4ka] {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+      }
+      div.embedded-messaging-system-event-participantchanged[lwc-3cjfrt9r4ka] {
+        display: flex;
+      }
+      div.embedded-messaging-system-event-participantchanged[lwc-3cjfrt9r4ka]
+        > lightning-avatar.embedded-messaging-system-event-avatar[lwc-3cjfrt9r4ka] {
+        border-radius: 25px;
+        display: inline-block;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-top: 0.25rem;
+      }
+      div.embedded-messaging-system-event-participantchanged-text[lwc-3cjfrt9r4ka],
+      div.embedded-messaging-system-event-routingresult-text[lwc-3cjfrt9r4ka] {
+        color: var(--contrastPrimaryColor, #333333);
+        background-color: var(--slds-g-color-neutral-base-100, #fbfbfb);
+        border-radius: 5px;
+        padding: 5px;
+      }
+      div.embedded-messaging-chat-message[lwc-3cjfrt9r4ka]
+        > lightning-avatar.embedded-messaging-chat-message-agent-avatar[lwc-3cjfrt9r4ka] {
+        border-radius: 25px;
+        min-width: 1.5rem;
+      }
+      div.embedded-messaging-chat-message[lwc-3cjfrt9r4ka]
+        > lightning-avatar[lwc-3cjfrt9r4ka] {
+        align-self: flex-end;
+        margin-bottom: 16px;
+      }
+      [dir="rtl"]
+        div.embedded-messaging-chat-message[lwc-3cjfrt9r4ka]
+        > lightning-avatar[lwc-3cjfrt9r4ka] {
+        margin-left: 0.5rem;
+        margin-right: 0;
+      }
+      div.embedded-messaging-chat-message[lwc-3cjfrt9r4ka] {
+        max-width: 85%;
+        white-space: pre-wrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+      }
+      div.embedded-messaging-inbound-chat-message[lwc-3cjfrt9r4ka],
+      div.embedded-messaging-outbound-chat-message[lwc-3cjfrt9r4ka] {
+        font-size: 0.875em;
+      }
+      div.embedded-messaging-inbound-chat-message[lwc-3cjfrt9r4ka] {
+        background-color: #f2f2f3;
+      }
+      div.embedded-messaging-chat-message-metadata[lwc-3cjfrt9r4ka] {
+        font-size: 0.625em;
+      }
+      [dir="rtl"]
+        div.embedded-messaging-outbound-chat-message[lwc-3cjfrt9r4ka] {
+        margin-right: auto;
+        margin-left: 0;
+        border-radius: 0.5rem 0.5rem 0.5rem 0;
+      }
+      [dir="rtl"] div.embedded-messaging-inbound-chat-message[lwc-3cjfrt9r4ka] {
+        margin-right: 0;
+        margin-left: auto;
+        border-radius: 0.5rem 0.5rem 0 0.5rem;
+      }
+      .slds-chat-message_faux-avatar[lwc-3cjfrt9r4ka] {
+        padding-left: 2rem;
+      }
+      [dir="rtl"] .slds-chat-message_faux-avatar[lwc-3cjfrt9r4ka] {
+        padding-right: 2rem;
+        padding-left: 0;
+      }
+      .embedded-messaging-chat-message[lwc-3cjfrt9r4ka]
+        div.embedded-messaging-inbound-chat-message[lwc-3cjfrt9r4ka] {
+        color: var(--contrastPrimaryColor, #333333);
+      }
+      .embedded-messaging-chat-message[lwc-3cjfrt9r4ka]
+        div.embedded-messaging-outbound-chat-message:not(
+          .slds-chat-message__file_outbound
+        ):not(.slds-chat-message__file_inbound):not(
+          .slds-chat-message__link_outbound
+        )[lwc-3cjfrt9r4ka] {
+        background-color: var(--secondaryColor, #005290);
+      }
+      .embedded-messaging-chat-message[lwc-3cjfrt9r4ka]
+        div.slds-chat-message__form_inbound[lwc-3cjfrt9r4ka] {
+        border-radius: 0.5rem 0.5rem 0.5rem 0;
+      }
+      .embedded-messaging-chat-message[lwc-3cjfrt9r4ka]
+        div.slds-chat-message__form_outbound[lwc-3cjfrt9r4ka] {
+        border-radius: 0.5rem 0.5rem 0;
+      }
+      [dir="rtl"]
+        .embedded-messaging-chat-message[lwc-3cjfrt9r4ka]
+        div.slds-chat-message__form_inbound[lwc-3cjfrt9r4ka] {
+        border-radius: 0.5rem 0.5rem 0;
+      }
+      [dir="rtl"]
+        .embedded-messaging-chat-message[lwc-3cjfrt9r4ka]
+        div.slds-chat-message__form_outbound[lwc-3cjfrt9r4ka] {
+        border-radius: 0.5rem 0.5rem 0.5rem 0;
+      }
+      div.embedded-messaging-outbound-chat-message[lwc-3cjfrt9r4ka]
+        + div.embedded-messaging-chat-message-metadata[lwc-3cjfrt9r4ka] {
+        margin-left: auto;
+      }
+      [dir="rtl"]
+        div.embedded-messaging-outbound-chat-message[lwc-3cjfrt9r4ka]
+        + div.embedded-messaging-chat-message-metadata[lwc-3cjfrt9r4ka] {
+        margin-right: auto;
+        margin-left: 0;
+      }
+      .embedded-messaging-conversation-entry-listitem.embedded-messaging-choices-message[lwc-3cjfrt9r4ka] {
+        flex-direction: column;
+      }
+      .embedded-messaging-conversation-entry-listitem[lwc-3cjfrt9r4ka] {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+        flex-wrap: wrap;
+      }
+      div.embedded-messaging-automated-response[lwc-3cjfrt9r4ka],
+      div.embedded-messaging-estimated-wait-time[lwc-3cjfrt9r4ka] {
+        color: var(--contrastPrimaryColor, #333333);
+        margin: 12px auto;
+        position: relative;
+        width: 100%;
+        text-align: center;
+        word-break: break-word;
+        font-size: 0.75em;
+        white-space: pre-line;
+      }
+      .embedded-messaging-retry-button[lwc-3cjfrt9r4ka] {
+        color: var(--secondaryColor, #005290);
+        display: inline;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 10ch;
+        font-size: 0.625rem;
+      }
+      [dir="rtl"] .embedded-messaging-retry-button[lwc-3cjfrt9r4ka] {
+        transform: scaleX(-1);
+      }
+      .embedded-messaging-timestamp[lwc-3cjfrt9r4ka] {
+        margin: 12px auto;
+        position: relative;
+        width: 100%;
+        text-align: center;
+        word-break: break-word;
+        font-size: 0.75em;
+      }
+      .unsupportedMessage[lwc-3cjfrt9r4ka] {
+        display: flex;
+      }
+      .unsupportedMessageIconContainer[lwc-3cjfrt9r4ka] {
+        background: red;
+        border-radius: 0.5rem 0 0 0;
+        margin: -8px;
+      }
+      .unsupportedMessageIcon[lwc-3cjfrt9r4ka] {
+        --sds-c-icon-color-foreground-default: white;
+        padding: 0.5rem 0.5rem;
+      }
+      .unsupportedMessageText[lwc-3cjfrt9r4ka] {
+        padding-left: 1.25rem;
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      .loadingBall[lwc-22793iaukvo] {
+        font-size: 4px;
+        text-align: left;
+        float: left;
+        margin: 0px 1.5px;
+        max-width: 100%;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: var(--slds-g-color-neutral-base-100, white);
+        animation-delay: -0.5s;
+        animation: chatTypingIndicatorAnimate-lwc-22793iaukvo 2.5s infinite
+          ease-in-out;
+      }
+      .second[lwc-22793iaukvo] {
+        animation-delay: 3s;
+      }
+      .third[lwc-22793iaukvo] {
+        animation-delay: 4s;
+      }
+      @keyframes chatTypingIndicatorAnimate-lwc-22793iaukvo {
+        0% {
+          opacity: 0;
+        }
+        35% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      .unseenMessageNotification[lwc-6berj1hjgql] {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        width: 36px;
+        bottom: 0;
+        left: 0.5rem;
+        pointer-events: none;
+      }
+      [dir="rtl"] .unseenMessageNotification[lwc-6berj1hjgql] {
+        left: auto;
+        transform: translateX(-1px);
+      }
+      .unseenMessageNotification[lwc-6berj1hjgql]
+        > .scrollDownButton:hover[lwc-6berj1hjgql],
+      .unseenMessageNotification[lwc-6berj1hjgql]
+        > .unseenMessageBubble:hover[lwc-6berj1hjgql] {
+        cursor: pointer;
+      }
+      .unseenMessageNotification[lwc-6berj1hjgql]
+        .unseenMessageBubble[lwc-6berj1hjgql] {
+        order: 0;
+        position: relative;
+        top: 5px;
+        display: flex;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin: 0 0.25rem;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        pointer-events: auto;
+        background-color: var(--contrastPrimaryColor, #333333);
+      }
+      .unseenMessageNotification[lwc-6berj1hjgql]
+        .unseenMessageBubble[lwc-6berj1hjgql]
+        .messageCount[lwc-6berj1hjgql] {
+        color: var(--slds-g-color-neutral-base-95, #f4f4f4);
+        font-weight: bold;
+        font-size: 1rem;
+      }
+      .messageCount[lwc-6berj1hjgql] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .unseenMessageNotification[lwc-6berj1hjgql]
+        .scrollDownButton[lwc-6berj1hjgql],
+      .scrollDownButton[lwc-6berj1hjgql] button[lwc-6berj1hjgql] {
+        order: 1;
+        position: relative;
+        margin-top: auto;
+        pointer-events: auto;
+      }
+      @supports (-moz-appearance: none) {
+        .unseenMessageNotification[lwc-6berj1hjgql]
+          .unseenMessageBubble[lwc-6berj1hjgql] {
+          z-index: 1;
+        }
+      }
+      .unseenMessageNotification.hideMessageCount[lwc-6berj1hjgql] {
+        -webkit-animation: notification-exit-fade-out-lwc-6berj1hjgql 0.3s
+          ease-in both;
+        animation: notification-exit-fade-out-lwc-6berj1hjgql 0.3s ease-in both;
+      }
+      .unseenMessageNotification[lwc-6berj1hjgql]
+        .scrollDownButton[lwc-6berj1hjgql] {
+        -webkit-animation: unseen-message-notification-fade-in-lwc-6berj1hjgql
+          0.5s ease-out both;
+        animation: unseen-message-notification-fade-in-lwc-6berj1hjgql 0.5s
+          ease-out both;
+      }
+      .unseenMessageNotification[lwc-6berj1hjgql]
+        .unseenMessageBubble[lwc-6berj1hjgql] {
+        -webkit-animation: bubble-scale-in-bottom-left-lwc-6berj1hjgql 0.3s
+          ease-out both;
+        animation: bubble-scale-in-bottom-left-lwc-6berj1hjgql 0.3s ease-out
+          both;
+      }
+      .unseenMessageNotification[lwc-6berj1hjgql]
+        .unseenMessageBubble[lwc-6berj1hjgql]
+        .messageCount.showMessageCount[lwc-6berj1hjgql] {
+        -webkit-animation: message-count-increment-slide-in-top-lwc-6berj1hjgql
+          0.3s cubic-bezier(0.075, 0.82, 0.165, 1) both;
+        animation: message-count-increment-slide-in-top-lwc-6berj1hjgql 0.3s
+          cubic-bezier(0.075, 0.82, 0.165, 1) both;
+      }
+      .unseenMessageNotification[lwc-6berj1hjgql]
+        .unseenMessageBubble[lwc-6berj1hjgql]
+        .messageCount.showNinePlusMessageCount[lwc-6berj1hjgql] {
+        -webkit-animation: unseen-message-notification-fade-in-lwc-6berj1hjgql
+          0.3s ease-out both;
+        animation: unseen-message-notification-fade-in-lwc-6berj1hjgql 0.3s
+          ease-out both;
+      }
+      @media not screen and (prefers-reduced-motion: no-preference),
+        only screen and (prefers-reduced-motion: reduce) {
+        .unseenMessageNotification.hideMessageCount[lwc-6berj1hjgql] {
+          -webkit-animation: none;
+          animation: none;
+        }
+        .unseenMessageNotification[lwc-6berj1hjgql]
+          .scrollDownButton[lwc-6berj1hjgql] {
+          -webkit-animation: none;
+          animation: none;
+        }
+        .unseenMessageNotification[lwc-6berj1hjgql]
+          .unseenMessageBubble[lwc-6berj1hjgql] {
+          -webkit-animation: none;
+          animation: none;
+        }
+        .unseenMessageNotification[lwc-6berj1hjgql]
+          .unseenMessageBubble[lwc-6berj1hjgql]
+          .messageCount.showMessageCount[lwc-6berj1hjgql] {
+          -webkit-animation: none;
+          animation: none;
+        }
+        .unseenMessageNotification[lwc-6berj1hjgql]
+          .unseenMessageBubble[lwc-6berj1hjgql]
+          .messageCount.showNinePlusMessageCount[lwc-6berj1hjgql] {
+          -webkit-animation: none;
+          animation: none;
+        }
+      }
+      @-webkit-keyframes unseen-message-notification-fade-in {
+        0%[lwc-6berj1hjgql] {
+          opacity: 0;
+          visibility: hidden;
+        }
+        100%[lwc-6berj1hjgql] {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+      @keyframes unseen-message-notification-fade-in-lwc-6berj1hjgql {
+        0% {
+          opacity: 0;
+          visibility: hidden;
+        }
+        100% {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+      @-webkit-keyframes bubble-scale-in-bottom-left {
+        0%[lwc-6berj1hjgql] {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+          -webkit-transform-origin: 0% 100%;
+          transform-origin: 0% 100%;
+          opacity: 1;
+          visibility: hidden;
+        }
+        100%[lwc-6berj1hjgql] {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+          -webkit-transform-origin: 0% 100%;
+          transform-origin: 0% 100%;
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+      @keyframes bubble-scale-in-bottom-left-lwc-6berj1hjgql {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+          -webkit-transform-origin: 0% 100%;
+          transform-origin: 0% 100%;
+          opacity: 1;
+          visibility: hidden;
+        }
+        100% {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+          -webkit-transform-origin: 0% 100%;
+          transform-origin: 0% 100%;
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+      @-webkit-keyframes message-count-increment-slide-in-top {
+        0%[lwc-6berj1hjgql] {
+          -webkit-transform: translateY(-30px);
+          transform: translateY(-30px);
+          opacity: 0;
+          visibility: hidden;
+        }
+        100%[lwc-6berj1hjgql] {
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+      @keyframes message-count-increment-slide-in-top-lwc-6berj1hjgql {
+        0% {
+          -webkit-transform: translateY(-30px);
+          transform: translateY(-30px);
+          opacity: 0;
+          visibility: hidden;
+        }
+        100% {
+          -webkit-transform: translateY(0);
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+      @-webkit-keyframes notification-exit-fade-out {
+        0%[lwc-6berj1hjgql] {
+          opacity: 1;
+          visibility: visible;
+        }
+        100%[lwc-6berj1hjgql] {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+      @keyframes notification-exit-fade-out-lwc-6berj1hjgql {
+        0% {
+          opacity: 1;
+          visibility: visible;
+        }
+        100% {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    </style>
+    <style type="text/css" data-rendered-by-lwc="">
+      [lwc-hia9nsqi18-host] {
+        height: 1rem;
+        width: 100%;
+        flex: 0 1 auto;
+        margin: 10px 0;
+      }
+      [lwc-hia9nsqi18-host].showAnimation {
+        opacity: 1;
+        display: block;
+        visibility: visible;
+        animation: appear-lwc-hia9nsqi18 0.5s linear;
+      }
+      [lwc-hia9nsqi18-host].hideAnimation {
+        opacity: 0;
+        display: none;
+        animation: disappear-lwc-hia9nsqi18 0.5s linear;
+      }
+      .slds-align_absolute-center[lwc-hia9nsqi18] {
+        transform: translate(0, 50%);
+      }
+      @keyframes appear-lwc-hia9nsqi18 {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      @keyframes disappear-lwc-hia9nsqi18 {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <webruntime-app
+      ><lwr-router-container
+        ><!----><experience-data-layer-object
+          ><div hidden="">
+            <script type="application/json" data-provider-type="site">
+              {
+                "siteId": "0DMed00000002pqGAA",
+                "templateDevName": "esw-template-frame"
+              }
+            </script>
+          </div></experience-data-layer-object
+        ><webruntime-inner-app
+          ><dxp_data_provider-user-data-provider
+            ><experience-data-layer-object
+              ><div hidden="">
+                <script type="application/json" data-provider-type="user">
+                  { "attributes": { "isGuest": true } }
+                </script>
+              </div></experience-data-layer-object
+            ><!----><!----><dxp_data_provider-data-proxy
+              ><embedded_service_iframe-iframe-wrapper
+                data-component-id="iframeWrapper-2f0e"
+                ><main data-f6-region="" role="main">
+                  <slot
+                    ><webruntime-router-container
+                      ><dxp_data_provider-user-data-provider
+                        ><experience-data-layer-object
+                          ><div hidden="">
+                            <script
+                              type="application/json"
+                              data-provider-type="user"
+                            >
+                              { "attributes": { "isGuest": true } }
+                            </script>
+                          </div></experience-data-layer-object
+                        ><!----><!----><dxp_data_provider-data-proxy
+                          ><embedded_service_iframe-frame-layout
+                            data-component-id="frameLayout-e7d3"
+                            ><slot name="content"
+                              ><embeddedmessaging-container
+                                data-component-id="container-95c8"
+                                slot="content"
+                                lwc-64un2jbuqj8-host=""
+                                dir="ltr"
+                                ><!----><embeddedmessaging-chat-header
+                                  lwc-64un2jbuqj8=""
+                                  class="containerArea"
+                                  lwc-c5th8h1hm8-host=""
+                                  ><style></style>
+                                  <header lwc-c5th8h1hm8="" class="chatHeader">
+                                    <div
+                                      lwc-c5th8h1hm8=""
+                                      class="slds-dropdown-trigger slds-dropdown-trigger_click"
+                                    >
+                                      <button
+                                        lwc-c5th8h1hm8=""
+                                        class="headerButton menuButton slds-button slds-button_icon slds-button_icon-bare slds-button_icon-inverse"
+                                        title="Open messaging menu"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                        id="headerMenuButton-25"
+                                      >
+                                        <span
+                                          class="slds-assistive-text"
+                                          lwc-c5th8h1hm8=""
+                                          >Open messaging menu</span
+                                        ><lightning-icon
+                                          lwc-c5th8h1hm8=""
+                                          icon-name="utility:threedots_vertical"
+                                          class="slds-icon-utility-threedots-vertical slds-icon_container"
+                                          id="menuButtonIcon-25"
+                                          lwc-4897l11qtae-host=""
+                                          ><span
+                                            lwc-4897l11qtae=""
+                                            style="
+                                              --sds-c-icon-color-background: var(
+                                                --slds-c-icon-color-background,
+                                                transparent
+                                              );
+                                            "
+                                            part="boundary"
+                                            ><lightning-primitive-icon
+                                              lwc-4897l11qtae=""
+                                              exportparts="icon"
+                                              size="x-small"
+                                              variant="inverse"
+                                              lwc-18fvdjbptdi-host=""
+                                              ><svg
+                                                focusable="false"
+                                                aria-hidden="true"
+                                                viewBox="0 0 520 520"
+                                                part="icon"
+                                                lwc-18fvdjbptdi=""
+                                                data-key="threedots_vertical"
+                                                class="slds-icon slds-icon_x-small"
+                                              >
+                                                <g lwc-18fvdjbptdi="">
+                                                  <path
+                                                    d="M200 440c0-33 27-60 60-60s60 27 60 60-27 60-60 60-60-27-60-60zm0-180c0-33 27-60 60-60s60 27 60 60-27 60-60 60-60-27-60-60zm0-180c0-33 27-60 60-60s60 27 60 60-27 60-60 60-60-27-60-60z"
+                                                    lwc-18fvdjbptdi=""
+                                                  ></path>
+                                                </g></svg></lightning-primitive-icon></span
+                                        ></lightning-icon>
+                                      </button>
+                                      <div
+                                        class="chatOverlay"
+                                        lwc-c5th8h1hm8=""
+                                        style="display: none"
+                                      ></div>
+                                      <section
+                                        lwc-c5th8h1hm8=""
+                                        class="optionsMenu slds-dropdown slds-dropdown_left slds-nubbin_top-left"
+                                      >
+                                        <ul
+                                          lwc-c5th8h1hm8=""
+                                          class="slds-dropdown__list"
+                                          role="menu"
+                                        >
+                                          <li
+                                            class="slds-dropdown__item"
+                                            role="presentation"
+                                            lwc-c5th8h1hm8=""
+                                          >
+                                            <button
+                                              role="menuitem"
+                                              class="requestTranscriptOption"
+                                              tabindex="-1"
+                                              lwc-c5th8h1hm8=""
+                                              id="requestTranscriptOptionButton-25"
+                                            >
+                                              <span
+                                                class="slds-truncate"
+                                                lwc-c5th8h1hm8=""
+                                                title="Request Chat Transcript"
+                                                id="requestTranscriptOptionText-25"
+                                                >Request Chat Transcript</span
+                                              >
+                                            </button>
+                                          </li>
+                                          <li
+                                            class="slds-dropdown__item"
+                                            role="presentation"
+                                            lwc-c5th8h1hm8=""
+                                          >
+                                            <button
+                                              role="menuitem"
+                                              class="closeConversationOption"
+                                              tabindex="-1"
+                                              lwc-c5th8h1hm8=""
+                                              aria-disabled="false"
+                                              id="closeConversationOptionButton-25"
+                                            >
+                                              <span
+                                                class="closeConversation slds-truncate"
+                                                lwc-c5th8h1hm8=""
+                                                title="End conversation"
+                                                id="closeConversationOptionText-25"
+                                                >End conversation</span
+                                              >
+                                            </button>
+                                          </li>
+                                        </ul>
+                                      </section>
+                                    </div>
+                                    <img
+                                      alt=""
+                                      lwc-c5th8h1hm8=""
+                                      src="https://a.sfdcstatic.com/shared/images/c360-nav/salesforce-with-type-logo.svg"
+                                    />
+                                    <h2
+                                      aria-live="polite"
+                                      lwc-c5th8h1hm8=""
+                                      title="Agentforce"
+                                      class="headerText logo"
+                                    >
+                                      Agentforce
+                                    </h2>
+                                    <button
+                                      lwc-c5th8h1hm8=""
+                                      class="headerButton minimizeButton slds-button slds-button_icon slds-button_icon-bare slds-button_icon-inverse"
+                                      title="Minimize chat window"
+                                      id="headerMinimizeButton-25"
+                                    >
+                                      <span
+                                        class="slds-assistive-text"
+                                        lwc-c5th8h1hm8=""
+                                        >Minimize the chat window</span
+                                      ><lightning-icon
+                                        lwc-c5th8h1hm8=""
+                                        icon-name="utility:chevrondown"
+                                        class="slds-icon-utility-chevrondown slds-icon_container"
+                                        id="headerMinimizeButtonIcon-25"
+                                        lwc-4897l11qtae-host=""
+                                        ><span
+                                          lwc-4897l11qtae=""
+                                          style="
+                                            --sds-c-icon-color-background: var(
+                                              --slds-c-icon-color-background,
+                                              transparent
+                                            );
+                                          "
+                                          part="boundary"
+                                          ><lightning-primitive-icon
+                                            lwc-4897l11qtae=""
+                                            exportparts="icon"
+                                            size="x-small"
+                                            variant="inverse"
+                                            lwc-7nohpd9g9ec-host=""
+                                            ><svg
+                                              focusable="false"
+                                              aria-hidden="true"
+                                              viewBox="0 0 520 520"
+                                              part="icon"
+                                              lwc-7nohpd9g9ec=""
+                                              data-key="chevrondown"
+                                              class="slds-icon slds-icon_x-small"
+                                            >
+                                              <g lwc-7nohpd9g9ec="">
+                                                <path
+                                                  d="M476 178L271 385c-6 6-16 6-22 0L44 178c-6-6-6-16 0-22l22-22c6-6 16-6 22 0l161 163c6 6 16 6 22 0l161-162c6-6 16-6 22 0l22 22c5 6 5 15 0 21z"
+                                                  lwc-7nohpd9g9ec=""
+                                                ></path>
+                                              </g></svg></lightning-primitive-icon></span
+                                      ></lightning-icon>
+                                    </button>
+                                  </header>
+                                  <embeddedmessaging-chat-header-announcement
+                                    lwc-c5th8h1hm8=""
+                                    class="headerAnnouncement"
+                                    lwc-7k5g5qoesmg-host=""
+                                    ><embeddedmessaging-loading-animation
+                                      lwc-7k5g5qoesmg=""
+                                      class="loadingAnimation hideLoadingAnimation"
+                                      lwc-2kir59ntf7a-host=""
+                                      ><style></style
+                                      ><span
+                                        class="loadingBall first"
+                                        lwc-2kir59ntf7a=""
+                                      ></span
+                                      ><span
+                                        class="loadingBall second"
+                                        lwc-2kir59ntf7a=""
+                                      ></span
+                                      ><span
+                                        class="loadingBall third"
+                                        lwc-2kir59ntf7a=""
+                                      ></span></embeddedmessaging-loading-animation></embeddedmessaging-chat-header-announcement></embeddedmessaging-chat-header
+                                ><!----><embeddedmessaging-chat-notification
+                                  lwc-64un2jbuqj8=""
+                                  class="containerArea"
+                                  lwc-2eenglaejop-host=""
+                                ></embeddedmessaging-chat-notification
+                                ><embeddedmessaging-conversation-state
+                                  lwc-64un2jbuqj8=""
+                                  class="containerArea"
+                                  lwc-67djd267s8u-host=""
+                                  ><embeddedmessaging-conversation-log
+                                    lwc-67djd267s8u=""
+                                    class="conversationState"
+                                    tabindex="0"
+                                    lwc-2itfp6ba1pc-host=""
+                                    ><section
+                                      lwc-2itfp6ba1pc=""
+                                      class="slds-chat"
+                                      role="log"
+                                      aria-label="Chat Window"
+                                    >
+                                      <ul
+                                        lwc-2itfp6ba1pc=""
+                                        class="slds-chat-list"
+                                      >
+                                        <embeddedmessaging-conversation-entry-item
+                                          lwc-2itfp6ba1pc=""
+                                          lwc-3cjfrt9r4ka-host=""
+                                          ><style></style>
+                                          <li
+                                            lwc-3cjfrt9r4ka=""
+                                            class="slds-chat-listitem slds-chat-listitem_event embedded-messaging-conversation-entry-listitem"
+                                            role="presentation"
+                                          >
+                                            <div
+                                              lwc-3cjfrt9r4ka=""
+                                              class="embedded-messaging-timestamp"
+                                            >
+                                              <span lwc-3cjfrt9r4ka=""
+                                                >Today&nbsp;•&nbsp;<lightning-formatted-date-time
+                                                  lwc-3cjfrt9r4ka=""
+                                                  >3:02
+                                                  AM</lightning-formatted-date-time
+                                                ></span
+                                              >
+                                            </div>
+                                            <div
+                                              lwc-3cjfrt9r4ka=""
+                                              class="slds-chat-event"
+                                            >
+                                              <div
+                                                lwc-3cjfrt9r4ka=""
+                                                class="slds-chat-event__body"
+                                              ></div>
+                                            </div></li></embeddedmessaging-conversation-entry-item
+                                        ><embeddedmessaging-conversation-entry-item
+                                          lwc-2itfp6ba1pc=""
+                                          lwc-3cjfrt9r4ka-host=""
+                                          ><style></style>
+                                          <li
+                                            lwc-3cjfrt9r4ka=""
+                                            class="slds-chat-listitem slds-chat-listitem_event embedded-messaging-conversation-entry-listitem"
+                                            role="presentation"
+                                          >
+                                            <div
+                                              lwc-3cjfrt9r4ka=""
+                                              class="slds-chat-event"
+                                            >
+                                              <div
+                                                lwc-3cjfrt9r4ka=""
+                                                class="slds-chat-event__body"
+                                              >
+                                                <div
+                                                  lwc-3cjfrt9r4ka=""
+                                                  class="embedded-messaging-system-event-participantchanged"
+                                                >
+                                                  <lightning-avatar
+                                                    lwc-3cjfrt9r4ka=""
+                                                    class="embedded-messaging-system-event-avatar"
+                                                    variant="circle"
+                                                    size="x-small"
+                                                    lwc-35am9di7q5a-host=""
+                                                    ><span
+                                                      lwc-35am9di7q5a=""
+                                                      class="slds-avatar slds-avatar_x-small slds-avatar_circle"
+                                                      part="avatar"
+                                                      ><img
+                                                        lwc-35am9di7q5a=""
+                                                        src="https://help.salesforce.com/resource/HC_ASA/bot-avatar.png"
+                                                        alt="Agentforce"
+                                                        title="Agentforce" /></span
+                                                  ></lightning-avatar>
+                                                  <div
+                                                    lwc-3cjfrt9r4ka=""
+                                                    class="embedded-messaging-system-event-participantchanged-text"
+                                                  >
+                                                    <span lwc-3cjfrt9r4ka=""
+                                                      >Agentforce
+                                                      joined&nbsp;•&nbsp;<lightning-formatted-date-time
+                                                        lwc-3cjfrt9r4ka=""
+                                                        >3:02
+                                                        AM</lightning-formatted-date-time
+                                                      ></span
+                                                    >
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </li></embeddedmessaging-conversation-entry-item
+                                        ><embeddedmessaging-conversation-entry-item
+                                          lwc-2itfp6ba1pc=""
+                                          lwc-3cjfrt9r4ka-host=""
+                                          ><style></style>
+                                          <li
+                                            lwc-3cjfrt9r4ka=""
+                                            class="slds-chat-listitem slds-chat-listitem_inbound embedded-messaging-conversation-entry-listitem"
+                                            role="presentation"
+                                          >
+                                            <div
+                                              lwc-3cjfrt9r4ka=""
+                                              class="slds-chat-message embedded-messaging-chat-message"
+                                            >
+                                              <lightning-avatar
+                                                lwc-3cjfrt9r4ka=""
+                                                class="slds-chat-avatar embedded-messaging-chat-message-agent-avatar"
+                                                variant="circle"
+                                                size="small"
+                                                lwc-35am9di7q5a-host=""
+                                                ><span
+                                                  lwc-35am9di7q5a=""
+                                                  class="slds-avatar slds-avatar_small slds-avatar_circle"
+                                                  part="avatar"
+                                                  ><img
+                                                    lwc-35am9di7q5a=""
+                                                    src="https://help.salesforce.com/resource/HC_ASA/bot-avatar.png"
+                                                    alt="Agentforce"
+                                                    title="Agentforce" /></span
+                                              ></lightning-avatar>
+                                              <div
+                                                lwc-3cjfrt9r4ka=""
+                                                class="slds-chat-message__body"
+                                              >
+                                                <div
+                                                  lwc-3cjfrt9r4ka=""
+                                                  class="slds-chat-message__text_inbound embedded-messaging-inbound-chat-message"
+                                                >
+                                                  <span lwc-3cjfrt9r4ka=""
+                                                    >Hi, I’m Agentforce and can
+                                                    answer your Salesforce
+                                                    questions and connect you
+                                                    with our Sales Experts. This
+                                                    experience, powered entirely
+                                                    by Agentforce, keeps
+                                                    improving daily, and you can
+                                                    do this too! Ask me things
+                                                    like, ‘Can I chat with a
+                                                    Sales Expert?’ or ‘What is
+                                                    CRM?’</span
+                                                  >
+                                                </div>
+                                                <div
+                                                  lwc-3cjfrt9r4ka=""
+                                                  class="slds-chat-message__meta embedded-messaging-chat-message-metadata"
+                                                  aria-label="sent Agentforce at 3:02:49 AM"
+                                                >
+                                                  <span lwc-3cjfrt9r4ka=""
+                                                    ><span lwc-3cjfrt9r4ka=""
+                                                      >Agentforce</span
+                                                    >&nbsp;•&nbsp;<lightning-formatted-date-time
+                                                      lwc-3cjfrt9r4ka=""
+                                                      >3:02
+                                                      AM</lightning-formatted-date-time
+                                                    ></span
+                                                  >
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </li></embeddedmessaging-conversation-entry-item
+                                        ><embeddedmessaging-conversation-entry-item
+                                          lwc-2itfp6ba1pc=""
+                                          lwc-3cjfrt9r4ka-host=""
+                                          ><style></style>
+                                          <li
+                                            lwc-3cjfrt9r4ka=""
+                                            class="slds-chat-listitem slds-chat-listitem_outbound embedded-messaging-conversation-entry-listitem"
+                                            role="presentation"
+                                          >
+                                            <div
+                                              lwc-3cjfrt9r4ka=""
+                                              class="slds-chat-message embedded-messaging-chat-message"
+                                            >
+                                              <div
+                                                lwc-3cjfrt9r4ka=""
+                                                class="slds-chat-message__body"
+                                              >
+                                                <div
+                                                  lwc-3cjfrt9r4ka=""
+                                                  class="slds-chat-message__text_outbound embedded-messaging-outbound-chat-message"
+                                                >
+                                                  <span lwc-3cjfrt9r4ka=""
+                                                    >what is the metadata type
+                                                    name for ApexTrigger?</span
+                                                  >
+                                                </div>
+                                                <div
+                                                  lwc-3cjfrt9r4ka=""
+                                                  class="slds-chat-message__meta embedded-messaging-chat-message-metadata"
+                                                  aria-label="sent Guest at 3:03:47 AM"
+                                                >
+                                                  <span
+                                                    lwc-3cjfrt9r4ka=""
+                                                    class="embedded-messaging-chat-message-receipt-text"
+                                                    aria-hidden="true"
+                                                    >Sent&nbsp;•&nbsp;<lightning-formatted-date-time
+                                                      lwc-3cjfrt9r4ka=""
+                                                      >3:03
+                                                      AM</lightning-formatted-date-time
+                                                    ></span
+                                                  >
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </li></embeddedmessaging-conversation-entry-item
+                                        ><embeddedmessaging-conversation-entry-item
+                                          lwc-2itfp6ba1pc=""
+                                          lwc-3cjfrt9r4ka-host=""
+                                          ><style></style>
+                                          <li
+                                            lwc-3cjfrt9r4ka=""
+                                            class="slds-chat-listitem slds-chat-listitem_inbound embedded-messaging-conversation-entry-listitem"
+                                            role="presentation"
+                                          >
+                                            <div
+                                              lwc-3cjfrt9r4ka=""
+                                              class="slds-chat-message embedded-messaging-chat-message"
+                                            >
+                                              <lightning-avatar
+                                                lwc-3cjfrt9r4ka=""
+                                                class="slds-chat-avatar embedded-messaging-chat-message-agent-avatar"
+                                                variant="circle"
+                                                size="small"
+                                                lwc-35am9di7q5a-host=""
+                                                ><span
+                                                  lwc-35am9di7q5a=""
+                                                  class="slds-avatar slds-avatar_small slds-avatar_circle"
+                                                  part="avatar"
+                                                  ><img
+                                                    lwc-35am9di7q5a=""
+                                                    src="https://help.salesforce.com/resource/HC_ASA/bot-avatar.png"
+                                                    alt="Agentforce"
+                                                    title="Agentforce" /></span
+                                              ></lightning-avatar>
+                                              <div
+                                                lwc-3cjfrt9r4ka=""
+                                                class="slds-chat-message__body"
+                                              >
+                                                <div
+                                                  lwc-3cjfrt9r4ka=""
+                                                  class="slds-chat-message__text_inbound embedded-messaging-inbound-chat-message"
+                                                >
+                                                  <span lwc-3cjfrt9r4ka=""
+                                                    >Sorry, I can't assist with
+                                                    that. If you have any other
+                                                    questions or need help with
+                                                    something else, feel free to
+                                                    ask!</span
+                                                  >
+                                                </div>
+                                                <div
+                                                  lwc-3cjfrt9r4ka=""
+                                                  class="slds-chat-message__meta embedded-messaging-chat-message-metadata"
+                                                  aria-label="sent Agentforce at 3:03:51 AM"
+                                                >
+                                                  <span lwc-3cjfrt9r4ka=""
+                                                    ><span lwc-3cjfrt9r4ka=""
+                                                      >Agentforce</span
+                                                    >&nbsp;•&nbsp;<lightning-formatted-date-time
+                                                      lwc-3cjfrt9r4ka=""
+                                                      >3:03
+                                                      AM</lightning-formatted-date-time
+                                                    ></span
+                                                  >
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </li></embeddedmessaging-conversation-entry-item
+                                        ><embeddedmessaging-conversation-entry-item
+                                          lwc-2itfp6ba1pc=""
+                                          lwc-3cjfrt9r4ka-host=""
+                                          ><style></style>
+                                          <li
+                                            lwc-3cjfrt9r4ka=""
+                                            class="slds-chat-listitem slds-chat-listitem_outbound embedded-messaging-conversation-entry-listitem"
+                                            role="presentation"
+                                          >
+                                            <div
+                                              lwc-3cjfrt9r4ka=""
+                                              class="slds-chat-message embedded-messaging-chat-message"
+                                            >
+                                              <div
+                                                lwc-3cjfrt9r4ka=""
+                                                class="slds-chat-message__body"
+                                              >
+                                                <div
+                                                  lwc-3cjfrt9r4ka=""
+                                                  class="slds-chat-message__text_outbound embedded-messaging-outbound-chat-message"
+                                                >
+                                                  <span lwc-3cjfrt9r4ka=""
+                                                    >what is ROI of implementing
+                                                    Agentforce?</span
+                                                  >
+                                                </div>
+                                                <div
+                                                  lwc-3cjfrt9r4ka=""
+                                                  class="slds-chat-message__meta embedded-messaging-chat-message-metadata"
+                                                  aria-label="sent Guest at 3:04:31 AM"
+                                                >
+                                                  <span
+                                                    lwc-3cjfrt9r4ka=""
+                                                    class="embedded-messaging-chat-message-receipt-text"
+                                                    aria-hidden="true"
+                                                    >Sent&nbsp;•&nbsp;<lightning-formatted-date-time
+                                                      lwc-3cjfrt9r4ka=""
+                                                      >3:04
+                                                      AM</lightning-formatted-date-time
+                                                    ></span
+                                                  >
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </li></embeddedmessaging-conversation-entry-item
+                                        ><embeddedmessaging-conversation-entry-item
+                                          lwc-2itfp6ba1pc=""
+                                          lwc-3cjfrt9r4ka-host=""
+                                          ><style></style>
+                                          <li
+                                            lwc-3cjfrt9r4ka=""
+                                            class="slds-chat-listitem slds-chat-listitem_inbound embedded-messaging-conversation-entry-listitem"
+                                            role="presentation"
+                                          >
+                                            <div
+                                              lwc-3cjfrt9r4ka=""
+                                              class="slds-chat-message embedded-messaging-chat-message"
+                                            >
+                                              <lightning-avatar
+                                                lwc-3cjfrt9r4ka=""
+                                                class="slds-chat-avatar embedded-messaging-chat-message-agent-avatar"
+                                                variant="circle"
+                                                size="small"
+                                                lwc-35am9di7q5a-host=""
+                                                ><span
+                                                  lwc-35am9di7q5a=""
+                                                  class="slds-avatar slds-avatar_small slds-avatar_circle"
+                                                  part="avatar"
+                                                  ><img
+                                                    lwc-35am9di7q5a=""
+                                                    src="https://help.salesforce.com/resource/HC_ASA/bot-avatar.png"
+                                                    alt="Agentforce"
+                                                    title="Agentforce" /></span
+                                              ></lightning-avatar>
+                                              <div
+                                                lwc-3cjfrt9r4ka=""
+                                                class="slds-chat-message__body"
+                                              >
+                                                <div
+                                                  lwc-3cjfrt9r4ka=""
+                                                  class="slds-chat-message__text_inbound embedded-messaging-inbound-chat-message"
+                                                >
+                                                  <span lwc-3cjfrt9r4ka=""
+                                                    >Implementing Salesforce,
+                                                    including Agentforce, can
+                                                    yield significant returns on
+                                                    investment (ROI). Here are
+                                                    some key benefits reported
+                                                    by customers: - 29% ROI:
+                                                    Users achieved a 29% return
+                                                    on investment after
+                                                    implementing Salesforce. -
+                                                    33% Increased Productivity:
+                                                    Users saw a 33% increase in
+                                                    employee productivity. - 31%
+                                                    Increased Revenue: Users
+                                                    experienced a 31% increase
+                                                    in sales revenue. For more
+                                                    detailed information, you
+                                                    can visit the "Salesforce
+                                                    ROI page" (</span
+                                                  ><a
+                                                    target="_blank"
+                                                    rel="noopener"
+                                                    lwc-3cjfrt9r4ka=""
+                                                    href="https://www.salesforce.com/compare/salesforce-vs-hubspot/"
+                                                    id="conversationEntryLink-58"
+                                                    >https://www.salesforce.com/compare/salesforce-vs-hubspot/</a
+                                                  ><span lwc-3cjfrt9r4ka=""
+                                                    >). Would you like to learn
+                                                    more about specific features
+                                                    or other benefits of
+                                                    Agentforce?</span
+                                                  >
+                                                </div>
+                                                <div
+                                                  lwc-3cjfrt9r4ka=""
+                                                  class="slds-chat-message__meta embedded-messaging-chat-message-metadata"
+                                                  aria-label="sent Agentforce at 3:04:40 AM"
+                                                >
+                                                  <span lwc-3cjfrt9r4ka=""
+                                                    ><span lwc-3cjfrt9r4ka=""
+                                                      >Agentforce</span
+                                                    >&nbsp;•&nbsp;<lightning-formatted-date-time
+                                                      lwc-3cjfrt9r4ka=""
+                                                      >3:04
+                                                      AM</lightning-formatted-date-time
+                                                    ></span
+                                                  >
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </li></embeddedmessaging-conversation-entry-item
+                                        >
+                                      </ul>
+                                    </section></embeddedmessaging-conversation-log
+                                  ><embeddedmessaging-input-footer
+                                    lwc-67djd267s8u=""
+                                    class="conversationState"
+                                    lwc-64sju2rf0mv-host=""
+                                    ><style></style>
+                                    <div
+                                      lwc-64sju2rf0mv=""
+                                      class="footerItemsContainer"
+                                    >
+                                      <div
+                                        lwc-64sju2rf0mv=""
+                                        class="embeddedMessagingInputTextAreaWrapper slds-p-around_small"
+                                      >
+                                        <textarea
+                                          class="embeddedMessagingInputFooterTextArea slds-textarea slds-p-around_x-small"
+                                          rows="1"
+                                          lwc-64sju2rf0mv=""
+                                          placeholder="Type your message..."
+                                          aria-label="Chat message"
+                                          aria-description="Press enter to send"
+                                        ></textarea>
+                                      </div></div></embeddedmessaging-input-footer></embeddedmessaging-conversation-state
+                                ><embeddedmessaging-minimized-state
+                                  lwc-64un2jbuqj8=""
+                                  class="notificationArea maximized"
+                                  lwc-2tu55qmbbaf-host=""
+                                  ><div
+                                    lwc-2tu55qmbbaf=""
+                                    id="minimizedNotificationArea-20"
+                                    class="minimizedNotification hide"
+                                  >
+                                    <div
+                                      class="minimizedTextWrapper"
+                                      lwc-2tu55qmbbaf=""
+                                      id="minimizedNotificationTextWrapper-20"
+                                    >
+                                      <span
+                                        role="status"
+                                        class="minimizedText"
+                                        lwc-2tu55qmbbaf=""
+                                        title=""
+                                        id="minimizedNotificationText-20"
+                                      ></span
+                                      ><span
+                                        class="slds-assistive-text"
+                                        lwc-2tu55qmbbaf=""
+                                        >Expand the text</span
+                                      >
+                                    </div>
+                                  </div>
+                                  <button
+                                    lwc-2tu55qmbbaf=""
+                                    aria-describedby="dismissButton-help-20"
+                                    id="minimizedNotificationDismissButton-20"
+                                    class="dismissButton hide"
+                                  >
+                                    <span
+                                      class="dismissButtonText"
+                                      lwc-2tu55qmbbaf=""
+                                      title="Got it"
+                                      id="minimizedNotificationDismissButtonText-20"
+                                      >Got it</span
+                                    ><span
+                                      class="slds-assistive-text"
+                                      lwc-2tu55qmbbaf=""
+                                      id="dismissButton-help-20"
+                                      >Close the chat notification</span
+                                    >
+                                  </button>
+                                  <div
+                                    lwc-2tu55qmbbaf=""
+                                    class="minimizedButtonWrapper"
+                                  >
+                                    <button
+                                      lwc-2tu55qmbbaf=""
+                                      class="slds-button minimizedButton"
+                                      title="Expand the chat window"
+                                      aria-label="Expand the chat window"
+                                      id="minimizedButton-20"
+                                    >
+                                      <div
+                                        lwc-2tu55qmbbaf=""
+                                        class="minimizedButtonIconContainer"
+                                        id="minimizedButtonIconContainer-20"
+                                      >
+                                        <svg
+                                          aria-hidden="true"
+                                          viewBox="0 0 100 100"
+                                          lwc-2tu55qmbbaf=""
+                                          class="slds-button__icon minimizedButtonIconChat"
+                                        >
+                                          <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            lwc-2tu55qmbbaf=""
+                                            d="M50 0c27.614 0 50 20.52 50 45.833S77.614 91.667 50 91.667c-8.458 0-16.425-1.925-23.409-5.323-13.33 6.973-21.083 9.839-23.258 8.595-2.064-1.18.114-8.436 6.534-21.767C3.667 65.54 0 56.08 0 45.833 0 20.52 22.386 0 50 0zm4.583 61.667H22.917a2.917 2.917 0 000 5.833h31.666a2.917 2.917 0 000-5.833zm12.5-15.834H22.917a2.917 2.917 0 000 5.834h44.166a2.917 2.917 0 000-5.834zM79.583 30H22.917a2.917 2.917 0 000 5.833h56.666a2.917 2.917 0 000-5.833z"
+                                          ></path>
+                                        </svg>
+                                      </div>
+                                    </button></div></embeddedmessaging-minimized-state
+                                ><embeddedmessaging-aria-live-announcer
+                                  lwc-64un2jbuqj8=""
+                                  lwc-2vma9s18e7s-host=""
+                                  ><div
+                                    role="alert"
+                                    aria-live="polite"
+                                    class="accessibleText"
+                                    aria-atomic="true"
+                                    lwc-2vma9s18e7s=""
+                                  >
+                                    <pre lwc-2vma9s18e7s=""></pre>
+                                  </div>
+                                  <div
+                                    role="alert"
+                                    aria-live="polite"
+                                    class="accessibleText"
+                                    aria-atomic="true"
+                                    lwc-2vma9s18e7s=""
+                                  >
+                                    <pre
+                                      lwc-2vma9s18e7s=""
+                                    ></pre></div></embeddedmessaging-aria-live-announcer></embeddedmessaging-container></slot></embedded_service_iframe-frame-layout
+                          ><community_layout-hidden-region
+                            ><!----><community_builder-seo-assistant
+                              class="component-wrapper-spacer"
+                              data-component-id="seoAssistant-ea37"
+                            ></community_builder-seo-assistant
+                            ><webruntime-viewchange-notifier
+                              data-component-id="viewchangeNotifier-0dd3"
+                              lwc-1j18phjg883-host=""
+                              >eyJuYW1lIjoiSG9tZSJ9</webruntime-viewchange-notifier
+                            ><webruntime-page-data-layer-object
+                              data-component-id="pageDataLayerObject-881e"
+                              ><experience-data-layer-object
+                                ><div hidden="">
+                                  <script
+                                    type="application/json"
+                                    data-provider-type="page"
+                                  >
+                                    {
+                                      "type": "comm__namedPage",
+                                      "url": "https://org62.my.site.com/ESWAgentAstro1728468759675/?lwc.mode=prod",
+                                      "urlReferrer": "https://www.salesforce.com/"
+                                    }
+                                  </script>
+                                </div></experience-data-layer-object
+                              ></webruntime-page-data-layer-object
+                            ><!----></community_layout-hidden-region
+                          ></dxp_data_provider-data-proxy
+                        ><!----><!----></dxp_data_provider-user-data-provider
+                      ></webruntime-router-container
+                    ></slot
+                  >
+                </main></embedded_service_iframe-iframe-wrapper
+              ></dxp_data_provider-data-proxy
+            ><!----><!----></dxp_data_provider-user-data-provider
+          ></webruntime-inner-app
+        ><!----><span class="router-title" aria-live="polite" aria-atomic="true"
+          >Home</span
+        ></lwr-router-container
+      ></webruntime-app
+    >
+
+    <span
+      id="sf-aria-live"
+      aria-live="polite"
+      aria-atomic="true"
+      style="
+        position: absolute;
+        margin: -1px;
+        border: 0;
+        padding: 0;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        text-transform: none;
+        white-space: nowrap;
+      "
+      >Home</span
+    >
+  </body>
+</html>
