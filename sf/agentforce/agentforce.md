@@ -398,17 +398,3 @@ This approach reduces cognitive load and enables efficient task completion, show
 
 ---
 
-<a name='hodemo'></a>
-
-
-## Demo screens
-
-### Part-1
-
-![Demo-1](https://raw.githubusercontent.com/mohan-chinnappan-n/agentforce/main/agentforce-1.svg)
-
-### Part-2
-
-![Demo-2](https://raw.githubusercontent.com/mohan-chinnappan-n/agentforce/main/agentforce-2.svg)
-
----
