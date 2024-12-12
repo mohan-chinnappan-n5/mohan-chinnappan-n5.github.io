@@ -524,6 +524,16 @@ Agri: {
 
     },
 
+Apex: {
+      title: 'Apex',
+      links: [
+        { text: 'Apex Test Summary', href: '../../apex/apex-test-results.html', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
 Dwg: {
       title: 'Diagrams',
       links: [

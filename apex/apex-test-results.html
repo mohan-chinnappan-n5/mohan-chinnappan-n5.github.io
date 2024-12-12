@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Summary Parser</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.6.1/dist/d3.min.js"></script> <!-- D3.js CDN -->
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CSS CDN -->
+</head>
+<body class="bg-gray-100">
+
+    <!-- Header -->
+    <header class="bg-blue-600 p-4 text-white text-center text-xl font-semibold">
+        Apex Test Summary 
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6">
+        <!-- File Upload Section -->
+        <section class="mb-6">
+            <h2 class="text-2xl font-semibold mb-4">Upload JSON File</h2>
+            <input type="file" id="file-input" class="p-2 border border-gray-300 rounded" />
+            <button id="parse-btn" class="mt-4 p-2 bg-blue-600 text-white rounded">Parse JSON</button>
+        </section>
+
+        <!-- Summary Section -->
+        <section id="summary-section" class="bg-white p-4 rounded shadow-md mb-6 hidden">
+            <h2 class="text-xl font-semibold mb-2">Test Summary</h2>
+            <div id="summary" class="mb-4"></div>
+        </section>
+
+        <!-- Unique Failing Classes Section -->
+        <section id="failing-classes-section" class="bg-white p-4 rounded shadow-md mb-6 hidden">
+            <h2 class="text-xl font-semibold mb-2">Unique Classes with Failures</h2>
+            <ul id="failing-classes-list"></ul>
+        </section>
+
+        <!-- Failed Classes and Messages Section -->
+        <section id="failed-classes-section" class="bg-white p-4 rounded shadow-md mb-6 hidden">
+            <h2 class="text-xl font-semibold mb-2">Failed Classes and Associated Messages</h2>
+            <ul id="failed-classes-list"></ul>
+        </section>
+
+        <!-- Chart Section -->
+        <section id="chart-section" class="mb-6 hidden">
+            <h2 class="text-xl font-semibold mb-2">Test Status Distribution</h2>
+            <div id="chart"></div>
+        </section>
+
+        <section id="csv-section" class="mb-6 hidden">
+            <h2 class="text-xl font-semibold mb-4">Download CSV Files</h2>
+            <ul class="space-y-4">
+                <li>
+                    <a id="download-failing-classes" 
+                       class="inline-block bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" 
+                       href="#" 
+                       download="failed_classes.csv">
+                        Failed Classes CSV
+                    </a>
+                </li>
+                <li>
+                    <a id="download-unique-failing-classes" 
+                       class="inline-block bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" 
+                       href="#" 
+                       download="unique_failing_classes.csv">
+                         Unique Failing Classes CSV
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white text-center p-4"> MCDocs - Apex Test
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.getElementById('parse-btn').addEventListener('click', function () {
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const data = JSON.parse(event.target.result);
+                    parseData(data);
+                };
+                reader.readAsText(file);
+            } else {
+                alert("Please select a file first.");
+            }
+        });
+
+        function parseData(data) {
+            const summary = data.result.summary;
+            const tests = data.result.tests;
+        
+            // Show Summary
+            const summaryDiv = document.getElementById('summary');
+            summaryDiv.innerHTML = Object.keys(summary).map(key => {
+                return `<p><strong>${key}:</strong> ${summary[key]}</p>`;
+            }).join('');
+            document.getElementById('summary-section').classList.remove('hidden');
+        
+            // Process Test Status Counts
+            const testStatusCount = { "Pass": 0, "Fail": 0 };
+            const failedClasses = [];
+            tests.forEach(test => {
+                const status = test.Outcome;
+                if (status === "Pass") {
+                    testStatusCount.Pass++;
+                } else if (status === "Fail") {
+                    testStatusCount.Fail++;
+                    const className = test.ApexClass.Name;
+                    const failureMessage = test.Message;
+                    const stackTrace = test.StackTrace || "No stack trace available";
+                    failedClasses.push({ className, failureMessage, stackTrace });
+                }
+            });
+        
+            // Unique Failing Classes
+            const uniqueFailingClasses = [...new Set(failedClasses.map(item => item.className))];
+        
+            // Show Unique Failing Classes
+            const failingClassesList = document.getElementById('failing-classes-list');
+            failingClassesList.innerHTML = uniqueFailingClasses.map(className => {
+                return `<li>${className}</li>`;
+            }).join('');
+            document.getElementById('failing-classes-section').classList.remove('hidden');
+        
+            // Show Failed Classes and Messages
+            const failedClassesList = document.getElementById('failed-classes-list');
+            failedClassesList.innerHTML = failedClasses.map(({ className, failureMessage, stackTrace }) => {
+                return `
+                    <li>
+                        <strong>Class:</strong> ${className}<br>
+                        <strong>Message:</strong> ${failureMessage}<br>
+                        <strong>StackTrace:</strong> ${stackTrace}
+                    </li>
+                `;
+            }).join('');
+            document.getElementById('failed-classes-section').classList.remove('hidden');
+        
+            // Generate CSVs for Download
+            const formattedFailedClasses = failedClasses.map(item => [item.className, item.failureMessage, item.stackTrace]);
+            generateCSV(formattedFailedClasses, "failed_classes.csv", ['Class Name', 'Failure Message', 'Stack Trace']);
+            generateCSV(uniqueFailingClasses.map(className => [className]), "unique_failing_classes.csv", ['Class Name']);
+        
+            // Show Download Links
+            document.getElementById('csv-section').classList.remove('hidden');
+        
+            // Generate Donut Chart for Test Status Distribution
+            generateChart(testStatusCount);
+        }
+
+        function generateCSV(data, fileName, headers) {
+            // Check if the data is an array of arrays
+            if (!Array.isArray(data[0])) {
+                data = data.map(item => [item]); // Make each element an array
+            }
+        
+            // Prepare the CSV content
+            const csvContent = [headers, ...data].map(e => e.join(",")).join("\n");
+        
+            // Create a Blob and the download link
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', fileName);
+            
+            // Update the download link for "failed classes"
+            if (fileName === "failed_classes.csv") {
+                document.getElementById('download-failing-classes').setAttribute('href', url);
+            }
+            
+            // Update the download link for "unique failing classes"
+            if (fileName === "unique_failing_classes.csv") {
+                document.getElementById('download-unique-failing-classes').setAttribute('href', url);
+            }
+        }
+
+        function generateChart(testStatusCount) {
+            const width = 300;
+            const height = 300;
+            const radius = Math.min(width, height) / 2;
+
+            const svg = d3.select('#chart')
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .append('g')
+                .attr('transform', `translate(${width / 2}, ${height / 2})`);
+
+            const color = d3.scaleOrdinal()
+                .domain(["Pass", "Fail"])
+                .range(["#4CAF50", "#F44336"]);
+
+            const pie = d3.pie().value(d => d.value);
+            const data = Object.entries(testStatusCount).map(([key, value]) => ({ label: key, value }));
+
+            const arc = d3.arc().innerRadius(radius - 70).outerRadius(radius - 20);
+            const labelArc = d3.arc().innerRadius(radius - 40).outerRadius(radius - 40);
+
+            const arcs = svg.selectAll('.arc')
+                .data(pie(data))
+                .enter()
+                .append('g')
+                .attr('class', 'arc');
+
+            arcs.append('path')
+                .attr('d', arc)
+                .style('fill', d => color(d.data.label));
+
+            arcs.append('text')
+                .attr('transform', d => `translate(${labelArc.centroid(d)})`)
+                .style('text-anchor', 'middle')
+                .style('fill', '#fff')
+                .style('font-size', '14px')
+                .text(d => `${d.data.label}: ${d.data.value}`);
+
+            document.getElementById('chart-section').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
