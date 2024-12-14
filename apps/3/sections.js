@@ -151,6 +151,8 @@
         { text: 'Vanity License Plate Generator', href: '../../common/license-plate/index.html', icon: 'desktop' },
         { text: 'US - Tax Calculator', href: 'https://mctaxes.streamlit.app', icon: 'desktop' },
         { text: 'Iframes viewer', href: '../../frames/iframes.html?data=frames.json', icon: 'desktop' },
+        { text: 'Weather App', href: '../../weather/weatherApp.html?c=Nashua NH', icon: 'desktop' },
+
 
 
 

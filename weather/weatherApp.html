@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Comparison App</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 p-4">
+    <div class="container mx-auto">
+      <h1 class="text-white text-lg font-bold">Weather Comparison App</h1>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow container mx-auto p-4">
+    <div class="bg-white shadow-md rounded p-6">
+      <h2 class="text-xl font-semibold mb-4">Compare Weather Reports</h2>
+      <form id="weatherForm" class="space-y-4">
+        <div>
+          <label for="cityInput" class="block font-medium">Enter city names (comma-separated):</label>
+          <input
+            type="text"
+            id="cityInput"
+            class="border p-2 rounded w-full"
+            placeholder="e.g., London, Paris, New York"
+            required
+          />
+        </div>
+        <div>
+          <label for="formatInput" class="block font-medium">Select weather format:</label>
+          <select id="formatInput" class="border p-2 rounded w-full">
+            <option value="">Default</option>
+            <option value="1">Short</option>
+            <option value="2">Detailed</option>
+            <option value="3" selected>ANSI</option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
+        >
+          Get Weather
+        </button>
+      </form>
+      <div id="output" class="mt-6 p-4 bg-gray-100 rounded font-mono overflow-x-auto max-w-full"></div>    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 p-4 text-center text-white">
+    <p>MCApps - Weather</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('weatherForm');
+    const output = document.getElementById('output');
+    const cityInput = document.getElementById('cityInput');
+    const formatInput = document.getElementById('formatInput');
+    const LOCAL_STORAGE_KEY = 'weatherAppCities';
+
+    // Function to get URL parameters
+    const getUrlParams = (param) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    };
+
+    // Load city names from URL or local storage on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlCities = getUrlParams('c');
+      if (urlCities) {
+        cityInput.value = urlCities;
+      } else {
+        const savedCities = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (savedCities) {
+          cityInput.value = savedCities;
+        }
+      }
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const cities = cityInput.value.trim();
+      const format = formatInput.value.trim();
+
+      if (cities) {
+        // Save city names to local storage
+        localStorage.setItem(LOCAL_STORAGE_KEY, cities);
+
+        const cityArray = cities.split(',').map(city => city.trim());
+        output.innerHTML = '<p>Fetching weather data...</p>';
+
+        const fetchWeatherData = async (city) => {
+          const url = `https://wttr.in/${city}?format=${format}`;
+          try {
+            const response = await fetch(url);
+            if (response.ok) {
+              const htmlContent = await response.text();
+              return `<div class="bg-gray-100 p-4 rounded shadow-md">
+                        <h3 class="font-semibold text-lg mb-2">${city}</h3>
+                        <pre class="whitespace-pre-wrap">${htmlContent}</pre>
+                      </div>`;
+            } else {
+              return `<div class="bg-gray-100 p-4 rounded shadow-md">
+                        <h3 class="font-semibold text-lg mb-2">${city}</h3>
+                        <p>Error fetching weather data.</p>
+                      </div>`;
+            }
+          } catch (error) {
+            return `<div class="bg-gray-100 p-4 rounded shadow-md">
+                      <h3 class="font-semibold text-lg mb-2">${city}</h3>
+                      <p>Failed to fetch weather data.</p>
+                    </div>`;
+          }
+        };
+
+        // Fetch weather data for all cities in parallel
+        const results = await Promise.all(cityArray.map(fetchWeatherData));
+        output.innerHTML = results.join('');
+      } else {
+        output.innerHTML = '<p>Please enter at least one city name.</p>';
+      }
+    });
+  </script>
+</body>
+</html>

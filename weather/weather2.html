@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-600 p-4">
+    <div class="container mx-auto">
+      <h1 class="text-white text-lg font-bold">Weather App</h1>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow container mx-auto p-4">
+    <div class="bg-white shadow-md rounded p-6">
+      <h2 class="text-xl font-semibold mb-4">Get Weather Report</h2>
+      <form id="weatherForm" class="flex space-x-4">
+        <input
+          type="text"
+          id="cityInput"
+          class="border p-2 rounded w-full"
+          placeholder="Enter city name"
+          required
+        />
+        <select id="formatInput" class="border p-2 rounded">
+          <option value="">Default</option>
+          <option value="1">Short</option>
+          <option value="2">Detailed</option>
+          <option value="3">ANSI</option>
+        </select>
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Get Weather
+        </button>
+      </form>
+      <div id="output" class="mt-6 p-4 bg-gray-100 rounded font-mono overflow-auto"></div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 p-4 text-center text-white">
+    <p>Weather App © 2024</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('weatherForm');
+    const output = document.getElementById('output');
+    const cityInput = document.getElementById('cityInput');
+    const formatInput = document.getElementById('formatInput');
+
+    // Utility function to parse query parameters
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Load city and format from URL or local storage
+    document.addEventListener('DOMContentLoaded', () => {
+      const cityFromQuery = getQueryParam('c');
+      const formatFromQuery = getQueryParam('format');
+      const savedCity = localStorage.getItem('cityName');
+
+      if (cityFromQuery) {
+        cityInput.value = cityFromQuery; // Populate city from URL
+      } else if (savedCity) {
+        cityInput.value = savedCity; // Populate city from local storage
+      }
+
+      if (formatFromQuery) {
+        formatInput.value = formatFromQuery; // Populate format from URL
+      }
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault(); // Prevent page reload
+      const city = cityInput.value.trim();
+      const format = formatInput.value.trim();
+
+      if (city) {
+        // Save city name to local storage
+        localStorage.setItem('cityName', city);
+
+        output.innerHTML = 'Fetching weather data...';
+
+        try {
+          // Build the URL with the format and city
+          const url = `https://wttr.in/${city}?format=${format}`;
+          const response = await fetch(url);
+
+          if (response.ok) {
+            const htmlContent = await response.text();
+            output.innerHTML = `<pre class="whitespace-pre-wrap">${htmlContent}</pre>`;
+          } else {
+            output.textContent = 'Error fetching weather data.';
+          }
+        } catch (error) {
+          output.textContent = 'Failed to fetch weather data.';
+        }
+      } else {
+        output.textContent = 'Please enter a city name.';
+      }
+    });
+  </script>
+</body>
+</html>
