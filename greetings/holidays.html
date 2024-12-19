@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Holidays</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <style>
+    /* Animation for the Main Section */
+    @keyframes moveBackForth {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(20px); }
+      100% { transform: translateX(0); }
+    }
+
+    #greeting {
+      animation: moveBackForth 8s infinite ease-in-out; /* Smooth back-and-forth motion */
+    }
+  </style>
+</head>
+<body class="bg-white-100 font-sans leading-relaxed tracking-wide text-center">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-700 p-4 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-white font-bold text-xl">Happy Holiday Greetings</h1>
+      <div>
+        <a href="#greeting" class="nav-link text-gray-200 hover:text-white px-3">Greeting</a>
+        <a href="#about" class="nav-link text-gray-200 hover:text-white px-3">About Holidays</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Section with Greeting -->
+  <section id="greeting" class="relative h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('img/holiday.jpg');">
+    <div class="bg-gradient-to-br from-green-500 via-red-500 to-white bg-opacity-80 p-6 rounded-lg shadow-lg">
+      <h2 class="text-5xl font-extrabold text-white mb-4">Happy Holidays!</h2>
+      <p class="text-white text-xl">Wishing you a season filled with joy, love, and cherished moments!</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="container mx-auto p-6 mt-8 bg-gradient-to-r from-red-100 via-green-100 to-white rounded-lg shadow-md">
+    <h3 class="text-3xl font-semibold text-gray-800 mb-4">About the Holidays</h3>
+    <p class="text-gray-700 leading-relaxed">
+      The holiday season is a time of joy, celebration, and togetherness. It encompasses various traditions and festivities, 
+      including Christmas, Hanukkah, Kwanzaa, New Year's, and more. 
+      <b>It’s a time to reflect on the past year and look forward to new beginnings.</b>
+      <hr/>
+      Families and friends gather to celebrate, exchange gifts, and create lasting memories. Whether it's sharing meals, decorating homes, 
+      or spreading kindness, the holidays remind us of the importance of love, gratitude, and community.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-700 text-white p-4 mt-12">
+    <div class="container mx-auto text-center">
+      <p>MCDocs - Holidays</p>
+    </div>
+  </footer>
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    // Trigger confetti animation on page load
+    window.onload = function() {
+      confetti({
+        particleCount: 300,
+        spread: 70,
+        origin: { y: 0.7 },
+        colors: ['0000FF', '#008000', '#FFFFFF'], // Holiday colors
+      });
+    };
+
+    // Function to trigger confetti on navbar link click
+    function triggerConfetti() {
+      confetti({
+        particleCount: 150,
+        spread: 50,
+        origin: { x: Math.random(), y: Math.random() }, // Randomize confetti origin
+        colors: ['#FF0000', '#008000', '#FFFFFF'],
+      });
+    }
+
+    // Add click event listeners to navbar links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', triggerConfetti);
+    });
+  </script>
+</body>
+</html>

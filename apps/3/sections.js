@@ -486,6 +486,7 @@ Greetings: {
       links: [
         { text: 'Happy Diwali!', href: '../../greetings/diwali.html', icon: 'book' },
         { text: 'Happy Thanksgiving!', href: '../../greetings/thanksgiving.html', icon: 'book' },
+        { text: 'Happy Holidays!', href: '../../greetings/holidays.html', icon: 'book' },
  
         // Add more links here
       ],
