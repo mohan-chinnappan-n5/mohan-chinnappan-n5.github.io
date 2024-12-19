@@ -17,11 +17,6 @@
     #greeting {
       animation: moveBackForth 8s infinite ease-in-out; /* Smooth back-and-forth motion */
     }
-
-    /* Background Transition Effect */
-    .bg-transition {
-      transition: background-image 1s ease-in-out;
-    }
   </style>
 </head>
 <body class="bg-white-100 font-sans leading-relaxed tracking-wide text-center">
@@ -38,7 +33,7 @@
   </nav>
 
   <!-- Main Section with Greeting -->
-  <section id="greeting" class="relative h-screen bg-cover bg-center flex items-center justify-center bg-transition" style="background-image: url('img/holiday.jpg');">
+  <section id="greeting" class="relative h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('img/holiday.jpg');">
     <div class="bg-gradient-to-br from-green-500 via-red-500 to-white bg-opacity-80 p-6 rounded-lg shadow-lg">
       <h2 class="text-5xl font-extrabold text-white mb-4">Happy Holidays!</h2>
       <p class="text-white text-xl">Wishing you a season filled with joy, love, and cherished moments!</p>
@@ -74,7 +69,7 @@
         particleCount: 300,
         spread: 70,
         origin: { y: 0.7 },
-        colors: ['#0000FF', '#008000', '#FFFFFF'], // Holiday colors
+        colors: ['0000FF', '#008000', '#FFFFFF'], // Holiday colors
       });
     };
 
@@ -92,34 +87,6 @@
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', triggerConfetti);
     });
-
-    // Background Slideshow Logic
-    const images = [
-      'holiday.jpg',
-      'holiday3.jpeg',
-      'holiday4.jpeg',
-      
-      'holiday5.jpeg',
-      'holiday6.jpeg',
-      'holiday7.jpeg',
-  
-      'holiday8.jpeg',
-       'holiday9.jpeg',
-       'holiday10.jpeg',
-       'holiday11.jpeg',
-       'holiday12.jpeg',
- 
-    ];
-
-    let currentIndex = 0;
-    const greetingSection = document.getElementById('greeting');
-    const interval = 8000; // Change every 8 seconds 
-    const repo = 'https://raw.githubusercontent.com/mohan-chinnappan-n5/ai-gen-images/main/'
-
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % images.length; // Loop through the images
-	    greetingSection.style.backgroundImage = `url('${repo}${images[currentIndex]}')`;
-    }, interval);
   </script>
 </body>
 </html>
