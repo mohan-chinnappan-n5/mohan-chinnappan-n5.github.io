@@ -11,6 +11,19 @@
     const calendar = document.getElementById("calendar");
     const monthYearDisplay = document.getElementById("month-year");
 
+
+    document.getElementById("print-month").onclick = function() {
+      const originalContent = document.body.innerHTML;
+      const printContent = document.getElementById("calendar").outerHTML;
+      document.body.innerHTML = `<div style="margin:20px; text-align:center;">
+                                   <h1>${monthYearDisplay.innerText}</h1>
+                                   ${printContent}
+                                 </div>`;
+      window.print();
+      document.body.innerHTML = originalContent;
+    };
+
+
     function generateCalendar(month, year) {
         calendar.innerHTML = "";
         monthYearDisplay.innerText = `${monthNames[month]} ${year}`;
@@ -185,7 +198,7 @@
     const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
     return usHolidays.find(holiday => holiday.date === dateKey);
   }
-  
+  	  
   function generateCalendar(month, year) {
     calendar.innerHTML = "";
     monthYearDisplay.innerText = `${monthNames[month]} ${year}`;
