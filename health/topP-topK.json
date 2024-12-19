@@ -1,0 +1,60 @@
+{
+  "title": "Understanding TopP and TopK in Language Models",
+  "description": "Explore the concepts of TopP and TopK sampling methods used in language models to generate coherent and diverse text.",
+  "sections": [
+    {
+      "id": "topP",
+      "title": "What is TopP?",
+      "content": [
+        "TopP, also known as nucleus sampling, limits the pool of candidate tokens by their cumulative probability. It dynamically adjusts the size of the token pool based on a probability threshold P.",
+        "Steps involved in TopP sampling:",
+        "1. Sort tokens by probability in descending order.",
+        "2. Select the smallest set of tokens where their cumulative probability exceeds P.",
+        "3. Randomly sample from this subset.",
+        "For example, if P=0.85 and token probabilities are: cat (0.40), dog (0.30), car (0.15), rat (0.10), only 'cat', 'dog', and 'car' would be considered since their cumulative probability is greater than 0.85."
+      ]
+    },
+    {
+      "id": "topK",
+      "title": "What is TopK?",
+      "content": [
+        "TopK restricts the candidate tokens to the K most probable ones, regardless of their cumulative probability. This ensures that only the top K tokens are eligible for sampling.",
+        "Steps involved in TopK sampling:",
+        "1. Identify the top K tokens by their probabilities.",
+        "2. Randomly sample from this fixed-size subset.",
+        "For example, if K=2 and token probabilities are: cat (0.40), dog (0.30), car (0.15), rat (0.10), only 'cat' and 'dog' would be considered for sampling."
+      ]
+    },
+    {
+      "id": "differences",
+      "title": "Differences Between TopP and TopK",
+      "content": [
+        "1. **Token Selection**: TopP uses cumulative probability, while TopK selects a fixed number of tokens.",
+        "2. **Diversity**: TopP adapts dynamically based on probabilities, whereas TopK provides a fixed pool size.",
+        "3. **Flexibility**: TopP is more flexible, adjusting to context, while TopK is more rigid.",
+        "4. **Use Cases**: TopP is ideal for generating natural text, while TopK is suitable for controlling randomness."
+      ]
+    },
+    {
+      "id": "combination",
+      "title": "Combining TopP and TopK",
+      "content": [
+        "In some cases, both methods are used together to balance flexibility and computational efficiency. For example, TopK might first limit the pool size, and then TopP ensures diversity within the subset."
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "title": "TopP and TopK Sampling Explained",
+      "url": "https://www.youtube.com/embed/example1"
+    },
+    {
+      "title": "How to Generate Text with TopP and TopK",
+      "url": "https://www.youtube.com/embed/example2"
+    }
+  ],
+  "references": [
+    "OpenAI Documentation: https://platform.openai.com/docs",
+    "TopP vs TopK Explanation: https://example.com/topP-vs-topK"
+  ]
+}

@@ -431,6 +431,18 @@
       ],
 
     },
+    Cooking: {
+      title: 'Cooking',
+      links: [
+         { text: 'Swiss Chard', href: '../../health/hdocs.html?data=salads/swiss_chard.json', icon: 'desktop' },
+         { text: 'Swiss Chard Salad', href: '../../health/hdocs.html?data=salads/swiss_chard2.json', icon: 'desktop' },
+
+
+        // Add more links here
+      ],
+
+    },
+
 
     LLM: {
       title: 'LLM',

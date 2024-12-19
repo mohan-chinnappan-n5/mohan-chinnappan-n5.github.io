@@ -1,0 +1,61 @@
+{
+  "title": "Swiss Chard Chicken Strip Salad",
+  "description": "A healthy and delicious salad combining the earthy flavors of Swiss chard with the protein-packed goodness of chicken strips.",
+  "ingredients": [
+    {
+      "category": "Salad Base",
+      "items": [
+        "2 cups of fresh Swiss chard leaves, chopped",
+        "1 cup of mixed greens (optional)"
+      ]
+    },
+    {
+      "category": "Protein",
+      "items": [
+        "1 cup of grilled or baked chicken strips"
+      ]
+    },
+    {
+      "category": "Toppings",
+      "items": [
+        "1/2 cup of cherry tomatoes, halved",
+        "1/4 cup of red onion, thinly sliced",
+        "1/4 cup of cucumber, diced",
+        "1/4 cup of shredded carrots",
+        "2 tablespoons of crumbled feta cheese or goat cheese (optional)",
+        "2 tablespoons of roasted sunflower seeds or slivered almonds"
+      ]
+    },
+    {
+      "category": "Dressing",
+      "items": [
+        "3 tablespoons of olive oil",
+        "1 tablespoon of lemon juice",
+        "1 teaspoon of Dijon mustard",
+        "1 teaspoon of honey",
+        "Salt and pepper to taste"
+      ]
+    }
+  ],
+  "instructions": [
+    "Wash and dry the Swiss chard leaves and mixed greens thoroughly.",
+    "Chop the Swiss chard into bite-sized pieces and place them in a large salad bowl.",
+    "Add the mixed greens (optional) to the bowl.",
+    "Top the greens with grilled or baked chicken strips.",
+    "Add cherry tomatoes, red onion, cucumber, shredded carrots, cheese (if using), and sunflower seeds or almonds to the bowl.",
+    "In a small bowl, whisk together olive oil, lemon juice, Dijon mustard, honey, salt, and pepper to make the dressing.",
+    "Drizzle the dressing over the salad and toss gently to combine.",
+    "Serve immediately and enjoy!"
+  ],
+  "notes": [
+    "Feel free to substitute chicken with grilled tofu or chickpeas for a vegetarian option.",
+    "You can also customize the toppings with your favorite nuts, seeds, or dried fruits."
+  ],
+  "nutrition": {
+    "servings": 2,
+    "calories_per_serving": 350,
+    "protein_per_serving": "25g",
+    "fat_per_serving": "20g",
+    "carbohydrates_per_serving": "12g"
+  }
+}
