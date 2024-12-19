@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Converter</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    #originalImage, #convertedImage {
+      max-width: 100%;
+      max-height: 300px;
+    }
+    .hidden-initially {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <!-- Navbar -->
+  <nav class="bg-blue-700 p-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-white font-bold text-xl">Image Converter - webp</h1>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Section -->
+  <main class="container mx-auto my-8">
+    <section id="upload" class="bg-white p-6 rounded-lg shadow-md">
+      <h2 class="text-2xl font-semibold mb-4">Upload and Convert Image</h2>
+      <div class="flex gap-6">
+        <!-- Image Upload -->
+        <div class="w-1/2">
+          <label class="block mb-2 font-medium">Select an Image (JPG, JPEG, PNG)</label>
+          <input type="file" id="imageInput" accept="image/jpeg, image/png" class="block w-full p-2 border rounded-md">
+          <div id="originalImageContainer" class="mt-4 hidden-initially">
+            <p class="font-semibold">Original Image:</p>
+            <img id="originalImage" class="mt-2 border rounded-md" alt="Original Preview">
+            <p id="originalSize" class="text-sm text-gray-600 mt-2"></p>
+          </div>
+        </div>
+
+        <!-- Converted Image -->
+        <div class="w-1/2">
+          <button id="convertButton" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+            Convert to WebP
+          </button>
+          <div id="convertedImageContainer" class="mt-4 hidden-initially">
+            <p id="savings" class="mt-8 font-semibold"> </p>
+            <p class="font-semibold">Converted Image (WebP):</p>
+            <img id="convertedImage" class="mt-2 border rounded-md" alt="Converted Preview">
+            <p id="convertedSize" class="text-sm text-gray-600 mt-2"></p>
+            <a id="downloadButton" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 mt-4 block mx-auto text-center hidden">
+              Download WebP
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer" class="bg-blue-700 text-white p-4 mt-8 text-center">
+    <p>MCDocs - Webp image converter</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -549,6 +549,17 @@ Apex: {
 
     },
 
+ImgConvert: {
+      title: 'Image Converters',
+      links: [
+        { text: 'WebP convertor', href: '../../img-convert/towebp.html', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
+
 Dwg: {
       title: 'Diagrams',
       links: [
