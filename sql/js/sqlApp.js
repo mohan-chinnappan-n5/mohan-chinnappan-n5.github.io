@@ -31,6 +31,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         }
     });
+
+    document.getElementById("exportCsvButton").addEventListener("click", () => {
+        exportToCsv("sqlTable");
+    });
 });
 
 async function initializeSQLite(data) {
@@ -70,6 +74,8 @@ function executeQuery(query) {
         }
         stmt.free();
         renderTable("sqlTable", data, columns);
+        document.getElementById("exportCsvButton").disabled = false; // Enable the export button after query results are obtained
+
     } catch (error) {
         alert("Error executing query: " + error.message);
     }
@@ -100,4 +106,27 @@ function renderTable(id, data, columns) {
         searching: true,
         ordering: true,
     });
+}
+
+// Export Table to CSV
+function exportToCsv(tableId) {
+    const table = document.getElementById(tableId);
+    const rows = table.querySelectorAll("tr");
+    const csvData = [];
+
+    rows.forEach(row => {
+        const rowData = [];
+        const cols = row.querySelectorAll("td, th");
+        cols.forEach(col => {
+            rowData.push(col.textContent.trim());
+        });
+        csvData.push(rowData.join(","));
+    });
+
+    const csvContent = csvData.join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "export.csv";
+    link.click();
 }
