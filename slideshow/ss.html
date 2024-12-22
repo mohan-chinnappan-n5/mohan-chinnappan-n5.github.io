@@ -7,70 +7,8 @@
 
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
- <style>
-    /* Slideshow Styles */
-    .slideshow-container {
-      position: relative;
-      max-width: 100%;
-      height: 80vh; /* Use most of the viewport height */
-      margin: auto;
-      overflow: hidden;
-    }
-    .slide {
-      display: none;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-    }
-    .slide img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      margin: auto;
-      border-radius: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19); /* Adds a subtle shadow */
-    }
-    .active {
-      display: block;
-    }
-    /* Title Styles */
-    .slide-title {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      z-index: 5;
-    }
-    /* Navigation Buttons */
-    .nav-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      border: none;
-      font-size: 1.5rem;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      z-index: 10;
-    }
-    .nav-button:hover {
-      background-color: rgba(0, 0, 0, 0.8);
-    }
-    #prev {
-      left: 10px;
-    }
-    #next {
-      right: 10px;
-    }
-  </style>
+
+  <link rel="stylesheet" href="css/ssApp.css">
 </head>
 <body class="flex flex-col min-h-screen bg-gray-50">
   <!-- Navbar -->
@@ -95,76 +33,7 @@
     <p>MCImages - Slideshow</p>
   </footer>
 
-  <!-- JavaScript -->
-  <script>
-    // Get data file from query parameter
-    const params = new URLSearchParams(window.location.search);
-    const dataFile = params.get('data');
+  <script src="js/ssApp.js"></script>
 
-    // Fetch JSON data and render slideshow
-    async function renderSlideshow() {
-      if (!dataFile) {
-        document.getElementById('slideshow').innerHTML =
-          "<p class='text-center text-red-500'>No data file provided in the query parameter.</p>";
-        return;
-      }
-
-      try {
-        const response = await fetch(dataFile);
-        const images = await response.json();
-        const slideshow = document.getElementById('slideshow');
-
-        // Generate slides
-        images.forEach((image, index) => {
-          const slide = document.createElement('div');
-          slide.className = `slide ${index === 0 ? 'active' : ''}`;
-          slide.innerHTML = `
-            <img src="${image.url}" alt="${image.title}" class="block">
-            <div class="slide-title">${image.title}</div>
-          `;
-          slideshow.appendChild(slide);
-        });
-
-        // Add navigation controls
-        const prevButton = document.createElement('button');
-        prevButton.id = 'prev';
-        prevButton.className = 'nav-button';
-        prevButton.textContent = '❮';
-
-        const nextButton = document.createElement('button');
-        nextButton.id = 'next';
-        nextButton.className = 'nav-button';
-        nextButton.textContent = '❯';
-
-        slideshow.appendChild(prevButton);
-        slideshow.appendChild(nextButton);
-
-        // Enable slideshow navigation
-        let currentIndex = 0;
-        const slides = document.querySelectorAll('.slide');
-
-        function showSlide(index) {
-          slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-          });
-        }
-
-        document.getElementById('prev').addEventListener('click', () => {
-          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-          showSlide(currentIndex);
-        });
-
-        document.getElementById('next').addEventListener('click', () => {
-          currentIndex = (currentIndex + 1) % slides.length;
-          showSlide(currentIndex);
-        });
-      } catch (error) {
-        document.getElementById('slideshow').innerHTML =
-          "<p class='text-center text-red-500'>Error loading data file.</p>";
-      }
-    }
-
-    renderSlideshow();
-  </script>
 </body>
 </html>
