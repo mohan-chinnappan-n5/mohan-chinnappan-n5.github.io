@@ -560,6 +560,27 @@ ImgConvert: {
 
     },
 
+Slideshow: {
+      title: 'Slideshows',
+      links: [
+        { text: 'AI generated Images', href: '../../slideshow/ss.html?data=holday.json', icon: 'desktop' },
+        // Add more links here
+      ],
+
+    },
+
+
+
+Maps: {
+      title: 'Maps',
+      links: [
+        { text: 'City Map', href: '../../maps/map.html', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
 
 Dwg: {
       title: 'Diagrams',

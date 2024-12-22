@@ -1,3 +1,6 @@
+// sqlApp.js
+// mohan chinnappan
+// --------------
 let db; // SQLite database instance
 const defaultCsvData = [
     { ID: "1", Name: "John Doe", Department: "Engineering", Salary: "75000", JoiningDate: "2020-01-15" },
