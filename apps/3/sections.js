@@ -563,7 +563,7 @@ ImgConvert: {
 Slideshow: {
       title: 'Slideshows',
       links: [
-        { text: 'AI generated Images', href: '../../slideshow/ss.html?data=holday.json', icon: 'desktop' },
+        { text: 'AI generated Images', href: '../../slideshow/ss.html?data=holiday.json', icon: 'desktop' },
         // Add more links here
       ],
 
