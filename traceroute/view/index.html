@@ -1,73 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Traceroute Analyzer</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico"
+    />
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"
+    />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="app.css">
-   
-</head>
-<body class="bg-gray-100">
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body class="bg-gray-100">
     <!-- Navbar -->
-    <nav class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between">
-            <h1 class="text-xl font-bold">Traceroute Analyzer</h1>
+    <nav class="bg-blue-700 p-4 shadow-md sticky top-0 z-50">
+
+        <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-white text-xl font-bold">Traceroute Analyzer</h1>
+
+        <div>
+          <a
+            target="_blank"
+            href="https://ss64.com/bash/traceroute.html"
+           
+            class="nav-link text-gray-200 hover:text-white px-3"
+            >Man Page</a
+          >
+          <a
+            target="_blank"
+            href="https://stefansundin.github.io/traceroute-mapper/"
+            class="nav-link text-gray-200 hover:text-white px-3"
+            >Traceroute mapper</a
+          >
+
+          <a
+            target="_blank"
+            href="https://mohan-chinnappan-n5.github.io/2021/dwg/pg/dwg.html"
+            class="nav-link text-gray-200 hover:text-white px-3"
+            >Drawing Tool</a
+          >
+
         </div>
+      </div>
     </nav>
 
     <!-- Main Content -->
     <div class="container mx-auto p-6">
-        <h2 class="text-2xl font-semibold mb-4">Upload Your Traceroute Output</h2>
+      <h2 class="text-2xl font-semibold mb-4">Upload Your Traceroute Output</h2>
 
-        <div class="mb-4">
-            <input type="file" id="fileInput" class="border border-gray-300 p-2 rounded">
-        </div>
+      <div class="mb-4">
+        <input
+          type="file"
+          id="fileInput"
+          class="border border-gray-300 p-2 rounded"
+        />
+      </div>
 
-        <!-- Raw Traceroute Output -->
-        <h3 class="text-xl font-semibold mt-8">Raw Traceroute Output</h3>
-        <pre id="rawTracerouteOutput" class="bg-gray-800 text-white p-4 rounded-lg overflow-auto"></pre>
+      <!-- Raw Traceroute Output -->
+      <h3 class="text-xl font-semibold mt-8">Raw Traceroute Output</h3>
+      <pre
+        id="rawTracerouteOutput"
+        class="bg-gray-800 text-white p-4 rounded-lg overflow-auto hidden"
+      ></pre>
 
-        <!-- Parsed Traceroute Data Table -->
-        <h3 class="text-xl font-semibold mt-8">Parsed Traceroute Data</h3>
-        <table id="tracerouteTable" class="display w-full mt-4">
-            <thead>
-                <tr>
-                    <th>Hop</th>
-                    <th>Hostname</th>
-                    <th>IP Address</th>
-                    <th>Latencies (ms)</th>
-                    <th>Country</th>
-                </tr>
-            </thead>
-            <tbody id="tracerouteTableBody">
-                <!-- Table rows will be inserted here dynamically -->
-            </tbody>
-        </table>
+      <!-- Parsed Traceroute Data Table -->
+      <h3 class="text-xl font-semibold mt-8">Parsed Traceroute Data</h3>
+      <table id="tracerouteTable" class="display w-full mt-4">
+        <thead>
+          <tr>
+            <th>Hop</th>
+            <th>Hostname</th>
+            <th>IP Address</th>
+            <th>Latencies (ms)</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody id="tracerouteTableBody">
+          <!-- Table rows will be inserted here dynamically -->
+        </tbody>
+      </table>
+      <!-- Total Latency -->
+      <h3 class="text-xl font-semibold mt-8">Total Latency</h3>
+      <p id="totalLatency" class="text-lg"></p>
 
-        <!-- Line-by-Line Analysis Section -->
-        <div id="lineAnalysisSection"></div>
+      <!-- Export CSV Button -->
+      <button
+        id="exportCsvButton"
+        class="bg-green-500 text-white py-2 px-4 rounded mt-4 hidden"
+      >
+        Export CSV
+      </button>
 
-        <!-- Total Latency -->
-        <h3 class="text-xl font-semibold mt-8">Total Latency</h3>
-        <p id="totalLatency" class="text-lg"></p>
+      <!-- Line-by-Line Analysis Section -->
+      <div id="lineAnalysisSection"></div>
 
-        <!-- Copy Mermaid Code Button -->
-        <button id="copyMermaidButton" class="bg-blue-500 text-white py-2 px-4 rounded mt-4" disabled>Copy Mermaid Code to Clipboard</button>
-
-         
+      <!-- Copy Mermaid Code Button -->
+      <button
+        id="copyMermaidButton"
+        class="bg-blue-500 text-white py-2 px-4 rounded mt-4 hidden"
+      >
+        Copy Mermaid Code to Clipboard
+      </button>
     </div>
 
     <!-- Footer -->
     <footer class="bg-blue-600 text-white text-center p-4">
-        <p>MCDocs - Traceroute</p>
+      <p>MCDocs - Traceroute</p>
     </footer>
 
- <script src="./app.js"></script> 
-</body>
+    <script src="./app.js"></script>
+  </body>
 </html>

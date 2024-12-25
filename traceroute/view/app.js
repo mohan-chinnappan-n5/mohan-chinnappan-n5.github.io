@@ -57,6 +57,7 @@
                     const tracerouteText = event.target.result;
                     // Display the raw traceroute output in the <pre> element
                     document.getElementById('rawTracerouteOutput').innerText = tracerouteText;
+                    document.getElementById('rawTracerouteOutput').style.display = 'block';
                     const hops = parseTraceroute(tracerouteText);
 
                     // Insert data into the table
@@ -65,6 +66,7 @@
 
                     // Clear previous table rows
                     tableBody.innerHTML = '';
+                    document.getElementById('exportCsvButton').style.display = 'block';
 
                     // Add new rows with country data
                     for (let hop of hops) {
@@ -125,7 +127,7 @@
                     `;
 
                     // Enable the button once the Mermaid code is ready
-                    document.getElementById('copyMermaidButton').disabled = false;
+                    document.getElementById('copyMermaidButton').style.display = 'block';
 
                     // Store the Mermaid text in clipboard when the button is clicked
                     document.getElementById('copyMermaidButton').addEventListener('click', function() {
@@ -140,3 +142,39 @@
                 reader.readAsText(file);
             }
         });
+
+
+// Function to export all DataTable data to CSV
+function exportAllDataTableToCSV(filename) {
+    const dataTable = $('#tracerouteTable').DataTable();
+
+    // Get all data from DataTable
+    const rows = [['Hop', 'Hostname', 'IP Address', 'Latencies (ms)', 'Country']]; // Add header row
+    const allData = dataTable.rows().data(); // Fetch all rows, ignoring pagination
+
+    // Iterate over all rows and push to CSV
+    allData.each(row => {
+        rows.push([
+            row[0], // Hop
+            row[1], // Hostname
+            row[2], // IP Address
+            row[3], // Latencies (ms)
+            row[4], // Country
+        ]);
+    });
+
+    // Convert rows to CSV format
+    const csvContent = rows.map(row => row.join(',')).join('\n');
+
+    // Create a blob and download it
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+}
+
+// Attach click event to the Export CSV button
+document.getElementById('exportCsvButton').addEventListener('click', function () {
+    exportAllDataTableToCSV('traceroute_data.csv');
+});
