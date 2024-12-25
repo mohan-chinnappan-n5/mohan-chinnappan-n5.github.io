@@ -57,6 +57,14 @@
                     const tracerouteText = event.target.result;
                     // Display the raw traceroute output in the <pre> element
                     document.getElementById('rawTracerouteOutput').innerText = tracerouteText;
+                    document.getElementById('allContent').style.display = 'block';
+
+                    navigator.clipboard.writeText(tracerouteText).then(function() {
+                        alert('The traceroute data copied to clipboard!');
+                    }).catch(function(error) {
+                        console.error('Error copying raceroute data : ', error);
+                    });
+
                     document.getElementById('rawTracerouteOutput').style.display = 'block';
                     const hops = parseTraceroute(tracerouteText);
 
