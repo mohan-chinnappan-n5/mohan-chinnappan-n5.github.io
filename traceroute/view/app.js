@@ -9,7 +9,7 @@
             } catch (error) {
                 console.error('Error fetching country info:', error);
                 // return 'Unknown';
-                return `<a target='new' href='https://ipinfo.io/${ip}'>Get Country Info</a>`;
+                return `<a target='new' class="text-blue-600 hover:text-blue-800 visited:text-purple-600" href='https://ipinfo.io/${ip}'>Get Country Info</a>`;
 
             }
         }
