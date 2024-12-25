@@ -210,6 +210,8 @@
         { text: 'Performance Visualizer', href: 'https://mohanpwviz.streamlit.app', icon: 'desktop' },
         { text: 'Enhancing traceroute', href: '../../traceroute/index.html', icon: 'desktop' },
         { text: 'SpeedTest - give metrics on the hosted server', href: 'https://mc-speedtest.streamlit.app', icon: 'desktop' },
+        { text: 'Traceroute Viewer', href: '../../traceroute/view/index.html', icon: 'desktop' },
+
 
 
 
