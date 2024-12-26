@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL From English</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+ <!-- Navbar -->
+ <nav class="bg-blue-700 p-4 shadow-md sticky top-0 z-50">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-white font-bold text-xl">SQL From English</h1>
+    <div>
+      <a href="https://mohan-chinnappan-n5.github.io/dfv/catalog.html" class="nav-link text-gray-200 hover:text-white px-3">Data Catalog</a>
+    </div>
+  </div>
+</nav>
+
+  <!-- Main Content -->
+  <main class="py-8 flex flex-col max-w-7xl mx-auto">
+    <section class="w-full p-4 bg-white shadow rounded">
+      <h2 class="text-lg font-bold mb-4">Upload CSV File</h2>
+      <input id="csvInput" type="file" accept=".csv" class="mb-4">
+      <textarea id="userPrompt" rows="3" class="w-full p-2 border rounded mb-4" placeholder="Describe what you want from the CSV in plain English..."></textarea>
+      <button id="generateSQL" class="bg-blue-600 text-white px-4 py-2 rounded hidden">Generate SQL</button>
+    </section>
+
+    <section id="tableSection" class="w-full mt-6 hidden">
+      <h2 class="text-lg font-bold mb-4">CSV Preview</h2>
+      <table id="csvTable" class="display" style="width:100%"></table>
+
+    </section>
+
+
+    <!-- Section to show Request Body -->
+  <div id="requestBodySection" class="hidden mt-4 p-4 bg-gray-100 rounded shadow">
+    <h2 class="text-lg font-bold mb-2">Request Body</h2>
+    <pre id="requestBodyContent" class="text-sm bg-white p-2 rounded overflow-auto"></pre>
+  </div>
+
+
+    <section id="sqlSection" class="w-full mt-6 hidden">
+      <h2 class="text-lg font-bold mb-4">Generated SQL Query</h2>
+      <div id="sqlOutput" class="bg-gray-100 p-4 rounded border"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white mt-8">
+    <div class="max-w-7xl mx-auto px-4 py-6 text-center">
+      <p>MCDocs - SQL From Engish - Powered by GROQ</p>
+    </div>
+  </footer>
+
+ <script src="js/eng2sqlApp.js"></script>
+</body>
+</html>
