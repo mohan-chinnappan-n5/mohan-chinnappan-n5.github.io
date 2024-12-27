@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura to LWC Converter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Navbar -->
+  <nav class="bg-blue-600 p-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-white text-xl font-bold">Aura to LWC Converter</h1>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container mx-auto my-8 grid grid-cols-2 gap-4">
+    <!-- Left Pane: File Upload and Zip Contents -->
+    <div class="bg-white p-4 rounded shadow">
+      <h2 class="text-lg font-semibold mb-4">Upload Aura Component</h2>
+      <input type="file" id="uploadZip" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" accept=".zip">
+      <div id="zipContents" class="mt-4">
+        <h3 class="text-md font-medium">Contents of the Zip:</h3>
+        <ul class="list-disc pl-5 text-sm text-gray-700" id="fileList">
+          <!-- Dynamically populated with zip file contents -->
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right Pane: LWC Output -->
+    <div class="bg-white p-4 rounded shadow">
+      <h2 class="text-lg font-semibold mb-4">Converted LWC Assets</h2>
+      <div id="lwcContents" class="overflow-auto max-h-96">
+        <h3 class="text-md font-medium">LWC Files:</h3>
+        <ul class="list-disc pl-5 text-sm text-gray-700" id="lwcFileList">
+          <!-- Dynamically populated with LWC files -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white p-4 mt-12">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2024 Aura to LWC Converter</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('uploadZip').addEventListener('change', async (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const fileListElement = document.getElementById('fileList');
+      const lwcFileListElement = document.getElementById('lwcFileList');
+
+      // Clear previous entries
+      fileListElement.innerHTML = '';
+      lwcFileListElement.innerHTML = '';
+
+      const jsZip = await import('https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js');
+      const zip = new jsZip.default();
+      const contents = await zip.loadAsync(file);
+
+      // Display zip contents
+      Object.keys(contents.files).forEach((fileName) => {
+        const li = document.createElement('li');
+        li.textContent = fileName;
+        fileListElement.appendChild(li);
+
+        // Simulate conversion: generate a matching LWC asset
+        if (fileName.endsWith('.cmp') || fileName.endsWith('.js')) {
+          const lwcLi = document.createElement('li');
+          lwcLi.textContent = fileName.replace('.cmp', '.html').replace('.js', '.js');
+          lwcFileListElement.appendChild(lwcLi);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

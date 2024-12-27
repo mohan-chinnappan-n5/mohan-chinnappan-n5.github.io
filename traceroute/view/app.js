@@ -14,39 +14,133 @@
             }
         }
 
-        // Parse traceroute output
-        function parseTraceroute(tracerouteText) {
-            const hops = [];
-            const lines = tracerouteText.split("\n");
 
-            lines.forEach(line => {
-                const match = line.match(/^\s*(\d+)\s+([\w\.-]+)?\s*\(([\d\.]+)\)\s+([\d\.]+ ms)?/);
 
-                if (match) {
-                    const hop = {
-                        hopNumber: match[1],
-                        hostname: match[2] || 'Unknown',
-                        ipAddress: match[3],
-                        latencies: match[4] ? match[4].split(', ') : ['N/A'],
-                        country: 'Fetching...' // Placeholder for country
-                    };
-                    hops.push(hop);
-                } else if (line.includes("*")) {
-                    const matchStar = line.match(/^\s*(\d+)\s+\*/);
-                    if (matchStar) {
-                        const hop = {
-                            hopNumber: matchStar[1],
-                            hostname: 'No Response',
-                            ipAddress: 'N/A',
-                            latencies: ['N/A'],
-                            country: 'Unknown'
-                        };
-                        hops.push(hop);
-                    }
-                }
-            });
-            return hops;
+
+// Parse traceroute output with support for multiple latencies and multi-line hops
+function parseTraceroute2(tracerouteText) {
+    const hops = [];
+    const lines = tracerouteText.split("\n");
+    let currentHop = null;
+
+    lines.forEach(line => {
+        // Match a new hop line
+        const hopMatch = line.match(/^\s*(\d+)\s+([\w\.-]+)?\s*\(([\d\.]+)\)\s+((?:[\d\.]+ ms\s*)+)/);
+        const starMatch = line.match(/^\s*(\d+)\s+\*/);
+
+        if (hopMatch) {
+            if (currentHop) {
+                hops.push(currentHop); // Save the previous hop before starting a new one
+            }
+
+            // Start a new hop
+            currentHop = {
+                hopNumber: hopMatch[1],
+                hostname: hopMatch[2] || 'Unknown',
+                ipAddress: hopMatch[3],
+                latencies: hopMatch[4]
+                    .trim()
+                    .split(/\s+/), // Split latencies by whitespace
+                country: 'Fetching...' // Placeholder for country
+            };
+        } else if (starMatch) {
+            if (currentHop) {
+                hops.push(currentHop); // Save the previous hop before starting a new one
+            }
+
+            // Start a new hop with no response
+            currentHop = {
+                hopNumber: starMatch[1],
+                hostname: 'No Response',
+                ipAddress: 'N/A',
+                latencies: ['N/A'],
+                country: 'Unknown'
+            };
+        } else if (line.match(/^\s+/) && currentHop) {
+            // Additional lines for the current hop
+            const additionalMatch = line.match(/([\w\.-]+)?\s*\(([\d\.]+)\)\s+((?:[\d\.]+ ms\s*)+)/);
+            if (additionalMatch) {
+                // Add details from the additional line
+                currentHop.latencies.push(
+                    ...additionalMatch[3]
+                        .trim()
+                        .split(/\s+/) // Split latencies by whitespace
+                );
+            }
         }
+    });
+
+    // Push the last hop if it exists
+    if (currentHop) {
+        hops.push(currentHop);
+    }
+
+    return hops;
+}
+
+function parseTraceroute(tracerouteText) {
+    const hops = [];
+    const lines = tracerouteText.split("\n");
+    let currentHop = null;
+
+    lines.forEach(line => {
+        // Match a new hop line with valid IP and latency
+        const hopMatch = line.match(/^\s*(\d+)\s+([\w\.-]+)?\s*\(([\d\.]+)\)\s+((?:[\d\.\*]+ ms\s*)+)/);
+        const starOnlyMatch = line.match(/^\s*(\d+)\s+\*/);
+
+        if (hopMatch) {
+            if (currentHop) {
+                hops.push(currentHop); // Save the previous hop before starting a new one
+            }
+
+            // Start a new hop
+            currentHop = {
+                hopNumber: hopMatch[1],
+                hostname: hopMatch[2] || 'Unknown',
+                ipAddress: hopMatch[3],
+                latencies: hopMatch[4]
+                    .trim()
+                    .split(/\s+/) // Split latencies by whitespace
+                    .filter(latency => latency !== '*'), // Exclude * from latencies
+                country: 'Fetching...' // Placeholder for country
+            };
+        } else if (starOnlyMatch) {
+            if (currentHop) {
+                hops.push(currentHop); // Save the previous hop before starting a new one
+            }
+
+            // Start a new hop with no response
+            currentHop = {
+                hopNumber: starOnlyMatch[1],
+                hostname: 'No Response',
+                ipAddress: 'N/A',
+                latencies: ['N/A'],
+                country: 'Unknown'
+            };
+        } else if (line.match(/^\s+/) && currentHop) {
+            // Additional lines for the current hop
+            const additionalMatch = line.match(/([\w\.-]+)?\s*\(([\d\.]+)\)\s+((?:[\d\.\*]+ ms\s*)+)/);
+            if (additionalMatch) {
+                // Add details from the additional line
+                currentHop.latencies.push(
+                    ...additionalMatch[3]
+                        .trim()
+                        .split(/\s+/) // Split latencies by whitespace
+                        .filter(latency => latency !== '*') // Exclude * from latencies
+                );
+            }
+        }
+    });
+
+    // Push the last hop if it exists
+    if (currentHop) {
+        hops.push(currentHop);
+    }
+
+    return hops;
+}
+
+
 
         // Handle file upload and process traceroute data
         document.getElementById('fileInput').addEventListener('change', function (e) {
