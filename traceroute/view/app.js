@@ -84,9 +84,9 @@ function parseTraceroute(tracerouteText) {
     let currentHop = null;
 
     lines.forEach(line => {
-        // Match a new hop line with valid IP and latency
-        const hopMatch = line.match(/^\s*(\d+)\s+([\w\.-]+)?\s*\(([\d\.]+)\)\s+((?:[\d\.\*]+ ms\s*)+)/);
-        const starOnlyMatch = line.match(/^\s*(\d+)\s+\*/);
+        // Match a new hop line
+        const hopMatch = line.match(/^\s*(\d+)\s+([\w\.-]+)?\s*\(([\d\.]+)\)\s+((?:\d+\.\d+ ms|\*\s?)+)/);
+        const starMatch = line.match(/^\s*(\d+)\s+\*/);
 
         if (hopMatch) {
             if (currentHop) {
@@ -100,18 +100,18 @@ function parseTraceroute(tracerouteText) {
                 ipAddress: hopMatch[3],
                 latencies: hopMatch[4]
                     .trim()
-                    .split(/\s+/) // Split latencies by whitespace
-                    .filter(latency => latency !== '*'), // Exclude * from latencies
+                    .split(/\s+(?=\d+\.|\*)/) // Split latencies into individual parts
+                    .map(latency => latency.trim()),
                 country: 'Fetching...' // Placeholder for country
             };
-        } else if (starOnlyMatch) {
+        } else if (starMatch) {
             if (currentHop) {
                 hops.push(currentHop); // Save the previous hop before starting a new one
             }
 
             // Start a new hop with no response
             currentHop = {
-                hopNumber: starOnlyMatch[1],
+                hopNumber: starMatch[1],
                 hostname: 'No Response',
                 ipAddress: 'N/A',
                 latencies: ['N/A'],
@@ -119,14 +119,14 @@ function parseTraceroute(tracerouteText) {
             };
         } else if (line.match(/^\s+/) && currentHop) {
             // Additional lines for the current hop
-            const additionalMatch = line.match(/([\w\.-]+)?\s*\(([\d\.]+)\)\s+((?:[\d\.\*]+ ms\s*)+)/);
+            const additionalMatch = line.match(/([\w\.-]+)?\s*\(([\d\.]+)\)\s+((?:\d+\.\d+ ms|\*\s?)+)/);
             if (additionalMatch) {
                 // Add details from the additional line
                 currentHop.latencies.push(
                     ...additionalMatch[3]
                         .trim()
-                        .split(/\s+/) // Split latencies by whitespace
-                        .filter(latency => latency !== '*') // Exclude * from latencies
+                        .split(/\s+(?=\d+\.|\*)/) // Split latencies into individual parts
+                        .map(latency => latency.trim())
                 );
             }
         }

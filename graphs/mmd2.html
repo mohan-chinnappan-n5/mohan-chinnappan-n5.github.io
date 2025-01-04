@@ -43,70 +43,15 @@
       }
     </style>
     <script type="module">
-
       Split(["#code", "#fig"], {
         sizes: [50, 50],
       });
 
       import mermaid from "https://unpkg.com/mermaid@10.9.0/dist/mermaid.esm.min.mjs";
 
-
-
-
-    const sample = `
-flowchart TB 
-  A[Reference Docs, Websites...] --> B[RAG System]  --> C[LLM] --> LLM[embeddings] --> VDB[Vector DB of embeddings]
-  Q[User Query] --> E[LLM] --> F[Query Vector ] --> B  --> G[Find the relevant context docs using cosine similarity] --> H[Context Chunks] --> HH[Augmented Query - Question and context]
-  HH --> I[LLM - Geneation] --> R[Response]
-  B --> VDB
-
-  style A fill:#f9f,stroke:#333,stroke-width:4px
-  style B fill:#9ff,stroke:#333,stroke-width:4px
-  style Q fill:#ff9,stroke:#333,stroke-width:4px
-  style R fill:#99ccff,stroke:#333,stroke-width:4px
- 
-    `;
-
       document.addEventListener("DOMContentLoaded", function () {
         // Initialize Mermaid
         mermaid.initialize({ startOnLoad: true });
-         document.getElementById("mermaid-input").value = sample; 
- 
-       // Function to load from the URL parameter and clipboard
-        const loadFromQueryStringAndClipboard = async () => {
-          const urlParams = new URLSearchParams(window.location.search);
-          const clipboardContent = urlParams.get("c");
-
-          if (clipboardContent) {
-            try {
-              // Decode the URL parameter content
-              const decodedContent = decodeURIComponent(clipboardContent);
-              document.getElementById("mermaid-input").value = decodedContent;
-              renderMermaid(); // Re-render diagram after loading content
-            } catch (error) {
-              alert("Error decoding URL parameter: " + error.message);
-            }
-          } 
-	  else {
-            // Fallback: If no ?c parameter, try reading clipboard
-            try {
-              const clipboardText = await navigator.clipboard.readText();
-              if (clipboardText) {
-                document.getElementById("mermaid-input").value = clipboardText;
-                renderMermaid(); // Re-render diagram after loading content
-              } else {
-                alert("Clipboard is empty or unsupported");
-              }
-            } catch (error) {
-              alert("Failed to read clipboard content: " + error.message);
-            }
-          }
-        };
-
-
-
-        // Trigger the load function on page load
-        loadFromQueryStringAndClipboard();
 
         // Function to render Mermaid diagrams
         const renderMermaid = () => {
@@ -136,7 +81,18 @@ flowchart TB
           }
         };
 
-        renderMermaid();
+        // Function to load content from URL query string (for ?c parameter)
+        const loadFromQueryString = () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const clipboardContent = urlParams.get("c");
+          if (clipboardContent) {
+            document.getElementById("mermaid-input").value = decodeURIComponent(clipboardContent);
+            renderMermaid(); // Re-render on change
+          }
+        };
+
+        // Check if URL has a ?c parameter and load it into the editor
+        loadFromQueryString();
 
         // Listen for input changes and render Mermaid diagram immediately
         document
@@ -183,7 +139,19 @@ flowchart TB
         <textarea 
           id="mermaid-input"
           class="w-full h-96 p-4 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Enter your Mermaid code here..." > </textarea
+          placeholder="Enter your Mermaid code here..."
+        >
+flowchart TB 
+  A[Reference Docs, Websites...] --> B[RAG System]  --> C[LLM] --> LLM[embeddings] --> VDB[Vector DB of embeddings]
+  Q[User Query] --> E[LLM] --> F[Query Vector ] --> B  --> G[Find the relevant context docs using cosine similarity] --> H[Context Chunks] --> HH[Augmented Query - Question and context]
+  HH --> I[LLM - Geneation] --> R[Response]
+  B --> VDB
+
+  style A fill:#f9f,stroke:#333,stroke-width:4px
+  style B fill:#9ff,stroke:#333,stroke-width:4px
+  style Q fill:#ff9,stroke:#333,stroke-width:4px
+  style R fill:#99ccff,stroke:#333,stroke-width:4px
+      </textarea
         >
       </div>
     </div>
@@ -210,9 +178,5 @@ flowchart TB
         </button>
       </div>
     </div>
-
-   
-
-    
   </body>
 </html>

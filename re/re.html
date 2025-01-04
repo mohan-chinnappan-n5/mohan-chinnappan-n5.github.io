@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Tester</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Navbar -->
+    <header class="bg-blue-500 text-white sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-lg font-bold">Regex Tester</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4">
+        <div class="mb-4">
+            <label for="regex" class="block text-sm font-medium text-gray-700">Enter Regular Expression</label>
+            <input type="text" id="regex" value="\d{3}-\d{2}-\d{4}" class="w-full p-2 border border-gray-300 rounded mt-1">
+        </div>
+        
+        <div class="grid grid-cols-2 gap-4">
+            <!-- Input Pane -->
+            <div>
+                <label for="textInput" class="block text-sm font-medium text-gray-700">Input Text</label>
+                <textarea id="textInput" rows="8" class="w-full p-2 border border-gray-300 rounded mt-1">
+Here are some fake Social Security Numbers (SSNs) for testing:
+123-45-6789
+987-65-4321
+Invalid SSN: 1234-56-789
+Another valid one: 111-22-3333
+                </textarea>
+            </div>
+            
+            <!-- Output Pane -->
+            <div>
+                <label for="output" class="block text-sm font-medium text-gray-700">Output</label>
+                <div id="output" class="w-full p-2 border border-gray-300 rounded mt-1 bg-gray-50 h-52 overflow-auto">
+                    <!-- Results will be rendered here -->
+                </div>
+            </div>
+        </div>
+
+        <button id="runButton" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Run Regex</button>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-500 text-white text-center py-4 mt-8">
+        <p>MCDoc - Regex</p>
+    </footer>
+
+    <!-- Script -->
+    <script>
+        document.getElementById('runButton').addEventListener('click', () => {
+            const regexInput = document.getElementById('regex').value;
+            const textInput = document.getElementById('textInput').value;
+            const outputDiv = document.getElementById('output');
+
+            try {
+                const regex = new RegExp(regexInput, 'g');
+                const matches = [...textInput.matchAll(regex)];
+
+                if (matches.length === 0) {
+                    outputDiv.innerHTML = '<p>No matches found.</p>';
+                } else {
+                    outputDiv.innerHTML = matches.map((match, index) => `
+                        <p>Match ${index + 1}: ${match[0]} (at index ${match.index})</p>
+                    `).join('');
+                }
+            } catch (e) {
+                outputDiv.innerHTML = `<p class="text-red-500">Error: ${e.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
