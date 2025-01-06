@@ -14,41 +14,8 @@
       href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico"
     />
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const msg = urlParams.get('msg') || 'Greetings';
-      const person = urlParams.get('person') || 'Friend';
-      const delay = parseInt(urlParams.get('del')) * 1000 || 1000; // Delay in ms, default 1s
-      const count = parseInt(urlParams.get('c'))  || 3; // count of images to show 
+    <script src='dcApp.js'></script>
 
-
-      // Set the greeting message
-      document.getElementById('greeting').textContent = `Happy ${msg} to ${person}!`;
-
-      // Load images dynamically with delay
-      const imageContainer = document.getElementById('imageContainer');
-      let currentImage = 1;
-
-      const loadImages = () => {
-        // Clear the container for a single image at a time
-        imageContainer.innerHTML = '';
-
-        const img = document.createElement('img');
-        img.src = `https://raw.githubusercontent.com/mohan-chinnappan-n5/ai-images/main/${msg}/${currentImage}.jpg`;
-        img.alt = `Image ${currentImage}`;
-        img.classList = 'w-full h-full object-cover rounded shadow';
-        imageContainer.appendChild(img);
-
-        // Cycle images, go back to 1 after 3
-        currentImage = currentImage < count ? currentImage + 1 : 1;
-
-        setTimeout(loadImages, delay); // Delay for next image
-      };
-
-      loadImages();
-    });
-  </script>
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100">
   <!-- Navbar -->
@@ -60,11 +27,10 @@
 
   <!-- Main Content -->
   <main class="flex-grow container mx-auto p-4 text-center">
-    <h1 id="greeting" class="text-2xl font-bold text-gray-800 mb-4"></h1>
-    <!-- Image Container (full content area height) -->
+    <h1 id="greeting" class="text-2xl font-bold text-gray-800 mb-4" style="font-family: 'Dancing Script', cursive;" ></h1>
     <div
       id="imageContainer"
-      class="w-full h-[calc(100vh-200px)] overflow-hidden flex items-center justify-center bg-gray-200 rounded"
+      class="w-full h-full overflow-hidden flex items-center justify-center bg-gray-200 rounded"
     ></div>
   </main>
 
