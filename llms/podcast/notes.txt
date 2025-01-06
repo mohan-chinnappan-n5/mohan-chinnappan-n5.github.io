@@ -1,0 +1,3 @@
+Another excellent work from 3Blue1Brown!
+It encouraged me to create the podcast for this video (using the lovely NotebookLLM).
+Here is the link: https://mohan-chinnappan-n5.github.io/llms/podcast/podcast.html

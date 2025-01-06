@@ -453,7 +453,7 @@
       title: 'LLM',
       links: [
          { text: 'Transformer', href: '../../health/hdocs.html?data=llm-transformer.json', icon: 'desktop' },
-         { text: 'Podcast on LLM', href: '../../llms/podcast/podcast.html', icon: 'desktop' },
+         { text: 'Podcasts on LLM', href: '../../llms/podcast/podcast2.html?data=videos.json', icon: 'desktop' },
      
          { text: 'Finetuning', href: '../../health/hdocs.html?data=llm-ft.json', icon: 'desktop' },
  
