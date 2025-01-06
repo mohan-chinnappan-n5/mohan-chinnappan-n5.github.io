@@ -4,7 +4,7 @@
 document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const msg = urlParams.get('msg') || 'Greetings';
-      const person = urlParams.get('person') || 'Friend';
+      const person = urlParams.get('p') || 'Friend';
       const delay = parseInt(urlParams.get('del')) * 1000 || 1000; // Delay in ms, default 1s
       const count = parseInt(urlParams.get('c'))  || 3; // count of images to show 
 
