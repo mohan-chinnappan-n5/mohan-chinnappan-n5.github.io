@@ -453,6 +453,8 @@
       title: 'LLM',
       links: [
          { text: 'Transformer', href: '../../health/hdocs.html?data=llm-transformer.json', icon: 'desktop' },
+         { text: 'Podcast on LLM', href: '../../llms/podcast/podcast.html', icon: 'desktop' },
+     
          { text: 'Finetuning', href: '../../health/hdocs.html?data=llm-ft.json', icon: 'desktop' },
  
          { text: 'Reinforcement Learning', href: '../../health/hdocs.html?data=rl.json', icon: 'desktop' },
