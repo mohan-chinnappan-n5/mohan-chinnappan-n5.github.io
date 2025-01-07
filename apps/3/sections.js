@@ -208,6 +208,8 @@
         { text: 'HAR Visualizer - Kalam', href: '../../har/harviz.html', icon: 'desktop' },
         { text: 'HAR Visualizer - Turing', href: '../../har2/index.html', icon: 'desktop' },
         { text: 'HAR File Analysis' , href: 'https://mohanhar.streamlit.app', icon: 'desktop' },
+        { text: 'HAR File Compare ', href: '../../har/compare/harcomp.html', icon: 'desktop' },
+
         { text: 'Curl Performance Metrics App', href: 'https://mohanperf.streamlit.app', icon: 'desktop' },
         { text: 'Performance Visualizer', href: 'https://mohanpwviz.streamlit.app', icon: 'desktop' },
         { text: 'Enhancing traceroute', href: '../../traceroute/index.html', icon: 'desktop' },
