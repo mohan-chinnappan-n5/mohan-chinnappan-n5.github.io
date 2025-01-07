@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTTP Status Codes</title>
+
+  <link
+  href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+  rel="stylesheet"
+/>
+<link
+  rel="icon"
+  type="image/x-icon"
+  href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico"
+/>
+
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100 text-gray-800">
+  <!-- Navbar -->
+  <header class="bg-blue-600 text-white sticky top-0 z-50 shadow">
+    <div class="container mx-auto p-4">
+      <h1 class="text-lg font-bold">HTTP Status Codes</h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow container mx-auto p-6">
+    <section class="bg-white p-6 rounded shadow">
+      <h2 class="text-2xl font-bold mb-4">List of HTTP Status Codes</h2>
+      <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden shadow-lg">
+        <thead class="bg-blue-600 text-white">
+          <tr>
+            <th class="py-3 px-6 text-left">HTTP Code</th>
+            <th class="py-3 px-6 text-left">Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 1xx Informational -->
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">100</td>
+            <td class="py-3 px-6 border-b">Continue - The server has received the request header and the client should proceed to send the request body.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">101</td>
+            <td class="py-3 px-6 border-b">Switching Protocols - The server is switching protocols as requested by the client.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">102</td>
+            <td class="py-3 px-6 border-b">Processing - The server has received the request but has not yet processed it.</td>
+          </tr>
+
+          <!-- 2xx Success -->
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">200</td>
+            <td class="py-3 px-6 border-b">OK - The request was successful.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">201</td>
+            <td class="py-3 px-6 border-b">Created - The resource was successfully created.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">202</td>
+            <td class="py-3 px-6 border-b">Accepted - The request has been accepted for processing, but the processing has not been completed.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">204</td>
+            <td class="py-3 px-6 border-b">No Content - The server successfully processed the request but did not return any content.</td>
+          </tr>
+
+          <!-- 3xx Redirection -->
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">300</td>
+            <td class="py-3 px-6 border-b">Multiple Choices - The request has more than one possible response.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">301</td>
+            <td class="py-3 px-6 border-b">Moved Permanently - The resource has been permanently moved to a new location.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">302</td>
+            <td class="py-3 px-6 border-b">Found - The resource has temporarily moved to a different location.</td>
+          </tr>
+
+          <!-- 4xx Client Error -->
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">400</td>
+            <td class="py-3 px-6 border-b">Bad Request - The server could not understand the request.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">401</td>
+            <td class="py-3 px-6 border-b">Unauthorized - Authentication is required.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">403</td>
+            <td class="py-3 px-6 border-b">Forbidden - The server understands the request but refuses to authorize it.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">404</td>
+            <td class="py-3 px-6 border-b">Not Found - The requested resource could not be found.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">405</td>
+            <td class="py-3 px-6 border-b">Method Not Allowed - The method specified in the request is not allowed for the resource.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">408</td>
+            <td class="py-3 px-6 border-b">Request Timeout - The server timed out waiting for the request.</td>
+          </tr>
+
+          <!-- 5xx Server Error -->
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">500</td>
+            <td class="py-3 px-6 border-b">Internal Server Error - The server encountered an unexpected condition that prevented it from fulfilling the request.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">501</td>
+            <td class="py-3 px-6 border-b">Not Implemented - The server does not support the functionality required to fulfill the request.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">502</td>
+            <td class="py-3 px-6 border-b">Bad Gateway - The server received an invalid response from an upstream server.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">503</td>
+            <td class="py-3 px-6 border-b">Service Unavailable - The server is not ready to handle the request.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">504</td>
+            <td class="py-3 px-6 border-b">Gateway Timeout - The server did not receive a timely response from an upstream server.</td>
+          </tr>
+          <tr class="odd:bg-white even:bg-gray-100">
+            <td class="py-3 px-6 border-b">505</td>
+            <td class="py-3 px-6 border-b">HTTP Version Not Supported - The server does not support the HTTP protocol version that was used in the request.</td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white">
+    <div class="container mx-auto p-4 text-center">
+      <p>MCDocs -  HTTP Codes Reference</p>
+    </div>
+  </footer>
+</body>
+</html>
