@@ -176,6 +176,8 @@
         { text: 'XML Diff Editor', href: '../../diff/index.html', icon: 'desktop' },
         { text: 'SF-LAND :: DeltaUtil', href: '../../delta/xmldelta.html?t=Profile', icon: 'desktop' },
         { text: 'package.xml Generator', href: '../../pkg/pkg-gen.html', icon: 'desktop' },
+        { text: 'package.xml Generator 2', href: '../../pkg/pkcreate.html?m=CustomLabel&i=one,two', icon: 'desktop' },
+     
         { text: 'Merger for package.xml - Kovai', href: '../../sf/merger2/index.html', icon: 'desktop' },
 
         { text: 'BuildGen - Turing', href: '../../build2/build.html', icon: 'desktop' },
