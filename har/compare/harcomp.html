@@ -21,6 +21,26 @@
   />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="jquery.dataTables.colResize.js"></script>
+  	<!-- Plugin -->
+	<link rel="stylesheet" href="jquery.dataTables.colResize.css">
+
+  <style>
+    table.dataTable thead th[data-is-resizable=true] {
+      border-left: 1px solid transparent;
+      border-right: 1px dashed #bfbfbf;
+    }
+    table.dataTable thead th.dt-colresizable-hover {
+      cursor: col-resize;
+      background-color: #eaeaea;
+      border-left: 1px solid #bfbfbf;
+     }
+    table.dataTable thead th.dt-colresizable-bound-min, 
+    table.dataTable thead th.dt-colresizable-bound-max {
+      opacity: 0.2;
+      cursor: not-allowed !important;
+    }
+  </style>
 </head>
 <body class="flex flex-col min-h-screen bg-gray-100">
 
@@ -69,10 +89,33 @@
               <th>Method</th>
               <th>HTTP Version</th>
               <th>Status</th>
-              <th>Body Size (bytes)</th>
-              <th>Time in HAR 1 (ms)</th>
-              <th>Time in HAR 2 (ms)</th>
-              <th>Difference (ms)</th>
+              <th>Body Size</th>
+      
+              <!-- HAR 1 and HAR 2 fields -->
+              <th>Server (HAR 1)</th>
+              <th>Server (HAR 2)</th>
+              <th>Request ID (HAR 1)</th>
+              <th>Request ID (HAR 2)</th>
+              <th>Time (HAR 1)</th>
+              <th>Time (HAR 2)</th>
+              <th>Blocked (HAR 1)</th>
+              <th>Blocked (HAR 2)</th>
+              <th>DNS (HAR 1)</th>
+              <th>DNS (HAR 2)</th>
+              <th>SSL (HAR 1)</th>
+              <th>SSL (HAR 2)</th>
+              <th>Connect (HAR 1)</th>
+              <th>Connect (HAR 2)</th>
+              <th>Send (HAR 1)</th>
+              <th>Send (HAR 2)</th>
+              <th>Wait (HAR 1)</th>
+              <th>Wait (HAR 2)</th>
+              <th>Receive (HAR 1)</th>
+              <th>Receive (HAR 2)</th>
+              <th>Blocked Queueing (HAR 1)</th>
+              <th>Blocked Queueing (HAR 2)</th>
+      
+              <th>Difference</th> <!-- For time difference between HAR 1 and HAR 2 -->
             </tr>
           </thead>
           <tbody></tbody>
@@ -87,7 +130,7 @@
       <p>MCDocs -  HAR File Comparison Tool</p>
     </div>
   </footer>
-  <script src="./harapp.js?v=2"></script>
+  <script src="./harapp2.js"></script>
 
 </body>
 </html>
