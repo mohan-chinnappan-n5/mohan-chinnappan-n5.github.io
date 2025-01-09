@@ -213,6 +213,8 @@
         { text: 'HAR File Compare ', href: '../../har/compare/harcomp.html', icon: 'desktop' },
 
         { text: 'Curl Performance Metrics App', href: 'https://mohanperf.streamlit.app', icon: 'desktop' },
+        { text: 'Network Latency Tester', href: 'https://mcperf.streamlit.app', icon: 'desktop' },
+     
         { text: 'Performance Visualizer', href: 'https://mohanpwviz.streamlit.app', icon: 'desktop' },
         { text: 'Enhancing traceroute', href: '../../traceroute/index.html', icon: 'desktop' },
         { text: 'SpeedTest - give metrics on the hosted server', href: 'https://mc-speedtest.streamlit.app', icon: 'desktop' },
