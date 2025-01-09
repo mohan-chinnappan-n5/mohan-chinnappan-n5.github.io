@@ -291,7 +291,7 @@
       title: 'GraphQL Apps',
       links: [
         { text: 'Salesforce GraphQL Client', href: '../../graphql/index.html', icon: 'desktop' },
-        { text: 'Salesforce GraphQL Client', href: 'https://mcgraphql.streamlit.app', icon: 'desktop' },
+        { text: 'Salesforce GraphQL Client-2', href: 'https://mcgraphql.streamlit.app', icon: 'desktop' },
  
         // Add more links here
       ],
