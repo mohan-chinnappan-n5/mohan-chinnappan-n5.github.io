@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAR Data Viewer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="bg-blue-600 text-white shadow">
+    <div class="container mx-auto px-4 py-4">
+      <h1 class="text-2xl font-bold">HAR Data Viewer</h1>
+      <p class="text-sm">Detailed breakdown of network request timings</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8">
+    <!-- Server Information -->
+    <section class="bg-white rounded shadow p-6 mb-6">
+      <h2 class="text-xl font-bold mb-4">Server Information</h2>
+      <ul class="space-y-2">
+        <li><strong>Server IP Address:</strong> 34.226.36.53</li>
+        <li><strong>Request Start Time:</strong> 2025-01-21T07:56:37.012Z</li>
+        <li><strong>Total Time:</strong> 107.019 ms</li>
+      </ul>
+    </section>
+
+    <!-- Timing Breakdown -->
+    <section class="bg-white rounded shadow p-6 mb-6">
+      <h2 class="text-xl font-bold mb-4">Timing Breakdown</h2>
+      <table class="w-full table-auto border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-300 px-4 py-2 text-left">Stage</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Time (ms)</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Blocked</td>
+            <td class="border border-gray-300 px-4 py-2">2.317</td>
+            <td class="border border-gray-300 px-4 py-2">Time spent waiting in the browser’s queue before the request is allowed to start.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">DNS</td>
+            <td class="border border-gray-300 px-4 py-2">-1</td>
+            <td class="border border-gray-300 px-4 py-2">Time spent resolving the domain name to an IP address. A value of -1 means this step was skipped due to DNS caching.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">SSL</td>
+            <td class="border border-gray-300 px-4 py-2">-1</td>
+            <td class="border border-gray-300 px-4 py-2">Time spent in the SSL handshake to establish a secure connection. A value of -1 indicates no SSL/TLS was used.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Connect</td>
+            <td class="border border-gray-300 px-4 py-2">-1</td>
+            <td class="border border-gray-300 px-4 py-2">Time spent establishing a TCP connection. A value of -1 indicates that a persistent connection was reused.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Send</td>
+            <td class="border border-gray-300 px-4 py-2">1.249</td>
+            <td class="border border-gray-300 px-4 py-2">Time spent sending the request to the server, including the request headers and body.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Wait</td>
+            <td class="border border-gray-300 px-4 py-2">103.057</td>
+            <td class="border border-gray-300 px-4 py-2">Time spent waiting for the server to process the request and begin responding. This is often the longest phase.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Receive</td>
+            <td class="border border-gray-300 px-4 py-2">0.396</td>
+            <td class="border border-gray-300 px-4 py-2">Time spent receiving the response from the server. Includes time to download the response data.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Total Time Breakdown Bar Chart -->
+    <section class="bg-white rounded shadow p-6 mb-6">
+      <h2 class="text-xl font-bold mb-4">Total Time Breakdown</h2>
+      <canvas id="timeBreakdownChart"></canvas>
+      <script>
+        const ctx = document.getElementById('timeBreakdownChart').getContext('2d');
+        const timeBreakdownChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Blocked', 'Send', 'Wait', 'Receive', 'Total'],  // Added Total
+            datasets: [{
+              label: 'Time in ms',
+              data: [2.317, 1.249, 103.057, 0.396, 107.019],  // Added Total time
+              backgroundColor: ['#4F46E5', '#4F46E5', '#4F46E5', '#4F46E5', '#4F46E5'],  // Color for each bar
+              borderColor: '#4F46E5',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Request Stage'
+                }
+              },
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Time (ms)'
+                }
+              }
+            }
+          }
+        });
+      </script>
+    </section>
+
+    <!-- Service Worker Details -->
+    <section class="bg-white rounded shadow p-6">
+      <h2 class="text-xl font-bold mb-4">Service Worker Details</h2>
+      <table class="w-full table-auto border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-300 px-4 py-2 text-left">Metric</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Value</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Blocked Queueing</td>
+            <td class="border border-gray-300 px-4 py-2">1.250</td>
+            <td class="border border-gray-300 px-4 py-2">Time spent by the browser's service worker in the queue waiting for resources to be fetched.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Worker Start</td>
+            <td class="border border-gray-300 px-4 py-2">-1</td>
+            <td class="border border-gray-300 px-4 py-2">Time when the service worker started processing the request. A value of -1 indicates the worker was not used.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Worker Ready</td>
+            <td class="border border-gray-300 px-4 py-2">-1</td>
+            <td class="border border-gray-300 px-4 py-2">Time when the service worker became ready to serve the request. A value of -1 indicates no service worker was involved.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Worker Fetch Start</td>
+            <td class="border border-gray-300 px-4 py-2">-1</td>
+            <td class="border border-gray-300 px-4 py-2">Time when the service worker started fetching the requested resource. A value of -1 indicates this phase was skipped.</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Worker Respond With Settled</td>
+            <td class="border border-gray-300 px-4 py-2">-1</td>
+            <td class="border border-gray-300 px-4 py-2">Time when the service worker responded with a settled promise, indicating the completion of the response process. A value of -1 indicates no service worker was involved in this process.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white">
+    <div class="container mx-auto px-4 py-4 text-center">
+      <p>&copy; 2025 HAR Data Viewer. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

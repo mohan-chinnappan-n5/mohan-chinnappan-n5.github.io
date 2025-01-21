@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAR Data Viewer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="bg-blue-600 text-white shadow">
+    <div class="container mx-auto px-4 py-4">
+      <h1 class="text-2xl font-bold">HAR Data Viewer</h1>
+      <p class="text-sm">Detailed breakdown of network request timings</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8">
+  <!-- File Input -->
+  <input type="file" accept=".json" onchange="handleFileUpload(event)" class="p-4 border rounded" />
+
+	  <!-- Server Information -->
+    <section class="bg-white rounded shadow p-6 mb-6" id="server-info">
+      <h2 class="text-xl font-bold mb-4">Server Information</h2>
+      <ul class="space-y-2">
+        <li><strong>Server IP Address:</strong> <span id="server-ip"></span></li>
+        <li><strong>Request Start Time:</strong> <span id="request-start"></span></li>
+        <li><strong>Total Time:</strong> <span id="total-time"></span></li>
+      </ul>
+    </section>
+
+    <!-- Timing Breakdown -->
+    <section class="bg-white rounded shadow p-6 mb-6" id="timing-breakdown">
+      <h2 class="text-xl font-bold mb-4">Timing Breakdown</h2>
+      <table class="w-full table-auto border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-300 px-4 py-2 text-left">Stage</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Time (ms)</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Description</th>
+          </tr>
+        </thead>
+        <tbody id="timing-table">
+          <!-- Dynamic rows go here -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Total Time Breakdown Bar Chart -->
+    <section class="bg-white rounded shadow p-6 mb-6">
+      <h2 class="text-xl font-bold mb-4">Total Time Breakdown</h2>
+      <canvas id="timeBreakdownChart"></canvas>
+    </section>
+
+    <!-- Service Worker Details -->
+    <section class="bg-white rounded shadow p-6" id="service-worker-details">
+      <h2 class="text-xl font-bold mb-4">Service Worker Details</h2>
+      <table class="w-full table-auto border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-300 px-4 py-2 text-left">Metric</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Value</th>
+            <th class="border border-gray-300 px-4 py-2 text-left">Description</th>
+          </tr>
+        </thead>
+        <tbody id="worker-table">
+          <!-- Dynamic rows go here -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white">
+    <div class="container mx-auto px-4 py-4 text-center">
+      <p>&copy; 2025 HAR Data Viewer. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript to handle file upload and rendering -->
+  <script>
+    // Function to handle file upload
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const jsonData = JSON.parse(e.target.result);
+
+        // Populate Server Information
+        document.getElementById('server-ip').innerText = jsonData.serverIPAddress;
+        document.getElementById('request-start').innerText = jsonData.startedDateTime;
+        document.getElementById('total-time').innerText = jsonData.time.toFixed(3);
+
+        // Populate Timing Breakdown
+        const timings = jsonData.timings;
+        const timingTable = document.getElementById('timing-table');
+        const timingData = [
+          { stage: 'Blocked', time: timings.blocked, description: 'Time spent waiting in the browser’s queue before the request is allowed to start.' },
+          { stage: 'DNS', time: timings.dns, description: 'Time spent resolving the domain name to an IP address.' },
+          { stage: 'SSL', time: timings.ssl, description: 'Time spent in the SSL handshake to establish a secure connection.' },
+          { stage: 'Connect', time: timings.connect, description: 'Time spent establishing a TCP connection.' },
+          { stage: 'Send', time: timings.send, description: 'Time spent sending the request to the server.' },
+          { stage: 'Wait', time: timings.wait, description: 'Time spent waiting for the server to process the request.' },
+          { stage: 'Receive', time: timings.receive, description: 'Time spent receiving the response from the server.' },
+        ];
+
+        timingData.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="border border-gray-300 px-4 py-2">${row.stage}</td>
+            <td class="border border-gray-300 px-4 py-2">${row.time === -1 ? '-' : row.time.toFixed(3)}</td>
+            <td class="border border-gray-300 px-4 py-2">${row.description}</td>
+          `;
+          timingTable.appendChild(tr);
+        });
+
+        // Populate Service Worker Details
+        const workerDetails = [
+          { metric: 'Blocked Queueing', value: timings._blocked_queueing, description: 'Time spent by the browser\'s service worker in the queue waiting for resources to be fetched.' },
+          { metric: 'Worker Start', value: timings._workerStart, description: 'Time when the service worker started processing the request.' },
+          { metric: 'Worker Ready', value: timings._workerReady, description: 'Time when the service worker became ready to serve the request.' },
+          { metric: 'Worker Fetch Start', value: timings._workerFetchStart, description: 'Time when the service worker started fetching the requested resource.' },
+          { metric: 'Worker Respond With Settled', value: timings._workerRespondWithSettled, description: 'Time when the service worker responded with a settled promise.' },
+        ];
+
+        const workerTable = document.getElementById('worker-table');
+        workerDetails.forEach(detail => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="border border-gray-300 px-4 py-2">${detail.metric}</td>
+            <td class="border border-gray-300 px-4 py-2">${detail.value === -1 ? '-' : detail.value.toFixed(3)}</td>
+            <td class="border border-gray-300 px-4 py-2">${detail.description}</td>
+          `;
+          workerTable.appendChild(tr);
+        });
+
+        // Create Bar Chart for Total Time Breakdown
+        const ctx = document.getElementById('timeBreakdownChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Blocked', 'Send', 'Wait', 'Receive', 'Total'],
+            datasets: [{
+              label: 'Time in ms',
+              data: [timings.blocked, timings.send, timings.wait, timings.receive, jsonData.time],
+              backgroundColor: ['#4F46E5', '#4F46E5', '#4F46E5', '#4F46E5', '#4F46E5'],
+              borderColor: '#4F46E5',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              x: { title: { display: true, text: 'Request Stage' } },
+              y: { beginAtZero: true, title: { display: true, text: 'Time (ms)' } }
+            }
+          }
+        });
+      };
+
+      reader.readAsText(file);
+    }
+  </script>
+
+</body>
+</html>

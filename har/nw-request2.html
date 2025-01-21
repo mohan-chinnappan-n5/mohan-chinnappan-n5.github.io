@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Timing Breakdown</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans">
+
+  <!-- Header -->
+  <header class="bg-blue-600 text-white p-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Request Timing Analysis</h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="py-8 px-4">
+    <div class="max-w-7xl mx-auto bg-white p-6 rounded shadow-md">
+      <h2 class="text-xl font-bold text-gray-800 mb-6">Request Timing Breakdown</h2>
+      
+      <table class="table-auto w-full text-left border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-300 px-4 py-2 text-gray-600">Stage</th>
+            <th class="border border-gray-300 px-4 py-2 text-gray-600">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Blocked</td>
+            <td class="border border-gray-300 px-4 py-2">
+              Time spent in the browser's queue before the request could start.
+            </td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="border border-gray-300 px-4 py-2">DNS</td>
+            <td class="border border-gray-300 px-4 py-2">
+              Time taken to resolve the domain name into an IP address. A value of <code>-1</code> means this step was skipped (due to DNS caching).
+            </td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">SSL</td>
+            <td class="border border-gray-300 px-4 py-2">
+              Time taken to establish a secure connection (SSL/TLS handshake). A value of <code>-1</code> indicates no SSL was required (e.g., HTTP request).
+            </td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="border border-gray-300 px-4 py-2">Connect</td>
+            <td class="border border-gray-300 px-4 py-2">
+              Time to establish a connection to the server. A value of <code>-1</code> suggests a persistent connection was reused.
+            </td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Send</td>
+            <td class="border border-gray-300 px-4 py-2">
+              Time taken to send the request data to the server.
+            </td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="border border-gray-300 px-4 py-2">Wait</td>
+            <td class="border border-gray-300 px-4 py-2">
+              Server's processing time (from receiving the request to starting the response).
+            </td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2">Receive</td>
+            <td class="border border-gray-300 px-4 py-2">
+              Time to download the response data from the server.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-4 mt-8">
+    <p>&copy; 2025 Request Timing Analysis. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
