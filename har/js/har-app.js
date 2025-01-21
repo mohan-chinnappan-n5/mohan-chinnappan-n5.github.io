@@ -40,6 +40,9 @@ require(["vs/editor/editor.main"], function () {
     value: simpleHAR, 
     language: "json",
     theme: "vs-dark",
+    // Disable outline by making focus border invisible
+    automaticLayout: true,
+    minimap: { enabled: false },
   });
  
   monaco.editor.setModelLanguage(editor.getModel(), 'json');
