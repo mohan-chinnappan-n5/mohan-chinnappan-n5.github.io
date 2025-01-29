@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataTable with JSON Popup</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+<body>
+
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Salary</th>
+                <th>Config</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- Popup Modal -->
+    <div id="jsonPopup" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        background: white; padding: 20px; border: 1px solid #ccc; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+        <h3>Configuration</h3>
+        <pre id="jsonContent" style="background: #f4f4f4; padding: 10px;"></pre>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            let dataSet = [
+                { name: "Alice", salary: "$50,000", config: { role: "Developer", level: "Mid", remote: true } },
+                { name: "Bob", salary: "$60,000", config: { role: "Manager", level: "Senior", remote: false } },
+                { name: "Charlie", salary: "$55,000", config: { role: "Designer", level: "Junior", remote: true } }
+            ];
+
+            $('#example').DataTable({
+                data: dataSet,
+                columns: [
+                    { data: "name", title: "Name" },
+                    { data: "salary", title: "Salary" },
+                    { 
+                        data: "config",
+                        title: "Config",
+                        render: function(data, type, row) {
+                            return `<button onclick='showJsonPopup(${JSON.stringify(data)})'>Show</button>`;
+                        }
+                    }
+                ]
+            });
+        });
+
+        function showJsonPopup(jsonData) {
+            document.getElementById("jsonContent").textContent = JSON.stringify(jsonData, null, 4);
+            document.getElementById("jsonPopup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("jsonPopup").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

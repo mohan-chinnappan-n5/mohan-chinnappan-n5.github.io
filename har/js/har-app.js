@@ -8,6 +8,10 @@ let simpleHAR;
 
 let showHeaders = false;
 
+
+
+
+
 // Get the query parameters from the URL
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('c')) {
@@ -146,14 +150,12 @@ blockedTime ms: ${summary.blockedTime}
     const entries = harData.log.entries;
 
     entries.forEach((entry, index) => {
-      const reqHeadersString = JSON.stringify(entry.request.headers, null, 2);
-      const resHeadersString = JSON.stringify(entry.response.headers, null, 2);
-
-      entry.reqHeadersString = reqHeadersString;
-      entry.resHeadersString = resHeadersString;
-
+      entry.reqHeadersString = entry.request.headers;
+      entry.resHeadersString = entry.response.headers;
 
      });
+
+     
 
   
 
@@ -184,8 +186,21 @@ blockedTime ms: ${summary.blockedTime}
 
       //{ data: 'connection', title: 'Connection' },
 
-      { data: "reqHeadersString", title: "ReqHeaders" },
-      { data: "resHeadersString", title: "ResHeaders" }
+      { 
+        data: "reqHeadersString",
+        title: "reqHeadersString",
+        render: function(data, type, row) {
+            return `<button class='showBtn' onclick='showJsonPopup(${JSON.stringify(data)})'>Show</button>`;
+        }
+     },
+
+     { 
+      data: "resHeadersString",
+      title: "resHeadersString",
+      render: function(data, type, row) {
+          return `<button class='showBtn' onclick='showJsonPopup(${JSON.stringify(data)})'>Show</button>`;
+      }
+    }
 
     ]
 
@@ -213,6 +228,8 @@ blockedTime ms: ${summary.blockedTime}
             } */
     });
   }
+
+ 
 
  
 
