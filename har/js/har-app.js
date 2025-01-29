@@ -6,6 +6,8 @@ let editor;
 let summary = {};
 let simpleHAR;
 
+let showHeaders = false;
+
 // Get the query parameters from the URL
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.has('c')) {
@@ -14,6 +16,10 @@ if (urlParams.has('c')) {
   });
 } else {
     simpleHAR = await fetchText(`./data/simple.har`);
+}
+
+if (urlParams.has('h')) {
+  showHeaders = true;
 }
 
 
@@ -138,6 +144,55 @@ blockedTime ms: ${summary.blockedTime}
     getEle("summary").style.display = "block";
 
     const entries = harData.log.entries;
+
+    entries.forEach((entry, index) => {
+      const reqHeadersString = JSON.stringify(entry.request.headers, null, 2);
+      const resHeadersString = JSON.stringify(entry.response.headers, null, 2);
+
+      entry.reqHeadersString = reqHeadersString;
+      entry.resHeadersString = resHeadersString;
+
+
+     });
+
+  
+
+     let myColumns = [
+      { data: "startedDateTime", title: "StartTime" },
+      //{ data: 'pageref', title: 'PageRef' },
+      //{ data: 'serverIPAddress', title: 'serverIPAddress' },
+
+      { data: "time", title: "Time (ms)" },
+      { data: "request.method", title: "Method" },
+      { data: "response.status", title: "Status" },
+      { data: "response.httpVersion", title: "HTTP" },
+      { data: "response.bodySize", title: "BodySize" },
+      { data: "request.url", title: "URL" },
+
+
+     { data: "timings.blocked", title: "Blocked (ms)" },
+
+      { data: "timings.receive", title: "Receive (ms)" },
+      { data: "timings.dns", title: "DNS (ms)" },
+      { data: "timings.connect", title: "Connect (ms)" },
+      { data: "timings.wait", title: "Wait (ms)" },
+      { data: "timings.ssl", title: "SSL (ms)" },
+
+      { data: "response.content.size", title: "Size (b)" },
+      // { data: "response.content.compression", title: "Compression (b)" },
+      { data: "response.content.mimeType", title: "MimeType" },
+
+      //{ data: 'connection', title: 'Connection' },
+
+      { data: "reqHeadersString", title: "ReqHeaders" },
+      { data: "resHeadersString", title: "ResHeaders" }
+
+    ]
+
+    if (!showHeaders) {
+      myColumns = myColumns.slice(0, -2);
+    }
+
     // $("#har-table").append( $('<tfoot/>').append($("#har-table thead tr").clone()));
     const table = $("#har-table").DataTable({
       scrollX: true,
@@ -147,34 +202,9 @@ blockedTime ms: ${summary.blockedTime}
       dom: "Blfrtip",
       buttons: ["copy", "csv", "excel", "pdf", "print"],
       data: entries,
-      columns: [
-        { data: "startedDateTime", title: "StartTime" },
-        //{ data: 'pageref', title: 'PageRef' },
-        //{ data: 'serverIPAddress', title: 'serverIPAddress' },
+      columns:  myColumns
 
-        { data: "time", title: "Time (ms)" },
-        { data: "request.method", title: "Method" },
-        { data: "response.status", title: "Status" },
-        { data: "response.httpVersion", title: "HTTP" },
-        { data: "response.bodySize", title: "BodySize" },
-        { data: "request.url", title: "URL" },
-
-
-       { data: "timings.blocked", title: "Blocked (ms)" },
-
-        { data: "timings.receive", title: "Receive (ms)" },
-        { data: "timings.dns", title: "DNS (ms)" },
-        { data: "timings.connect", title: "Connect (ms)" },
-        { data: "timings.wait", title: "Wait (ms)" },
-        { data: "timings.ssl", title: "SSL (ms)" },
-
-        { data: "response.content.size", title: "Size (b)" },
-        // { data: "response.content.compression", title: "Compression (b)" },
-        { data: "response.content.mimeType", title: "MimeType" },
-
-        //{ data: 'connection', title: 'Connection' },
-
-      ],
+      
       /* drawCallback: function () {
                 var api = this.api();
                 $(api.table().footer()).html(
