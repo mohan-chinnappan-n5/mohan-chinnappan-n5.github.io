@@ -188,7 +188,7 @@ blockedTime ms: ${summary.blockedTime}
 
       { 
         data: "reqHeadersString",
-        title: "reqHeadersString",
+        title: "RequestHeaders",
         render: function(data, type, row) {
             return `<button class='showBtn' onclick='showJsonPopup(${JSON.stringify(data)})'>Show</button>`;
         }
@@ -196,7 +196,7 @@ blockedTime ms: ${summary.blockedTime}
 
      { 
       data: "resHeadersString",
-      title: "resHeadersString",
+      title: "ResponseHeaders",
       render: function(data, type, row) {
           return `<button class='showBtn' onclick='showJsonPopup(${JSON.stringify(data)})'>Show</button>`;
       }
