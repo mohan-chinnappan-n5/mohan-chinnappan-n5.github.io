@@ -30,6 +30,7 @@
     <script src="https://cdn.datatables.net/plug-ins/1.13.6/api/sum().js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/loader.js"></script>
     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+
     
  
     
@@ -109,6 +110,37 @@
         .close-btn:hover {
             background: darkred;
         }
+
+        .url-wrap {
+            
+            white-space: normal;
+            overflow-wrap: break-word;
+            width: 100%;
+            word-break: break-word;
+
+        }
+
+        .url-wrap:hover {
+            background: #f4f4f4;
+        }
+        /* Reduce font size for DataTable */
+        #har-table {
+            font-size: 12px;  /* Adjust font size as needed */
+        }
+
+        /* Reduce font size for table headers */
+        #har-table th {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Reduce font size for table rows */
+        #har-table td {
+            font-size: 12px;
+            padding: 4px; /* Adjust padding to make it more compact */
+        }
+
+
     
     </style>
 </head>
@@ -181,6 +213,9 @@
         <textarea name="summary" id="summary" style="display:none;" cols="50" rows="10"> </textarea>
         <div id="vizBytes" tabindex="-1"></div>
         <div id="vizTimes"></div>
+
+
+        <div id="waterfall-chart"></div>
     </div>
 
     <script>
@@ -192,6 +227,25 @@
           function closePopup() {
             document.getElementById("jsonPopup").style.display = "none";
           }
+
+          function createVegaLiteChart(containerId, dataValues) {
+            let spec = {
+                $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+                width: 100,
+                height: 40,
+                data: { values: dataValues },
+                mark: "bar",
+                
+                encoding: {
+                    x: { field: "category", type: "ordinal", axis: { labels: false, title: "" } },
+                    y: { field: "value", type: "quantitative", axis: { labels: false, title: "" } },
+                    color: { field: "category", type: "nominal" }
+                }
+            };
+        
+            vegaEmbed(`#${containerId}`, spec, { actions: false }).catch(console.error);
+        }
+
     </script>
 
 
