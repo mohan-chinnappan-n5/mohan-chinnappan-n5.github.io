@@ -11,6 +11,10 @@
         { text: 'Notes on Metadata Deploy Status Monitor', href: '../../deployments/deploy-status.html', icon: 'book' },
         { text: 'Notes on Page Performance Chrome Extension', href: '../../pageperf/pageperf.html', icon: 'book' },
         { text: 'Notes on SF Utils Chrome Extension', href: '../../queryperf/index.html', icon: 'book' },
+        { text: 'Notes on LWR sites', href: '../../books/lwr/index.html', icon: 'book' },
+
+
+
 
 	{ text: 'Notes on Chatty for LLMs Chrome Extension', href: '../../llms/chatty/index.html', icon: 'book' },
         { text: 'LLM Cheat Sheet', href: '../../cheatsheets/llm.html', icon: 'book' },
