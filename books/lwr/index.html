@@ -177,8 +177,30 @@
 &lt;/webruntime-app&gt;
 
 </code></pre>
+<h1 id="comparison-lwr-sites-vs-aura-sites"><a class="header" href="#comparison-lwr-sites-vs-aura-sites">Comparison: LWR Sites vs. Aura Sites</a></h1>
+<div class="table-wrapper"><table><thead><tr><th>Feature</th><th>LWR Sites (Lightning Web Runtime)</th><th>Aura Sites (Experience Builder Sites)</th></tr></thead><tbody>
+<tr><td><strong>Technology</strong></td><td>Based on Lightning Web Components (LWC)</td><td>Based on Aura Framework</td></tr>
+<tr><td><strong>Performance</strong></td><td>Faster and more optimized</td><td>Slower due to Aura’s overhead</td></tr>
+<tr><td><strong>Customization</strong></td><td>Uses LWC and standard web tech</td><td>Uses Aura components and Site Builder</td></tr>
+<tr><td><strong>SEO Optimization</strong></td><td>Better SEO-friendly features</td><td>Limited SEO capabilities</td></tr>
+<tr><td><strong>Page Rendering</strong></td><td>Client-side rendering (CSR)</td><td>Server-side rendering (SSR)</td></tr>
+<tr><td><strong>Flexibility</strong></td><td>Full control over UI/UX with code</td><td>Drag-and-drop customization</td></tr>
+<tr><td><strong>Development Approach</strong></td><td>Requires more coding</td><td>Low-code/no-code approach</td></tr>
+<tr><td><strong>Use Case</strong></td><td>Best for high-performance, custom sites</td><td>Best for traditional Experience Cloud sites</td></tr>
+<tr><td><strong>Salesforce CDN</strong></td><td>Uses Salesforce CDN for static assets</td><td>Uses Aura framework and standard SF CDN</td></tr>
+<tr><td><strong>Component Library</strong></td><td>LWC-based component library</td><td>Aura component library</td></tr>
+<tr><td><strong>Security</strong></td><td>Follows LWC security model</td><td>Follows Locker Service for security</td></tr>
+<tr><td><strong>Best For</strong></td><td>High-performance, headless, modern web experiences</td><td>Standard Salesforce Experience Cloud sites</td></tr>
+</tbody></table>
+</div>
+<p>📌 <strong>Conclusion</strong></p>
+<ul>
+<li>Use <strong>LWR Sites</strong> for better <strong>performance, SEO, and customizability</strong> with <strong>modern web standards</strong>.</li>
+<li>Use <strong>Aura Sites</strong> if you prefer <strong>low-code solutions</strong> and <strong>easy customization</strong> via the Experience Builder.</li>
+</ul>
 <p>We will discuss about building Experience Cloud sites using the Lightning Web Runtime (LWR). </p>
-<p>The series uses a sample application, &quot;AC Insurance,&quot; to demonstrate building various customer experiences:</p>
+<hr />
+<p>We can use LWR sites for:</p>
 <ul>
 <li>B2C (like Marketing site - unauthenticated user)</li>
 <li>authenticated customer (using the customer personal data)</li>
@@ -237,7 +259,7 @@ export default class CustomThemeLayout extends LightningElement {
     &lt;targets&gt;
         &lt;target&gt;lightningCommunity_Page&lt;/target&gt;
         &lt;target&gt;lightningCommunity_Default&lt;/target&gt;
-        
+
         &lt;!-- layout --&gt;
         &lt;target&gt;lightningCommunity_Theme_Layout&lt;/target&gt;
     &lt;/targets&gt;
@@ -291,6 +313,8 @@ export default class CustomThemeLayout extends LightningElement {
 <p><a href="./designToken.html">Example Page</a></p>
 </li>
 </ul>
+<p><img src="img/lwrsite-nw.png" alt="lwr nw" /></p>
+<p><img src="img/lwrsite-har.png" alt="lwr har" /></p>
 
                     </main>
 
