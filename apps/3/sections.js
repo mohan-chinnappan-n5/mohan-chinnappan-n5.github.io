@@ -116,7 +116,9 @@
       title: 'JSON Apps',
       links: [
         { text: 'JSON Editor', href: '../../json/json.html', icon: 'desktop' },
+        { text: 'JSON query with JQ', href: 'https://mcjsonapp.streamlit.app', icon: 'desktop' },
  
+
         // Add more links here
       ],
     },

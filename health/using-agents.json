@@ -1,0 +1,76 @@
+{
+  "title": "Salesforce Agentforce: Empowering Customer Service Teams",
+  "description": "Discover how Agentforce enhances customer service with AI-driven automation, case management, and real-time insights.",
+  "sections": [
+    {
+      "id": "agentforce-overview",
+      "title": "What is Salesforce Agentforce?",
+      "content": [
+        "Salesforce Agentforce is a customer service solution designed to enhance agent productivity and improve customer interactions. It integrates AI-driven automation, case management, and knowledge management tools to streamline service operations.",
+        "By leveraging **Einstein AI**, automated workflows, and real-time data, Agentforce enables customer service teams to provide faster, more accurate resolutions and create personalized experiences."
+      ]
+    },
+    {
+      "id": "key-features",
+      "title": "Key Features of Agentforce",
+      "content": [
+        "1. **AI-Powered Assistance**: Einstein AI suggests responses, surfaces relevant knowledge articles, and automates routine tasks.",
+        "2. **Omnichannel Support**: Agents can engage with customers across email, chat, phone, SMS, and social media from a single unified interface.",
+        "3. **Intelligent Case Management**: Automates case routing and prioritization to ensure efficient issue resolution.",
+        "4. **Self-Service Portals**: Provides customers with knowledge base access and AI-powered chatbots for quick answers.",
+        "5. **Real-Time Analytics & Insights**: Offers dashboards and reports to track agent performance, customer satisfaction, and operational efficiency.",
+        "6. **Seamless CRM Integration**: Connects seamlessly with Salesforce CRM, providing a complete view of customer interactions and history."
+      ]
+    },
+    {
+      "id": "benefits",
+      "title": "How Agentforce Benefits Businesses",
+      "content": [
+        "1. **Enhanced Productivity**: Reduces manual workload for agents through automation and AI-powered suggestions.",
+        "2. **Improved Customer Satisfaction**: Faster response times and personalized interactions lead to better customer experiences.",
+        "3. **Operational Efficiency**: Automates case routing, reduces resolution times, and optimizes resource allocation.",
+        "4. **Data-Driven Decision Making**: Provides real-time insights into customer trends, agent performance, and service operations.",
+        "5. **Scalability**: Designed to support businesses of all sizes, adapting to growing customer service needs."
+      ]
+    },
+    {
+      "id": "getting-started",
+      "title": "Getting Started with Agentforce",
+      "content": [
+        "To implement Salesforce Agentforce in your organization, follow these steps:",
+        "1. **Assess Business Needs**: Identify key service challenges and objectives.",
+        "2. **Customize Agentforce**: Configure workflows, case routing, and AI-powered automation tailored to your business.",
+        "3. **Train Agents**: Provide hands-on training to ensure agents are familiar with the platform and AI-assisted features.",
+        "4. **Integrate with CRM**: Connect Agentforce with Salesforce CRM to ensure a seamless customer data flow.",
+        "5. **Monitor & Optimize**: Use real-time analytics to track performance and continuously improve service operations."
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "title": "Introduction to Salesforce Agentforce",
+      "url": "https://www.youtube.com/embed/AGENTFORCE_INTRO"
+    },
+    {
+      "title": "AI-Powered Customer Service with Agentforce",
+      "url": "https://www.youtube.com/embed/AGENTFORCE_AI"
+    },
+    {
+      "title": "Case Management Best Practices in Agentforce",
+      "url": "https://www.youtube.com/embed/AGENTFORCE_CASES"
+    },
+    {
+      "title": "Omnichannel Support in Agentforce",
+      "url": "https://www.youtube.com/embed/AGENTFORCE_OMNICHANNEL"
+    },
+    {
+      "title": "Maximizing Agent Productivity with Salesforce Agentforce",
+      "url": "https://www.youtube.com/embed/AGENTFORCE_PRODUCTIVITY"
+    }
+  ],
+  "references": [
+    "Salesforce Agentforce Official Page: https://www.salesforce.com/products/service-cloud/agentforce/",
+    "Salesforce Documentation: https://help.salesforce.com",
+    "Trailhead Learning: https://trailhead.salesforce.com"
+  ]
+}
