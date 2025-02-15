@@ -117,7 +117,9 @@
       links: [
         { text: 'JSON Editor', href: '../../json/json.html', icon: 'desktop' },
         { text: 'JSON query with JQ', href: 'https://mcjsonapp.streamlit.app', icon: 'desktop' },
+        { text: 'Salesforce Reports Viewer', href: 'https://mcrpts.streamlit.app', icon: 'desktop' },
  
+
 
         // Add more links here
       ],
