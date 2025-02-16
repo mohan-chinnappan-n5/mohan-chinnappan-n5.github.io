@@ -116,14 +116,24 @@
       title: 'JSON Apps',
       links: [
         { text: 'JSON Editor', href: '../../json/json.html', icon: 'desktop' },
-        { text: 'JSON query with JQ', href: 'https://mcjsonapp.streamlit.app', icon: 'desktop' },
-        { text: 'Salesforce Reports Viewer', href: 'https://mcrpts.streamlit.app', icon: 'desktop' },
  
+        // Add more links here
+      ],
+    },
 
+  ReportsApp: {
+      title: 'Reports Apps',
+      links: [
+        { text: 'Salesforce Reports Viewer', href: 'https://mcrpts.streamlit.app', icon: 'desktop' },
+        { text: 'Salesforce Reports Util', href: 'https://mcsfrpts.streamlit.app', icon: 'desktop' },
+        { text: 'JSON query with JQ', href: 'https://mcjsonapp.streamlit.app', icon: 'desktop' },
+     
 
         // Add more links here
       ],
     },
+
+
 
     XMLApps: {
       title: 'XML Apps',
