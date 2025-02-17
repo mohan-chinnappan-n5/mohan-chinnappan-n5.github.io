@@ -4,6 +4,10 @@
 **PRs to Package.xml Tool** is a command-line tool for generating `package.xml` from Salesforce pull requests (PRs).  
 It is a CLI version of the **[VS Code Extension](https://marketplace.visualstudio.com/items?itemName=mohanc5.mcghutils)**.
 
+## Available at:
+- [Tool](./prs-to-pkg-vscode.sh)
+
+
 ## Installation  
 
 1. Save the script as `/usr/local/bin/prs-to-pkg-vscode.sh`.
