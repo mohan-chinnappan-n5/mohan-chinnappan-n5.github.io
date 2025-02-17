@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Headers Info</title>
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Sticky table header and footer */
+        .sticky-header,
+        .sticky-footer {
+            position: sticky;
+            background-color: #ffffff;
+            z-index: 10;
+        }
+
+        .sticky-header {
+            top: 0;
+        }
+
+        .sticky-footer {
+            bottom: 0;
+        }
+
+        /* Sticky Navbar */
+        .sticky-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        /* Sticky Footer */
+        .sticky-footer {
+            position: sticky;
+            bottom: 0;
+            z-index: 20;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans text-gray-900">
+
+    <!-- Sticky Navbar -->
+    <nav class="sticky-navbar bg-gray-800 text-white p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-semibold">Header Info App</a>
+            <div>
+                <a href="#table-section" class="mx-4 hover:text-gray-400">Headers</a>
+                <a href="#about-section" class="mx-4 hover:text-gray-400">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto p-6">
+        <!-- Header Section -->
+        <header class="mb-6 text-center">
+            <h1 class="text-3xl font-semibold">HTTP Headers from HAR File</h1>
+            <p class="text-gray-600 mt-2">Here are the details of the HTTP headers:</p>
+        </header>
+
+        <!-- Table Section -->
+        <div id="table-section" class="overflow-x-auto">
+            <table class="min-w-full bg-white shadow-md rounded-lg">
+                <!-- Table Header (Sticky) -->
+                <thead class="bg-gray-200 sticky-header">
+                    <tr>
+                        <th class="py-3 px-4 text-left font-semibold text-gray-600">Header Name</th>
+                        <th class="py-3 px-4 text-left font-semibold text-gray-600">Header Value</th>
+                        <th class="py-3 px-4 text-left font-semibold text-gray-600">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Header Rows -->
+                    <tr class="border-b">
+                        <td class="py-3 px-4">x-robots-tag</td>
+                        <td class="py-3 px-4">none</td>
+                        <td class="py-3 px-4">Controls the behavior of search engine crawlers.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">access-control-max-age</td>
+                        <td class="py-3 px-4">86400</td>
+                        <td class="py-3 px-4">Specifies the time (in seconds) that preflight requests can be cached.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">access-control-expose-headers</td>
+                        <td class="py-3 px-4">Server-Timing</td>
+                        <td class="py-3 px-4">Indicates which headers can be exposed to the browser during CORS requests.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">content-encoding</td>
+                        <td class="py-3 px-4">br</td>
+                        <td class="py-3 px-4">Indicates the type of encoding used on the content (e.g., Brotli compression).</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">x-content-type-options</td>
+                        <td class="py-3 px-4">nosniff</td>
+                        <td class="py-3 px-4">Prevents browsers from interpreting files as a different MIME type than what is specified.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">access-control-allow-methods</td>
+                        <td class="py-3 px-4">GET, POST, OPTIONS, HEAD</td>
+                        <td class="py-3 px-4">Specifies the methods allowed when accessing the resource in a CORS request.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">expires</td>
+                        <td class="py-3 px-4">Mon, 28 Apr 2025 23:13:45 GMT</td>
+                        <td class="py-3 px-4">Indicates when the content should be considered stale and no longer cached.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">server-timing</td>
+                        <td class="py-3 px-4">Total;dur=3</td>
+                        <td class="py-3 px-4">Provides performance timing data (e.g., duration of request processing).</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">date</td>
+                        <td class="py-3 px-4">Tue, 21 Jan 2025 07:47:11 GMT</td>
+                        <td class="py-3 px-4">The date and time when the response was sent.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">content-type</td>
+                        <td class="py-3 px-4">text/javascript;charset=UTF-8</td>
+                        <td class="py-3 px-4">Specifies the media type and character encoding of the response.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">last-modified</td>
+                        <td class="py-3 px-4">Sun, 29 Dec 2024 23:13:49 GMT</td>
+                        <td class="py-3 px-4">Indicates the last time the resource was modified.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">vary</td>
+                        <td class="py-3 px-4">Accept-Encoding</td>
+                        <td class="py-3 px-4">Indicates the request headers that affect the response's cacheability.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">access-control-allow-headers</td>
+                        <td class="py-3 px-4">*</td>
+                        <td class="py-3 px-4">Indicates which headers can be included in a CORS request.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">cache-control</td>
+                        <td class="py-3 px-4">public,max-age=31536000,immutable</td>
+                        <td class="py-3 px-4">Defines caching policies (e.g., public caching and long max-age).</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">timing-allow-origin</td>
+                        <td class="py-3 px-4">*</td>
+                        <td class="py-3 px-4">Allows resources to be accessed by other origins for performance timing measurements.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">access-control-allow-credentials</td>
+                        <td class="py-3 px-4">false</td>
+                        <td class="py-3 px-4">Indicates whether or not cookies or other credentials can be included in a CORS request.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">access-control-allow-origin</td>
+                        <td class="py-3 px-4">*</td>
+                        <td class="py-3 px-4">Indicates which origin is allowed to access the resource in a CORS request.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">content-length</td>
+                        <td class="py-3 px-4">231871</td>
+                        <td class="py-3 px-4">The size of the response body in bytes.</td>
+                    </tr>
+                    <tr class="border-b">
+                        <td class="py-3 px-4">akamai-grn</td>
+                        <td class="py-3 px-4">0.9783c217.1735514025.18bd16b9, 0.8c794668.1704514025.88bc98b3</td>
+                        <td class="py-3 px-4">Indicates the Akamai Global Resource Name used for content delivery.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- About Section -->
+        <div id="about-section" class="mt-10 text-center">
+            <h2 class="text-2xl font-semibold mb-4">About this Application</h2>
+            <p class="text-gray-700">This web app displays HTTP header details extracted from a HAR file. It provides useful information
+                about caching policies, content encoding, and performance metrics to help with optimization.</p>
+        </div>
+    </div>
+
+    <!-- Sticky Footer -->
+    <footer class="sticky-footer bg-gray-800 text-white py-4">
+        <div class="max-w-6xl mx-auto text-center">
+            <p>Header Info App </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

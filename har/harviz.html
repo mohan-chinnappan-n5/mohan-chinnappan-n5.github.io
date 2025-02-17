@@ -30,6 +30,7 @@
     <script src="https://cdn.datatables.net/plug-ins/1.13.6/api/sum().js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/loader.js"></script>
     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+
     
  
     
@@ -52,6 +53,95 @@
         ul.list-group.list-group-hover li:hover{
             background:linen;
         }
+
+        /* Popup styling */
+        #jsonPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            max-width: 800px;
+            max-height: 70vh; /* Limits height to 70% of viewport */
+            overflow-y: auto; /* Enables vertical scrolling */
+            overflow-x: auto; /* Enables horizontal scrolling */
+            border-radius: 8px;
+            z-index: 10;
+        }
+
+        #jsonContent {
+            background:black;
+            color: white;
+            padding: 10px;
+            white-space: pre-wrap; /* Ensures long JSON lines wrap */
+            word-wrap: break-word;
+        }
+
+        /* Close button */
+        .close-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+             /* Close button */
+             .showBtn {
+                display: block;
+                margin-top: 10px;
+                padding: 8px 12px;
+                background:black;
+                color: white;
+                border: none;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+
+        .close-btn:hover {
+            background: darkred;
+        }
+
+        .url-wrap {
+            
+            white-space: normal;
+            overflow-wrap: break-word;
+            width: 100%;
+            word-break: break-word;
+
+        }
+
+        .url-wrap:hover {
+            background: #f4f4f4;
+        }
+        /* Reduce font size for DataTable */
+        #har-table {
+            font-size: 12px;  /* Adjust font size as needed */
+        }
+
+        /* Reduce font size for table headers */
+        #har-table th {
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Reduce font size for table rows */
+        #har-table td {
+            font-size: 12px;
+            padding: 4px; /* Adjust padding to make it more compact */
+        }
+
+
+    
     </style>
 </head>
 
@@ -70,7 +160,9 @@
                         <span style="color: wheat;">Drag and drop a HAR file here</span>
                     </div>
                 </li>
+                
             </ul>
+        
         </div>
     </nav>
 
@@ -88,17 +180,75 @@
             <li class="list-group-item">
                 <a target="new" href="https://stefansundin.github.io/traceroute-mapper/">Traceroute mapper by Stefan</a>
             </li>
+
+            <li class="list-group-item">
+                <a target="new" href="./headers.html">Headers Sample </a>
+            </li>
+            <li class="list-group-item">
+                <a target="new" href="./nw-request.html">Network Sample </a>
+            </li>
+             <li class="list-group-item">
+                <a target="new" href="./nw-request-d.html">Network Sample with upload </a>
+            </li>
+ 
+ 
         </ul>
     </div>
     <div class="split split-horizontal" id="content">
         <table id="har-table" class="display"> </table>
+
+            <!-- Scrollable Popup Modal -->
+        <div id="jsonPopup">
+            <button class="close-btn" onclick="closePopup()">Close</button>
+
+            <h3>Headers</h3>
+            <pre id="jsonContent"></pre>
+            <button class="close-btn" onclick="closePopup()">Close</button>
+
+        </div>
+
+
+ 
         <hr />
         <textarea name="summary" id="summary" style="display:none;" cols="50" rows="10"> </textarea>
         <div id="vizBytes" tabindex="-1"></div>
         <div id="vizTimes"></div>
+
+
+        <div id="waterfall-chart"></div>
     </div>
 
+    <script>
+        function showJsonPopup(jsonData) {
+            document.getElementById("jsonContent").textContent = JSON.stringify(jsonData, null ,1);
+            document.getElementById("jsonPopup").style.display = "block";
+          }
+          
+          function closePopup() {
+            document.getElementById("jsonPopup").style.display = "none";
+          }
 
-    <script type="module" src="./js/har-app.js?v=7"></script>
+          function createVegaLiteChart(containerId, dataValues) {
+            let spec = {
+                $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+                width: 100,
+                height: 40,
+                data: { values: dataValues },
+                mark: "bar",
+                
+                encoding: {
+                    x: { field: "category", type: "ordinal", axis: { labels: false, title: "" } },
+                    y: { field: "value", type: "quantitative", axis: { labels: false, title: "" } },
+                    color: { field: "category", type: "nominal" }
+                }
+            };
+        
+            vegaEmbed(`#${containerId}`, spec, { actions: false }).catch(console.error);
+        }
+
+    </script>
+
+
+    <script type="module" src="./js/har-app.js?v=9"></script>
 </body>
 </html>

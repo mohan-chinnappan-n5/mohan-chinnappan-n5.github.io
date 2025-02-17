@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Template</title>
+    <style>
+        /* Basic Styling - Customize as needed */
+        .custom-header {
+            background-color: #f0f0f0; /* Light gray background for header */
+            padding: 10px;
+        }
+        .slds-var-p-top_large {
+            padding-top: 20px; /* Large top padding for main content */
+            padding: 10px;
+        }
+        footer {
+            background-color: #eee; /* Slightly darker gray for footer */
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <template>  <header data-f6-region class="custom-header">
+            <slot name="header">
+                <h1>Default Header</h1> 
+            </slot>
+        </header>
+
+        <main data-f6-region class="slds-var-p-top_large">
+            <slot>
+                <p>Default Main Content Area.  This can be replaced via the slot.</p>
+            </slot>
+        </main>
+
+        <footer data-f6-region>
+            <slot name="footer">
+                <p>&copy; 2023 My Company</p>
+            </slot>
+        </footer>
+    </template> 
+
+    <div id="my-content"> </div>
+
+    <script>
+        // Simulate setting content via slots (this is typically done with a framework)
+        const myContent = document.getElementById('my-content');
+
+        // You would fetch your actual data here
+        const data = {
+            header: "<h1>My Custom Header</h1>",
+            main: "<p>This is the main content provided via a slot.</p>",
+            footer: "<p>Custom Footer - Dynamic Content</p>"
+        };
+
+        myContent.innerHTML = `
+            <header data-f6-region class="custom-header">
+                ${data.header}
+            </header>
+            <main data-f6-region class="slds-var-p-top_large">
+                ${data.main}
+            </main>
+            <footer data-f6-region>
+                ${data.footer}
+            </footer>
+        `;
+    </script>
+
+</body>
+</html>

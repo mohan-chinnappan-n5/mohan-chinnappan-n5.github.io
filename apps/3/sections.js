@@ -11,6 +11,10 @@
         { text: 'Notes on Metadata Deploy Status Monitor', href: '../../deployments/deploy-status.html', icon: 'book' },
         { text: 'Notes on Page Performance Chrome Extension', href: '../../pageperf/pageperf.html', icon: 'book' },
         { text: 'Notes on SF Utils Chrome Extension', href: '../../queryperf/index.html', icon: 'book' },
+        { text: 'Notes on LWR sites', href: '../../books/lwr/index.html', icon: 'book' },
+
+
+
 
 	{ text: 'Notes on Chatty for LLMs Chrome Extension', href: '../../llms/chatty/index.html', icon: 'book' },
         { text: 'LLM Cheat Sheet', href: '../../cheatsheets/llm.html', icon: 'book' },
@@ -117,6 +121,21 @@
       ],
     },
 
+  ReportsApp: {
+      title: 'Reports and Dashboard Apps',
+      links: [
+        { text: 'Salesforce Reports Viewer', href: 'https://mcrpts.streamlit.app', icon: 'desktop' },
+        { text: 'Salesforce Reports Util', href: 'https://mcsfrpts.streamlit.app', icon: 'desktop' },
+        { text: 'Salesforce Dashboard Util', href: 'https://mcsfdbd.streamlit.app/', icon: 'desktop' },
+        { text: 'JSON query with JQ', href: 'https://mcjsonapp.streamlit.app', icon: 'desktop' },
+     
+
+        // Add more links here
+      ],
+    },
+
+
+
     XMLApps: {
       title: 'XML Apps',
       links: [
@@ -208,6 +227,8 @@
       links: [
         { text: 'Traceroute Map Util - Turing', href: '../../nw/traceroute/routemap.html', icon: 'desktop' },
         { text: 'HAR Visualizer - Kalam', href: '../../har/harviz.html', icon: 'desktop' },
+        { text: 'HAR Waterfall Viewer - ', href: '../../har/wf/wf.html', icon: 'desktop' },
+
         { text: 'HAR Visualizer - Turing', href: '../../har2/index.html', icon: 'desktop' },
         { text: 'HAR File Analysis' , href: 'https://mohanhar.streamlit.app', icon: 'desktop' },
         { text: 'HAR File Compare ', href: '../../har/compare/harcomp.html', icon: 'desktop' },
