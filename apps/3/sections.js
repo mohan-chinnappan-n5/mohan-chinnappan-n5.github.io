@@ -125,6 +125,7 @@
       title: 'Reports and Dashboard Apps',
       links: [
         { text: 'Salesforce Reports Viewer', href: 'https://mcrpts.streamlit.app', icon: 'desktop' },
+        { text: 'Salesforce Reports Viewer v2', href: 'https://mcsfrpts2.streamlit.app', icon: 'desktop' },
         { text: 'Salesforce Reports Util', href: 'https://mcsfrpts.streamlit.app', icon: 'desktop' },
         { text: 'Salesforce Dashboard Util', href: 'https://mcsfdbd.streamlit.app/', icon: 'desktop' },
         { text: 'JSON query with JQ', href: 'https://mcjsonapp.streamlit.app', icon: 'desktop' },
