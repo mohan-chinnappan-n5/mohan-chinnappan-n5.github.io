@@ -10,7 +10,7 @@ It is a CLI version of the **[VS Code Extension](https://marketplace.visualstudi
 
 ## Installation  
 
-1. Save the script as `/usr/local/bin/prs-to-pkg-vscode.sh`.
+1. Save the script as `/usr/local/bin/prs-to-pkg-vscode.sh`
 2. Make it executable:  
    ```bash
    chmod +x /usr/local/bin/prs-to-pkg-vscode.sh
