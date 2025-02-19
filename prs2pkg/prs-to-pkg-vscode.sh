@@ -38,7 +38,8 @@ NC='\033[0m' # No Color
 echo -e "${CYAN}--- PRs to Package.xml tool ---${NC}" >&2
 
 # Define paths and constants
-SCRIPTS=~/.vscode/extensions/mohanc5.mcghutils-0.0.31/scripts
+EXT_VER=0.0.32
+SCRIPTS=~/.vscode/extensions/mohanc5.mcghutils-${EXT_VER}/scripts
 API_VER=60.0
 
 # Extract PR details and save to a CSV file

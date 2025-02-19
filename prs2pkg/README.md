@@ -20,6 +20,7 @@ It is a CLI version of the **[VS Code Extension](https://marketplace.visualstudi
 
 - Install the **VS Code Extension**:  
   [MCGH Utils](https://marketplace.visualstudio.com/items?itemName=mohanc5.mcghutils)
+  - Version required 0.0.32
 - Ensure Python 3 (3.11 and above) is installed.
 
 ## Usage  
