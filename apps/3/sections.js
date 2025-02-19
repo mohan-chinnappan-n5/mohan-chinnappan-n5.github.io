@@ -448,6 +448,8 @@
       links: [
          { text: 'Videos', href: '../../vids', icon: 'desktop' },
          { text: 'Health', href: '../../health', icon: 'desktop' },
+         { text: 'Video Comparision Tool', href: '../../vplayer/vp.html', icon: 'desktop' },
+
 
         // Add more links here
       ],
