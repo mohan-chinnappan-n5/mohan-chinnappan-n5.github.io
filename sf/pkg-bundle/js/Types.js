@@ -1264,6 +1264,18 @@ export class Types {
 
         };
       },
+    },
+
+
+    NotificationTypeConfig: {
+      folderName: "notificationTypeConfig",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `notificationTypeConfig`,
+          fileNames: [`${member}.config-meta.xml`],
+
+        };
+      },
     }
 
 
