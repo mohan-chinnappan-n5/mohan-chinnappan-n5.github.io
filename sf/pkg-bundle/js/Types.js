@@ -913,8 +913,10 @@ export class Types {
         return {
           folderName: `networks`,
           fileNames: [`${member}.network`, `${member}.network-meta.xml`],
+          
         };
       },
+      
     },
 
 
@@ -1229,6 +1231,40 @@ export class Types {
         };
       },
     },
+
+    CustomSite: {
+      folderName: "sites",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `sites`,
+          fileNames: [`${member}.site-meta.xml`],
+
+        };
+      },
+    },
+
+    DigitalExperienceBundle: {
+      folderName: "digitalExperiences/",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `digitalExperiences`,
+          fileNames: [''],
+
+        };
+      },
+      copyAllFiles: true,
+    },
+
+    DigitalExperienceConfig: {
+      folderName: "digitalExperienceConfigs",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `digitalExperienceConfigs`,
+          fileNames: [`${member}.digitalExperienceConfig-meta.xml`],
+
+        };
+      },
+    }
 
 
     
