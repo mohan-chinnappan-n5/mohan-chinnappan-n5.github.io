@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Comparison App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-500 p-4">
+        <div class="container mx-auto flex justify-between">
+            <h1 class="text-white text-2xl font-bold">Video Comparison</h1>
+            <button id="runButton" class="bg-white text-blue-500 px-4 py-2 rounded hover:bg-blue-100">Run</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 flex-grow">
+        <div class="grid grid-cols-2 gap-4">
+            <!-- Videos will be dynamically added here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-500 p-4">
+        <div class="container mx-auto text-center text-white">
+            <p>&copy; 2023 Video Comparison App</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fetching video data
+            fetch('videos.json')
+                .then(response => response.json())
+                .then(data => {
+                    const videosContainer = document.querySelector('main .grid');
+                    
+                    // Dynamically add videos
+                    data.videos.forEach(video => {
+                        const videoElement = document.createElement('video');
+                        videoElement.src = video.url;
+                        videoElement.controls = true;
+                        videoElement.classList.add('w-full');
+                        videosContainer.appendChild(videoElement);
+                    });
+
+                    // Run button functionality
+                    const runButton = document.getElementById('runButton');
+                    runButton.addEventListener('click', () => {
+                        const videos = document.querySelectorAll('main video');
+                        videos.forEach(video => {
+                            video.play();
+                        });
+                    });
+                })
+                .catch(error => console.error('Error loading videos:', error));
+        });
+    </script>
+
+</body>
+</html>

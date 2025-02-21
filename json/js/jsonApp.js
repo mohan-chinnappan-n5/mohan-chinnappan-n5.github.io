@@ -129,7 +129,9 @@ require(['vs/editor/editor.main'], function () {
     jsonEditor = monaco.editor.create(document.getElementById('editor-json'), {
         value: initJSON,
         language: 'json',
-        theme: 'vs-dark'
+        theme: 'vs-dark',
+        automaticLayout: true,
+        minimap: { enabled: false }
     });
     editor.set(JSON.parse(initJSON));
 
