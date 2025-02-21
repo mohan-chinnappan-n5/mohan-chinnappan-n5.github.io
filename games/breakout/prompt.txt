@@ -1,0 +1,11 @@
+The initial prompt was simply
+
+"How about a colored version of Breakout?"
+
+First revision was:
+
+"Make the player move automatically under computer control, and make the ball go 10% faster each time it bounces off the paddle"
+
+Final rev was:
+
+"Good, but the ball can get stuck in a vertical bounce.  How did the original game handle that?  Do the same!  And make the player aim for remaining bricks."
