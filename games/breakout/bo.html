@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Breakout Clone (Auto, Aiming)</title>
-    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <title>Breakout Clone (User-Controlled)</title>
     <style>
         canvas { border: 1px solid white; background: black; }
         body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #111; }
@@ -36,6 +35,9 @@
         let score = 0;
         let lives = 3;
         let gameOver = false;
+        let leftPressed = false;
+        let rightPressed = false;
+        let isDragging = false;
 
         // Colors for bricks (one per row)
         const BRICK_COLORS = ['#FF4136', '#FF851B', '#FFDC00', '#2ECC40', '#0074D9']; // Red, Orange, Yellow, Green, Blue
@@ -52,50 +54,43 @@
             }
         }
 
-        // Function to find nearest active brick's X center
-        function getNearestBrickX() {
-            let minDist = Infinity;
-            let nearestX = canvas.width / 2; // Default to center if no bricks
-            for (let row = 0; row < BRICK_ROWS; row++) {
-                for (let col = 0; col < BRICK_COLS; col++) {
-                    const brick = bricks[row][col];
-                    if (brick.active) {
-                        const brickCenterX = brick.x + BRICK_WIDTH / 2;
-                        const dist = Math.abs(ballX - brickCenterX);
-                        if (dist < minDist) {
-                            minDist = dist;
-                            nearestX = brickCenterX;
-                        }
-                    }
-                }
-            }
-            return nearestX;
-        }
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') leftPressed = true;
+            if (e.key === 'ArrowRight') rightPressed = true;
+        });
 
-        // Predict ball landing X-position
-        function predictBallLanding() {
-            let x = ballX;
-            let y = ballY;
-            let dx = ballDX;
-            let dy = ballDY;
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft') leftPressed = false;
+            if (e.key === 'ArrowRight') rightPressed = false;
+        });
 
-            while (y < canvas.height - PADDLE_HEIGHT) {
-                x += dx;
-                y += dy;
-                if (x + BALL_RADIUS > canvas.width) {
-                    x = canvas.width - BALL_RADIUS;
-                    dx = -dx;
-                } else if (x - BALL_RADIUS < 0) {
-                    x = BALL_RADIUS;
-                    dx = -dx;
-                }
-                if (y - BALL_RADIUS < 0) {
-                    y = BALL_RADIUS;
-                    dy = -dy;
-                }
+        // Touch controls
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            const touchX = touch.clientX - rect.left;
+            if (touchX >= paddleX && touchX <= paddleX + PADDLE_WIDTH) {
+                isDragging = true;
             }
-            return x;
-        }
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (isDragging) {
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                const touchX = touch.clientX - rect.left;
+                paddleX = touchX - PADDLE_WIDTH / 2;
+                if (paddleX < 0) paddleX = 0;
+                if (paddleX + PADDLE_WIDTH > canvas.width) paddleX = canvas.width - PADDLE_WIDTH;
+            }
+        });
+
+        canvas.addEventListener('touchend', () => {
+            isDragging = false;
+        });
 
         // Game loop
         function gameLoop() {
@@ -110,15 +105,12 @@
             // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Auto-move paddle with aiming
-            const ballLandingX = predictBallLanding();
-            const nearestBrickX = getNearestBrickX();
-            // Blend ball landing and brick target (50% each)
-            const targetX = (ballLandingX * 0.5 + nearestBrickX * 0.5) - PADDLE_WIDTH / 2;
-            if (paddleX < targetX && paddleX < canvas.width - PADDLE_WIDTH) {
-                paddleX += Math.min(PADDLE_SPEED, targetX - paddleX);
-            } else if (paddleX > targetX && paddleX > 0) {
-                paddleX -= Math.min(PADDLE_SPEED, paddleX - targetX);
+            // Move paddle based on user input
+            if (leftPressed && paddleX > 0) {
+                paddleX -= PADDLE_SPEED;
+            }
+            if (rightPressed && paddleX + PADDLE_WIDTH < canvas.width) {
+                paddleX += PADDLE_SPEED;
             }
 
             // Update ball
@@ -134,7 +126,7 @@
                 ballY = canvas.height - 50;
                 ballDX = 4; // Reset speed
                 ballDY = -4;
-                paddleX = canvas.width / 2 - PADDLE_WIDTH / 2;
+                paddleX = canvas.width / 2 - PADDLE_WIDTH / 2; // Reset paddle to center
             }
 
             // Ball collision with paddle
