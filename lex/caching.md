@@ -101,5 +101,15 @@ listAllIndexedDBContents();
 ![indexedDB usage](lex-indexedDB.webm.gif)
 
 
+## IndexedDB Backends 
+| **Browser**            | **IndexedDB Backend** |
+|------------------------|----------------------|
+| Chrome, Edge, Opera    | LevelDB              |
+| Firefox               | SQLite               |
+| Safari                | SQLite               |
+| Brave, Chromium-based | LevelDB              |
+
+
+
 ## Conclusion
 Caching with IndexedDB is not just a performance enhancement—it’s a cornerstone of delivering a robust, responsive SPA like Salesforce Lightning Experience. By reducing latency, optimizing resource usage, and enabling offline functionality, IndexedDB empowers enterprise applications to meet the demands of modern users. For Salesforce administrators and developers, adopting IndexedDB-based caching represents a strategic investment in scalability and user satisfaction, aligning with the platform’s promise of efficiency and innovation. As SPAs continue to dominate web development, mastering client-side caching will remain a differentiator in building world-class experiences.
