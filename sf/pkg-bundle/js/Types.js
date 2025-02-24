@@ -1279,6 +1279,20 @@ export class Types {
     }
 
 
+
+    ,ApexComponent: {
+      folderName: "components",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `components`,
+          fileNames: [``],
+
+        };
+      },
+      copyAllFiles: true,
+    }
+
+
     
 
 
