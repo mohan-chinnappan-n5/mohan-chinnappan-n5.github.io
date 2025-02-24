@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Track App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+            background: #87CEEB; /* Sky blue background */
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Train Track App</h1>
+            <div>
+                <button id="startTrain" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded mr-2">
+                    Start Train
+                </button>
+                <button id="stopTrain" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded">
+                    Stop Train
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex justify-center items-center p-4">
+        <canvas id="trainCanvas" width="800" height="400"></canvas>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Click "Start Train" to run the train • Click "Stop Train" to pause it
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('trainCanvas');
+        const ctx = canvas.getContext('2d');
+        const startTrainBtn = document.getElementById('startTrain');
+        const stopTrainBtn = document.getElementById('stopTrain');
+
+        // Train and track properties
+        const TRACK_Y = canvas.height / 2; // Center track vertically
+        const TRAIN_WIDTH = 100;
+        const TRAIN_HEIGHT = 40;
+        const TRAIN_SPEED = 5;
+        let trainX = 0; // Starting position
+        let isRunning = false;
+        let animationFrame;
+
+        // Draw track
+        function drawTrack() {
+            ctx.fillStyle = '#8B4513'; // Brown for track
+            ctx.fillRect(0, TRACK_Y - 10, canvas.width, 20); // Track base
+            ctx.fillStyle = '#555'; // Gray for rails
+            ctx.fillRect(0, TRACK_Y - 12, canvas.width, 2); // Top rail
+            ctx.fillRect(0, TRACK_Y + 10, canvas.width, 2); // Bottom rail
+            for (let x = 0; x < canvas.width; x += 20) {
+                ctx.fillRect(x, TRACK_Y - 5, 10, 10); // Ties
+            }
+        }
+
+        // Draw train
+        function drawTrain() {
+            // Train body
+            ctx.fillStyle = '#FF4500'; // Orange-red
+            ctx.fillRect(trainX, TRACK_Y - TRAIN_HEIGHT, TRAIN_WIDTH, TRAIN_HEIGHT);
+            
+            // Wheels
+            ctx.fillStyle = '#333';
+            ctx.beginPath();
+            ctx.arc(trainX + 20, TRACK_Y, 10, 0, Math.PI * 2);
+            ctx.arc(trainX + 80, TRACK_Y, 10, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Cabin
+            ctx.fillStyle = '#FFD700'; // Gold
+            ctx.fillRect(trainX + 70, TRACK_Y - TRAIN_HEIGHT - 10, 30, 10);
+
+            // Smoke stack
+            ctx.fillStyle = '#333';
+            ctx.fillRect(trainX + 60, TRACK_Y - TRAIN_HEIGHT - 20, 10, 10);
+        }
+
+        // Update train position
+        function updateTrain() {
+            trainX += TRAIN_SPEED;
+            if (trainX > canvas.width) {
+                trainX = -TRAIN_WIDTH; // Loop back to start
+            }
+        }
+
+        // Game loop
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawTrack();
+            drawTrain();
+
+            if (isRunning) {
+                updateTrain();
+                animationFrame = requestAnimationFrame(gameLoop);
+            }
+        }
+
+        // Start train
+        startTrainBtn.addEventListener('click', () => {
+            if (!isRunning) {
+                isRunning = true;
+                gameLoop();
+            }
+        });
+
+        // Stop train
+        stopTrainBtn.addEventListener('click', () => {
+            if (isRunning) {
+                isRunning = false;
+                cancelAnimationFrame(animationFrame);
+            }
+        });
+
+        // Initial draw
+        gameLoop();
+    </script>
+</body>
+</html>

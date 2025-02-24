@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Track App - Circular</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+            background: #87CEEB; /* Sky blue background */
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Train Track App</h1>
+            <div>
+                <button id="startTrain" class="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded mr-2">
+                    Start Train
+                </button>
+                <button id="stopTrain" class="bg-red-500 hover:bg-red-600 px-4 py-2 rounded">
+                    Stop Train
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex justify-center items-center p-4">
+        <canvas id="trainCanvas" width="800" height="600"></canvas>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Click "Start Train" to run the train • Click "Stop Train" to pause it
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('trainCanvas');
+        const ctx = canvas.getContext('2d');
+        const startTrainBtn = document.getElementById('startTrain');
+        const stopTrainBtn = document.getElementById('stopTrain');
+
+        // Track and train properties
+        const TRACK_RADIUS = 200;
+        const TRACK_CENTER_X = canvas.width / 2;
+        const TRACK_CENTER_Y = canvas.height / 2;
+        const TRAIN_WIDTH = 60;
+        const TRAIN_HEIGHT = 30;
+        const TRAIN_SPEED = 0.02; // Angular speed in radians per frame
+        let trainAngle = 0; // Starting angle (top of circle)
+        let isRunning = false;
+        let animationFrame;
+
+        // Draw circular track
+        function drawTrack() {
+            ctx.strokeStyle = '#8B4513'; // Brown for track
+            ctx.lineWidth = 20;
+            ctx.beginPath();
+            ctx.arc(TRACK_CENTER_X, TRACK_CENTER_Y, TRACK_RADIUS, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Rails
+            ctx.strokeStyle = '#555'; // Gray for rails
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(TRACK_CENTER_X, TRACK_CENTER_Y, TRACK_RADIUS - 10, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(TRACK_CENTER_X, TRACK_CENTER_Y, TRACK_RADIUS + 10, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Ties (simplified as small rectangles)
+            for (let i = 0; i < 12; i++) {
+                const angle = i * (Math.PI / 6); // 30° intervals
+                const x = TRACK_CENTER_X + TRACK_RADIUS * Math.cos(angle);
+                const y = TRACK_CENTER_Y + TRACK_RADIUS * Math.sin(angle);
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(angle + Math.PI / 2);
+                ctx.fillStyle = '#8B4513';
+                ctx.fillRect(-10, -5, 20, 10);
+                ctx.restore();
+            }
+        }
+
+        // Draw train
+        function drawTrain() {
+            const trainX = TRACK_CENTER_X + TRACK_RADIUS * Math.cos(trainAngle);
+            const trainY = TRACK_CENTER_Y + TRACK_RADIUS * Math.sin(trainAngle);
+
+            ctx.save();
+            ctx.translate(trainX, trainY);
+            ctx.rotate(trainAngle + Math.PI / 2); // Align train with track direction
+
+            // Train body
+            ctx.fillStyle = '#FF4500'; // Orange-red
+            ctx.fillRect(-TRAIN_WIDTH / 2, -TRAIN_HEIGHT / 2, TRAIN_WIDTH, TRAIN_HEIGHT);
+
+            // Wheels
+            ctx.fillStyle = '#333';
+            ctx.beginPath();
+            ctx.arc(-TRAIN_WIDTH / 2 + 15, TRAIN_HEIGHT / 2, 8, 0, Math.PI * 2);
+            ctx.arc(TRAIN_WIDTH / 2 - 15, TRAIN_HEIGHT / 2, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Cabin
+            ctx.fillStyle = '#FFD700'; // Gold
+            ctx.fillRect(TRAIN_WIDTH / 2 - 20, -TRAIN_HEIGHT / 2 - 10, 20, 10);
+
+            // Smoke stack
+            ctx.fillStyle = '#333';
+            ctx.fillRect(TRAIN_WIDTH / 2 - 30, -TRAIN_HEIGHT / 2 - 15, 8, 15);
+
+            ctx.restore();
+        }
+
+        // Update train position
+        function updateTrain() {
+            trainAngle += TRAIN_SPEED;
+            if (trainAngle >= Math.PI * 2) {
+                trainAngle -= Math.PI * 2; // Loop back to 0
+            }
+        }
+
+        // Game loop
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawTrack();
+            drawTrain();
+
+            if (isRunning) {
+                updateTrain();
+                animationFrame = requestAnimationFrame(gameLoop);
+            }
+        }
+
+        // Start train
+        startTrainBtn.addEventListener('click', () => {
+            if (!isRunning) {
+                isRunning = true;
+                gameLoop();
+            }
+        });
+
+        // Stop train
+        stopTrainBtn.addEventListener('click', () => {
+            if (isRunning) {
+                isRunning = false;
+                cancelAnimationFrame(animationFrame);
+            }
+        });
+
+        // Initial draw
+        gameLoop();
+    </script>
+</body>
+</html>
