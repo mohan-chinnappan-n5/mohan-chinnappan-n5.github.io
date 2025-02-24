@@ -105,7 +105,7 @@ listAllIndexedDBContents();
 | **Browser**            | **IndexedDB Backend** |
 |------------------------|----------------------|
 | Chrome, Edge, Opera    | [LevelDB](https://github.com/google/leveldb)              |
-| Firefox               | SQLite               |
+| Firefox               | [SQLite](https://www.sqlite.org/index.html)               |
 | Safari                | SQLite               |
 | Brave, Chromium-based | LevelDB              |
 
