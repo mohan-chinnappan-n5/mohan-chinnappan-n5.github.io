@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tennis Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+
+    <style>
+        canvas { 
+            border: 1px solid white; 
+            background: #228B22; /* Forest Green for court */
+            max-width: 100%; 
+            height: auto; 
+        }
+    </style>
+</head>
+<body class="bg-gray-900 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Tennis Game</h1>
+            <div>
+                <span id="player1Score" class="mr-4">Player 1 (AI): 0</span>
+                <span id="player2Score" class="mr-4">Player 2 (You): 0</span>
+                <button id="startBtn" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded">
+                    Start Game
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Area -->
+    <main class="flex-grow flex justify-center items-center p-4">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                How to Play: Desktop: ← and → keys • Mobile: Drag paddle • Click "Start Game" to begin
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startBtn = document.getElementById('startBtn');
+        const player1ScoreElement = document.getElementById('player1Score');
+        const player2ScoreElement = document.getElementById('player2Score');
+
+        // Game constants
+        const PADDLE_WIDTH = 100;
+        const PADDLE_HEIGHT = 10;
+        const BALL_RADIUS = 8;
+        const PADDLE_SPEED = 6;
+        const AI_SPEED = 4; // Slower than user for fairness
+
+        // Game state
+        let player1X = canvas.width / 2 - PADDLE_WIDTH / 2; // AI paddle (top)
+        let player2X = canvas.width / 2 - PADDLE_WIDTH / 2; // User paddle (bottom)
+        let ballX = canvas.width / 2;
+        let ballY = canvas.height / 2;
+        let ballDX = 4;
+        let ballDY = -4;
+        let player1Score = 0;
+        let player2Score = 0;
+        let gameStarted = false;
+        let leftPressed = false;
+        let rightPressed = false;
+        let isDragging = false;
+
+        // Keyboard controls for Player 2 (user)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') leftPressed = true;
+            if (e.key === 'ArrowRight') rightPressed = true;
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft') leftPressed = false;
+            if (e.key === 'ArrowRight') rightPressed = false;
+        });
+
+        // Touch controls for Player 2 (user)
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            const touchX = touch.clientX - rect.left;
+            if (touchX >= player2X && touchX <= player2X + PADDLE_WIDTH &&
+                touch.clientY - rect.top > canvas.height - PADDLE_HEIGHT - 50) { // Near bottom paddle
+                isDragging = true;
+            }
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (isDragging) {
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                const touchX = touch.clientX - rect.left;
+                player2X = touchX - PADDLE_WIDTH / 2;
+                if (player2X < 0) player2X = 0;
+                if (player2X + PADDLE_WIDTH > canvas.width) player2X = canvas.width - PADDLE_WIDTH;
+            }
+        });
+
+        canvas.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        // Start game
+        startBtn.addEventListener('click', () => {
+            if (!gameStarted) {
+                gameStarted = true;
+                startBtn.textContent = 'Restart';
+                resetBall();
+                gameLoop();
+            } else {
+                resetGame();
+            }
+        });
+
+        function resetBall() {
+            ballX = canvas.width / 2;
+            ballY = canvas.height / 2;
+            ballDX = 4 * (Math.random() > 0.5 ? 1 : -1); // Random left or right
+            ballDY = -4;
+        }
+
+        function resetGame() {
+            resetBall();
+            player1X = canvas.width / 2 - PADDLE_WIDTH / 2;
+            player2X = canvas.width / 2 - PADDLE_WIDTH / 2;
+            player1Score = 0;
+            player2Score = 0;
+            player1ScoreElement.textContent = `Player 1 (AI): ${player1Score}`;
+            player2ScoreElement.textContent = `Player 2 (You): ${player2Score}`;
+        }
+
+        // AI movement for Player 1
+        function moveAI() {
+            const targetX = ballX - PADDLE_WIDTH / 2;
+            if (player1X < targetX && player1X + PADDLE_WIDTH < canvas.width) {
+                player1X += Math.min(AI_SPEED, targetX - player1X);
+            } else if (player1X > targetX && player1X > 0) {
+                player1X -= Math.min(AI_SPEED, player1X - targetX);
+            }
+        }
+
+        // Game loop
+        function gameLoop() {
+            if (!gameStarted) {
+                ctx.fillStyle = 'white';
+                ctx.font = '30px Arial';
+                ctx.fillText('Click "Start Game" to begin', canvas.width / 2 - 150, canvas.height / 2);
+                drawPaddles();
+                drawBall();
+                return;
+            }
+
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw net
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.setLineDash([5, 15]);
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Move AI paddle (Player 1)
+            moveAI();
+
+            // Move user paddle (Player 2)
+            if (leftPressed && player2X > 0) {
+                player2X -= PADDLE_SPEED;
+            }
+            if (rightPressed && player2X + PADDLE_WIDTH < canvas.width) {
+                player2X += PADDLE_SPEED;
+            }
+
+            // Update ball
+            ballX += ballDX;
+            ballY += ballDY;
+
+            // Ball collision with walls
+            if (ballX + BALL_RADIUS > canvas.width || ballX - BALL_RADIUS < 0) {
+                ballDX = -ballDX;
+            }
+
+            // Ball collision with paddles
+            // Player 1 (AI) - Top
+            if (
+                ballY - BALL_RADIUS < PADDLE_HEIGHT &&
+                ballX > player1X && ballX < player1X + PADDLE_WIDTH
+            ) {
+                ballDY = -ballDY * 1.1;
+                ballDX *= 1.1;
+                const hitPos = (ballX - player1X) / PADDLE_WIDTH;
+                ballDX = 8 * (hitPos - 0.5) + (Math.random() - 0.5) * 2;
+            }
+
+            // Player 2 (User) - Bottom
+            if (
+                ballY + BALL_RADIUS > canvas.height - PADDLE_HEIGHT &&
+                ballX > player2X && ballX < player2X + PADDLE_WIDTH
+            ) {
+                ballDY = -ballDY * 1.1;
+                ballDX *= 1.1;
+                const hitPos = (ballX - player2X) / PADDLE_WIDTH;
+                ballDX = 8 * (hitPos - 0.5) + (Math.random() - 0.5) * 2;
+            }
+
+            // Scoring
+            if (ballY < 0) {
+                player2Score++;
+                player2ScoreElement.textContent = `Player 2 (You): ${player2Score}`;
+                resetBall();
+            } else if (ballY > canvas.height) {
+                player1Score++;
+                player1ScoreElement.textContent = `Player 1 (AI): ${player1Score}`;
+                resetBall();
+            }
+
+            // Draw paddles
+            drawPaddles();
+
+            // Draw ball
+            drawBall();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function drawPaddles() {
+            ctx.fillStyle = '#00FFFF'; // Cyan for Player 1 (AI)
+            ctx.fillRect(player1X, 0, PADDLE_WIDTH, PADDLE_HEIGHT);
+            ctx.fillStyle = '#FF00FF'; // Magenta for Player 2 (User)
+            ctx.fillRect(player2X, canvas.height - PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT);
+        }
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(ballX, ballY, BALL_RADIUS, 0, Math.PI * 2);
+            ctx.fillStyle = '#FFFFFF'; // White
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Initial draw
+        gameLoop();
+    </script>
+</body>
+</html>
