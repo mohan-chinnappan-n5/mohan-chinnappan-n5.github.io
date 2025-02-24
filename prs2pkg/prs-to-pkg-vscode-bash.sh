@@ -44,7 +44,8 @@ API_VER=60.0
 
 # Extract PR details and save to a CSV file
 echo -e "${YELLOW}Extracting PR information...${NC}"
-python ${SCRIPTS}/pr_info.py -p "$1" > /tmp/diff.csv 
+#python ${SCRIPTS}/pr_info.py -p "$1" > /tmp/diff.csv 
+bash ${SCRIPTS}/pr_info.sh -p "$1" > /tmp/diff.csv
 
 # Display relevant columns from the CSV file (fields: 6, 8, 2, 7)
 echo -e "${GREEN}Relevant PR changes:${NC}"

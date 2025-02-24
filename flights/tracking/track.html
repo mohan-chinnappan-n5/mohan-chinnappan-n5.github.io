@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white py-4 px-6 fixed top-0 w-full shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Flight Tracker</h1>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="flex-grow flex flex-col items-center justify-center mt-16 p-6">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h2 class="text-lg font-semibold mb-4 text-gray-700">Enter Flight Number</h2>
+            <input type="text" id="flightNumber" placeholder="e.g. AA100" 
+                   class="w-full p-2 border rounded-md mb-4">
+            <button onclick="trackFlight()" 
+                    class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+                Track Flight
+            </button>
+
+            <h3 class="mt-6 text-lg font-semibold text-gray-700">Recent Flights</h3>
+            <ul id="recentFlights" class="mt-2 text-gray-600"></ul>
+
+            <div id="flightInfo" class="mt-6 text-gray-700"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-3 fixed bottom-0 w-full">
+        &copy; 2025 Flight Tracker
+    </footer>
+
+    <script>
+        function trackFlight() {
+            let flightNum = document.getElementById("flightNumber").value.trim();
+            if (flightNum) {
+                // Save to localStorage
+                let flights = JSON.parse(localStorage.getItem("flights")) || [];
+                if (!flights.includes(flightNum)) {
+                    flights.push(flightNum);
+                    localStorage.setItem("flights", JSON.stringify(flights));
+                }
+                displayRecentFlights();
+                
+                // Simulating Flight Tracking Data
+                document.getElementById("flightInfo").innerHTML = 
+                 `<a href='https://www.flightaware.com/live/flight/${flight}'">${flight}</a>`
+            }
+        }
+
+        function displayRecentFlights() {
+            let flights = JSON.parse(localStorage.getItem("flights")) || [];
+            let recentFlightsEl = document.getElementById("recentFlights");
+            recentFlightsEl.innerHTML = flights.map(flight => 
+                `<a href='https://www.flightaware.com/live/flight/${flight}'">${flight}</a>`
+            ).join("");
+        }
+
+        window.onload = displayRecentFlights;
+    </script>
+
+</body>
+</html>
