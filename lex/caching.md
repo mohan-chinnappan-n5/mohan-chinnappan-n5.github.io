@@ -44,5 +44,6 @@ The benefits of IndexedDB caching extend beyond theory. Organizations using Sale
 ## Challenges and Mitigations
 Despite its advantages, IndexedDB caching isn’t without challenges. Browser compatibility, while broad (supported in all modern browsers), requires testing across versions. Storage quotas can vary, necessitating graceful degradation strategies. Additionally, managing cache size and eviction policies prevents bloating, which could slow down the database over time. These hurdles are addressable with disciplined coding practices and monitoring, ensuring the benefits outweigh the overhead.
 
+![indexedDB usage](lex-indexedDB.webm.gif)
 ## Conclusion
 Caching with IndexedDB is not just a performance enhancement—it’s a cornerstone of delivering a robust, responsive SPA like Salesforce Lightning Experience. By reducing latency, optimizing resource usage, and enabling offline functionality, IndexedDB empowers enterprise applications to meet the demands of modern users. For Salesforce administrators and developers, adopting IndexedDB-based caching represents a strategic investment in scalability and user satisfaction, aligning with the platform’s promise of efficiency and innovation. As SPAs continue to dominate web development, mastering client-side caching will remain a differentiator in building world-class experiences.
