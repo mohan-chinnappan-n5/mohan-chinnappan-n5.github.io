@@ -44,6 +44,62 @@ The benefits of IndexedDB caching extend beyond theory. Organizations using Sale
 ## Challenges and Mitigations
 Despite its advantages, IndexedDB caching isn’t without challenges. Browser compatibility, while broad (supported in all modern browsers), requires testing across versions. Storage quotas can vary, necessitating graceful degradation strategies. Additionally, managing cache size and eviction policies prevents bloating, which could slow down the database over time. These hurdles are addressable with disciplined coding practices and monitoring, ensuring the benefits outweigh the overhead.
 
+
+## Demo
+
+```js
+async function listAllIndexedDBContents() {
+    const databases = await indexedDB.databases();
+    
+    if (!databases.length) {
+        console.log("No IndexedDB databases found.");
+        return;
+    }
+
+    console.log(`Found ${databases.length} IndexedDB databases:`);
+    console.table(databases);
+
+    for (const dbInfo of databases) {
+        if (!dbInfo.name) continue;
+
+        const dbName = dbInfo.name;
+        const openRequest = indexedDB.open(dbName);
+
+        openRequest.onsuccess = function(event) {
+            const db = event.target.result;
+            console.log(`\n📂 Database: ${dbName} (Version: ${db.version})`);
+
+            const objectStores = db.objectStoreNames;
+            console.log(`Contains ${objectStores.length} object store(s):`, objectStores);
+
+            for (const storeName of objectStores) {
+                const transaction = db.transaction(storeName, "readonly");
+                const store = transaction.objectStore(storeName);
+                const getAllRequest = store.getAll();
+
+                getAllRequest.onsuccess = function() {
+                    console.log(`📌 Data from store: ${storeName}`);
+                    console.log(JSON.stringify(getAllRequest.result, null, 2)); // Pretty-print JSON
+                };
+
+                getAllRequest.onerror = function(event) {
+                    console.error(`❌ Error reading store '${storeName}':`, event.target.error);
+                };
+            }
+        };
+
+        openRequest.onerror = function(event) {
+            console.error(`❌ Error opening database '${dbName}':`, event.target.error);
+        };
+    }
+}
+
+// Run the function
+listAllIndexedDBContents();
+```
+
 ![indexedDB usage](lex-indexedDB.webm.gif)
+
+
 ## Conclusion
 Caching with IndexedDB is not just a performance enhancement—it’s a cornerstone of delivering a robust, responsive SPA like Salesforce Lightning Experience. By reducing latency, optimizing resource usage, and enabling offline functionality, IndexedDB empowers enterprise applications to meet the demands of modern users. For Salesforce administrators and developers, adopting IndexedDB-based caching represents a strategic investment in scalability and user satisfaction, aligning with the platform’s promise of efficiency and innovation. As SPAs continue to dominate web development, mastering client-side caching will remain a differentiator in building world-class experiences.
