@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.32/Tone.js"></script> <!-- Tone.js for music generation -->
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 bg-gray-800 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Piano App</h1>
+            <ul class="flex space-x-6">
+                <li><a href="#" class="hover:text-gray-400">Home</a></li>
+                <li><a href="#" class="hover:text-gray-400">About</a></li>
+                <li><a href="#" class="hover:text-gray-400">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="flex justify-center py-10">
+        <div id="piano" class="flex space-x-1">
+            <!-- Piano Keys -->
+            <div class="relative w-16">
+                <button class="w-full h-32 bg-white border-2 border-black" data-key="C" onclick="playNote('C')"></button>
+                <button class="w-8 h-24 absolute left-8 bg-black text-white border-2 border-black" data-key="C#"
+                        onclick="playNote('C#')"></button>
+            </div>
+            <div class="relative w-16">
+                <button class="w-full h-32 bg-white border-2 border-black" data-key="D" onclick="playNote('D')"></button>
+                <button class="w-8 h-24 absolute left-8 bg-black text-white border-2 border-black" data-key="D#"
+                        onclick="playNote('D#')"></button>
+            </div>
+            <div class="relative w-16">
+                <button class="w-full h-32 bg-white border-2 border-black" data-key="E" onclick="playNote('E')"></button>
+            </div>
+            <div class="relative w-16">
+                <button class="w-full h-32 bg-white border-2 border-black" data-key="F" onclick="playNote('F')"></button>
+                <button class="w-8 h-24 absolute left-8 bg-black text-white border-2 border-black" data-key="F#"
+                        onclick="playNote('F#')"></button>
+            </div>
+            <div class="relative w-16">
+                <button class="w-full h-32 bg-white border-2 border-black" data-key="G" onclick="playNote('G')"></button>
+                <button class="w-8 h-24 absolute left-8 bg-black text-white border-2 border-black" data-key="G#"
+                        onclick="playNote('G#')"></button>
+            </div>
+            <div class="relative w-16">
+                <button class="w-full h-32 bg-white border-2 border-black" data-key="A" onclick="playNote('A')"></button>
+                <button class="w-8 h-24 absolute left-8 bg-black text-white border-2 border-black" data-key="A#"
+                        onclick="playNote('A#')"></button>
+            </div>
+            <div class="relative w-16">
+                <button class="w-full h-32 bg-white border-2 border-black" data-key="B" onclick="playNote('B')"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="sticky bottom-0 bg-gray-800 text-white p-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2025 Piano App. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Setup Tone.js synth
+        const synth = new Tone.Synth().toDestination();
+
+        // Function to play the note
+        function playNote(note) {
+            synth.triggerAttackRelease(note, "8n");
+        }
+    </script>
+
+</body>
+</html>
