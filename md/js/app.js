@@ -53,6 +53,10 @@ require(["vs/editor/editor.main"], function () {
     value: JSON.stringify(initData, null, 4),
     language: "markdown",
     theme: "vs-dark",
+    automaticLayout: true,
+    minimap: {
+      enabled: false,
+    },
   });
 
   editor.setValue(initData);
