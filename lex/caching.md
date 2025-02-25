@@ -121,5 +121,47 @@ listAllIndexedDBContents();
 | **Structure** | Simple key-value store | Simple key-value store | Indexed, object-based database (NoSQL) |
 | **Best For** | Storing small, frequently accessed settings | Temporary session data like form inputs | Storing large datasets like offline apps or caches |
 
+
+## Lightning Data Service (LDS)
+
+**Overview**
+
+Lightning Data Service (LDS) is a framework in Salesforce for working with data and metadata in Lightning Web Components (LWC). It caches and shares record data across components, ensuring consistency and efficiency without additional API calls.
+
+**Key Features**
+
+* **Technologies:** Built on LDS, it includes:
+    * Base components: `lightning-record-edit-form`, `lightning-record-form`, `lightning-record-view-form`.
+    * Wire adapters and functions in `lightning/ui*Api` modules.
+* **Supported Objects:** Works with all custom objects and most standard objects supported by the User Interface API (UI API). Custom metadata types are not supported.
+* **No API Usage:** Doesn’t consume API limits but is subject to general record return limits.
+
+**How It Works ?**
+
+* **Data Management:** LDS manages data automatically; changes to a record reflect across all components using it, unlike Apex, which requires manual refreshing.
+* **Change Detection:** Updates are triggered when:
+    * A component mutates a record.
+    * The LDS cache expires, and a component re-reads the data (same browser/app/user context required).
+* **Performance Optimization:**
+    * Progressive data loading.
+    * Client-side caching of records via wire adapters.
+    * Bulkifies and deduplicates server requests.
+    * Durable caching for object/layout metadata (requires logout/login to see immediate layout changes in some cases).
+
+**Technical Details**
+
+* **Built on UI API:** LDS leverages the User Interface API, a public Salesforce API used for Lightning Experience and mobile apps.
+* **UI API Benefits:**
+    * Combines data and metadata in one response.
+    * Respects layout changes, CRUD access, field-level security, and sharing settings.
+* **Caching:** Maintains a client-side cache for records and a separate durable store for metadata, enhancing performance.
+
+**Use Cases**
+
+* Ideal for building UI that mirrors Salesforce’s native experience, ensuring users see only what they’re authorized to access.
+
+
+
+
 ## Conclusion
 Caching with IndexedDB is not just a performance enhancement—it’s a cornerstone of delivering a robust, responsive SPA like Salesforce Lightning Experience. By reducing latency, optimizing resource usage, and enabling offline functionality, IndexedDB empowers enterprise applications to meet the demands of modern users. For Salesforce administrators and developers, adopting IndexedDB-based caching represents a strategic investment in scalability and user satisfaction, aligning with the platform’s promise of efficiency and innovation. As SPAs continue to dominate web development, mastering client-side caching will remain a differentiator in building world-class experiences.
