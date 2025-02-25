@@ -77,6 +77,8 @@ For real-time analysis, administrators can enable an EPT counter in Lightning Ex
 * **Debug Mode:** Activated via Setup, this displays load time and network bandwidth in the header but may impact performance due to unminified code.
 * **URL Parameter:** Adding `?eptVisible=1` to the URL shows load time without significant overhead, ideal for targeted testing.
 
+![EPT Counter](img/eptCounter.png)
+
 ## Strategies for Optimizing EPT
 
 Improving EPT requires a multifaceted approach addressing both technical and operational aspects of Salesforce implementations.
@@ -107,6 +109,22 @@ Consider a mid-sized sales organization using Lightning Experience for its oppor
 * Inconsistent browser usage, with some reps on outdated versions.
 
 The team optimized the LWC to fetch only essential fields, implemented caching for contact data, and rolled out a browser upgrade campaign. Within weeks, EPT dropped to 3.5 seconds, boosting user satisfaction and productivity.
+
+## EPT
+![EPT](img/EPT.png)
+```js
+$A.metricsService.getCurrentPageTransaction().config.context.ept
+
+```
+
+## Total EPT
+![EPT](img/totalEPT.png)
+```js
+$A.metricsService.getCurrentPageTransaction().config.context.attributes.totalEpt
+
+```
+
+
 
 ## Conclusion
 
