@@ -620,6 +620,16 @@ Maps: {
 
     },
 
+Podcasts: {
+      title: 'Podcasts',
+      links: [
+        { text: 'Podcasts for Lex', href: '../../podcast/podcasts.html?data=podcasts.json', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
 
 Dwg: {
       title: 'Diagrams',

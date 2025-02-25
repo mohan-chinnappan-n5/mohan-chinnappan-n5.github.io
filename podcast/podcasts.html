@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Podcast Reader</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+  <script>
+    let mediaData = [];
+    let currentIndex = 0;
+
+    // Load JSON file from the URL parameter
+    async function loadMedia() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const jsonFile = urlParams.get('data');
+
+      if (jsonFile) {
+        try {
+          const response = await fetch(jsonFile);
+          mediaData = await response.json();
+
+          if (mediaData.length > 0) {
+            loadMediaItem(currentIndex);
+          }
+        } catch (error) {
+          console.error('Error loading JSON data:', error);
+        }
+      } else {
+        console.warn('No data parameter provided in the URL.');
+      }
+    }
+
+    // Load a media item (Markdown + Audio + Link)
+    async function loadMediaItem(index) {
+      const markdownContainer = document.getElementById('markdownContent');
+      const audioSource = document.getElementById('audioSource');
+      const audioElement = document.getElementById('audioElement');
+      const originalLink = document.getElementById('originalLink');
+    
+      const contentUrl = mediaData[index].content_url;
+      const githubUrl = mediaData[index].github_url; // GitHub direct link
+      const audioUrl = mediaData[index].audio_url;
+    
+      // Fetch and render Markdown content
+      try {
+        const response = await fetch(contentUrl);
+        const markdownText = await response.text();
+        markdownContainer.innerHTML = marked.parse(markdownText);
+      } catch (error) {
+        console.error('Error loading Markdown:', error);
+        markdownContainer.innerHTML = '<p class="text-red-500">Failed to load content.</p>';
+      }
+    
+      // Update the audio source
+      audioSource.src = audioUrl;
+      audioElement.load();
+    
+      // Update the "Read Original Article" link (now using GitHub URL)
+      originalLink.href = githubUrl;
+      originalLink.textContent = "Read Original Article on GitHub";
+    }
+    // Navigate to next item
+    function nextMedia() {
+      if (currentIndex < mediaData.length - 1) {
+        currentIndex++;
+        loadMediaItem(currentIndex);
+      }
+    }
+
+    // Navigate to previous item
+    function previousMedia() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        loadMediaItem(currentIndex);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadMedia);
+  </script>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+  <!-- Navbar -->
+  <header class="bg-blue-600 text-white sticky top-0 z-50 shadow-md">
+    <div class="container mx-auto p-4 flex justify-between items-center">
+      <h1 class="text-lg font-bold">Podcast Reader</h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow container mx-auto p-4 space-y-8">
+    
+    <!-- Navigation buttons -->
+    <section id="navigation" class="text-center">
+      <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="previousMedia()"> &lt; Previous</button>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded ml-4" onclick="nextMedia()">Next  &gt;</button>
+    </section>
+ 
+    <!-- Podcast Section -->
+    <section id="podcast" class="bg-white p-6 rounded shadow">
+      <h2 class="text-xl font-semibold mb-4">Listen to the Podcast</h2>
+      <audio controls class="w-full" id="audioElement">
+        <source id="audioSource" src="" type="audio/mp3" />
+        Your browser does not support the audio element.
+      </audio>
+    </section>
+
+    <!-- Markdown Content Section -->
+    <section id="content" class="bg-white p-6 rounded shadow">
+      <h2 class="text-xl font-semibold mb-4">Article Content</h2>
+      <div class="mt-4">
+        <a id="originalLink" href="#" target="_blank" class="text-blue-600 hover:underline font-semibold">
+          Read Original Article
+        </a>
+        <hr class="my-4" />
+      </div>
+      <div id="markdownContent" class="prose max-w-none"></div>
+     
+    </section>
+
+    <!-- Navigation buttons -->
+    <section id="navigation" class="text-center">
+      <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="previousMedia()"> &lt; Previous</button>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded ml-4" onclick="nextMedia()">Next &gt;</button>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white sticky bottom-0">
+    <div class="container mx-auto p-4 text-center">
+      <p>MCDocs - Podcast Reader</p>
+    </div>
+  </footer>
+</body>
+</html>
