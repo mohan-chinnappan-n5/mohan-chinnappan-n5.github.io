@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itsy Bitsy Spider Game</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js"></script>
+    <script defer src="script.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+
+</head>
+<body class="bg-blue-100 flex flex-col min-h-screen">
+    
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Itsy Bitsy Spider Game</h1>
+            <div>
+                <button id="singBtn" class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded mr-2">Sing Song</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col items-center justify-center text-center p-4">
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-800">Itsy Bitsy Spider</h2>
+            <div class="lyrics-box">
+                <p id="lyrics" class="lyrics-text">
+                    The itsy bitsy spider climbed up the waterspout.<br>
+                    Down came the rain and washed the spider out.<br>
+                    Out came the sun and dried up all the rain,<br>
+                    And the itsy bitsy spider climbed up the spout again.
+                </p>
+            </div>
+        </div> 
+        
+      
+
+        <!-- Processing.js Canvas -->
+        <canvas id="spiderCanvas" data-processing-sources="sketch.pde" class="mt-6"></canvas>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white p-4 text-center sticky bottom-0">
+     Click on the spider to start or stop 
+    </footer>
+
+</body>
+</html>
