@@ -109,7 +109,17 @@ listAllIndexedDBContents();
 | Safari                | SQLite               |
 | Brave, Chromium-based | LevelDB              |
 
-
+## Comparisons  
+| Feature         | localStorage                  | sessionStorage               | IndexedDB                    |
+|---------------|-----------------------------|-----------------------------|-----------------------------|
+| **Purpose**  | Store key-value pairs for long-term use | Store key-value pairs for a session | Store large structured data |
+| **Storage Limit** | ~5-10MB per origin | ~5-10MB per origin | Several GB (depends on browser & disk space) |
+| **Data Type** | Strings (must convert objects to JSON) | Strings (must convert objects to JSON) | Objects, arrays, blobs, files |
+| **Persistence** | Until manually cleared | Cleared when tab is closed | Persistent until manually deleted |
+| **Access Scope** | Available across all tabs of a site | Available only in the same tab | Available across all tabs of a site |
+| **Read/Write Speed** | Fast (sync) | Fast (sync) | Slower (async, transactional) |
+| **Structure** | Simple key-value store | Simple key-value store | Indexed, object-based database (NoSQL) |
+| **Best For** | Storing small, frequently accessed settings | Temporary session data like form inputs | Storing large datasets like offline apps or caches |
 
 ## Conclusion
 Caching with IndexedDB is not just a performance enhancement—it’s a cornerstone of delivering a robust, responsive SPA like Salesforce Lightning Experience. By reducing latency, optimizing resource usage, and enabling offline functionality, IndexedDB empowers enterprise applications to meet the demands of modern users. For Salesforce administrators and developers, adopting IndexedDB-based caching represents a strategic investment in scalability and user satisfaction, aligning with the platform’s promise of efficiency and innovation. As SPAs continue to dominate web development, mastering client-side caching will remain a differentiator in building world-class experiences.
