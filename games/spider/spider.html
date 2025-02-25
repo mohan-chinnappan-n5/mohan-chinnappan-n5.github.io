@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itsy Bitsy Spider Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        #spider {
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .lyrics-box {
+                background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+                border: 2px solid #4dd0e1;
+                border-radius: 15px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                padding: 1.5rem;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            .lyrics-text {
+                font-family: 'Georgia', serif;
+                font-size: 1.125rem;
+                line-height: 1.75;
+                color: #01579b;
+                text-align: center;
+            }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Itsy Bitsy Spider Game</h1>
+            <div>
+                <span class="mr-4">Score: <span id="score">0</span></span>
+                <button id="singBtn" class="bg-green-600 hover:bg-green-700 px-3 py-1 rounded mr-2">Sing Song</button>
+                <button id="resetBtn" class="bg-blue-800 hover:bg-blue-900 px-3 py-1 rounded">Reset</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto p-4 flex flex-col items-center justify-center">
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-800">Itsy Bitsy Spider</h2>
+            <div class="lyrics-box">
+                <p id="lyrics" class="lyrics-text">
+                    The itsy bitsy spider climbed up the waterspout.<br>
+                    Down came the rain and washed the spider out.<br>
+                    Out came the sun and dried up all the rain,<br>
+                    And the itsy bitsy spider climbed up the spout again.
+                </p>
+            </div>
+        </div> 
+
+        <!-- Game Area -->
+        <div class="relative w-64 h-96 bg-blue-200 rounded-lg overflow-hidden">
+            <!-- Waterspout -->
+            <svg class="absolute inset-0" viewBox="0 0 256 384" preserveAspectRatio="none">
+                <path 
+                    d="M 80 0 Q 120 96 80 192 Q 40 288 80 384 H 176 Q 216 288 176 192 Q 136 96 176 0 H 80 Z"
+                    fill="#8b4513"
+                    stroke="#5a2e0d"
+                    stroke-width="4"
+                />
+                <!-- Gradient background inside spout -->
+                <path 
+                    d="M 90 10 Q 120 96 90 192 Q 60 288 90 374 H 166 Q 196 288 166 192 Q 136 96 166 10 H 90 Z"
+                    fill="url(#spoutGradient)"
+                />
+                <defs>
+                    <linearGradient id="spoutGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#d2b48c;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#a0522d;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <!-- Colorful Spider -->
+            <div id="spider" class="absolute w-12 h-12 cursor-pointer z-10" style="bottom: 0; left: 50%; transform: translateX(-50%);">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                    <circle cx="12" cy="12" r="5" fill="#ff6b6b" stroke="#4ecdc4"/>
+                    <!-- Legs -->
+                    <path d="M7 7L4 4M17 7L20 4M7 17L4 20M17 17L20 20" stroke="#45b7d1"/>
+                    <path d="M9 9L6 6M15 9L18 6M9 15L6 18M15 15L18 18" stroke="#96c93d"/>
+                </svg>
+            </div>
+
+            <!-- Rain Effect -->
+            <div id="rain" class="absolute inset-0 hidden z-20">
+                <div class="w-full h-full bg-blue-400 opacity-50 animate-pulse"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p>Click the spider to help it climb!</p>
+        </div>
+    </footer>
+
+    <script>
+        const spider = document.getElementById('spider');
+        const rain = document.getElementById('rain');
+        const scoreDisplay = document.getElementById('score');
+        const resetBtn = document.getElementById('resetBtn');
+        const singBtn = document.getElementById('singBtn');
+        const lyrics = document.getElementById('lyrics').innerText;
+        let score = 0;
+        let position = 0;
+        let gameActive = true;
+
+        function climb() {
+            if (!gameActive) return;
+            position += 20;
+            score += 10;
+            scoreDisplay.textContent = score;
+            spider.style.transform = `translateX(-50%) translateY(-${position}px)`;
+
+            if (position >= 300) {
+                alert('Yay! The itsy bitsy spider reached the top!');
+                gameActive = false;
+            } else if (Math.random() < 0.3) {
+                triggerRain();
+            }
+        }
+
+        function triggerRain() {
+            rain.classList.remove('hidden');
+            position = Math.max(0, position - 100);
+            spider.style.transform = `translateX(-50%) translateY(-${position}px)`;
+            setTimeout(() => {
+                rain.classList.add('hidden');
+            }, 1000);
+        }
+
+        function resetGame() {
+            position = 0;
+            score = 0;
+            gameActive = true;
+            scoreDisplay.textContent = score;
+            spider.style.transform = 'translateX(-50%) translateY(0)';
+            rain.classList.add('hidden');
+        }
+
+        function singSong() {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(lyrics);
+                utterance.rate = 0.9; // Slightly slower for clarity
+                utterance.pitch = 1.2; // Slightly higher pitch for a playful tone
+                speechSynthesis.speak(utterance);
+            } else {
+                alert('Sorry, your browser does not support text-to-speech!');
+            }
+        }
+
+        spider.addEventListener('click', climb);
+        resetBtn.addEventListener('click', resetGame);
+        singBtn.addEventListener('click', singSong);
+    </script>
+</body>
+</html>
