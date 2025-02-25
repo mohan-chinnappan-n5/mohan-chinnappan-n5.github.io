@@ -64,6 +64,9 @@ Introduced with Lightning Experience, the Lightning Usage App offers aggregated 
 * **Browser Performance Tab:** Highlights EPT variations across browsers (e.g., Chrome, Firefox) and devices (e.g., desktop vs. mobile).
 * **Page Performance Tab:** Identifies the slowest-loading pages, such as Feed Items or custom objects, based on real user data.
 
+#### Demo
+![Demo](https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/gif/ept1.webm.gif)
+
 ### EPT Counter
 
 For real-time analysis, administrators can enable an EPT counter in Lightning Experience:
