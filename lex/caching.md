@@ -165,3 +165,8 @@ Lightning Data Service (LDS) is a framework in Salesforce for working with data 
 
 ## Conclusion
 Caching with IndexedDB is not just a performance enhancement—it’s a cornerstone of delivering a robust, responsive SPA like Salesforce Lightning Experience. By reducing latency, optimizing resource usage, and enabling offline functionality, IndexedDB empowers enterprise applications to meet the demands of modern users. For Salesforce administrators and developers, adopting IndexedDB-based caching represents a strategic investment in scalability and user satisfaction, aligning with the platform’s promise of efficiency and innovation. As SPAs continue to dominate web development, mastering client-side caching will remain a differentiator in building world-class experiences.
+
+
+## References
+- [LDS](https://developer.salesforce.com/docs/atlas.en-us.lightning.meta/lightning/data_service.htm)
+- [Lightning Experience Performance Optimization](https://trailhead.salesforce.com/content/learn/modules/lightning-experience-performance-optimization)
