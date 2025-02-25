@@ -1,7 +1,10 @@
 # Whitepaper: The Critical Role of Caching with IndexedDB in Single Page Applications: A Focus on Salesforce Lightning Experience
 
+[Podcast for this paper](https://mohan-chinnappan-n5.github.io/podcast/podcasts.html?data=podcasts.json)
+
 ## Introduction
 Single Page Applications (SPAs) have transformed the way modern web applications deliver seamless, desktop-like experiences to users. Unlike traditional multi-page applications, SPAs load a single HTML page and dynamically update content as users interact with the application, minimizing full page reloads. Salesforce Lightning Experience, a leading example of an enterprise-grade SPA, leverages this architecture to provide a responsive, intuitive interface for customer relationship management (CRM). However, the dynamic nature of SPAs introduces unique performance challenges, particularly in managing data efficiently across user interactions. This whitepaper explores the critical role of caching—specifically using IndexedDB in the browser—in optimizing SPAs like Salesforce Lightning Experience, enhancing performance, reliability, and user experience.
+
 
 ## The Performance Demands of SPAs
 SPAs rely heavily on client-side rendering and asynchronous data fetching to deliver fluid interactions. In Salesforce Lightning Experience, for instance, users frequently navigate dashboards, update records, or generate reports—actions that trigger numerous API calls to retrieve or manipulate data. Without efficient data management, these operations can lead to latency, redundant network requests, and a sluggish user experience, especially in environments with variable network conditions.
