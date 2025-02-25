@@ -7,6 +7,9 @@
 
 Salesforce, a pioneer in cloud-based customer relationship management (CRM), has redefined its infrastructure with Hyperforce—a transformative architecture built to harness the power of public cloud platforms. Announced as a strategic shift from Salesforce’s traditional proprietary data centers, Hyperforce empowers organizations with unprecedented flexibility, scalability, and compliance capabilities. This whitepaper delves into the architectural principles, benefits, and implications of Hyperforce, offering insights for IT leaders, developers, and business decision-makers seeking to understand its impact on modern enterprise solutions.
 
+[Podcast for this paper - Page 3](https://mohan-chinnappan-n5.github.io/podcast/podcasts.html?data=podcasts.json)
+
+
 ## Introduction
 
 For over two decades, Salesforce has connected businesses and customers through its innovative SaaS platform, initially powered by custom-built data centers. However, as global demands for scalability, data residency, and resilience grew, Salesforce recognized the need to evolve. Hyperforce represents this evolution—a reimagined infrastructure leveraging public cloud providers like Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP). By transitioning from hardware-centric to code-driven infrastructure, Hyperforce delivers agility, security, and global reach, positioning Salesforce to meet the needs of a dynamic digital landscape.
