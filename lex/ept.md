@@ -125,6 +125,10 @@ $A.metricsService.getCurrentPageTransaction().config.context.attributes.totalEpt
 ```
 
 
+## Using Chrome Extension - Page Optimizer
+![Page optimizer ](img/ept-measure-1.png)
+
+
 
 ## Conclusion
 
