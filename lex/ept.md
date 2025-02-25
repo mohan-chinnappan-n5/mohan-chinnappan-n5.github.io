@@ -126,6 +126,8 @@ $A.metricsService.getCurrentPageTransaction().config.context.attributes.totalEpt
 
 
 ## Using Chrome Extension - Page Optimizer
+- [Install Page Optimizer Chrome Extension](https://chromewebstore.google.com/detail/salesforce-page-optimizer/alkcnclapbnefkodhbkpifdkceldogka)
+
 ![Page optimizer ](img/ept-measure-1.png)
 
 
