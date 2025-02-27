@@ -1,4 +1,8 @@
 #!/bin/bash
+# -------------------------------------------
+# Customlabels change finder in given PRs list
+# author: mohan chinnappan
+# -------------------------------------------
 
 # Function to display usage
 usage() {
