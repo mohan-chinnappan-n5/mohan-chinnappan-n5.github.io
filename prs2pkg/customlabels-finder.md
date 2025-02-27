@@ -22,7 +22,7 @@ This script is designed to check if Salesforce Custom Labels have been modified 
 ```bash
 check_custom_labels.sh -p 28426,28427,28428 -f "src/sales/xyz"
 ```
-- -f arg will be just before the main in the path
+- -f arg value will be the path from the current folder, just before the ```main``` in the path
 
 
 ```bash
