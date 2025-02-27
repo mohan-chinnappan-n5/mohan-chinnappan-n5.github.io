@@ -11,7 +11,7 @@ This script is designed to check if Salesforce Custom Labels have been modified 
 
 
 ## Install
-- Get [script](./customlabels-find.sh)
+- Get [script](./customlabels-finder.sh)
 - Copy this script to your usr/local/bin folder
 - Make it executable: chmod +x customlabels-find.sh
 
