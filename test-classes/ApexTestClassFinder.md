@@ -22,7 +22,7 @@ This Python script scans a folder containing Salesforce Apex classes (.cls files
 ## Usage
 
 
--- Run the script with the --cls-folder argument, specifying the path to the folder containing Apex class files.
+- Run the script with the ```--cls-folder``` argument, specifying the path to the folder containing Apex class files.
 
 
 ```bash
