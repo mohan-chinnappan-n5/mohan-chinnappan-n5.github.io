@@ -3,6 +3,14 @@ import argparse
 from rich.console import Console
 from rich.table import Table
 
+#---------------------------
+# ApexTestClassFinder.py
+# Scans a folder containing Salesforce Apex classes (.cls files) and identifies corresponding test classes. 
+# It assumes that test classes either end with Test or start with Test.
+# author: mohan chinnappan
+#---------------------------
+
+
 def find_apex_test_classes(apex_folder):
     if not os.path.isdir(apex_folder):
         print(f"[red]Invalid folder path: {apex_folder}[/red]")

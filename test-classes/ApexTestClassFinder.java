@@ -1,6 +1,16 @@
 import java.io.File;
 import java.util.*;
 
+
+/*
+ * ------------------------------
+ * ApexTestClassFinder.java
+ * scans a folder containing Salesforce Apex classes (.cls files) and identifies corresponding test classes. 
+ * It assumes that test classes either end with Test or start with Test.
+ * author: mohan chinnappan
+ * ------------------------------
+ *
+ * */
 public class ApexTestClassFinder {
     public static void main(String[] args) {
         // Parse the command-line argument
