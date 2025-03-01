@@ -640,6 +640,19 @@ Items: {
 
     },
 
+QRC: {
+      title: 'QRC',
+      links: [
+        { text: 'QRC', href: '../../qrc/qrc.html', icon: 'desktop' },
+        { text: 'QRC2', href: '../../qrc/qrc2.html?c=mango', icon: 'desktop' },
+        { text: 'Barcode', href: '../../qrc/barcode.html', icon: 'desktop' },
+        { text: 'Barcode2', href: '../../qrc/barcode2.html?c=jackfruit', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
 
 
 

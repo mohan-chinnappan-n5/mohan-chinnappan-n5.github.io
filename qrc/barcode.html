@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white p-4 fixed w-full top-0 shadow-lg">
+        <div class="text-center text-lg font-semibold">📌 Barcode Generator</div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="flex flex-col items-center justify-center min-h-screen pt-20 pb-20 px-4">
+        <div class="bg-white shadow-xl rounded-lg p-6 w-full max-w-lg">
+            <h2 class="text-xl font-bold mb-4 text-center">Enter Text to Generate Barcode</h2>
+            <input type="text" id="userInput" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Type here...">
+            <button onclick="generateBarcode()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full">Generate Barcode</button>
+            <div class="flex justify-center mt-6">
+                <svg id="barcode"></svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white text-center p-3 fixed bottom-0 w-full shadow-md">
+	    MCDocs - Barcode
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function generateBarcode() {
+            const input = document.getElementById("userInput").value.trim();
+            const barcodeElement = document.getElementById("barcode");
+
+            if (input === "") {
+                alert("Please enter text to generate a barcode.");
+                return;
+            }
+
+            JsBarcode(barcodeElement, input, {
+                format: "CODE128",
+                lineColor: "#333",
+                width: 2,
+                height: 100,
+                displayValue: true
+            });
+        }
+    </script>
+
+</body>
+</html>
