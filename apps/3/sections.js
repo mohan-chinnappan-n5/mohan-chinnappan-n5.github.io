@@ -303,6 +303,8 @@
         { text: 'SOQL Playground', href: 'https://mohan-chinnappan-n5.github.io/sf/query/app.html', icon: 'desktop' },
         { text: 'SOQL Playground - Deno', href: 'https://mohanc-sf.deno.dev', icon: 'desktop' },
         { text: 'Query and REST Console', href: '../../sf/toolset/index.html', icon: 'desktop' },
+        { text: 'SOQL Editor', href: '../../sf/ac/soqlQuery.html', icon: 'desktop' },
+
 
         // Add more links here
       ],
