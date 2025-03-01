@@ -630,6 +630,18 @@ Podcasts: {
 
     },
 
+Items: {
+      title: 'Items',
+      links: [
+        { text: 'Items to search for', href: '../../items/items.html?data=fruits.json&type=fruits', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
+
+
 
 Dwg: {
       title: 'Diagrams',

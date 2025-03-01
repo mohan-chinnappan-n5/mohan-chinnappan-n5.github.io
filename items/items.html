@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Finder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto text-center text-lg font-semibold" id="navbar-title">Item Finder</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-10 p-4">
+        <h2 class="text-xl font-semibold mb-3" id="page-title">Search for an item:</h2>
+        <input type="text" id="search" class="w-full p-2 border border-gray-300 rounded-lg" placeholder="Type to search...">
+        <ul id="results" class="bg-white shadow-lg rounded-lg mt-2 p-2 hidden"></ul>
+
+        <!-- Display Wikipedia link -->
+        <div id="wikipedia-link" class="mt-3 hidden">
+            <a id="wiki-url" href="#" target="_blank" class="text-white bg-gradient-to-r from-blue-500 to-teal-500 hover:from-teal-500 hover:to-blue-500 py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">View details on Wikipedia</a>
+        </div>
+    </div>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white text-center p-3 fixed bottom-0 w-full">
+       MCDocs - Finder 
+    </footer>
+
+    <script>
+        let items = [];
+        const urlParams = new URLSearchParams(window.location.search);
+        const dataUrl = urlParams.get("data");
+        const itemType = urlParams.get("type") || "fruits"; // Default to "fruits"
+
+        document.getElementById("navbar-title").textContent = `${itemType} Finder`;
+        document.getElementById("page-title").textContent = `Search for ${itemType.toLowerCase()}:`;
+
+        async function fetchItems() {
+            if (!dataUrl) {
+                alert("Please provide a data URL via ?data=<URL>");
+                return;
+            }
+
+            try {
+                //console.log(`Fetching data from: ${dataUrl}`);
+                const response = await fetch(dataUrl);
+                const jsonData = await response.json();
+
+                // Ensure we're accessing the correct key dynamically
+                const itemsObject = jsonData.items || {};  // Access the 'items' key
+                items = itemsObject[itemType] || [];  // Then access the correct type (e.g., 'fruits')
+
+                if (!Array.isArray(items)) {
+                    console.error(`Expected an array for '${itemType}', but got:`, items);
+                    items = [];
+                }
+                console.log("Loaded items:", items);
+            } catch (error) {
+                console.error("Error fetching items:", error);
+            }
+        }
+
+        function filterItems(query) {
+            const results = document.getElementById("results");
+            results.innerHTML = "";
+            if (!query) {
+                results.classList.add("hidden");
+                return;
+            }
+
+            const filtered = items.filter(item => item.toLowerCase().includes(query.toLowerCase()));
+            if (filtered.length === 0) {
+                results.classList.add("hidden");
+                return;
+            }
+
+            filtered.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                li.classList.add("p-2", "cursor-pointer", "hover:bg-blue-100");
+                li.addEventListener("click", () => {
+                    document.getElementById("search").value = item;
+                    results.classList.add("hidden");
+                    showWikipediaLink(item);
+                });
+                results.appendChild(li);
+            });
+
+            results.classList.remove("hidden");
+        }
+
+        function showWikipediaLink(item) {
+            // Generate the Wikipedia URL for the item
+            const wikiUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(item)}`;
+            const linkElement = document.getElementById("wiki-url");
+            linkElement.href = wikiUrl;
+
+            // Display the Wikipedia link
+            const linkContainer = document.getElementById("wikipedia-link");
+            linkContainer.classList.remove("hidden");
+        }
+
+        document.getElementById("search").addEventListener("input", (e) => {
+            filterItems(e.target.value);
+        });
+
+        fetchItems();
+    </script>
+
+</body>
+</html>

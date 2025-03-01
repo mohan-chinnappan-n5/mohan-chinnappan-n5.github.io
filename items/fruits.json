@@ -1,0 +1,43 @@
+{
+  "items": {
+    "fruits": [
+      "Apple",
+      "Apricot",
+      "Avocado",
+      "Banana",
+      "Blackberry",
+      "Blueberry",
+      "Cherry",
+      "Coconut",
+      "Cranberry",
+      "Date",
+      "Dragonfruit",
+      "Durian",
+      "Elderberry",
+      "Fig",
+      "Grape",
+      "Grapefruit",
+      "Guava",
+      "Jackfruit",
+      "Kiwi",
+      "Lemon",
+      "Lime",
+      "Lychee",
+      "Mango",
+      "Melon",
+      "Mulberry",
+      "Nectarine",
+      "Orange",
+      "Papaya",
+      "Peach",
+      "Pear",
+      "Pineapple",
+      "Plum",
+      "Pomegranate",
+      "Raspberry",
+      "Strawberry",
+      "Tangerine",
+      "Watermelon"
+    ]
+  }
+}

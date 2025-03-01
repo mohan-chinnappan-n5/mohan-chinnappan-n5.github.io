@@ -1,0 +1,26 @@
+{
+  "items": {
+    "langs": [
+      "Python",
+      "JavaScript",
+      "Java",
+      "C",
+      "C++",
+      "Ruby",
+      "Go",
+      "Swift",
+      "PHP",
+      "Rust",
+      "Kotlin",
+      "Perl",
+      "TypeScript",
+      "Lua",
+      "Scala",
+      "Haskell",
+      "Shell",
+      "Dart",
+      "Objective-C",
+      "R"
+    ]
+  }
+}
