@@ -55,7 +55,7 @@ Name FROM Account`,
         document.getElementById('instanceUrl').value = localStorage.getItem('instanceUrl') || '';
         soqlEditor.setValue(localStorage.getItem('query') || 'SELECT Id, Name FROM Account');
 
-        document.getElementById('backendUrl').value = localStorage.getItem('backendUrl') || 'http://localhost:5000';
+        document.getElementById('backendUrl').value = localStorage.getItem('backendUrl') || ' https://mc-sf-backend-c67d573c563d.herokuapp.com';
     };
 
     // Save config to localStorage on input change
