@@ -68,7 +68,8 @@
                 <label class="block text-sm font-medium text-gray-700">Backend URL</label>
                 <input id="backendUrl" type="text" class="mt-1 block w-full p-2 border rounded" value="https://mc-sf-backend-c67d573c563d.herokuapp.com">
                 <a href="./backend.py" target="_blank" class="text-blue-500">View Backend Code</a>
-                <pre>To Run it locally as: python3 backend.py</pre>
+                <pre>To Run it locally as: python3 backend.py 
+Backend URL: http://localhost:5000 </pre>
             </div>
         </div>
     </div>
@@ -94,6 +95,21 @@
             Show in Datatable
             </button>
         </div>
+
+       
+
+    </div>
+    <div class="bg-white p-4 rounded shadow">
+        <h2 class="text-lg font-semibold mb-2">Query Results Table</h2>
+            
+        <table id="queryResultsTable" class="w-full border border-gray-300">
+            <thead>
+                <tr id="tableHeader" class="bg-gray-200"></tr>
+            </thead>
+            <tbody id="tableBody" class="divide-y divide-gray-300 odd:bg-gray-100 even:bg-white"></tbody>
+        </table>
+ 
+      
     </div>
 </main>
 
@@ -101,6 +117,11 @@
     <footer class="bg-gray-800 text-white p-4 text-center">
         <p>MCDocs SQL Editor</p>
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
 
     <script src="./soqlQueryApp.js"></script>
 

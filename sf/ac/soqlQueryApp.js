@@ -39,12 +39,8 @@ function copyToClipboard(text) {
 require.config({
     paths: {
         'vs': 'https://unpkg.com/monaco-editor@0.34.0/min/vs',
-        'jquery': 'https://code.jquery.com/jquery-3.6.0.min',
-        'datatables': 'https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min'
-    },
-    shim: {
-        'datatables': { deps: ['jquery'], exports: '$.fn.DataTable' }
     }
+    
 });
 
 require(['vs/editor/editor.main'], function(monaco, $) {
@@ -189,6 +185,20 @@ monaco.languages.registerCompletionItemProvider('sql', {
         copyToClipboard(JSON.stringify( result.records));
 
     });
+
+    let currentPage = 1;
+    const rowsPerPage = 10; // Set number of rows per page
+    let tableRows = []; // Store all rows for pagination
+
+
+
+    function applyStriping() {
+        const rows = document.querySelectorAll("#queryResultsTable tbody tr");
+        rows.forEach((row, index) => {
+            row.classList.toggle("bg-gray-100", index % 2 === 0);
+            row.classList.toggle("bg-white", index % 2 !== 0);
+        });
+    }
     
     // Run Query Button
     document.getElementById('queryButton').addEventListener('click', async () => {
@@ -198,6 +208,48 @@ monaco.languages.registerCompletionItemProvider('sql', {
         // Update JSON Editor
         resultEditor.setValue(JSON.stringify(result, null, 2));
         document.getElementById('show-in-datatable').disabled = false; // Enable the button
+
+        if (result.records && result.records.length > 0) {
+            populateDataTable(result.records);
+        }   applyStriping();
     });
+
+    
+
+
+    function populateDataTable(records) {
+        const tableHeader = document.getElementById('tableHeader');
+        const tableBody = document.getElementById('tableBody');
+
+        // Clear existing content
+        tableHeader.innerHTML = '';
+        tableBody.innerHTML = '';
+
+        // Create table headers
+        const headers = Object.keys(records[0]);
+        // ignore attributes
+        const index = headers.indexOf('attributes');
+        if (index > -1) {
+            headers.splice(index, 1);
+        }
+        headers.forEach(header => {
+            const th = document.createElement('th');
+            th.textContent = header;
+            tableHeader.appendChild(th);
+        });
+
+        // Create table rows
+        records.forEach(record => {
+            const row = document.createElement('tr');
+            headers.forEach(header => {
+                const cell = document.createElement('td');
+                cell.textContent = record[header] || '';
+                row.appendChild(cell);
+            });
+            tableBody.appendChild(row);
+        });
+
+    }
+
          
 });
