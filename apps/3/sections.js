@@ -641,12 +641,13 @@ Items: {
     },
 
 QRC: {
-      title: 'QRC',
+      title: 'QRC, BAR Code and Music',
       links: [
         { text: 'QRC', href: '../../qrc/qrc.html', icon: 'desktop' },
         { text: 'QRC2', href: '../../qrc/qrc2.html?c=mango', icon: 'desktop' },
         { text: 'Barcode', href: '../../qrc/barcode.html', icon: 'desktop' },
         { text: 'Barcode2', href: '../../qrc/barcode2.html?c=jackfruit', icon: 'desktop' },
+        { text: 'Music', href: '../../music/score/score.html', icon: 'desktop' },
  
         // Add more links here
       ],

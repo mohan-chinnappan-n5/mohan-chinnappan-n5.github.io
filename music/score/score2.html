@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Score Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Using a more reliable CDN source and specific version -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vexflow/3.0.9/vexflow-min.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <nav class="bg-blue-600 text-white p-4 fixed w-full top-0 shadow-lg">
+        <div class="text-center text-lg font-semibold">🎼 Music Score Generator</div>
+    </nav>
+
+    <div class="flex flex-col items-center justify-center min-h-screen pt-20 pb-20 px-4">
+        <div class="bg-white shadow-xl rounded-lg p-6 w-full max-w-lg">
+            <h2 class="text-xl font-bold mb-4 text-center">Enter Notes (e.g., "C4 D4 E4 F4")</h2>
+            <input type="text" id="userInput" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Type musical notes here...">
+            <button onclick="generateMusicScore()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full">Generate Music Score</button>
+            <div id="music-container" class="flex justify-center mt-6"></div>
+        </div>
+    </div>
+
+    <footer class="bg-blue-600 text-white text-center p-3 fixed bottom-0 w-full shadow-md">
+        MCDocs Music Score Generator
+    </footer>
+
+    <script>
+        // Wait for VexFlow to load
+        function checkVexFlowLoaded() {
+            if (typeof Vex === 'undefined') {
+                console.error('VexFlow failed to load');
+                alert('Error: Music notation library failed to load. Please refresh the page.');
+                return false;
+            }
+            return true;
+        }
+
+        function generateMusicScore() {
+            if (!checkVexFlowLoaded()) return;
+
+            const input = document.getElementById("userInput").value.trim();
+            const musicContainer = document.getElementById("music-container");
+            musicContainer.innerHTML = "";
+
+            if (!input) {
+                alert("Please enter notes to generate a music score.");
+                return;
+            }
+
+            const notesArray = input.split(" ").filter(note => note !== "");
+            renderMusicSheet(notesArray, "music-container");
+        }
+
+        function renderMusicSheet(notes, containerId) {
+            if (!checkVexFlowLoaded()) return;
+
+            const VF = Vex.Flow;
+            const div = document.getElementById(containerId);
+            div.innerHTML = "";
+
+            const renderer = new VF.Renderer(div, VF.Renderer.Backends.SVG);
+            renderer.resize(500, 500);
+            const context = renderer.getContext();
+            const stave = new VF.Stave(10, 40, 400);
+            stave.addClef("treble").addTimeSignature("4/4");
+            stave.setContext(context).draw();
+
+            const parsedNotes = notes.map(note => {
+                const match = note.match(/^([A-Ga-g])([#b]?)(\d)?$/);
+                if (!match) return null;
+                
+                const [_, pitch, accidental, octave] = match;
+                const key = `${pitch.toLowerCase()}${accidental || ''}/${octave || '4'}`;
+                return new VF.StaveNote({ keys: [key], duration: "q" });
+            }).filter(note => note !== null);
+
+            if (parsedNotes.length === 0) {
+                alert("No valid notes found!");
+                return;
+            }
+
+            const notesInMeasure = parsedNotes.slice(0, 4);
+            const voice = new VF.Voice({ num_beats: 4, beat_value: 4 });
+            voice.addTickables(notesInMeasure);
+
+            new VF.Formatter().joinVoices([voice]).format([voice], 350);
+            voice.draw(context, stave);
+        }
+
+        // Check if VexFlow loaded when page loads
+        window.onload = function() {
+            if (!checkVexFlowLoaded()) {
+                console.error('VexFlow not available on page load');
+            }
+        };
+    </script>
+</body>
+</html>
