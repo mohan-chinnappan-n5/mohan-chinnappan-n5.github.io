@@ -39,56 +39,63 @@
 </nav> 
 
     <!-- Main Content -->
-    <main class="container mx-auto p-4 flex-grow">
-        <!-- Configuration Inputs -->
-        <div class="mb-4 bg-white p-4 rounded shadow">
-            <h2 class="text-lg font-semibold mb-2">Salesforce Configuration</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Access Token</label>
-                    <input id="accessToken" type="text" class="mt-1 block w-full p-2 border rounded" placeholder="Enter Access Token">
-                    <pre>Get them from running: sf force org display after logging in to your org.  </pre>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Instance URL</label>
-                    <input id="instanceUrl" type="text" class="mt-1 block w-full p-2 border rounded" placeholder="e.g., https://your-domain.my.salesforce.com">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700">Backend URL</label>
-                    <input id="backendUrl" type="text" class="mt-1 block w-full p-2 border rounded" value="https://mc-sf-backend-c67d573c563d.herokuapp.com">
-                    <a href="./backend.py" target="_blank" class="text-blue-500">View Backend Code</a>
-                    <pre>To Run it locally as: python3 backend.py</pre>
-                </div>
+ <!-- Main Content -->
+<main class="container mx-auto p-4 flex-grow">
+    <!-- Configuration Inputs -->
+    <div class="mb-4 bg-white p-4 rounded shadow">
+        <h2 class="text-lg font-semibold mb-2 flex items-center">
+            Salesforce Configuration
+            <span class="ml-2 inline-block bg-yellow-500 text-white rounded-full w-6 h-6 text-center font-semibold cursor-pointer" id="info-icon">
+                i
+            </span>
+        </h2>
+        <pre id="info-text" class="font-medium bg-gray-800 text-white p-4 rounded-lg shadow-lg w-full max-w-4xl hidden">
+            Get Access Token and Instance URL from running: 
+            sf force org display 
+            after logging into your org with:
+            sf force auth web login -s 
+        </pre>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Access Token</label>
+                <input id="accessToken" type="text" class="mt-1 block w-full p-2 border rounded" placeholder="Enter Access Token">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Instance URL</label>
+                <input id="instanceUrl" type="text" class="mt-1 block w-full p-2 border rounded" placeholder="e.g., https://your-domain.my.salesforce.com">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Backend URL</label>
+                <input id="backendUrl" type="text" class="mt-1 block w-full p-2 border rounded" value="https://mc-sf-backend-c67d573c563d.herokuapp.com">
+                <a href="./backend.py" target="_blank" class="text-blue-500">View Backend Code</a>
+                <pre>To Run it locally as: python3 backend.py</pre>
             </div>
         </div>
+    </div>
 
-        <!-- Editors -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <!-- SOQL Input Editor -->
-            <div>
-                <h2 class="text-lg font-semibold mb-2">SOQL Query</h2>
-                <div id="soqlEditor" class="editor-container"></div>
-            </div>
-            <!-- Query Results Editor -->
-            <div>
-                <h2 class="text-lg font-semibold mb-2">Query Results (JSON)</h2>
-                <div id="resultEditor" class="editor-container"></div>
-            </div>
+    <!-- Editors -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <!-- SOQL Input Editor -->
+        <div>
+            <h2 class="text-lg font-semibold mb-2">SOQL Query</h2>
+            <div id="soqlEditor" class="editor-container"></div>
+        </div>
+        <!-- Query Results Editor -->
+        <div>
+            <h2 class="text-lg font-semibold mb-2">Query Results (JSON)</h2>
+            <div id="resultEditor" class="editor-container"></div>
+        </div>
 
-            <!-- Query Results Table -->
-            <div class="bg-white p-4 rounded shadow">
-                <button id="show-in-datatable"
-                class="text-white bg-gradient-to-r from-blue-500 to-teal-500 hover:from-teal-500 hover:to-blue-500 py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 
-                       disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-50">
+        <!-- Query Results Table -->
+        <div class="bg-white p-4 rounded shadow">
+            <button id="show-in-datatable"
+            class="text-white bg-gradient-to-r from-blue-500 to-teal-500 hover:from-teal-500 hover:to-blue-500 py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 
+                   disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-50">
             Show in Datatable
             </button>
-          
-              
-            </div>
         </div>
-
-   
-    </main>
+    </div>
+</main>
 
     <!-- Sticky Footer -->
     <footer class="bg-gray-800 text-white p-4 text-center">

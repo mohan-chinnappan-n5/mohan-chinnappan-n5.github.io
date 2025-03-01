@@ -1,9 +1,26 @@
+//-
 // soqlQueryApp.js
 // Description: This file contains the code for the soqlQueryApp module.
 // The soqlQueryApp module is responsible for handling the SOQL query form and
 // results display.
 
 // author: Mohan Chinnappan
+//------------------------------------------------------------------------
+
+// Script to show the pre element when hovering on the (i) icon
+
+    const infoIcon = document.getElementById('info-icon');
+    const infoText = document.getElementById('info-text');
+
+    // Show the <pre> element when hovering over the (i) icon
+    infoIcon.addEventListener('mouseover', () => {
+        infoText.classList.remove('hidden');
+    });
+
+    // Hide the <pre> element when the mouse leaves the (i) icon
+    infoIcon.addEventListener('mouseleave', () => {
+        infoText.classList.add('hidden');
+    });
 
 
 function copyToClipboard(text) {
