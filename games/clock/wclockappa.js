@@ -28,7 +28,7 @@ let alarmSet = null;
 let stopwatchRunning = false;
 let stopwatchTime = 0;
 let stopwatchInterval;
-let lastAnnouncedHour = -1; // To track the last announced hour
+let lastAnnouncedTime = null; // To track the last announced time (hour or half-hour)
 
 // Time zones
 const timeZones = {
@@ -76,9 +76,15 @@ function formatTime(date) {
     return date.toLocaleTimeString('en-US', { hour12: false });
 }
 
-// Announce the hour
-function announceHour(hour) {
-    const speech = new SpeechSynthesisUtterance(`The time is now ${hour} o'clock`);
+// Announce the time
+function announceTime(hour, minute) {
+    let announcement;
+    if (minute === 0) {
+        announcement = `The time is now ${hour} o'clock`;
+    } else if (minute === 30) {
+        announcement = `The time is now ${hour} thirty`;
+    }
+    const speech = new SpeechSynthesisUtterance(announcement);
     speech.lang = 'en-US';
     window.speechSynthesis.speak(speech);
 }
@@ -99,10 +105,11 @@ function updateClocks() {
     secondHand.style.transform = `rotate(${secondDeg}deg) translateX(-50%)`;
     digitalClock.textContent = formatTime(now);
 
-    // Hourly announcement for local time
-    if (minutes === 0 && seconds === 0 && hours !== lastAnnouncedHour) {
-        announceHour(hours);
-        lastAnnouncedHour = hours; // Update the last announced hour
+    // Hourly and half-hourly announcement for local time
+    const currentTimeKey = `${hours}:${minutes}`; // Unique key for hour and minute
+    if (seconds === 0 && (minutes === 0 || minutes === 30) && currentTimeKey !== lastAnnouncedTime) {
+        announceTime(hours, minutes);
+        lastAnnouncedTime = currentTimeKey; // Update the last announced time
     }
 
     // World clocks
