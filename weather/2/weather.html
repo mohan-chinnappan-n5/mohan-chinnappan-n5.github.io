@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        .weather-box {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Header -->
+    <header class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Weather Tracker</h1>
+            <div>
+                <select id="unitSelector" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                    <option value="imperial">Imperial (°F)</option>
+                    <option value="metric">Metric (°C)</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <!-- Weather Input -->
+        <div class="weather-box flex flex-col items-center w-full max-w-md">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Check Weather</h2>
+            <div class="w-full flex flex-col sm:flex-row gap-2">
+                <input 
+                    id="cityInput" 
+                    type="text" 
+                    placeholder="Enter City (e.g., Nashua, NH, US or London)" 
+                    class="p-2 border rounded flex-grow text-gray-700"
+                >
+                <button 
+                    id="getWeather" 
+                    class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                >
+                    Check
+                </button>
+            </div>
+            <div id="weatherResult" class="mt-4 text-gray-800 text-center"></div>
+            <p id="weatherStatus" class="mt-2 text-gray-600 text-center"></p>
+        </div>
+
+        <!-- Last Searched Cities -->
+        <div class="weather-box flex flex-col items-center w-full max-w-md mt-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Last Searched Cities</h2>
+            <ul id="lastSearchedCities" class="w-full text-gray-800 list-disc pl-6"></ul>
+            <button 
+                id="clearHistory" 
+                class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+            >
+                Clear History
+            </button>
+        </div>
+
+        <!-- World Clocks -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+            <div id="indiaClock" class="text-xl font-mono text-gray-800"></div>
+            <div id="nyClock" class="text-xl font-mono text-gray-800"></div>
+            <div id="austinClock" class="text-xl font-mono text-gray-800"></div>
+            <div id="sfClock" class="text-xl font-mono text-gray-800"></div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Enter city name (e.g., Nashua, NH, US) or use ?c={city} • Choose units above • View search history below • Times in 24-hour format
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const cityInput = document.getElementById('cityInput');
+        const getWeatherBtn = document.getElementById('getWeather');
+        const weatherResult = document.getElementById('weatherResult');
+        const weatherStatus = document.getElementById('weatherStatus');
+        const indiaClock = document.getElementById('indiaClock');
+        const nyClock = document.getElementById('nyClock');
+        const austinClock = document.getElementById('austinClock');
+        const sfClock = document.getElementById('sfClock');
+        const lastSearchedCitiesList = document.getElementById('lastSearchedCities');
+        const clearHistoryBtn = document.getElementById('clearHistory');
+        const unitSelector = document.getElementById('unitSelector');
+
+        // OpenWeatherMap API key (replace with your own key from https://openweathermap.org/)
+        const API_KEY = 'fe341971f8bda16b037ea1b30f7b83e0'; // Sign up for a free key at OpenWeatherMap
+
+        // Time zones
+        const timeZones = {
+            'India': 'Asia/Kolkata',
+            'New York': 'America/New_York',
+            'Austin TX': 'America/Chicago',
+            'San Francisco CA': 'America/Los_Angeles'
+        };
+
+        // Load search history from local storage
+        let lastSearchedCities = JSON.parse(localStorage.getItem('lastSearchedCities')) || [];
+        let currentUnit = 'imperial'; // Default to Imperial (°F)
+
+        // Format time
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', { hour12: false });
+        }
+
+        // Update world clocks
+        function updateClocks() {
+            const now = new Date();
+            indiaClock.textContent = `India: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['India'], hour12: false })}`;
+            nyClock.textContent = `New York: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['New York'], hour12: false })}`;
+            austinClock.textContent = `Austin TX: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['Austin TX'], hour12: false })}`;
+            sfClock.textContent = `San Francisco: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['San Francisco CA'], hour12: false })}`;
+        }
+
+        // Update search history display
+        function updateSearchHistory() {
+            lastSearchedCitiesList.innerHTML = '';
+            lastSearchedCities.forEach(city => {
+                const li = document.createElement('li');
+                li.textContent = `${city.name} (Searched: ${city.timestamp})`;
+                li.classList.add('cursor-pointer', 'hover:text-blue-600');
+                li.addEventListener('click', () => {
+                    cityInput.value = city.name;
+                    getWeatherBtn.click();
+                });
+                lastSearchedCitiesList.appendChild(li);
+            });
+        }
+
+        // Add city to history
+        function addToHistory(cityName) {
+            const timestamp = new Date().toLocaleString();
+            lastSearchedCities = lastSearchedCities.filter(c => c.name.toLowerCase() !== cityName.toLowerCase());
+            lastSearchedCities.unshift({ name: cityName, timestamp });
+            if (lastSearchedCities.length > 10) {
+                lastSearchedCities.pop();
+            }
+            localStorage.setItem('lastSearchedCities', JSON.stringify(lastSearchedCities));
+            updateSearchHistory();
+        }
+
+        // Fetch weather data
+        async function fetchWeather(city) {
+            try {
+                weatherStatus.textContent = `Fetching weather for ${city}...`;
+                const response = await fetch(
+                    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${currentUnit}`
+                );
+                if (!response.ok) throw new Error('City not found or invalid format');
+                const data = await response.json();
+                const { main, weather, name } = data;
+                const unitSymbol = currentUnit === 'imperial' ? '°F' : '°C';
+                weatherResult.innerHTML = `
+                    <p><strong>${name}</strong></p>
+                    <p>Temperature: ${main.temp}${unitSymbol}</p>
+                    <p>Feels Like: ${main.feels_like}${unitSymbol}</p>
+                    <p>Weather: ${weather[0].description}</p>
+                    <p>Humidity: ${main.humidity}%</p>
+                `;
+                addToHistory(city); // Store the input as entered
+                weatherStatus.textContent = '';
+            } catch (error) {
+                weatherResult.textContent = '';
+                weatherStatus.textContent = error.message || 'Error fetching weather data';
+            }
+        }
+
+        // Get URL parameter
+        function getCityFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('c');
+        }
+
+        // Event Listeners
+        getWeatherBtn.addEventListener('click', () => {
+            const city = cityInput.value.trim();
+            if (city) {
+                fetchWeather(city);
+            } else {
+                weatherStatus.textContent = 'Please enter a city name';
+                weatherResult.textContent = '';
+            }
+        });
+
+        cityInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                getWeatherBtn.click();
+            }
+        });
+
+        clearHistoryBtn.addEventListener('click', () => {
+            lastSearchedCities = [];
+            localStorage.removeItem('lastSearchedCities');
+            updateSearchHistory();
+            weatherStatus.textContent = 'Search history cleared';
+            setTimeout(() => { weatherStatus.textContent = ''; }, 2000);
+        });
+
+        unitSelector.addEventListener('change', (e) => {
+            currentUnit = e.target.value;
+            const city = cityInput.value.trim();
+            if (city && weatherResult.textContent) {
+                fetchWeather(city);
+            }
+        });
+
+        // Initial Setup
+        unitSelector.value = 'imperial'; // Set default to Imperial
+        setInterval(updateClocks, 1000);
+        updateClocks();
+        updateSearchHistory();
+
+        // Check for URL parameter and fetch weather if present
+        const urlCity = getCityFromUrl();
+        if (urlCity) {
+            cityInput.value = urlCity;
+            fetchWeather(urlCity);
+        }
+    </script>
+</body>
+</html>

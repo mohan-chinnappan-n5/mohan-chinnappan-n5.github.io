@@ -165,6 +165,8 @@
         { text: 'Simple Accounting App - Kalam', href: '../../common/books/books.html', icon: 'desktop' },
         { text: 'Simple TODO app - Kalam', href: '../../common/todo/todo.html', icon: 'desktop' },
         { text: 'Clock', href: '../..//utils/clock/clockapp.html', icon: 'desktop' },
+        { text: 'World Clock', href: '../../games/clock/wclock.html', icon: 'desktop' },
+	{ text: 'Flight Tracker', href: '../../flights/tracking/ftrack.html', icon: 'desktop' },
         { text: 'Calendar', href: '../..//utils/cal/cal.html', icon: 'desktop' },
   
         { text: 'Scientific Calculator', href: '../../calc/c.html', icon: 'desktop' },
@@ -175,6 +177,9 @@
         { text: 'US - Tax Calculator', href: 'https://mctaxes.streamlit.app', icon: 'desktop' },
         { text: 'Iframes viewer', href: '../../frames/iframes.html?data=frames.json', icon: 'desktop' },
         { text: 'Weather App', href: '../../weather/weatherApp.html?c=Nashua NH', icon: 'desktop' },
+        { text: 'Weather App 2', href: '../../weather/2/weather.html?c=Nashua,NH,US', icon: 'desktop' },
+
+
 
 
 
@@ -343,6 +348,7 @@
         { text: 'Vdeo, Audio, Screen Recording and Music Apps (13 Apps)', href: 'https://mohan-chinnappan-n2.github.io/media-app.html', icon: 'desktop' },
         { text: 'OCR App - Turing', href: '../../ocr/index.html', icon: 'desktop' },
         { text: 'Icon Generator', href: '../../icon/popup.html', icon: 'desktop' },
+
 
         // Add more links here
       ],
