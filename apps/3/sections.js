@@ -348,6 +348,8 @@
         { text: 'Vdeo, Audio, Screen Recording and Music Apps (13 Apps)', href: 'https://mohan-chinnappan-n2.github.io/media-app.html', icon: 'desktop' },
         { text: 'OCR App - Turing', href: '../../ocr/index.html', icon: 'desktop' },
         { text: 'Icon Generator', href: '../../icon/popup.html', icon: 'desktop' },
+        { text: 'Nursery Songs', href: '../../nursery/nursery.html', icon: 'desktop' },
+
 
 
         // Add more links here
@@ -611,6 +613,8 @@ Slideshow: {
       title: 'Slideshows',
       links: [
         { text: 'AI generated Images', href: '../../slideshow/ss.html?data=holiday.json', icon: 'desktop' },
+        { text: 'Slides Presenter', href: '../../slides/2/slides.html?s=slides.md', icon: 'desktop' },
+ 
         // Add more links here
       ],
 
