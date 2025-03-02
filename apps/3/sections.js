@@ -561,6 +561,7 @@ Chemistry: {
       title: 'Chemistry',
       links: [
         { text: 'Periodic Table', href: '../../chemistry/pt/app.html', icon: 'desktop' },
+        { text: 'Rare Earth Elements', href: '../../slides/2/slides.html?s=../../materials/rare.md', icon: 'desktop' },
  
         // Add more links here
       ],
@@ -587,6 +588,9 @@ Agri: {
       links: [
         { text: 'AgriRevolution', href: '../../agri/us.html', icon: 'desktop' },
         { text: 'Organic Farming', href: '../../agri/organic.html', icon: 'desktop' },
+        { text: 'Fruit Trees', href: '../../slides/2/slides.html?s=../../agri/fruits.md', icon: 'desktop' },
+        { text: 'Farm Animals', href: '../../slides/2/slides.html?s=../../agri/animals.md', icon: 'desktop' },
+        { text: 'Grains', href: '../../slides/2/slides.html?s=../../agri/grains.md', icon: 'desktop' },
  
         // Add more links here
       ],
@@ -655,6 +659,24 @@ Items: {
       ],
 
     },
+
+
+Software: {
+      title: 'Software',
+      links: [
+        { text: 'Languages', href: '../../slides/2/slides.html?s=../../software/langs.md', icon: 'desktop' },
+        { text: 'Operating Systmes', href: '../../slides/2/slides.html?s=../../software/os.md', icon: 'desktop' },
+         { text: 'Databases', href: '../../slides/2/slides.html?s=../../software/db.md', icon: 'desktop' },
+         { text: 'Security', href: '../../slides/2/slides.html?s=../../software/security.md', icon: 'desktop' },
+         { text: 'Web Performance', href: '../../slides/2/slides.html?s=../../software/web_perf.md', icon: 'desktop' },
+         { text: 'Window.Performance', href: '../../slides/2/slides.html?s=../../software/window.performance.md', icon: 'desktop' },
+          { text: 'Playwright', href: '../../slides/2/slides.html?s=../../software/playwright.md', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
 
 QRC: {
       title: 'QRC, BAR Code and Music',
