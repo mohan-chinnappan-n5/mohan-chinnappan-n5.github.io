@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        .flight-box {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <header class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Flight Tracker</h1>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <div class="flight-box flex flex-col items-center w-full max-w-md">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Track a Flight</h2>
+            <div class="w-full flex flex-col sm:flex-row gap-2">
+                <input 
+                    id="flightNumber" 
+                    type="text" 
+                    placeholder="Enter Flight Number (e.g., AA123)" 
+                    class="p-2 border rounded flex-grow text-gray-700"
+                >
+                <button 
+                    id="trackFlight" 
+                    class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
+                >
+                    Track
+                </button>
+            </div>
+            <p id="flightStatus" class="mt-2 text-gray-600 text-center"></p>
+        </div>
+
+        <div class="flight-box flex flex-col items-center w-full max-w-md mt-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Last Viewed Flights</h2>
+            <ul id="lastViewedFlights" class="w-full text-gray-800 list-disc pl-6"></ul>
+            <button 
+                id="clearHistory" 
+                class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+            >
+                Clear History
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+            <div id="indiaClock" class="text-xl font-mono text-gray-800"></div>
+            <div id="nyClock" class="text-xl font-mono text-gray-800"></div>
+            <div id="austinClock" class="text-xl font-mono text-gray-800"></div>
+            <div id="sfClock" class="text-xl font-mono text-gray-800"></div>
+        </div>
+    </main>
+
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Enter a flight number and click Track • View history below • Times in 24-hour format
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const flightNumberInput = document.getElementById('flightNumber');
+        const trackFlightBtn = document.getElementById('trackFlight');
+        const flightStatus = document.getElementById('flightStatus');
+        const indiaClock = document.getElementById('indiaClock');
+        const nyClock = document.getElementById('nyClock');
+        const austinClock = document.getElementById('austinClock');
+        const sfClock = document.getElementById('sfClock');
+        const lastViewedFlightsList = document.getElementById('lastViewedFlights');
+        const clearHistoryBtn = document.getElementById('clearHistory');
+
+        const timeZones = {
+            'India': 'Asia/Kolkata',
+            'New York': 'America/New_York',
+            'Austin TX': 'America/Chicago',
+            'San Francisco CA': 'America/Los_Angeles'
+        };
+
+        let lastViewedFlights = JSON.parse(localStorage.getItem('lastViewedFlights')) || [];
+
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', { hour12: false });
+        }
+
+        function updateClocks() {
+            const now = new Date();
+            indiaClock.textContent = `India: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['India'], hour12: false })}`;
+            nyClock.textContent = `New York: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['New York'], hour12: false })}`;
+            austinClock.textContent = `Austin TX: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['Austin TX'], hour12: false })}`;
+            sfClock.textContent = `San Francisco: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['San Francisco CA'], hour12: false })}`;
+        }
+
+        function updateFlightHistory() {
+            lastViewedFlightsList.innerHTML = '';
+            lastViewedFlights.forEach(flight => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="https://www.flightaware.com/live/flight/${flight.number}" target="_blank" class="text-blue-600 hover:underline">${flight.number}</a> (Viewed: ${flight.timestamp})`;
+                lastViewedFlightsList.appendChild(li);
+            });
+        }
+
+        function addToHistory(flightNumber) {
+            const timestamp = new Date().toLocaleString();
+            lastViewedFlights = lastViewedFlights.filter(f => f.number !== flightNumber);
+            lastViewedFlights.unshift({ number: flightNumber, timestamp });
+            if (lastViewedFlights.length > 10) {
+                lastViewedFlights.pop();
+            }
+            localStorage.setItem('lastViewedFlights', JSON.stringify(lastViewedFlights));
+            updateFlightHistory();
+        }
+
+        trackFlightBtn.addEventListener('click', () => {
+            const flightNumber = flightNumberInput.value.trim().toUpperCase();
+            if (flightNumber) {
+                flightStatus.textContent = `Opening FlightAware for flight ${flightNumber} in new tab...`;
+                addToHistory(flightNumber);
+                window.open(`https://www.flightaware.com/live/flight/${flightNumber}`, '_blank');
+                setTimeout(() => { flightStatus.textContent = ''; }, 2000);
+            } else {
+                flightStatus.textContent = 'Please enter a valid flight number';
+            }
+        });
+
+        flightNumberInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                trackFlightBtn.click();
+            }
+        });
+
+        clearHistoryBtn.addEventListener('click', () => {
+            lastViewedFlights = [];
+            localStorage.removeItem('lastViewedFlights');
+            updateFlightHistory();
+            flightStatus.textContent = 'Flight history cleared';
+            setTimeout(() => { flightStatus.textContent = ''; }, 2000);
+        });
+
+        setInterval(updateClocks, 1000);
+        updateClocks();
+        updateFlightHistory();
+    </script>
+</body>
+</html>
