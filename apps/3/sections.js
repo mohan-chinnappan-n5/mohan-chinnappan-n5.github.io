@@ -179,6 +179,9 @@
         { text: 'Weather App', href: '../../weather/weatherApp.html?c=Nashua NH', icon: 'desktop' },
         { text: 'Weather App 2', href: '../../weather/2/weather.html?c=Nashua,NH,US', icon: 'desktop' },
 
+	 { text: 'Daily Book Balancing', href: '../../book-keeping/book-keeping.html', icon: 'desktop' },
+
+
 
 
 
