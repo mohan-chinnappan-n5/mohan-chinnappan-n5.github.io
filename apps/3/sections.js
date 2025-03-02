@@ -473,6 +473,8 @@
          { text: 'Lungs', href: '../../health/hdocs.html?data=lungs.json', icon: 'desktop' },
          { text: 'Spine', href: '../../health/hdocs.html?data=spine.json', icon: 'desktop' },
          { text: 'Vitamins', href: '../../slides/2/slides.html?s=../../health/vitamins.md', icon: 'desktop' },
+         { text: 'Hyperthyroid', href: '../../slides/2/slides.html?s=../../health/hyperthyroid.md', icon: 'desktop' },
+
 
 
 
