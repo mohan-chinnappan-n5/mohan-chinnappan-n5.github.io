@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitamin Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        .vitamin-container {
+            background: #93c5fd; /* Light blue background from the image */
+            padding: 2rem 0;
+            width: 100%;
+            max-height: calc(100vh - 8rem); /* Full height minus navbar and footer */
+            overflow-y: auto;
+        }
+        .vitamin-list-box, .vitamin-detail-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Readable width, centered */
+            margin: 0 auto; /* Center the box */
+            transition: all 0.3s ease-in-out;
+        }
+        .vitamin-list-box:hover, .vitamin-detail-box:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        .vitamin-list ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            color: #1f2937; /* Dark gray */
+        }
+        .vitamin-list li {
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+        .vitamin-list li:hover {
+            transform: translateX(5px);
+            color: #3b82f6; /* Blue on hover */
+        }
+        .vitamin-detail {
+            color: #374151; /* Gray */
+            line-height: 1.6;
+        }
+        .vitamin-detail h2 {
+            font-size: 1.875rem; /* Larger title */
+            font-weight: 700;
+            color: #1e40af; /* Dark blue */
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #3b82f6; /* Blue underline */
+            padding-bottom: 0.5rem;
+        }
+        .vitamin-detail p {
+            margin-bottom: 1rem;
+        }
+        .pagination-btn {
+            background: #3b82f6; /* Darker blue for buttons */
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .pagination-btn:hover:not(:disabled) {
+            background: #2563eb; /* Lighter blue on hover */
+            transform: translateY(-2px);
+        }
+        .pagination-btn:disabled {
+            background: #a3a3a3; /* Gray for disabled */
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <header class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Vitamin Guide</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <!-- Vitamin Display -->
+        <div class="vitamin-container">
+            <div id="vitaminContent" class="vitamin-list-box hidden">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Select a Vitamin</h2>
+                <ul id="vitaminList" class="vitamin-list"></ul>
+                <p id="vitaminListStatus" class="mt-2 text-gray-600 text-center"></p>
+            </div>
+            <div id="vitaminDetail" class="vitamin-detail-box hidden"></div>
+        </div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="mt-4 flex justify-center gap-4 hidden">
+            <button 
+                id="prevBtn" 
+                class="pagination-btn"
+                disabled
+            >
+                Prev
+            </button>
+            <span id="pageInfo" class="text-gray-800 flex items-center font-semibold"></span>
+            <button 
+                id="nextBtn" 
+                class="pagination-btn"
+            >
+                Next
+            </button>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Browse vitamins with Prev/Next • Click a vitamin to see benefits
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const vitaminContent = document.getElementById('vitaminContent');
+        const vitaminList = document.getElementById('vitaminList');
+        const vitaminDetail = document.getElementById('vitaminDetail');
+        const vitaminListStatus = document.getElementById('vitaminListStatus');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pageInfo = document.getElementById('pageInfo');
+        const pagination = document.getElementById('pagination');
+
+        // List of top 20 vitamins and their benefits (hardcoded for simplicity)
+        const vitamins = [
+            { name: "Vitamin A", benefits: "Supports eye health, immune function, and skin health. Essential for vision in low light and growth of cells." },
+            { name: "Vitamin B1 (Thiamine)", benefits: "Helps convert nutrients into energy, aids nerve function, and supports heart health. Found in whole grains and pork." },
+            { name: "Vitamin B2 (Riboflavin)", benefits: "Promotes energy production, skin and eye health, and red blood cell formation. Found in dairy, eggs, and green vegetables." },
+            { name: "Vitamin B3 (Niacin)", benefits: "Supports energy metabolism, skin health, and nervous system function. Found in meat, fish, and whole grains." },
+            { name: "Vitamin B5 (Pantothenic Acid)", benefits: "Essential for synthesizing coenzyme A, aiding in energy production and hormone synthesis. Found in meats, whole grains, and broccoli." },
+            { name: "Vitamin B6 (Pyridoxine)", benefits: "Supports brain development, immune function, and red blood cell production. Found in bananas, potatoes, and fortified cereals." },
+            { name: "Vitamin B7 (Biotin)", benefits: "Promotes healthy hair, skin, and nails, and supports metabolism. Found in eggs, almonds, and salmon." },
+            { name: "Vitamin B9 (Folate)", benefits: "Crucial for DNA synthesis, red blood cell formation, and prevents birth defects. Found in leafy greens, legumes, and citrus fruits." },
+            { name: "Vitamin B12 (Cobalamin)", benefits: "Supports nerve function, red blood cell production, and DNA synthesis. Found in meat, dairy, and fortified foods." },
+            { name: "Vitamin C", benefits: "Boosts immune system, promotes skin health, and acts as an antioxidant. Found in citrus fruits, strawberries, and bell peppers." },
+            { name: "Vitamin D", benefits: "Supports bone health, immune function, and calcium absorption. Synthesized by sunlight exposure and found in fatty fish and fortified milk." },
+            { name: "Vitamin E", benefits: "Acts as an antioxidant, protects cells from damage, and supports skin health. Found in nuts, seeds, and green leafy vegetables." },
+            { name: "Vitamin K", benefits: "Essential for blood clotting and bone health. Found in leafy greens, broccoli, and Brussels sprouts." },
+            { name: "Vitamin H (Biotin)", benefits: "Supports metabolism, hair, skin, and nail health. Found in eggs, nuts, and whole grains." },
+            { name: "Vitamin P (Bioflavonoids)", benefits: "Enhances vitamin C absorption, supports blood vessel health, and acts as an antioxidant. Found in citrus fruits and berries." },
+            { name: "Choline", benefits: "Supports brain health, liver function, and metabolism. Found in eggs, liver, and soybeans." },
+            { name: "Inositol", benefits: "Supports cell membrane function, nerve signaling, and mood regulation. Found in fruits, beans, and grains." },
+            { name: "Vitamin B15 (Pangamic Acid)", benefits: "May support oxygen utilization and energy production, though its status as a vitamin is debated. Found in seeds and grains." },
+            { name: "Vitamin U", benefits: "Supports digestive health and may help with ulcers. Found in cabbage, broccoli, and leafy greens." },
+            { name: "Vitamin Q (Ubiquinone)", benefits: "Supports energy production and acts as an antioxidant. Found in organ meats, spinach, and fish." }
+        ];
+
+        let currentPage = 0;
+        const vitaminsPerPage = 5; // Show 5 vitamins per page for pagination
+
+        // Update vitamin list display
+        function updateVitaminList() {
+            vitaminList.innerHTML = '';
+            const start = currentPage * vitaminsPerPage;
+            const end = start + vitaminsPerPage;
+            const paginatedVitamins = vitamins.slice(start, end);
+
+            paginatedVitamins.forEach(vitamin => {
+                const li = document.createElement('li');
+                li.textContent = vitamin.name;
+                li.addEventListener('click', () => showVitaminDetails(vitamin));
+                vitaminList.appendChild(li);
+            });
+
+            pageInfo.textContent = `Page ${currentPage + 1} of ${Math.ceil(vitamins.length / vitaminsPerPage)}`;
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage === Math.ceil(vitamins.length / vitaminsPerPage) - 1;
+        }
+
+        // Show vitamin details
+        function showVitaminDetails(vitamin) {
+            vitaminDetail.innerHTML = `
+                <h2>${vitamin.name}</h2>
+                <div class="vitamin-detail">
+                    <p>${vitamin.benefits}</p>
+                    <button id="backBtn" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded">Back</button>
+                </div>
+            `;
+            vitaminContent.classList.add('hidden');
+            vitaminDetail.classList.remove('hidden');
+            pagination.classList.add('hidden');
+
+            // Add event listener for back button
+            const backBtn = document.getElementById('backBtn');
+            backBtn.addEventListener('click', returnToList);
+        }
+
+        // Return to vitamin list
+        function returnToList() {
+            vitaminDetail.classList.add('hidden');
+            vitaminContent.classList.remove('hidden');
+            pagination.classList.remove('hidden');
+            updateVitaminList();
+        }
+
+        // Event Listeners
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updateVitaminList();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < Math.ceil(vitamins.length / vitaminsPerPage) - 1) {
+                currentPage++;
+                updateVitaminList();
+            }
+        });
+
+        // Initial Setup
+        updateVitaminList();
+    </script>
+</body>
+</html>
