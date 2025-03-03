@@ -78,6 +78,8 @@
 
         { text: 'DataGen', href: 'https://mohan-chinnappan-n5.github.io/devops/slides/devops-tools.html#9', icon: 'desktop' },
         { text: 'Word Cloud', href: 'https://mohan-chinnappan-n5.github.io/wc/wc.html', icon: 'desktop' },
+        { text: 'Word Cloud - 2', href: '../../wc/wc2.html?c=Be the change you want to see in the world - Mahatma Gandhi', icon: 'desktop' },
+
 
         { text: 'CSV Mapper', href: '../../mapping/index.html', icon: 'desktop' },
         { text: 'Charts for CSV - Kalam', href: '../../charts2/index.html', icon: 'desktop' },

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Cloud Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-cloud@1.2.5/build/d3.layout.cloud.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> <!-- For downloading image -->
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        .wordcloud-box {
+            background: #f0f0f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        #wordCloud {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .word {
+            cursor: pointer;
+            transition: font-size 0.3s ease, opacity 0.3s ease;
+        }
+        .word:hover {
+            opacity: 0.8;
+        }
+        #downloadBtn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <header class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Word Cloud Generator</h1>
+            <div class="flex items-center gap-4">
+                <input 
+                    id="urlInput" 
+                    type="url" 
+                    placeholder="Enter website URL (e.g., https://example.com)" 
+                    class="p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                >
+                <button 
+                    id="generateFromUrl" 
+                    class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-300"
+                >
+                    Generate Word Cloud
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <!-- Word Cloud Input and Display -->
+        <div class="wordcloud-box w-full max-w-2xl">
+            <div id="wordCloud"></div>
+            <button 
+                id="downloadBtn" 
+                class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded transition-all duration-300"
+            >
+                Download Word Cloud
+            </button>
+            <p id="wordCloudStatus" class="mt-2 text-gray-600 text-center"></p>
+        </div>
+        <div class="mt-4 flex flex-col gap-4 w-full max-w-2xl">
+            <textarea 
+                id="clipboardInput" 
+                placeholder="Paste content from clipboard here..." 
+                class="p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full h-32"
+            ></textarea>
+            <button 
+                id="generateFromClipboard" 
+                class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-300"
+            >
+                Generate Word Cloud from Clipboard
+            </button>
+            <div id="shareLink" class="text-gray-700">
+                <p>Share Word Cloud:</p>
+                <input 
+                    id="shareUrl" 
+                    type="text" 
+                    readonly 
+                    class="mt-1 block w-full p-2 border rounded text-gray-700 bg-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onclick="this.select()"
+                >
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Enter a website URL or paste content to generate a word cloud • Share via URL parameters (?w=, ?c=, or ?tc=) • Data saved locally
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const urlInput = document.getElementById('urlInput');
+        const generateFromUrlBtn = document.getElementById('generateFromUrl');
+        const clipboardInput = document.getElementById('clipboardInput');
+        const generateFromClipboardBtn = document.getElementById('generateFromClipboard');
+        const wordCloud = document.getElementById('wordCloud');
+        const wordCloudStatus = document.getElementById('wordCloudStatus');
+        const shareUrl = document.getElementById('shareUrl');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // Load word cloud data from localStorage
+        let wordCloudData = JSON.parse(localStorage.getItem('wordCloudData')) || null;
+
+        // Common English stop words to exclude
+        const stopWords = new Set([
+            'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he', 'in', 'is', 'it',
+            'of', 'on', 'that', 'the', 'to', 'was', 'were', 'will', 'with', 'but', 'i', 'you', 'they', 'this'
+        ]);
+
+        // Function to save word cloud data to localStorage
+        function saveWordCloud(data, topCount = 10) {
+            const words = getTopWords(data.words, topCount);
+            localStorage.setItem('wordCloudData', JSON.stringify({ words, source: data.source, original: data.original }));
+            wordCloudData = { words, source: data.source, original: data.original };
+            updateWordCloud(topCount);
+            updateShareLink(topCount);
+        }
+
+        // Function to fetch website content with CORS proxy
+        async function fetchWebsiteContent(url) {
+            try {
+                wordCloudStatus.textContent = 'Fetching website content...';
+                const corsProxy = 'https://api.allorigins.win/get?url='; // Alternative CORS proxy
+                const proxyUrl = corsProxy + encodeURIComponent(url);
+                const response = await fetch(proxyUrl);
+                if (!response.ok) throw new Error('Failed to fetch website via proxy');
+                const data = await response.json();
+                if (!data.contents) throw new Error('No content returned from proxy');
+                return extractText(data.contents);
+            } catch (error) {
+                wordCloudStatus.textContent = `Error: ${error.message}. Try using 'no-cors' mode or a different URL.`;
+                try {
+                    const noCorsResponse = await fetch(url, { mode: 'no-cors' });
+                    wordCloudStatus.textContent += ' Fetched with no-cors mode, but content is not readable.';
+                    return ''; // No-cors mode returns opaque response, so no text extraction
+                } catch (noCorsError) {
+                    console.error('No-cors fetch failed:', noCorsError);
+                    return '';
+                }
+            }
+        }
+
+        // Function to extract text from HTML
+        function extractText(html) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            return doc.body.textContent.replace(/\s+/g, ' ').trim();
+        }
+
+        // Function to generate word cloud data (excludes stop words)
+        function generateWordCloudData(text) {
+            if (!text) return [];
+            console.log('Input text:', text); // Debug: log the input text
+            const words = text
+                .split(/\s+/)
+                .filter(word => word.length > 1) // Allow words of length > 1, including Tamil
+                .map(word => word.toLowerCase()) // Normalize to lowercase for stop word checking
+                .filter(word => {
+                    // Clean word (remove punctuation, keep Tamil/Unicode chars)
+                    const cleanedWord = word.replace(/[^\p{L}\p{N}]/gu, '').trim();
+                    // Exclude if empty or a stop word
+                    return cleanedWord && !stopWords.has(cleanedWord);
+                })
+                .reduce((acc, word) => {
+                    if (word) {
+                        acc[word] = (acc[word] || 0) + 1;
+                    }
+                    return acc;
+                }, {});
+            console.log('Word frequency (after stop words):', words); // Debug: log word frequency
+            return Object.entries(words)
+                .map(([text, size]) => ({ text, size })) // Convert to array of objects {text, size}
+                .sort((a, b) => b.size - a.size);
+        }
+
+        // Function to get top N words
+        function getTopWords(words, count = 10) {
+            return words.slice(0, count);
+        }
+
+        // Function to draw word cloud with better colors
+        function drawWordCloud(words) {
+            wordCloud.innerHTML = '';
+            const width = wordCloud.clientWidth;
+            const height = wordCloud.clientHeight;
+
+            if (!words.length) {
+                wordCloud.innerHTML = '<p class="text-gray-500">No words to display.</p>';
+                return;
+            }
+
+            d3.layout.cloud()
+                .size([width, height])
+                .words(words)
+                .padding(5)
+                .rotate(() => Math.random() * 2 * Math.PI - Math.PI)
+                .fontSize(d => Math.sqrt(d.size) * 15)
+                .on("end", draw)
+                .start();
+
+            function draw(words) {
+                d3.select("#wordCloud").append("svg")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .append("g")
+                    .attr("transform", `translate(${width / 2},${height / 2})`)
+                    .selectAll("text")
+                    .data(words)
+                    .enter().append("text")
+                    .style("font-size", d => `${d.size}px`)
+                    .style("font-family", "Arial Unicode MS, Noto Sans Tamil, sans-serif") // Support Tamil and other scripts
+                    .style("fill", (d, i) => d3.interpolateSpectral(i / words.length)) // Use d3.interpolateSpectral for vibrant colors
+                    .attr("text-anchor", "middle")
+                    .attr("transform", d => `translate(${d.x},${d.y}) rotate(${d.rotate})`)
+                    .text(d => d.text)
+                    .classed("word", true)
+                    .on("click", (event, d) => alert(`Word: ${d.text}, Frequency: ${d.size}`));
+            }
+        }
+
+        // Function to download word cloud as PNG
+        async function downloadWordCloud() {
+            try {
+                const canvas = await html2canvas(wordCloud, { scale: 2 });
+                const link = document.createElement('a');
+                link.download = 'wordcloud.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } catch (error) {
+                console.error('Error downloading word cloud:', error);
+                alert('Failed to download word cloud. Please try again.');
+            }
+        }
+
+        // Function to update word cloud
+        function updateWordCloud(topCount = 10) {
+            if (wordCloudData && wordCloudData.words && wordCloudData.words.length) {
+                const words = getTopWords(wordCloudData.words, topCount);
+                drawWordCloud(words);
+                wordCloudStatus.textContent = '';
+            } else {
+                wordCloud.innerHTML = '<p class="text-gray-500">No word cloud generated yet.</p>';
+                wordCloudStatus.textContent = 'Enter a URL or paste content to generate a word cloud.';
+            }
+        }
+
+        // Function to update share link
+        function updateShareLink(topCount = 10) {
+            const url = new URL(window.location.href);
+            if (wordCloudData.source === 'url') {
+                url.searchParams.set('w', encodeURIComponent(wordCloudData.original));
+            } else if (wordCloudData.source === 'clipboard') {
+                url.searchParams.set('c', encodeURIComponent(wordCloudData.original));
+            }
+            url.searchParams.set('tc', topCount); // Add top count to URL parameters
+            shareUrl.value = url.href;
+        }
+
+        // Handle URL parameter loading
+        function loadFromUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const websiteUrl = params.get('w');
+            const clipboardContent = params.get('c');
+            const topCount = parseInt(params.get('tc')) || 10; // Default to 10 if not specified
+
+            if (websiteUrl) {
+                urlInput.value = decodeURIComponent(websiteUrl);
+                generateWordCloudFromUrl(topCount);
+            } else if (clipboardContent) {
+                clipboardInput.value = decodeURIComponent(clipboardContent);
+                generateWordCloudFromClipboard(topCount);
+            } else {
+                updateWordCloud(topCount); // Load existing data with default or URL-specified count
+            }
+        }
+
+        // Generate word cloud from URL
+        async function generateWordCloudFromUrl(topCount = 10) {
+            const url = urlInput.value.trim();
+            if (url) {
+                const text = await fetchWebsiteContent(url);
+                const words = generateWordCloudData(text);
+                saveWordCloud({ words, source: 'url', original: url }, topCount);
+            }
+        }
+
+        // Generate word cloud from clipboard
+        function generateWordCloudFromClipboard(topCount = 10) {
+            const content = clipboardInput.value.trim();
+            if (content) {
+                const words = generateWordCloudData(content);
+                saveWordCloud({ words, source: 'clipboard', original: content }, topCount);
+            }
+        }
+
+        // Event Listeners
+        generateFromUrlBtn.addEventListener('click', () => generateWordCloudFromUrl(10));
+        generateFromClipboardBtn.addEventListener('click', () => generateWordCloudFromClipboard(10));
+        downloadBtn.addEventListener('click', downloadWordCloud);
+
+        // Initial Setup
+        loadFromUrlParams();
+    </script>
+</body>
+</html>
