@@ -258,13 +258,15 @@ const data = {
 
 
         ],
-      },
+      },  
 
       {
         name: "Enterperneurship",
         videos: [
           { title: "இத Follow பண்ணா நீங்க கோடீஸ்வரர் ஆகலாம்..!" , youtubeId: "FqAMQEHrmDk" },
           { title: "உலகம் முழுவதும் வேட்டி கட்ட வைப்பேன்" , youtubeId: "9FROfvj1oCg" },
+          { title: "இந்த ரகசியம் தெரிஞ்சா 10,000 கோடி EARN பண்ணலாம்" , youtubeId: "p1JY0XfXRfo" },
+
 
 
         ],

@@ -6,7 +6,8 @@
     <title>Slides Presenter</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+     <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
     <style>
         .slide-container {
             background: white; /* Light blue background from the image */
@@ -242,6 +243,18 @@
             nextBtn.disabled = true;
             pageInfo.textContent = 'Slide 0 of 0';
         }
+
+	<!-- Canvas Confetti -->
+        // Trigger confetti animation on page load
+	    window.onload = function() {
+	      // Confetti burst
+	      confetti({
+		particleCount: 500,
+		spread: 100,
+		origin: { y: 0.8 },
+	      });
+	 };
+
     </script>
 </body>
 </html>
