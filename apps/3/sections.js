@@ -13,6 +13,15 @@
         { text: 'Notes on SF Utils Chrome Extension', href: '../../queryperf/index.html', icon: 'book' },
         { text: 'Notes on LWR sites', href: '../../books/lwr/index.html', icon: 'book' },
 
+	{ text: 'Whitepaper on Salesforce Caching', href: 'https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/main/lex/caching.md', icon: 'book' },
+	{ text: 'Whitepaper on Hyperfoce', href: 'https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/main/lex/hyperforce.md', icon: 'book' },
+
+	{ text: 'Whitepaper on EPT', href: 'https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/main/lex/ept.md', icon: 'book' },
+
+	{ text: 'Whitepaper on Mobile Perf', href: 'https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/main/mobile/mobile-perf.md', icon: 'book' },
+
+
+
 
 
 
@@ -698,6 +707,16 @@ QRC: {
 
     },
 
+
+Antlr: {
+      title: 'Antlr based apps ',
+      links: [
+        { text: 'Apex parsing', href: 'https://github.com/mohan-chinnappan-n5/antlr-apex', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
 
 
 
