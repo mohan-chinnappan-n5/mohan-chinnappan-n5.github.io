@@ -568,6 +568,7 @@ Games: {
       title: 'Games',
       links: [
         { text: 'Chess', href: 'https://mcchess.streamlit.app/', icon: 'desktop' },
+        { text: 'Various Games for Kids', href: '../../games', icon: 'desktop' },
  
         // Add more links here
       ],
