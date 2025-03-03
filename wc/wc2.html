@@ -129,7 +129,7 @@
 
         // Common English stop words to exclude
         const stopWords = new Set([
-            'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he', 'in', 'is', 'it',
+            'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he', 'in', 'is', 'it', 'if',
             'of', 'on', 'that', 'the', 'to', 'was', 'were', 'will', 'with', 'but', 'i', 'you', 'they', 'this'
         ]);
 
@@ -187,7 +187,7 @@
                     // Exclude if empty or a stop word
                     return cleanedWord && !stopWords.has(cleanedWord);
                 })
-                .reduce((acc, word) => {
+                .reduce((acc, word) => { // Count word frequency
                     if (word) {
                         acc[word] = (acc[word] || 0) + 1;
                     }
@@ -215,43 +215,43 @@
                 return;
             }
 
-            d3.layout.cloud()
+            d3.layout.cloud() // Use d3.layout.cloud for word cloud layout
                 .size([width, height])
                 .words(words)
                 .padding(5)
-                .rotate(() => Math.random() * 2 * Math.PI - Math.PI)
-                .fontSize(d => Math.sqrt(d.size) * 15)
-                .on("end", draw)
-                .start();
+                .rotate(() => Math.random() * 2 * Math.PI - Math.PI) // Random rotation
+                .fontSize(d => Math.sqrt(d.size) * 15) // Scale font size based on frequency
+                .on("end", draw) // Call draw function on layout end
+                .start(); // Start layout
 
             function draw(words) {
                 d3.select("#wordCloud").append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .append("g")
-                    .attr("transform", `translate(${width / 2},${height / 2})`)
-                    .selectAll("text")
-                    .data(words)
-                    .enter().append("text")
+                    .attr("width", width) // Set SVG width and height
+                    .attr("height", height) // Set SVG width and height
+                    .append("g") // Append g element for word cloud
+                    .attr("transform", `translate(${width / 2},${height / 2})`) // Center the cloud
+                    .selectAll("text") // Select all text elements
+                    .data(words) // Bind words data
+                    .enter().append("text") // Append text elements
                     .style("font-size", d => `${d.size}px`)
                     .style("font-family", "Arial Unicode MS, Noto Sans Tamil, sans-serif") // Support Tamil and other scripts
                     .style("fill", (d, i) => d3.interpolateSpectral(i / words.length)) // Use d3.interpolateSpectral for vibrant colors
-                    .attr("text-anchor", "middle")
-                    .attr("transform", d => `translate(${d.x},${d.y}) rotate(${d.rotate})`)
-                    .text(d => d.text)
-                    .classed("word", true)
-                    .on("click", (event, d) => alert(`Word: ${d.text}, Frequency: ${d.size}`));
+                    .attr("text-anchor", "middle") // Center text
+                    .attr("transform", d => `translate(${d.x},${d.y}) rotate(${d.rotate})`) // Position and rotate text
+                    .text(d => d.text) // Set text content
+                    .classed("word", true) // Add word class for styling
+                    .on("click", (event, d) => alert(`Word: ${d.text}, Frequency: ${d.size}`)); // Show alert on word click
             }
         }
 
         // Function to download word cloud as PNG
         async function downloadWordCloud() {
             try {
-                const canvas = await html2canvas(wordCloud, { scale: 2 });
-                const link = document.createElement('a');
-                link.download = 'wordcloud.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
+                const canvas = await html2canvas(wordCloud, { scale: 2 }); // Use html2canvas for rendering
+                const link = document.createElement('a'); // Create a link element
+                link.download = 'wordcloud.png';  // Set download attribute
+                link.href = canvas.toDataURL('image/png'); //
+                link.click(); //
             } catch (error) {
                 console.error('Error downloading word cloud:', error);
                 alert('Failed to download word cloud. Please try again.');
@@ -260,10 +260,10 @@
 
         // Function to update word cloud
         function updateWordCloud(topCount = 10) {
-            if (wordCloudData && wordCloudData.words && wordCloudData.words.length) {
-                const words = getTopWords(wordCloudData.words, topCount);
-                drawWordCloud(words);
-                wordCloudStatus.textContent = '';
+            if (wordCloudData && wordCloudData.words && wordCloudData.words.length) { // Check if data exists
+                const words = getTopWords(wordCloudData.words, topCount); // Get top words
+                drawWordCloud(words); // Draw word cloud
+                wordCloudStatus.textContent = ''; // Clear status message
             } else {
                 wordCloud.innerHTML = '<p class="text-gray-500">No word cloud generated yet.</p>';
                 wordCloudStatus.textContent = 'Enter a URL or paste content to generate a word cloud.';
@@ -271,9 +271,9 @@
         }
 
         // Function to update share link
-        function updateShareLink(topCount = 10) {
+        function updateShareLink(topCount = 10) { // Add top count to URL parameters
             const url = new URL(window.location.href);
-            if (wordCloudData.source === 'url') {
+            if (wordCloudData.source === 'url') { //   Add URL or clipboard content to URL parameters
                 url.searchParams.set('w', encodeURIComponent(wordCloudData.original));
             } else if (wordCloudData.source === 'clipboard') {
                 url.searchParams.set('c', encodeURIComponent(wordCloudData.original));
@@ -283,17 +283,17 @@
         }
 
         // Handle URL parameter loading
-        function loadFromUrlParams() {
-            const params = new URLSearchParams(window.location.search);
-            const websiteUrl = params.get('w');
+        function loadFromUrlParams() { //
+            const params = new URLSearchParams(window.location.search); 
+            const websiteUrl = params.get('w'); //  Get URL or clipboard content from URL parameters
             const clipboardContent = params.get('c');
             const topCount = parseInt(params.get('tc')) || 10; // Default to 10 if not specified
 
-            if (websiteUrl) {
-                urlInput.value = decodeURIComponent(websiteUrl);
-                generateWordCloudFromUrl(topCount);
+            if (websiteUrl) { // Load data from URL or clipboard
+                urlInput.value = decodeURIComponent(websiteUrl); // Decode URL or clipboard content
+                generateWordCloudFromUrl(topCount); // Generate word cloud from URL
             } else if (clipboardContent) {
-                clipboardInput.value = decodeURIComponent(clipboardContent);
+                clipboardInput.value = decodeURIComponent(clipboardContent); // Decode URL or clipboard content
                 generateWordCloudFromClipboard(topCount);
             } else {
                 updateWordCloud(topCount); // Load existing data with default or URL-specified count
@@ -313,7 +313,7 @@
         // Generate word cloud from clipboard
         function generateWordCloudFromClipboard(topCount = 10) {
             const content = clipboardInput.value.trim();
-            if (content) {
+            if (content) { // Generate word cloud from clipboard content
                 const words = generateWordCloudData(content);
                 saveWordCloud({ words, source: 'clipboard', original: content }, topCount);
             }
