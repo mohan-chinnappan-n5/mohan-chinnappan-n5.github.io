@@ -190,7 +190,9 @@
         { text: 'Weather App', href: '../../weather/weatherApp.html?c=Nashua NH', icon: 'desktop' },
         { text: 'Weather App 2', href: '../../weather/2/weather.html?c=Nashua,NH,US', icon: 'desktop' },
 
-	 { text: 'Daily Book Balancing', href: '../../book-keeping/book-keeping.html', icon: 'desktop' },
+	{ text: 'Daily Book Balancing', href: '../../book-keeping/book-keeping.html', icon: 'desktop' },
+	{ text: 'github Url convertor', href: '../../github/urlc.html', icon: 'desktop' },
+
 
 
 
@@ -712,6 +714,16 @@ Antlr: {
       title: 'Antlr based apps ',
       links: [
         { text: 'Apex parsing', href: 'https://github.com/mohan-chinnappan-n5/antlr-apex', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
+Demos: {
+      title: 'Demos of the Apps  ',
+      links: [
+        { text: 'Lexer', href: '../../webm/player.html?v=https%253A%252F%252Fraw.githubusercontent.com%252Fmohan-chinnappan-n5%252Fdemos-git%252Fmain%252Flexer%252Flexer.webm', icon: 'desktop' },
  
         // Add more links here
       ],

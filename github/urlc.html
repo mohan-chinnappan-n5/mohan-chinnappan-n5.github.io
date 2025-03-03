@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Raw URL Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 text-white py-4 px-6 fixed top-0 w-full shadow-md">
+        <div class="container mx-auto flex justify-between">
+            <h1 class="text-xl font-semibold">GitHub Raw URL Generator</h1>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex items-center justify-center mt-20 p-6">
+        <div class="bg-white shadow-lg rounded-lg p-6 max-w-lg w-full">
+            <label for="githubUrl" class="block text-lg font-medium text-gray-700">Enter GitHub File URL:</label>
+            <input type="text" id="githubUrl" class="mt-2 w-full p-3 border rounded-md" placeholder="https://github.com/user/repo/blob/main/file.txt">
+            <button onclick="generateRawUrl()" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md w-full hover:bg-blue-700">
+                Generate Raw URL
+            </button>
+            <p id="result" class="mt-4 text-gray-800 font-semibold"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white text-center py-4 fixed bottom-0 w-full">
+        <p>© 2025 GitHub URL Converter</p>
+    </footer>
+
+    <script>
+        function generateRawUrl() {
+            const input = document.getElementById("githubUrl").value.trim();
+            if (!input.startsWith("https://github.com/")) {
+                document.getElementById("result").textContent = "Invalid GitHub URL";
+                return;
+            }
+            const rawUrl = input.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/");
+            document.getElementById("result").innerHTML = 
+                `<a href="${rawUrl}" target="_blank" class="text-blue-600 underline">${rawUrl}</a>`;
+
+            // Update URL in browser without reloading
+            const newUrl = window.location.origin + window.location.pathname + "?u=" + encodeURIComponent(input);
+            window.history.pushState({ path: newUrl }, "", newUrl);
+        }
+
+        function checkQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            const urlParam = params.get("u");
+            if (urlParam) {
+                document.getElementById("githubUrl").value = decodeURIComponent(urlParam);
+                generateRawUrl();
+            }
+        }
+
+        // Run on page load
+        window.onload = checkQueryParams;
+    </script>
+
+</body>
+</html>
