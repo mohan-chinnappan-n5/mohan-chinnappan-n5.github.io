@@ -114,6 +114,8 @@
         { text: 'CSV - SQL Query', href: '../../csv/query.html', icon: 'desktop' },
         { text: 'CSV - SQL Joins', href: 'https://mc-joins.streamlit.app', icon: 'desktop' },
         { text: 'SQL Query for CSVs', href: '../../sql/sql.html', icon: 'desktop' },
+        { text: 'Another SQL Query for CSVs', href: '../../sql/2/sql.html', icon: 'desktop' },
+ 
         { text: 'SQL Query from English', href: '../../sql/gen-sql.html', icon: 'desktop' },
  
 
