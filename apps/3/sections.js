@@ -117,6 +117,7 @@
         { text: 'Another SQL Query for CSVs', href: '../../sql/2/sql2.html', icon: 'desktop' },
  
         { text: 'SQL Query from English', href: '../../sql/gen-sql.html', icon: 'desktop' },
+        { text: 'Spreadsheet', href: '../../sql/2/spreadsheet.html', icon: 'desktop' },
  
 
 
