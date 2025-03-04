@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Minecraft Game</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #87CEEB; /* Sky blue background */
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        #gameContainer {
+            background-color: #6B8E23; /* Grass green background for ground */
+            border: 2px solid #333;
+            width: 600px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        .block {
+            width: 50px;
+            height: 50px;
+            background-color: #8B4513; /* Brown for dirt/wood blocks */
+            position: absolute;
+            border: 1px solid #333;
+            cursor: pointer;
+        }
+        .player {
+            width: 30px;
+            height: 30px;
+            background-color: #FF4500; /* Orange for player */
+            position: absolute;
+            border-radius: 50%;
+        }
+        #toolBar {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+        }
+        #toolBar button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #toolBar button:hover {
+            background-color: #45a049;
+        }
+        #score {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer"></div>
+    <div id="toolBar">
+        <button id="placeBlock">Place Block</button>
+        <button id="removeBlock">Remove Block</button>
+        <button id="reset">Reset Game</button>
+    </div>
+    <div id="score">Score: 0</div>
+
+    <script>
+        const gameContainer = document.getElementById('gameContainer');
+        const placeBlockBtn = document.getElementById('placeBlock');
+        const removeBlockBtn = document.getElementById('removeBlock');
+        const resetBtn = document.getElementById('reset');
+        const scoreDisplay = document.getElementById('score');
+
+        let player = { x: 50, y: 350 }; // Starting position of player (near bottom-left)
+        let blocks = []; // Array to store block positions
+        let score = 0;
+        let mode = 'place'; // Default mode: place blocks
+
+        // Create player
+        function createPlayer() {
+            const playerElement = document.createElement('div');
+            playerElement.className = 'player';
+            playerElement.style.left = player.x + 'px';
+            playerElement.style.bottom = player.y + 'px';
+            gameContainer.appendChild(playerElement);
+        }
+
+        // Create or update blocks
+        function updateBlocks() {
+            blocks.forEach(block => {
+                const blockElement = document.createElement('div');
+                blockElement.className = 'block';
+                blockElement.style.left = block.x + 'px';
+                blockElement.style.bottom = block.y + 'px';
+                blockElement.addEventListener('click', () => handleBlockClick(block));
+                gameContainer.appendChild(blockElement);
+            });
+        }
+
+        // Handle block click based on mode
+        function handleBlockClick(block) {
+            if (mode === 'remove') {
+                blocks = blocks.filter(b => b !== block);
+                gameContainer.innerHTML = ''; // Clear all elements
+                createPlayer();
+                updateBlocks();
+                score -= 5; // Decrease score for removing
+                updateScore();
+            }
+        }
+
+        // Place or remove block on click
+        gameContainer.addEventListener('click', (e) => {
+            const rect = gameContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left - 25; // Center block horizontally
+            const y = e.clientY - rect.top - 25; // Center block vertically
+
+            if (mode === 'place' && x >= 0 && x <= 550 && y >= 0 && y <= 350) {
+                blocks.push({ x: Math.floor(x / 50) * 50, y: Math.floor(y / 50) * 50 });
+                gameContainer.innerHTML = ''; // Clear all elements
+                createPlayer();
+                updateBlocks();
+                score += 10; // Increase score for placing
+                updateScore();
+            }
+        });
+
+        // Move player with arrow keys
+        document.addEventListener('keydown', (e) => {
+            const step = 50;
+            switch (e.key) {
+                case 'ArrowUp':
+                    if (player.y < 350) player.y += step;
+                    break;
+                case 'ArrowDown':
+                    if (player.y > 0) player.y -= step;
+                    break;
+                case 'ArrowLeft':
+                    if (player.x > 0) player.x -= step;
+                    break;
+                case 'ArrowRight':
+                    if (player.x < 550) player.x += step;
+                    break;
+            }
+            gameContainer.innerHTML = ''; // Clear all elements
+            createPlayer();
+            updateBlocks();
+        });
+
+        // Switch modes
+        placeBlockBtn.addEventListener('click', () => mode = 'place');
+        removeBlockBtn.addEventListener('click', () => mode = 'remove');
+
+        // Reset game
+        resetBtn.addEventListener('click', () => {
+            player = { x: 50, y: 350 };
+            blocks = [];
+            score = 0;
+            gameContainer.innerHTML = ''; // Clear all elements
+            createPlayer();
+            updateBlocks();
+            updateScore();
+        });
+
+        // Update score display
+        function updateScore() {
+            scoreDisplay.textContent = `Score: ${score}`;
+        }
+
+        // Initialize game
+        createPlayer();
+        updateBlocks();
+        updateScore();
+    </script>
+</body>
+</html>

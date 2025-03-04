@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Player (WebM, MP4, WAV)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        .video-box {
+            background: #f0f0f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        #mediaPlayer {
+            width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        #mediaPlayer video, #mediaPlayer audio {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        #mediaPlayer audio {
+            max-height: 50px; /* Smaller height for audio players */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <header class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Media Player (WebM, MP4, WAV)</h1>
+            <div class="flex items-center gap-4">
+                <input 
+                    id="mediaUrl" 
+                    type="url" 
+                    placeholder="Enter media URL (e.g., https://example.com/video.webm, .mp4, or .wav)" 
+                    class="p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                >
+                <button 
+                    id="loadMedia" 
+                    class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-300"
+                >
+                    Load Media
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <!-- Media Player Display -->
+        <div class="video-box w-full max-w-2xl">
+            <h2 class="text-xl font-semibold text-gray-700">Media Player</h2>
+            <div id="mediaPlayer"></div>
+            <p id="mediaStatus" class="text-gray-600 text-center"></p>
+        </div>
+        <div class="mt-4 flex flex-col gap-4 w-full max-w-2xl">
+            <div id="shareLink" class="text-gray-700">
+                <p>Share Media:</p>
+                <input 
+                    id="shareUrl" 
+                    type="text" 
+                    readonly 
+                    class="mt-1 block w-full p-2 border rounded text-gray-700 bg-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onclick="this.select()"
+                >
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Enter a media URL (WebM, MP4, or WAV) to play • Share via URL parameters (?m=) • Data saved locally
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const mediaUrl = document.getElementById('mediaUrl');
+        const loadMediaBtn = document.getElementById('loadMedia');
+        const mediaPlayer = document.getElementById('mediaPlayer');
+        const mediaStatus = document.getElementById('mediaStatus');
+        const shareUrl = document.getElementById('shareUrl');
+
+        // Load media URL from localStorage
+        let mediaData = JSON.parse(localStorage.getItem('mediaData')) || null;
+
+        // Function to save media URL to localStorage
+        function saveMedia(url) {
+            localStorage.setItem('mediaData', JSON.stringify({ url }));
+            mediaData = { url };
+            updatePlayer();
+            updateShareLink();
+        }
+
+        // Function to get file extension
+        function getFileExtension(url) {
+            return url.toLowerCase().split('.').pop();
+        }
+
+        // Function to load and play media
+        async function loadMedia() {
+            const url = mediaUrl.value.trim();
+            if (url) {
+                mediaStatus.textContent = 'Loading media...';
+                loadMediaBtn.disabled = true;
+
+                try {
+                    // Check if the URL is valid and ends with supported extensions (.webm, .mp4, .wav)
+                    const extension = getFileExtension(url);
+                    const supportedFormats = ['webm', 'mp4', 'wav'];
+                    if (!supportedFormats.includes(extension)) {
+                        throw new Error('Please enter a valid media URL with .webm, .mp4, or .wav extension');
+                    }
+
+                    // Create a media element to test if the URL is accessible and playable
+                    let tempMedia;
+                    if (extension === 'wav') {
+                        tempMedia = document.createElement('audio');
+                        tempMedia.preload = 'metadata';
+                    } else {
+                        tempMedia = document.createElement('video');
+                        tempMedia.preload = 'metadata';
+                    }
+                    tempMedia.src = url;
+                    tempMedia.crossOrigin = 'anonymous'; // Handle CORS if needed
+
+                    tempMedia.onloadedmetadata = () => {
+                        saveMedia(url);
+                        mediaStatus.textContent = '';
+                        loadMediaBtn.disabled = false;
+                    };
+
+                    tempMedia.onerror = () => {
+                        throw new Error('Invalid or inaccessible media URL');
+                    };
+
+                    // Clean up temp media element
+                    tempMedia.remove();
+                } catch (error) {
+                    mediaStatus.textContent = `Error: ${error.message}`;
+                    mediaPlayer.innerHTML = '';
+                    mediaData = null;
+                    updatePlayer();
+                    loadMediaBtn.disabled = false;
+                }
+            } else {
+                mediaStatus.textContent = 'Please enter a valid media URL';
+                loadMediaBtn.disabled = false;
+            }
+        }
+
+        // Function to update media player
+        function updatePlayer() {
+            if (mediaData && mediaData.url) {
+                const extension = getFileExtension(mediaData.url);
+                if (extension === 'wav') {
+                    mediaPlayer.innerHTML = `
+                        <audio controls autoplay loop>
+                            <source src="${mediaData.url}" type="audio/wav">
+                            Your browser does not support the WAV audio format.
+                        </audio>
+                    `;
+                } else {
+                    mediaPlayer.innerHTML = `
+                        <video controls autoplay loop>
+                            <source src="${mediaData.url}" type="${extension === 'webm' ? 'video/webm' : 'video/mp4'}">
+                            Your browser does not support the ${extension.toUpperCase()} video format.
+                        </video>
+                    `;
+                }
+                mediaStatus.textContent = '';
+            } else {
+                mediaPlayer.innerHTML = '<p class="text-gray-500">No media loaded. Enter a media URL to play.</p>';
+                mediaStatus.textContent = 'Enter a media URL (WebM, MP4, or WAV) to load and play.';
+            }
+        }
+
+        // Function to update share link
+        function updateShareLink() {
+            const url = new URL(window.location.href);
+            if (mediaData && mediaData.url) {
+                url.searchParams.set('m', encodeURIComponent(mediaData.url)); // Share media URL
+            }
+            shareUrl.value = url.href;
+        }
+
+        // Handle URL parameter loading (for media URL)
+        function loadFromUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const mediaUrlParam = params.get('m');
+
+            if (mediaUrlParam) {
+                const decodedUrl = decodeURIComponent(mediaUrlParam);
+                mediaUrl.value = decodedUrl;
+                saveMedia(decodedUrl);
+            }
+        }
+
+        // Event Listeners
+        loadMediaBtn.addEventListener('click', loadMedia);
+        mediaUrl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                loadMedia();
+            }
+        });
+
+        // Initial Setup
+        loadFromUrlParams();
+        updatePlayer();
+    </script>
+</body>
+</html>
