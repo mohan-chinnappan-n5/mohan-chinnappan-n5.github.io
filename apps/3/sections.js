@@ -499,6 +499,9 @@
          { text: 'Vitamins', href: '../../slides/2/slides.html?s=../../health/vitamins.md', icon: 'desktop' },
          { text: 'Hyperthyroid', href: '../../slides/2/slides.html?s=../../health/hyperthyroid.md', icon: 'desktop' },
 
+	 { text: 'EKG/ECG (still in training!)', href: '../../med/ekg.html', icon: 'desktop' },
+
+
 
 
 

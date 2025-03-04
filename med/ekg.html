@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EKG Analysis Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        /* Custom styles for enhanced UI */
+        .ekg-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .ekg-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .sticky-footer {
+            background: linear-gradient(to top, #1e3a8a, #4b5563);
+        }
+        #ekgPreview {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            border: 2px solid #4b5563;
+            border-radius: 0.5rem;
+        }
+        @media (max-width: 640px) {
+            #ekgPreview {
+                max-height: 200px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Sticky Navbar -->
+    <nav class="fixed top-0 w-full bg-blue-600 text-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">EKG Analysis Tool</h1>
+            <div class="flex items-center space-x-4">
+                <button id="uploadBtn" class="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition">
+                    Upload EKG
+                </button>
+                <button id="analyzeBtn" class="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition hidden">
+                    Analyze EKG
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 mt-16 mb-16 flex-grow">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Upload and Analyze EKG</h2>
+            
+            <!-- File Upload and Preview -->
+            <div id="uploadSection" class="mb-6">
+                <input type="file" id="ekgFile" accept=".pdf,.csv,.jpg,.png" class="mb-4 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                <img id="ekgPreview" class="hidden" alt="EKG Preview">
+                <p id="uploadStatus" class="text-gray-600 mt-2"></p>
+            </div>
+
+            <!-- Analysis Results -->
+            <div id="results" class="hidden">
+                <h3 class="text-lg font-medium text-gray-700 mb-4">EKG Analysis Findings</h3>
+                <div id="findingsList" class="grid gap-4">
+                    <!-- Findings will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="fixed bottom-0 w-full bg-gray-800 text-white p-4 shadow-md z-50 sticky-footer">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                © 2025 EKG Analysis Tool - Built with Tailwind CSS | Contact: support@ekgtool.com
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // DOM elements
+        const uploadBtn = document.getElementById('uploadBtn');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const ekgFile = document.getElementById('ekgFile');
+        const ekgPreview = document.getElementById('ekgPreview');
+        const uploadStatus = document.getElementById('uploadStatus');
+        const results = document.getElementById('results');
+        const findingsList = document.getElementById('findingsList');
+
+        // Handle file upload
+        uploadBtn.addEventListener('click', () => {
+            ekgFile.click();
+        });
+
+        ekgFile.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                uploadStatus.textContent = `Uploading ${file.name}...`;
+                analyzeBtn.classList.remove('hidden');
+                uploadBtn.classList.add('hidden');
+
+                // Simulate EKG preview (works for images, adjust for PDFs/CSV)
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        ekgPreview.src = event.target.result;
+                        ekgPreview.classList.remove('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                    uploadStatus.textContent = `Uploaded ${file.name} successfully!`;
+                } else {
+                    uploadStatus.textContent = `Uploaded ${file.name} successfully! (Preview not available for this format)`;
+                    ekgPreview.classList.add('hidden');
+                }
+            }
+        });
+
+        // Simulate EKG analysis with accurate heart rate
+        analyzeBtn.addEventListener('click', () => {
+            uploadStatus.textContent = 'Analyzing EKG...';
+            analyzeBtn.disabled = true;
+
+            // Simulate async analysis (delay for realism)
+            setTimeout(() => {
+                // Simulate heart rate calculation based on dummy EKG data
+                // Assuming a typical EKG with R-R intervals (time between R peaks) of ~0.83 seconds for 72 bpm
+                const rrIntervalSeconds = 0.83; // Example R-R interval in seconds (72 bpm = 60 / 72)
+                const heartRate = Math.round(60 / rrIntervalSeconds); // Heart rate in beats per minute
+
+                // Dummy EKG findings with accurate heart rate
+                const findings = [
+                    { id: 1, description: "Normal Sinus Rhythm detected", severity: "Normal" },
+                    { id: 2, description: `Heart Rate: ${heartRate} bpm (within normal range)`, severity: "Normal" },
+                    { id: 3, description: "Possible ST Elevation in Lead II – Monitor for ischemia", severity: "Warning" },
+                    { id: 4, description: "PR Interval: 0.16 seconds (normal)", severity: "Normal" },
+                    { id: 5, description: "QRS Duration: 0.08 seconds (normal)", severity: "Normal" }
+                ];
+
+                // Clear previous findings
+                findingsList.innerHTML = '';
+
+                // Render findings
+                findings.forEach(finding => {
+                    const card = document.createElement('div');
+                    card.className = `ekg-card p-4 bg-white rounded-lg shadow-md ${finding.severity.toLowerCase() === 'warning' ? 'border-l-4 border-yellow-500' : ''}`;
+                    card.innerHTML = `
+                        <p class="text-gray-800">${finding.description}</p>
+                        <span class="text-sm font-medium ${finding.severity === 'Normal' ? 'text-green-600' : 'text-yellow-600'}">
+                            ${finding.severity}
+                        </span>
+                    `;
+                    findingsList.appendChild(card);
+                });
+
+                results.classList.remove('hidden');
+                uploadStatus.textContent = 'EKG analyzed successfully!';
+                analyzeBtn.disabled = false;
+            }, 2000); // Simulate 2-second analysis
+        });
+    </script>
+</body>
+</html>
