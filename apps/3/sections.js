@@ -502,6 +502,8 @@
          { text: 'Hyperthyroid', href: '../../slides/2/slides.html?s=../../health/hyperthyroid.md', icon: 'desktop' },
 
 	 { text: 'EKG/ECG (still in training!)', href: '../../med/ekg.html', icon: 'desktop' },
+	 { text: 'EKG/ECG Notes', href: '../../md/2/md.html?url=https://raw.githubusercontent.com/mohan-chinnappan-n5/health-notes/main/ecg.md', icon: 'desktop' },
+
 
 
 
