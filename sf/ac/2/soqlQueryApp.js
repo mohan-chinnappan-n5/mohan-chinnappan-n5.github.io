@@ -1,6 +1,7 @@
 // soqlQueryApp.js - Enhanced SOQL Editor with REST URL Support, REST/Tooling API, and Improved Error Handling
 // Author: Mohan Chinnappan (Updated)
 
+
 // Show/hide info text on hover
 const infoIcon = document.getElementById('info-icon');
 const infoText = document.getElementById('info-text');
@@ -34,7 +35,11 @@ require(['vs/editor/editor.main'], function (monaco, $) {
     const soqlEditor = monaco.editor.create(document.getElementById('soqlEditor'), {
         value: `SELECT Id, Name FROM Account`,
         language: 'sql',
-        theme: 'vs-dark'
+        theme: 'vs-dark',
+            // Disable outline by making focus border invisible
+        automaticLayout: true,
+        minimap: { enabled: false },
+
     });
 
     const resultEditor = monaco.editor.create(document.getElementById('resultEditor'), {
@@ -42,6 +47,7 @@ require(['vs/editor/editor.main'], function (monaco, $) {
         language: 'json',
         theme: 'vs-dark',
         readOnly: true,
+        automaticLayout: true,
         minimap: { enabled: false }
     });
 
@@ -374,4 +380,7 @@ require(['vs/editor/editor.main'], function (monaco, $) {
             populateDataTable(result.records || []);
         }
     });
+
+
+    
 });

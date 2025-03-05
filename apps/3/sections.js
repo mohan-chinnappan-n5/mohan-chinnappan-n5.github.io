@@ -377,7 +377,8 @@
         { text: 'Nursery Songs', href: '../../nursery/nursery.html', icon: 'desktop' },
         { text: 'Webm Player', href: '../../webm/player.html?v=https%253A%252F%252Fraw.githubusercontent.com%252Fmohan-chinnappan-n5%252Fdemos-git%252Fmain%252Flexer%252Flexer.webm', icon: 'desktop' },
 
-
+        { text: 'Whiteboard (WIP)', href: '../../wb/wb.html', icon: 'desktop' },
+     
 
 
         // Add more links here
