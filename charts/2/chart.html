@@ -381,7 +381,7 @@
                         yField.appendChild(optionY);
         
                         // Add aggregate options for bar charts
-                        ['sum', 'max', 'average', 'countd'].forEach(agg => {
+                        ['sum', 'max', 'average', 'count'].forEach(agg => {
                             const aggOption = document.createElement('option');
                             aggOption.value = `${agg}(${header})`;
                             aggOption.textContent = `${agg.toUpperCase()} of ${header}`;
