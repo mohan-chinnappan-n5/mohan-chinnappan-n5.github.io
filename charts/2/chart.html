@@ -381,7 +381,7 @@
                         yField.appendChild(optionY);
         
                         // Add aggregate options for bar charts
-                        ['sum', 'max', 'average'].forEach(agg => {
+                        ['sum', 'max', 'average', 'countd'].forEach(agg => {
                             const aggOption = document.createElement('option');
                             aggOption.value = `${agg}(${header})`;
                             aggOption.textContent = `${agg.toUpperCase()} of ${header}`;
@@ -411,19 +411,19 @@
                         encoding: {
                             x: { field: xField, type: 'nominal' }, // Default to nominal, adjust below
                             y: { 
-                                field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), 
+                                field: yField.replace(/^(sum|max|average|count)\((.*?)\)$/, '$2'), 
                                 type: 'quantitative' 
                             },
                             tooltip: [ // Tooltips for mouseover
                                 { field: xField, type: 'nominal', title: 'X-Axis' },
-                                { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+                                { field: yField.replace(/^(sum|max|average|count)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
                             ]
                         }
                     };
         
                     // Handle aggregates for bar charts
-                    if (chartType === 'bar' && yField.match(/^(sum|max|average)\((.*?)\)$/)) {
-                        const [agg, field] = yField.match(/^(sum|max|average)\((.*?)\)$/).slice(1);
+                    if (chartType === 'bar' && yField.match(/^(sum|max|average|count)\((.*?)\)$/)) {
+                        const [agg, field] = yField.match(/^(sum|max|average|count)\((.*?)\)$/).slice(1);
                         spec.transform = [{
                             aggregate: [{ op: agg, field: field, as: field }],
                             groupby: [xField]
@@ -440,11 +440,11 @@
                     // Adjust for specific chart types and data types
                     if (chartType === 'donut') {
                         spec.mark = { type: 'arc', innerRadius: 50 };
-                        spec.encoding.theta = { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative' };
+                        spec.encoding.theta = { field: yField.replace(/^(sum|max|average|count)\((.*?)\)$/, '$2'), type: 'quantitative' };
                         spec.encoding.color = { field: xField, type: 'nominal' }; // Optional: color by X-axis for better visualization
                         spec.encoding.tooltip = [
                             { field: xField, type: 'nominal', title: 'Category' },
-                            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Value' }
+                            { field: yField.replace(/^(sum|max|average|count)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Value' }
                         ];
                         delete spec.encoding.x;
                         delete spec.encoding.y;
@@ -456,7 +456,7 @@
                         }
                         spec.encoding.tooltip = [
                             { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
-                            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+                            { field: yField.replace(/^(sum|max|average|count)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
                         ];
                     } else if (chartType === 'line') {
                         spec.mark = 'line';
@@ -466,7 +466,7 @@
                         }
                         spec.encoding.tooltip = [
                             { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
-                            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+                            { field: yField.replace(/^(sum|max|average|count)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
                         ];
                     } else if (chartType === 'area') {
                         spec.mark = 'area';
@@ -476,7 +476,7 @@
                         }
                         spec.encoding.tooltip = [
                             { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
-                            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+                            { field: yField.replace(/^(sum|max|average|count)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
                         ];
                     }
         
