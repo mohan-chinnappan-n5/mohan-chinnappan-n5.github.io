@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesforce User Management App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .pane {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .user-list-item {
+            transition: background-color 0.3s ease;
+        }
+        .user-list-item:hover {
+            background-color: #f3f4f6;
+            cursor: pointer;
+        }
+        .sticky-footer {
+            background: linear-gradient(to top, #1e3a8a, #4b5563);
+        }
+        @media (max-width: 640px) {
+            .pane {
+                height: 300px;
+            }
+            .user-list-item {
+                padding: 0.5rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+
+    <!-- Sticky Navbar -->
+    <nav class="fixed top-0 w-full bg-blue-600 text-white p-4 shadow-md z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Salesforce User Management</h1>
+        </div>
+          
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 flex-grow mt-16 mb-16">
+
+        <div class="flex flex-col space-x-10 ">
+            <input id="accessToken" type="text" placeholder="Access Token" class="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            <input id="instanceUrl" type="text" placeholder="Instance URL (e.g., https://your-domain.my.salesforce.com)" class="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            <button id="fetchUsersBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">Fetch Users</button>
+        </div>
+        <div class="flex flex-col md:flex-row gap-4">
+            <!-- Left Pane (User List) -->
+            <div class="w-full md:w-64 pane h-full">
+                <h2 class="text-lg font-semibold p-4 bg-gray-100">Users</h2>
+                <ul id="userList" class="h-[calc(100%-4rem)] overflow-y-auto p-2"></ul>
+            </div>
+            <!-- Right Pane (User Details) -->
+            <div class="flex-1 pane h-full">
+                <h2 class="text-lg font-semibold p-4 bg-gray-100">User Details</h2>
+                <div id="userDetails" class="p-4 h-[calc(100%-4rem)] overflow-y-auto"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="fixed bottom-0 w-full bg-gray-800 text-white p-4 text-center shadow-md z-50 sticky-footer">
+        <p class="text-sm">© 2025 Salesforce User Management - Built with Tailwind CSS | Contact: support@salesforceuserapp.com</p>
+    </footer>
+
+    <script>
+        const accessTokenInput = document.getElementById('accessToken');
+        const instanceUrlInput = document.getElementById('instanceUrl');
+        const fetchUsersBtn = document.getElementById('fetchUsersBtn');
+        const userList = document.getElementById('userList');
+        const userDetails = document.getElementById('userDetails');
+        const backendUrl = 'http://localhost:7000';
+
+        // Save and load config to/from localStorage
+        function loadConfig() {
+            accessTokenInput.value = localStorage.getItem('accessToken') || '';
+            instanceUrlInput.value = localStorage.getItem('instanceUrl') || '';
+        }
+
+        function saveConfig() {
+            localStorage.setItem('accessToken', accessTokenInput.value);
+            localStorage.setItem('instanceUrl', instanceUrlInput.value);
+        }
+
+        // Load initial config
+        loadConfig();
+
+        // Add input listeners to save config
+        accessTokenInput.addEventListener('input', saveConfig);
+        instanceUrlInput.addEventListener('input', saveConfig);
+
+        // Fetch users from Salesforce
+        async function fetchUsers() {
+            const accessToken = accessTokenInput.value.trim();
+            const instanceUrl = instanceUrlInput.value.trim();
+
+            if (!accessToken || !instanceUrl) {
+                showError('Please provide both Access Token and Instance URL.');
+                return;
+            }
+
+            showLoading(true);
+            try {
+                const response = await fetch(`${backendUrl}/fetch_users`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        access_token: accessToken,
+                        instance_url: instanceUrl,
+                        api_version: 'v60.0'
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                if (data.error) throw new Error(data.error);
+
+                renderUsers(data.users);
+            } catch (error) {
+                showError(`Failed to fetch users: ${error.message}`);
+                console.error('Error fetching users:', error);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Fetch user details and permission sets
+        async function fetchUserDetails(userId) {
+            const accessToken = accessTokenInput.value.trim();
+            const instanceUrl = instanceUrlInput.value.trim();
+
+            if (!accessToken || !instanceUrl) {
+                showError('Please provide both Access Token and Instance URL.');
+                return;
+            }
+
+            showLoading(true);
+            try {
+                // Fetch user profile
+                const userResponse = await fetch(`${backendUrl}/fetch_user`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        access_token: accessToken,
+                        instance_url: instanceUrl,
+                        user_id: userId,
+                        api_version: 'v60.0'
+                    })
+                });
+
+                if (!userResponse.ok) {
+                    throw new Error(`HTTP error! status: ${userResponse.status}, message: ${userResponse.statusText}`);
+                }
+
+                const userData = await userResponse.json();
+                if (userData.error) throw new Error(userData.error);
+
+                // Fetch permission sets
+                const permsResponse = await fetch(`${backendUrl}/fetch_permissions`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        access_token: accessToken,
+                        instance_url: instanceUrl,
+                        user_id: userId,
+                        api_version: 'v60.0'
+                    })
+                });
+
+                if (!permsResponse.ok) {
+                    throw new Error(`HTTP error! status: ${permsResponse.status}, message: ${permsResponse.statusText}`);
+                }
+
+                const permsData = await permsResponse.json();
+                if (permsData.error) throw new Error(permsData.error);
+
+                renderUserDetails(userData.user, permsData.permissions);
+            } catch (error) {
+                showError(`Failed to fetch user details: ${error.message}`);
+                console.error('Error fetching user details:', error);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Render user list
+        function renderUsers(users) {
+            userList.innerHTML = '';
+            users.forEach(user => {
+                const li = document.createElement('li');
+                li.className = 'user-list-item p-2 rounded-lg';
+                li.textContent = `${user.Name} (${user.Email})`;
+                li.dataset.userId = user.Id;
+                li.addEventListener('click', () => fetchUserDetails(user.Id));
+                userList.appendChild(li);
+            });
+        }
+
+        // Render user details and permission sets
+        function renderUserDetails(user, permissions) {
+            userDetails.innerHTML = `
+                <h3 class="text-lg font-semibold mb-2">${user.Name}</h3>
+                <p><strong>Email:</strong> ${user.Email || 'N/A'}</p>
+                <p><strong>User ID:</strong> ${user.Id}</p>
+                <p><strong>Profile:</strong> ${user.Profile?.Name || 'N/A'}</p>
+                <p><strong>Is Active:</strong> ${user.IsActive ? 'Yes' : 'No'}</p>
+                <h4 class="text-md font-semibold mt-4 mb-2">Permission Sets</h4>
+                <ul class="list-disc pl-5">
+                    ${permissions.map(perm => `<li>${perm.PermissionSet.Name} (${perm.PermissionSet.Id})</li>`).join('') || '<li>No permission sets assigned</li>'}
+                </ul>
+            `;
+        }
+
+        // Show/hide loading indicator and errors
+        function showLoading(show) {
+            const loadingElement = document.getElementById('loading') || document.createElement('div');
+            if (!loadingElement.id) {
+                loadingElement.id = 'loading';
+                loadingElement.className = 'loading fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center text-white z-50';
+                loadingElement.innerHTML = '<span>Loading...</span>';
+                document.body.appendChild(loadingElement);
+            }
+            loadingElement.style.display = show ? 'flex' : 'none';
+        }
+
+        function showError(message) {
+            const errorElement = document.getElementById('error') || document.createElement('div');
+            if (!errorElement.id) {
+                errorElement.id = 'error';
+                errorElement.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white p-4 rounded-lg shadow-md z-50';
+                document.body.appendChild(errorElement);
+            }
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            setTimeout(() => errorElement.style.display = 'none', 5000);
+        }
+
+        // Fetch users when button is clicked
+        fetchUsersBtn.addEventListener('click', fetchUsers);
+    </script>
+</body>
+</html>
