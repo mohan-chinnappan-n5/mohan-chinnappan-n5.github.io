@@ -64,12 +64,7 @@
     <div class="pane w-full md:w-1/2 h-full" id="leftPane">
         <h2 class="text-lg font-semibold p-4 bg-gray-100">Data Table</h2>
         <div class="p-4 h-[calc(100%-4rem)] overflow-y-auto">
-            <table id="dataTable" class="w-full border border-gray-300 hidden">
-                <thead>
-                    <tr id="tableHeader" class="bg-gray-200"></tr>
-                </thead>
-                <tbody id="tableBody" class="divide-y divide-gray-300"></tr>
-            </table>
+
             <div id="dataTableControls" class="mt-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4 hidden">
                 <div class="flex items-center gap-2">
                     <label for="pageSize" class="text-sm font-medium text-gray-700">Show</label>
@@ -86,6 +81,13 @@
                 </div>
                 <div id="pagination" class="flex gap-2 text-sm text-gray-600"></div>
             </div>
+            <table id="dataTable" class="w-full border border-gray-300 hidden">
+                <thead>
+                    <tr id="tableHeader" class="bg-gray-200"></tr>
+                </thead>
+                <tbody id="tableBody" class="divide-y divide-gray-300"></tr>
+            </table>
+          
             <p id="tableStatus" class="text-gray-600 mt-2">Upload a CSV file to display data.</p>
         </div>
     </div>
