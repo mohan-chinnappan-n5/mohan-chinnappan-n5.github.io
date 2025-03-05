@@ -75,3 +75,78 @@
 2025-03-04 19:40:14,467 - INFO - Starting SOQL Backend Server on port 5000...
 2025-03-04 19:40:14,470 - WARNING -  * Debugger is active!
 2025-03-04 19:40:14,473 - INFO -  * Debugger PIN: 879-385-724
+2025-03-04 19:43:54,687 - INFO - 127.0.0.1 - - [04/Mar/2025 19:43:54] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:43:54,693 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 19:43:54,891 - INFO - Successfully queried 10 records
+2025-03-04 19:43:54,894 - INFO - 127.0.0.1 - - [04/Mar/2025 19:43:54] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:44:35,506 - INFO - 127.0.0.1 - - [04/Mar/2025 19:44:35] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:44:35,511 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.1/
+2025-03-04 19:44:35,665 - INFO - 127.0.0.1 - - [04/Mar/2025 19:44:35] "[33mPOST /query_data HTTP/1.1[0m" 404 -
+2025-03-04 19:44:57,474 - INFO - 127.0.0.1 - - [04/Mar/2025 19:44:57] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:44:57,479 - ERROR - Invalid REST URL format: /services/data/v60.0
+2025-03-04 19:44:57,479 - INFO - 127.0.0.1 - - [04/Mar/2025 19:44:57] "[31m[1mPOST /query_data HTTP/1.1[0m" 400 -
+2025-03-04 19:45:04,668 - INFO - 127.0.0.1 - - [04/Mar/2025 19:45:04] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:45:04,670 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/
+2025-03-04 19:45:04,837 - INFO - Successfully queried 0 records
+2025-03-04 19:45:04,839 - INFO - 127.0.0.1 - - [04/Mar/2025 19:45:04] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:45:28,489 - INFO -  * Detected change in '/Users/saromo/github-pages/mohan-chinnappan-n5.github.io/sf/ac/2/backend.py', reloading
+2025-03-04 19:45:28,948 - INFO -  * Restarting with watchdog (fsevents)
+2025-03-04 19:45:29,162 - INFO - Starting SOQL Backend Server on port 5000...
+2025-03-04 19:45:29,168 - WARNING -  * Debugger is active!
+2025-03-04 19:45:29,175 - INFO -  * Debugger PIN: 879-385-724
+2025-03-04 19:45:42,252 - INFO - 127.0.0.1 - - [04/Mar/2025 19:45:42] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:45:42,270 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/
+2025-03-04 19:45:42,471 - INFO - Successfully queried 0 records
+2025-03-04 19:45:42,474 - INFO - 127.0.0.1 - - [04/Mar/2025 19:45:42] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:45:49,686 - INFO - 127.0.0.1 - - [04/Mar/2025 19:45:49] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:45:49,689 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/tooling/v60.0/
+2025-03-04 19:45:49,845 - INFO - 127.0.0.1 - - [04/Mar/2025 19:45:49] "[33mPOST /query_data HTTP/1.1[0m" 404 -
+2025-03-04 19:46:05,789 - INFO - 127.0.0.1 - - [04/Mar/2025 19:46:05] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:46:05,794 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobject/Account
+2025-03-04 19:46:05,975 - INFO - 127.0.0.1 - - [04/Mar/2025 19:46:05] "[33mPOST /query_data HTTP/1.1[0m" 404 -
+2025-03-04 19:46:07,073 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobject/Account
+2025-03-04 19:46:07,232 - INFO - 127.0.0.1 - - [04/Mar/2025 19:46:07] "[33mPOST /query_data HTTP/1.1[0m" 404 -
+2025-03-04 19:46:09,467 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobject/Account
+2025-03-04 19:46:09,630 - INFO - 127.0.0.1 - - [04/Mar/2025 19:46:09] "[33mPOST /query_data HTTP/1.1[0m" 404 -
+2025-03-04 19:46:15,386 - INFO - 127.0.0.1 - - [04/Mar/2025 19:46:15] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:46:15,389 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account
+2025-03-04 19:46:15,560 - INFO - Successfully queried 0 records
+2025-03-04 19:46:15,562 - INFO - 127.0.0.1 - - [04/Mar/2025 19:46:15] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:46:57,183 - INFO - 127.0.0.1 - - [04/Mar/2025 19:46:57] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:46:57,188 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT+Id,+Name+FROM+Account
+2025-03-04 19:46:57,441 - INFO - Successfully queried 1037 records
+2025-03-04 19:46:57,462 - INFO - 127.0.0.1 - - [04/Mar/2025 19:46:57] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:47:11,605 - INFO - 127.0.0.1 - - [04/Mar/2025 19:47:11] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:47:11,610 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/tooling/v60.0/query?q=SELECT+Id,+Name+FROM+Account
+2025-03-04 19:47:11,738 - INFO - 127.0.0.1 - - [04/Mar/2025 19:47:11] "[33mPOST /query_data HTTP/1.1[0m" 404 -
+2025-03-04 19:47:15,700 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT+Id,+Name+FROM+Account
+2025-03-04 19:47:15,893 - INFO - Successfully queried 1037 records
+2025-03-04 19:47:15,915 - INFO - 127.0.0.1 - - [04/Mar/2025 19:47:15] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:51:40,033 - INFO - 127.0.0.1 - - [04/Mar/2025 19:51:40] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:51:40,038 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT+Id,+Name+FROM+Account
+2025-03-04 19:51:40,251 - INFO - Successfully queried 1037 records
+2025-03-04 19:51:40,274 - INFO - 127.0.0.1 - - [04/Mar/2025 19:51:40] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:52:41,618 - INFO - 127.0.0.1 - - [04/Mar/2025 19:52:41] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:52:41,624 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT+Id,+Name+FROM+Account
+2025-03-04 19:52:41,844 - INFO - Successfully queried 1037 records
+2025-03-04 19:52:41,863 - INFO - 127.0.0.1 - - [04/Mar/2025 19:52:41] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:52:54,065 - INFO - 127.0.0.1 - - [04/Mar/2025 19:52:54] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:52:54,069 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 19:52:54,218 - INFO - Successfully queried 10 records
+2025-03-04 19:52:54,220 - INFO - 127.0.0.1 - - [04/Mar/2025 19:52:54] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 20:40:49,631 - INFO - 127.0.0.1 - - [04/Mar/2025 20:40:49] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 20:40:49,636 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 20:40:50,242 - INFO - Successfully queried 10 records
+2025-03-04 20:40:50,245 - INFO - 127.0.0.1 - - [04/Mar/2025 20:40:50] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 20:51:11,462 - INFO - 127.0.0.1 - - [04/Mar/2025 20:51:11] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 20:51:11,468 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 20:51:11,688 - INFO - Successfully queried 10 records
+2025-03-04 20:51:11,691 - INFO - 127.0.0.1 - - [04/Mar/2025 20:51:11] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 20:51:28,692 - INFO - 127.0.0.1 - - [04/Mar/2025 20:51:28] "OPTIONS /fetch_fields HTTP/1.1" 200 -
+2025-03-04 20:51:28,695 - INFO - Fetching fields using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account/describe
+2025-03-04 20:51:29,041 - INFO - Successfully fetched 70 fields
+2025-03-04 20:51:29,043 - INFO - 127.0.0.1 - - [04/Mar/2025 20:51:29] "POST /fetch_fields HTTP/1.1" 200 -
+2025-03-04 20:51:32,480 - INFO - 127.0.0.1 - - [04/Mar/2025 20:51:32] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 20:51:32,483 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue%2CActive__c%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 20:51:32,661 - INFO - Successfully queried 10 records
+2025-03-04 20:51:32,663 - INFO - 127.0.0.1 - - [04/Mar/2025 20:51:32] "POST /query_data HTTP/1.1" 200 -
