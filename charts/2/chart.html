@@ -59,18 +59,38 @@
         <!-- Resizable Container -->
         <div class="flex-1 flex flex-row h-full w-full" id="resizableContainer">
             <!-- DataTable Pane -->
-            <div class="pane w-full md:w-1/2 h-full" id="leftPane">
-                <h2 class="text-lg font-semibold p-4 bg-gray-100">Data Table</h2>
-                <div class="p-4 h-[calc(100%-4rem)] overflow-y-auto">
-                    <table id="dataTable" class="w-full border border-gray-300 hidden">
-                        <thead>
-                            <tr id="tableHeader" class="bg-gray-200"></tr>
-                        </thead>
-                        <tbody id="tableBody" class="divide-y divide-gray-300"></tr>
-                    </table>
-                    <p id="tableStatus" class="text-gray-600 mt-2">Upload a CSV file to display data.</p>
-                </div>
+
+    <div class="pane w-full md:w-1/2 h-full" id="leftPane">
+        <h2 class="text-lg font-semibold p-4 bg-gray-100">Data Table</h2>
+
+        <div id="dataTableControls" class="mt-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4 hidden">
+            <div class="flex items-center gap-2">
+                <label for="pageSize" class="text-sm font-medium text-gray-700">Show</label>
+                <select id="pageSize" class="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                <span class="text-sm text-gray-600">entries</span>
             </div>
+            <div class="flex-1 md:flex-none">
+                <input type="text" id="searchInput" placeholder="Search..." class="w-full md:w-48 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+            </div>
+            <div id="pagination" class="flex gap-2 text-sm text-gray-600"></div>
+        </div>
+        <div class="p-4 h-[calc(100%-4rem)] overflow-y-auto">
+            <table id="dataTable" class="w-full border border-gray-300 hidden">
+                <thead>
+                    <tr id="tableHeader" class="bg-gray-200"></tr>
+                </thead>
+                <tbody id="tableBody" class="divide-y divide-gray-300"></tr>
+            </table>
+         
+            <p id="tableStatus" class="text-gray-600 mt-2">Upload a CSV file to display data.</p>
+        </div>
+    </div>
+           
             <!-- Vertical Splitter -->
             <div class="w-2 bg-gray-300 cursor-col-resize" id="splitter"></div> <!-- Removed hidden md:block to always show on desktop, manage visibility in JS -->
             <!-- Chart Pane (Larger Area) -->
@@ -118,8 +138,6 @@
         <p class="text-sm">Data Visualization</p>
     </footer>
 
-
-
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 // Handle CSV Upload
@@ -139,7 +157,7 @@
                                 return;
                             }
         
-                            // Display data in DataTable
+                            // Display data in DataTable with pagination, page size, and search
                             populateDataTable(data);
                             // Populate field selectors for charts
                             populateFieldSelectors(data);
@@ -147,6 +165,7 @@
                             document.getElementById('fieldSelection').classList.remove('hidden');
                             document.getElementById('chartContainer').innerHTML = ''; // Clear previous chart
                             initializeSplitter(); // Reinitialize splitter after rendering
+                            document.getElementById('dataTableControls').classList.remove('hidden'); // Show controls after data
                         },
                         header: true,
                         skipEmptyLines: true,
@@ -156,11 +175,14 @@
                     });
                 });
         
-                // Populate DataTable
+                // Populate DataTable with pagination, page size, and search
                 function populateDataTable(data) {
                     const tableHeader = document.getElementById('tableHeader');
                     const tableBody = document.getElementById('tableBody');
                     const table = document.getElementById('dataTable');
+                    const pageSizeSelect = document.getElementById('pageSize');
+                    const searchInput = document.getElementById('searchInput');
+                    const pagination = document.getElementById('pagination');
         
                     // Clear existing content
                     tableHeader.innerHTML = '';
@@ -180,9 +202,20 @@
                         tableHeader.appendChild(th);
                     });
         
-                    // Populate rows
-                    data.forEach(row => {
-                        if (typeof row === 'object' && row !== null) {
+                    // Store data for pagination and search
+                    let tableData = data.filter(row => typeof row === 'object' && row !== null);
+                    let currentPage = 1;
+                    let rowsPerPage = parseInt(pageSizeSelect.value) || 10;
+        
+                    // Render table rows with pagination
+                    function renderTable(page = currentPage) {
+                        tableBody.innerHTML = '';
+                        const start = (page - 1) * rowsPerPage;
+                        const end = start + rowsPerPage;
+                        const filteredData = filterData(tableData);
+                        const paginatedData = filteredData.slice(start, end);
+        
+                        paginatedData.forEach(row => {
                             const tr = document.createElement('tr');
                             headers.forEach(header => {
                                 const td = document.createElement('td');
@@ -191,11 +224,84 @@
                                 tr.appendChild(td);
                             });
                             tableBody.appendChild(tr);
+                        });
+        
+                        updatePagination(filteredData.length);
+                    }
+        
+                    // Filter data based on search input
+                    function filterData(data) {
+                        const searchTerm = searchInput.value.toLowerCase().trim();
+                        if (!searchTerm) return data;
+                        return data.filter(row => {
+                            return headers.some(header => 
+                                (row[header] || '').toString().toLowerCase().includes(searchTerm)
+                            );
+                        });
+                    }
+        
+                    // Update pagination controls
+                    function updatePagination(totalRows) {
+                        const totalPages = Math.ceil(totalRows / rowsPerPage);
+                        pagination.innerHTML = '';
+        
+                        if (totalPages <= 1) return;
+        
+                        const prevButton = document.createElement('button');
+                        prevButton.textContent = 'Previous';
+                        prevButton.className = 'px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300';
+                        prevButton.disabled = currentPage === 1;
+                        prevButton.addEventListener('click', () => {
+                            if (currentPage > 1) {
+                                currentPage--;
+                                renderTable();
+                            }
+                        });
+                        pagination.appendChild(prevButton);
+        
+                        for (let i = 1; i <= totalPages; i++) {
+                            const pageButton = document.createElement('button');
+                            pageButton.textContent = i;
+                            pageButton.className = `px-3 py-1 ${i === currentPage ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'} rounded-lg`;
+                            pageButton.addEventListener('click', () => {
+                                currentPage = i;
+                                renderTable();
+                            });
+                            pagination.appendChild(pageButton);
                         }
+        
+                        const nextButton = document.createElement('button');
+                        nextButton.textContent = 'Next';
+                        nextButton.className = 'px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300';
+                        nextButton.disabled = currentPage === totalPages;
+                        nextButton.addEventListener('click', () => {
+                            if (currentPage < totalPages) {
+                                currentPage++;
+                                renderTable();
+                            }
+                        });
+                        pagination.appendChild(nextButton);
+                    }
+        
+                    // Handle page size change
+                    pageSizeSelect.addEventListener('change', () => {
+                        rowsPerPage = parseInt(pageSizeSelect.value) || 10;
+                        currentPage = 1; // Reset to first page
+                        renderTable();
+                    });
+        
+                    // Handle search input
+                    searchInput.addEventListener('input', () => {
+                        currentPage = 1; // Reset to first page on search
+                        renderTable();
                     });
         
                     table.classList.remove('hidden');
                     document.getElementById('tableStatus').classList.add('hidden');
+                    document.getElementById('dataTableControls').classList.remove('hidden');
+        
+                    // Initial render
+                    renderTable();
                 }
         
                 // Populate field selectors for charts
@@ -236,107 +342,105 @@
                 }
         
                 // Generate VegaLite Chart
-
-                // Replace the `generateChart` function in `index.js` with this updated version to include tooltips for mouseover on the VegaLite graph:
-
-function generateChart(data) {
-    const chartType = document.getElementById('chartType').value;
-    const xField = document.getElementById('xField').value;
-    const yField = document.getElementById('yField').value;
-
-    if (!xField || !yField) {
-        document.getElementById('chartError').classList.remove('hidden');
-        document.getElementById('chartError').textContent = 'Please select both X-Axis and Y-Axis fields or aggregates.';
-        return;
-    }
-
-    document.getElementById('chartError').classList.add('hidden');
-
-    let spec = {
-        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-        data: { values: data },
-        mark: chartType,
-        encoding: {
-            x: { field: xField, type: 'nominal' }, // Default to nominal, adjust below
-            y: { 
-                field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), 
-                type: 'quantitative' 
-            },
-            tooltip: [ // Add tooltips for mouseover
-                { field: xField, type: 'nominal', title: 'X-Axis' },
-                { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
-            ]
-        }
-    };
-
-    // Handle aggregates for bar charts
-    if (chartType === 'bar' && yField.match(/^(sum|max|average)\((.*?)\)$/)) {
-        const [agg, field] = yField.match(/^(sum|max|average)\((.*?)\)$/).slice(1);
-        spec.transform = [{
-            aggregate: [{ op: agg, field: field, as: field }],
-            groupby: [xField]
-        }];
-        spec.encoding.y.field = field;
-        spec.encoding.y.type = 'quantitative';
-        // Update tooltip for aggregated data
-        spec.encoding.tooltip = [
-            { field: xField, type: 'nominal', title: 'X-Axis' },
-            { field: field, type: 'quantitative', title: `${agg.toUpperCase()} of ${field}` }
-        ];
-    }
-
-    // Adjust for specific chart types and data types
-    if (chartType === 'donut') {
-        spec.mark = { type: 'arc', innerRadius: 50 };
-        spec.encoding.theta = { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative' };
-        spec.encoding.color = { field: xField, type: 'nominal' }; // Optional: color by X-axis for better visualization
-        spec.encoding.tooltip = [
-            { field: xField, type: 'nominal', title: 'Category' },
-            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Value' }
-        ];
-        delete spec.encoding.x;
-        delete spec.encoding.y;
-    } else if (chartType === 'scatter') {
-        spec.mark = { type: 'point', filled: true };
-        // Check if X-axis field is numeric (quantitative)
-        if (data[0] && !isNaN(data[0][xField])) {
-            spec.encoding.x.type = 'quantitative';
-        }
-        spec.encoding.tooltip = [
-            { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
-            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
-        ];
-    } else if (chartType === 'line') {
-        spec.mark = 'line';
-        // Check if X-axis field is numeric (quantitative)
-        if (data[0] && !isNaN(data[0][xField])) {
-            spec.encoding.x.type = 'quantitative';
-        }
-        spec.encoding.tooltip = [
-            { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
-            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
-        ];
-    } else if (chartType === 'area') {
-        spec.mark = 'area';
-        // Check if X-axis field is numeric (quantitative)
-        if (data[0] && !isNaN(data[0][xField])) {
-            spec.encoding.x.type = 'quantitative';
-        }
-        spec.encoding.tooltip = [
-            { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
-            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
-        ];
-    }
-
-    vegaEmbed('#chartContainer', spec, { actions: true }).then(() => {
-        console.log('Chart rendered successfully');
-    }).catch(error => {
-        console.error('Error rendering chart:', error);
-        document.getElementById('chartError').classList.remove('hidden');
-        document.getElementById('chartError').textContent = `Error generating chart: ${error.message}`;
-    });
-}   
-              // Handle chart generation on button click
+                function generateChart(data) {
+                    const chartType = document.getElementById('chartType').value;
+                    const xField = document.getElementById('xField').value;
+                    const yField = document.getElementById('yField').value;
+        
+                    if (!xField || !yField) {
+                        document.getElementById('chartError').classList.remove('hidden');
+                        document.getElementById('chartError').textContent = 'Please select both X-Axis and Y-Axis fields or aggregates.';
+                        return;
+                    }
+        
+                    document.getElementById('chartError').classList.add('hidden');
+        
+                    let spec = {
+                        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+                        data: { values: data },
+                        mark: chartType,
+                        encoding: {
+                            x: { field: xField, type: 'nominal' }, // Default to nominal, adjust below
+                            y: { 
+                                field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), 
+                                type: 'quantitative' 
+                            },
+                            tooltip: [ // Tooltips for mouseover
+                                { field: xField, type: 'nominal', title: 'X-Axis' },
+                                { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+                            ]
+                        }
+                    };
+        
+                    // Handle aggregates for bar charts
+                    if (chartType === 'bar' && yField.match(/^(sum|max|average)\((.*?)\)$/)) {
+                        const [agg, field] = yField.match(/^(sum|max|average)\((.*?)\)$/).slice(1);
+                        spec.transform = [{
+                            aggregate: [{ op: agg, field: field, as: field }],
+                            groupby: [xField]
+                        }];
+                        spec.encoding.y.field = field;
+                        spec.encoding.y.type = 'quantitative';
+                        // Update tooltip for aggregated data
+                        spec.encoding.tooltip = [
+                            { field: xField, type: 'nominal', title: 'X-Axis' },
+                            { field: field, type: 'quantitative', title: `${agg.toUpperCase()} of ${field}` }
+                        ];
+                    }
+        
+                    // Adjust for specific chart types and data types
+                    if (chartType === 'donut') {
+                        spec.mark = { type: 'arc', innerRadius: 50 };
+                        spec.encoding.theta = { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative' };
+                        spec.encoding.color = { field: xField, type: 'nominal' }; // Optional: color by X-axis for better visualization
+                        spec.encoding.tooltip = [
+                            { field: xField, type: 'nominal', title: 'Category' },
+                            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Value' }
+                        ];
+                        delete spec.encoding.x;
+                        delete spec.encoding.y;
+                    } else if (chartType === 'scatter') {
+                        spec.mark = { type: 'point', filled: true };
+                        // Check if X-axis field is numeric (quantitative)
+                        if (data[0] && !isNaN(data[0][xField])) {
+                            spec.encoding.x.type = 'quantitative';
+                        }
+                        spec.encoding.tooltip = [
+                            { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
+                            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+                        ];
+                    } else if (chartType === 'line') {
+                        spec.mark = 'line';
+                        // Check if X-axis field is numeric (quantitative)
+                        if (data[0] && !isNaN(data[0][xField])) {
+                            spec.encoding.x.type = 'quantitative';
+                        }
+                        spec.encoding.tooltip = [
+                            { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
+                            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+                        ];
+                    } else if (chartType === 'area') {
+                        spec.mark = 'area';
+                        // Check if X-axis field is numeric (quantitative)
+                        if (data[0] && !isNaN(data[0][xField])) {
+                            spec.encoding.x.type = 'quantitative';
+                        }
+                        spec.encoding.tooltip = [
+                            { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
+                            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+                        ];
+                    }
+        
+                    vegaEmbed('#chartContainer', spec, { actions: true }).then(() => {
+                        console.log('Chart rendered successfully');
+                    }).catch(error => {
+                        console.error('Error rendering chart:', error);
+                        document.getElementById('chartError').classList.remove('hidden');
+                        document.getElementById('chartError').textContent = `Error generating chart: ${error.message}`;
+                    });
+                }
+        
+                // Handle chart generation on button click
                 const generateChartBtn = document.getElementById('generateChartBtn');
                 if (generateChartBtn) {
                     generateChartBtn.addEventListener('click', () => {
@@ -474,5 +578,7 @@ function generateChart(data) {
                 initializeSplitter();
             });
         </script>
+
+       
 </body>
 </html>
