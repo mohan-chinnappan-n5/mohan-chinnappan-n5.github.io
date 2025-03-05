@@ -3,6 +3,7 @@
 
 const queriesURL = 'https://raw.githubusercontent.com/mohan-chinnappan-n5/soql/main/commonQueries.json';
 //const queriesURL = 'queries/commonQueries.json';
+const MAX_LIMIT_Q = 200;
 
 // Show/hide info text on hover
 const infoIcon = document.getElementById('info-icon');
@@ -406,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
 
                     return {
-                        suggestions: suggestions.slice(0, 50) // Limit to 50 suggestions for performance
+                        suggestions: suggestions.slice(0, MAX_LIMIT_Q) // Limit to MAX_LIMIT_Q suggestions for performance
                     };
                 }
             });
