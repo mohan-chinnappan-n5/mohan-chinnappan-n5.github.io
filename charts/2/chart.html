@@ -60,25 +60,9 @@
         <div class="flex-1 flex flex-row h-full w-full" id="resizableContainer">
             <!-- DataTable Pane -->
 
+
     <div class="pane w-full md:w-1/2 h-full" id="leftPane">
         <h2 class="text-lg font-semibold p-4 bg-gray-100">Data Table</h2>
-
-        <div id="dataTableControls" class="mt-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4 hidden">
-            <div class="flex items-center gap-2">
-                <label for="pageSize" class="text-sm font-medium text-gray-700">Show</label>
-                <select id="pageSize" class="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-                <span class="text-sm text-gray-600">entries</span>
-            </div>
-            <div class="flex-1 md:flex-none">
-                <input type="text" id="searchInput" placeholder="Search..." class="w-full md:w-48 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-            </div>
-            <div id="pagination" class="flex gap-2 text-sm text-gray-600"></div>
-        </div>
         <div class="p-4 h-[calc(100%-4rem)] overflow-y-auto">
             <table id="dataTable" class="w-full border border-gray-300 hidden">
                 <thead>
@@ -86,7 +70,22 @@
                 </thead>
                 <tbody id="tableBody" class="divide-y divide-gray-300"></tr>
             </table>
-         
+            <div id="dataTableControls" class="mt-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4 hidden">
+                <div class="flex items-center gap-2">
+                    <label for="pageSize" class="text-sm font-medium text-gray-700">Show</label>
+                    <select id="pageSize" class="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span class="text-sm text-gray-600">entries</span>
+                </div>
+                <div class="flex-1 md:flex-none">
+                    <input type="text" id="searchInput" placeholder="Search..." class="w-full md:w-48 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <div id="pagination" class="flex gap-2 text-sm text-gray-600"></div>
+            </div>
             <p id="tableStatus" class="text-gray-600 mt-2">Upload a CSV file to display data.</p>
         </div>
     </div>
@@ -138,6 +137,7 @@
         <p class="text-sm">Data Visualization</p>
     </footer>
 
+
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 // Handle CSV Upload
@@ -157,7 +157,7 @@
                                 return;
                             }
         
-                            // Display data in DataTable with pagination, page size, and search
+                            // Display data in DataTable with sorting, pagination, page size, and search
                             populateDataTable(data);
                             // Populate field selectors for charts
                             populateFieldSelectors(data);
@@ -175,7 +175,7 @@
                     });
                 });
         
-                // Populate DataTable with pagination, page size, and search
+                // Populate DataTable with sorting, pagination, page size, and search
                 function populateDataTable(data) {
                     const tableHeader = document.getElementById('tableHeader');
                     const tableBody = document.getElementById('tableBody');
@@ -195,24 +195,59 @@
                         return;
                     }
         
+                    // Store data and sorting state
+                    let tableData = data.filter(row => typeof row === 'object' && row !== null);
+                    let sortColumn = null;
+                    let sortDirection = 1; // 1 for ascending, -1 for descending
+                    let currentPage = 1;
+                    let rowsPerPage = parseInt(pageSizeSelect.value) || 10;
+        
+                    // Render table headers with sorting arrows
                     headers.forEach(header => {
                         const th = document.createElement('th');
                         th.textContent = header;
-                        th.className = 'p-2 text-left';
+                        th.className = 'p-2 text-left cursor-pointer';
+                        th.addEventListener('click', () => {
+                            if (sortColumn === header) {
+                                sortDirection *= -1; // Toggle direction
+                            } else {
+                                sortColumn = header;
+                                sortDirection = 1; // Default to ascending
+                            }
+                            tableData = sortData(tableData, sortColumn, sortDirection);
+                            currentPage = 1; // Reset to first page after sorting
+                            renderTable();
+                        });
+        
+                        // Add sorting indicator
+                        const sortIndicator = document.createElement('span');
+                        sortIndicator.className = 'ml-1 text-xs';
+                        sortIndicator.textContent = ' ▼'; // Down arrow for descending
+                        th.appendChild(sortIndicator);
+                        th.dataset.sortDirection = sortDirection; // Track sort direction per column
+                        th.classList.add('sortable');
                         tableHeader.appendChild(th);
                     });
         
-                    // Store data for pagination and search
-                    let tableData = data.filter(row => typeof row === 'object' && row !== null);
-                    let currentPage = 1;
-                    let rowsPerPage = parseInt(pageSizeSelect.value) || 10;
+                    // Sort data function
+                    function sortData(data, column, direction) {
+                        return data.sort((a, b) => {
+                            const valueA = a[column] || '';
+                            const valueB = b[column] || '';
+                            if (typeof valueA === 'number' && typeof valueB === 'number') {
+                                return direction * (valueA - valueB);
+                            } else {
+                                return direction * valueA.toString().localeCompare(valueB.toString());
+                            }
+                        });
+                    }
         
                     // Render table rows with pagination
                     function renderTable(page = currentPage) {
                         tableBody.innerHTML = '';
                         const start = (page - 1) * rowsPerPage;
                         const end = start + rowsPerPage;
-                        const filteredData = filterData(tableData);
+                        const filteredData = filterData(sortData(tableData, sortColumn, sortDirection));
                         const paginatedData = filteredData.slice(start, end);
         
                         paginatedData.forEach(row => {
@@ -224,6 +259,18 @@
                                 tr.appendChild(td);
                             });
                             tableBody.appendChild(tr);
+                        });
+        
+                        // Update sorting indicators
+                        tableHeader.querySelectorAll('.sortable').forEach(th => {
+                            const indicator = th.querySelector('span');
+                            if (th.textContent.trim() === sortColumn) {
+                                indicator.textContent = sortDirection === 1 ? ' ▲' : ' ▼'; // Up for ascending, down for descending
+                                th.dataset.sortDirection = sortDirection;
+                            } else {
+                                indicator.textContent = ' ▼'; // Default to down arrow for unsorted columns
+                                th.dataset.sortDirection = 1;
+                            }
                         });
         
                         updatePagination(filteredData.length);
@@ -300,7 +347,9 @@
                     document.getElementById('tableStatus').classList.add('hidden');
                     document.getElementById('dataTableControls').classList.remove('hidden');
         
-                    // Initial render
+                    // Initial render with default sorting (first column ascending)
+                    sortColumn = headers[0];
+                    sortDirection = 1;
                     renderTable();
                 }
         
@@ -577,8 +626,7 @@
                 // Initialize splitter on page load and after DataTable rendering
                 initializeSplitter();
             });
-        </script>
 
-       
+        </script> 
 </body>
 </html>
