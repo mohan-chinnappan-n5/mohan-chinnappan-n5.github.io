@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+
+    <style>
+        .pane {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .sticky-footer {
+            background: linear-gradient(to top, #1e3a8a, #4b5563);
+        }
+        #chartContainer {
+            height: 500px;
+            width: 600px;
+        }
+        @media (max-width: 640px) {
+            .pane {
+                height: 300px;
+            }
+            #chartContainer {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+
+    <!-- Sticky Navbar -->
+    <nav class="fixed top-0 w-full bg-blue-600 text-white p-4 shadow-md z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Data Visualization App</h1>
+            <div class="flex items-center space-x-4">
+                <input type="file" id="csvUpload" accept=".csv" class="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <button id="uploadBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">Upload CSV</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+
+<main class="container mx-auto p-4 flex-grow mt-16 mb-16">
+    <div class="flex flex-col md:flex-row h-full relative">
+        <!-- Resizable Container -->
+        <div class="flex-1 flex flex-row h-full w-full" id="resizableContainer">
+            <!-- DataTable Pane -->
+            <div class="pane w-full md:w-1/2 h-full" id="leftPane">
+                <h2 class="text-lg font-semibold p-4 bg-gray-100">Data Table</h2>
+                <div class="p-4 h-[calc(100%-4rem)] overflow-y-auto">
+                    <table id="dataTable" class="w-full border border-gray-300 hidden">
+                        <thead>
+                            <tr id="tableHeader" class="bg-gray-200"></tr>
+                        </thead>
+                        <tbody id="tableBody" class="divide-y divide-gray-300"></tr>
+                    </table>
+                    <p id="tableStatus" class="text-gray-600 mt-2">Upload a CSV file to display data.</p>
+                </div>
+            </div>
+            <!-- Vertical Splitter -->
+            <div class="w-2 bg-gray-300 cursor-col-resize" id="splitter"></div> <!-- Removed hidden md:block to always show on desktop, manage visibility in JS -->
+            <!-- Chart Pane (Larger Area) -->
+            <div class="pane w-full md:w-1/2 h-full" id="rightPane">
+                <h2 class="text-lg font-semibold p-4 bg-gray-100">Chart Visualization</h2>
+                <div class="p-4 h-[calc(100%-4rem)] flex flex-col gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Chart Type</label>
+                        <select id="chartType" class="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="bar">Bar Chart</option>
+                            <option value="line">Line Chart</option>
+                            <option value="donut">Donut Chart</option>
+                            <option value="scatter">Scatter Plot</option>
+                            <option value="area">Area Chart</option>
+                        </select>
+                    </div>
+                    <div id="fieldSelection" class="hidden">
+                        <p class="text-sm text-gray-600 mb-2">Select fields to create your chart. For Bar charts, you can use aggregates like SUM, MAX, or AVERAGE for the Y-axis.</p>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">X-Axis Field</label>
+                            <select id="xField" class="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Select X-Axis Field</option>
+                                <!-- Dynamically populated -->
+                            </select>
+                        </div>
+                        <div class="mt-2">
+                            <label class="block text-sm font-medium text-gray-700">Y-Axis Field / Aggregate</label>
+                            <select id="yField" class="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Select Y-Axis Field / Aggregate</option>
+                                <!-- Dynamically populated with aggregates for bar charts -->
+                            </select>
+                        </div>
+                        <button id="generateChartBtn" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Generate Chart</button>
+                    </div>
+                    <div id="chartContainer" class="h-full"></div> <!-- Increased height to fill available space -->
+                    <p id="chartError" class="error-message text-red-500 mt-2 hidden">Error generating chart. Ensure fields are selected and data is valid.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main> 
+
+    <!-- Sticky Footer -->
+    <footer class="fixed bottom-0 w-full bg-gray-800 text-white p-4 text-center shadow-md z-50 sticky-footer">
+        <p class="text-sm">Data Visualization</p>
+    </footer>
+
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Handle CSV Upload
+                document.getElementById('uploadBtn').addEventListener('click', () => {
+                    const fileInput = document.getElementById('csvUpload');
+                    const file = fileInput.files[0];
+                    if (!file) {
+                        alert('Please select a CSV file.');
+                        return;
+                    }
+        
+                    Papa.parse(file, {
+                        complete: function(results) {
+                            const data = results.data;
+                            if (data.length === 0 || (data[0] && Object.keys(data[0]).length === 0)) {
+                                alert('No data found in the CSV file.');
+                                return;
+                            }
+        
+                            // Display data in DataTable
+                            populateDataTable(data);
+                            // Populate field selectors for charts
+                            populateFieldSelectors(data);
+                            // Show field selection, chart container, and ensure splitter is visible
+                            document.getElementById('fieldSelection').classList.remove('hidden');
+                            document.getElementById('chartContainer').innerHTML = ''; // Clear previous chart
+                            initializeSplitter(); // Reinitialize splitter after rendering
+                        },
+                        header: true,
+                        skipEmptyLines: true,
+                        error: function(error) {
+                            alert(`Error parsing CSV: ${error.message}`);
+                        }
+                    });
+                });
+        
+                // Populate DataTable
+                function populateDataTable(data) {
+                    const tableHeader = document.getElementById('tableHeader');
+                    const tableBody = document.getElementById('tableBody');
+                    const table = document.getElementById('dataTable');
+        
+                    // Clear existing content
+                    tableHeader.innerHTML = '';
+                    tableBody.innerHTML = '';
+        
+                    // Use header row for columns
+                    const headers = Object.keys(data[0] || {});
+                    if (headers.length === 0) {
+                        alert('No headers found in the CSV file.');
+                        return;
+                    }
+        
+                    headers.forEach(header => {
+                        const th = document.createElement('th');
+                        th.textContent = header;
+                        th.className = 'p-2 text-left';
+                        tableHeader.appendChild(th);
+                    });
+        
+                    // Populate rows
+                    data.forEach(row => {
+                        if (typeof row === 'object' && row !== null) {
+                            const tr = document.createElement('tr');
+                            headers.forEach(header => {
+                                const td = document.createElement('td');
+                                td.textContent = row[header] || '';
+                                td.className = 'p-2';
+                                tr.appendChild(td);
+                            });
+                            tableBody.appendChild(tr);
+                        }
+                    });
+        
+                    table.classList.remove('hidden');
+                    document.getElementById('tableStatus').classList.add('hidden');
+                }
+        
+                // Populate field selectors for charts
+                function populateFieldSelectors(data) {
+                    const xField = document.getElementById('xField');
+                    const yField = document.getElementById('yField');
+        
+                    // Clear existing options
+                    xField.innerHTML = '<option value="">Select X-Axis Field</option>';
+                    yField.innerHTML = '<option value="">Select Y-Axis Field / Aggregate</option>';
+        
+                    // Use the first row (headers) to get field names
+                    const headers = data.length > 0 && typeof data[0] === 'object' && data[0] !== null ? Object.keys(data[0]) : [];
+                    if (headers.length === 0) {
+                        alert('No valid headers found in the CSV data.');
+                        return;
+                    }
+        
+                    headers.forEach(header => {
+                        const optionX = document.createElement('option');
+                        optionX.value = header;
+                        optionX.textContent = header;
+                        xField.appendChild(optionX);
+        
+                        const optionY = document.createElement('option');
+                        optionY.value = header;
+                        optionY.textContent = header;
+                        yField.appendChild(optionY);
+        
+                        // Add aggregate options for bar charts
+                        ['sum', 'max', 'average'].forEach(agg => {
+                            const aggOption = document.createElement('option');
+                            aggOption.value = `${agg}(${header})`;
+                            aggOption.textContent = `${agg.toUpperCase()} of ${header}`;
+                            yField.appendChild(aggOption);
+                        });
+                    });
+                }
+        
+                // Generate VegaLite Chart
+
+                // Replace the `generateChart` function in `index.js` with this updated version to include tooltips for mouseover on the VegaLite graph:
+
+function generateChart(data) {
+    const chartType = document.getElementById('chartType').value;
+    const xField = document.getElementById('xField').value;
+    const yField = document.getElementById('yField').value;
+
+    if (!xField || !yField) {
+        document.getElementById('chartError').classList.remove('hidden');
+        document.getElementById('chartError').textContent = 'Please select both X-Axis and Y-Axis fields or aggregates.';
+        return;
+    }
+
+    document.getElementById('chartError').classList.add('hidden');
+
+    let spec = {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        data: { values: data },
+        mark: chartType,
+        encoding: {
+            x: { field: xField, type: 'nominal' }, // Default to nominal, adjust below
+            y: { 
+                field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), 
+                type: 'quantitative' 
+            },
+            tooltip: [ // Add tooltips for mouseover
+                { field: xField, type: 'nominal', title: 'X-Axis' },
+                { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+            ]
+        }
+    };
+
+    // Handle aggregates for bar charts
+    if (chartType === 'bar' && yField.match(/^(sum|max|average)\((.*?)\)$/)) {
+        const [agg, field] = yField.match(/^(sum|max|average)\((.*?)\)$/).slice(1);
+        spec.transform = [{
+            aggregate: [{ op: agg, field: field, as: field }],
+            groupby: [xField]
+        }];
+        spec.encoding.y.field = field;
+        spec.encoding.y.type = 'quantitative';
+        // Update tooltip for aggregated data
+        spec.encoding.tooltip = [
+            { field: xField, type: 'nominal', title: 'X-Axis' },
+            { field: field, type: 'quantitative', title: `${agg.toUpperCase()} of ${field}` }
+        ];
+    }
+
+    // Adjust for specific chart types and data types
+    if (chartType === 'donut') {
+        spec.mark = { type: 'arc', innerRadius: 50 };
+        spec.encoding.theta = { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative' };
+        spec.encoding.color = { field: xField, type: 'nominal' }; // Optional: color by X-axis for better visualization
+        spec.encoding.tooltip = [
+            { field: xField, type: 'nominal', title: 'Category' },
+            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Value' }
+        ];
+        delete spec.encoding.x;
+        delete spec.encoding.y;
+    } else if (chartType === 'scatter') {
+        spec.mark = { type: 'point', filled: true };
+        // Check if X-axis field is numeric (quantitative)
+        if (data[0] && !isNaN(data[0][xField])) {
+            spec.encoding.x.type = 'quantitative';
+        }
+        spec.encoding.tooltip = [
+            { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
+            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+        ];
+    } else if (chartType === 'line') {
+        spec.mark = 'line';
+        // Check if X-axis field is numeric (quantitative)
+        if (data[0] && !isNaN(data[0][xField])) {
+            spec.encoding.x.type = 'quantitative';
+        }
+        spec.encoding.tooltip = [
+            { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
+            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+        ];
+    } else if (chartType === 'area') {
+        spec.mark = 'area';
+        // Check if X-axis field is numeric (quantitative)
+        if (data[0] && !isNaN(data[0][xField])) {
+            spec.encoding.x.type = 'quantitative';
+        }
+        spec.encoding.tooltip = [
+            { field: xField, type: spec.encoding.x.type, title: 'X-Axis' },
+            { field: yField.replace(/^(sum|max|average)\((.*?)\)$/, '$2'), type: 'quantitative', title: 'Y-Axis' }
+        ];
+    }
+
+    vegaEmbed('#chartContainer', spec, { actions: true }).then(() => {
+        console.log('Chart rendered successfully');
+    }).catch(error => {
+        console.error('Error rendering chart:', error);
+        document.getElementById('chartError').classList.remove('hidden');
+        document.getElementById('chartError').textContent = `Error generating chart: ${error.message}`;
+    });
+}   
+              // Handle chart generation on button click
+                const generateChartBtn = document.getElementById('generateChartBtn');
+                if (generateChartBtn) {
+                    generateChartBtn.addEventListener('click', () => {
+                        const fileInput = document.getElementById('csvUpload');
+                        if (fileInput.files.length > 0) {
+                            Papa.parse(fileInput.files[0], {
+                                complete: function(results) {
+                                    generateChart(results.data);
+                                },
+                                header: true,
+                                skipEmptyLines: true,
+                                error: function(error) {
+                                    alert(`Error parsing CSV: ${error.message}`);
+                                }
+                            });
+                        } else {
+                            alert('Please upload a CSV file first.');
+                        }
+                    });
+                }
+        
+                // Handle chart generation on selection change (optional, for real-time updates)
+                const chartType = document.getElementById('chartType');
+                if (chartType) {
+                    chartType.addEventListener('change', () => {
+                        const fileInput = document.getElementById('csvUpload');
+                        if (fileInput.files.length > 0) {
+                            Papa.parse(fileInput.files[0], {
+                                complete: function(results) {
+                                    generateChart(results.data);
+                                },
+                                header: true,
+                                skipEmptyLines: true,
+                                error: function(error) {
+                                    alert(`Error parsing CSV: ${error.message}`);
+                                }
+                            });
+                        }
+                    });
+                }
+        
+                const xField = document.getElementById('xField');
+                if (xField) {
+                    xField.addEventListener('change', () => {
+                        const fileInput = document.getElementById('csvUpload');
+                        if (fileInput.files.length > 0) {
+                            Papa.parse(fileInput.files[0], {
+                                complete: function(results) {
+                                    generateChart(results.data);
+                                },
+                                header: true,
+                                skipEmptyLines: true,
+                                error: function(error) {
+                                    alert(`Error parsing CSV: ${error.message}`);
+                                }
+                            });
+                        }
+                    });
+                }
+        
+                const yField = document.getElementById('yField');
+                if (yField) {
+                    yField.addEventListener('change', () => {
+                        const fileInput = document.getElementById('csvUpload');
+                        if (fileInput.files.length > 0) {
+                            Papa.parse(fileInput.files[0], {
+                                complete: function(results) {
+                                    generateChart(results.data);
+                                },
+                                header: true,
+                                skipEmptyLines: true,
+                                error: function(error) {
+                                    alert(`Error parsing CSV: ${error.message}`);
+                                }
+                            });
+                        }
+                    });
+                }
+        
+                // Initialize Resizable Splitter
+                function initializeSplitter() {
+                    const splitter = document.getElementById('splitter');
+                    const leftPane = document.getElementById('leftPane');
+                    const rightPane = document.getElementById('rightPane');
+                    const resizableContainer = document.getElementById('resizableContainer');
+        
+                    if (splitter && leftPane && rightPane && resizableContainer) {
+                        splitter.classList.remove('hidden'); // Ensure splitter is visible
+        
+                        let isDragging = false;
+                        let initialX;
+        
+                        splitter.addEventListener('mousedown', (e) => {
+                            isDragging = true;
+                            initialX = e.clientX;
+                            document.body.style.userSelect = 'none'; // Prevent text selection
+                            document.body.style.cursor = 'col-resize';
+                            e.preventDefault();
+                        });
+        
+                        document.addEventListener('mousemove', (e) => {
+                            if (!isDragging) return;
+        
+                            const containerRect = resizableContainer.getBoundingClientRect();
+                            const offsetX = e.clientX - containerRect.left;
+                            const totalWidth = containerRect.width;
+                            const minWidth = 200; // Minimum width for each pane
+        
+                            const newLeftWidth = Math.max(minWidth, Math.min(offsetX, totalWidth - minWidth));
+                            const newRightWidth = totalWidth - newLeftWidth;
+        
+                            leftPane.style.width = `${newLeftWidth}px`;
+                            rightPane.style.width = `${newRightWidth}px`;
+                            splitter.style.left = `${newLeftWidth}px`;
+        
+                            // Ensure panes remain flexible on resize
+                            leftPane.style.flex = `0 0 ${newLeftWidth}px`;
+                            rightPane.style.flex = `0 0 ${newRightWidth}px`;
+                        });
+        
+                        document.addEventListener('mouseup', () => {
+                            if (isDragging) {
+                                isDragging = false;
+                                document.body.style.userSelect = 'auto';
+                                document.body.style.cursor = 'default';
+                            }
+                        });
+        
+                        // Prevent text selection while dragging
+                        splitter.addEventListener('selectstart', (e) => e.preventDefault());
+                    }
+                }
+        
+                // Initialize splitter on page load and after DataTable rendering
+                initializeSplitter();
+            });
+        </script>
+</body>
+</html>

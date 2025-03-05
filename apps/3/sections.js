@@ -83,6 +83,8 @@
         { text: 'CSV Editor', href: '../../csveditor/index.html', icon: 'desktop' },
         { text: 'Data Viz - Kalam', href: '../../kalam/viz/app.html', icon: 'desktop' },
         { text: 'Data Viz - Turing', href: '../../dviz/', icon: 'desktop' },
+        { text: 'Another Data Viz', href: '../../charts/2/chart.html', icon: 'desktop' },
+ 
         { text: 'SF-LAND: Data Viz : Renderer', href: '../../dfv/renderer.html', icon: 'desktop' },
 
         { text: 'DataGen', href: 'https://mohan-chinnappan-n5.github.io/devops/slides/devops-tools.html#9', icon: 'desktop' },
