@@ -1,0 +1,77 @@
+2025-03-04 19:35:12,344 - INFO - Starting SOQL Backend Server on port 5000...
+2025-03-04 19:35:12,516 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.22:5000
+2025-03-04 19:35:12,517 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-04 19:35:12,525 - INFO -  * Restarting with watchdog (fsevents)
+2025-03-04 19:35:12,648 - INFO - Starting SOQL Backend Server on port 5000...
+2025-03-04 19:35:12,651 - WARNING -  * Debugger is active!
+2025-03-04 19:35:12,660 - INFO -  * Debugger PIN: 879-385-724
+2025-03-04 19:35:34,870 - INFO - 127.0.0.1 - - [04/Mar/2025 19:35:34] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:35:34,876 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 19:35:35,087 - INFO - Successfully queried 10 records
+2025-03-04 19:35:35,089 - INFO - 127.0.0.1 - - [04/Mar/2025 19:35:35] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:35:37,183 - INFO - 127.0.0.1 - - [04/Mar/2025 19:35:37] "OPTIONS /fetch_fields HTTP/1.1" 200 -
+2025-03-04 19:35:37,186 - INFO - Fetching fields using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account/describe
+2025-03-04 19:35:37,475 - INFO - Successfully fetched 70 fields
+2025-03-04 19:35:37,477 - INFO - 127.0.0.1 - - [04/Mar/2025 19:35:37] "POST /fetch_fields HTTP/1.1" 200 -
+2025-03-04 19:35:56,411 - INFO - 127.0.0.1 - - [04/Mar/2025 19:35:56] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:35:56,415 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue2%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 19:35:56,553 - INFO - 127.0.0.1 - - [04/Mar/2025 19:35:56] "[31m[1mPOST /query_data HTTP/1.1[0m" 400 -
+2025-03-04 19:36:19,777 - INFO - 127.0.0.1 - - [04/Mar/2025 19:36:19] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:36:19,781 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue2%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 19:36:19,910 - INFO - 127.0.0.1 - - [04/Mar/2025 19:36:19] "[31m[1mPOST /query_data HTTP/1.1[0m" 400 -
+2025-03-04 19:36:32,836 - INFO - 127.0.0.1 - - [04/Mar/2025 19:36:32] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:36:32,839 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 19:36:33,067 - INFO - Successfully queried 10 records
+2025-03-04 19:36:33,069 - INFO - 127.0.0.1 - - [04/Mar/2025 19:36:33] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:36:59,049 - INFO - 127.0.0.1 - - [04/Mar/2025 19:36:59] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:36:59,053 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/
+2025-03-04 19:36:59,256 - INFO - Successfully queried 0 records
+2025-03-04 19:36:59,258 - INFO - 127.0.0.1 - - [04/Mar/2025 19:36:59] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:37:10,256 - INFO - 127.0.0.1 - - [04/Mar/2025 19:37:10] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:37:10,259 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account
+2025-03-04 19:37:10,475 - INFO - Successfully queried 0 records
+2025-03-04 19:37:10,477 - INFO - 127.0.0.1 - - [04/Mar/2025 19:37:10] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:37:13,671 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account2
+2025-03-04 19:37:13,875 - INFO - 127.0.0.1 - - [04/Mar/2025 19:37:13] "[33mPOST /query_data HTTP/1.1[0m" 404 -
+2025-03-04 19:37:26,066 - INFO - 127.0.0.1 - - [04/Mar/2025 19:37:26] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:37:26,070 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account
+2025-03-04 19:37:26,282 - INFO - Successfully queried 0 records
+2025-03-04 19:37:26,284 - INFO - 127.0.0.1 - - [04/Mar/2025 19:37:26] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:38:29,420 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:29] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:38:29,424 - INFO - Executing query using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account
+2025-03-04 19:38:29,590 - INFO - Successfully queried 0 records
+2025-03-04 19:38:29,592 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:29] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:38:33,990 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:33] "OPTIONS /fetch_fields HTTP/1.1" 200 -
+2025-03-04 19:38:33,993 - INFO - Fetching fields using custom URL at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account
+2025-03-04 19:38:34,157 - INFO - Successfully fetched 0 fields
+2025-03-04 19:38:34,159 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:34] "POST /fetch_fields HTTP/1.1" 200 -
+2025-03-04 19:38:38,394 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:38] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:38:38,398 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue2%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 19:38:38,533 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:38] "[31m[1mPOST /query_data HTTP/1.1[0m" 400 -
+2025-03-04 19:38:41,299 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:41] "OPTIONS /fetch_fields HTTP/1.1" 200 -
+2025-03-04 19:38:41,302 - INFO - Fetching fields using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account/describe
+2025-03-04 19:38:41,612 - INFO - Successfully fetched 70 fields
+2025-03-04 19:38:41,614 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:41] "POST /fetch_fields HTTP/1.1" 200 -
+2025-03-04 19:38:42,858 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue2%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 19:38:42,998 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:42] "[31m[1mPOST /query_data HTTP/1.1[0m" 400 -
+2025-03-04 19:38:46,999 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:46] "OPTIONS /fetch_fields HTTP/1.1" 200 -
+2025-03-04 19:38:47,002 - INFO - Fetching fields using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account/describe
+2025-03-04 19:38:47,292 - INFO - Successfully fetched 70 fields
+2025-03-04 19:38:47,294 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:47] "POST /fetch_fields HTTP/1.1" 200 -
+2025-03-04 19:38:49,302 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:49] "OPTIONS /query_data HTTP/1.1" 200 -
+2025-03-04 19:38:49,305 - INFO - Executing query using default endpoint at https://dhs000000qasyma4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT%20Id%2C%20Name%2CCleanStatus%2CAnnualRevenue%0A%20FROM%20Account%0A%20WHERE%20AnnualRevenue%20%3E%201000%0A%20LIMIT%2010
+2025-03-04 19:38:49,443 - INFO - Successfully queried 10 records
+2025-03-04 19:38:49,446 - INFO - 127.0.0.1 - - [04/Mar/2025 19:38:49] "POST /query_data HTTP/1.1" 200 -
+2025-03-04 19:40:10,217 - INFO -  * Detected change in '/Users/saromo/github-pages/mohan-chinnappan-n5.github.io/sf/ac/2/backend.py', reloading
+2025-03-04 19:40:10,994 - INFO -  * Restarting with watchdog (fsevents)
+2025-03-04 19:40:11,240 - INFO - Starting SOQL Backend Server on port 5000...
+2025-03-04 19:40:11,246 - WARNING -  * Debugger is active!
+2025-03-04 19:40:11,251 - INFO -  * Debugger PIN: 879-385-724
+2025-03-04 19:40:13,797 - INFO -  * Detected change in '/Users/saromo/github-pages/mohan-chinnappan-n5.github.io/sf/ac/2/backend.py', reloading
+2025-03-04 19:40:14,355 - INFO -  * Restarting with watchdog (fsevents)
+2025-03-04 19:40:14,467 - INFO - Starting SOQL Backend Server on port 5000...
+2025-03-04 19:40:14,470 - WARNING -  * Debugger is active!
+2025-03-04 19:40:14,473 - INFO -  * Debugger PIN: 879-385-724

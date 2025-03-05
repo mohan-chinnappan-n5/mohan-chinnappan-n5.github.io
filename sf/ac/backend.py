@@ -11,7 +11,7 @@ from flask_cors import CORS
 # The server runs on port 5000
 # To run the server, execute the following command:
 # python backend.py
-# author: mohan chinnappa
+# author: mohan chinnappan
 # ------------
 
 # The server will be accessible at http://localhost:5000

@@ -330,6 +330,8 @@
         { text: 'SOQL Playground - Deno', href: 'https://mohanc-sf.deno.dev', icon: 'desktop' },
         { text: 'Query and REST Console', href: '../../sf/toolset/index.html', icon: 'desktop' },
         { text: 'SOQL Editor', href: '../../sf/ac/soqlQuery.html', icon: 'desktop' },
+        { text: 'SOQL and REST  Console', href: '../../sf/ac/2/console.html', icon: 'desktop' },
+
 
 
         // Add more links here

@@ -94,7 +94,10 @@
     </div>
     <div class="mt-4">
         <label class="block text-sm font-medium text-gray-700">REST URL</label>
-        <input id="restUrl" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="e.g., /services/data/v60.0/query?q=SELECT+Id,+Name+FROM+Account">
+        <input id="restUrl" type="text" class="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="e.g., /services/data/v60.0/query?q=SELECT+Id,+Name+FROM+Account"
+        value="/services/data/v60.0/sobjects/Account"
+        >
+
         <p id="restUrlError" class="error-message">Enter a valid Salesforce REST URL or leave blank for default SOQL query.</p>
     </div>
     <div class="mt-4">
