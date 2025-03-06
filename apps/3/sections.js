@@ -20,6 +20,8 @@
 
 	{ text: 'Whitepaper on Mobile Perf', href: 'https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/main/mobile/mobile-perf.md', icon: 'book' },
 
+	{ text: 'Whitepaper on ListViews', href: 'https://github.com/mohan-chinnappan-n5/whitepapers/blob/main/list-views/list-views.md', icon: 'book' },
+
 
 
 

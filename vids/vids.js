@@ -22,6 +22,17 @@ const data = {
       },
 
       {
+        name: "TDX 2025",
+        videos: [
+           { title: "Keynote", youtubeId: "mPFgNepSNCY" }, 
+ 
+
+        ],
+      },
+
+
+
+      {
         name: "My Videos",
         videos: [
            { title: "Chat with your LLMs running locally using Ollama and perform RAG on the document in the active tab.  ", youtubeId: "bnzLoIHBnu0" }, 
