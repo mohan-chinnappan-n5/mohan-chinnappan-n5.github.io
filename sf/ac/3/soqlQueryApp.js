@@ -2,8 +2,10 @@
 // Author: Mohan Chinnappan (Updated)
 
 const queriesURL = 'https://raw.githubusercontent.com/mohan-chinnappan-n5/soql/main/commonQueries.json';
-//const queriesURL = 'queries/commonQueries.json';
 const MAX_LIMIT_Q = 200;
+
+const executionTime = document.getElementById('executionTime');
+
 
 // Toggle password visibility
 const togglePasswordBtn = document.getElementById('togglePassword');
@@ -21,6 +23,10 @@ if (togglePasswordBtn) {
 // Show/hide info text on hover
 const infoIcon = document.getElementById('info-icon');
 const infoText = document.getElementById('info-text');
+
+// Spinner and Overlay elements
+const spinner = document.getElementById('spinner');
+const overlay = document.getElementById('overlay');
 
 infoIcon.addEventListener('mouseover', () => {
     infoText.classList.remove('hidden');
@@ -43,7 +49,7 @@ function copyToClipboard(text) {
 // Load common SOQL queries from JSON file synchronously on page load
 let commonQueries = {};
 async function loadCommonQueries2() {
-    commonQueries =  {
+    commonQueries = {
         "Accounts": `SELECT Id, Name, Industry, AnnualRevenue, Phone 
         FROM Account ORDER BY AnnualRevenue
          DESC NULLS LAST LIMIT 10`,
@@ -81,19 +87,19 @@ async function loadCommonQueries2() {
         "File Storage": `SELECT CreatedBy.Name, ContentDocumentId, ContentSize, ContentDocument.FileType
          FROM ContentVersion 
          ORDER BY ContentSize DESC`
-      };
+    };
 }
 
 async function loadCommonQueries() {
     try {
-         const response = await fetch(queriesURL, {
+        const response = await fetch(queriesURL, {
             mode: 'cors', // Explicitly set CORS mode
             cache: 'no-cache' // Ensure fresh fetch
         });
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}, message: ${response.statusText}`);
         const result = await response.json();
-        commonQueries = result['commonQueries']
-        console.log('Common queries loaded:',result['commonQueries']);
+        commonQueries = result['commonQueries'];
+        console.log('Common queries loaded:', result['commonQueries']);
     } catch (error) {
         console.error('Error loading common queries:', error);
         showError('queryError', 'Failed to load common SOQL queries. Check the JSON file or network. Using default queries.');
@@ -229,6 +235,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (!validateRestUrl(config.restUrl)) return [];
 
+                // Show spinner and overlay
+                spinner.style.display = 'block';
+                overlay.style.display = 'block';
                 showLoading('fieldsLoading', true);
                 try {
                     // Use REST URL if provided, otherwise construct default
@@ -275,12 +284,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     let errorMsg = `Failed to fetch fields: ${error.message}`;
                     if (error.message.includes('INVALID_FIELD')) {
                         errorMsg = `Invalid field for object '${sObjectName}': Check field names in your Salesforce org. Ensure the object and fields exist and are accessible.`;
-                    } else if (error.message.includes('500') || error.message.includes('INTERNAL SERVER ERROR')) {
+                    } else if (error.message.includes('500') || errorMessage.includes('INTERNAL SERVER ERROR')) {
                         errorMsg = `Internal Server Error: Contact administrator or check Salesforce API logs for details. Raw error: ${error.message}`;
                     }
                     showError('queryError', errorMsg);
                     return [];
                 } finally {
+                    // Hide spinner, overlay, and loading indicator
+                    spinner.style.display = 'none';
+                    overlay.style.display = 'none';
                     showLoading('fieldsLoading', false);
                 }
             }
@@ -314,7 +326,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
+                // Show spinner and overlay
+                spinner.style.display = 'block';
+                overlay.style.display = 'block';
                 showLoading('queryLoading', true);
+
+                // Start measuring execution time
+                const startTime = performance.now();
+
                 try {
                     let url = config.restUrl ? `${config.instanceUrl}${config.restUrl}` :
                         `${config.instanceUrl}/services/data/${config.apiVersion}/query?q=${encodeURIComponent(soqlQuery)}`;
@@ -355,6 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const data = await response.json();
                     if (data.error) throw new Error(data.error);
                     return data.result || { error: 'No results returned' };
+                    
                 } catch (error) {
                     console.error('Error querying data:', error);
                     let errorMsg = `Query failed: ${error.message}`;
@@ -366,6 +386,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     showError('resultError', errorMsg);
                     return { error: errorMsg };
                 } finally {
+                    // Hide spinner, overlay, and loading indicator
+                    spinner.style.display = 'none';
+                    overlay.style.display = 'none';
+                     // Calculate and display execution time after the promise resolves
+                    const endTime = performance.now();
+                    const timeTaken = (endTime - startTime) / 1000; // Convert to seconds
+                    executionTime.textContent = `Time: ${timeTaken.toFixed(1)}s`;
+                    executionTime.classList.remove('hidden');
+
                     showLoading('queryLoading', false);
                 }
             }
