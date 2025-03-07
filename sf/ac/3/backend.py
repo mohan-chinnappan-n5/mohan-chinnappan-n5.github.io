@@ -50,6 +50,70 @@ def validate_method_for_url(method, url):
             return method in allowed_methods
     return True  # Allow if no specific pattern matches (fallback)
 
+# Helper function to fetch all records by following nextRecordsUrl
+def fetch_all_records(instance_url, access_token, initial_url, method='GET', payload=None):
+    """
+    Recursively fetch all records by following nextRecordsUrl until no more pages remain.
+    
+    Args:
+        instance_url (str): Salesforce instance URL
+        access_token (str): Salesforce OAuth access token
+        initial_url (str): The initial query URL (or nextRecordsUrl for subsequent calls)
+        method (str): HTTP method (default: 'GET')
+        payload (str): Optional JSON payload for the request
+    
+    Returns:
+        list: Combined list of all records from all pages
+    """
+    all_records = []
+    url = initial_url
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': 'application/json'
+    }
+
+    while url:
+        logger.info(f"Fetching records from: {url}")
+        try:
+            if method == 'POST':
+                response = requests.post(url, headers=headers, data=payload, timeout=30)
+            elif method == 'PATCH':
+                response = requests.patch(url, headers=headers, data=payload, timeout=30)
+            elif method == 'DELETE':
+                response = requests.delete(url, headers=headers, timeout=30)
+            else:  # GET
+                response = requests.get(url, headers=headers, timeout=30)
+
+            if response.status_code != 200:
+                logger.error(f"Failed to fetch records: {response.text}")
+                raise Exception(f"Failed to fetch records: {response.text}")
+
+            content_type = response.headers.get('Content-Type', '')
+            if 'application/json' not in content_type:
+                logger.error("Expected JSON response for paginated query, but got non-JSON response")
+                raise Exception("Expected JSON response for paginated query, but got non-JSON response")
+
+            result = response.json()
+            if 'records' in result:
+                all_records.extend(result['records'])
+            else:
+                logger.error("No 'records' field found in response")
+                raise Exception("No 'records' field found in response")
+
+            # Check for nextRecordsUrl to fetch the next page
+            url = result.get('nextRecordsUrl') or result.get('nextPageUrl')
+
+            if url:
+                # If nextRecordsUrl is relative, prepend the instance_url
+                if url.startswith('/'):
+                    url = f"{instance_url}{url}"
+
+        except Exception as e:
+            logger.error(f"Error fetching records: {str(e)}")
+            raise e
+
+    return all_records
+
 # Fetch SObject fields (REST or Tooling API)
 @app.route('/fetch_fields', methods=['POST'])
 def fetch_fields():
@@ -199,14 +263,28 @@ def query_data():
         if response.status_code != 200:
             return jsonify({'error': f"Failed to query data: {response.text}", 'status_code': response.status_code}), response.status_code
 
-        logging.info(response.json())
-        # Check Content-Type to determine response format
+        # Log the Content-Type for debugging
         content_type = response.headers.get('Content-Type', '')
-        logging.info(content_type)
-        
+        logger.info(f"Response Content-Type: {content_type}")
+
+        # Check Content-Type to determine response format
         if 'application/json' in content_type:
-            query_result = response.json()
-            logger.info(f"Successfully queried {query_result.get('totalSize', 'N/A')} records or completed request")
+            # Parse the initial response
+            initial_result = response.json()
+            
+            # Check if this is a paginated query response (has 'records' and 'nextRecordsUrl')
+            if 'records' in initial_result and 'nextRecordsUrl' in initial_result:
+                logger.info("Paginated response detected, fetching all records...")
+                all_records = fetch_all_records(instance_url, access_token, url, method, payload)
+                query_result = {
+                    'totalSize': len(all_records),
+                    'done': True,
+                    'records': all_records
+                }
+                logger.info(f"Successfully fetched {len(all_records)} records across all pages")
+            else:
+                query_result = initial_result
+                logger.info(f"Successfully queried {query_result.get('totalSize', 'N/A')} records or completed request")
         else:
             # Handle plain text response (e.g., testRunId from runTestsAsynchronous)
             query_result = response.text
