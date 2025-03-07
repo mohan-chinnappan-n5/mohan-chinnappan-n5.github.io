@@ -4,7 +4,6 @@ from flask_cors import CORS
 import logging
 import re
 from datetime import datetime
-import urllib.parse
 
 #-------------
 # Backend API server    
@@ -45,30 +44,28 @@ def validate_method_for_url(method, url):
         r'/services/data/v\d+\.\d+/query': ['GET'],
         r'/services/data/v\d+\.\d+/tooling/runTestsAsynchronous': ['POST'],
         r'/services/data/v\d+\.\d+/sobjects/': ['GET', 'POST', 'PATCH', 'DELETE'],
-        r'/services/data/v\d+\.\d+/wave/datasets': ['GET'],
     }
     for pattern, allowed_methods in method_map.items():
         if re.match(pattern, url):
             return method in allowed_methods
     return True  # Allow if no specific pattern matches (fallback)
 
-# Helper function to fetch all records or datasets by following pagination URLs
-def fetch_all_items(instance_url, access_token, initial_url, method='GET', payload=None):
+# Helper function to fetch all records by following nextRecordsUrl
+def fetch_all_records(instance_url, access_token, initial_url, method='GET', payload=None):
     """
-    Recursively fetch all items (records or datasets) by following nextRecordsUrl or nextPageUrl
-    until no more pages remain.
+    Recursively fetch all records by following nextRecordsUrl until no more pages remain.
     
     Args:
         instance_url (str): Salesforce instance URL
         access_token (str): Salesforce OAuth access token
-        initial_url (str): The initial query URL (or nextRecordsUrl/nextPageUrl for subsequent calls)
+        initial_url (str): The initial query URL (or nextRecordsUrl for subsequent calls)
         method (str): HTTP method (default: 'GET')
         payload (str): Optional JSON payload for the request
     
     Returns:
-        list: Combined list of all items from all pages
+        list: Combined list of all records from all pages
     """
-    all_items = []
+    all_records = []
     url = initial_url
     headers = {
         'Authorization': f'Bearer {access_token}',
@@ -76,7 +73,7 @@ def fetch_all_items(instance_url, access_token, initial_url, method='GET', paylo
     }
 
     while url:
-        logger.info(f"Fetching items from: {url}")
+        logger.info(f"Fetching records from: {url}")
         try:
             if method == 'POST':
                 response = requests.post(url, headers=headers, data=payload, timeout=30)
@@ -88,8 +85,8 @@ def fetch_all_items(instance_url, access_token, initial_url, method='GET', paylo
                 response = requests.get(url, headers=headers, timeout=30)
 
             if response.status_code != 200:
-                logger.error(f"Failed to fetch items: {response.text}")
-                raise Exception(f"Failed to fetch items: {response.text}")
+                logger.error(f"Failed to fetch records: {response.text}")
+                raise Exception(f"Failed to fetch records: {response.text}")
 
             content_type = response.headers.get('Content-Type', '')
             if 'application/json' not in content_type:
@@ -97,30 +94,26 @@ def fetch_all_items(instance_url, access_token, initial_url, method='GET', paylo
                 raise Exception("Expected JSON response for paginated query, but got non-JSON response")
 
             result = response.json()
-
-            # Determine the field name based on the URL (e.g., 'records' for query, 'datasets' for wave/datasets)
-            url_path = urllib.parse.urlparse(url).path
-            last_segment = url_path.split('/')[-1]
-            data_field = 'records' if last_segment == 'query' else last_segment if last_segment in result else 'records'
-
-            if data_field in result:
-                all_items.extend(result[data_field])
+            if 'records' in result :
+                all_records.extend(result['records'])
             else:
-                logger.error(f"No '{data_field}' field found in response")
-                raise Exception(f"No '{data_field}' field found in response")
+                logger.error("No 'records' field found in response")
+                raise Exception("No 'records' field found in response")
 
-            # Check for nextRecordsUrl or nextPageUrl to fetch the next page
+            # Check for nextRecordsUrl to fetch the next page
             url = result.get('nextRecordsUrl') or result.get('nextPageUrl')
+            logger.info(url)
+
             if url:
-                # If the URL is relative, prepend the instance_url
+                # If nextRecordsUrl is relative, prepend the instance_url
                 if url.startswith('/'):
                     url = f"{instance_url}{url}"
 
         except Exception as e:
-            logger.error(f"Error fetching items: {str(e)}")
+            logger.error(f"Error fetching records: {str(e)}")
             raise e
 
-    return all_items
+    return all_records
 
 # Fetch SObject fields (REST or Tooling API)
 @app.route('/fetch_fields', methods=['POST'])
@@ -280,23 +273,22 @@ def query_data():
             # Parse the initial response
             initial_result = response.json()
             
-            # Check if this is a paginated query response (has items and nextRecordsUrl or nextPageUrl)
-            url_path = urllib.parse.urlparse(url).path
-            last_segment = url_path.split('/')[-1]
-            data_field = 'records' if last_segment == 'query' else last_segment if last_segment in initial_result else 'records'
-
-            if data_field in initial_result and ('nextRecordsUrl' in initial_result or 'nextPageUrl' in initial_result):
-                logger.info(f"Paginated response detected for {data_field}, fetching all items...")
-                all_items = fetch_all_items(instance_url, access_token, url, method, payload)
+            # Check if this is a paginated query response (has 'records' and 'nextRecordsUrl')
+            entity = url.split('/')[-1:][0]
+            logger.info(entity)
+            if ('records' in initial_result and 'nextRecordsUrl' in initial_result) :
+            #or (entity in initial_result   and   'nextPageUrl' in initial_result) :
+                logger.info("Paginated response detected, fetching all records...")
+                all_records = fetch_all_records(instance_url, access_token, url, method, payload)
                 query_result = {
-                    'totalSize': len(all_items),
+                    'totalSize': len(all_records),
                     'done': True,
-                    f'{data_field}': all_items
+                    'records': all_records
                 }
-                logger.info(f"Successfully fetched {len(all_items)} {data_field} across all pages")
+                logger.info(f"Successfully fetched {len(all_records)} records across all pages")
             else:
                 query_result = initial_result
-                logger.info(f"Successfully queried {query_result.get('totalSize', 'N/A')} items or completed request")
+                logger.info(f"Successfully queried {query_result.get('totalSize', 'N/A')} records or completed request")
         else:
             # Handle plain text response (e.g., testRunId from runTestsAsynchronous)
             query_result = response.text
@@ -324,7 +316,7 @@ def query_data():
         }), 400
     except Exception as e:
         error_msg = f"Server error during request: {str(e)}"
-        logger.error(msg)
+        logger.error(error_msg)
         return jsonify({
             'error': 'Server error',
             'message': str(e)
