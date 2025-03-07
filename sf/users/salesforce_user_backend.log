@@ -1,0 +1,32 @@
+2025-03-05 05:33:38,032 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:7000
+ * Running on http://192.168.1.22:7000
+2025-03-05 05:33:38,032 - INFO - [33mPress CTRL+C to quit[0m
+2025-03-05 05:33:38,040 - INFO -  * Restarting with watchdog (fsevents)
+2025-03-05 05:33:38,171 - WARNING -  * Debugger is active!
+2025-03-05 05:33:38,177 - INFO -  * Debugger PIN: 879-385-724
+2025-03-05 05:39:20,295 - INFO - 127.0.0.1 - - [05/Mar/2025 05:39:20] "OPTIONS /fetch_users HTTP/1.1" 200 -
+2025-03-05 05:39:35,099 - INFO - 127.0.0.1 - - [05/Mar/2025 05:39:35] "OPTIONS /fetch_users HTTP/1.1" 200 -
+2025-03-05 05:39:55,747 - INFO -  * Detected change in '/Users/saromo/github-pages/mohan-chinnappan-n5.github.io/sf/users/um.py', reloading
+2025-03-05 05:39:56,520 - INFO -  * Restarting with watchdog (fsevents)
+2025-03-05 05:39:56,644 - WARNING -  * Debugger is active!
+2025-03-05 05:39:56,651 - INFO -  * Debugger PIN: 879-385-724
+2025-03-05 05:39:58,718 - INFO - 127.0.0.1 - - [05/Mar/2025 05:39:58] "OPTIONS /fetch_users HTTP/1.1" 200 -
+2025-03-05 05:40:57,438 - INFO -  * Detected change in '/Users/saromo/github-pages/mohan-chinnappan-n5.github.io/sf/users/um.py', reloading
+2025-03-05 05:40:58,395 - INFO -  * Restarting with watchdog (fsevents)
+2025-03-05 05:40:58,654 - WARNING -  * Debugger is active!
+2025-03-05 05:40:58,659 - INFO -  * Debugger PIN: 879-385-724
+2025-03-05 05:41:01,864 - INFO - 127.0.0.1 - - [05/Mar/2025 05:41:01] "OPTIONS /fetch_users HTTP/1.1" 200 -
+2025-03-05 05:41:46,848 - INFO -  * Detected change in '/Users/saromo/github-pages/mohan-chinnappan-n5.github.io/sf/users/um.py', reloading
+2025-03-05 05:41:47,270 - INFO -  * Restarting with watchdog (fsevents)
+2025-03-05 05:41:47,455 - WARNING -  * Debugger is active!
+2025-03-05 05:41:47,459 - INFO -  * Debugger PIN: 879-385-724
+2025-03-05 05:41:53,181 - INFO - 127.0.0.1 - - [05/Mar/2025 05:41:53] "OPTIONS /fetch_users HTTP/1.1" 200 -
+2025-03-05 05:42:13,217 - INFO -  * Detected change in '/Users/saromo/github-pages/mohan-chinnappan-n5.github.io/sf/users/um.py', reloading
+2025-03-05 05:42:13,841 - INFO -  * Restarting with watchdog (fsevents)
+2025-03-05 05:42:49,506 - INFO -  * Restarting with watchdog (fsevents)
+2025-03-05 05:44:44,159 - INFO -  * Restarting with watchdog (fsevents)
+2025-03-05 05:44:45,149 - WARNING -  * Debugger is active!
+2025-03-05 05:44:45,154 - INFO -  * Debugger PIN: 879-385-724
+2025-03-05 05:45:07,492 - INFO - 127.0.0.1 - - [05/Mar/2025 05:45:07] "OPTIONS /fetch_users HTTP/1.1" 200 -

@@ -1,0 +1,16 @@
+{
+    "commonQueries": {
+      "AccountsAll": "SELECT Id FROM ACCOUNT",
+      "Accounts": "SELECT Id, Name, Industry, AnnualRevenue, Phone FROM Account ORDER BY AnnualRevenue DESC NULLS LAST LIMIT 10",
+      "Contacts": "SELECT Id, Name, Email, Phone, Account.Name FROM Contact WHERE AccountId != NULL ORDER BY Name",
+      "Opportunities": "SELECT Id, Name, StageName, Amount, CloseDate, Account.Name FROM Opportunity WHERE IsClosed = FALSE ORDER BY CloseDate",
+      "Leads": "SELECT Id, Name, Email, Status, Company, LeadSource FROM Lead WHERE Status != 'Closed - Converted' ORDER BY CreatedDate DESC LIMIT 10",
+      "Cases": "SELECT Id, CaseNumber, Subject, Status, Priority, Contact.Name, Account.Name FROM Case WHERE IsClosed = FALSE ORDER BY Priority",
+      "Users": "SELECT Id, Name, Email, Profile.Name, IsActive FROM User ORDER BY Name",
+      "Campaigns": "SELECT Id, Name, Status, Type, StartDate, EndDate, NumberOfLeads, NumberOfContacts FROM Campaign WHERE IsActive = TRUE ORDER BY StartDate",
+      "Tasks": "SELECT Id, Subject, Status, Priority, Who.Name, What.Name, ActivityDate FROM Task WHERE IsClosed = FALSE ORDER BY ActivityDate",
+      "Events": "SELECT Id, Subject, StartDateTime, EndDateTime, Who.Name, What.Name FROM Event WHERE IsRecurrence = FALSE ORDER BY StartDateTime",
+      "Custom Objects": "SELECT Id, Name, CustomField__c FROM CustomObject__c WHERE Active__c = TRUE ORDER BY CreatedDate DESC LIMIT 5",
+      "File Storage": "SELECT CreatedBy.Name, ContentDocumentId, ContentSize, ContentDocument.FileType FROM ContentVersion ORDER BY ContentSize DESC"
+    }
+  }

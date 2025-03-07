@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traceroute Analyzer App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        .pane {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .sticky-footer {
+            background: linear-gradient(to top, #1e3a8a, #4b5563);
+        }
+        @media (max-width: 640px) {
+            .pane {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+
+    <!-- Sticky Navbar -->
+    <nav class="fixed top-0 w-full bg-blue-600 text-white p-4 shadow-md z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Traceroute Analyzer App</h1>
+            <div class="flex items-center space-x-4">
+                <input type="file" id="tracerouteUpload" accept=".txt" class="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <button id="uploadBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">Upload Traceroute</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 flex-grow mt-16 mb-16">
+        <div class="pane h-full">
+            <h2 class="text-lg font-semibold p-4 bg-gray-100">Traceroute Data</h2>
+            <div class="p-4 h-[calc(100%-4rem)] overflow-y-auto">
+                <table id="dataTable" class="w-full border border-gray-300 hidden">
+                    <thead>
+                        <tr id="tableHeader" class="bg-gray-200"></tr>
+                    </thead>
+                    <tbody id="tableBody" class="divide-y divide-gray-300"></tr>
+                </table>
+                <div id="dataTableControls" class="mt-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4 hidden">
+                    <div class="flex items-center gap-2">
+                        <label for="pageSize" class="text-sm font-medium text-gray-700">Show</label>
+                        <select id="pageSize" class="p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <span class="text-sm text-gray-600">entries</span>
+                    </div>
+                    <div class="flex-1 md:flex-none">
+                        <input type="text" id="searchInput" placeholder="Search..." class="w-full md:w-48 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div id="pagination" class="flex gap-2 text-sm text-gray-600"></div>
+                </div>
+                <p id="tableStatus" class="text-gray-600 mt-2">Upload a traceroute text file to display data.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="fixed bottom-0 w-full bg-gray-800 text-white p-4 text-center shadow-md z-50 sticky-footer">
+        <p class="text-sm">© 2025 Traceroute Analyzer App - Built with Tailwind CSS | Contact: support@tracerouteapp.com</p>
+    </footer>
+
+    <script>
+        // Handle Traceroute Upload
+        document.getElementById('uploadBtn').addEventListener('click', () => {
+            const fileInput = document.getElementById('tracerouteUpload');
+            const file = fileInput.files[0];
+            if (!file) {
+                alert('Please select a traceroute text file.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const text = event.target.result;
+                const csvData = parseTracerouteToCSV(text);
+                if (csvData.length === 0) {
+                    alert('No valid traceroute data found in the file.');
+                    return;
+                }
+
+                // Display data in DataTable
+                populateDataTable(csvData);
+                // Show controls after data
+                document.getElementById('dataTableControls').classList.remove('hidden');
+            };
+            reader.readAsText(file);
+        });
+
+        // Replace the `parseTracerouteToCSV` function in `index.js` with this updated version, inspired by the C# tracert2csv logic and tailored to your sample:
+
+// Parse Traceroute Text to CSV Data
+function parseTracerouteToCSV(text) {
+    const lines = text.split('\n').filter(line => line.trim());
+    const data = [];
+    let hopNumber = 1;
+
+    lines.forEach(line => {
+        // Skip header or summary lines
+        if (line.includes('traceroute to') || line.includes('Trace complete') || !/\d/.test(line)) {
+            return;
+        }
+
+        // Match hop number and rest of the line
+        const hopMatch = line.match(/^(\d+)\s+(.+)/);
+        if (hopMatch) {
+            const [, hopStr, rest] = hopMatch;
+            let ip = 'N/A';
+            const latencies = [];
+
+            // Extract IP address (look for the first IP in parentheses or standalone)
+            const ipMatch = rest.match(/([\d.]+)(?:\s+\(([\d.]+)\))?/);
+            if (ipMatch) {
+                ip = ipMatch[2] || ipMatch[1]; // Prefer IP in parentheses, fallback to standalone
+            }
+
+            // Extract latency values (numbers followed by 'ms' or asterisks)
+            const latencyMatches = rest.match(/\d+\.\d+\s?ms|\*/g) || [];
+            latencies.push(...latencyMatches.map(lat => lat.replace(' ms', '').trim() || '*').slice(0, 3));
+            while (latencies.length < 3) latencies.push('*'); // Pad with '*' for missing values
+
+            data.push({
+                Hop: parseInt(hopStr),
+                IP: ip,
+                Latency1: latencies[0],
+                Latency2: latencies[1],
+                Latency3: latencies[2]
+            });
+            hopNumber++;
+        }
+    });
+
+    console.log(data);
+    return data;
+}
+
+
+      // Populate DataTable with pagination, page size, and search
+        function populateDataTable(data) {
+            const tableHeader = document.getElementById('tableHeader');
+            const tableBody = document.getElementById('tableBody');
+            const table = document.getElementById('dataTable');
+            const pageSizeSelect = document.getElementById('pageSize');
+            const searchInput = document.getElementById('searchInput');
+            const pagination = document.getElementById('pagination');
+
+            // Clear existing content
+            tableHeader.innerHTML = '';
+            tableBody.innerHTML = '';
+
+            // Use header row for columns
+            const headers = Object.keys(data[0] || {});
+            if (headers.length === 0) {
+                alert('No headers found in the parsed data.');
+                return;
+            }
+
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.textContent = header;
+                th.className = 'p-2 text-left cursor-pointer';
+                th.addEventListener('click', () => {
+                    sortTable(header);
+                });
+                tableHeader.appendChild(th);
+            });
+
+            // Store data and sorting state
+            let tableData = data;
+            let sortColumn = headers[0];
+            let sortDirection = 1; // 1 for ascending, -1 for descending
+            let currentPage = 1;
+            let rowsPerPage = parseInt(pageSizeSelect.value) || 10;
+
+            // Sort table function
+            function sortTable(column) {
+                if (sortColumn === column) {
+                    sortDirection *= -1; // Toggle direction
+                } else {
+                    sortColumn = column;
+                    sortDirection = 1; // Default to ascending
+                }
+                tableData = tableData.sort((a, b) => {
+                    const valueA = a[column] || '';
+                    const valueB = b[column] || '';
+                    if (typeof valueA === 'number' && typeof valueB === 'number') {
+                        return sortDirection * (valueA - valueB);
+                    } else {
+                        return sortDirection * valueA.toString().localeCompare(valueB.toString());
+                    }
+                });
+                renderTable();
+            }
+
+            // Render table rows with pagination
+            function renderTable(page = currentPage) {
+                tableBody.innerHTML = '';
+                const start = (page - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+                const filteredData = filterData(tableData);
+                const paginatedData = filteredData.slice(start, end);
+
+                paginatedData.forEach(row => {
+                    const tr = document.createElement('tr');
+                    headers.forEach(header => {
+                        const td = document.createElement('td');
+                        td.textContent = row[header] || '';
+                        td.className = 'p-2';
+                        tr.appendChild(td);
+                    });
+                    tableBody.appendChild(tr);
+                });
+
+                updatePagination(filteredData.length);
+            }
+
+            // Filter data based on search input
+            function filterData(data) {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                if (!searchTerm) return data;
+                return data.filter(row => {
+                    return headers.some(header => 
+                        (row[header] || '').toString().toLowerCase().includes(searchTerm)
+                    );
+                });
+            }
+
+            // Update pagination controls
+            function updatePagination(totalRows) {
+                const totalPages = Math.ceil(totalRows / rowsPerPage);
+                pagination.innerHTML = '';
+
+                if (totalPages <= 1) return;
+
+                const prevButton = document.createElement('button');
+                prevButton.textContent = 'Previous';
+                prevButton.className = 'px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300';
+                prevButton.disabled = currentPage === 1;
+                prevButton.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderTable();
+                    }
+                });
+                pagination.appendChild(prevButton);
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageButton = document.createElement('button');
+                    pageButton.textContent = i;
+                    pageButton.className = `px-3 py-1 ${i === currentPage ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300'} rounded-lg`;
+                    pageButton.addEventListener('click', () => {
+                        currentPage = i;
+                        renderTable();
+                    });
+                    pagination.appendChild(pageButton);
+                }
+
+                const nextButton = document.createElement('button');
+                nextButton.textContent = 'Next';
+                nextButton.className = 'px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300';
+                nextButton.disabled = currentPage === totalPages;
+                nextButton.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderTable();
+                    }
+                });
+                pagination.appendChild(nextButton);
+            }
+
+            // Handle page size change
+            pageSizeSelect.addEventListener('change', () => {
+                rowsPerPage = parseInt(pageSizeSelect.value) || 10;
+                currentPage = 1; // Reset to first page
+                renderTable();
+            });
+
+            // Handle search input
+            searchInput.addEventListener('input', () => {
+                currentPage = 1; // Reset to first page on search
+                renderTable();
+            });
+
+            table.classList.remove('hidden');
+            document.getElementById('tableStatus').classList.add('hidden');
+            document.getElementById('dataTableControls').classList.remove('hidden');
+
+            // Initial render with default sorting
+            sortTable(sortColumn);
+        }
+
+        // Initialize Resizable Splitter (no changes needed, included for completeness)
+        function initializeSplitter() {
+            const splitter = document.getElementById('splitter');
+            const leftPane = document.getElementById('leftPane');
+            const rightPane = document.getElementById('rightPane');
+            const resizableContainer = document.getElementById('resizableContainer');
+
+            if (splitter && leftPane && rightPane && resizableContainer) {
+                splitter.classList.remove('hidden');
+
+                let isDragging = false;
+                let initialX;
+
+                splitter.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    initialX = e.clientX;
+                    document.body.style.userSelect = 'none';
+                    document.body.style.cursor = 'col-resize';
+                    e.preventDefault();
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+
+                    const containerRect = resizableContainer.getBoundingClientRect();
+                    const offsetX = e.clientX - containerRect.left;
+                    const totalWidth = containerRect.width;
+                    const minWidth = 200;
+
+                    const newLeftWidth = Math.max(minWidth, Math.min(offsetX, totalWidth - minWidth));
+                    const newRightWidth = totalWidth - newLeftWidth;
+
+                    leftPane.style.width = `${newLeftWidth}px`;
+                    rightPane.style.width = `${newRightWidth}px`;
+                    splitter.style.left = `${newLeftWidth}px`;
+
+                    leftPane.style.flex = `0 0 ${newLeftWidth}px`;
+                    rightPane.style.flex = `0 0 ${newRightWidth}px`;
+                });
+
+                document.addEventListener('mouseup', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        document.body.style.userSelect = 'auto';
+                        document.body.style.cursor = 'default';
+                    }
+                });
+
+                splitter.addEventListener('selectstart', (e) => e.preventDefault());
+            }
+        }
+
+        // Initialize splitter on page load
+        initializeSplitter();
+    </script>
+</body>
+</html>

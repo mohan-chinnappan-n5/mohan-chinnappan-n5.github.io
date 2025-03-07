@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Nursery Songs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        .song-box {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Header -->
+    <header class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Top 10 Nursery Songs</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <!-- Song Display -->
+        <div class="song-box flex flex-col items-center w-full max-w-md">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4" id="songTitle"></h2>
+            <div id="songLyrics" class="text-gray-800 text-center whitespace-pre-line"></div>
+            <div class="mt-4 flex flex-col gap-2 w-full">
+                <label for="voiceSelector" class="text-gray-700">Voice:</label>
+                <select id="voiceSelector" class="p-2 border rounded text-gray-700"></select>
+                <label for="speedSlider" class="text-gray-700">Speed: <span id="speedValue">1.0</span>x</label>
+                <input 
+                    id="speedSlider" 
+                    type="range" 
+                    min="0.5" 
+                    max="2" 
+                    step="0.1" 
+                    value="1" 
+                    class="w-full"
+                >
+                <button 
+                    id="playAudio" 
+                    class="mt-2 bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded"
+                >
+                    Play Audio (Sing)
+                </button>
+            </div>
+            <p id="songStatus" class="mt-2 text-gray-600 text-center"></p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-4 flex gap-4">
+            <button 
+                id="prevBtn" 
+                class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded disabled:bg-gray-400 disabled:cursor-not-allowed"
+                disabled
+            >
+                Prev
+            </button>
+            <span id="pageInfo" class="text-gray-800 flex items-center"></span>
+            <button 
+                id="nextBtn" 
+                class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
+            >
+                Next
+            </button>
+        </div>
+
+        <!-- World Clocks -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+            <div id="indiaClock" class="text-xl font-mono text-gray-800"></div>
+            <div id="nyClock" class="text-xl font-mono text-gray-800"></div>
+            <div id="austinClock" class="text-xl font-mono text-gray-800"></div>
+            <div id="sfClock" class="text-xl font-mono text-gray-800"></div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Use Prev/Next to browse • Adjust voice and speed • Click Play Audio to sing lyrics with pauses • Times in 24-hour format
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const songTitle = document.getElementById('songTitle');
+        const songLyrics = document.getElementById('songLyrics');
+        const playAudioBtn = document.getElementById('playAudio');
+        const songStatus = document.getElementById('songStatus');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const pageInfo = document.getElementById('pageInfo');
+        const indiaClock = document.getElementById('indiaClock');
+        const nyClock = document.getElementById('nyClock');
+        const austinClock = document.getElementById('austinClock');
+        const sfClock = document.getElementById('sfClock');
+        const voiceSelector = document.getElementById('voiceSelector');
+        const speedSlider = document.getElementById('speedSlider');
+        const speedValue = document.getElementById('speedValue');
+
+        // Time zones
+        const timeZones = {
+            'India': 'Asia/Kolkata',
+            'New York': 'America/New_York',
+            'Austin TX': 'America/Chicago',
+            'San Francisco CA': 'America/Los_Angeles'
+        };
+
+        // Nursery songs data
+        const nurserySongs = [
+            { title: "Twinkle, Twinkle, Little Star", lyrics: "Twinkle, twinkle, little star\nHow I wonder what you are\nUp above the world so high\nLike a diamond in the sky" },
+            { title: "Baa, Baa, Black Sheep", lyrics: "Baa, baa, black sheep\nHave you any wool?\nYes, sir, yes, sir\nThree bags full" },
+            { title: "Mary Had a Little Lamb", lyrics: "Mary had a little lamb\nLittle lamb, little lamb\nMary had a little lamb\nIts fleece was white as snow" },
+            { title: "Row, Row, Row Your Boat", lyrics: "Row, row, row your boat\nGently down the stream\nMerrily, merrily, merrily, merrily\nLife is but a dream" },
+            { title: "Humpty Dumpty", lyrics: "Humpty Dumpty sat on a wall\nHumpty Dumpty had a great fall\nAll the king's horses and all the king's men\nCouldn't put Humpty together again" },
+            { title: "Itsy Bitsy Spider", lyrics: "The itsy bitsy spider climbed up the waterspout\nDown came the rain and washed the spider out\nOut came the sun and dried up all the rain\nAnd the itsy bitsy spider climbed up the spout again" },
+            { title: "Old MacDonald Had a Farm", lyrics: "Old MacDonald had a farm, E-I-E-I-O\nAnd on his farm he had a cow, E-I-E-I-O\nWith a moo moo here and a moo moo there\nHere a moo, there a moo, everywhere a moo moo" },
+            { title: "Wheels on the Bus", lyrics: "The wheels on the bus go round and round\nRound and round, round and round\nThe wheels on the bus go round and round\nAll through the town" },
+            { title: "Hickory Dickory Dock", lyrics: "Hickory dickory dock\nThe mouse ran up the clock\nThe clock struck one\nThe mouse ran down\nHickory dickory dock" },
+            { title: "London Bridge", lyrics: "London Bridge is falling down\nFalling down, falling down\nLondon Bridge is falling down\nMy fair lady" }
+        ];
+
+        let currentPage = 0;
+        const songsPerPage = 1;
+        let voices = [];
+        const PAUSE_DURATION = 500; // 500ms pause between lines
+
+        // Format time
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', { hour12: false });
+        }
+
+        // Update world clocks
+        function updateClocks() {
+            const now = new Date();
+            indiaClock.textContent = `India: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['India'], hour12: false })}`;
+            nyClock.textContent = `New York: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['New York'], hour12: false })}`;
+            austinClock.textContent = `Austin TX: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['Austin TX'], hour12: false })}`;
+            sfClock.textContent = `San Francisco: ${now.toLocaleTimeString('en-US', { timeZone: timeZones['San Francisco CA'], hour12: false })}`;
+        }
+
+        // Populate voice selector
+        function populateVoices() {
+            voices = window.speechSynthesis.getVoices();
+            voiceSelector.innerHTML = '';
+            voices.forEach((voice, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${voice.name} (${voice.lang})`;
+                voiceSelector.appendChild(option);
+            });
+        }
+
+        // Update song display
+        function updateSongDisplay() {
+            const song = nurserySongs[currentPage];
+            songTitle.textContent = song.title;
+            songLyrics.textContent = song.lyrics;
+            pageInfo.textContent = `Song ${currentPage + 1} of ${nurserySongs.length}`;
+            prevBtn.disabled = currentPage === 0;
+            nextBtn.disabled = currentPage === nurserySongs.length - 1;
+        }
+
+        // Play audio with singing style
+        async function playAudio() {
+            const song = nurserySongs[currentPage];
+            const selectedVoiceIndex = voiceSelector.value;
+            const speed = parseFloat(speedSlider.value);
+            const lines = [song.title, ...song.lyrics.split('\n').filter(line => line.trim() !== '')];
+
+            songStatus.textContent = 'Singing audio...';
+            playAudioBtn.disabled = true;
+
+            for (let i = 0; i < lines.length; i++) {
+                const speech = new SpeechSynthesisUtterance(lines[i]);
+                speech.lang = 'en-US';
+                speech.voice = voices[selectedVoiceIndex];
+                speech.rate = speed * (0.9 + Math.random() * 0.2); // Slight speed variation (0.9x to 1.1x base speed)
+                speech.pitch = 1 + (i % 2 === 0 ? 0.2 : -0.2); // Alternate pitch: higher (1.2), lower (0.8)
+
+                await new Promise(resolve => {
+                    speech.onend = resolve;
+                    window.speechSynthesis.speak(speech);
+                });
+
+                // Add pause after each line except the last one
+                if (i < lines.length - 1) {
+                    await new Promise(resolve => setTimeout(resolve, PAUSE_DURATION));
+                }
+            }
+
+            songStatus.textContent = '';
+            playAudioBtn.disabled = false;
+        }
+
+        // Event Listeners
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updateSongDisplay();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < nurserySongs.length - 1) {
+                currentPage++;
+                updateSongDisplay();
+            }
+        });
+
+        playAudioBtn.addEventListener('click', () => {
+            playAudio();
+        });
+
+        speedSlider.addEventListener('input', () => {
+            speedValue.textContent = speedSlider.value;
+        });
+
+        // Load voices
+        window.speechSynthesis.onvoiceschanged = populateVoices;
+        populateVoices();
+
+        // Initial Setup
+        setInterval(updateClocks, 1000);
+        updateClocks();
+        updateSongDisplay();
+    </script>
+</body>
+</html>

@@ -13,6 +13,17 @@
         { text: 'Notes on SF Utils Chrome Extension', href: '../../queryperf/index.html', icon: 'book' },
         { text: 'Notes on LWR sites', href: '../../books/lwr/index.html', icon: 'book' },
 
+	{ text: 'Whitepaper on Salesforce Caching', href: 'https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/main/lex/caching.md', icon: 'book' },
+	{ text: 'Whitepaper on Hyperfoce', href: 'https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/main/lex/hyperforce.md', icon: 'book' },
+
+	{ text: 'Whitepaper on EPT', href: 'https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/main/lex/ept.md', icon: 'book' },
+
+	{ text: 'Whitepaper on Mobile Perf', href: 'https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/main/mobile/mobile-perf.md', icon: 'book' },
+
+	{ text: 'Whitepaper on ListViews', href: 'https://github.com/mohan-chinnappan-n5/whitepapers/blob/main/list-views/list-views.md', icon: 'book' },
+
+
+
 
 
 
@@ -74,10 +85,14 @@
         { text: 'CSV Editor', href: '../../csveditor/index.html', icon: 'desktop' },
         { text: 'Data Viz - Kalam', href: '../../kalam/viz/app.html', icon: 'desktop' },
         { text: 'Data Viz - Turing', href: '../../dviz/', icon: 'desktop' },
+        { text: 'Another Data Viz', href: '../../charts/2/chart.html', icon: 'desktop' },
+ 
         { text: 'SF-LAND: Data Viz : Renderer', href: '../../dfv/renderer.html', icon: 'desktop' },
 
         { text: 'DataGen', href: 'https://mohan-chinnappan-n5.github.io/devops/slides/devops-tools.html#9', icon: 'desktop' },
         { text: 'Word Cloud', href: 'https://mohan-chinnappan-n5.github.io/wc/wc.html', icon: 'desktop' },
+        { text: 'Word Cloud - 2', href: '../../wc/wc2.html?c=Be the change you want to see in the world - Mahatma Gandhi', icon: 'desktop' },
+
 
         { text: 'CSV Mapper', href: '../../mapping/index.html', icon: 'desktop' },
         { text: 'Charts for CSV - Kalam', href: '../../charts2/index.html', icon: 'desktop' },
@@ -90,6 +105,8 @@
       title: 'Editor Apps',
       links: [
         { text: 'Markdown Editor - Kalam', href: '../../md/md.html', icon: 'desktop' },
+        { text: 'Markdown Viewer ', href: '../../md/2/md.html?url=https://raw.githubusercontent.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/main/lex/caching.md', icon: 'desktop' },
+ 
         { text: 'Simple File Editor - Kalam', href: '../../editor/simple-editor.html', icon: 'desktop' },
  
         // Add more links here
@@ -103,7 +120,10 @@
         { text: 'CSV - SQL Query', href: '../../csv/query.html', icon: 'desktop' },
         { text: 'CSV - SQL Joins', href: 'https://mc-joins.streamlit.app', icon: 'desktop' },
         { text: 'SQL Query for CSVs', href: '../../sql/sql.html', icon: 'desktop' },
+        { text: 'Another SQL Query for CSVs', href: '../../sql/2/sql2.html', icon: 'desktop' },
+ 
         { text: 'SQL Query from English', href: '../../sql/gen-sql.html', icon: 'desktop' },
+        { text: 'Spreadsheet', href: '../../sql/2/spreadsheet.html', icon: 'desktop' },
  
 
 
@@ -165,6 +185,8 @@
         { text: 'Simple Accounting App - Kalam', href: '../../common/books/books.html', icon: 'desktop' },
         { text: 'Simple TODO app - Kalam', href: '../../common/todo/todo.html', icon: 'desktop' },
         { text: 'Clock', href: '../..//utils/clock/clockapp.html', icon: 'desktop' },
+        { text: 'World Clock', href: '../../games/clock/wclock.html', icon: 'desktop' },
+	{ text: 'Flight Tracker', href: '../../flights/tracking/ftrack.html', icon: 'desktop' },
         { text: 'Calendar', href: '../..//utils/cal/cal.html', icon: 'desktop' },
   
         { text: 'Scientific Calculator', href: '../../calc/c.html', icon: 'desktop' },
@@ -175,6 +197,14 @@
         { text: 'US - Tax Calculator', href: 'https://mctaxes.streamlit.app', icon: 'desktop' },
         { text: 'Iframes viewer', href: '../../frames/iframes.html?data=frames.json', icon: 'desktop' },
         { text: 'Weather App', href: '../../weather/weatherApp.html?c=Nashua NH', icon: 'desktop' },
+        { text: 'Weather App 2', href: '../../weather/2/weather.html?c=Nashua,NH,US', icon: 'desktop' },
+
+	{ text: 'Daily Book Balancing', href: '../../book-keeping/book-keeping.html', icon: 'desktop' },
+	{ text: 'github Url convertor', href: '../../github/urlc.html', icon: 'desktop' },
+
+
+
+
 
 
 
@@ -304,6 +334,8 @@
         { text: 'SOQL Playground - Deno', href: 'https://mohanc-sf.deno.dev', icon: 'desktop' },
         { text: 'Query and REST Console', href: '../../sf/toolset/index.html', icon: 'desktop' },
         { text: 'SOQL Editor', href: '../../sf/ac/soqlQuery.html', icon: 'desktop' },
+        { text: 'SOQL and REST  Console', href: '../../sf/ac/2/console.html', icon: 'desktop' },
+
 
 
         // Add more links here
@@ -342,7 +374,16 @@
       links: [
         { text: 'Vdeo, Audio, Screen Recording and Music Apps (13 Apps)', href: 'https://mohan-chinnappan-n2.github.io/media-app.html', icon: 'desktop' },
         { text: 'OCR App - Turing', href: '../../ocr/index.html', icon: 'desktop' },
-        { text: 'Icon Generator', href: '../../icon/popup.html', icon: 'desktop' },
+        { text: 'OCR App - 2', href: '../../ocr/2/ocr.html?i=%25E0%25AE%258E%25E0%25AE%25B4%25E0%25AF%2581%25E0%25AE%25A4%25E0%25AF%258D%25E0%25AE%25A4%25E0%25AF%2581%25E0%25AE%2595%25E0%25AF%258D%25E0%25AE%2595%25E0%25AE%25B3%25E0%25AF%258D%25E2%2580%258C%2520%25E0%25AE%258E%25E0%25AE%25B2%25E0%25AF%258D%25E0%25AE%25B2%25E0%25AE%25BE%25E0%25AE%25AE%25E0%25AF%258D%25E2%2580%258C%250A%25E0%25AE%2585%25E0%25AE%2595%25E0%25AE%25B0%25E0%25AE%25A4%25E0%25AF%258D%25E0%25AE%25A4%25E0%25AF%2588%250A%25E0%25AE%2585%25E0%25AE%259F%25E0%25AE%25BF%25E0%25AE%25AA%25E0%25AF%258D%25E0%25AE%25AA%25E0%25AE%259F%25E0%25AF%2588%25E0%25AE%25AF%25E0%25AE%25BE%25E0%25AE%2595%250A%25E0%25AE%2595%25E0%25AF%258A%25E0%25AE%25A3%25E0%25AF%258D%25E0%25AE%259F%25E0%25AE%25BF%25E0%25AE%25B0%25E0%25AF%2581%25E0%25AE%2595%25E0%25AF%258D%25E0%25AE%2595%25E0%25AE%25BF%25E0%25AE%25A9%25E0%25AF%258D%25E0%25AE%25B1%25E0%25AE%25A9.%250A%25E0%25AE%2585%25E0%25AE%25A4%25E0%25AF%2581%25E0%25AE%25AA%25E0%25AF%258B%25E0%25AE%25B2%2520%25E0%25AE%2589%25E0%25AE%25B2%25E0%25AE%2595%25E0%25AE%25AE%25E0%25AF%258D%25E2%2580%258C%250A%25E0%25AE%2595%25E0%25AE%259F%25E0%25AE%25B5%25E0%25AF%2581%25E0%25AE%25B3%25E0%25AF%2588%250A%25E0%25AE%2585%25E0%25AE%259F%25E0%25AE%25BF%25E0%25AE%25AA%25E0%25AF%258D%25E0%25AE%25AA%25E0%25AE%259F%25E0%25AF%2588%25E0%25AE%25AF%25E0%25AE%25BE%25E0%25AE%2595%250A%25E0%25AE%2595%25E0%25AF%258A%25E0%25AE%25A3%25E0%25AF%258D%25E0%25AE%259F%25E0%25AE%25BF%25E0%25AE%25B0%25E0%25AF%2581%25E0%25AE%2595%25E0%25AF%258D%25E0%25AE%2595%25E0%25AE%25BF%25E0%25AE%25B1%25E0%25AE%25A4%25E0%25AF%2581.&l=tam', icon: 'desktop' },
+	{ text: 'Icon Generator', href: '../../icon/popup.html', icon: 'desktop' },
+	{ text: 'Another Icon Generator', href: '../../icon/2/icon-gen.html', icon: 'desktop' },
+        
+        { text: 'Nursery Songs', href: '../../nursery/nursery.html', icon: 'desktop' },
+        { text: 'Webm Player', href: '../../webm/player.html?v=https%253A%252F%252Fraw.githubusercontent.com%252Fmohan-chinnappan-n5%252Fdemos-git%252Fmain%252Flexer%252Flexer.webm', icon: 'desktop' },
+
+        { text: 'Whiteboard (WIP)', href: '../../wb/wb.html', icon: 'desktop' },
+     
+
 
         // Add more links here
       ],
@@ -464,6 +505,15 @@
          { text: 'Heart', href: '../../health/hdocs.html?data=heart.json', icon: 'desktop' },
          { text: 'Lungs', href: '../../health/hdocs.html?data=lungs.json', icon: 'desktop' },
          { text: 'Spine', href: '../../health/hdocs.html?data=spine.json', icon: 'desktop' },
+         { text: 'Vitamins', href: '../../slides/2/slides.html?s=../../health/vitamins.md', icon: 'desktop' },
+         { text: 'Hyperthyroid', href: '../../slides/2/slides.html?s=../../health/hyperthyroid.md', icon: 'desktop' },
+
+	 { text: 'EKG/ECG (still in training!)', href: '../../med/ekg.html', icon: 'desktop' },
+	 { text: 'EKG/ECG Notes', href: '../../md/2/md.html?url=https://raw.githubusercontent.com/mohan-chinnappan-n5/health-notes/main/ecg.md', icon: 'desktop' },
+
+
+
+
 
 
         // Add more links here
@@ -539,6 +589,7 @@ Games: {
       title: 'Games',
       links: [
         { text: 'Chess', href: 'https://mcchess.streamlit.app/', icon: 'desktop' },
+        { text: 'Various Games for Kids', href: '../../games', icon: 'desktop' },
  
         // Add more links here
       ],
@@ -549,6 +600,7 @@ Chemistry: {
       title: 'Chemistry',
       links: [
         { text: 'Periodic Table', href: '../../chemistry/pt/app.html', icon: 'desktop' },
+        { text: 'Rare Earth Elements', href: '../../slides/2/slides.html?s=../../materials/rare.md', icon: 'desktop' },
  
         // Add more links here
       ],
@@ -575,6 +627,9 @@ Agri: {
       links: [
         { text: 'AgriRevolution', href: '../../agri/us.html', icon: 'desktop' },
         { text: 'Organic Farming', href: '../../agri/organic.html', icon: 'desktop' },
+        { text: 'Fruit Trees', href: '../../slides/2/slides.html?s=../../agri/fruits.md', icon: 'desktop' },
+        { text: 'Farm Animals', href: '../../slides/2/slides.html?s=../../agri/animals.md', icon: 'desktop' },
+        { text: 'Grains', href: '../../slides/2/slides.html?s=../../agri/grains.md', icon: 'desktop' },
  
         // Add more links here
       ],
@@ -605,6 +660,8 @@ Slideshow: {
       title: 'Slideshows',
       links: [
         { text: 'AI generated Images', href: '../../slideshow/ss.html?data=holiday.json', icon: 'desktop' },
+        { text: 'Slides Presenter', href: '../../slides/2/slides.html?s=slides.md', icon: 'desktop' },
+ 
         // Add more links here
       ],
 
@@ -642,6 +699,24 @@ Items: {
 
     },
 
+
+Software: {
+      title: 'Software',
+      links: [
+        { text: 'Languages', href: '../../slides/2/slides.html?s=../../software/langs.md', icon: 'desktop' },
+        { text: 'Operating Systmes', href: '../../slides/2/slides.html?s=../../software/os.md', icon: 'desktop' },
+         { text: 'Databases', href: '../../slides/2/slides.html?s=../../software/db.md', icon: 'desktop' },
+         { text: 'Security', href: '../../slides/2/slides.html?s=../../software/security.md', icon: 'desktop' },
+         { text: 'Web Performance', href: '../../slides/2/slides.html?s=../../software/web_perf.md', icon: 'desktop' },
+         { text: 'Window.Performance', href: '../../slides/2/slides.html?s=../../software/window.performance.md', icon: 'desktop' },
+          { text: 'Playwright', href: '../../slides/2/slides.html?s=../../software/playwright.md', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
+
 QRC: {
       title: 'QRC, BAR Code and Music',
       links: [
@@ -656,6 +731,26 @@ QRC: {
 
     },
 
+
+Antlr: {
+      title: 'Antlr based apps ',
+      links: [
+        { text: 'Apex parsing', href: 'https://github.com/mohan-chinnappan-n5/antlr-apex', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
+Demos: {
+      title: 'Demos of the Apps  ',
+      links: [
+        { text: 'Lexer', href: '../../webm/player.html?v=https%253A%252F%252Fraw.githubusercontent.com%252Fmohan-chinnappan-n5%252Fdemos-git%252Fmain%252Flexer%252Flexer.webm', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
 
 
 

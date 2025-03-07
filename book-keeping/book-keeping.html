@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Book Balancing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        .balance-box {
+            background: #f0f0f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .transaction-table {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .transaction-table th, .transaction-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .transaction-table th {
+            background: #3b82f6;
+            color: white;
+        }
+        .receipt-row {
+            background-color: #d1fae5; /* Light green for receipts */
+        }
+        .expense-row {
+            background-color: #fee2e2; /* Light red for expenses */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <header class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Daily Book Balancing</h1>
+            <div>
+                <input 
+                    id="dateFilter" 
+                    type="date" 
+                    class="p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <!-- Balance Input and Table -->
+        <div class="balance-box w-full max-w-2xl">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Add Transaction</h2>
+            <div class="flex flex-col gap-4 mb-4">
+                <div>
+                    <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
+                    <select id="type" class="mt-1 block w-full p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="receipt">Receipt</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                    <input 
+                        id="description" 
+                        type="text" 
+                        placeholder="Enter description" 
+                        class="mt-1 block w-full p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                </div>
+                <div>
+                    <label for="amount" class="block text-sm font-medium text-gray-700">Amount ($)</label>
+                    <input 
+                        id="amount" 
+                        type="number" 
+                        step="0.01" 
+                        placeholder="Enter amount" 
+                        class="mt-1 block w-full p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                </div>
+                <div>
+                    <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                    <input 
+                        id="date" 
+                        type="date" 
+                        class="mt-1 block w-full p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                </div>
+                <button 
+                    id="addTransaction" 
+                    class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-300"
+                >
+                    Add Transaction
+                </button>
+            </div>
+
+            <h3 class="text-xl font-semibold text-gray-700 mb-2">Transactions</h3>
+            <div class="transaction-table overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Amount ($)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactions"></tbody>
+                </table>
+            </div>
+            <div class="mt-4 text-gray-800">
+                <p><strong>Total Receipts:</strong> $<span id="totalReceipts">0.00</span></p>
+                <p><strong>Total Expenses:</strong> $<span id="totalExpenses">0.00</span></p>
+                <p><strong>Net Balance:</strong> $<span id="netBalance">0.00</span></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Track daily receipts and expenses • Use date filter to view specific days • Data saved locally
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const typeSelect = document.getElementById('type');
+        const descriptionInput = document.getElementById('description');
+        const amountInput = document.getElementById('amount');
+        const dateInput = document.getElementById('date');
+        const addTransactionBtn = document.getElementById('addTransaction');
+        const transactionsTable = document.getElementById('transactions');
+        const totalReceipts = document.getElementById('totalReceipts');
+        const totalExpenses = document.getElementById('totalExpenses');
+        const netBalance = document.getElementById('netBalance');
+        const dateFilter = document.getElementById('dateFilter');
+
+        // Load transactions from localStorage
+        let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+        // Function to save transactions to localStorage
+        function saveTransactions() {
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            updateTransactions();
+            calculateTotals();
+        }
+
+        // Function to add a transaction
+        function addTransaction() {
+            const type = typeSelect.value;
+            const description = descriptionInput.value.trim();
+            const amount = parseFloat(amountInput.value) || 0;
+            const date = dateInput.value || new Date().toISOString().split('T')[0];
+
+            if (description && amount > 0) {
+                transactions.push({ type, description, amount, date });
+                saveTransactions();
+                descriptionInput.value = '';
+                amountInput.value = '';
+                dateInput.value = '';
+            } else {
+                alert('Please enter a valid description and amount.');
+            }
+        }
+
+        // Function to update transactions table based on date filter
+        function updateTransactions() {
+            const filterDate = dateFilter.value;
+            transactionsTable.innerHTML = '';
+            const filteredTransactions = filterDate ? transactions.filter(t => t.date === filterDate) : transactions;
+
+            filteredTransactions.forEach((transaction, index) => {
+                const row = document.createElement('tr');
+                const rowClass = transaction.type === 'receipt' ? 'receipt-row' : 'expense-row';
+                row.innerHTML = `
+                    <td class="${rowClass}">${transaction.date}</td>
+                    <td class="${rowClass}">${transaction.type}</td>
+                    <td class="${rowClass}">${transaction.description}</td>
+                    <td class="${rowClass}">$${transaction.amount.toFixed(2)}</td>
+                    <td class="${rowClass}">
+                        <button class="bg-red-500 hover:bg-red-700 text-white px-2 py-1 rounded delete-btn" data-index="${index}">Delete</button>
+                    </td>
+                `;
+                transactionsTable.appendChild(row);
+            });
+
+            // Add delete event listeners
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const index = btn.getAttribute('data-index');
+                    transactions.splice(index, 1);
+                    saveTransactions();
+                });
+            });
+        }
+
+        // Function to calculate totals
+        function calculateTotals() {
+            const filterDate = dateFilter.value;
+            const filteredTransactions = filterDate ? transactions.filter(t => t.date === filterDate) : transactions;
+
+            const receipts = filteredTransactions.filter(t => t.type === 'receipt').reduce((sum, t) => sum + t.amount, 0);
+            const expenses = filteredTransactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+            const balance = receipts - expenses;
+
+            totalReceipts.textContent = receipts.toFixed(2);
+            totalExpenses.textContent = expenses.toFixed(2);
+            netBalance.textContent = balance.toFixed(2);
+        }
+
+        // Event Listeners
+        addTransactionBtn.addEventListener('click', addTransaction);
+        dateFilter.addEventListener('change', () => {
+            updateTransactions();
+            calculateTotals();
+        });
+
+        // Initial Setup
+        updateTransactions();
+        calculateTotals();
+    </script>
+</body>
+</html>

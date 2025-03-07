@@ -1,0 +1,344 @@
+from flask import Flask, request, jsonify
+import requests
+from flask_cors import CORS
+import logging
+import re
+from datetime import datetime
+import urllib.parse
+
+#-------------
+# Backend API server    
+# supports two endpoints:
+# 1. /fetch_fields: Fetches fields for an SObject
+# 2. /query_data: Queries data or executes custom REST requests (GET, POST, PATCH, DELETE) with Explain Plan support
+# The server is CORS-enabled to allow requests from the frontend
+# The server runs on port 5000 (or from env variable PORT)
+# To run the server, execute: python backend.py
+# author: mohan chinnappan
+#-------------
+
+# Initialize Flask app and enable CORS for frontend requests
+app = Flask(__name__)
+CORS(app)
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename='soql_backend.log'
+)
+logger = logging.getLogger(__name__)
+
+# Validate Salesforce REST URL
+def validate_salesforce_rest_url(url):
+    if not url:
+        return True
+    pattern = r'^/services/(data|tooling)/v\d+\.\d+/'
+    return bool(re.match(pattern, url))
+
+# Validate HTTP method against URL
+def validate_method_for_url(method, url):
+    if not url:
+        return False
+    # Define supported methods for common Salesforce endpoints
+    method_map = {
+        r'/services/data/v\d+\.\d+/query': ['GET'],
+        r'/services/data/v\d+\.\d+/tooling/runTestsAsynchronous': ['POST'],
+        r'/services/data/v\d+\.\d+/sobjects/': ['GET', 'POST', 'PATCH', 'DELETE'],
+        r'/services/data/v\d+\.\d+/wave/datasets': ['GET'],
+    }
+    for pattern, allowed_methods in method_map.items():
+        if re.match(pattern, url):
+            return method in allowed_methods
+    return True  # Allow if no specific pattern matches (fallback)
+
+# Helper function to fetch all records or datasets by following pagination URLs
+def fetch_all_items(instance_url, access_token, initial_url, method='GET', payload=None):
+    """
+    Recursively fetch all items (records or datasets) by following nextRecordsUrl or nextPageUrl
+    until no more pages remain.
+    
+    Args:
+        instance_url (str): Salesforce instance URL
+        access_token (str): Salesforce OAuth access token
+        initial_url (str): The initial query URL (or nextRecordsUrl/nextPageUrl for subsequent calls)
+        method (str): HTTP method (default: 'GET')
+        payload (str): Optional JSON payload for the request
+    
+    Returns:
+        list: Combined list of all items from all pages
+    """
+    all_items = []
+    url = initial_url
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': 'application/json'
+    }
+
+    while url:
+        logger.info(f"Fetching items from: {url}")
+        try:
+            if method == 'POST':
+                response = requests.post(url, headers=headers, data=payload, timeout=30)
+            elif method == 'PATCH':
+                response = requests.patch(url, headers=headers, data=payload, timeout=30)
+            elif method == 'DELETE':
+                response = requests.delete(url, headers=headers, timeout=30)
+            else:  # GET
+                response = requests.get(url, headers=headers, timeout=30)
+
+            if response.status_code != 200:
+                logger.error(f"Failed to fetch items: {response.text}")
+                raise Exception(f"Failed to fetch items: {response.text}")
+
+            content_type = response.headers.get('Content-Type', '')
+            if 'application/json' not in content_type:
+                logger.error("Expected JSON response for paginated query, but got non-JSON response")
+                raise Exception("Expected JSON response for paginated query, but got non-JSON response")
+
+            result = response.json()
+
+            # Determine the field name based on the URL (e.g., 'records' for query, 'datasets' for wave/datasets)
+            url_path = urllib.parse.urlparse(url).path
+            last_segment = url_path.split('/')[-1]
+            data_field = 'records' if last_segment == 'query' else last_segment if last_segment in result else 'records'
+
+            if data_field in result:
+                all_items.extend(result[data_field])
+            else:
+                logger.error(f"No '{data_field}' field found in response")
+                raise Exception(f"No '{data_field}' field found in response")
+
+            # Check for nextRecordsUrl or nextPageUrl to fetch the next page
+            url = result.get('nextRecordsUrl') or result.get('nextPageUrl')
+            if url:
+                # If the URL is relative, prepend the instance_url
+                if url.startswith('/'):
+                    url = f"{instance_url}{url}"
+
+        except Exception as e:
+            logger.error(f"Error fetching items: {str(e)}")
+            raise e
+
+    return all_items
+
+# Fetch SObject fields (REST or Tooling API)
+@app.route('/fetch_fields', methods=['POST'])
+def fetch_fields():
+    """
+    Fetch field names for a given Salesforce SObject using REST or Tooling API, or a custom REST URL.
+    
+    Request Body (JSON):
+    - sobject_name: Name of the Salesforce SObject (e.g., 'Account') or null if using custom_url
+    - access_token: Salesforce OAuth access token
+    - instance_url: Salesforce instance URL (e.g., 'https://your-domain.my.salesforce.com')
+    - api_version: Salesforce API version (default: 'v60.0')
+    - tooling: Boolean to use Tooling API instead of REST API (default: False)
+    - custom_url: Optional custom REST URL (e.g., '/services/data/v60.0/sobjects/Account/describe')
+    
+    Returns:
+    - JSON: List of field names or error message
+    """
+    try:
+        data = request.get_json()
+        sobject_name = data.get('sobject_name')
+        access_token = data.get('access_token')
+        instance_url = data.get('instance_url')
+        api_version = data.get('api_version', 'v60.0')
+        tooling = data.get('tooling', False)
+        custom_url = data.get('custom_url')
+
+        if not all([access_token, instance_url]):
+            logger.error("Missing required parameters for fetching fields")
+            return jsonify({
+                'error': 'Missing required parameters: access_token or instance_url'
+            }), 400
+
+        if custom_url and not validate_salesforce_rest_url(custom_url):
+            logger.error(f"Invalid REST URL format: {custom_url}")
+            return jsonify({
+                'error': 'Invalid REST URL format. Must start with /services/data/ or /services/tooling/.'
+            }), 400
+
+        url = f"{instance_url}{custom_url}" if custom_url else f"{instance_url}/services/data/{api_version}/sobjects/{sobject_name}/describe"
+        if tooling and not custom_url:
+            url = f"{instance_url}/services/data/{api_version}/tooling/sobjects/{sobject_name}/describe"
+
+        logger.info(f"Fetching fields using {'custom URL' if custom_url else 'default endpoint'} at {url}")
+
+        headers = {
+            'Authorization': f'Bearer {access_token}',
+            'Content-Type': 'application/json'
+        }
+        response = requests.get(url, headers=headers, timeout=10)
+
+        response.raise_for_status()
+        fields_data = response.json()
+        fields = [field['name'] for field in fields_data['fields']] if 'fields' in fields_data else []
+
+        logger.info(f"Successfully fetched {len(fields)} fields")
+        return jsonify({'fields': fields}), 200
+
+    except requests.exceptions.RequestException as e:
+        error_msg = f"Network or request failed: {str(e)}"
+        logger.error(error_msg)
+        return jsonify({
+            'error': 'Network or request failed',
+            'message': str(e)
+        }), 500
+    except KeyError:
+        logger.error("Invalid response format from Salesforce for fields")
+        return jsonify({
+            'error': 'Invalid response format from Salesforce'
+        }), 500
+    except Exception as e:
+        error_msg = f"Server error while fetching fields: {str(e)}"
+        logger.error(error_msg)
+        return jsonify({
+            'error': 'Server error',
+            'message': str(e)
+        }), 500
+
+# Query SOQL data or execute custom REST request (GET, POST, PATCH, DELETE) with Explain Plan support
+@app.route('/query_data', methods=['POST'])
+def query_data():
+    """
+    Execute a SOQL query or custom REST request (GET, POST, PATCH, DELETE) using REST or Tooling API,
+    with support for Explain Plan.
+    
+    Request Body (JSON):
+    - soql_query: SOQL query string or null if using custom_url
+    - access_token: Salesforce OAuth access token
+    - instance_url: Salesforce instance URL
+    - api_version: Salesforce API version (default: 'v60.0')
+    - tooling: Boolean to use Tooling API (default: False)
+    - custom_url: Optional custom REST URL
+    - method: HTTP method (GET, POST, PATCH, DELETE, default: 'GET')
+    - payload: Optional JSON payload for non-GET requests
+    - explain: Boolean to request an explain plan (default: False)
+    
+    Returns:
+    - JSON: Query results, explain plan, test run ID, or error message
+    """
+    try:
+        data = request.get_json()
+        soql_query = data.get('soql_query')
+        access_token = data.get('access_token')
+        instance_url = data.get('instance_url')
+        api_version = data.get('api_version', 'v60.0')
+        tooling = data.get('tooling', False)
+        custom_url = data.get('custom_url')
+        method = data.get('method', 'GET').upper()
+        payload = data.get('payload')
+        explain = data.get('explain', False)  # New field for explain plan
+
+        if not all([access_token, instance_url]):
+            logger.error("Missing required parameters for querying data")
+            return jsonify({
+                'error': 'Missing required parameters: access_token or instance_url'
+            }), 400
+
+        if custom_url and not validate_salesforce_rest_url(custom_url):
+            logger.error(f"Invalid REST URL format: {custom_url}")
+            return jsonify({
+                'error': 'Invalid REST URL format. Must start with /services/data/ or /services/tooling/.'
+            }), 400
+
+        if custom_url and not validate_method_for_url(method, custom_url):
+            logger.error(f"Method {method} not allowed for URL {custom_url}")
+            return jsonify({
+                'error': f'Method {method} not allowed for URL {custom_url}. Check supported methods.'
+            }), 405
+
+        # Construct the Salesforce API endpoint
+        if custom_url:
+            url = f"{instance_url}{custom_url}"
+        else:
+            base_path = f"/services/data/{api_version}/tooling/query" if tooling else f"/services/data/{api_version}/query"
+            query_param = f"explain={requests.utils.quote(soql_query)}" if explain else f"q={requests.utils.quote(soql_query)}"
+            url = f"{instance_url}{base_path}?{query_param}"
+
+        logger.info(f"Executing {method} request at {url} with explain={explain}")
+
+        headers = {
+            'Authorization': f'Bearer {access_token}',
+            'Content-Type': 'application/json'
+        }
+
+        if method == 'POST':
+            response = requests.post(url, headers=headers, data=payload, timeout=30)
+        elif method == 'PATCH':
+            response = requests.patch(url, headers=headers, data=payload, timeout=30)
+        elif method == 'DELETE':
+            response = requests.delete(url, headers=headers, timeout=30)
+        else:  # GET
+            response = requests.get(url, headers=headers, timeout=30)
+
+        if response.status_code != 200:
+            return jsonify({'error': f"Failed to query data: {response.text}", 'status_code': response.status_code}), response.status_code
+
+        # Log the Content-Type for debugging
+        content_type = response.headers.get('Content-Type', '')
+        logger.info(f"Response Content-Type: {content_type}")
+
+        # Check Content-Type to determine response format
+        if 'application/json' in content_type:
+            # Parse the initial response
+            initial_result = response.json()
+            
+            # Handle explain plan response if explain is true
+            if explain and 'plans' in initial_result:
+                logger.info("Explain plan detected, returning raw plan data")
+                query_result = initial_result
+            # Handle paginated query response if not explain plan
+            elif 'records' in initial_result and ('nextRecordsUrl' in initial_result or 'nextPageUrl' in initial_result):
+                logger.info(f"Paginated response detected for 'records', fetching all items...")
+                all_items = fetch_all_items(instance_url, access_token, url, method, payload)
+                query_result = {
+                    'totalSize': len(all_items),
+                    'done': True,
+                    'records': all_items
+                }
+                logger.info(f"Successfully fetched {len(all_items)} records across all pages")
+            else:
+                query_result = initial_result
+                logger.info(f"Successfully queried {query_result.get('totalSize', 'N/A')} items or completed request")
+        else:
+            # Handle plain text response (e.g., testRunId from runTestsAsynchronous)
+            query_result = response.text
+            logger.info(f"Successfully completed request, returned testRunId: {query_result}")
+
+        return jsonify({'result': query_result}), 200
+
+    except requests.exceptions.RequestException as e:
+        error_msg = f"Network or request failed during request: {str(e)}"
+        logger.error(error_msg)
+        return jsonify({
+            'error': 'Network or request failed during request',
+            'message': str(e)
+        }), 500
+    except KeyError as e:
+        logger.error(f"Missing expected field in response: {str(e)}")
+        return jsonify({
+            'error': f'Missing expected field in the response: {str(e)}'
+        }), 500
+    except ValueError as e:
+        logger.error(f"Invalid JSON in response or request body: {str(e)}")
+        return jsonify({
+            'error': 'Invalid JSON in response or request body',
+            'message': str(e)
+        }), 400
+    except Exception as e:
+        error_msg = f"Server error during request: {str(e)}"
+        logger.error(error_msg)
+        return jsonify({
+            'error': 'Server error',
+            'message': str(e)
+        }), 500
+
+import os
+
+if __name__ == '__main__':
+    port = int(os.getenv('PORT', 5000))  # Default to 5000 if PORT is not set
+    logger.info(f"Starting SOQL Backend Server on port {port}...")
+    app.run(host='0.0.0.0', port=port, debug=True)

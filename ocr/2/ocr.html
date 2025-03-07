@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image OCR Renderer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/tesseract.js@v2.1.1/dist/tesseract.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        .ocr-box {
+            background: #f0f0f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        #ocrText {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            overflow-y: auto;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <header class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Image OCR Renderer</h1>
+            <div class="flex items-center gap-4">
+                <select 
+                    id="languageSelect" 
+                    class="p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                    <option value="eng">English (eng)</option>
+                    <option value="tam">Tamil (tam)</option>
+                    <option value="tel">Telugu (tel)</option>
+                    <option value="kan">Kannada (kan)</option>
+                    <option value="hin">Hindi (hin)</option>
+                    <option value="mal">Malayalam (mal)</option>
+                    <option value="spa">Spanish (spa)</option>
+                    <option value="fra">French (fra)</option>
+                    <option value="deu">German (deu)</option>
+                </select>
+                <input 
+                    id="imageUpload" 
+                    type="file" 
+                    accept="image/*" 
+                    class="p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                <button 
+                    id="processImage" 
+                    class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-300"
+                    disabled
+                >
+                    Process Image
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <!-- OCR Display -->
+        <div class="ocr-box w-full max-w-2xl">
+            <h2 class="text-xl font-semibold text-gray-700">OCRed Text</h2>
+            <textarea 
+                id="ocrText" 
+                class="p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full h-32 resize-none"
+                readonly
+            ></textarea>
+            <p id="ocrStatus" class="text-gray-600 text-center"></p>
+        </div>
+        <div class="mt-4 flex flex-col gap-4 w-full max-w-2xl">
+            <div id="shareLink" class="text-gray-700">
+                <p>Share OCR Text:</p>
+                <input 
+                    id="shareUrl" 
+                    type="text" 
+                    readonly 
+                    class="mt-1 block w-full p-2 border rounded text-gray-700 bg-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onclick="this.select()"
+                >
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Upload an image to extract text via OCR • Select language for OCR • Share via URL parameters (?i=&l=) • Data saved locally
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const imageUpload = document.getElementById('imageUpload');
+        const processImageBtn = document.getElementById('processImage');
+        const ocrText = document.getElementById('ocrText');
+        const ocrStatus = document.getElementById('ocrStatus');
+        const shareUrl = document.getElementById('shareUrl');
+        const languageSelect = document.getElementById('languageSelect');
+
+        // Load OCR data from localStorage
+        let ocrData = JSON.parse(localStorage.getItem('ocrData')) || null;
+
+        // Supported Tesseract languages (expanded with Telugu, Kannada, Hindi, Malayalam)
+        const supportedLanguages = {
+            'eng': 'English',
+            'tam': 'Tamil',
+            'tel': 'Telugu',
+            'kan': 'Kannada',
+            'hin': 'Hindi',
+            'mal': 'Malayalam',
+            'spa': 'Spanish',
+            'fra': 'French',
+            'deu': 'German'
+            // Add more language codes as needed, ensuring Tesseract.js supports them
+        };
+
+        // Function to save OCR data to localStorage
+        function saveOCR(ocrResult, imageData, language) {
+            localStorage.setItem('ocrData', JSON.stringify({ text: ocrResult, imageData, language }));
+            ocrData = { text: ocrResult, imageData, language };
+            updateOCR();
+            updateShareLink();
+        }
+
+        // Function to process image with OCR
+        async function processImage(file) {
+            if (!file) return;
+            ocrStatus.textContent = 'Processing image with OCR...';
+            processImageBtn.disabled = true;
+            const selectedLanguage = languageSelect.value;
+
+            try {
+                const result = await Tesseract.recognize(file, selectedLanguage, {
+                    logger: progress => {
+                        ocrStatus.textContent = `OCR Progress: ${Math.round(progress.progress * 100)}%`;
+                    }
+                });
+                const ocrTextContent = result.data.text.trim();
+                ocrText.value = ocrTextContent;
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const imageData = reader.result; // Base64 data URL
+                    saveOCR(ocrTextContent, imageData, selectedLanguage);
+                };
+                reader.readAsDataURL(file);
+            } catch (error) {
+                ocrStatus.textContent = `Error: ${error.message}`;
+                ocrText.value = '';
+                ocrData = null;
+                updateOCR();
+            } finally {
+                processImageBtn.disabled = false;
+            }
+        }
+
+        // Function to update OCR text
+        function updateOCR() {
+            if (ocrData && ocrData.text) {
+                ocrText.value = ocrData.text;
+                languageSelect.value = ocrData.language || 'eng'; // Restore selected language
+                ocrStatus.textContent = '';
+            } else {
+                ocrText.value = '';
+                ocrStatus.textContent = 'Upload an image to extract text via OCR.';
+            }
+        }
+
+        // Function to update share link
+        function updateShareLink() {
+            const url = new URL(window.location.href);
+            if (ocrData && ocrData.text) {
+                url.searchParams.set('i', encodeURIComponent(ocrData.text)); // Share OCR text
+                url.searchParams.set('l', encodeURIComponent(ocrData.language || 'eng')); // Share language
+            }
+            shareUrl.value = url.href;
+        }
+
+        // Handle URL parameter loading (for OCR text and language)
+        function loadFromUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const ocrTextParam = params.get('i');
+            const languageParam = params.get('l') || 'eng'; // Default to English if not specified
+
+            if (ocrTextParam) {
+                const decodedText = decodeURIComponent(ocrTextParam);
+                ocrData = { text: decodedText, imageData: null, language: languageParam }; // No image data, just text and language
+                updateOCR();
+                updateShareLink();
+            }
+            // Set language select based on URL or default
+            languageSelect.value = languageParam;
+        }
+
+        // Event Listeners
+        imageUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                processImageBtn.disabled = false;
+            } else {
+                processImageBtn.disabled = true;
+            }
+        });
+        processImageBtn.addEventListener('click', () => processImage(imageUpload.files[0]));
+
+        // Initial Setup
+        loadFromUrlParams();
+        updateOCR();
+    </script>
+</body>
+</html>

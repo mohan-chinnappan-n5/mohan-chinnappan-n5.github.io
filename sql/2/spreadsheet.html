@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Spreadsheet App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+
+    <style>
+        .spreadsheet {
+            border-collapse: collapse;
+            width: 100%;
+            overflow-x: auto;
+            position: relative;
+            table-layout: fixed; /* Ensure table layout is fixed for resizing */
+        }
+        .spreadsheet th, .spreadsheet td {
+            border: 1px solid #d1d5db;
+            padding: 8px;
+            min-width: 80px;
+            text-align: center;
+            position: relative;
+        }
+        .spreadsheet th {
+            background-color: #f3f4f6;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .spreadsheet td input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: center;
+            outline: none;
+        }
+        .spreadsheet td.formula {
+            background-color: #e5e7eb;
+            font-style: italic;
+        }
+        .error {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+        #saveStatus, #loadStatus {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #4a5568;
+        }
+        /* Resizer styles */
+        .resizer {
+            position: absolute;
+            right: -5px;
+            top: 0;
+            bottom: 0;
+            width: 10px;
+            cursor: col-resize;
+            z-index: 2;
+        }
+        .resizer:hover {
+            background: #e5e7eb;
+        }
+        .row-resizer {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 10px;
+            bottom: -5px;
+            cursor: row-resize;
+            z-index: 2;
+        }
+        .row-resizer:hover {
+            background: #e5e7eb;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen p-4">
+    <header class="bg-blue-600 text-white p-4 rounded-lg mb-4">
+        <h1 class="text-2xl font-bold">Spreadsheet</h1>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center w-full">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full">
+            <div class="mb-4 flex justify-between">
+                <button id="saveSpreadsheet" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-300">Save Spreadsheet</button>
+                <button id="loadSpreadsheet" class="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded transition-all duration-300">Load Spreadsheet</button>
+            </div>
+            <div class="spreadsheet-container overflow-x-auto">
+                <table id="spreadsheet" class="spreadsheet"></table>
+            </div>
+            <p id="saveStatus" class="mt-2 text-center text-gray-500"></p>
+            <p id="loadStatus" class="mt-2 text-center text-gray-500"></p>
+        </div>
+    </main>
+
+    <footer class="bg-blue-600 text-white p-4 rounded-lg mt-4 text-center">
+        <p class="text-sm">Enter values or formulas (e.g., =SUM(A1:A3), =AVG(B1:B3)) in cells. Save and load data locally. Drag cell borders to resize columns and rows.</p>
+    </footer>
+
+    <script>
+        const ROWS = 20; // Number of rows
+        const COLS = 26; // Number of columns (A-Z)
+        const spreadsheet = document.getElementById('spreadsheet');
+        const saveBtn = document.getElementById('saveSpreadsheet');
+        const loadBtn = document.getElementById('loadSpreadsheet');
+        const saveStatus = document.getElementById('saveStatus');
+        const loadStatus = document.getElementById('loadStatus');
+
+        // Initialize spreadsheet data
+        let data = Array(ROWS).fill().map(() => Array(COLS).fill(''));
+        let colWidths = Array(COLS).fill(80); // Default column width in pixels
+        let rowHeights = Array(ROWS).fill(40); // Default row height in pixels
+
+        // Create spreadsheet grid
+        function createSpreadsheet() {
+            // Header row (column labels A-Z)
+            const headerRow = document.createElement('tr');
+            const emptyTh = document.createElement('th');
+            headerRow.appendChild(emptyTh);
+            for (let col = 0; col < COLS; col++) {
+                const th = document.createElement('th');
+                th.textContent = String.fromCharCode(65 + col); // A, B, C, ...
+                th.style.width = `${colWidths[col]}px`;
+                const resizer = document.createElement('div');
+                resizer.className = 'resizer';
+                resizer.addEventListener('mousedown', startResizeColumn);
+                th.appendChild(resizer);
+                headerRow.appendChild(th);
+            }
+            spreadsheet.appendChild(headerRow);
+
+            // Data rows (1-20)
+            for (let row = 0; row < ROWS; row++) {
+                const tr = document.createElement('tr');
+                const rowTh = document.createElement('th');
+                rowTh.textContent = row + 1; // Row numbers 1-20
+                rowTh.style.height = `${rowHeights[row]}px`;
+                const rowResizer = document.createElement('div');
+                rowResizer.className = 'row-resizer';
+                rowResizer.addEventListener('mousedown', startResizeRow);
+                rowTh.appendChild(rowResizer);
+                tr.appendChild(rowTh);
+                for (let col = 0; col < COLS; col++) {
+                    const td = document.createElement('td');
+                    td.style.width = `${colWidths[col]}px`;
+                    td.style.height = `${rowHeights[row]}px`;
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.dataset.row = row;
+                    input.dataset.col = col;
+                    input.value = data[row][col] || '';
+                    input.addEventListener('input', handleInput);
+                    td.appendChild(input);
+                    tr.appendChild(td);
+                }
+                spreadsheet.appendChild(tr);
+            }
+        }
+
+        // Handle cell input (values or formulas)
+        function handleInput(e) {
+            const row = parseInt(e.target.dataset.row);
+            const col = parseInt(e.target.dataset.col);
+            let value = e.target.value.trim();
+
+            if (value.startsWith('=')) {
+                if (value.length === 1) { // Just '=' entered, don't evaluate yet
+                    data[row][col] = value;
+                    e.target.parentElement.classList.remove('formula', 'error');
+                    updateCellDisplay(row, col, '');
+                    return;
+                }
+                try {
+                    const result = evaluateFormula(value.substring(1), row, col);
+                    data[row][col] = value; // Store formula
+                    e.target.parentElement.classList.add('formula');
+                    e.target.parentElement.classList.remove('error');
+                    updateCellDisplay(row, col, result);
+                } catch (error) {
+                    data[row][col] = value;
+                    e.target.parentElement.classList.add('error');
+                    e.target.parentElement.classList.remove('formula');
+                    updateCellDisplay(row, col, `#ERROR: ${error.message}`);
+                }
+            } else {
+                data[row][col] = value;
+                e.target.parentElement.classList.remove('formula', 'error');
+                updateCellDisplay(row, col, value || '');
+            }
+        }
+
+        // Evaluate simple formulas (updated for better parsing)
+        function evaluateFormula(formula, row, col) {
+            // Trim and normalize formula (remove extra spaces, handle case insensitivity)
+            const normalizedFormula = formula.trim().toUpperCase();
+            const tokens = normalizedFormula.match(/([A-Z]+|\w+\s*\()/g) || []; // Match function names and ranges
+
+            if (tokens.length === 0) {
+                throw new Error('Invalid formula format');
+            }
+
+            const functionName = tokens[0].replace(/\s*\(/, '');
+            if (functionName === 'SUM') {
+                const rangeMatch = normalizedFormula.match(/([A-Z]+)(\d+):([A-Z]+)(\d+)/);
+                if (!rangeMatch) throw new Error('Invalid SUM range format (e.g., =SUM(A1:A3)');
+                const [_, startCol, startRow, endCol, endRow] = rangeMatch;
+                const startColIndex = startCol.charCodeAt(0) - 65;
+                const endColIndex = endCol.charCodeAt(0) - 65;
+                const startRowIndex = parseInt(startRow) - 1;
+                const endRowIndex = parseInt(endRow) - 1;
+
+                if (startColIndex < 0 || endColIndex >= COLS || startRowIndex < 0 || endRowIndex >= ROWS) {
+                    throw new Error('Range out of bounds');
+                }
+
+                let sum = 0;
+                for (let r = startRowIndex; r <= endRowIndex; r++) {
+                    for (let c = startColIndex; c <= endColIndex; c++) {
+                        const cellValue = data[r][c];
+                        if (!isNaN(parseFloat(cellValue)) && isFinite(cellValue)) {
+                            sum += parseFloat(cellValue);
+                        } else if (cellValue && cellValue.startsWith('=')) {
+                            sum += evaluateFormula(cellValue.substring(1), r, c);
+                        }
+                    }
+                }
+                return sum;
+            } else if (functionName === 'AVG') {
+                const rangeMatch = normalizedFormula.match(/([A-Z]+)(\d+):([A-Z]+)(\d+)/);
+                if (!rangeMatch) throw new Error('Invalid AVG range format (e.g., =AVG(A1:A3)');
+                const [_, startCol, startRow, endCol, endRow] = rangeMatch;
+                const startColIndex = startCol.charCodeAt(0) - 65;
+                const endColIndex = endCol.charCodeAt(0) - 65;
+                const startRowIndex = parseInt(startRow) - 1;
+                const endRowIndex = parseInt(endRow) - 1;
+
+                if (startColIndex < 0 || endColIndex >= COLS || startRowIndex < 0 || endRowIndex >= ROWS) {
+                    throw new Error('Range out of bounds');
+                }
+
+                let sum = 0;
+                let count = 0;
+                for (let r = startRowIndex; r <= endRowIndex; r++) {
+                    for (let c = startColIndex; c <= endColIndex; c++) {
+                        const cellValue = data[r][c];
+                        if (!isNaN(parseFloat(cellValue)) && isFinite(cellValue)) {
+                            sum += parseFloat(cellValue);
+                            count++;
+                        } else if (cellValue && cellValue.startsWith('=')) {
+                            const formulaResult = evaluateFormula(cellValue.substring(1), r, c);
+                            sum += formulaResult;
+                            count++;
+                        }
+                    }
+                }
+                return count > 0 ? sum / count : 0;
+            } else {
+                throw new Error('Unsupported formula');
+            }
+        }
+
+        // Update cell display with computed or raw value
+        function updateCellDisplay(row, col, value) {
+            const cell = spreadsheet.rows[row + 1].cells[col + 1].querySelector('input');
+            cell.value = value;
+        }
+
+        // Save spreadsheet to localStorage (including widths and heights)
+        function saveSpreadsheet() {
+            const saveData = {
+                data: data,
+                colWidths: colWidths,
+                rowHeights: rowHeights
+            };
+            localStorage.setItem('spreadsheetData', JSON.stringify(saveData));
+            saveStatus.textContent = 'Spreadsheet saved successfully!';
+            setTimeout(() => saveStatus.textContent = '', 3000);
+        }
+
+        // Load spreadsheet from localStorage
+        function loadSpreadsheet() {
+            const savedData = localStorage.getItem('spreadsheetData');
+            if (savedData) {
+                const { data: loadedData, colWidths: loadedColWidths, rowHeights: loadedRowHeights } = JSON.parse(savedData);
+                data = loadedData;
+                colWidths = loadedColWidths || Array(COLS).fill(80);
+                rowHeights = loadedRowHeights || Array(ROWS).fill(40);
+
+                // Rebuild spreadsheet with saved data and dimensions
+                spreadsheet.innerHTML = '';
+                createSpreadsheet();
+
+                for (let row = 0; row < ROWS; row++) {
+                    for (let col = 0; col < COLS; col++) {
+                        const cell = spreadsheet.rows[row + 1].cells[col + 1].querySelector('input');
+                        cell.value = data[row][col] || '';
+                        if (data[row][col] && data[row][col].startsWith('=')) {
+                            try {
+                                const result = evaluateFormula(data[row][col].substring(1), row, col);
+                                cell.parentElement.classList.add('formula');
+                                cell.parentElement.classList.remove('error');
+                            } catch (error) {
+                                cell.parentElement.classList.add('error');
+                                cell.parentElement.classList.remove('formula');
+                            }
+                        } else {
+                            cell.parentElement.classList.remove('formula', 'error');
+                        }
+                        // Apply saved widths and heights
+                        spreadsheet.rows[row + 1].cells[col + 1].style.width = `${colWidths[col]}px`;
+                        spreadsheet.rows[row + 1].style.height = `${rowHeights[row]}px`;
+                    }
+                }
+                loadStatus.textContent = 'Spreadsheet loaded successfully!';
+                setTimeout(() => loadStatus.textContent = '', 3000);
+            } else {
+                loadStatus.textContent = 'No saved spreadsheet found.';
+                setTimeout(() => loadStatus.textContent = '', 3000);
+            }
+        }
+
+        // Column resizing
+        function startResizeColumn(e) {
+            const th = e.target.parentElement;
+            const colIndex = Array.from(th.parentElement.children).indexOf(th) - 1; // -1 for empty first th
+            const startX = e.pageX;
+            const startWidth = colWidths[colIndex];
+
+            function onMouseMove(e) {
+                const diff = e.pageX - startX;
+                colWidths[colIndex] = Math.max(40, startWidth + diff); // Minimum width of 40px
+                updateColumnWidths(colIndex);
+            }
+
+            function onMouseUp() {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        }
+
+        // Row resizing
+        function startResizeRow(e) {
+            const th = e.target.parentElement;
+            const rowIndex = Array.from(spreadsheet.rows).indexOf(th.parentElement) - 1; // -1 for header row
+            const startY = e.pageY;
+            const startHeight = rowHeights[rowIndex];
+
+            function onMouseMove(e) {
+                const diff = e.pageY - startY;
+                rowHeights[rowIndex] = Math.max(20, startHeight + diff); // Minimum height of 20px
+                updateRowHeights(rowIndex);
+            }
+
+            function onMouseUp() {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        }
+
+        // Update column widths
+        function updateColumnWidths(colIndex) {
+            for (let row = 0; row <= ROWS; row++) {
+                spreadsheet.rows[row].cells[colIndex + 1].style.width = `${colWidths[colIndex]}px`;
+            }
+        }
+
+        // Update row heights
+        function updateRowHeights(rowIndex) {
+            spreadsheet.rows[rowIndex + 1].style.height = `${rowHeights[rowIndex]}px`;
+            for (let col = 0; col < COLS; col++) {
+                spreadsheet.rows[rowIndex + 1].cells[col + 1].style.height = `${rowHeights[rowIndex]}px`;
+            }
+        }
+
+        // Event listeners
+        saveBtn.addEventListener('click', saveSpreadsheet);
+        loadBtn.addEventListener('click', loadSpreadsheet);
+
+        // Initialize spreadsheet
+        createSpreadsheet();
+    </script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Renderer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        /* Custom styles for enhanced UI */
+        .markdown-content {
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+        .markdown-content h1, .markdown-content h2, .markdown-content h3, .markdown-content h4, .markdown-content h5, .markdown-content h6 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: bold;
+            color: #1e40af; /* Dark blue for headings */
+            transition: color 0.3s ease;
+        }
+        .markdown-content h1:hover, .markdown-content h2:hover, .markdown-content h3:hover, .markdown-content h4:hover, .markdown-content h5:hover, .markdown-content h6:hover {
+            color: #3b82f6; /* Lighter blue on hover for interactivity */
+        }
+        .markdown-content h1 {
+            font-size: 2rem; /* H1: 32px */
+            border-bottom: 2px solid #bfdbfe; /* Light blue underline */
+            padding-bottom: 0.25rem;
+        }
+        .markdown-content h2 {
+            font-size: 1.5rem; /* H2: 24px */
+            border-bottom: 1px solid #bfdbfe; /* Light blue underline */
+            padding-bottom: 0.25rem;
+        }
+        .markdown-content h3 {
+            font-size: 1.25rem; /* H3: 20px */
+            text-decoration: underline; /* Underline for H3 */
+            text-decoration-color: #bfdbfe;
+        }
+        .markdown-content h4, .markdown-content h5, .markdown-content h6 {
+            font-size: 1rem; /* H4-H6: 16px */
+            text-decoration: none; /* No underline for H4-H6 */
+        }
+        .markdown-content a {
+            color: #2563eb; /* Blue for links, matching Tailwind's primary color */
+            text-decoration: underline;
+            text-decoration-color: #bfdbfe; /* Light blue underline */
+            transition: color 0.3s ease, text-decoration-color 0.3s ease;
+        }
+        .markdown-content a:hover {
+            color: #1d4ed8; /* Darker blue on hover */
+            text-decoration-color: #93c5fd; /* Lighter blue underline on hover */
+            text-decoration-thickness: 2px;
+        }
+        .markdown-content a:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #93c5fd; /* Focus ring for accessibility */
+        }
+        .markdown-content p, .markdown-content ul, .markdown-content ol {
+            margin-bottom: 1rem;
+        }
+        .markdown-content code {
+            background: #e5e7eb;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+        }
+        .markdown-content pre code {
+            display: block;
+            padding: 1rem;
+            background: #1f2937;
+            color: #ffffff;
+            overflow-x: auto;
+        }
+        .sticky-footer {
+            background: linear-gradient(to top, #1e3a8a, #4b5563);
+        }
+        #markdownPreview {
+            max-width: 100%;
+            min-height: 200px;
+        }
+        @media (max-width: 640px) {
+            .input-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            #markdownPreview {
+                min-height: 150px;
+            }
+            .markdown-content h1 { font-size: 1.5rem; }
+            .markdown-content h2 { font-size: 1.25rem; }
+            .markdown-content h3 { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Sticky Navbar -->
+    <nav class="fixed top-0 w-full bg-blue-600 text-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Markdown Renderer</h1>
+            <div class="flex items-center space-x-4">
+                <button id="renderBtn" class="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition">
+                    Render Markdown
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 mt-16 mb-16 flex-grow">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Enter or Upload Markdown</h2>
+            
+            <!-- Input Section -->
+            <div class="space-y-6">
+                <!-- URL Input -->
+                <div class="input-group flex items-center gap-4">
+                    <input type="url" id="markdownUrl" placeholder="Enter Markdown file URL (e.g., https://example.com/file.md)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <button id="fetchUrl" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                        Fetch
+                    </button>
+                </div>
+
+                <!-- Text Area for Pasting -->
+                <div class="input-group">
+                    <label for="markdownText" class="block text-lg font-medium  mb-2">Or Paste Markdown Here</label>
+                    <textarea id="markdownText" placeholder="Paste your Markdown text here..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent h-32"></textarea>
+                </div>
+
+                <!-- Clipboard Button -->
+                <button id="pasteClipboard" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
+                    Paste from Clipboard
+                </button>
+            </div>
+
+            <!-- Markdown Preview -->
+            <div id="markdownPreview" class="mt-6 markdown-content hidden">
+                <!-- Rendered Markdown will appear here -->
+            </div>
+            <p id="renderStatus" class="text-gray-600 mt-2"></p>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="fixed bottom-0 w-full bg-gray-800 text-white p-4 shadow-md z-50 sticky-footer">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                © 2025 Markdown Renderer - Built with Tailwind CSS | Contact: support@markdowntool.com
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // DOM elements
+        const renderBtn = document.getElementById('renderBtn');
+        const markdownUrl = document.getElementById('markdownUrl');
+        const fetchUrlBtn = document.getElementById('fetchUrl');
+        const markdownText = document.getElementById('markdownText');
+        const pasteClipboardBtn = document.getElementById('pasteClipboard');
+        const markdownPreview = document.getElementById('markdownPreview');
+        const renderStatus = document.getElementById('renderStatus');
+
+        // Function to render Markdown
+        function renderMarkdown(content) {
+            if (!content.trim()) {
+                renderStatus.textContent = 'No Markdown content provided.';
+                markdownPreview.classList.add('hidden');
+                return;
+            }
+
+            try {
+                const html = marked.parse(content);
+                markdownPreview.innerHTML = html;
+                markdownPreview.classList.remove('hidden');
+                renderStatus.textContent = 'Markdown rendered successfully!';
+            } catch (error) {
+                renderStatus.textContent = `Error rendering Markdown: ${error.message}`;
+                markdownPreview.classList.add('hidden');
+            }
+        }
+
+        // Fetch Markdown from URL
+        async function fetchMarkdown(url) {
+            renderStatus.textContent = 'Fetching Markdown...';
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch Markdown file');
+                const text = await response.text();
+                renderMarkdown(text);
+                markdownText.value = text; // Optionally populate textarea for editing
+            } catch (error) {
+                renderStatus.textContent = `Error: ${error.message}`;
+                markdownPreview.classList.add('hidden');
+            }
+        }
+
+        // Handle URL fetch
+        fetchUrlBtn.addEventListener('click', () => {
+            const url = markdownUrl.value.trim();
+            if (url) {
+                fetchMarkdown(url);
+            } else {
+                renderStatus.textContent = 'Please enter a valid Markdown URL.';
+            }
+        });
+
+        // Handle render button (uses pasted text if available)
+        renderBtn.addEventListener('click', () => {
+            const text = markdownText.value.trim();
+            renderMarkdown(text);
+        });
+
+        // Handle clipboard paste
+        pasteClipboardBtn.addEventListener('click', async () => {
+            try {
+                const text = await navigator.clipboard.readText();
+                markdownText.value = text;
+                renderMarkdown(text);
+                renderStatus.textContent = 'Markdown pasted and rendered from clipboard!';
+            } catch (error) {
+                renderStatus.textContent = `Error accessing clipboard: ${error.message}. Please ensure clipboard permissions are granted.`;
+            }
+        });
+
+        // Handle Enter key in URL input
+        markdownUrl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                fetchUrlBtn.click();
+            }
+        });
+
+        // Handle Enter key in text area
+        markdownText.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) { // Ctrl + Enter to render
+                renderBtn.click();
+            }
+        });
+
+        // Load Markdown from URL parameter
+        function loadFromUrlParam() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const url = urlParams.get('url');
+            if (url) {
+                markdownUrl.value = url;
+                fetchMarkdown(url);
+                renderStatus.textContent = `Loading Markdown from URL: ${url}...`;
+            }
+        }
+
+        // Initial Setup
+        loadFromUrlParam(); // Check for ?url parameter on page load
+    </script>
+</body>
+</html>

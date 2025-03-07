@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Query App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.tailwindcss.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.tailwindcss.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        input[type="search"] {
+            border: 2px solid #3498db;
+            padding: 8px;
+            border-radius: 10px;
+            outline: none;
+            background-color: white;
+            color: black;
+        }
+        select[name="resultsTable_length"],  select[name="csvTable_length"]{
+            border: 2px solid #3498db;
+            padding: 8px;
+            border-radius: 10px;
+            outline: none;
+            background-color: white;
+            color: black;
+
+        }
+
+        .query-box {
+            background: #f0f0f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+        #queryResults, #csvPreviewTable {
+            width: 100%;
+            overflow-x: auto;
+        }
+        /* White theme for main page DataTables */
+        #queryResults .dataTable, #csvPreviewTable .dataTable {
+            background: #ffffff;
+            color: #000000;
+        }
+        #queryResults .dataTable th, #csvPreviewTable .dataTable th {
+            background: #f3f4f6; /* Very light gray (Tailwind gray-50) for header */
+            color: #000000;
+            border-bottom: 1px solid #e5e7eb; /* Light gray border for header */
+        }
+        #queryResults .dataTable td, #csvPreviewTable .dataTable td {
+            background: #ffffff; /* Explicitly white for rows */
+            border-bottom: 1px solid #e5e7eb; /* Light gray border for rows */
+        }
+        #queryResults .dataTable input, #csvPreviewTable .dataTable input {
+            background: #ffffff !important;
+            color: #000000 !important;
+            border: 1px solid #d1d5db !important; /* Light gray border for search input */
+            padding: 0.375rem 0.75rem !important; /* Add padding for better appearance */
+        }
+        #queryResults .dataTable .dataTables_length select, #csvPreviewTable .dataTable .dataTables_length select {
+            background: #ffffff !important;
+            color: #000000 !important;
+            border: 1px solid #d1d5db !important; /* Light gray border for "Show entries" dropdown */
+            padding: 0.375rem 0.75rem !important; /* Match input padding for consistency */
+        }
+        #queryResults .dataTable .paginate_button, #csvPreviewTable .dataTable .paginate_button {
+            background: #ffffff;
+            color: #000000;
+            border: 1px solid #d1d5db;
+        }
+        #queryResults .dataTable .paginate_button:hover, #csvPreviewTable .dataTable .paginate_button:hover {
+            background: #f3f4f6; /* Very light gray on hover */
+            color: #000000;
+        }
+        #queryResults .dataTable .paginate_button.active, #csvPreviewTable .dataTable .paginate_button.active {
+            background: #3b82f6; /* Blue for active (Tailwind blue-500) */
+            color: #ffffff;
+            border: 1px solid #3b82f6;
+        }
+        .balloon {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            width: 1200px;
+            overflow-y: auto;
+            z-index: 20;
+            color: #e5e7eb;
+            border: 1px solid #374151;
+            resize: both;
+            min-width: 300px;
+            min-height: 200px;
+        }
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 12px;
+            border-style: solid;
+            border-color: transparent transparent #1f2937 transparent;
+            border-right: 1px solid #374151;
+            border-left: 1px solid #374151;
+        }
+        .balloon.hidden {
+            display: none;
+        }
+        .balloon .dataTable {
+            background: #1f2937;
+            color: #e5e7eb;
+        }
+        .balloon .dataTable th {
+            background: #4a5568;
+            color: #e5e7eb;
+        }
+        .balloon .dataTable td {
+            border-bottom: 1px solid #4a5568;
+        }
+        .balloon .dataTable input {
+            background: #1f2937;
+            color: #e5e7eb;
+            border: 1px solid #4a5568;
+        }
+        .balloon .dataTable .dataTables_length select {
+            background: #1f2937;
+            color: #e5e7eb;
+            border: 1px solid #4a5568;
+        }
+        .balloon .dataTable .paginate_button {
+            color: #e5e7eb;
+            background: #1f2937;
+            border: 1px solid #4a5568;
+        }
+        .balloon .dataTable .paginate_button:hover {
+            background: #4a5568;
+            color: #ffffff;
+        }
+        .balloon .dataTable .paginate_button.active {
+            background: #3b82f6;
+            color: #ffffff;
+            border: 1px solid #3b82f6;
+        }
+        .query-loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 30;
+        }
+        .query-loading.show {
+            display: block;
+        }
+        .query-loading span {
+            color: #3b82f6;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <header class="bg-blue-600 text-white p-4 sticky top-0 z-10 relative">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">CSV Query App</h1>
+            <div class="flex items-center gap-4 relative">
+                <input 
+                    id="csvUpload" 
+                    type="file" 
+                    accept=".csv" 
+                    class="p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                <button 
+                    id="loadCSV" 
+                    class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-300"
+                    disabled
+                >
+                    Load CSV
+                </button>
+                <div id="csvPreview" class="balloon hidden"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-4 relative w-full">
+        <div id="queryLoading" class="query-loading">
+            <span>Executing query...</span>
+        </div>
+        <div class="query-box w-full">
+            <h2 class="text-xl font-semibold text-gray-700">SQL Query</h2>
+            <textarea 
+                id="sqlQuery" 
+                placeholder="Enter SQL query (e.g., SELECT * FROM data LIMIT 10)" 
+                class="p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full h-24 resize-none"
+            >SELECT * FROM data</textarea>
+            <button 
+                id="runQuery" 
+                class="bg-blue-500 hover:bg-green-700 text-white px-4 py-2 rounded transition-all duration-300"
+                disabled
+            >
+                Run Query
+            </button>
+            <div id="queryResults"></div>
+            <!-- Export button for Query Results -->
+            <div class="mt-2 w-full text-right">
+                <button id="exportQueryCsv" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-300">Export Query Results to CSV</button>
+            </div>
+            <p id="queryStatus" class="text-gray-600 text-center"></p>
+        </div>
+        <div class="mt-4 w-full">
+            <h3 class="text-xl font-semibold text-gray-700 mb-2">Raw CSV Data Preview</h3>
+            <div id="csvPreviewTable"></div>
+        </div>
+        <!-- Export button for CSV Preview -->
+        <div class="mt-2 w-full text-right">
+            <button id="exportCsvPreviewCsv" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-300">Export CSV Preview to CSV</button>
+        </div>
+
+     
+
+   
+
+
+        <div class="mt-4 flex flex-col gap-4 w-full">
+            <div id="shareLink" class="text-gray-700">
+                <p>Share Query Results:</p>
+                <input 
+                    id="shareUrl" 
+                    type="text" 
+                    readonly 
+                    class="mt-1 block w-full p-2 border rounded text-gray-700 bg-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onclick="this.select()"
+                >
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Upload a CSV file, query it with SQL, and view results in a table with pagination and search • Preview CSV in resizable balloon DataTable • Share via URL parameters (?q=&f=) • Data saved locally
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const csvUpload = document.getElementById('csvUpload');
+        const loadCSVBtn = document.getElementById('loadCSV');
+        const sqlQuery = document.getElementById('sqlQuery');
+        const runQueryBtn = document.getElementById('runQuery');
+        const queryResults = document.getElementById('queryResults');
+        const queryStatus = document.getElementById('queryStatus');
+        const shareUrl = document.getElementById('shareUrl');
+        const csvPreview = document.getElementById('csvPreview');
+        const csvPreviewTable = document.getElementById('csvPreviewTable');
+        const queryLoading = document.getElementById('queryLoading');
+
+        let csvData = JSON.parse(localStorage.getItem('csvData')) || null;
+        let queryResultsData = JSON.parse(localStorage.getItem('queryResultsData')) || null;
+
+        function saveData(csv, queryResult) {
+            localStorage.setItem('csvData', JSON.stringify(csv));
+            localStorage.setItem('queryResultsData', JSON.stringify(queryResult));
+            csvData = csv;
+            queryResultsData = queryResult;
+            updateQueryResults();
+            updateCSVPreviewTable();
+            updateShareLink();
+            hidePreview();
+        }
+
+        function showPreview(parsedData) {
+            if (!parsedData || !parsedData.data || parsedData.data.length === 0) {
+                csvPreview.innerHTML = '<p class="text-gray-300">No data to preview. Invalid or empty CSV file.</p>';
+                csvPreview.classList.remove('hidden');
+                return;
+            }
+
+            const table = `
+                <table id="balloonTable" class="display dataTable w-full" style="color: #e5e7eb;">
+                    <thead>
+                        <tr>${Object.keys(parsedData.data[0]).map(col => `<th>${col}</th>`).join('')}</tr>
+                    </thead>
+                    <tbody>
+                        ${parsedData.data.map(row => `
+                            <tr>${Object.values(row).map(val => `<td>${val || ''}</td>`).join('')}</tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            csvPreview.innerHTML = table;
+            csvPreview.classList.remove('hidden');
+
+            $(document).ready(function () {
+                if ($.fn.DataTable.isDataTable('#balloonTable')) {
+                    $('#balloonTable').DataTable().destroy();
+                }
+                $('#balloonTable').DataTable({
+                    paging: true,
+                    searching: true,
+                    pageLength: 5,
+                    lengthMenu: [5, 10, 20],
+                    info: true,
+                    responsive: true,
+                    scrollY: 500,
+                    scrollCollapse: true,
+                    language: {
+                        search: "Filter:",
+                        paginate: { previous: "Previous", next: "Next" }
+                    }
+                });
+
+                $(csvPreview).resizable({
+                    minWidth: 300,
+                    minHeight: 200,
+                    maxWidth: 1000,
+                    maxHeight: 800,
+                    handles: "se",
+                    resize: function(event, ui) {
+                        const newHeight = ui.size.height - 60;
+                        if ($.fn.DataTable.isDataTable('#balloonTable')) {
+                            $('#balloonTable').DataTable().destroy();
+                        }
+                        $('#balloonTable').DataTable({
+                            paging: true,
+                            searching: true,
+                            pageLength: 5,
+                            lengthMenu: [5, 10, 20],
+                            info: true,
+                            responsive: true,
+                            scrollY: newHeight,
+                            scrollCollapse: true,
+                            language: {
+                                search: "Filter:",
+                                paginate: { previous: "Previous", next: "Next" }
+                            }
+                        });
+                    }
+                });
+            });
+        }
+
+        function hidePreview() {
+            csvPreview.classList.add('hidden');
+            csvPreview.innerHTML = '';
+            if ($(csvPreview).data('ui-resizable')) {
+                $(csvPreview).resizable('destroy');
+            }
+        }
+
+        function updateCSVPreviewTable() {
+            csvPreviewTable.innerHTML = '';
+            if (csvData && csvData.data && csvData.data.length) {
+                const table = `
+                    <table id="csvTable" class="display dataTable w-full">
+                        <thead>
+                            <tr>${Object.keys(csvData.data[0]).map(col => `<th>${col}</th>`).join('')}</tr>
+                        </thead>
+                        <tbody>
+                            ${csvData.data.map(row => `
+                                <tr>${Object.values(row).map(val => `<td>${val || ''}</td>`).join('')}</tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+                csvPreviewTable.innerHTML = table;
+                $(document).ready(function () {
+                    if ($.fn.DataTable.isDataTable('#csvTable')) {
+                        $('#csvTable').DataTable().destroy();
+                    }
+                    $('#csvTable').DataTable({
+                        paging: true,
+                        searching: true,
+                        pageLength: 10,
+                        lengthMenu: [10, 25, 50],
+                        responsive: true,
+                        language: {
+                            search: "Search:",
+                            paginate: { previous: "Previous", next: "Next" }
+                        }
+                    });
+                });
+            } else {
+                csvPreviewTable.innerHTML = '<p class="text-gray-500">No CSV data to display. Upload a CSV file to preview.</p>';
+            }
+        }
+
+        async function loadCSV(file) {
+            if (!file) return;
+            queryStatus.textContent = 'Loading CSV...';
+            loadCSVBtn.disabled = true;
+            runQueryBtn.disabled = true;
+
+            try {
+                const text = await file.text();
+                const parsed = Papa.parse(text, { header: true, skipEmptyLines: true });
+                showPreview(parsed);
+                if (!parsed.data || parsed.data.length === 0) {
+                    throw new Error('Invalid or empty CSV file');
+                }
+
+                const SQL = await initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` });
+                const db = new SQL.Database();
+                const columns = Object.keys(parsed.data[0]).join(', ');
+                const values = parsed.data.map(row => {
+                    const escapedValues = Object.values(row).map(v => `'${v.replace(/'/g, "''")}'`);
+                    return `(${escapedValues.join(', ')})`;
+                }).join(', ');
+                const createTable = `CREATE TABLE data (${columns})`;
+                const insertData = `INSERT INTO data (${columns}) VALUES ${values}`;
+                
+                db.run(createTable);
+                db.run(insertData);
+
+                saveData({ data: parsed.data, db }, null);
+                queryStatus.textContent = '';
+                runQueryBtn.disabled = false;
+            } catch (error) {
+                queryStatus.textContent = `Error: ${error.message}`;
+                csvData = null;
+                queryResultsData = null;
+                updateQueryResults();
+                updateCSVPreviewTable();
+                loadCSVBtn.disabled = false;
+                runQueryBtn.disabled = true;
+            }
+        }
+
+        function runQuery() {
+            console.log('runQuery called with query:', sqlQuery.value);
+            const query = sqlQuery.value.trim();
+            if (!query || !csvData || !csvData.db) {
+                queryStatus.textContent = 'Please load a CSV file and enter a valid SQL query.';
+                console.log('runQuery skipped: No query, CSV, or DB available');
+                return;
+            }
+            queryStatus.textContent = '';
+            queryLoading.classList.add('show');
+            runQueryBtn.disabled = true;
+
+            try {
+                console.log('Executing SQLite query:', query);
+                const result = csvData.db.exec(query);
+                console.log('Query result:', result);
+                if (!result || result.length === 0 || !result[0].values) {
+                    throw new Error('No results found or invalid query');
+                }
+                const columns = result[0].columns;
+                const rows = result[0].values;
+                const data = rows.map(row => columns.reduce((obj, col, i) => ({ ...obj, [col]: row[i] !== undefined ? row[i] : '' }), {}));
+                saveData(csvData, { query, data });
+                updateQueryResults();
+                queryStatus.textContent = '';
+                console.log('Query executed successfully, data:', data);
+            } catch (error) {
+                queryStatus.textContent = `Error: ${error.message}`;
+                queryResultsData = null;
+                updateQueryResults();
+                console.error('Query error:', error);
+            } finally {
+                queryLoading.classList.remove('show');
+                runQueryBtn.disabled = false;
+            }
+        }
+
+        function updateQueryResults() {
+            queryResults.innerHTML = '';
+            if (queryResultsData && queryResultsData.data && queryResultsData.data.length) {
+                const table = `
+                    <table id="resultsTable" class="display dataTable w-full">
+                        <thead>
+                            <tr>${Object.keys(queryResultsData.data[0]).map(col => `<th>${col}</th>`).join('')}</tr>
+                        </thead>
+                        <tbody>
+                            ${queryResultsData.data.map(row => `
+                                <tr>${Object.values(row).map(val => `<td>${val !== undefined ? val : ''}</td>`).join('')}</tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+                queryResults.innerHTML = table;
+                $(document).ready(function () {
+                    if ($.fn.DataTable.isDataTable('#resultsTable')) {
+                        $('#resultsTable').DataTable().destroy();
+                    }
+                    $('#resultsTable').DataTable({
+                        paging: true,
+                        searching: true,
+                        pageLength: 10,
+                        lengthMenu: [10, 25, 50],
+                        responsive: true,
+                        language: {
+                            search: "Search:",
+                            paginate: { previous: "Previous", next: "Next" }
+                        }
+                    });
+                });
+            } else {
+                queryResults.innerHTML = '<p class="text-gray-500">No query results to display. Load a CSV and run a query.</p>';
+                queryStatus.textContent = 'Upload a CSV file and enter a SQL query to see results.';
+            }
+        }
+
+        function updateShareLink() {
+            const url = new URL(window.location.href);
+            if (queryResultsData && queryResultsData.query && csvData) {
+                const csvString = Papa.unparse(csvData.data);
+                url.searchParams.set('q', encodeURIComponent(queryResultsData.query));
+                url.searchParams.set('f', encodeURIComponent(csvString));
+            }
+            shareUrl.value = url.href;
+        }
+
+        async function loadFromUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const queryParam = params.get('q');
+            const csvParam = params.get('f');
+
+            if (queryParam && csvParam) {
+                const decodedQuery = decodeURIComponent(queryParam);
+                const parsedCSV = Papa.parse(decodeURIComponent(csvParam), { header: true, skipEmptyLines: true });
+                if (parsedCSV.data && parsedCSV.data.length) {
+                    const SQL = await initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}` });
+                    const db = new SQL.Database();
+                    const columns = Object.keys(parsedCSV.data[0]).join(', ');
+                    const values = parsedCSV.data.map(row => {
+                        const escapedValues = Object.values(row).map(v => `'${v.replace(/'/g, "''")}'`);
+                        return `(${escapedValues.join(', ')})`;
+                    }).join(', ');
+                    const createTable = `CREATE TABLE data (${columns})`;
+                    const insertData = `INSERT INTO data (${columns}) VALUES ${values}`;
+                    
+                    db.run(createTable);
+                    db.run(insertData);
+                    csvData = { data: parsedCSV.data, db };
+                    queryResultsData = { query: decodedQuery, data: [] };
+                    sqlQuery.value = decodedQuery;
+                    runQuery();
+                }
+            }
+        }
+
+        csvUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && file.name.endsWith('.csv')) {
+                loadCSVBtn.disabled = false;
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const text = event.target.result;
+                    const parsed = Papa.parse(text, { header: true, skipEmptyLines: true });
+                    showPreview(parsed);
+                };
+                reader.readAsText(file);
+            } else {
+                loadCSVBtn.disabled = true;
+                queryStatus.textContent = 'Please upload a valid CSV file.';
+                hidePreview();
+            }
+        });
+        loadCSVBtn.addEventListener('click', () => loadCSV(csvUpload.files[0]));
+        runQueryBtn.addEventListener('click', () => {
+            console.log('Run Query button clicked');
+            runQuery();
+        });
+        sqlQuery.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                console.log('Enter key pressed in SQL query');
+                runQuery();
+            }
+        });
+
+        (async () => {
+            await loadFromUrlParams();
+            updateQueryResults();
+            updateCSVPreviewTable();
+        })();
+
+
+        // csv export
+        // Function to export DataTable to CSV
+function exportTableToCsv(tableId, filename) {
+    const $table = $(tableId).DataTable();
+    const data = $table.rows({ search: 'applied' }).data().toArray(); // Get filtered data
+    const headers = $table.settings()[0].aoColumns.map(col => col.sTitle); // Get column headers
+
+    // Prepare CSV content
+    let csvContent = 'data:text/csv;charset=utf-8,';
+    csvContent += headers.join(',') + '\n'; // Add headers
+    data.forEach(row => {
+        const rowData = Object.values(row).map(cell => {
+            // Handle commas and quotes in cell data
+            let value = cell !== undefined ? cell.toString() : '';
+            value = value.replace(/"/g, '""'); // Escape double quotes
+            if (value.includes(',') || value.includes('"') || value.includes('\n')) {
+                value = `"${value}"`; // Wrap in quotes if needed
+            }
+            return value;
+        });
+        csvContent += rowData.join(',') + '\n'; // Add row data
+    });
+
+    // Create and trigger download
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `${filename}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Event listeners for export buttons
+document.getElementById('exportQueryCsv').addEventListener('click', () => {
+    exportTableToCsv('#resultsTable', 'query_results');
+});
+
+document.getElementById('exportCsvPreviewCsv').addEventListener('click', () => {
+    exportTableToCsv('#csvTable', 'csv_preview');
+});
+    </script>
+</body>
+</html>

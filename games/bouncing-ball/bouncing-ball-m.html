@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Bouncing Ball Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-10 flex justify-between items-center">
+        <h1 class="text-xl font-bold">Bouncing Ball Game</h1>
+        <div class="flex items-center">
+            <span id="score" class="mr-4">Score: 0</span>
+            <select id="difficulty" class="bg-blue-500 text-white p-2 rounded mr-4">
+                <option value="beginner">Beginner</option>
+                <option value="intermediate" selected>Intermediate</option>
+                <option value="expert">Expert</option>
+            </select>
+            <button id="startBtn" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded">
+                Start Game
+            </button>
+        </div>
+    </nav>
+
+    <!-- Full-Page Game Area -->
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startBtn = document.getElementById('startBtn');
+        const scoreElement = document.getElementById('score');
+        const difficultySelect = document.getElementById('difficulty');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight - document.querySelector('nav').offsetHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let ball = { x: canvas.width / 2, y: canvas.height - 30, radius: 10, dx: 4, dy: -4 };
+        let paddle = { width: canvas.width * 0.2, height: 20, x: (canvas.width * 0.4), speed: 7 };
+        let score = 0, gameRunning = false, leftPressed = false, rightPressed = false, touchX = null;
+
+        const difficultySpeeds = { beginner: { dx: 3, dy: -3 }, intermediate: { dx: 4, dy: -4 }, expert: { dx: 6, dy: -6 } };
+
+        document.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft') leftPressed = true; if (e.key === 'ArrowRight') rightPressed = true; });
+        document.addEventListener('keyup', (e) => { if (e.key === 'ArrowLeft') leftPressed = false; if (e.key === 'ArrowRight') rightPressed = false; });
+
+        canvas.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; });
+        canvas.addEventListener('touchmove', (e) => {
+            let deltaX = e.touches[0].clientX - touchX;
+            paddle.x += deltaX * 0.3;
+            paddle.x = Math.max(0, Math.min(canvas.width - paddle.width, paddle.x));
+            touchX = e.touches[0].clientX;
+            e.preventDefault();
+        });
+
+        startBtn.addEventListener('click', () => { if (!gameRunning) { gameRunning = true; startBtn.textContent = 'Restart'; resetGame(); gameLoop(); } else { resetGame(); } });
+
+        function setDifficulty() { const selectedDifficulty = difficultySelect.value; ball.dx = difficultySpeeds[selectedDifficulty].dx; ball.dy = difficultySpeeds[selectedDifficulty].dy; }
+        function resetGame() { ball.x = canvas.width / 2; ball.y = canvas.height - 30; setDifficulty(); paddle.x = (canvas.width - paddle.width) / 2; score = 0; scoreElement.textContent = `Score: ${score}`; }
+
+        function drawBall() { ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2); ctx.fillStyle = '#ef4444'; ctx.fill(); ctx.closePath(); }
+        function drawPaddle() { ctx.beginPath(); ctx.rect(paddle.x, canvas.height - paddle.height, paddle.width, paddle.height); ctx.fillStyle = '#3b82f6'; ctx.fill(); ctx.closePath(); }
+
+        function update() {
+            if (leftPressed) paddle.x = Math.max(paddle.x - paddle.speed, 0);
+            if (rightPressed) paddle.x = Math.min(paddle.x + paddle.speed, canvas.width - paddle.width);
+
+            ball.x += ball.dx; ball.y += ball.dy;
+
+            if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) ball.dx = -ball.dx;
+            if (ball.y - ball.radius < 0) ball.dy = -ball.dy;
+
+            if (ball.y + ball.radius > canvas.height - paddle.height && ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
+                ball.dy = -ball.dy;
+                let hitFactor = (ball.x - (paddle.x + paddle.width / 2)) / (paddle.width / 2);
+                ball.dx += hitFactor * 2;
+                score++;
+                scoreElement.textContent = `Score: ${score}`;
+            }
+
+            if (ball.y + ball.radius > canvas.height) {
+                gameRunning = false;
+                startBtn.textContent = 'Start Game';
+                alert(`Game Over! Score: ${score}`);
+            }
+        }
+
+        function draw() { ctx.clearRect(0, 0, canvas.width, canvas.height); drawBall(); drawPaddle(); }
+        function gameLoop() { if (gameRunning) { update(); draw(); requestAnimationFrame(gameLoop); } }
+    </script>
+</body>
+</html>

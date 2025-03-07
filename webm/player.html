@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebM Video Player</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        .video-box {
+            background: #f0f0f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        #videoPlayer {
+            width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        #videoPlayer video {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <header class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">WebM Video Player</h1>
+            <div class="flex items-center gap-4">
+                <input 
+                    id="videoUrl" 
+                    type="url" 
+                    placeholder="Enter WebM video URL (e.g., https://example.com/video.webm)" 
+                    class="p-2 border rounded text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 w-64"
+                >
+                <button 
+                    id="loadVideo" 
+                    class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded transition-all duration-300"
+                >
+                    Load Video
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <!-- Video Player Display -->
+        <div class="video-box w-full max-w-2xl">
+            <h2 class="text-xl font-semibold text-gray-700">Video Player</h2>
+            <div id="videoPlayer"></div>
+            <p id="videoStatus" class="text-gray-600 text-center"></p>
+        </div>
+        <div class="mt-4 flex flex-col gap-4 w-full max-w-2xl">
+            <div id="shareLink" class="text-gray-700">
+                <p>Share Video:</p>
+                <input 
+                    id="shareUrl" 
+                    type="text" 
+                    readonly 
+                    class="mt-1 block w-full p-2 border rounded text-gray-700 bg-gray-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onclick="this.select()"
+                >
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">
+                Enter a WebM video URL to play • Share via URL parameters (?v=) • Data saved locally
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const videoUrl = document.getElementById('videoUrl');
+        const loadVideoBtn = document.getElementById('loadVideo');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoStatus = document.getElementById('videoStatus');
+        const shareUrl = document.getElementById('shareUrl');
+
+        // Load video URL from localStorage
+        let videoData = JSON.parse(localStorage.getItem('videoData')) || null;
+
+        // Function to save video URL to localStorage
+        function saveVideo(url) {
+            localStorage.setItem('videoData', JSON.stringify({ url }));
+            videoData = { url };
+            updatePlayer();
+            updateShareLink();
+        }
+
+        // Function to load and play video
+        async function loadVideo() {
+            const url = videoUrl.value.trim();
+            if (url) {
+                videoStatus.textContent = 'Loading video...';
+                loadVideoBtn.disabled = true;
+
+                try {
+                    // Check if the URL is valid and ends with .webm (basic validation)
+                    if (!url.toLowerCase().endsWith('.webm')) {
+                        throw new Error('Please enter a valid WebM video URL');
+                    }
+
+                    // Create a video element to test if the URL is accessible and playable
+                    const tempVideo = document.createElement('video');
+                    tempVideo.src = url;
+                    tempVideo.crossOrigin = 'anonymous'; // Handle CORS if needed
+                    tempVideo.preload = 'metadata';
+
+                    tempVideo.onloadedmetadata = () => {
+                        saveVideo(url);
+                        videoStatus.textContent = '';
+                        loadVideoBtn.disabled = false;
+                    };
+
+                    tempVideo.onerror = () => {
+                        throw new Error('Invalid or inaccessible video URL');
+                    };
+
+                    // Clean up temp video element
+                    tempVideo.remove();
+                } catch (error) {
+                    videoStatus.textContent = `Error: ${error.message}`;
+                    videoPlayer.innerHTML = '';
+                    videoData = null;
+                    updatePlayer();
+                    loadVideoBtn.disabled = false;
+                }
+            } else {
+                videoStatus.textContent = 'Please enter a valid WebM video URL';
+                loadVideoBtn.disabled = false;
+            }
+        }
+
+        // Function to update video player
+        function updatePlayer() {
+            if (videoData && videoData.url) {
+                videoPlayer.innerHTML = `
+                    <video controls autoplay loop>
+                        <source src="${videoData.url}" type="video/webm">
+                        Your browser does not support the WebM video format.
+                    </video>
+                `;
+                videoStatus.textContent = '';
+            } else {
+                videoPlayer.innerHTML = '<p class="text-gray-500">No video loaded. Enter a WebM URL to play.</p>';
+                videoStatus.textContent = 'Enter a WebM video URL to load and play a video.';
+            }
+        }
+
+        // Function to update share link
+        function updateShareLink() {
+            const url = new URL(window.location.href);
+            if (videoData && videoData.url) {
+                url.searchParams.set('v', encodeURIComponent(videoData.url)); // Share video URL
+            }
+            shareUrl.value = url.href;
+        }
+
+        // Handle URL parameter loading (for video URL)
+        function loadFromUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const videoUrlParam = params.get('v');
+
+            if (videoUrlParam) {
+                const decodedUrl = decodeURIComponent(videoUrlParam);
+                videoUrl.value = decodedUrl;
+                saveVideo(decodedUrl);
+            }
+        }
+
+        // Event Listeners
+        loadVideoBtn.addEventListener('click', loadVideo);
+        videoUrl.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                loadVideo();
+            }
+        });
+
+        // Initial Setup
+        loadFromUrlParams();
+        updatePlayer();
+    </script>
+</body>
+</html>
