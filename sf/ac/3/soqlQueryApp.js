@@ -4,9 +4,6 @@
 const queriesURL = 'https://raw.githubusercontent.com/mohan-chinnappan-n5/soql/main/commonQueries.json';
 const MAX_LIMIT_Q = 200;
 
-const executionTime = document.getElementById('executionTime');
-
-
 // Toggle password visibility
 const togglePasswordBtn = document.getElementById('togglePassword');
 if (togglePasswordBtn) {
@@ -27,6 +24,12 @@ const infoText = document.getElementById('info-text');
 // Spinner and Overlay elements
 const spinner = document.getElementById('spinner');
 const overlay = document.getElementById('overlay');
+const executionTime = document.getElementById('executionTime');
+
+// Verify spinner and overlay elements exist
+if (!spinner || !overlay) {
+    console.error('Spinner or overlay element not found in the DOM.');
+}
 
 infoIcon.addEventListener('mouseover', () => {
     infoText.classList.remove('hidden');
@@ -223,6 +226,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 return true;
             }
 
+            // Helper function to ensure spinner is visible for at least a minimum time
+            async function withMinimumSpinnerTime(promise) {
+                const MINIMUM_SPINNER_TIME = 500; // 500ms minimum display time
+                const startTime = Date.now();
+                try {
+                    const result = await promise;
+                    const elapsedTime = Date.now() - startTime;
+                    const remainingTime = MINIMUM_SPINNER_TIME - elapsedTime;
+                    if (remainingTime > 0) {
+                        await new Promise(resolve => setTimeout(resolve, remainingTime));
+                    }
+                    return result;
+                } finally {
+                    spinner.style.display = 'none';
+                    overlay.style.display = 'none';
+                    showLoading('fieldsLoading', false);
+                    showLoading('queryLoading', false);
+                }
+            }
+
             // Fetch SObject fields for autocompletion (REST and Tooling API support)
             async function fetchSObjectFields(sObjectName) {
                 const config = getConfig();
@@ -239,68 +262,67 @@ document.addEventListener('DOMContentLoaded', () => {
                 spinner.style.display = 'block';
                 overlay.style.display = 'block';
                 showLoading('fieldsLoading', true);
-                try {
-                    // Use REST URL if provided, otherwise construct default
-                    let url = config.restUrl ? `${config.instanceUrl}${config.restUrl}` :
-                        `${config.instanceUrl}/services/data/${config.apiVersion}/sobjects/${sObjectName}/describe`;
-                    if (tooling && !config.restUrl) {
-                        url = `${config.instanceUrl}/services/data/${config.apiVersion}/tooling/sobjects/${sObjectName}/describe`;
-                    }
 
-                    const response = await fetch(`${config.backendUrl}/fetch_fields`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            sobject_name: sObjectName,
-                            access_token: config.accessToken,
-                            instance_url: config.instanceUrl,
-                            api_version: config.apiVersion,
-                            tooling,
-                            custom_url: config.restUrl || null
-                        })
-                    });
-                    if (!response.ok) {
-                        const errorText = await response.text();
-                        let errorMsg = `HTTP error! status: ${response.status}, message: ${response.statusText}`;
-                        if (errorText) {
-                            try {
-                                const errorData = JSON.parse(errorText);
-                                if (errorData.error && errorData.error.includes('INVALID_FIELD')) {
-                                    errorMsg = `Invalid field for object '${sObjectName}': Check field names in your Salesforce org. Ensure the object and fields exist and are accessible.`;
-                                } else if (errorData.message) {
-                                    errorMsg = `Failed to fetch fields: ${errorData.message}`;
-                                }
-                            } catch (parseError) {
-                                errorMsg += ` - Raw response: ${errorText}`;
-                            }
+                return withMinimumSpinnerTime((async () => {
+                    try {
+                        // Use REST URL if provided, otherwise construct default
+                        let url = config.restUrl ? `${config.instanceUrl}${config.restUrl}` :
+                            `${config.instanceUrl}/services/data/${config.apiVersion}/sobjects/${sObjectName}/describe`;
+                        if (tooling && !config.restUrl) {
+                            url = `${config.instanceUrl}/services/data/${config.apiVersion}/tooling/sobjects/${sObjectName}/describe`;
                         }
-                        throw new Error(errorMsg);
+
+                        const response = await fetch(`${config.backendUrl}/fetch_fields`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                sobject_name: sObjectName,
+                                access_token: config.accessToken,
+                                instance_url: config.instanceUrl,
+                                api_version: config.apiVersion,
+                                tooling,
+                                custom_url: config.restUrl || null
+                            })
+                        });
+                        if (!response.ok) {
+                            const errorText = await response.text();
+                            let errorMsg = `HTTP error! status: ${response.status}, message: ${response.statusText}`;
+                            if (errorText) {
+                                try {
+                                    const errorData = JSON.parse(errorText);
+                                    if (errorData.error && errorData.error.includes('INVALID_FIELD')) {
+                                        errorMsg = `Invalid field for object '${sObjectName}': Check field names in your Salesforce org. Ensure the object and fields exist and are accessible.`;
+                                    } else if (errorData.message) {
+                                        errorMsg = `Failed to fetch fields: ${errorData.message}`;
+                                    }
+                                } catch (parseError) {
+                                    errorMsg += ` - Raw response: ${errorText}`;
+                                }
+                            }
+                            throw new Error(errorMsg);
+                        }
+                        const data = await response.json();
+                        if (data.error) throw new Error(data.error);
+                        return data.fields || [];
+                    } catch (error) {
+                        console.error(`Error fetching fields for ${sObjectName}:`, error);
+                        let errorMsg = `Failed to fetch fields: ${error.message}`;
+                        if (error.message.includes('INVALID_FIELD')) {
+                            errorMsg = `Invalid field for object '${sObjectName}': Check field names in your Salesforce org. Ensure the object and fields exist and are accessible.`;
+                        } else if (error.message.includes('500') || error.message.includes('INTERNAL SERVER ERROR')) {
+                            errorMsg = `Internal Server Error: Contact administrator or check Salesforce API logs for details. Raw error: ${error.message}`;
+                        }
+                        showError('queryError', errorMsg);
+                        return [];
                     }
-                    const data = await response.json();
-                    if (data.error) throw new Error(data.error);
-                    return data.fields || [];
-                } catch (error) {
-                    console.error(`Error fetching fields for ${sObjectName}:`, error);
-                    let errorMsg = `Failed to fetch fields: ${error.message}`;
-                    if (error.message.includes('INVALID_FIELD')) {
-                        errorMsg = `Invalid field for object '${sObjectName}': Check field names in your Salesforce org. Ensure the object and fields exist and are accessible.`;
-                    } else if (error.message.includes('500') || errorMessage.includes('INTERNAL SERVER ERROR')) {
-                        errorMsg = `Internal Server Error: Contact administrator or check Salesforce API logs for details. Raw error: ${error.message}`;
-                    }
-                    showError('queryError', errorMsg);
-                    return [];
-                } finally {
-                    // Hide spinner, overlay, and loading indicator
-                    spinner.style.display = 'none';
-                    overlay.style.display = 'none';
-                    showLoading('fieldsLoading', false);
-                }
+                })());
             }
 
             // Query SOQL data or execute REST request (GET, POST, PATCH, DELETE)
             async function queryData(soqlQuery) {
                 const config = getConfig();
                 const tooling = document.getElementById('tooling').checked;
+                const explainPlan = document.getElementById('explainPlan').checked; // Check if Explain Plan is enabled
 
                 if (!config.accessToken || !config.instanceUrl || (!config.restUrl && !soqlQuery.trim())) {
                     showError('accessTokenError', 'Access Token, Instance URL, and SOQL Query (or REST URL) are required.');
@@ -334,69 +356,79 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Start measuring execution time
                 const startTime = performance.now();
 
-                try {
-                    let url = config.restUrl ? `${config.instanceUrl}${config.restUrl}` :
-                        `${config.instanceUrl}/services/data/${config.apiVersion}/query?q=${encodeURIComponent(soqlQuery)}`;
-                    if (tooling && !config.restUrl) {
-                        url = `${config.instanceUrl}/services/data/${config.apiVersion}/tooling/query?q=${encodeURIComponent(soqlQuery)}`;
-                    }
-
-                    const response = await fetch(`${config.backendUrl}/query_data`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            soql_query: config.restMethod === 'GET' ? soqlQuery : null,
-                            access_token: config.accessToken,
-                            instance_url: config.instanceUrl,
-                            api_version: config.apiVersion,
-                            tooling,
-                            custom_url: config.restUrl || null,
-                            method: config.restMethod,
-                            payload: body
-                        })
-                    });
-
-                    if (!response.ok) {
-                        const errorText = await response.text();
-                        let errorMsg = `HTTP error! status: ${response.status}, message: ${response.statusText}`;
-                        try {
-                            const errorData = JSON.parse(errorText);
-                            if (errorData.error && errorData.error.includes('INVALID_FIELD')) {
-                                errorMsg = `Invalid field in query: Check fields like 'CleanStatus' or 'AnnualRevenue' in your Salesforce org. Ensure they exist and are accessible.`;
-                            } else if (errorData.message) {
-                                errorMsg = `Query failed: ${errorData.message}`;
+                return withMinimumSpinnerTime((async () => {
+                    try {
+                        let url;
+                        if (config.restUrl) {
+                            url = `${config.instanceUrl}${config.restUrl}`;
+                        } else {
+                            // Base query URL
+                            let queryPath = `/services/data/${config.apiVersion}/query`;
+                            if (tooling) {
+                                queryPath = `/services/data/${config.apiVersion}/tooling/query`;
                             }
-                        } catch (parseError) {
-                            errorMsg += ` - Raw response: ${errorText}`;
+                            // Append ?explain= if Explain Plan is checked, otherwise use regular query
+                            if (explainPlan) {
+                                url = `${config.instanceUrl}${queryPath}?explain=${encodeURIComponent(soqlQuery)}`;
+                            } else {
+                                url = `${config.instanceUrl}${queryPath}?q=${encodeURIComponent(soqlQuery)}`;
+                            }
                         }
-                        throw new Error(errorMsg);
+
+                        const response = await fetch(`${config.backendUrl}/query_data`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                soql_query: config.restMethod === 'GET' ? soqlQuery : null,
+                                access_token: config.accessToken,
+                                instance_url: config.instanceUrl,
+                                api_version: config.apiVersion,
+                                tooling,
+                                custom_url: config.restUrl || null,
+                                method: config.restMethod,
+                                payload: body,
+                                explain: explainPlan // Pass the explain flag to the backend
+                            })
+                        });
+
+                        if (!response.ok) {
+                            const errorText = await response.text();
+                            let errorMsg = `HTTP error! status: ${response.status}, message: ${response.statusText}`;
+                            try {
+                                const errorData = JSON.parse(errorText);
+                                if (errorData.error && errorData.error.includes('INVALID_FIELD')) {
+                                    errorMsg = `Invalid field in query: Check fields like 'CleanStatus' or 'AnnualRevenue' in your Salesforce org. Ensure they exist and are accessible.`;
+                                } else if (errorData.message) {
+                                    errorMsg = `Query failed: ${errorData.message}`;
+                                }
+                            } catch (parseError) {
+                                errorMsg += ` - Raw response: ${errorText}`;
+                            }
+                            throw new Error(errorMsg);
+                        }
+                        const data = await response.json();
+                        if (data.error) throw new Error(data.error);
+                        return data.result || { error: 'No results returned' };
+                    } catch (error) {
+                        console.error('Error querying data:', error);
+                        let errorMsg = `Query failed: ${error.message}`;
+                        if (error.message.includes('INVALID_FIELD')) {
+                            errorMsg = `Invalid field in query: Check fields like 'CleanStatus' or 'AnnualRevenue' in your Salesforce org. Ensure they exist and are accessible.`;
+                        } else if (error.message.includes('500') || error.message.includes('INTERNAL SERVER ERROR')) {
+                            errorMsg = `Internal Server Error: Contact administrator or check Salesforce API logs for details. Raw error: ${error.message}`;
+                        }
+                        showError('resultError', errorMsg);
+                        return { error: errorMsg };
                     }
-                    const data = await response.json();
-                    if (data.error) throw new Error(data.error);
-                    return data.result || { error: 'No results returned' };
-                    
-                } catch (error) {
-                    console.error('Error querying data:', error);
-                    let errorMsg = `Query failed: ${error.message}`;
-                    if (error.message.includes('INVALID_FIELD')) {
-                        errorMsg = `Invalid field in query: Check fields like 'CleanStatus' or 'AnnualRevenue' in your Salesforce org. Ensure they exist and are accessible.`;
-                    } else if (error.message.includes('500') || error.message.includes('INTERNAL SERVER ERROR')) {
-                        errorMsg = `Internal Server Error: Contact administrator or check Salesforce API logs for details. Raw error: ${error.message}`;
-                    }
-                    showError('resultError', errorMsg);
-                    return { error: errorMsg };
-                } finally {
-                    // Hide spinner, overlay, and loading indicator
-                    spinner.style.display = 'none';
-                    overlay.style.display = 'none';
-                     // Calculate and display execution time after the promise resolves
+                })()).then(result => {
+                    // Calculate and display execution time after the promise resolves
                     const endTime = performance.now();
                     const timeTaken = (endTime - startTime) / 1000; // Convert to seconds
                     executionTime.textContent = `Time: ${timeTaken.toFixed(1)}s`;
                     executionTime.classList.remove('hidden');
-
-                    showLoading('queryLoading', false);
-                }
+                    setTimeout(() => executionTime.classList.add('hidden'), 5000); // Hide after 5 seconds
+                    return result;
+                });
             }
 
             // Autocompletion for SOQL Editor with common queries

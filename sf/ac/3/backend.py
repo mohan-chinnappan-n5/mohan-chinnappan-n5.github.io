@@ -10,9 +10,9 @@ import urllib.parse
 # Backend API server    
 # supports two endpoints:
 # 1. /fetch_fields: Fetches fields for an SObject
-# 2. /query_data: Queries data or executes custom REST requests (GET, POST, PATCH, DELETE)
+# 2. /query_data: Queries data or executes custom REST requests (GET, POST, PATCH, DELETE) with Explain Plan support
 # The server is CORS-enabled to allow requests from the frontend
-# The server runs on port 5000
+# The server runs on port 5000 (or from env variable PORT)
 # To run the server, execute: python backend.py
 # author: mohan chinnappan
 #-------------
@@ -199,11 +199,12 @@ def fetch_fields():
             'message': str(e)
         }), 500
 
-# Query SOQL data or execute custom REST request (GET, POST, PATCH, DELETE)
+# Query SOQL data or execute custom REST request (GET, POST, PATCH, DELETE) with Explain Plan support
 @app.route('/query_data', methods=['POST'])
 def query_data():
     """
-    Execute a SOQL query or custom REST request (GET, POST, PATCH, DELETE) using REST or Tooling API.
+    Execute a SOQL query or custom REST request (GET, POST, PATCH, DELETE) using REST or Tooling API,
+    with support for Explain Plan.
     
     Request Body (JSON):
     - soql_query: SOQL query string or null if using custom_url
@@ -214,9 +215,10 @@ def query_data():
     - custom_url: Optional custom REST URL
     - method: HTTP method (GET, POST, PATCH, DELETE, default: 'GET')
     - payload: Optional JSON payload for non-GET requests
+    - explain: Boolean to request an explain plan (default: False)
     
     Returns:
-    - JSON: Query results, test run ID, or error message
+    - JSON: Query results, explain plan, test run ID, or error message
     """
     try:
         data = request.get_json()
@@ -228,6 +230,7 @@ def query_data():
         custom_url = data.get('custom_url')
         method = data.get('method', 'GET').upper()
         payload = data.get('payload')
+        explain = data.get('explain', False)  # New field for explain plan
 
         if not all([access_token, instance_url]):
             logger.error("Missing required parameters for querying data")
@@ -247,12 +250,15 @@ def query_data():
                 'error': f'Method {method} not allowed for URL {custom_url}. Check supported methods.'
             }), 405
 
-        url = f"{instance_url}{custom_url}" if custom_url else \
-            f"{instance_url}/services/data/{api_version}/query?q={requests.utils.quote(soql_query)}"
-        if tooling and not custom_url and soql_query:
-            url = f"{instance_url}/services/data/{api_version}/tooling/query?q={requests.utils.quote(soql_query)}"
+        # Construct the Salesforce API endpoint
+        if custom_url:
+            url = f"{instance_url}{custom_url}"
+        else:
+            base_path = f"/services/data/{api_version}/tooling/query" if tooling else f"/services/data/{api_version}/query"
+            query_param = f"explain={requests.utils.quote(soql_query)}" if explain else f"q={requests.utils.quote(soql_query)}"
+            url = f"{instance_url}{base_path}?{query_param}"
 
-        logger.info(f"Executing {method} request at {url}")
+        logger.info(f"Executing {method} request at {url} with explain={explain}")
 
         headers = {
             'Authorization': f'Bearer {access_token}',
@@ -280,20 +286,20 @@ def query_data():
             # Parse the initial response
             initial_result = response.json()
             
-            # Check if this is a paginated query response (has items and nextRecordsUrl or nextPageUrl)
-            url_path = urllib.parse.urlparse(url).path
-            last_segment = url_path.split('/')[-1]
-            data_field = 'records' if last_segment == 'query' else last_segment if last_segment in initial_result else 'records'
-
-            if data_field in initial_result and ('nextRecordsUrl' in initial_result or 'nextPageUrl' in initial_result):
-                logger.info(f"Paginated response detected for {data_field}, fetching all items...")
+            # Handle explain plan response if explain is true
+            if explain and 'plans' in initial_result:
+                logger.info("Explain plan detected, returning raw plan data")
+                query_result = initial_result
+            # Handle paginated query response if not explain plan
+            elif 'records' in initial_result and ('nextRecordsUrl' in initial_result or 'nextPageUrl' in initial_result):
+                logger.info(f"Paginated response detected for 'records', fetching all items...")
                 all_items = fetch_all_items(instance_url, access_token, url, method, payload)
                 query_result = {
                     'totalSize': len(all_items),
                     'done': True,
-                    f'{data_field}': all_items
+                    'records': all_items
                 }
-                logger.info(f"Successfully fetched {len(all_items)} {data_field} across all pages")
+                logger.info(f"Successfully fetched {len(all_items)} records across all pages")
             else:
                 query_result = initial_result
                 logger.info(f"Successfully queried {query_result.get('totalSize', 'N/A')} items or completed request")
@@ -324,7 +330,7 @@ def query_data():
         }), 400
     except Exception as e:
         error_msg = f"Server error during request: {str(e)}"
-        logger.error(msg)
+        logger.error(error_msg)
         return jsonify({
             'error': 'Server error',
             'message': str(e)
