@@ -289,6 +289,10 @@ const data = {
         name: "Sports",
         videos: [
           { title: "Intuitive Tennis" , youtubeId: "MMifAROm6F0" },
+          { title: "How to Train on a Tennis Wall?" , youtubeId: "GU7mq8uZgJo" },
+          { title: "How to BUILD a DIY TENNIS BACKBOARD" , youtubeId: "AVx7qLZQaRQ" },
+          { title: "How to Practice Tennis at Home" , youtubeId: "B-cpqBmT07E" },
+ 
           { title: "Roger Federer's Best Points at Wimbledon" , youtubeId: "fK2i-Jo3CNA" },
           { title: "Roger Federer v Rafael Nadal " , youtubeId: "KTCDxjJvs2U" },
           { title: "Bjorn Borg vs John McEnroe" , youtubeId: "UnwYdF8a5ws" },
