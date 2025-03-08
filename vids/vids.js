@@ -41,10 +41,14 @@ const data = {
            { title: "Chrome Extension ONNU", youtubeId: "feH8KIuUsrY" },  
            { title: "Salesforce Orgs Compare CLI with UI", youtubeId: "3eLkVv9djCg" },  
            { title: "Compare 2 Salesforce Orgs for a metadata type. For example compare Admin Profile metadata ", youtubeId: "NdRZe_bfp54" },  
-            { title: "Tool to transform XML (like profile) into HTML using XSLT", youtubeId: "dK2IzpwxO_w" }, 
-            { title: "How to Retrieve a Profile from a Salesforce org and check its validity", youtubeId: "aP4A9By1Ex8" }, 
-             { title: "How to use JQuery Datatable in Lightning Web Components (LWC) - Part-1" , youtubeId: "lp5PG_r6nO4" }, 
+           { title: "Tool to transform XML (like profile) into HTML using XSLT", youtubeId: "dK2IzpwxO_w" }, 
+           { title: "How to Retrieve a Profile from a Salesforce org and check its validity", youtubeId: "aP4A9By1Ex8" }, 
+           { title: "How to use JQuery Datatable in Lightning Web Components (LWC) - Part-1" , youtubeId: "lp5PG_r6nO4" }, 
            { title: "How to use JQuery Datatable in Lightning Web Components (LWC) - Part-2" , youtubeId: "XcNY_5ap8Bc" }, 
+
+           { title: "Salesforce EPT and TotalEPT" , youtubeId: "-gzDzfj9hOU" }, 
+
+
 
 
 
