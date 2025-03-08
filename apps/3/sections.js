@@ -433,6 +433,8 @@
         { text: 'Page Performance', href: 'https://chromewebstore.google.com/detail/afhmplbnocjhbpmdfiefplmaliagpfch', icon: 'desktop' },
         { text: 'File Diff', href: 'https://chromewebstore.google.com/detail/obmjlelfmcmimbppoijobhijppdchekg', icon: 'desktop' },
         { text: 'Chatty for LLMs', href: 'https://chromewebstore.google.com/detail/mnecjkcdjdkgiklbmeodicgdfladfdan', icon: 'desktop' },
+        { text: 'Salesforce EPT Monitor', href: 'https://mohan-chinnappan-n5.github.io/extns/ept2.html', icon: 'desktop' },
+
 
 
 
