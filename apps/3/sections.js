@@ -507,8 +507,11 @@
          { text: 'Heart', href: '../../health/hdocs.html?data=heart.json', icon: 'desktop' },
          { text: 'Lungs', href: '../../health/hdocs.html?data=lungs.json', icon: 'desktop' },
          { text: 'Spine', href: '../../health/hdocs.html?data=spine.json', icon: 'desktop' },
-         { text: 'Vitamins', href: '../../slides/2/slides.html?s=../../health/vitamins.md', icon: 'desktop' },
+         { text: 'Pre-Diabetic', href: '../../health/hdocs.html?data=./2/pre-diabetic.json', icon: 'desktop' },
+         
+	 { text: 'Vitamins', href: '../../slides/2/slides.html?s=../../health/vitamins.md', icon: 'desktop' },
          { text: 'Hyperthyroid', href: '../../slides/2/slides.html?s=../../health/hyperthyroid.md', icon: 'desktop' },
+
 
 	 { text: 'EKG/ECG (still in training!)', href: '../../med/ekg.html', icon: 'desktop' },
 	 { text: 'EKG/ECG Notes', href: '../../md/2/md.html?url=https://raw.githubusercontent.com/mohan-chinnappan-n5/health-notes/main/ecg.md', icon: 'desktop' },

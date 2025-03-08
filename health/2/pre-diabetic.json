@@ -1,0 +1,50 @@
+{
+  "title": "Best Top 10 Foods for Pre-Diabetic Patients",
+  "description": "Discover the top 10 foods that can help manage pre-diabetes effectively, including dates and other nutrient-rich options.",
+  "sections": [
+    {
+      "id": "introduction",
+      "title": "Why Food Choices Matter for Pre-Diabetes",
+      "content": [
+        "Pre-diabetes is a condition where blood sugar levels are higher than normal but not yet high enough to be classified as type 2 diabetes. Making the right food choices can significantly impact your well-being by helping to regulate blood sugar levels and prevent progression to diabetes.",
+        "This guide provides a curated list of top food recommendations to help you make informed choices. These options are backed by research and practical insights, focusing on accessibility and effectiveness."
+      ]
+    },
+    {
+      "id": "top-foods",
+      "title": "Top 10 Foods to Include in Your Diet",
+      "content": [
+        "1. **Dates**: Rich in fiber and natural sugars, dates provide a healthy energy boost without spiking blood sugar levels drastically.",
+        "2. **Whole Grains**: Options like quinoa and brown rice offer sustained energy and help regulate glucose levels.",
+        "3. **Leafy Greens**: Spinach and kale are packed with vitamins and minerals that support overall health.",
+        "4. **Nuts**: Almonds and walnuts provide healthy fats and protein, aiding in blood sugar control.",
+        "5. **Berries**: Blueberries and strawberries are low-glycemic fruits with antioxidants.",
+        "6. **Legumes**: Lentils and chickpeas are high in fiber and protein, promoting satiety and stable sugar levels.",
+        "7. **Fatty Fish**: Salmon and mackerel offer omega-3s, which reduce inflammation and support heart health.",
+        "8. **Greek Yogurt**: Unsweetened Greek yogurt provides probiotics and protein for balanced nutrition.",
+        "9. **Avocado**: A source of monounsaturated fats, avocados help maintain steady blood sugar.",
+        "10. **Cinnamon**: This spice can enhance insulin sensitivity and add flavor without calories."
+      ]
+    },
+    {
+      "id": "final-thoughts",
+      "title": "Final Thoughts",
+      "content": [
+        "Incorporating these foods into your routine can pave the way for better health outcomes in managing pre-diabetes. Always consult with a healthcare professional to tailor these recommendations to your specific needs!"
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "title": "Managing Pre-Diabetes with Diet",
+      "url": "https://www.youtube.com/embed/Rds8TjqbcMs"
+    },
+    {
+      "title": "Healthy Eating Tips for Blood Sugar Control",
+      "url": "https://www.youtube.com/embed/Nay62P7jb8w"
+    }
+  ],
+  "references": [
+    "https://www.diabetes.org"
+  ]
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Content Page</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Showdown.js for Markdown rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <style>
+        /* Custom styles for Markdown-converted HTML with increased specificity */
+        #content .prose h1 {
+            @apply text-4xl font-bold text-indigo-700 mb-6;
+        }
+        #content .prose h2 {
+            @apply text-2xl font-semibold text-gray-800 mt-8 mb-4 border-b-2 border-indigo-200 pb-2;
+        }
+        #content .prose h3 {
+            @apply text-xl font-medium text-gray-700 mt-6 mb-3;
+        }
+        #content .prose p {
+            @apply text-gray-600 leading-relaxed mb-4;
+        }
+        #content .prose ul {
+            @apply list-disc pl-6 mb-4;
+        }
+        #content .prose li {
+            @apply text-gray-600 mb-2;
+        }
+        #content .prose strong {
+            @apply font-semibold text-gray-800;
+        }
+        #content .prose a {
+            @apply text-indigo-600 hover:underline;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+    <!-- Sticky Navbar -->
+    <nav class="sticky top-0 bg-indigo-600 text-white p-4 shadow-md z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Health Insights</h1>
+            <div class="space-x-4">
+                <a href="#" class="hover:text-indigo-200">Home</a>
+                <a href="#" class="hover:text-indigo-200">About</a>
+                <a href="#" class="hover:text-indigo-200">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto p-6">
+        <article id="content" class="prose max-w-none bg-white p-6 rounded-lg shadow-md">
+            <p>Loading content...</p>
+        </article>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="sticky bottom-0 bg-gray-800 text-white p-4 shadow-md z-10">
+        <div class="container mx-auto text-center">
+            <p>© 2025 Health Insights. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript to Fetch and Render Markdown from URL -->
+    <script>
+        // Function to get query parameter
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Initialize Showdown converter
+        const converter = new showdown.Converter();
+
+        // Fetch Markdown from URL and render it
+        const dataUrl = getQueryParam('data');
+        if (dataUrl) {
+            fetch(dataUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to fetch Markdown');
+                    return response.text();
+                })
+                .then(markdown => {
+                    const htmlContent = converter.makeHtml(markdown);
+                    document.getElementById('content').innerHTML = htmlContent;
+                    // Ensure styles are reapplied after content injection
+                    applyCustomStyles();
+                })
+                .catch(error => {
+                    document.getElementById('content').innerHTML = `<p class="text-red-600">Error: ${error.message}</p>`;
+                });
+        } else {
+            document.getElementById('content').innerHTML = '<p class="text-gray-500">No data URL provided. Add ?data= with a URL to Markdown content.</p>';
+        }
+
+        // Function to apply custom styles (optional, for dynamic content)
+        function applyCustomStyles() {
+            const content = document.getElementById('content');
+            const headings = content.getElementsByTagName('h1');
+            for (let h of headings) {
+                h.classList.add('text-4xl', 'font-bold', 'text-indigo-700', 'mb-6');
+            }
+            // Add similar logic for other tags if needed
+        }
+    </script>
+</body>
+</html>
