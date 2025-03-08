@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesforce EPT Monitor - Chrome Extension</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .sticky-footer {
+            background: linear-gradient(to top, #1e3a8a, #4b5563);
+        }
+    </style>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-2xl font-bold">Salesforce EPT Monitor</h1>
+            </div>
+            <div class="space-x-4">
+                <a href="#features" class="hover:text-blue-200 transition-colors">Features</a>
+                <a href="#usage" class="hover:text-blue-200 transition-colors">Usage</a>
+                <a href="#install" class="hover:text-blue-200 transition-colors">Install</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Optimize Your Salesforce Experience</h2>
+            <p class="text-lg md:text-xl mb-8">Monitor Salesforce Experienced Page Time (EPT) and Total EPT metrics in real-time with the Salesforce EPT Monitor Chrome extension.</p>
+            <a href="#install" class="bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors">Get Started Now</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16">
+        <div class="max-w-5xl mx-auto px-4">
+            <h3 class="text-3xl font-semibold text-center text-gray-900 mb-12">Key Features</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold text-blue-600 mb-4">Real-Time EPT Tracking</h4>
+                    <p class="text-gray-600">Instantly view EPT and Total EPT values for any active Salesforce page hosted on force.com domains.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold text-blue-600 mb-4">User-Friendly Popup</h4>
+                    <p class="text-gray-600">Access a clean interface with color-coded metrics (green for normal, red for errors).</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold text-blue-600 mb-4">One-Click Refresh</h4>
+                    <p class="text-gray-600">Reload the active tab and update EPT metrics with a single click to troubleshoot performance issues.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold text-blue-600 mb-4">Secure & Lightweight</h4>
+                    <p class="text-gray-600">Built with Manifest V3, ensuring security and efficiency on force.com domains.</p>
+                </div>
+            </div>
+            <img src="./ept2.png" alt="">
+        </div>
+    </section>
+
+
+   
+
+    <!-- Usage Section -->
+    <section id="usage" class="bg-gray-100 py-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <h3 class="text-3xl font-semibold text-center text-gray-900 mb-12">How to Use</h3>
+            <ol class="list-decimal list-inside space-y-4 text-gray-700">
+                <li>Install the Salesforce EPT Monitor extension from the Chrome Web Store.</li>
+                <li>Navigate to any Salesforce Lightning page on a <code class="bg-gray-200 text-gray-800 px-1 rounded">force.com</code> domain.</li>
+                <li>Click the extension icon to view live EPT and Total EPT metrics in the popup.</li>
+                <li>Use the refresh feature to re-evaluate performance after making changes.</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="install" class="py-16 text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h3 class="text-3xl font-semibold text-gray-900 mb-6">Get Started Today!</h3>
+            <a href="https://chromewebstore.google.com/detail/your-extension-id" target="_blank" class="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors">Download from Chrome Web Store</a>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-4 text-center sticky bottom-0 z-10 shadow-md sticky-footer">
+        <footer class="bg-gray-800 text-white p-4 text-center sticky bottom-0 z-10 shadow-md sticky-footer">
+
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p>Salesforce EPT Chrome Extension</p>
+        </div>
+    </footer>
+</body>
+</html>
