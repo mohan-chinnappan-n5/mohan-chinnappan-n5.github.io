@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+    <style>
+        .chess-square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            cursor: pointer;
+        }
+        .light-square {
+            background-color: #f0d9b5;
+        }
+        .dark-square {
+            background-color: #b58863;
+        }
+        .piece {
+            user-select: none;
+        }
+        .highlight {
+            background-color: rgba(255, 255, 0, 0.4);
+        }
+        .ai-move {
+            background-color: rgba(255, 0, 0, 0.4);
+            transition: background-color 1s;
+        }
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .tooltip-show:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Chess Game (AI vs White)</h1>
+            <div class="flex space-x-4">
+                <div class="relative tooltip-show">
+                    <button class="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded">Help</button>
+                    <div class="tooltip absolute top-full left-0 mt-2 bg-gray-800 text-white p-4 rounded shadow-lg w-64 z-20">
+                        <h3 class="font-bold mb-2">Chess Rules:</h3>
+                        <ul class="text-sm list-disc list-inside">
+                            <li>Pawn: 1 forward (2 from start), diagonal capture</li>
+                            <li>Rook: Horizontal/vertical</li>
+                            <li>Knight: L-shape (2x1 or 1x2)</li>
+                            <li>Bishop: Diagonal</li>
+                            <li>Queen: Rook + Bishop moves</li>
+                            <li>King: 1 square any direction</li>
+                            <li>AI plays Black and starts, you play White</li>
+                            <li>Drag pieces to move</li>
+                        </ul>
+                    </div>
+                </div>
+                <button id="resetBtn" class="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded">
+                    New Game
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto py-8 flex justify-center relative">
+        <div id="chessboard" class="grid grid-cols-8 gap-0 border-4 border-gray-800"></div>
+        <div id="aiPopup" class="hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white p-6 rounded-lg shadow-xl z-30">
+            <p class="text-lg font-semibold">AI is thinking...</p>
+            <div class="mt-2 flex justify-center">
+                <div class="animate-spin h-6 w-6 border-4 border-t-transparent border-white rounded-full"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p>AI (Black) starts, you play White</p>
+        </div>
+    </footer>
+
+    <script>
+        const initialBoard = [
+            ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'],
+            ['♟', '♟', '♟', '♟', '♟', '♟', '♟', '♟'],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', ''],
+            ['♙', '♙', '♙', '♙', '♙', '♙', '♙', '♙'],
+            ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']
+        ];
+
+        let board = JSON.parse(JSON.stringify(initialBoard));
+        let selectedPiece = null;
+        let isWhiteTurn = false; // AI (Black) starts
+
+        function createBoard() {
+            const chessboard = document.getElementById('chessboard');
+            chessboard.innerHTML = '';
+
+            for (let i = 0; i < 8; i++) {
+                for (let j = 0; j < 8; j++) {
+                    const square = document.createElement('div');
+                    square.className = `chess-square ${(i + j) % 2 === 0 ? 'light-square' : 'dark-square'}`;
+                    square.dataset.row = i;
+                    square.dataset.col = j;
+
+                    if (board[i][j]) {
+                        const piece = document.createElement('span');
+                        piece.className = 'piece';
+                        piece.textContent = board[i][j];
+                        piece.draggable = isWhitePiece(board[i][j]) && isWhiteTurn; // Ensure draggable updates
+                        square.appendChild(piece);
+                    }
+
+                    square.addEventListener('dragover', (e) => e.preventDefault());
+                    square.addEventListener('drop', handleDrop);
+                    chessboard.appendChild(square);
+                }
+            }
+
+            document.querySelectorAll('.piece').forEach(piece => {
+                piece.addEventListener('dragstart', handleDragStart);
+            });
+
+            console.log(`Board created. isWhiteTurn: ${isWhiteTurn}`);
+        }
+
+        function isWhitePiece(piece) {
+            return piece === piece.toUpperCase() && piece !== '';
+        }
+
+        function handleDragStart(e) {
+            if (!isWhiteTurn) {
+                console.log("Not White's turn, drag prevented");
+                return;
+            }
+            selectedPiece = {
+                piece: e.target.textContent,
+                row: parseInt(e.target.parentElement.dataset.row),
+                col: parseInt(e.target.parentElement.dataset.col)
+            };
+            console.log(`White piece selected: ${selectedPiece.piece} at (${selectedPiece.row}, ${selectedPiece.col})`);
+        }
+
+        function isValidMove(piece, fromRow, fromCol, toRow, toCol) {
+            const dx = Math.abs(fromCol - toCol);
+            const dy = Math.abs(fromRow - toRow);
+            const targetPiece = board[toRow][toCol];
+            const isWhite = isWhitePiece(piece);
+
+            if (targetPiece && isWhite === isWhitePiece(targetPiece)) return false;
+
+            switch (piece.toLowerCase()) {
+                case '♙': // Pawn
+                    if (isWhite) {
+                        if (fromCol === toCol && !targetPiece) {
+                            if (fromRow === 6 && toRow === 4) return true;
+                            return toRow === fromRow - 1;
+                        }
+                        if (dx === 1 && toRow === fromRow - 1 && targetPiece) return true;
+                    } else {
+                        if (fromCol === toCol && !targetPiece) {
+                            if (fromRow === 1 && toRow === 3) return true;
+                            return toRow === fromRow + 1;
+                        }
+                        if (dx === 1 && toRow === fromRow + 1 && targetPiece) return true;
+                    }
+                    break;
+                case '♖': // Rook
+                    return (dx === 0 || dy === 0) && isPathClear(fromRow, fromCol, toRow, toCol);
+                case '♘': // Knight
+                    return (dx === 1 && dy === 2) || (dx === 2 && dy === 1);
+                case '♗': // Bishop
+                    return dx === dy && isPathClear(fromRow, fromCol, toRow, toCol);
+                case '♕': // Queen
+                    return ((dx === 0 || dy === 0) || dx === dy) && isPathClear(fromRow, fromCol, toRow, toCol);
+                case '♔': // King
+                    return dx <= 1 && dy <= 1;
+            }
+            return false;
+        }
+
+        function isPathClear(fromRow, fromCol, toRow, toCol) {
+            const dx = Math.sign(toCol - fromCol);
+            const dy = Math.sign(toRow - fromRow);
+            let row = fromRow + dy;
+            let col = fromCol + dx;
+
+            while (row !== toRow || col !== toCol) {
+                if (board[row][col]) return false;
+                row += dy;
+                col += dx;
+            }
+            return true;
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            if (!isWhiteTurn || !selectedPiece) return;
+
+            const targetRow = parseInt(e.currentTarget.dataset.row);
+            const targetCol = parseInt(e.currentTarget.dataset.col);
+
+            if (isValidMove(selectedPiece.piece, selectedPiece.row, selectedPiece.col, targetRow, targetCol)) {
+                board[selectedPiece.row][selectedPiece.col] = '';
+                board[targetRow][targetCol] = selectedPiece.piece;
+                isWhiteTurn = false;
+                createBoard();
+                showAIPopup();
+                setTimeout(() => {
+                    aiMove();
+                    hideAIPopup();
+                }, 1000);
+            }
+            selectedPiece = null;
+        }
+
+        function showAIPopup() {
+            document.getElementById('aiPopup').classList.remove('hidden');
+        }
+
+        function hideAIPopup() {
+            document.getElementById('aiPopup').classList.add('hidden');
+        }
+
+        function aiMove() {
+            const blackPawns = [];
+            for (let j = 0; j < 8; j++) {
+                if (board[1][j] === '♟' && !board[2][j]) {
+                    blackPawns.push({ row: 1, col: j });
+                }
+            }
+
+            if (blackPawns.length > 0) {
+                const pawn = blackPawns[Math.floor(Math.random() * blackPawns.length)];
+                const fromRow = pawn.row;
+                const fromCol = pawn.col;
+                const toRow = fromRow + 1;
+                const toCol = fromCol;
+
+                console.log(`AI moving pawn from (${fromRow}, ${fromCol}) to (${toRow}, ${toCol})`);
+                
+                board[fromRow][fromCol] = '';
+                board[toRow][toCol] = '♟';
+                
+                createBoard();
+                const squares = document.querySelectorAll('.chess-square');
+                const fromSquare = squares[fromRow * 8 + fromCol];
+                const toSquare = squares[toRow * 8 + toCol];
+                fromSquare.classList.add('ai-move');
+                toSquare.classList.add('ai-move');
+                setTimeout(() => {
+                    fromSquare.classList.remove('ai-move');
+                    toSquare.classList.remove('ai-move');
+                }, 1000);
+                console.log(`AI moved pawn to (${toRow}, ${toCol})`);
+                
+                isWhiteTurn = true; // Set to White's turn after AI moves
+                createBoard(); // Refresh board to make White pieces draggable
+                console.log("AI turn complete, now White's turn");
+            } else {
+                console.log("No movable Black pawns found!");
+                isWhiteTurn = true; // Still switch to White even if no move
+                createBoard();
+            }
+        }
+
+        function resetGame() {
+            board = JSON.parse(JSON.stringify(initialBoard));
+            isWhiteTurn = false;
+            createBoard();
+            showAIPopup();
+            setTimeout(() => {
+                aiMove();
+                hideAIPopup();
+            }, 1000);
+        }
+
+        // Initial setup: AI starts
+        createBoard();
+        showAIPopup();
+        setTimeout(() => {
+            aiMove();
+            hideAIPopup();
+        }, 1000);
+
+        document.getElementById('resetBtn').addEventListener('click', resetGame);
+    </script>
+</body>
+</html>
