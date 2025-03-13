@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAR Waterfall Diagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .tooltip-show:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .waterfall-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .waterfall-item {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #fff;
+        }
+        .waterfall-chart {
+            min-height: 100px;
+            margin-top: 10px;
+        }
+        .stacked-bar {
+            display: flex;
+            align-items: center;
+            height: 20px;
+            border: 1px solid #ddd;
+        }
+        .phase-label {
+            font-size: 10px;
+            margin-right: 5px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">HAR Waterfall Diagram</h1>
+            <div class="flex space-x-4">
+                <div class="relative tooltip-show">
+                    <button class="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded">Help</button>
+                    <div class="tooltip absolute top-full left-0 mt-2 bg-gray-800 text-white p-4 rounded shadow-lg w-64 z-20">
+                        <h3 class="font-bold mb-2">How to Use:</h3>
+                        <ul class="text-sm list-disc list-inside">
+                            <li>Export a .har file from your browser's DevTools (Network tab)</li>
+                            <li>Upload the .har file using the input below</li>
+                            <li>View waterfall diagrams for all URLs automatically</li>
+                            <li>Each diagram shows a stacked bar with timings and HTTP version</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto py-8 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-semibold mb-4">Upload HAR File</h2>
+            <input type="file" id="harFileInput" accept=".har" class="mb-4 p-2 border border-gray-300 rounded-lg">
+            <div class="waterfall-container" id="waterfallContainer"></div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-gray-800 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p>HAR Waterfall Diagram © 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let harData = null;
+
+        // Parse HAR file and generate waterfalls
+        document.getElementById('harFileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    harData = JSON.parse(event.target.result);
+                    generateWaterfalls();
+                } catch (error) {
+                    alert("Invalid HAR file: " + error.message);
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        function generateWaterfalls() {
+            const container = document.getElementById('waterfallContainer');
+            container.innerHTML = '';
+
+            const entries = harData.log.entries || [];
+            entries.forEach(entry => {
+                const item = document.createElement('div');
+                item.className = 'waterfall-item';
+                item.innerHTML = `<h3 class="text-lg font-medium">${entry.request.url} (HTTP/${entry.httpVersion})</h3>`;
+
+                const chartDiv = document.createElement('div');
+                chartDiv.className = 'waterfall-chart';
+                item.appendChild(chartDiv);
+
+                drawWaterfall(chartDiv, entry);
+                container.appendChild(item);
+            });
+        }
+
+        function drawWaterfall(container, entry) {
+            const timings = entry.timings || {};
+            const totalTime = entry.time || 0;
+
+            // Phases with colors
+            const phases = [
+                { name: "Blocked", value: timings.blocked || 0, color: "#FF6B6B" }, // Red
+                { name: "DNS", value: timings.dns || 0, color: "#4ECDC4" },        // Teal
+                { name: "Connect", value: timings.connect || 0, color: "#45B7D1" }, // Light Blue
+                { name: "SSL", value: timings.ssl || 0, color: "#96CEB4" },         // Green
+                { name: "Send", value: timings.send || 0, color: "#FFEEAD" },       // Yellow
+                { name: "Wait", value: timings.wait || 0, color: "#D4A5A5" },       // Light Red
+                { name: "Receive", value: timings.receive || 0, color: "#9B59B6" }  // Purple
+            ];
+
+            let cumulativeWidth = 0;
+            const totalValidTime = phases.reduce((sum, phase) => sum + (phase.value > 0 ? phase.value : 0), 0);
+            const barWidth = 300; // Fixed width for stacked bar in pixels
+
+            const stackedBar = d3.select(container)
+                .append("div")
+                .attr("class", "stacked-bar");
+
+            phases.forEach(phase => {
+                const width = totalValidTime > 0 ? (phase.value / totalValidTime) * barWidth : 0;
+                if (width > 0) {
+                    stackedBar.append("div")
+                        .style("width", `${width}px`)
+                        .style("height", "20px")
+                        .style("background-color", phase.color)
+                        .style("display", "inline-block");
+
+                    stackedBar.append("span")
+                        .attr("class", "phase-label")
+                        .text(`${phase.name}: ${phase.value >= 0 ? phase.value.toFixed(2) : 'N/A'}ms`);
+                }
+            });
+
+            // X-axis (time scale)
+            const xScale = d3.scaleLinear()
+                .domain([0, totalTime > 0 ? totalTime : 200])
+                .range([0, barWidth]);
+
+            d3.select(container)
+                .append("svg")
+                .attr("width", barWidth)
+                .attr("height", 30)
+                .append("g")
+                .attr("transform", "translate(0,10)")
+                .call(d3.axisBottom(xScale).ticks(5).tickFormat(d => `${d}ms`));
+        }
+    </script>
+</body>
+</html>

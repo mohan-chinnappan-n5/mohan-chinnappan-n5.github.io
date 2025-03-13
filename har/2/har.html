@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAR Waterfall Diagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .tooltip-show:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .waterfall-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+        }
+        .waterfall-chart {
+            flex-grow: 1;
+            min-height: 400px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">HAR Waterfall Diagram</h1>
+            <div class="flex space-x-4">
+                <div class="relative tooltip-show">
+                    <button class="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded">Help</button>
+                    <div class="tooltip absolute top-full left-0 mt-2 bg-gray-800 text-white p-4 rounded shadow-lg w-64 z-20">
+                        <h3 class="font-bold mb-2">How to Use:</h3>
+                        <ul class="text-sm list-disc list-inside">
+                            <li>Export a .har file from your browser's DevTools (Network tab)</li>
+                            <li>Upload the .har file using the input below</li>
+                            <li>Select a URL from the dropdown to view its waterfall diagram</li>
+                            <li>The diagram shows request timings; HTTP version is displayed</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto py-8 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl font-semibold mb-4">Upload HAR File</h2>
+            <input type="file" id="harFileInput" accept=".har" class="mb-4 p-2 border border-gray-300 rounded-lg">
+            <div class="waterfall-container">
+                <div class="w-1/4">
+                    <label for="urlSelect" class="block mb-2">Select URL:</label>
+                    <select id="urlSelect" class="w-full p-2 border border-gray-300 rounded-lg" disabled>
+                        <option value="">No URLs available</option>
+                    </select>
+                </div>
+                <div class="waterfall-chart w-3/4" id="waterfallChart"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-gray-800 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p>HAR Waterfall Diagram © 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let harData = null;
+        const margin = { top: 20, right: 20, bottom: 30, left: 50 },
+              width = 800 - margin.left - margin.right,
+              height = 400 - margin.top - margin.bottom;
+
+        // SVG setup
+        const svg = d3.select("#waterfallChart")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Parse HAR file and populate URL dropdown
+        document.getElementById('harFileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    harData = JSON.parse(event.target.result);
+                    populateUrlDropdown();
+                } catch (error) {
+                    alert("Invalid HAR file: " + error.message);
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        function populateUrlDropdown() {
+            const select = document.getElementById('urlSelect');
+            select.innerHTML = '<option value="">Select a URL</option>';
+            select.disabled = false;
+
+            const entries = harData.log.entries || [];
+            entries.forEach(entry => {
+                const option = document.createElement('option');
+                option.value = entry.request.url;
+                option.textContent = `${entry.request.url} (HTTP/${entry.httpVersion})`;
+                select.appendChild(option);
+            });
+
+            select.addEventListener('change', drawWaterfall);
+        }
+
+        function drawWaterfall() {
+            svg.selectAll("*").remove(); // Clear previous diagram
+
+            const url = document.getElementById('urlSelect').value;
+            if (!url || !harData) return;
+
+            const entries = harData.log.entries.filter(entry => entry.request.url === url);
+            if (entries.length === 0) {
+                svg.append("text")
+                    .attr("x", width / 2)
+                    .attr("y", height / 2)
+                    .attr("text-anchor", "middle")
+                    .text("No data for selected URL");
+                return;
+            }
+
+            const entry = entries[0];
+            const timings = entry.timings || {};
+            const startTime = entry.startedDateTime;
+            const totalTime = entry.time;
+
+            // Sample data for waterfall (simplified)
+            const phases = [
+                { name: "Blocked", value: timings.blocked || 0 },
+                { name: "DNS", value: timings.dns || 0 },
+                { name: "Connect", value: timings.connect || 0 },
+                { name: "SSL", value: timings.ssl || 0 },
+                { name: "Send", value: timings.send || 0 },
+                { name: "Wait", value: timings.wait || 0 },
+                { name: "Receive", value: timings.receive || 0 }
+            ];
+
+            let cumulativeTime = 0;
+            phases.forEach(phase => {
+                phase.start = cumulativeTime;
+                cumulativeTime += phase.value >= 0 ? phase.value : 0;
+            });
+
+            const xScale = d3.scaleLinear()
+                .domain([0, totalTime > 0 ? totalTime : 100])
+                .range([0, width]);
+
+            const yScale = d3.scaleBand()
+                .domain(phases.map(d => d.name))
+                .range([0, height])
+                .padding(0.1);
+
+            // Draw bars
+            svg.selectAll(".bar")
+                .data(phases)
+                .enter()
+                .append("rect")
+                .attr("class", "bar")
+                .attr("y", d => yScale(d.name))
+                .attr("x", d => xScale(d.start))
+                .attr("height", yScale.bandwidth())
+                .attr("width", d => Math.max(0, xScale(d.value)))
+                .attr("fill", "steelblue");
+
+            // Add text labels
+            svg.selectAll(".label")
+                .data(phases)
+                .enter()
+                .append("text")
+                .attr("class", "label")
+                .attr("y", d => yScale(d.name) + yScale.bandwidth() / 2)
+                .attr("x", d => xScale(d.start) + 5)
+                .attr("dy", ".35em")
+                .text(d => `${d.name}: ${d.value >= 0 ? d.value.toFixed(2) : 'N/A'}ms`)
+                .attr("fill", "white");
+
+            // X-axis
+            svg.append("g")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(xScale).ticks(5).tickFormat(d => `${d}ms`));
+
+            // Y-axis
+            svg.append("g")
+                .call(d3.axisLeft(yScale));
+        }
+    </script>
+</body>
+</html>

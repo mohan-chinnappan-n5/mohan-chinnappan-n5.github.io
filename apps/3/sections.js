@@ -67,6 +67,7 @@
 
 
 
+
       ],
     },
 
@@ -635,6 +636,7 @@ Agri: {
         { text: 'Fruit Trees', href: '../../slides/2/slides.html?s=../../agri/fruits.md', icon: 'desktop' },
         { text: 'Farm Animals', href: '../../slides/2/slides.html?s=../../agri/animals.md', icon: 'desktop' },
         { text: 'Grains', href: '../../slides/2/slides.html?s=../../agri/grains.md', icon: 'desktop' },
+        { text: 'Plant Links', href: '../../farming/links.html?data=plants.json', icon: 'desktop' },
  
         // Add more links here
       ],
