@@ -1,0 +1,30 @@
+{
+    "name": "Jane Doe",
+    "title": "CEO",
+    "children": [
+        {
+            "name": "John Smith",
+            "title": "CTO",
+            "children": [
+                {
+                    "name": "Alice Johnson",
+                    "title": "Lead Developer"
+                },
+                {
+                    "name": "Bob Brown",
+                    "title": "Senior Engineer"
+                }
+            ]
+        },
+        {
+            "name": "Sarah Wilson",
+            "title": "CFO",
+            "children": [
+                {
+                    "name": "Emma Davis",
+                    "title": "Accountant"
+                }
+            ]
+        }
+    ]
+}

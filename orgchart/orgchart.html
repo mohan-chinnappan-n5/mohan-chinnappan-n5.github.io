@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Org Chart Viewer</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- D3.js via CDN -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        /* Custom styles for the org chart */
+        .node circle {
+            fill: #3b82f6; /* Blue fill for nodes */
+            stroke: #1e40af;
+            stroke-width: 1.5px;
+        }
+        .node text {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 1.5px;
+        }
+        .node rect {
+            fill: #fff;
+            stroke: #3b82f6;
+            stroke-width: 1px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 shadow-md z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Org Chart Viewer</h1>
+            <div>
+                <a href="#" class="px-3 py-2 hover:bg-blue-700 rounded">Home</a>
+                <a href="#" class="px-3 py-2 hover:bg-blue-700 rounded">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 flex-grow">
+        <div class="mb-6">
+            <h2 class="text-3xl font-semibold mb-4 text-center">Upload Organization Data (JSON)</h2>
+            <div class="flex justify-center">
+                <input type="file" id="jsonInput" accept=".json" class="block w-full max-w-md p-2 border rounded bg-white">
+            </div>
+        </div>
+        <div id="chartContainer" class="w-full">
+            <!-- Org chart will be rendered here -->
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 text-center">
+        <p>© 2025 Org Chart Viewer. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript to handle JSON input and draw the org chart -->
+    <script>
+        // Wait for the DOM to load
+        document.getElementById('jsonInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const jsonData = JSON.parse(e.target.result);
+                    drawOrgChart(jsonData);
+                } catch (error) {
+                    alert('Error parsing JSON: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        // Function to draw the org chart using D3.js
+        function drawOrgChart(data) {
+            // Clear any existing chart
+            d3.select("#chartContainer").selectAll("*").remove();
+
+            // Set dimensions and margins
+            const margin = { top: 40, right: 120, bottom: 20, left: 120 };
+            const width = 1200 - margin.left - margin.right;
+            const height = 600 - margin.top - margin.bottom;
+
+            // Create SVG container
+            const svg = d3.select("#chartContainer")
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Create a tree layout
+            const treeLayout = d3.tree().size([height, width]);
+
+            // Convert the JSON data into a hierarchy
+            const root = d3.hierarchy(data, d => d.children);
+            const treeData = treeLayout(root);
+
+            // Draw links (lines between nodes)
+            const links = svg.selectAll(".link")
+                .data(treeData.links())
+                .enter()
+                .append("path")
+                .attr("class", "link")
+                .attr("d", d3.linkHorizontal()
+                    .x(d => d.y)
+                    .y(d => d.x));
+
+            // Draw nodes
+            const nodes = svg.selectAll(".node")
+                .data(treeData.descendants())
+                .enter()
+                .append("g")
+                .attr("class", "node")
+                .attr("transform", d => `translate(${d.y},${d.x})`);
+
+            // Add a circle for each node
+            nodes.append("circle")
+                .attr("r", 10);
+
+            // Add a rectangle for the label background
+            nodes.append("rect")
+                .attr("x", -50)
+                .attr("y", -30)
+                .attr("width", 100)
+                .attr("height", 40)
+                .attr("rx", 5)
+                .attr("ry", 5);
+
+            // Add name text
+            nodes.append("text")
+                .attr("dy", "-1em")
+                .attr("text-anchor", "middle")
+                .text(d => d.data.name);
+
+            // Add title text
+            nodes.append("text")
+                .attr("dy", "0.5em")
+                .attr("text-anchor", "middle")
+                .text(d => d.data.title || "");
+        }
+    </script>
+</body>
+</html>

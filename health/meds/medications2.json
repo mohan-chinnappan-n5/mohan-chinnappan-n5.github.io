@@ -1,0 +1,272 @@
+[
+    {
+        "name": "Aspirin",
+        "purpose": "Pain relief, anti-inflammatory, blood thinner"
+    },
+    {
+        "name": "Ibuprofen",
+        "purpose": "Pain relief, fever reduction, anti-inflammatory"
+    },
+    {
+        "name": "Paracetamol",
+        "purpose": "Pain relief, fever reduction"
+    },
+    {
+        "name": "Amoxicillin",
+        "purpose": "Antibiotic for bacterial infections"
+    },
+    {
+        "name": "Metformin",
+        "purpose": "Type 2 diabetes management"
+    },
+    {
+        "name": "Lisinopril",
+        "purpose": "High blood pressure, heart failure"
+    },
+    {
+        "name": "Atorvastatin",
+        "purpose": "Lower cholesterol, heart disease prevention"
+    },
+    {
+        "name": "Omeprazole",
+        "purpose": "Acid reflux, GERD, ulcers"
+    },
+    {
+        "name": "Citalopram",
+        "purpose": "Depression, anxiety"
+    },
+    {
+        "name": "Levothyroxine",
+        "purpose": "Hypothyroidism treatment"
+    },
+    {
+        "name": "Losartan",
+        "purpose": "High blood pressure, kidney protection in diabetes"
+    },
+    {
+        "name": "Sertraline",
+        "purpose": "Depression, anxiety, OCD, PTSD"
+    },
+    {
+        "name": "Gabapentin",
+        "purpose": "Nerve pain, seizures"
+    },
+    {
+        "name": "Prednisone",
+        "purpose": "Anti-inflammatory, autoimmune diseases"
+    },
+    {
+        "name": "Alprazolam",
+        "purpose": "Anxiety, panic disorders"
+    },
+    {
+        "name": "Simvastatin",
+        "purpose": "Lower cholesterol, heart disease prevention"
+    },
+    {
+        "name": "Hydrochlorothiazide",
+        "purpose": "High blood pressure, fluid retention"
+    },
+    {
+        "name": "Amlodipine",
+        "purpose": "High blood pressure, angina"
+    },
+    {
+        "name": "Tramadol",
+        "purpose": "Moderate to severe pain relief"
+    },
+    {
+        "name": "Warfarin",
+        "purpose": "Blood thinner to prevent clots"
+    },
+    {
+        "name": "Diazepam",
+        "purpose": "Anxiety, muscle spasms, seizures"
+    },
+    {
+        "name": "Fluoxetine",
+        "purpose": "Depression, anxiety, OCD"
+    },
+    {
+        "name": "Clonazepam",
+        "purpose": "Seizures, panic disorder"
+    },
+    {
+        "name": "Escitalopram",
+        "purpose": "Depression, generalized anxiety disorder"
+    },
+    {
+        "name": "Doxycycline",
+        "purpose": "Antibiotic for bacterial infections"
+    },
+    {
+        "name": "Azithromycin",
+        "purpose": "Antibiotic for bacterial infections"
+    },
+    {
+        "name": "Montelukast",
+        "purpose": "Asthma, allergies"
+    },
+    {
+        "name": "Tamsulosin",
+        "purpose": "Enlarged prostate (BPH) treatment"
+    },
+    {
+        "name": "Metoprolol",
+        "purpose": "High blood pressure, heart conditions"
+    },
+    {
+        "name": "Furosemide",
+        "purpose": "Fluid retention, high blood pressure"
+    },
+    {
+        "name": "Insulin",
+        "purpose": "Diabetes management"
+    },
+    {
+        "name": "Venlafaxine",
+        "purpose": "Depression, anxiety, panic disorders"
+    },
+    {
+        "name": "Bupropion",
+        "purpose": "Depression, smoking cessation"
+    },
+    {
+        "name": "Ciprofloxacin",
+        "purpose": "Antibiotic for bacterial infections"
+    },
+    {
+        "name": "Pantoprazole",
+        "purpose": "Acid reflux, GERD, ulcers"
+    },
+    {
+        "name": "Mirtazapine",
+        "purpose": "Depression, appetite stimulation"
+    },
+    {
+        "name": "Oxycodone",
+        "purpose": "Severe pain relief"
+    },
+    {
+        "name": "Duloxetine",
+        "purpose": "Depression, anxiety, nerve pain"
+    },
+    {
+        "name": "Meloxicam",
+        "purpose": "Pain relief, arthritis treatment"
+    },
+    {
+        "name": "Allopurinol",
+        "purpose": "Gout, kidney stone prevention"
+    },
+    {
+        "name": "Cephalexin",
+        "purpose": "Antibiotic for bacterial infections"
+    },
+    {
+        "name": "Risperidone",
+        "purpose": "Schizophrenia, bipolar disorder"
+    },
+    {
+        "name": "Lorazepam",
+        "purpose": "Anxiety, seizures"
+    },
+    {
+        "name": "Esomeprazole",
+        "purpose": "Acid reflux, GERD, ulcers"
+    },
+    {
+        "name": "Carvedilol",
+        "purpose": "Heart failure, high blood pressure"
+    },
+    {
+        "name": "Clopidogrel",
+        "purpose": "Prevention of blood clots"
+    },
+    {
+        "name": "Methotrexate",
+        "purpose": "Cancer, rheumatoid arthritis"
+    },
+    {
+        "name": "Trazodone",
+        "purpose": "Depression, insomnia"
+    },
+    {
+        "name": "Baclofen",
+        "purpose": "Muscle spasms, spasticity"
+    },
+    {
+        "name": "Cyclobenzaprine",
+        "purpose": "Muscle spasms"
+    },
+    {
+        "name": "Metronidazole",
+        "purpose": "Antibiotic, parasitic infections"
+    },
+    {
+        "name": "Prednisolone",
+        "purpose": "Anti-inflammatory, autoimmune diseases"
+    },
+    {
+        "name": "Fexofenadine",
+        "purpose": "Allergy relief"
+    },
+    {
+        "name": "Levocetirizine",
+        "purpose": "Allergy relief"
+    },
+    {
+        "name": "Cetirizine",
+        "purpose": "Allergy relief"
+    },
+    {
+        "name": "Diphenhydramine",
+        "purpose": "Allergy relief, sleep aid"
+    },
+    {
+        "name": "Ondansetron",
+        "purpose": "Nausea, vomiting prevention"
+    },
+    {
+        "name": "Dicyclomine",
+        "purpose": "Irritable bowel syndrome (IBS)"
+    },
+    {
+        "name": "Famotidine",
+        "purpose": "Acid reflux, GERD, ulcers"
+    },
+    {
+        "name": "Lansoprazole",
+        "purpose": "Acid reflux, GERD, ulcers"
+    },
+    {
+        "name": "Sucralfate",
+        "purpose": "Ulcer treatment"
+    },
+    {
+        "name": "Methimazole",
+        "purpose": "Hyperthyroidism treatment"
+    },
+    {
+        "name": "Finasteride",
+        "purpose": "Enlarged prostate, hair loss treatment"
+    },
+    {
+        "name": "Tadalafil",
+        "purpose": "Erectile dysfunction, enlarged prostate"
+    },
+    {
+        "name": "Sildenafil",
+        "purpose": "Erectile dysfunction, pulmonary hypertension"
+    },
+    {
+        "name": "Atenolol",
+        "purpose": "Treat high blood pressure and prevent angina"
+    },
+{
+        "name": "TEST",
+        "purpose": "TEST high blood pressure and prevent angina"
+    }
+
+
+]
