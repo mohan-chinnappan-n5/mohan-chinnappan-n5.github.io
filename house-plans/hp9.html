@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Plan Designer</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Interact.js for drag-and-drop -->
+    <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.27/dist/interact.min.js"></script>
+    <style>
+        /* Custom styles for the app */
+        .canvas-container {
+            border: 2px solid #3b82f6;
+            background-color: #f9fafb;
+            position: relative;
+        }
+        .toolbar-item {
+            cursor: move;
+            user-select: none;
+        }
+        .house-element {
+            position: absolute;
+            border: 1px solid #3b82f6;
+            background-color: rgba(59, 130, 246, 0.1);
+            cursor: move;
+            resize: both;
+            overflow: auto;
+            transform-origin: center center; /* Ensure rotation is centered */
+        }
+        .house-element:hover {
+            background-color: rgba(59, 130, 246, 0.3);
+        }
+        .house-element label {
+            font-size: 12px;
+            color: #1e40af;
+            text-align: center;
+            display: block;
+        }
+        .context-menu {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            padding: 0;
+            margin: 0;
+        }
+        .context-menu li {
+            padding: 8px 16px;
+            cursor: pointer;
+            list-style: none;
+        }
+        .context-menu li:hover {
+            background-color: #f0f0f0;
+        }
+        .color-picker-container {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 shadow-md z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">House Plan Designer</h1>
+            <div>
+                <a href="#" class="px-3 py-2 hover:bg-blue-700 rounded">Home</a>
+                <a href="#" class="px-3 py-2 hover:bg-blue-700 rounded">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 flex-grow flex">
+        <!-- Toolbar (Sidebar) -->
+        <div class="w-1/4 bg-white shadow-md rounded-lg p-4 mr-4">
+            <h2 class="text-xl font-semibold mb-4">Add Elements</h2>
+            <div class="space-y-4">
+                <div class="toolbar-item bg-blue-100 p-2 rounded text-center" data-type="room">
+                    Room (Rectangle)
+                </div>
+                <div class="toolbar-item bg-blue-100 p-2 rounded text-center" data-type="door">
+                    Door (Line)
+                </div>
+                <div class="toolbar-item bg-blue-100 p-2 rounded text-center" data-type="window">
+                    Window (Dashed Line)
+                </div>
+                <button id="undoButton" class="w-full bg-gray-500 text-white p-2 rounded hover:bg-gray-600 disabled:bg-gray-300 disabled:cursor-not-allowed" disabled>
+                    Undo
+                </button>
+                <button id="redoButton" class="w-full bg-gray-500 text-white p-2 rounded hover:bg-gray-600 disabled:bg-gray-300 disabled:cursor-not-allowed" disabled>
+                    Redo
+                </button>
+                <button id="downloadSvgButton" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
+                    Download as SVG
+                </button>
+                <button id="clearCanvas" class="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600">
+                    Clear Canvas
+                </button>
+            </div>
+        </div>
+
+        <!-- Canvas Area -->
+        <div class="w-3/4">
+            <h2 class="text-xl font-semibold mb-4">Your House Plan</h2>
+            <div class="canvas-container relative">
+                <canvas id="houseCanvas" width="800" height="600"></canvas>
+                <div id="elementsContainer" class="absolute top-0 left-0 w-full h-full"></div>
+            </div>
+            <p class="text-gray-600 mt-2">Drag elements from the sidebar to the canvas. Resize, reposition, or right-click for options (rotate, color, delete). Use Undo/Redo or download as SVG.</p>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 text-center">
+        <p>© 2025 House Plan Designer. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for drawing, drag-and-drop, context menu, undo/redo, ticks, rotate, color, and SVG export -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('houseCanvas');
+            const ctx = canvas.getContext('2d');
+            const elementsContainer = document.getElementById('elementsContainer');
+            const clearCanvasButton = document.getElementById('clearCanvas');
+            const undoButton = document.getElementById('undoButton');
+            const redoButton = document.getElementById('redoButton');
+            const downloadSvgButton = document.getElementById('downloadSvgButton');
+
+            // Track all elements on the canvas
+            let elements = [];
+            // Undo/Redo stacks
+            let history = [];
+            let redoStack = [];
+            const HISTORY_LIMIT = 50; // Limit the number of actions in history
+            const GRID_SIZE = 50; // Grid size for ticks (in pixels)
+
+            // Default colors
+            const DEFAULT_BG_COLOR = 'rgba(59, 130, 246, 0.1)';
+            const DEFAULT_FG_COLOR = '#3b82f6';
+
+            // Counter for generating unique element IDs
+            let elementIdCounter = 0;
+
+            // Function to convert hex to rgba with alpha
+            function hexToRgba(hex, alpha = 1) {
+                hex = hex.replace('#', '');
+                const r = parseInt(hex.length === 3 ? hex[0] + hex[0] : hex.substring(0, 2), 16);
+                const g = parseInt(hex.length === 3 ? hex[1] + hex[1] : hex.substring(2, 4), 16);
+                const b = parseInt(hex.length === 3 ? hex[2] + hex[2] : hex.substring(4, 6), 16);
+                return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+            }
+
+            // Helper function to convert RGB to hex
+            function rgbToHex(r, g, b) {
+                return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+            }
+
+            // Function to draw grid and ticks
+            function drawGridAndTicks() {
+                ctx.save();
+                ctx.beginPath();
+                ctx.strokeStyle = '#e5e7eb'; // Light gray grid lines
+                ctx.lineWidth = 0.5;
+
+                // Draw vertical grid lines and X-axis ticks
+                for (let x = 0; x <= canvas.width; x += GRID_SIZE) {
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height);
+                    ctx.stroke();
+
+                    // Draw X-axis tick label
+                    ctx.fillStyle = '#6b7280'; // Gray text
+                    ctx.font = '10px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(x.toString(), x, canvas.height - 5);
+                }
+
+                // Draw horizontal grid lines and Y-axis ticks
+                for (let y = 0; y <= canvas.height; y += GRID_SIZE) {
+                    ctx.moveTo(0, y);
+                    ctx.lineTo(canvas.width, y);
+                    ctx.stroke();
+
+                    // Draw Y-axis tick label
+                    ctx.fillStyle = '#6b7280'; // Gray text
+                    ctx.textAlign = 'right';
+                    ctx.fillText(y.toString(), 15, y + 3);
+                }
+
+                ctx.restore();
+            }
+
+            // Function to redraw the canvas with grid, ticks, and elements
+            function redrawCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawGridAndTicks(); // Draw grid and ticks first
+
+                // Draw all elements
+                elements.forEach(element => {
+                    const { type, x, y, width, height, rotation, bgColor, fgColor } = element;
+                    ctx.save(); // Save context to apply rotation
+                    ctx.translate(x + width / 2, y + height / 2); // Translate to center of element
+                    ctx.rotate(rotation * Math.PI / 180); // Apply rotation in radians
+                    ctx.translate(-width / 2, -height / 2); // Translate back
+
+                    ctx.beginPath();
+                    if (type === 'room') {
+                        ctx.rect(0, 0, width, height);
+                        ctx.fillStyle = bgColor || DEFAULT_BG_COLOR;
+                        ctx.fill();
+                        ctx.strokeStyle = fgColor || DEFAULT_FG_COLOR;
+                        ctx.stroke();
+                    } else if (type === 'door') {
+                        ctx.moveTo(0, height / 2);
+                        ctx.lineTo(width, height / 2);
+                        ctx.strokeStyle = fgColor || DEFAULT_FG_COLOR;
+                        ctx.lineWidth = 3;
+                        ctx.stroke();
+                    } else if (type === 'window') {
+                        ctx.moveTo(0, height / 2);
+                        ctx.lineTo(width, height / 2);
+                        ctx.strokeStyle = fgColor || DEFAULT_FG_COLOR;
+                        ctx.lineWidth = 2;
+                        ctx.setLineDash([5, 5]); // Dashed line for windows
+                        ctx.stroke();
+                        ctx.setLineDash([]); // Reset to solid line
+                    }
+
+                    ctx.restore(); // Restore context to remove rotation
+                });
+            }
+
+            // Function to generate SVG content
+            function generateSvg() {
+                let svgContent = `<svg width="${canvas.width}" height="${canvas.height}" xmlns="http://www.w3.org/2000/svg">`;
+
+                // Add grid and ticks
+                svgContent += '<g stroke="#e5e7eb" stroke-width="0.5">';
+                for (let x = 0; x <= canvas.width; x += GRID_SIZE) {
+                    svgContent += `<line x1="${x}" y1="0" x2="${x}" y2="${canvas.height}" />`;
+                    svgContent += `<text x="${x}" y="${canvas.height - 5}" fill="#6b7280" font-size="10" text-anchor="middle">${x}</text>`;
+                }
+                for (let y = 0; y <= canvas.height; y += GRID_SIZE) {
+                    svgContent += `<line x1="0" y1="${y}" x2="${canvas.width}" y2="${y}" />`;
+                    svgContent += `<text x="15" y="${y + 3}" fill="#6b7280" font-size="10" text-anchor="end">${y}</text>`;
+                }
+                svgContent += '</g>';
+
+                // Add elements
+                elements.forEach(element => {
+                    const { type, x, y, width, height, rotation, bgColor, fgColor } = element;
+                    const centerX = x + width / 2;
+                    const centerY = y + height / 2;
+                    svgContent += `<g transform="translate(${centerX}, ${centerY}) rotate(${rotation}) translate(${-width / 2}, ${-height / 2})">`;
+                    if (type === 'room') {
+                        svgContent += `<rect x="0" y="0" width="${width}" height="${height}" fill="${bgColor || DEFAULT_BG_COLOR}" stroke="${fgColor || DEFAULT_FG_COLOR}" stroke-width="1" />`;
+                    } else if (type === 'door') {
+                        svgContent += `<line x1="0" y1="${height / 2}" x2="${width}" y2="${height / 2}" stroke="${fgColor || DEFAULT_FG_COLOR}" stroke-width="3" />`;
+                    } else if (type === 'window') {
+                        svgContent += `<line x1="0" y1="${height / 2}" x2="${width}" y2="${height / 2}" stroke="${fgColor || DEFAULT_FG_COLOR}" stroke-width="2" stroke-dasharray="5,5" />`;
+                    }
+                    svgContent += '</g>';
+                });
+
+                svgContent += '</svg>';
+                return svgContent;
+            }
+
+            // Function to download the SVG
+            downloadSvgButton.addEventListener('click', () => {
+                const svgContent = generateSvg();
+                const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'house_plan.svg';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            });
+
+            // Function to save the current state to history
+            function saveState(actionType, elementId, additionalData = {}) {
+                // Create a copy of elements without domElement
+                const elementsCopy = elements.map(element => {
+                    const { domElement, ...rest } = element;
+                    return rest;
+                });
+                const state = {
+                    action: actionType,
+                    elementId: elementId,
+                    elements: elementsCopy,
+                    additionalData: additionalData
+                };
+                history.push(state);
+                if (history.length > HISTORY_LIMIT) {
+                    history.shift(); // Remove oldest action if limit exceeded
+                }
+                redoStack = []; // Clear redo stack on new action
+                updateUndoRedoButtons();
+            }
+
+            // Function to update Undo/Redo button states
+            function updateUndoRedoButtons() {
+                undoButton.disabled = history.length === 0;
+                redoButton.disabled = redoStack.length === 0;
+            }
+
+            // Function to sync DOM elements with the elements array
+            function syncElementsWithDOM() {
+                elementsContainer.innerHTML = '';
+                elements.forEach(element => {
+                    const clone = document.createElement('div');
+                    clone.className = 'house-element';
+                    clone.style.width = `${element.width}px`;
+                    clone.style.height = `${element.height}px`;
+                    clone.style.left = `${element.x}px`;
+                    clone.style.top = `${element.y}px`;
+                    clone.style.transform = `rotate(${element.rotation || 0}deg)`;
+                    clone.style.backgroundColor = element.bgColor || DEFAULT_BG_COLOR;
+                    clone.style.borderColor = element.fgColor || DEFAULT_FG_COLOR;
+                    clone.innerHTML = `<label>${element.type.charAt(0).toUpperCase() + element.type.slice(1)}</label>`;
+                    elementsContainer.appendChild(clone);
+                    element.domElement = clone;
+                    setupElementInteractions(element);
+                });
+            }
+
+            // Function to show context menu
+            function showContextMenu(elementData, x, y) {
+                // Remove any existing context menu
+                const existingMenu = document.querySelector('.context-menu');
+                if (existingMenu) existingMenu.remove();
+
+                const menu = document.createElement('ul');
+                menu.className = 'context-menu';
+                menu.style.left = `${x}px`;
+                menu.style.top = `${y}px`;
+
+                // Delete option
+                const deleteItem = document.createElement('li');
+                deleteItem.textContent = 'Delete';
+                deleteItem.addEventListener('click', () => {
+                    const index = elements.findIndex(el => el.id === elementData.id);
+                    if (index !== -1) {
+                        saveState('delete', elementData.id, { index });
+                        elements.splice(index, 1);
+                        elementsContainer.removeChild(elementData.domElement);
+                        redrawCanvas();
+                    }
+                    menu.remove();
+                });
+                menu.appendChild(deleteItem);
+
+                // Rotate submenu
+                const rotateItem = document.createElement('li');
+                rotateItem.textContent = 'Rotate';
+                rotateItem.addEventListener('click', () => {
+                    const angles = [15, 30, 45, 90, 180, 'Custom'];
+                    const rotateMenu = document.createElement('ul');
+                    rotateMenu.className = 'context-menu';
+                    rotateMenu.style.left = `${parseInt(menu.style.left) + menu.offsetWidth}px`;
+                    rotateMenu.style.top = menu.style.top;
+                    angles.forEach(angle => {
+                        const angleOption = document.createElement('li');
+                        angleOption.textContent = angle === 'Custom' ? 'Custom Angle...' : `${angle}°`;
+                        angleOption.addEventListener('click', () => {
+                            let newAngle;
+                            if (angle === 'Custom') {
+                                const customAngle = prompt('Enter rotation angle (degrees):', '0');
+                                newAngle = parseFloat(customAngle) || 0;
+                            } else {
+                                newAngle = angle;
+                            }
+                            const oldRotation = elementData.rotation || 0;
+                            elementData.rotation = (oldRotation + newAngle) % 360;
+                            elementData.domElement.style.transform = `rotate(${elementData.rotation}deg)`;
+                            redrawCanvas();
+                            saveState('rotate', elementData.id, { oldRotation, angle: newAngle });
+                            rotateMenu.remove();
+                            menu.remove();
+                        });
+                        rotateMenu.appendChild(angleOption);
+                    });
+                    document.body.appendChild(rotateMenu);
+
+                    // Close nested menu when clicking outside
+                    document.addEventListener('click', function closeNestedMenu(event) {
+                        if (!rotateMenu.contains(event.target) && !rotateItem.contains(event.target)) {
+                            rotateMenu.remove();
+                            document.removeEventListener('click', closeNestedMenu);
+                        }
+                    });
+                });
+                menu.appendChild(rotateItem);
+
+                // Background Color with color wheel
+                const bgColorItem = document.createElement('li');
+                bgColorItem.textContent = 'Change Background Color';
+                bgColorItem.addEventListener('click', () => {
+                    const colorMenu = document.createElement('div');
+                    colorMenu.className = 'context-menu color-picker-container';
+                    colorMenu.style.left = `${parseInt(menu.style.left) + menu.offsetWidth}px`;
+                    colorMenu.style.top = menu.style.top;
+
+                    const colorPicker = document.createElement('input');
+                    colorPicker.type = 'color';
+                    // Use the base color without alpha for the picker
+                    const currentColor = elementData.bgColor || DEFAULT_BG_COLOR;
+                    const hexColor = currentColor.match(/^rgba\((\d+),\s*(\d+),\s*(\d+)/) 
+                        ? rgbToHex(...currentColor.match(/^rgba\((\d+),\s*(\d+),\s*(\d+)/).slice(1, 4).map(Number)) 
+                        : currentColor;
+                    colorPicker.value = hexColor;
+
+                    // Temporary variable to track color changes
+                    let tempBgColor = elementData.bgColor;
+                    colorPicker.addEventListener('input', (e) => {
+                        tempBgColor = hexToRgba(e.target.value, 0.1);
+                        elementData.bgColor = tempBgColor;
+                        elementData.domElement.style.backgroundColor = elementData.bgColor;
+                        redrawCanvas();
+                    });
+                    // Save state only when the color picker is closed
+                    document.addEventListener('click', function closeNestedMenu(event) {
+                        if (!colorMenu.contains(event.target) && !bgColorItem.contains(event.target)) {
+                            if (tempBgColor !== elementData.bgColor) {
+                                saveState('bgColor', elementData.id, { oldBgColor: elementData.bgColor });
+                            }
+                            colorMenu.remove();
+                            document.removeEventListener('click', closeNestedMenu);
+                        }
+                    });
+                    colorMenu.appendChild(colorPicker);
+                    document.body.appendChild(colorMenu);
+                });
+                menu.appendChild(bgColorItem);
+
+                // Foreground Color with color wheel
+                const fgColorItem = document.createElement('li');
+                fgColorItem.textContent = 'Change Foreground Color';
+                fgColorItem.addEventListener('click', () => {
+                    const colorMenu = document.createElement('div');
+                    colorMenu.className = 'context-menu color-picker-container';
+                    colorMenu.style.left = `${parseInt(menu.style.left) + menu.offsetWidth}px`;
+                    colorMenu.style.top = menu.style.top;
+
+                    const colorPicker = document.createElement('input');
+                    colorPicker.type = 'color';
+                    colorPicker.value = elementData.fgColor || DEFAULT_FG_COLOR;
+
+                    // Temporary variable to track color changes
+                    let tempFgColor = elementData.fgColor;
+                    colorPicker.addEventListener('input', (e) => {
+                        tempFgColor = e.target.value;
+                        elementData.fgColor = tempFgColor;
+                        elementData.domElement.style.borderColor = elementData.fgColor;
+                        redrawCanvas();
+                    });
+                    // Save state only when the color picker is closed
+                    document.addEventListener('click', function closeNestedMenu(event) {
+                        if (!colorMenu.contains(event.target) && !fgColorItem.contains(event.target)) {
+                            if (tempFgColor !== elementData.fgColor) {
+                                saveState('fgColor', elementData.id, { oldFgColor: elementData.fgColor });
+                            }
+                            colorMenu.remove();
+                            document.removeEventListener('click', closeNestedMenu);
+                        }
+                    });
+                    colorMenu.appendChild(colorPicker);
+                    document.body.appendChild(colorMenu);
+                });
+                menu.appendChild(fgColorItem);
+
+                document.body.appendChild(menu);
+
+                // Close the context menu when clicking elsewhere
+                document.addEventListener('click', function closeMenu(event) {
+                    if (!menu.contains(event.target)) {
+                        menu.remove();
+                        document.removeEventListener('click', closeMenu);
+                    }
+                });
+            }
+
+            // Function to set up drag, resize, and context menu interactions for an element
+            function setupElementInteractions(elementData) {
+                interact(elementData.domElement)
+                    .draggable({
+                        listeners: {
+                            move: function(event) {
+                                const target = event.target;
+                                const x = (parseFloat(target.style.left) || 0) + event.dx;
+                                const y = (parseFloat(target.style.top) || 0) + event.dy;
+
+                                target.style.left = `${x}px`;
+                                target.style.top = `${y}px`;
+
+                                const oldX = elementData.x;
+                                const oldY = elementData.y;
+                                elementData.x = x;
+                                elementData.y = y;
+                                redrawCanvas();
+
+                                // Save the move action to history
+                                saveState('move', elementData.id, { oldX, oldY });
+                            }
+                        }
+                    })
+                    .resizable({
+                        edges: { left: true, right: true, bottom: true, top: true },
+                        listeners: {
+                            move: function(event) {
+                                const target = event.target;
+                                let x = parseFloat(target.style.left) || 0;
+                                let y = parseFloat(target.style.top) || 0;
+
+                                // Update size
+                                target.style.width = `${event.rect.width}px`;
+                                target.style.height = `${event.rect.height}px`;
+
+                                // Update position if the left or top edge is resized
+                                if (event.edges.left) {
+                                    x += event.deltaRect.left;
+                                    target.style.left = `${x}px`;
+                                }
+                                if (event.edges.top) {
+                                    y += event.deltaRect.top;
+                                    target.style.top = `${y}px`;
+                                }
+
+                                const oldX = elementData.x;
+                                const oldY = elementData.y;
+                                const oldWidth = elementData.width;
+                                const oldHeight = elementData.height;
+
+                                elementData.x = x;
+                                elementData.y = y;
+                                elementData.width = event.rect.width;
+                                elementData.height = event.rect.height;
+                                redrawCanvas();
+
+                                // Save the resize action to history
+                                saveState('resize', elementData.id, { oldX, oldY, oldWidth, oldHeight });
+                            }
+                        }
+                    });
+
+                // Add right-click to show context menu
+                elementData.domElement.addEventListener('contextmenu', (event) => {
+                    event.preventDefault();
+                    const rect = elementsContainer.getBoundingClientRect();
+                    const x = event.clientX;
+                    const y = event.clientY;
+                    showContextMenu(elementData, x, y);
+                });
+            }
+
+            // Function to create and set up a new element
+            function createElement(type, x, y) {
+                const elementData = {
+                    id: `element-${elementIdCounter++}`, // Unique ID for each element
+                    type: type,
+                    x: x,
+                    y: y,
+                    width: type === 'room' ? 100 : 50,
+                    height: type === 'room' ? 80 : 10,
+                    rotation: 0,
+                    bgColor: DEFAULT_BG_COLOR,
+                    fgColor: DEFAULT_FG_COLOR,
+                    domElement: null
+                };
+                elements.push(elementData);
+                syncElementsWithDOM();
+                redrawCanvas();
+                saveState('add', elementData.id);
+            }
+
+            // Initialize drag-and-drop for toolbar items
+            interact('.toolbar-item').draggable({
+                listeners: {
+                    start: function(event) {
+                        event.preventDefault();
+                    },
+                    move: function(event) {
+                        // Optional: Show a ghost element while dragging (visual feedback)
+                    },
+                    end: function(event) {
+                        const type = event.target.dataset.type;
+                        const rect = elementsContainer.getBoundingClientRect();
+                        const x = event.clientX - rect.left - (type === 'room' ? 50 : 25); // Adjust for element width
+                        const y = event.clientY - rect.top - (type === 'room' ? 40 : 5);  // Adjust for element height
+
+                        createElement(type, x, y);
+                    }
+                }
+            });
+
+            // Undo functionality
+            undoButton.addEventListener('click', () => {
+                if (history.length === 0) return;
+                const state = history.pop();
+                redoStack.push(state);
+
+                if (state.action === 'add') {
+                    elements.pop();
+                } else if (state.action === 'delete') {
+                    const { index } = state.additionalData;
+                    const deletedElement = state.elements.find(el => el.id === state.elementId);
+                    elements.splice(index, 0, deletedElement);
+                } else if (state.action === 'move') {
+                    const element = elements.find(el => el.id === state.elementId);
+                    if (element) {
+                        element.x = state.additionalData.oldX;
+                        element.y = state.additionalData.oldY;
+                    }
+                } else if (state.action === 'resize') {
+                    const element = elements.find(el => el.id === state.elementId);
+                    if (element) {
+                        element.x = state.additionalData.oldX;
+                        element.y = state.additionalData.oldY;
+                        element.width = state.additionalData.oldWidth;
+                        element.height = state.additionalData.oldHeight;
+                    }
+                } else if (state.action === 'rotate') {
+                    const element = elements.find(el => el.id === state.elementId);
+                    if (element) {
+                        element.rotation = state.additionalData.oldRotation;
+                    }
+                } else if (state.action === 'bgColor') {
+                    const element = elements.find(el => el.id === state.elementId);
+                    if (element) {
+                        element.bgColor = state.additionalData.oldBgColor;
+                    }
+                } else if (state.action === 'fgColor') {
+                    const element = elements.find(el => el.id === state.elementId);
+                    if (element) {
+                        element.fgColor = state.additionalData.oldFgColor;
+                    }
+                } else if (state.action === 'clear') {
+                    elements = state.elements.slice();
+                }
+
+                syncElementsWithDOM();
+                redrawCanvas();
+                updateUndoRedoButtons();
+            });
+
+            // Redo functionality
+            redoButton.addEventListener('click', () => {
+                if (redoStack.length === 0) return;
+                const state = redoStack.pop();
+                history.push(state);
+
+                if (state.action === 'add') {
+                    const addedElement = state.elements[state.elements.length - 1];
+                    elements.push(addedElement);
+                } else if (state.action === 'delete') {
+                    const { index } = state.additionalData;
+                    elements.splice(index, 1);
+                } else if (state.action === 'move') {
+                    const element = elements.find(el => el.id === state.elementId);
+                    if (element) {
+                        const currentState = history[history.length - 2]; // Previous state before the undo
+                        const prevElement = currentState.elements.find(el => el.id === state.elementId);
+                        element.x = prevElement.x;
+                        element.y = prevElement.y;
+                    }
+                } else if (state.action === 'resize') {
+                    const element = elements.find(el => el.id === state.elementId);
+                    if (element) {
+                        const currentState = history[history.length - 2];
+                        const prevElement = currentState.elements.find(el => el.id === state.elementId);
+                        element.x = prevElement.x;
+                        element.y = prevElement.y;
+                        element.width = prevElement.width;
+                        element.height = prevElement.height;
+                    }
+                } else if (state.action === 'rotate') {
+                    const element = elements.find(el => el.id === state.elementId);
+                    if (element) {
+                        const currentState = history[history.length - 2];
+                        const prevElement = currentState.elements.find(el => el.id === state.elementId);
+                        element.rotation = prevElement.rotation;
+                    }
+                } else if (state.action === 'bgColor') {
+                    const element = elements.find(el => el.id === state.elementId);
+                    if (element) {
+                        const currentState = history[history.length - 2];
+                        const prevElement = currentState.elements.find(el => el.id === state.elementId);
+                        element.bgColor = prevElement.bgColor;
+                    }
+                } else if (state.action === 'fgColor') {
+                    const element = elements.find(el => el.id === state.elementId);
+                    if (element) {
+                        const currentState = history[history.length - 2];
+                        const prevElement = currentState.elements.find(el => el.id === state.elementId);
+                        element.fgColor = prevElement.fgColor;
+                    }
+                } else if (state.action === 'clear') {
+                    elements = [];
+                }
+
+                syncElementsWithDOM();
+                redrawCanvas();
+                updateUndoRedoButtons();
+            });
+
+            // Clear canvas button
+            clearCanvasButton.addEventListener('click', () => {
+                saveState('clear', null);
+                elements = [];
+                elementsContainer.innerHTML = '';
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawGridAndTicks(); // Redraw grid and ticks
+                redoStack = [];
+                updateUndoRedoButtons();
+            });
+
+            // Initial draw of grid and ticks
+            drawGridAndTicks();
+        });
+    </script>
+</body>
+</html>

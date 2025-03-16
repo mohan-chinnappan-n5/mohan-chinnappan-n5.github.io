@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Plan Designer</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Interact.js for drag-and-drop -->
+    <script src="https://cdn.jsdelivr.net/npm/interactjs@1.10.27/dist/interact.min.js"></script>
+    <style>
+        /* Custom styles for the app */
+        .canvas-container {
+            border: 2px solid #3b82f6;
+            background-color: #f9fafb;
+        }
+        .toolbar-item {
+            cursor: move;
+            user-select: none;
+        }
+        .house-element {
+            position: absolute;
+            border: 1px solid #3b82f6;
+            background-color: rgba(59, 130, 246, 0.1);
+            cursor: move;
+            resize: both;
+            overflow: auto;
+        }
+        .house-element:hover {
+            background-color: rgba(59, 130, 246, 0.3);
+        }
+        .house-element label {
+            font-size: 12px;
+            color: #1e40af;
+            text-align: center;
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 shadow-md z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">House Plan Designer</h1>
+            <div>
+                <a href="#" class="px-3 py-2 hover:bg-blue-700 rounded">Home</a>
+                <a href="#" class="px-3 py-2 hover:bg-blue-700 rounded">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 flex-grow flex">
+        <!-- Toolbar (Sidebar) -->
+        <div class="w-1/4 bg-white shadow-md rounded-lg p-4 mr-4">
+            <h2 class="text-xl font-semibold mb-4">Add Elements</h2>
+            <div class="space-y-4">
+                <div class="toolbar-item bg-blue-100 p-2 rounded text-center" data-type="room">
+                    Room (Rectangle)
+                </div>
+                <div class="toolbar-item bg-blue-100 p-2 rounded text-center" data-type="door">
+                    Door (Line)
+                </div>
+                <div class="toolbar-item bg-blue-100 p-2 rounded text-center" data-type="window">
+                    Window (Dashed Line)
+                </div>
+                <button id="clearCanvas" class="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600">
+                    Clear Canvas
+                </button>
+            </div>
+        </div>
+
+        <!-- Canvas Area -->
+        <div class="w-3/4">
+            <h2 class="text-xl font-semibold mb-4">Your House Plan</h2>
+            <div class="canvas-container relative">
+                <canvas id="houseCanvas" width="800" height="600"></canvas>
+                <div id="elementsContainer" class="absolute top-0 left-0 w-full h-full"></div>
+            </div>
+            <p class="text-gray-600 mt-2">Drag elements from the sidebar to the canvas. Resize and position them to design your house plan.</p>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4 text-center">
+        <p>© 2025 House Plan Designer. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for drawing and drag-and-drop -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('houseCanvas');
+            const ctx = canvas.getContext('2d');
+            const elementsContainer = document.getElementById('elementsContainer');
+            const clearCanvasButton = document.getElementById('clearCanvas');
+
+            // Track all elements on the canvas
+            let elements = [];
+
+            // Function to redraw the canvas with all elements
+            function redrawCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                elements.forEach(element => {
+                    const { type, x, y, width, height } = element;
+                    ctx.beginPath();
+                    if (type === 'room') {
+                        ctx.rect(x, y, width, height);
+                        ctx.fillStyle = 'rgba(59, 130, 246, 0.1)';
+                        ctx.fill();
+                        ctx.strokeStyle = '#3b82f6';
+                        ctx.stroke();
+                    } else if (type === 'door') {
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(x + width, y + height);
+                        ctx.strokeStyle = '#3b82f6';
+                        ctx.lineWidth = 3;
+                        ctx.stroke();
+                    } else if (type === 'window') {
+                        ctx.moveTo(x, y);
+                        ctx.lineTo(x + width, y + height);
+                        ctx.strokeStyle = '#3b82f6';
+                        ctx.lineWidth = 2;
+                        ctx.setLineDash([5, 5]); // Dashed line for windows
+                        ctx.stroke();
+                        ctx.setLineDash([]); // Reset to solid line
+                    }
+                });
+            }
+
+            // Initialize drag-and-drop for toolbar items
+            interact('.toolbar-item').draggable({
+                onstart: function(event) {
+                    const type = event.target.dataset.type;
+                    const clone = document.createElement('div');
+                    clone.className = 'house-element';
+                    clone.style.width = type === 'room' ? '100px' : '50px';
+                    clone.style.height = type === 'room' ? '80px' : '10px';
+                    clone.style.left = '0px';
+                    clone.style.top = '0px';
+                    clone.innerHTML = `<label>${type.charAt(0).toUpperCase() + type.slice(1)}</label>`;
+                    elementsContainer.appendChild(clone);
+
+                    const elementData = {
+                        type: type,
+                        x: 0,
+                        y: 0,
+                        width: type === 'room' ? 100 : 50,
+                        height: type === 'room' ? 80 : 10,
+                        domElement: clone
+                    };
+                    elements.push(elementData);
+
+                    // Enable drag and resize for the new element
+                    interact(clone).draggable({
+                        onmove: function(event) {
+                            const target = event.target;
+                            const x = (parseFloat(target.style.left) || 0) + event.dx;
+                            const y = (parseFloat(target.style.top) || 0) + event.dy;
+                            target.style.left = `${x}px`;
+                            target.style.top = `${y}px`;
+
+                            elementData.x = x;
+                            elementData.y = y;
+                            redrawCanvas();
+                        }
+                    }).resizable({
+                        edges: { left: true, right: true, bottom: true, top: true },
+                        onmove: function(event) {
+                            const target = event.target;
+                            let x = parseFloat(target.style.left) || 0;
+                            let y = parseFloat(target.style.top) || 0;
+
+                            // Update size
+                            target.style.width = `${event.rect.width}px`;
+                            target.style.height = `${event.rect.height}px`;
+
+                            // Update position if the left or top edge is resized
+                            if (event.edges.left) {
+                                x += event.deltaRect.left;
+                                target.style.left = `${x}px`;
+                            }
+                            if (event.edges.top) {
+                                y += event.deltaRect.top;
+                                target.style.top = `${y}px`;
+                            }
+
+                            elementData.x = x;
+                            elementData.y = y;
+                            elementData.width = event.rect.width;
+                            elementData.height = event.rect.height;
+                            redrawCanvas();
+                        }
+                    });
+                },
+                onmove: function(event) {
+                    const lastElement = elements[elements.length - 1];
+                    const target = lastElement.domElement;
+                    const x = (parseFloat(target.style.left) || 0) + event.dx;
+                    const y = (parseFloat(target.style.top) || 0) + event.dy;
+                    target.style.left = `${x}px`;
+                    target.style.top = `${y}px`;
+
+                    lastElement.x = x;
+                    lastElement.y = y;
+                    redrawCanvas();
+                }
+            });
+
+            // Clear canvas button
+            clearCanvasButton.addEventListener('click', () => {
+                elements = [];
+                elementsContainer.innerHTML = '';
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            });
+        });
+    </script>
+</body>
+</html>
