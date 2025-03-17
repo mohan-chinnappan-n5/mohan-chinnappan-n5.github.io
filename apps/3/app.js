@@ -2,10 +2,11 @@ import sections from './sections.js?v=2';
 
 // Function to create catalog content based on selected category
 function createCatalog(selectedCategoryKey) {
-  const catalogContainer = document.getElementById('catalog');
-  catalogContainer.innerHTML = ''; // Clear existing content
 
-  // Display all items if no category is selected
+     const catalogContainer = document.getElementById('catalog');
+     catalogContainer.innerHTML = ''; // Clear existing content
+     catalogContainer.className = 'space-y-6 bg-white dark:bg-gray-900 p-4 rounded-lg shadow'; // Ensures background is applied
+	  // Display all items if no category is selected
   if (!selectedCategoryKey) {
     Object.keys(sections).forEach(key => {
       const section = sections[key];
@@ -13,7 +14,7 @@ function createCatalog(selectedCategoryKey) {
       sectionDiv.className = 'bg-white dark:bg-gray-800 p-4 rounded shadow-md';
 
       const title = document.createElement('h3');
-      title.className = 'text-xl font-semibold text-blue-800 dark:text-blue-400';
+      title.className = 'text-xl font-semibold text-white-800 dark:text-white-400';
       title.textContent = section.title;
 
       sectionDiv.appendChild(title);
@@ -32,7 +33,7 @@ function createCatalog(selectedCategoryKey) {
         const anchor = document.createElement('a');
         anchor.href = link.href;
         anchor.textContent = link.text;
-        anchor.className = 'text-blue-600 dark:text-blue-400 hover:underline';
+        anchor.className = 'text-white-600 dark:text-white-400 hover:underline';
 
         listItem.appendChild(icon);
         listItem.appendChild(anchor);
@@ -51,7 +52,7 @@ function createCatalog(selectedCategoryKey) {
       sectionDiv.className = 'bg-white dark:bg-gray-800 p-4 rounded shadow-md';
 
       const title = document.createElement('h3');
-      title.className = 'text-xl font-semibold text-blue-800 dark:text-blue-400';
+      title.className = 'text-xl font-semibold text-white-800 dark:text-white-400';
       title.textContent = section.title;
 
       sectionDiv.appendChild(title);
@@ -70,7 +71,7 @@ function createCatalog(selectedCategoryKey) {
         const anchor = document.createElement('a');
         anchor.href = link.href;
         anchor.textContent = link.text;
-        anchor.className = 'text-blue-600 dark:text-blue-400 hover:underline';
+        anchor.className = 'text-white-600 dark:text-white-400 hover:underline';
 
         listItem.appendChild(icon);
         listItem.appendChild(anchor);
@@ -94,7 +95,7 @@ function createCategories() {
   Object.keys(sections).forEach(key => {
     const section = sections[key];
     const categoryItem = document.createElement('li');
-    categoryItem.className = 'cursor-pointer text-blue-600 dark:text-blue-400 hover:underline';
+    categoryItem.className = 'cursor-pointer text-white-600 dark:white-blue-400 hover:underline';
     categoryItem.textContent = section.title;
     categoryItem.dataset.key = key; // Store the section key for reference
     categoryItem.addEventListener('click', () => {
