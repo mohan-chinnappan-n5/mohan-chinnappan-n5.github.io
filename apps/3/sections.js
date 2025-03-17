@@ -584,7 +584,8 @@ Greetings: {
         { text: 'Happy Diwali!', href: '../../greetings/diwali.html', icon: 'book' },
         { text: 'Happy Thanksgiving!', href: '../../greetings/thanksgiving.html', icon: 'book' },
         { text: 'Happy Holidays!', href: '../../greetings/holidays.html', icon: 'book' },
-        { text: 'Happy Birthday!', href: '../../greetings//dc.html?msg=birthday&del=10&c=4', icon: 'book' },
+        { text: 'Happy Birthday!', href: '../../greetings/dc.html?msg=birthday&del=10&c=4', icon: 'book' },
+        { text: 'St. Partick Day!', href: '../../greetings/2/greet.html?data=stpat.json', icon: 'book' },
  
         // Add more links here
       ],

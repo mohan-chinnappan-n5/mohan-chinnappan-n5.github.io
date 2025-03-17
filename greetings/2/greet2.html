@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival Greeting App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Sticky Navbar -->
+    <nav class="bg-green-600 text-white p-4 sticky top-0 z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold" id="festival-name">Festival Greetings</h1>
+            <div>
+                <a href="#" class="mr-4 hover:underline">Home</a>
+                <a href="#" class="hover:underline">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-8 px-4 min-h-[calc(100vh-8rem)]">
+        <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+            <h2 class="text-3xl font-semibold mb-4" id="festival-title">Happy Festival!</h2>
+            <img id="festival-image" class="max-w-full h-auto mx-auto mb-6 rounded-md" src="" alt="Festival Image">
+            <div id="greetings-container" class="space-y-4"></div>
+        </div>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-green-600 text-white p-4 sticky bottom-0">
+        <div class="container mx-auto text-center">
+            <p>© 2025 Festival Greetings App. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Function to get query parameter
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to load festival data from JSON file
+        function loadFestivalData(dataUrl) {
+            fetch(dataUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('festival-name').textContent = data.name + " Greetings";
+                    document.getElementById('festival-title').textContent = "Happy " + data.name + "!";
+                    document.getElementById('festival-image').src = data.image;
+                    document.getElementById('festival-image').alt = data.name + " Image";
+
+                    const greetingsContainer = document.getElementById('greetings-container');
+                    greetingsContainer.innerHTML = '';
+                    data.greetings.forEach(greeting => {
+                        const p = document.createElement('p');
+                        p.textContent = greeting;
+                        // Apply Tailwind classes for gradient background, padding, rounded corners, and text styling
+                        p.className = 'p-4 rounded-lg bg-gradient-to-r from-green-300 to-green-500 text-white text-lg font-medium shadow-sm hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 transition-all duration-300';
+                        greetingsContainer.appendChild(p);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading festival data:', error);
+                    document.getElementById('festival-title').textContent = "Error loading festival data!";
+                    document.getElementById('greetings-container').innerHTML = '<p class="text-red-500">Could not load the festival data. Please check the URL parameter.</p>';
+                });
+        }
+
+        // Load data when the page loads
+        window.onload = () => {
+            const dataUrl = getQueryParam('data');
+            if (dataUrl) {
+                loadFestivalData(dataUrl);
+            } else {
+                document.getElementById('festival-title').textContent = "No data provided!";
+                document.getElementById('greetings-container').innerHTML = '<p class="text-red-500">Please provide a ?data parameter with a JSON file URL (e.g., ?data=festival.json).</p>';
+            }
+        };
+    </script>
+</body>
+</html>
