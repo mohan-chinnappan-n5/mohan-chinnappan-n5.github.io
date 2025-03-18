@@ -2,6 +2,32 @@
 // mohan chinnappan
 // --------------
 let db; // SQLite database instance
+let queryHistory = new Set(JSON.parse(localStorage.getItem("queryHistory")) || []); // Load from localStorage or initialize empty
+
+function addToQueryHistory(query) {
+    if (!queryHistory.has(query)) {
+        queryHistory.add(query);
+        localStorage.setItem("queryHistory", JSON.stringify([...queryHistory])); // Save to localStorage
+        updateQueryHistoryUI();
+
+    }
+}
+function updateQueryHistoryUI() {
+    const historyContainer = document.getElementById("queryHistoryContainer");
+    historyContainer.innerHTML = ""; // Clear existing content
+    queryHistory.forEach(query => {
+        const queryItem = document.createElement("div");
+        queryItem.className = "p-2 hover:bg-gray-200 cursor-pointer border-b border-gray-300";
+        queryItem.textContent = query;
+        queryItem.title = "Click to rerun this query";
+        queryItem.addEventListener("click", () => {
+            document.getElementById("sqlQuery").value = query; // Populate textarea
+            executeQuery(query); // Rerun the query
+        });
+        historyContainer.appendChild(queryItem);
+    });
+}
+
 const defaultCsvData = [
     { ID: "1", Name: "John Doe", Department: "Engineering", Salary: "75000", JoiningDate: "2020-01-15" },
     { ID: "2", Name: "Jane Smith", Department: "Marketing", Salary: "68000", JoiningDate: "2019-07-08" },
@@ -18,6 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("runQueryButton").addEventListener("click", () => {
         const query = document.getElementById("sqlQuery").value;
         executeQuery(query);
+	addToQueryHistory(query);
     });
 
     document.getElementById("csvFileInput").addEventListener("change", event => {
@@ -38,6 +65,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("exportCsvButton").addEventListener("click", () => {
         exportToCsv("sqlTable");
     });
+    updateQueryHistoryUI()
 });
 
 async function initializeSQLite(data) {
