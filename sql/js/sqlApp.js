@@ -1,6 +1,14 @@
 // sqlApp.js
 // mohan chinnappan
 // --------------
+
+function showSpinner() {
+    document.getElementById("spinner").classList.remove("hidden");
+}
+function hideSpinner() {
+    document.getElementById("spinner").classList.add("hidden");
+}
+
 let db; // SQLite database instance
 let queryHistory = new Set(JSON.parse(localStorage.getItem("queryHistory")) || []); // Load from localStorage or initialize empty
 
@@ -75,13 +83,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("runQueryButton").addEventListener("click", () => {
 	const query = editor.getValue().trim();
 	if (query) { // Check if query is non-empty
+	    showSpinner(); // Show spinner before executing query
             executeQuery(query);
             addToQueryHistory(query);
+	    hideSpinner(); // Hide spinner after execution
+
         }
     });
 
     document.getElementById("csvFileInput").addEventListener("change", event => {
         const file = event.target.files[0];
+	showSpinner(); // Show spinner before CSV processing
         if (file) {
             Papa.parse(file, {
                 header: true,
@@ -90,6 +102,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const data = results.data;
                     renderTable("csvTable", data);
                     await initializeSQLite(data);
+                    hideSpinner(); // Hide spinner after CSV is loaded
+
                 },
             });
         }
@@ -102,28 +116,34 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function initializeSQLite(data) {
-    const SQL = await initSqlJs({
-        locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.7.0/sql-wasm.wasm`,
-    });
-    db = new SQL.Database(); // Initialize SQLite database
-    const columns = Object.keys(data[0]);
-    currentColumns = columns;
-   
-    const createTableQuery = `CREATE TABLE data (${columns.map(col => `"${col}" TEXT`).join(", ")});`;
-    db.exec(createTableQuery);
+    showSpinner(); // Show spinner at the start
+    try {
+        const SQL = await initSqlJs({
+            locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.7.0/sql-wasm.wasm`,
+        });
+        db = new SQL.Database();
+        const columns = Object.keys(data[0]);
+        currentColumns = columns;
+        const createTableQuery = `CREATE TABLE data (${columns.map(col => `"${col}" TEXT`).join(", ")});`;
+        db.exec(createTableQuery);
 
-    const insertQuery = `INSERT INTO data VALUES (${columns.map(() => "?").join(", ")});`;
-    const stmt = db.prepare(insertQuery);
-    data.forEach(row => {
-        stmt.bind(columns.map(col => row[col]));
-        stmt.step();
-        stmt.reset();
-    });
-    stmt.free();
+        const insertQuery = `INSERT INTO data VALUES (${columns.map(() => "?").join(", ")});`;
+        const stmt = db.prepare(insertQuery);
+        data.forEach(row => {
+            stmt.bind(columns.map(col => row[col]));
+            stmt.step();
+            stmt.reset();
+        });
+        stmt.free();
+    } finally {
+        hideSpinner(); // Hide spinner when done
+    }
 }
+
 function executeQuery(query) {
     if (!db) {
         alert("Database not initialized. Upload a CSV file first.");
+        hideSpinner(); // Ensure spinner is hidden if db is not ready
         return;
     }
     try {
@@ -149,31 +169,11 @@ function executeQuery(query) {
     } catch (error) {
         alert("Error executing query: " + error.message);
     }
-}
-function executeQuery2(query) {
-    if (!db) {
-        alert("Database not initialized. Upload a CSV file first.");
-        return;
+    finally {
+        hideSpinner(); // Ensure spinner is hidden after query execution
     }
-    try {
-        const stmt = db.prepare(query);
-        const columns = stmt.getColumnNames();
-        const data = [];
-        while (stmt.step()) {
-            const row = {};
-            stmt.get().forEach((value, index) => {
-                row[columns[index]] = value;
-            });
-            data.push(row);
-        }
-        stmt.free();
-        renderTable("sqlTable", data, columns);
-        document.getElementById("exportCsvButton").disabled = false; // Enable the export button after query results are obtained
+}
 
-    } catch (error) {
-        alert("Error executing query: " + error.message);
-    }
-}
 
 function renderTable(id, data, columns) {
     const container = document.getElementById(`${id}Container`);
