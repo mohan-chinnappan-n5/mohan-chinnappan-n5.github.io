@@ -21,12 +21,14 @@ function updateQueryHistoryUI() {
         queryItem.textContent = query;
         queryItem.title = "Click to rerun this query";
         queryItem.addEventListener("click", () => {
-            document.getElementById("sqlQuery").value = query; // Populate textarea
+	    editor.setValue(query); // Set value in Monaco Editor
             executeQuery(query); // Rerun the query
         });
         historyContainer.appendChild(queryItem);
     });
 }
+
+
 
 const defaultCsvData = [
     { ID: "1", Name: "John Doe", Department: "Engineering", Salary: "75000", JoiningDate: "2020-01-15" },
@@ -36,15 +38,46 @@ const defaultCsvData = [
     { ID: "5", Name: "Michael Brown", Department: "HR", Salary: "60000", JoiningDate: "2022-06-01" },
     { ID: "6", Name: "Mohan Chinnappan", Department: "Engineering", Salary: "60000", JoiningDate: "2022-06-01" },
 ];
+let editor; // Monaco Editor instance
+let currentColumns = Object.keys(defaultCsvData[0]); // Default columns from initial data
+
 
 document.addEventListener("DOMContentLoaded", async () => {
     renderTable("csvTable", defaultCsvData);
     await initializeSQLite(defaultCsvData);
 
+
+    // Initialize Monaco Editor
+    require(['vs/editor/editor.main'], function () {
+        editor = monaco.editor.create(document.getElementById('sqlQuery'), {
+            value: "SELECT * FROM data WHERE Department = 'Engineering';",
+            language: 'sql',
+            theme: 'vs', // Optional: change to 'vs' for light theme
+            automaticLayout: true,
+            minimap: { enabled: false },
+            suggestOnTriggerCharacters: true,
+        });
+
+        // Register autocompletion provider
+        monaco.languages.registerCompletionItemProvider('sql', {
+            provideCompletionItems: function (model, position) {
+                const suggestions = currentColumns.map(col => ({
+                    label: col,
+                    kind: monaco.languages.CompletionItemKind.Field,
+                    insertText: col,
+                    detail: 'Column',
+                }));
+                return { suggestions };
+            }
+        });
+    });
+
     document.getElementById("runQueryButton").addEventListener("click", () => {
-        const query = document.getElementById("sqlQuery").value;
-        executeQuery(query);
-	addToQueryHistory(query);
+	const query = editor.getValue().trim();
+	if (query) { // Check if query is non-empty
+            executeQuery(query);
+            addToQueryHistory(query);
+        }
     });
 
     document.getElementById("csvFileInput").addEventListener("change", event => {
@@ -74,6 +107,8 @@ async function initializeSQLite(data) {
     });
     db = new SQL.Database(); // Initialize SQLite database
     const columns = Object.keys(data[0]);
+    currentColumns = columns;
+   
     const createTableQuery = `CREATE TABLE data (${columns.map(col => `"${col}" TEXT`).join(", ")});`;
     db.exec(createTableQuery);
 
@@ -86,8 +121,36 @@ async function initializeSQLite(data) {
     });
     stmt.free();
 }
-
 function executeQuery(query) {
+    if (!db) {
+        alert("Database not initialized. Upload a CSV file first.");
+        return;
+    }
+    try {
+        const results = db.exec(query); // Use exec for broader query support
+        if (results.length > 0) {
+            // Query returned results (e.g., SELECT)
+            const columns = results[0].columns;
+            const data = results[0].values.map(row => {
+                const rowData = {};
+                columns.forEach((col, index) => {
+                    rowData[col] = row[index];
+                });
+                return rowData;
+            });
+            renderTable("sqlTable", data, columns);
+            document.getElementById("exportCsvButton").disabled = false;
+        } else {
+            // No results (e.g., INSERT, UPDATE, DELETE, or empty SELECT)
+            alert("Query executed successfully, but no data returned.");
+            renderTable("sqlTable", []); // Clear table
+            document.getElementById("exportCsvButton").disabled = true;
+        }
+    } catch (error) {
+        alert("Error executing query: " + error.message);
+    }
+}
+function executeQuery2(query) {
     if (!db) {
         alert("Database not initialized. Upload a CSV file first.");
         return;

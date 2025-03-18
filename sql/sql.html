@@ -47,8 +47,7 @@
 	</div>
         <div class="mb-8">
             <h2 class="text-xl font-bold mb-2">Run SQL Queries</h2>
-            <textarea id="sqlQuery" class="w-full p-2 border border-gray-300 rounded mb-4"
-                rows="3">SELECT * FROM data WHERE Department = 'Engineering';</textarea>
+	    <div id="sqlQuery" class="w-full border border-gray-300 rounded mb-4" style="height: 100px;"></div>
             <button id="runQueryButton" class="bg-blue-600 text-white px-4 py-2 rounded">Run Query</button>
             <!-- Export CSV Button -->
             <button id="exportCsvButton" class="bg-green-600 text-white px-4 py-2 rounded ml-4" disabled>Export CSV</button>
@@ -62,7 +61,8 @@
     <footer class="bg-blue-600 text-white p-4 text-center">
         <p>MCSQL - Query</p>
     </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.33.0/min/vs/loader.min.js"></script>
+    <script> require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.33.0/min/vs' } }); </script>
     <script src="js/sqlApp.js"></script>
 </body>
 
