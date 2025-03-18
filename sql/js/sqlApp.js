@@ -110,22 +110,29 @@ function renderTable(id, data, columns) {
         ordering: true,
     });
 }
-
-// Export Table to CSV
+// Replace the existing exportToCsv function with this updated version
 function exportToCsv(tableId) {
-    const table = document.getElementById(tableId);
-    const rows = table.querySelectorAll("tr");
-    const csvData = [];
+    const table = $(`#${tableId}`).DataTable(); // Get the DataTable instance
+    const data = table.rows({ search: 'applied' }).data().toArray(); // Get all filtered data across all pages
+    const columns = table.columns().header().toArray().map(th => th.textContent.trim()); // Get column headers
 
-    rows.forEach(row => {
-        const rowData = [];
-        const cols = row.querySelectorAll("td, th");
-        cols.forEach(col => {
-            rowData.push(col.textContent.trim());
+    // Prepare CSV data
+    const csvData = [];
+    
+    // Add headers
+    csvData.push(columns.join(","));
+
+    // Add rows
+    data.forEach(row => {
+        // DataTables returns row data as an array, not an object, so use indices instead of column names
+        const rowData = row.map((value, index) => {
+            const cellValue = value !== null && value !== undefined ? value.toString() : ''; // Handle null/undefined
+            return `"${cellValue.replace(/"/g, '""')}"`; // Escape quotes and wrap in quotes
         });
         csvData.push(rowData.join(","));
     });
 
+    // Generate and download CSV
     const csvContent = csvData.join("\n");
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const link = document.createElement("a");
@@ -133,3 +140,4 @@ function exportToCsv(tableId) {
     link.download = "export.csv";
     link.click();
 }
+

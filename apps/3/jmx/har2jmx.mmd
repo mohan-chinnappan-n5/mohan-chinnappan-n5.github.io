@@ -1,0 +1,24 @@
+graph TD;
+    A["🟢 Start"] -->|Obtain HAR file| B["📂 HAR File Acquired"]
+    B -->|Parse Requests| C["📜 Extract Requests"]
+    C -->|Convert to JMeter Samplers| D["⚙️ Create HTTP Samplers"]
+    D -->|Apply Headers, Cookies & Params| E["🛠️ Set Headers & Params"]
+    E -->|Define Thread Groups & Timers| F["🔄 Configure JMeter Elements"]
+    F -->|Save JMX File| G["💾 Export JMX"]
+    G -->|Load in JMeter| H["📥 Load JMX in JMeter"]
+    H -->|Run Test Plan| I["🚀 Execute JMeter Test"]
+    I -->|Analyze Results| J["📊 Review Test Results"]
+    J -->|Completion| K["🏁 End"]
+
+    %% Styling nodes
+    style A fill:#28a745,stroke:#0e4d10,color:#fff;
+    style B fill:#17a2b8,stroke:#0c5460,color:#fff;
+    style C fill:#f39c12,stroke:#9a6700,color:#fff;
+    style D fill:#e74c3c,stroke:#7b241c,color:#fff;
+    style E fill:#9b59b6,stroke:#452760,color:#fff;
+    style F fill:#ff5733,stroke:#7b241c,color:#fff;
+    style G fill:#2ecc71,stroke:#145a32,color:#fff;
+    style H fill:#007bff,stroke:#004085,color:#fff;
+    style I fill:#dc3545,stroke:#721c24,color:#fff;
+    style J fill:#ffc107,stroke:#856404,color:#fff;
+    style K fill:#28a745,stroke:#0e4d10,color:#fff;
