@@ -64,6 +64,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             automaticLayout: true,
             minimap: { enabled: false },
             suggestOnTriggerCharacters: true,
+	    tabCompletion: 'on', // Enable Tab completion
+	    acceptSuggestionOnCommitCharacter: true, // Accept suggestion on commit characters (e.g., space, comma)
+            suggest: {
+                showFields: true, // Ensure field suggestions are shown
+                showWords: true,  // Include SQL keywords if available
+            }
         });
 
         // Register autocompletion provider
@@ -76,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     detail: 'Column',
                 }));
                 return { suggestions };
-            }
+            }, triggerCharacters: ['\t'] 
         });
     });
 
