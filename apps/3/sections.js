@@ -434,11 +434,12 @@
         { text: 'Page Performance', href: 'https://chromewebstore.google.com/detail/afhmplbnocjhbpmdfiefplmaliagpfch', icon: 'desktop' },
         { text: 'File Diff', href: 'https://chromewebstore.google.com/detail/obmjlelfmcmimbppoijobhijppdchekg', icon: 'desktop' },
         { text: 'Chatty for LLMs', href: 'https://chromewebstore.google.com/detail/mnecjkcdjdkgiklbmeodicgdfladfdan', icon: 'desktop' },
-        { text: 'Salesforce EPT Monitor', href: 'https://mohan-chinnappan-n5.github.io/extns/ept2.html', icon: 'desktop' },
 
+        { text: 'Salesforce EPT Monitor Doc', href: 'https://mohan-chinnappan-n5.github.io/extns/ept2.html', icon: 'desktop' },
+        { text: 'Salesforce EPT Monitor', href: 'https://chromewebstore.google.com/detail/salesforce-ept/hjcakpeopngpilpjfabmboafnahfnmli', icon: 'desktop' },
+        { text: 'Page Load and LCP Timer', href: 'https://chromewebstore.google.com/detail/page-load-and-lcp-timer/hffhhgjjjfpicljilolepipliihiiefg', icon: 'desktop' },
 
-
-
+        { text: 'Gemma-3 OCR', href: 'https://chromewebstore.google.com/detail/gemma-3-ocr/neckobfikakckhijfdpannepdhlkjmfg', icon: 'desktop' },
 
         { text: 'Thirukkural', href: 'https://chromewebstore.google.com/detail/jgcmcenfgepdlgccfmfhhfoeaooecokh', icon: 'desktop' },
         { text: 'Bible Verse Viewer', href: 'https://chromewebstore.google.com/detail/ejkdfolobnjcpdpigidjommpcbdflhna', icon: 'desktop' },
