@@ -38,7 +38,39 @@ function updateQueryHistoryUI() {
     });
 }
 
+function downloadQueries() {
+    if (queryHistory.size === 0) {
+        alert("No queries to download.");
+        return;
+    }
+    const queries = [...queryHistory].reverse(); // Latest queries first, matching UI
+    const content = queries.join("\n"); // One query per line
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "query_history.txt"; // File name
+    link.click();
+}
 
+function uploadQueries(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const text = e.target.result;
+        const queries = text.split("\n").map(q => q.trim()).filter(q => q); // Split by newline, trim, remove empty
+        queries.forEach(query => {
+            if (!queryHistory.has(query)) {
+                queryHistory.add(query);
+            }
+        });
+        localStorage.setItem("queryHistory", JSON.stringify([...queryHistory])); // Update localStorage
+        updateQueryHistoryUI(); // Refresh UI
+    };
+    reader.readAsText(file);
+    event.target.value = ""; // Reset file input
+}
 
 const defaultCsvData = [
     { ID: "1", Name: "John Doe", Department: "Engineering", Salary: "75000", JoiningDate: "2020-01-15" },
@@ -127,6 +159,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         localStorage.removeItem("queryHistory"); // Remove from localStorage
         updateQueryHistoryUI(); // Update the UI
     });
+
+
+    // Add event listener for download queries button
+    document.getElementById("downloadQueriesButton").addEventListener("click", () => {
+        downloadQueries();
+    });
+
+    // Add event listeners for upload queries
+    const uploadButton = document.getElementById("uploadQueriesButton");
+    const fileInput = document.getElementById("queriesFileInput");
+    uploadButton.addEventListener("click", () => fileInput.click()); // Trigger file input click
+    fileInput.addEventListener("change", uploadQueries);
+
     updateQueryHistoryUI()
 });
 
