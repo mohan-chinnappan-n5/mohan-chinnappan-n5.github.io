@@ -23,7 +23,9 @@ function addToQueryHistory(query) {
 function updateQueryHistoryUI() {
     const historyContainer = document.getElementById("queryHistoryContainer");
     historyContainer.innerHTML = ""; // Clear existing content
-    queryHistory.forEach(query => {
+    const queries = [...queryHistory].reverse(); // Convert Set to array and reverse to show latest first
+
+    queries.forEach(query => {
         const queryItem = document.createElement("div");
         queryItem.className = "p-2 hover:bg-gray-200 cursor-pointer border-b border-gray-300";
         queryItem.textContent = query;
@@ -117,6 +119,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.getElementById("exportCsvButton").addEventListener("click", () => {
         exportToCsv("sqlTable");
+    });
+
+    // The event listener for clear history button
+    document.getElementById("clearHistoryButton").addEventListener("click", () => {
+        queryHistory.clear(); // Clear the Set
+        localStorage.removeItem("queryHistory"); // Remove from localStorage
+        updateQueryHistoryUI(); // Update the UI
     });
     updateQueryHistoryUI()
 });
