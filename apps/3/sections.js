@@ -557,6 +557,8 @@
 
          { text: 'COT Prompts', href: 'https://mohan-chinnappan-n5.github.io/dfv/dfv.html?d=https://raw.githubusercontent.com/mohan-chinnappan-n5/llm-prompts/refs/heads/main/cot.csv', icon: 'desktop' },
 
+         { text: 'Apex Analyzer using Gemma', href: 'https://mchinnappan100.github.io/pages/apex/doc.html', icon: 'desktop' },
+
 
 
 
