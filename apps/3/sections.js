@@ -21,6 +21,8 @@
 	{ text: 'Whitepaper on Mobile Perf', href: 'https://github.com/mohan-chinnappan-n5/mohan-chinnappan-n5.github.io/blob/main/mobile/mobile-perf.md', icon: 'book' },
 
 	{ text: 'Whitepaper on ListViews', href: 'https://github.com/mohan-chinnappan-n5/whitepapers/blob/main/list-views/list-views.md', icon: 'book' },
+	{ text: 'Whitepaper on Report', href: 'https://github.com/mchinnappan100/pages2/blob/main/wp/reports_wp.md', icon: 'book' },
+
 
 
 
@@ -273,7 +275,7 @@
         { text: 'SpeedTest - give metrics on the hosted server', href: 'https://mc-speedtest.streamlit.app', icon: 'desktop' },
         { text: 'Traceroute Viewer', href: '../../traceroute/view/index.html', icon: 'desktop' },
 
-        { text: 'EPT Report Tool', href: 'https://mchinnappan100.github.io/pages/ept/ept-report.html', icon: 'desktop' },
+        { text: 'EPT Report Tool', href: 'https://mchinnappan100.github.io/pages2/ept/ept-report.html', icon: 'desktop' },
 
 
 
@@ -376,7 +378,7 @@
       title: 'Media Apps',
       links: [
         { text: 'Vdeo, Audio, Screen Recording and Music Apps (13 Apps)', href: 'https://mohan-chinnappan-n2.github.io/media-app.html', icon: 'desktop' },
-        { text: 'OCR with Gemma-3', href: 'https://mchinnappan100.github.io/pages/ocr', icon: 'desktop' },
+        { text: 'OCR with Gemma-3', href: 'https://mchinnappan100.github.io/pages2/ocr', icon: 'desktop' },
  
         { text: 'OCR App - Turing', href: '../../ocr/index.html', icon: 'desktop' },
         { text: 'OCR App - 2', href: '../../ocr/2/ocr.html?i=%25E0%25AE%258E%25E0%25AE%25B4%25E0%25AF%2581%25E0%25AE%25A4%25E0%25AF%258D%25E0%25AE%25A4%25E0%25AF%2581%25E0%25AE%2595%25E0%25AF%258D%25E0%25AE%2595%25E0%25AE%25B3%25E0%25AF%258D%25E2%2580%258C%2520%25E0%25AE%258E%25E0%25AE%25B2%25E0%25AF%258D%25E0%25AE%25B2%25E0%25AE%25BE%25E0%25AE%25AE%25E0%25AF%258D%25E2%2580%258C%250A%25E0%25AE%2585%25E0%25AE%2595%25E0%25AE%25B0%25E0%25AE%25A4%25E0%25AF%258D%25E0%25AE%25A4%25E0%25AF%2588%250A%25E0%25AE%2585%25E0%25AE%259F%25E0%25AE%25BF%25E0%25AE%25AA%25E0%25AF%258D%25E0%25AE%25AA%25E0%25AE%259F%25E0%25AF%2588%25E0%25AE%25AF%25E0%25AE%25BE%25E0%25AE%2595%250A%25E0%25AE%2595%25E0%25AF%258A%25E0%25AE%25A3%25E0%25AF%258D%25E0%25AE%259F%25E0%25AE%25BF%25E0%25AE%25B0%25E0%25AF%2581%25E0%25AE%2595%25E0%25AF%258D%25E0%25AE%2595%25E0%25AE%25BF%25E0%25AE%25A9%25E0%25AF%258D%25E0%25AE%25B1%25E0%25AE%25A9.%250A%25E0%25AE%2585%25E0%25AE%25A4%25E0%25AF%2581%25E0%25AE%25AA%25E0%25AF%258B%25E0%25AE%25B2%2520%25E0%25AE%2589%25E0%25AE%25B2%25E0%25AE%2595%25E0%25AE%25AE%25E0%25AF%258D%25E2%2580%258C%250A%25E0%25AE%2595%25E0%25AE%259F%25E0%25AE%25B5%25E0%25AF%2581%25E0%25AE%25B3%25E0%25AF%2588%250A%25E0%25AE%2585%25E0%25AE%259F%25E0%25AE%25BF%25E0%25AE%25AA%25E0%25AF%258D%25E0%25AE%25AA%25E0%25AE%259F%25E0%25AF%2588%25E0%25AE%25AF%25E0%25AE%25BE%25E0%25AE%2595%250A%25E0%25AE%2595%25E0%25AF%258A%25E0%25AE%25A3%25E0%25AF%258D%25E0%25AE%259F%25E0%25AE%25BF%25E0%25AE%25B0%25E0%25AF%2581%25E0%25AE%2595%25E0%25AF%258D%25E0%25AE%2595%25E0%25AE%25BF%25E0%25AE%25B1%25E0%25AE%25A4%25E0%25AF%2581.&l=tam', icon: 'desktop' },
@@ -561,7 +563,7 @@
 
          { text: 'COT Prompts', href: 'https://mohan-chinnappan-n5.github.io/dfv/dfv.html?d=https://raw.githubusercontent.com/mohan-chinnappan-n5/llm-prompts/refs/heads/main/cot.csv', icon: 'desktop' },
 
-         { text: 'Apex Analyzer using Gemma', href: 'https://mchinnappan100.github.io/pages/apex/doc.html', icon: 'desktop' },
+         { text: 'Apex Analyzer using Gemma', href: 'https://mchinnappan100.github.io/pages2/apex/doc.html', icon: 'desktop' },
 
 
 
