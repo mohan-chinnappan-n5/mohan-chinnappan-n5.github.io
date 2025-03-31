@@ -128,7 +128,8 @@
         { text: 'SQL Query from English', href: '../../sql/gen-sql.html', icon: 'desktop' },
         { text: 'Spreadsheet', href: '../../sql/2/spreadsheet.html', icon: 'desktop' },
  
-
+        { text: 'SQL Query for XLSX', href: '../../sql/xlsx/xlsx.html', icon: 'desktop' },
+ 
 
         // Add more links here
       ],
@@ -246,6 +247,8 @@
         { text: 'Package Generator for SourceMember', href: 'https://mohanpkg.streamlit.app', icon: 'desktop' },
 
         { text: 'REST API Data Fetcher', href: 'https://mohanrest.streamlit.app', icon: 'desktop' },
+        { text: 'SF RESTY', href: 'https://mcresty.streamlit.app/', icon: 'desktop' },
+ 
         { text: 'SOQL Query Executor  ', href: 'https://mohansoql.streamlit.app', icon: 'desktop' },
 	{ text: 'Admin Changes Implementor App', href: '../../admin-changes/index.html', icon: 'desktop' },
         { text: 'Territory Management Visualizer  ', href: 'https://mohantm.streamlit.app', icon: 'desktop' },
