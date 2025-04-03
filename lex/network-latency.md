@@ -3,6 +3,7 @@
 ## Abstract
 In today’s digital landscape, page load time is a critical factor influencing user experience, search engine rankings, and business outcomes. While numerous elements contribute to page load time—such as server performance, file size, and client-side rendering—one often overlooked yet pervasive factor is network latency. This whitepaper explores the mechanics of network latency, its direct and indirect impacts on page load time, and practical strategies to mitigate its effects. Through technical analysis and real-world case studies, we demonstrate how latency shapes web performance and offer actionable insights for developers, network engineers, and business leaders.
 
+![nl plt](img/nl-plt-1.png)
 ## 1. Introduction
 The speed at which a webpage loads is a cornerstone of modern web performance. Studies consistently show that even a one-second delay in page load time can reduce user satisfaction, increase bounce rates, and diminish conversion rates by up to 7% (Akamai, 2017). While factors like server processing time, content optimization, and browser rendering play significant roles, network latency—the time it takes for data to travel between a client and a server—remains a fundamental bottleneck. As businesses increasingly rely on globalized, cloud-based infrastructure, understanding and addressing network latency is more critical than ever.
 
