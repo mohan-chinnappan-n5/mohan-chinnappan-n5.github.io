@@ -1,10 +1,10 @@
 ## Statement of Work (SOW)
 
-**Project Name:** Salesforce CRM Enhancement
-**Client:** [Client Name]
-**Vendor:** [Vendor Name]
-**Effective Date:** April 04, 2025
-**SOW Number:** SF-2025-001
+- **Project Name:** Salesforce CRM Enhancement
+- **Client:** [Client Name]
+- **Vendor:** [Vendor Name]
+- **Effective Date:** April 04, 2025
+- **SOW Number:** SF-2025-001
 
 ### 1. Introduction
 This Statement of Work (SOW) defines the scope, deliverables, and terms for the implementation and optimization of Salesforce solutions for [Client Name]. The project aims to enhance the client’s Customer Relationship Management (CRM) system by leveraging Salesforce capabilities, including custom FlexiPages, integrations, and reporting, to improve operational efficiency, user experience, and business outcomes.
