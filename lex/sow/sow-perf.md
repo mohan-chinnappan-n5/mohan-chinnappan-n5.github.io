@@ -27,7 +27,7 @@ This Statement of Work (SOW) defines the scope, deliverables, and terms for the 
 * Ongoing post-deployment support beyond the agreed warranty period.
 
 ### 4. Non-Functional Requirements
-This section details the functional requirements for the Salesforce implementation, with a focus on performance 
+This section details the non-functional requirements for the Salesforce implementation, with a focus on performance 
 
 #### 4.1 Performance
 The performance of Salesforce pages, measured as Experienced Page Time (EPT)—the time from user initiation to full interactivity—shall meet defined benchmarks based on page complexity. The EPT will vary depending on the number of components in FlexiPages, as outlined below:
