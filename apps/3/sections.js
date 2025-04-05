@@ -427,6 +427,8 @@
 
       { text: 'XLIFF translate using local LLM', href: 'https://mohan-chinnappan-n5.github.io/webm/player.html?v=https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/xliff/translate-app-demo1.webm', icon: 'desktop' },
 
+      { text: 'Chrome Extension: XLIFF translate using local LLM', href: '../../chrome-extensions/xliff.html', icon: 'desktop' },
+
 
   
 
