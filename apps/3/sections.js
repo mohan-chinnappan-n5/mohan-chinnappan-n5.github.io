@@ -666,6 +666,7 @@ Apex: {
       title: 'Apex',
       links: [
         { text: 'Apex Test Summary', href: '../../apex/apex-test-results.html', icon: 'desktop' },
+        { text: 'Apex Analyzer using local LLM', href: 'https://mohan-chinnappan-n5.github.io/webm/player.html?v=https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/apex/apexTool-demo1.webm', icon: 'desktop' },
  
         // Add more links here
       ],

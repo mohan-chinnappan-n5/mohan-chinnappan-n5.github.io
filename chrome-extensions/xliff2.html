@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XLIFF Translator - Chrome Extension</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Ensure the body has enough height for scrolling */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    /* Smooth scrolling for anchor links */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Ensure iframes are responsive */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <a href="#home">XLIFF Translator</a>
+      </div>
+      <div class="space-x-4">
+        <a href="#home" class="hover:text-blue-200">Home</a>
+        <a href="#features" class="hover:text-blue-200">Features</a>
+        <a href="#demo" class="hover:text-blue-200">Demo</a>
+        <a href="#how-to-use" class="hover:text-blue-200">How to Use</a>
+        <a href="https://chrome.google.com/webstore/detail" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-400">Install Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">XLIFF Translator Chrome Extension</h1>
+        <p class="text-xl mb-8">Effortlessly translate XLIFF files using local Ollama LLM models, with batch processing and intuitive data tables.</p>
+        <a href="https://chrome.google.com/webstore/detail" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get Started</a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Feature 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">📤</div>
+            <h3 class="text-xl font-semibold mb-2">Batch Translation</h3>
+            <p class="text-gray-600">Translate large XLIFF files in batches, with customizable batch sizes for efficient processing.</p>
+          </div>
+          <!-- Feature 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">🤖</div>
+            <h3 class="text-xl font-semibold mb-2">Local LLM Support</h3>
+            <p class="text-gray-600">Use local Ollama models for secure, offline translation without relying on external APIs.</p>
+          </div>
+          <!-- Feature 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">📊</div>
+            <h3 class="text-xl font-semibold mb-2">Interactive Data Tables</h3>
+            <p class="text-gray-600">View input and output data in sortable, searchable tables with CSV export options.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="bg-gray-200 py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">See It in Action</h2>
+        <div class="grid grid-cols-1 gap-8">
+          <!-- WebM Video -->
+          <div class="flex flex-col items-center">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Demo 1</h3>
+            <video controls class="rounded-lg shadow-lg w-full max-w-2xl h-auto">
+              <source src="https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/xliff/chrome-extn-tr-demo-1.webm" type="video/webm">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <!-- YouTube Video 
+          <div class="flex flex-col items-center">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">Demo 2</h3>
+            <div class="video-container w-full max-w-2xl">
+              <iframe src="https://www.youtube.com/embed/b7cwpJZuwwU" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+	  -->
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section id="how-to-use" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">How to Use</h2>
+        <p class="text-gray-600 mb-6">To get started with our extension, follow these simple steps:</p>
+        <div class="space-y-6">
+          <!-- Step 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Set Up Your Local LLM with Ollama</h3>
+            <p class="text-gray-600 mb-4">Select your local LLM running using Ollama. You need to run the following commands on your local machine:</p>
+            <pre class="bg-gray-100 p-4 rounded-md text-sm overflow-x-auto">
+export OLLAMA_ORIGINS=chrome-extension://*
+ollama serve
+           ...
+
+Something went wrong, please try again.
