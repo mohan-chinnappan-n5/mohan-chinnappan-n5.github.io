@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>XLIFF Translator - Chrome Extension</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
   <style>
     /* Ensure the body has enough height for scrolling */
     body {
@@ -32,6 +33,7 @@
         <a href="#home" class="hover:text-blue-200">Home</a>
         <a href="#features" class="hover:text-blue-200">Features</a>
         <a href="#demo" class="hover:text-blue-200">Demo</a>
+        <a href="#how-to-use" class="hover:text-blue-200">How to Use</a>
         <a href="https://chrome.google.com/webstore/detail" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-400">Install Now</a>
       </div>
     </div>
@@ -81,9 +83,42 @@
         <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">See It in Action</h2>
         <div class="flex justify-center">
           <video controls class="rounded-lg shadow-lg max-w-full h-auto">
-            <source src="https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/xliff/xliff-chrome-extn-demo-2.webm" type="video/webm">
+            <source src="https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/xliff/chrome-extn-tr-demo-1.webm" type="video/webm">
             Your browser does not support the video tag.
           </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section id="how-to-use" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">How to Use</h2>
+        <p class="text-gray-600 mb-6">To get started with our extension, follow these simple steps:</p>
+        <div class="space-y-6">
+          <!-- Step 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Set Up Your Local LLM with Ollama</h3>
+            <p class="text-gray-600 mb-4">Select your local LLM running using Ollama. You need to run the following commands on your local machine:</p>
+            <pre class="bg-gray-100 p-4 rounded-md text-sm overflow-x-auto">
+export OLLAMA_ORIGINS=chrome-extension://*
+ollama serve
+            </pre>
+          </div>
+          <!-- Step 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 2: Check Available Models</h3>
+            <p class="text-gray-600 mb-4">You can check the models running on your local machine by running:</p>
+            <pre class="bg-gray-100 p-4 rounded-md text-sm overflow-x-auto">
+ollama ls
+---------------------------------------------------------
+NAME                       ID              SIZE      MODIFIED      
+gemma3:latest              a2af6cc3eb7f    3.3 GB    5 hours ago      
+deepseek-r1:1.5b           a42b25d8c10a    1.1 GB    2 months ago     
+nomic-embed-text:latest    0a109f422b47    274 MB    11 months ago    
+tinyllama:latest           2644915ede35    637 MB    13 months ago
+            </pre>
+          </div>
         </div>
       </div>
     </section>
@@ -92,9 +127,9 @@
   <!-- Footer -->
   <footer class="bg-blue-600 text-white py-6">
     <div class="max-w-6xl mx-auto px-4 text-center">
-      <p>&copy; 2025 XLIFF Translator. All rights reserved.</p>
+      <p>© 2025 XLIFF Translator. All rights reserved.</p>
       <p class="mt-2">
-        <a href="https://github.com/your-repo" class="hover:text-blue-200">GitHub</a> |
+        <a href="https://github.com/mohan-chinnappan-n5" class="hover:text-blue-200">GitHub</a> |
         <a href="mailto:support@xlifftranslator.com" class="hover:text-blue-200">Contact Us</a>
       </p>
     </div>
