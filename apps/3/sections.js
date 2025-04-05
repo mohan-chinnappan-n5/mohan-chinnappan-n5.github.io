@@ -248,6 +248,7 @@
 
         { text: 'REST API Data Fetcher', href: 'https://mohanrest.streamlit.app', icon: 'desktop' },
         { text: 'SF RESTY', href: 'https://mcresty.streamlit.app/', icon: 'desktop' },
+        { text: 'SF RESTY V2 with Nodejs code gen', href: 'https://mcresty2.streamlit.app/', icon: 'desktop' },
  
         { text: 'SOQL Query Executor  ', href: 'https://mohansoql.streamlit.app', icon: 'desktop' },
 	{ text: 'Admin Changes Implementor App', href: '../../admin-changes/index.html', icon: 'desktop' },
@@ -423,6 +424,9 @@
       { text: 'Embedding - transformer', href: '../../genai/embedding/app.html', icon: 'desktop' },
       { text: 'OpenSource LLMs Playground', href: '../../genai/cf/cf.html', icon: 'desktop' },
       { text: 'Chat with Local LLMS', href: '../../genai/ollms/app.html', icon: 'desktop' },
+
+      { text: 'XLIFF translate using local LLM', href: 'https://mohan-chinnappan-n5.github.io/webm/player.html?v=https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/xliff/translate-app-demo1.webm', icon: 'desktop' },
+
 
   
 
