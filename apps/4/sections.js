@@ -502,6 +502,9 @@
       title: 'CodeGen Apps',
       links: [
         { text: 'LWC Generator', href: 'https://mohan-chinnappan-n5.github.io/2022/dpa/oauth2/callback/codegen.html', icon: 'desktop' },
+        { text: 'LWC Generator V2', href: '../../code-gen/lwc/index.html', icon: 'desktop' },
+        { text: 'LWC Generator V2 - Doc', href: '../../code-gen/lwc/doc.html', icon: 'desktop' },
+ 
         { text: 'Batch Apex Assembler', href: '../../apex/batch/app.html', icon: 'desktop' },
 
         // Add more links here

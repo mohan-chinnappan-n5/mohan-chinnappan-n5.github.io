@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LWC CodeGen - Documentation</title>
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    #main-content {
+      flex: 1;
+    }
+    .prose code {
+      background-color: #f3f4f6;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.25rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Sticky Navbar -->
+  <nav class="sticky top-0 bg-indigo-600 text-white p-4 z-50 shadow-lg">
+    <div class="container mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <a href="index.html" class="text-2xl font-bold">LWC CodeGen</a>
+        <span class="text-sm">v1.0</span>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="#overview" class="hover:text-indigo-200">Overview</a>
+        <a href="#usage" class="hover:text-indigo-200">Usage</a>
+        <a href="#templates" class="hover:text-indigo-200">Templates</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div id="main-content" class="container mx-auto p-6">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-16 rounded-lg shadow-xl mb-12">
+      <div class="container mx-auto text-center">
+        <h1 class="text-5xl font-extrabold mb-4">LWC CodeGen Documentation</h1>
+        <p class="text-xl max-w-2xl mx-auto">Generate Salesforce Lightning Web Components effortlessly with SOQL queries and customizable templates.</p>
+        <a href="index.html" class="mt-6 inline-block bg-white text-indigo-600 font-semibold py-3 px-6 rounded-full hover:bg-indigo-100 transition">Try It Now</a>
+      </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="mb-12 prose max-w-none">
+      <h2 class="text-3xl font-bold text-indigo-700 mb-4">Overview</h2>
+      <p>LWC CodeGen is a web-based tool designed to simplify the creation of Salesforce Lightning Web Components (LWC). By inputting a valid SOQL query, users can generate LWC code using predefined templates such as <code>uiRecordApi</code>, <code>ApexWire</code>, <code>ApexREST</code>, and <code>TCRM</code>. The app features a split-pane interface with Monaco Editors for input and output, offering syntax highlighting and real-time feedback.</p>
+      <p>Key features include:</p>
+      <ul class="list-disc pl-6">
+        <li>SOQL parsing with customizable RegEx</li>
+        <li>Multiple LWC templates</li>
+        <li>Monaco Editor integration for code editing</li>
+        <li>Copy-to-clipboard and file download options</li>
+      </ul>
+    </section>
+
+    <!-- Usage Section -->
+    <section id="usage" class="mb-12 prose max-w-none">
+      <h2 class="text-3xl font-bold text-indigo-700 mb-4">Usage</h2>
+      <h3 class="text-2xl font-semibold mb-2">Getting Started</h3>
+      <p>1. Open the app in your browser.</p>
+      <p>2. In the left pane, enter a valid SOQL query in the <strong>SOQL Query</strong> editor (e.g., <code>SELECT Id, Name FROM Account</code>).</p>
+      <p>3. Adjust the <strong>RegEx for SOQL Parsing</strong> if needed (default: <code>SELECT\s+(.*?)\s*FROM\s*([a-zA-Z_$0-9]*)</code>).</p>
+      <p>4. Select a template from the <strong>Select Template</strong> dropdown.</p>
+      <p>5. View the parsed RegEx results in the <strong>RegEx Results</strong> editor.</p>
+      <p>6. Check the generated code in the right pane, organized in tabs.</p>
+      <p>7. Use the <strong>Copy to Clipboard</strong> button or download files individually or all at once.</p>
+
+      <h3 class="text-2xl font-semibold mt-6 mb-2">Tips</h3>
+      <ul class="list-disc pl-6">
+        <li>The SOQL Query editor supports SQL syntax highlighting.</li>
+        <li>The RegEx Results editor is read-only and displays JSON output.</li>
+        <li>Downloads are individual files (ZIP functionality requires additional libraries).</li>
+      </ul>
+    </section>
+
+    <!-- Templates Section -->
+    <section id="templates" class="mb-12 prose max-w-none">
+      <h2 class="text-3xl font-bold text-indigo-700 mb-4">Templates</h2>
+      <p>LWC CodeGen supports the following templates:</p>
+      
+      <h3 class="text-2xl font-semibold mb-2">uiRecordApi</h3>
+      <p>Generates an LWC using the <code>uiRecordApi</code> to fetch record data. Outputs:</p>
+      <ul class="list-disc pl-6">
+        <li><code>.html</code>: Displays fields in a card layout</li>
+        <li><code>.js</code>: Wires record data with getters</li>
+        <li><code>.js-meta.xml</code>: Metadata for deployment</li>
+      </ul>
+
+      <h3 class="text-2xl font-semibold mt-6 mb-2">ApexWire</h3>
+      <p>Generates an LWC with Apex controller integration using the wire service. Outputs:</p>
+      <ul class="list-disc pl-6">
+        <li><code>.cls</code>: Apex controller</li>
+        <li><code>.cls-meta.xml</code>: Apex metadata</li>
+        <li><code>.html</code>: Datatable for records</li>
+        <li><code>.js</code>: Wires Apex method</li>
+        <li><code>.js-meta.xml</code>: Metadata</li>
+      </ul>
+
+      <h3 class="text-2xl font-semibold mt-6 mb-2">ApexREST</h3>
+      <p>Generates an Apex REST controller. Outputs:</p>
+      <ul class="list-disc pl-6">
+        <li><code>.cls</code>: REST endpoint</li>
+      </ul>
+
+      <h3 class="text-2xl font-semibold mt-6 mb-2">TCRM</h3>
+      <p>Generates an LWC for Tableau CRM (TCRM) dashboards. Outputs:</p>
+      <ul class="list-disc pl-6">
+        <li><code>dashboard.json</code>: Dashboard step</li>
+        <li><code>.html</code>: Simple display</li>
+        <li><code>.js</code>: Component logic</li>
+        <li><code>.js-meta.xml</code>: Metadata</li>
+      </ul>
+    </section>
+
+   
+  </div>
+
+  <!-- Sticky Footer -->
+  <footer class="sticky bottom-0 bg-indigo-600 text-white p-4 text-center shadow-lg">
+    <p>MC -  2025 LWC CodeGen. Built with ❤️ by Mohan Chinnappan</p>
+  </footer>
+
+  <script>
+    // Smooth scrolling for navbar links
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
