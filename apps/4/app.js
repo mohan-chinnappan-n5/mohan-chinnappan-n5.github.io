@@ -1,4 +1,4 @@
-import sections from './sections.js?v=2';
+import sections from './sections.js?v=4';
 
 // Function to create catalog content based on selected category
 function createCatalog(selectedCategoryKey) {

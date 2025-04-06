@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalog of Apps and Books</title>
+  <link
+    rel="icon"
+    type="image/x-icon"
+    href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico"
+  />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="app.css" />
+  <style>
+    .highlight {
+      background: red;
+      color: white;
+      font-weight: bold;
+    }
+    /* Style for the search container and X button */
+    .search-container {
+      position: relative;
+      width: 100%;
+    }
+    .search-container input {
+      padding-right: 2.5rem; /* Space for the X button */
+      width: 100%; /* Ensure input takes full width of container */
+    }
+    .search-container .clear-icon {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #6b7280; /* Gray color for the X */
+      font-size: 1.25rem;
+      display: none; /* Hidden by default */
+      line-height: 1; /* Ensure proper vertical alignment */
+    }
+    .search-container .clear-icon:hover {
+      color: #374151; /* Darker gray on hover */
+    }
+    .dark .search-container .clear-icon {
+      color: #9ca3af; /* Lighter gray in dark mode */
+    }
+    .dark .search-container .clear-icon:hover {
+      color: #d1d5db; /* Lighter gray on hover in dark mode */
+    }
+  </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+  <!-- Navbar -->
+  <nav class="sticky top-0 bg-blue-600 dark:bg-gray-800 p-4 flex flex-wrap items-center justify-between gap-4 z-50">
+    <div class="flex items-center space-x-4">
+      <img src="img/logo.png" width="40" alt="Logo" />
+      <h1 class="text-white text-2xl font-bold">Catalog of Apps and Books</h1>
+    </div>
+
+    <!-- Global Search Bar -->
+    <div class="flex items-center space-x-2 flex-grow max-w-md">
+      <div class="search-container">
+        <input
+          type="text"
+          id="global-search"
+          placeholder="Search catalog items..."
+          class="w-full p-2 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+        />
+        <span id="clear-search-icon" class="clear-icon" aria-label="Clear search">✕</span>
+      </div>
+      <button id="clear-global-search-btn" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" style='display:none;'>Clear</button>
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <h3 class="text-white text-sm italic font-bold">Shoemaker’s children will not go barefoot!</h3>
+      <a href="../2/index.html" class="bg-blue-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out shadow-lg">
+        Another View
+      </a>
+      <!-- Total Links Bubble -->
+      <div
+        id="total-links-bubble"
+        class="bg-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-xs"
+      >
+        0
+      </div>
+
+      <!-- Dark Theme Toggle -->
+      <div class="flex items-center space-x-2" style="display:none;">
+        <label for="dark-mode-toggle" class="text-white">Dark Mode</label>
+        <input type="checkbox" id="dark-mode-toggle" class="toggle-checkbox" />
+      </div>
+    </div>
+
+    <!-- Global Search Results -->
+    <p id="global-search-results" class="text-white text-sm w-full mt-2"></p>
+  </nav>
+
+  <div class="flex h-screen">
+    <!-- Left Pane (Categories) -->
+    <div class="resizable bg-white dark:bg-gray-800 shadow-lg p-4 overflow-y-auto" id="left-pane">
+      <h2 class="text-xl font-semibold mb-4">Categories</h2>
+
+      <!-- Search Input for Categories -->
+      <input
+        type="text"
+        id="category-search"
+        placeholder="Search categories..."
+        class="w-full p-2 mb-4 border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+      />
+
+      <ul id="categories" class="space-y-3">
+        <!-- Categories will be dynamically populated here -->
+      </ul>
+    </div>
+
+    <!-- Main Content (Links) -->
+    <div class="flex-grow p-6 overflow-y-auto bg-white dark:bg-gray-900">
+      <h2 class="text-2xl font-semibold mb-6" id="category-title">
+        Select a Category
+      </h2>
+      <div id="catalog" class="space-y-6 bg-white dark:bg-gray-900 p-4 rounded-lg shadow">
+        <!-- Catalog items will be dynamically populated here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FMKXCLFQJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5FMKXCLFQJ');
+  </script>
+
+  <script src="sections.js?v=4"></script>
+  <script type="module" src="app.js?v=8"></script>
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    // Trigger confetti animation on page load
+    window.onload = function() {
+      // Confetti burst
+      confetti({
+        particleCount: 500,
+        spread: 100,
+        origin: { y: 0.8 },
+      });
+    };
+  </script>
+</body>
+</html>
