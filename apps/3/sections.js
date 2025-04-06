@@ -459,7 +459,11 @@
         { text: 'Thirukkural', href: 'https://chromewebstore.google.com/detail/jgcmcenfgepdlgccfmfhhfoeaooecokh', icon: 'desktop' },
         { text: 'Bible Verse Viewer', href: 'https://chromewebstore.google.com/detail/ejkdfolobnjcpdpigidjommpcbdflhna', icon: 'desktop' },
         { text: 'Gita Viewer', href: 'https://chromewebstore.google.com/detail/lghmadjhjjncmepoknmghaplkemeibol', icon: 'desktop' },
-        { text: 'Quran Viewer', href: 'https://chromewebstore.google.com/detail/mkgihoidhkingbjedacddmfaeiepmafe', icon: 'desktop' },
+
+        { text: 'Chrome Extension: XLIFF translate using local LLM', href: '../../chrome-extensions/xliff.html', icon: 'desktop' },
+        { text: 'Chrome Extension: Web Vitals', href: '../../chrome-extensions/webvitals.html', icon: 'desktop' },
+
+
 
 
 
