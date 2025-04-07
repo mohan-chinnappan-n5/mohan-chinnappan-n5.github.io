@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Salesforce Flow Designer</title>
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n2.github.io/favicon.ico" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Split.js for resizable panes -->
+  <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+  <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css" />
+  <!-- Konva.js for canvas drawing -->
+  <script src="https://unpkg.com/konva@9.3.6/konva.min.js"></script>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    #main-content {
+      flex: 1;
+      overflow-y: auto;
+    }
+    .palette-item {
+      cursor: grab;
+      user-select: none;
+      transition: transform 0.2s;
+    }
+    .palette-item:hover {
+      transform: scale(1.05);
+      background-color: #e5e7eb;
+    }
+    .canvas-container {
+      border: 1px solid #ccc;
+      height: 200px;
+    }
+    #flow-canvas {
+      border: 1px solid #ccc;
+      height: 600px;
+      width: 100%;
+    }
+    .selected-node {
+      stroke: 'yellow';
+      strokeWidth: 3;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <!-- Sticky Navbar -->
+  <nav class="sticky top-0 bg-indigo-600 text-white p-4 z-50 shadow-lg">
+    <div class="container mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-4">
+        <a href="#" class="text-2xl font-bold">Salesforce Flow Designer</a>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="#overview" class="hover:text-indigo-200">Overview</a>
+        <a href="#docs" class="hover:text-indigo-200">Docs</a>
+        <a href="#samples" class="hover:text-indigo-200">Samples</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div id="main-content" class="container mx-auto p-6">
+    <div class="flex flex-col md:flex-row h-full gap-4">
+      <!-- Left Pane -->
+      <div class="split split-horizontal bg-white p-4 rounded-lg shadow-md" id="left">
+        <h2 class="text-xl font-semibold mb-4">Components Palette</h2>
+        <div id="palette" class="mb-4 grid grid-cols-1 gap-4">
+          <div class="palette-item bg-gray-100 p-4 rounded-lg shadow-sm flex items-center space-x-3" draggable="true" data-type="start">
+            <i class="fas fa-play text-green-500 text-xl"></i>
+            <div>
+              <h3 class="font-semibold">Start</h3>
+              <p class="text-sm text-gray-600">Begins the Flow execution</p>
+            </div>
+          </div>
+          <div class="palette-item bg-gray-100 p-4 rounded-lg shadow-sm flex items-center space-x-3" draggable="true" data-type="decision">
+            <i class="fas fa-diamond text-blue-500 text-xl"></i>
+            <div>
+              <h3 class="font-semibold">Decision</h3>
+              <p class="text-sm text-gray-600">Branches based on conditions</p>
+            </div>
+          </div>
+          <div class="palette-item bg-gray-100 p-4 rounded-lg shadow-sm flex items-center space-x-3" draggable="true" data-type="action">
+            <i class="fas fa-bolt text-red-500 text-xl"></i>
+            <div>
+              <h3 class="font-semibold">Action</h3>
+              <p class="text-sm text-gray-600">Executes an action or call</p>
+            </div>
+          </div>
+          <div class="palette-item bg-gray-100 p-4 rounded-lg shadow-sm flex items-center space-x-3" draggable="true" data-type="assignment">
+            <i class="fas fa-equals text-yellow-500 text-xl"></i>
+            <div>
+              <h3 class="font-semibold">Assignment</h3>
+              <p class="text-sm text-gray-600">Sets variable values</p>
+            </div>
+          </div>
+          <div class="palette-item bg-gray-100 p-4 rounded-lg shadow-sm flex items-center space-x-3" draggable="true" data-type="loop">
+            <i class="fas fa-redo text-purple-500 text-xl"></i>
+            <div>
+              <h3 class="font-semibold">Loop</h3>
+              <p class="text-sm text-gray-600">Iterates over a collection</p>
+            </div>
+          </div>
+          <div class="palette-item bg-gray-100 p-4 rounded-lg shadow-sm flex items-center space-x-3" draggable="true" data-type="end">
+            <i class="fas fa-stop text-gray-500 text-xl"></i>
+            <div>
+              <h3 class="font-semibold">End</h3>
+              <p class="text-sm text-gray-600">Terminates the Flow</p>
+            </div>
+          </div>
+        </div>
+        <h2 class="text-xl font-semibold mb-4">Staging Canvas</h2>
+        <div id="staging-canvas" class="canvas-container"></div>
+      </div>
+
+      <!-- Right Pane -->
+      <div class="split split-horizontal bg-white p-4 rounded-lg shadow-md flex-1" id="right">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">Flow Diagram</h2>
+          <div class="space-x-2">
+            <button id="undo-btn" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Undo</button>
+            <button id="redo-btn" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Redo</button>
+            <button id="codegen-btn" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Generate Flow XML</button>
+          </div>
+        </div>
+        <div id="flow-canvas"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Footer -->
+  <footer class="sticky bottom-0 bg-indigo-600 text-white p-4 text-center shadow-lg">
+    <p>© 2025 Salesforce Flow Designer. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Initialize Split.js
+    Split(["#left", "#right"], { sizes: [30, 70] });
+
+    // Initialize Konva.js canvases
+    const stagingWidth = document.getElementById('staging-canvas').offsetWidth;
+    const stagingCanvas = new Konva.Stage({
+      container: 'staging-canvas',
+      width: stagingWidth,
+      height: 200
+    });
+    const stagingLayer = new Konva.Layer();
+    stagingCanvas.add(stagingLayer);
+
+    const flowWidth = document.getElementById('flow-canvas').offsetWidth;
+    const flowCanvas = new Konva.Stage({
+      container: 'flow-canvas',
+      width: flowWidth,
+      height: 600
+    });
+    const flowLayer = new Konva.Layer();
+    flowCanvas.add(flowLayer);
+
+    // Store nodes, connections, and history
+    let nodes = [];
+    let connections = [];
+    let selectedNode = null;
+    let history = [];
+    let redoStack = [];
+
+    // Palette drag-and-drop
+    const paletteItems = document.querySelectorAll('.palette-item');
+    paletteItems.forEach(item => {
+      item.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', item.dataset.type);
+      });
+    });
+
+    // Staging canvas drag-and-drop
+    const stagingContainer = stagingCanvas.container();
+    stagingContainer.addEventListener('dragover', (e) => e.preventDefault());
+    stagingContainer.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const type = e.dataTransfer.getData('text/plain');
+      const rect = stagingContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      addNode(type, x, y, stagingLayer, stagingCanvas, false);
+    });
+
+    // Flow canvas drag-and-drop
+    const flowContainer = flowCanvas.container();
+    flowContainer.addEventListener('dragover', (e) => e.preventDefault());
+    flowContainer.addEventListener('drop', (e) => {
+      e.preventDefault();
+      const type = e.dataTransfer.getData('text/plain');
+      const rect = flowContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      addNode(type, x, y, flowLayer, flowCanvas, true);
+    });
+
+    // Function to add a node to the canvas
+    function addNode(type, x, y, layer, stage, isFlowCanvas = false) {
+      const node = new Konva.Group({
+        x: Math.max(0, Math.min(x - 30, stage.width() - 60)),
+        y: Math.max(0, Math.min(y - 30, stage.height() - 60)),
+        draggable: true,
+        type: type
+      });
+
+      let shape;
+      if (type === 'start' || type === 'end') {
+        shape = new Konva.Circle({
+          radius: 30,
+          fill: getNodeColor(type),
+          stroke: type === 'start' ? '#00C4B4' : '#F44336',
+          strokeWidth: 2
+        });
+      } else {
+        shape = new Konva.Rect({
+          width: 60,
+          height: 60,
+          fill: getNodeColor(type),
+          stroke: type === 'assignment' ? '#FF9800' : '#0288D1',
+          strokeWidth: 2,
+          cornerRadius: 5
+        });
+      }
+
+      const icon = new Konva.Text({
+        text: getNodeIcon(type),
+        fontSize: 24,
+        fontFamily: 'Arial',
+        fill: 'white',
+        width: 60,
+        align: 'center',
+        verticalAlign: 'middle',
+        height: 60
+      });
+
+      const label = new Konva.Text({
+        text: type.charAt(0).toUpperCase() + type.slice(1),
+        fontSize: 12,
+        fontFamily: 'Arial',
+        fill: 'black',
+        width: 100,
+        align: 'center',
+        y: 70
+      });
+
+      node.add(shape, icon, label);
+      layer.add(node);
+      layer.draw();
+
+      if (isFlowCanvas) {
+        const nodeId = `node_${nodes.length + 1}`;
+        nodes.push({ id: nodeId, type, x: node.x(), y: node.y() });
+        history.push({ action: 'add', node: { id: nodeId, type, x: node.x(), y: node.y() } });
+        redoStack = [];
+
+        node.on('click', (e) => {
+          if (e.evt.shiftKey) {
+            if (selectedNode) {
+              const fromId = selectedNode;
+              const toId = nodeId;
+              if (fromId !== toId && !connections.some(c => c.from === fromId && c.to === toId)) {
+                connections.push({ from: fromId, to: toId });
+                history.push({ action: 'connect', from: fromId, to: toId });
+                redoStack = [];
+                drawConnection(fromId, toId);
+                selectedNode = null;
+                clearSelection();
+              }
+            } else {
+              selectedNode = nodeId;
+              node.findOne(type === 'start' || type === 'end' ? 'Circle' : 'Rect').stroke('yellow').strokeWidth(3);
+              layer.draw();
+            }
+          }
+        });
+
+        node.on('dragmove', () => {
+          updateNodePosition(nodeId, node.x(), node.y());
+          history.push({ action: 'move', nodeId, x: node.x(), y: node.y() });
+          redoStack = [];
+          redrawConnections();
+        });
+      }
+    }
+
+    // Function to get node color based on type
+    function getNodeColor(type) {
+      const colors = {
+        start: '#00C4B4', // Teal
+        decision: '#0288D1', // Blue
+        action: '#EF5350', // Red
+        assignment: '#FF9800', // Orange
+        loop: '#AB47BC', // Purple
+        end: '#F44336' // Red
+      };
+      return colors[type] || '#6b7280';
+    }
+
+    // Function to get node icon
+    function getNodeIcon(type) {
+      const icons = {
+        start: '▶',
+        decision: '◆',
+        action: '⚡',
+        assignment: '=',
+        loop: '⟳',
+        end: '■'
+      };
+      return icons[type] || '□';
+    }
+
+    // Function to update node position
+    function updateNodePosition(nodeId, x, y) {
+      const node = nodes.find(n => n.id === nodeId);
+      if (node) {
+        node.x = x;
+        node.y = y;
+      }
+    }
+
+    // Function to draw a connection with plus icons
+    function drawConnection(fromId, toId) {
+      const fromNode = nodes.find(n => n.id === fromId);
+      const toNode = nodes.find(n => n.id === toId);
+      if (!fromNode || !toNode) return;
+
+      const fromPos = { x: fromNode.x + 30, y: fromNode.y + 30 };
+      const toPos = { x: toNode.x + 30, y: toNode.y + 30 };
+
+      const midPoint = {
+        x: (fromPos.x + toPos.x) / 2,
+        y: (fromPos.y + toPos.y) / 2
+      };
+
+      // Draw line
+      const line = new Konva.Line({
+        points: [fromPos.x, fromPos.y, midPoint.x, midPoint.y, toPos.x, toPos.y],
+        stroke: 'black',
+        strokeWidth: 2
+      });
+
+      // Draw plus icon at midpoint
+      const plusIcon = new Konva.Group({
+        x: midPoint.x - 10,
+        y: midPoint.y - 10
+      });
+      const plusCircle = new Konva.Circle({
+        radius: 10,
+        fill: 'white',
+        stroke: 'gray',
+        strokeWidth: 1
+      });
+      const plusText = new Konva.Text({
+        text: '+',
+        fontSize: 14,
+        fontFamily: 'Arial',
+        fill: 'gray',
+        width: 20,
+        height: 20,
+        align: 'center',
+        verticalAlign: 'middle'
+      });
+      plusIcon.add(plusCircle, plusText);
+
+      flowLayer.add(line, plusIcon);
+      flowLayer.draw();
+    }
+
+    // Function to clear selection highlight
+    function clearSelection() {
+      flowLayer.find('Rect, Circle').forEach(shape => {
+        shape.stroke(shape.attrs.fill === '#00C4B4' ? '#00C4B4' : shape.attrs.fill === '#F44336' ? '#F44336' : shape.attrs.fill === '#FF9800' ? '#FF9800' : '#0288D1');
+        shape.strokeWidth(2);
+      });
+      flowLayer.draw();
+    }
+
+    // Function to redraw all connections
+    function redrawConnections() {
+      flowLayer.destroyChildren();
+      nodes.forEach(node => {
+        addNode(node.type, node.x, node.y, flowLayer, flowCanvas, true);
+      });
+      connections.forEach(conn => {
+        drawConnection(conn.from, conn.to);
+      });
+      flowLayer.draw();
+    }
+
+    // Undo function
+    document.getElementById('undo-btn').addEventListener('click', () => {
+      if (history.length === 0) return;
+      const lastAction = history.pop();
+      redoStack.push(lastAction);
+
+      if (lastAction.action === 'add') {
+        nodes = nodes.filter(n => n.id !== lastAction.node.id);
+      } else if (lastAction.action === 'move') {
+        const node = nodes.find(n => n.id === lastAction.nodeId);
+        if (node) {
+          const prevAction = history.findLast(h => h.action === 'move' && h.nodeId === lastAction.nodeId && h !== lastAction) || 
+                            history.findLast(h => h.action === 'add' && h.node.id === lastAction.nodeId);
+          node.x = prevAction ? (prevAction.x || prevAction.node.x) : node.x;
+          node.y = prevAction ? (prevAction.y || prevAction.node.y) : node.y;
+        }
+      } else if (lastAction.action === 'connect') {
+        connections = connections.filter(c => !(c.from === lastAction.from && c.to === lastAction.to));
+      }
+      redrawConnections();
+    });
+
+    // Redo function
+    document.getElementById('redo-btn').addEventListener('click', () => {
+      if (redoStack.length === 0) return;
+      const action = redoStack.pop();
+      history.push(action);
+
+      if (action.action === 'add') {
+        nodes.push(action.node);
+      } else if (action.action === 'move') {
+        const node = nodes.find(n => n.id === action.nodeId);
+        if (node) {
+          node.x = action.x;
+          node.y = action.y;
+        }
+      } else if (action.action === 'connect') {
+        connections.push({ from: action.from, to: action.to });
+      }
+      redrawConnections();
+    });
+
+    // Code generation for Salesforce Flow XML
+    document.getElementById('codegen-btn').addEventListener('click', () => {
+      let xml = `<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <label>Generated Flow</label>
+    <description>Generated by Salesforce Flow Designer</description>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>node_2</targetReference>
+        </connector>
+    </start>
+`;
+
+      nodes.forEach((node, index) => {
+        if (node.type === 'start') return; // Handled above
+        xml += `    <${getFlowElementType(node.type)}>
+        <name>${node.id}</name>
+        <label>${node.type.charAt(0).toUpperCase() + node.type.slice(1)}</label>
+        <locationX>${node.x}</locationX>
+        <locationY>${node.y}</locationY>
+`;
+
+        const nextConn = connections.find(c => c.from === node.id);
+        if (nextConn) {
+          xml += `        <connector>
+            <targetReference>${nextConn.to}</targetReference>
+        </connector>
+`;
+        }
+        xml += `    </${getFlowElementType(node.type)}>\n`;
+      });
+
+      xml += `</Flow>`;
+
+      // Download the generated XML
+      const blob = new Blob([xml], { type: 'text/xml' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'generated-flow.flow';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    // Map node types to Salesforce Flow element types
+    function getFlowElementType(type) {
+      const types = {
+        start: 'start',
+        decision: 'decisions',
+        action: 'actionCalls',
+        assignment: 'assignments',
+        loop: 'loops',
+        end: 'subflows' // Using subflows as a placeholder for end
+      };
+      return types[type] || 'actionCalls';
+    }
+  </script>
+</body>
+</html>
