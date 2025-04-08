@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Summarizer - Chrome Extension</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <style>
+    /* Ensure the body has enough height for scrolling */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    /* Smooth scrolling for anchor links */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <a href="#home">PDF Summarizer</a>
+      </div>
+      <div class="space-x-4">
+        <a href="#home" class="hover:text-blue-200">Home</a>
+        <a href="#features" class="hover:text-blue-200">Features</a>
+        <a href="#demo" class="hover:text-blue-200">Demo</a>
+        <a href="#how-to-use" class="hover:text-blue-200">How to Use</a>
+        <a href="https://github.com/mohan-chinnappan-n5/chrome-extensions" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-400">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">PDF Summarizer Chrome Extension</h1>
+        <p class="text-xl mb-8">Extract text from PDFs and generate concise summaries using local Ollama models, all within a modern, user-friendly interface.</p>
+        <a href="#" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get Started</a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Feature 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">📄</div>
+            <h3 class="text-xl font-semibold mb-2">Multi-Page PDF Viewer</h3>
+            <p class="text-gray-600">View all pages of your PDF in a scrollable pane with high-quality rendering.</p>
+          </div>
+          <!-- Feature 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">✍️</div>
+            <h3 class="text-xl font-semibold mb-2">Editable Text Extraction</h3>
+            <p class="text-gray-600">Extract text from PDFs and edit it in a sleek, dark-themed textarea.</p>
+          </div>
+          <!-- Feature 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">🤖</div>
+            <h3 class="text-xl font-semibold mb-2">Local LLM Summarization</h3>
+            <p class="text-gray-600">Generate summaries using local Ollama models, keeping your data secure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="bg-gray-200 py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">See It in Action</h2>
+        <div class="flex justify-center">
+          <video controls class="rounded-lg shadow-lg max-w-full h-auto">
+            <source src="https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/pdf/pdf-summarizer-demo1.webm" type="video/webm">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section id="how-to-use" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">How to Use</h2>
+        <p class="text-gray-600 mb-6">Get started with the PDF Summarizer in a few simple steps:</p>
+        <div class="space-y-6">
+          <!-- Step 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Install the Extension</h3>
+        <a href="#" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Install</a>
+ 
+          </div>
+          <!-- Step 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 2: Set Up Local Ollama</h3>
+            <p class="text-gray-600 mb-4">Run a local Ollama server to power summarization:</p>
+            <pre class="bg-gray-100 p-4 rounded-md text-sm overflow-x-auto">
+export OLLAMA_ORIGINS=chrome-extension://*
+ollama serve
+            </pre>
+            <p class="text-gray-600">Check available models with <code>ollama ls</code>.</p>
+          </div>
+          <!-- Step 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 3: Summarize a PDF</h3>
+            <p class="text-gray-600">Open the extension, upload a PDF, edit the extracted text if needed, select a model, and click "Summarize" to generate a summary.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-6">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>MC - 2025 PDF Summarizer</p>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

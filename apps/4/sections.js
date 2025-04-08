@@ -427,12 +427,11 @@
       { text: 'OpenSource LLMs Playground', href: '../../genai/cf/cf.html', icon: 'desktop' },
       { text: 'Chat with Local LLMS', href: '../../genai/ollms/app.html', icon: 'desktop' },
 
-      { text: 'XLIFF translate using local LLM', href: 'https://mohan-chinnappan-n5.github.io/webm/player.html?v=https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/xliff/translate-app-demo1.webm', icon: 'desktop' },
+      { text: 'Demo: XLIFF translate using local LLM', href: 'https://mohan-chinnappan-n5.github.io/webm/player.html?v=https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/xliff/translate-app-demo1.webm', icon: 'desktop' },
 
       { text: 'Chrome Extension: XLIFF translate using local LLM', href: '../../chrome-extensions/xliff.html', icon: 'desktop' },
-
-
-  
+      { text: 'Chrome Extension: PDF Summarizer', href: '../../chrome-extensions/pdf-summary.html', icon: 'desktop' },
+      { text: 'Demo: PDF Summarizer', href: 'https://mohan-chinnappan-n5.github.io/webm/player.html?v=https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/pdf/pdf-summarizer-demo1.webm', icon: 'desktop' },
 
 
 
