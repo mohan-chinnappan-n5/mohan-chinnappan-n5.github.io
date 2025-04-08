@@ -99,6 +99,8 @@
 
         { text: 'CSV Mapper', href: '../../mapping/index.html', icon: 'desktop' },
         { text: 'Charts for CSV - Kalam', href: '../../charts2/index.html', icon: 'desktop' },
+       
+	 { text: 'Synthetic Data Generator - Chrome Extension Doc', href: '../../chrome-extensions/synthetic-data-generator.html', icon: 'desktop' },
  
         // Add more links here
       ],
