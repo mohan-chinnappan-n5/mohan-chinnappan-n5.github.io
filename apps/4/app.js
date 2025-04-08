@@ -1,5 +1,5 @@
 import sections from './sections.js?v=4';
-
+const mediaAppsCount = 12
 // Function to create catalog content based on selected category
 function createCatalog(selectedCategoryKey) {
   const catalogContainer = document.getElementById('catalog');

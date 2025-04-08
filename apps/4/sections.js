@@ -137,10 +137,12 @@
 
 
     JSONApps: {
-      title: 'JSON Apps',
+      title: 'JSON',
       links: [
         { text: 'JSON Editor', href: '../../json/json.html', icon: 'desktop' },
+        { text: 'Mastering jq', href: '../../books/jq/jq.html', icon: 'desktop' },
  
+
         // Add more links here
       ],
     },

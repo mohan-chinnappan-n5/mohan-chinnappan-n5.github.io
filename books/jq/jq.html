@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering jq: A Practical Guide to JSON Processing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.33.0/min/vs/loader.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico" />
+    <style>
+        .editor-container {
+            height: 200px; /* Adjust as needed */
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans leading-relaxed">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white sticky top-0 z-10 shadow-md">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Mastering jq</h1>
+            <ul class="flex space-x-6">
+                <li><a href="#intro" class="hover:text-blue-200">Introduction</a></li>
+                <li><a href="#ch1" class="hover:text-blue-200">Chapter 1</a></li>
+                <li><a href="#ch2" class="hover:text-blue-200">Chapter 2</a></li>
+                <li><a href="#ch3" class="hover:text-blue-200">Chapter 3</a></li>
+                <li><a href="#ch4" class="hover:text-blue-200">Chapter 4</a></li>
+                <li><a href="#ch5" class="hover:text-blue-200">Chapter 5</a></li>
+                <li><a href="#ch6" class="hover:text-blue-200">Chapter 6</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8">Mastering jq: A Practical Guide to JSON Processing</h1>
+
+        <!-- Introduction -->
+        <section id="intro" class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Introduction</h2>
+            <p class="mb-4">`jq` is a lightweight, powerful command-line tool for processing JSON data. Whether you’re a developer, system administrator, or data analyst, mastering `jq` can save you time when working with APIs, log files, or configuration data. This book assumes basic familiarity with JSON and the command line but will guide you from beginner to advanced usage with clear examples.</p>
+            <h3 class="text-xl font-medium mb-2">Why jq?</h3>
+            <ul class="list-disc ml-6 mb-4">
+                <li>It’s fast and scriptable.</li>
+                <li>It handles complex JSON structures with ease.</li>
+                <li>It’s widely available on Unix-like systems and works cross-platform.</li>
+            </ul>
+        </section>
+
+        <!-- Chapter 1 -->
+        <section id="ch1" class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Chapter 1: Getting Started with jq</h2>
+            <h3 class="text-xl font-medium mb-2">Your First jq Command</h3>
+            <p class="mb-2">Given a JSON file <code>data.json</code>:</p>
+            <div class="editor-container" data-language="json" data-code='{"name": "Alice", "age": 30, "city": "New York"}'></div>
+            <p class="mb-2 mt-2">Run:</p>
+            <div class="editor-container" data-language="bash" data-code="jq '.' data.json"></div>
+            <p class="mb-2 mt-2">Output (pretty-printed):</p>
+            <div class="editor-container" data-language="json" data-code='{
+  "name": "Alice",
+  "age": 30,
+  "city": "New York"
+}'></div>
+            <p>The <code>.</code> filter is the simplest: it outputs the input unchanged.</p>
+        </section>
+
+        <!-- Chapter 2 -->
+        <section id="ch2" class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Chapter 2: Basic Filters and Selection</h2>
+            <h3 class="text-xl font-medium mb-2">Selecting Fields</h3>
+            <p class="mb-2">Extract specific fields with the dot operator:</p>
+            <div class="editor-container" data-language="bash" data-code="jq '.name' data.json"></div>
+            <p class="mb-2 mt-2">Output: <code>"Alice"</code></p>
+            <h3 class="text-xl font-medium mb-2">Example: Nested Objects</h3>
+            <p class="mb-2">For this JSON:</p>
+            <div class="editor-container" data-language="json" data-code='{
+  "user": {
+    "id": 123,
+    "details": {
+      "name": "Bob",
+      "email": "bob@example.com"
+    }
+  }
+}'></div>
+            <p class="mb-2 mt-2">Get the email:</p>
+            <div class="editor-container" data-language="bash" data-code="jq '.user.details.email' data.json"></div>
+            <p class="mb-2 mt-2">Output: <code>"bob@example.com"</code></p>
+            <h3 class="text-xl font-medium mb-2">Arrays</h3>
+            <p class="mb-2">Given:</p>
+            <div class="editor-container" data-language="json" data-code='{
+  "users": [
+    {"name": "Alice", "age": 30},
+    {"name": "Bob", "age": 25}
+  ]
+}'></div>
+            <p class="mb-2 mt-2">Select all names:</p>
+            <div class="editor-container" data-language="bash" data-code="jq '.users[].name' data.json"></div>
+            <p class="mb-2 mt-2">Output:</p>
+            <div class="editor-container" data-language="json" data-code='"Alice"\n"Bob"'></div>
+        </section>
+
+        <!-- Chapter 3 -->
+        <section id="ch3" class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Chapter 3: Transforming Data</h2>
+            <h3 class="text-xl font-medium mb-2">Creating New Structures</h3>
+            <p class="mb-2">From:</p>
+            <div class="editor-container" data-language="json" data-code='{"id": 1, "title": "Book", "price": 15.99}'></div>
+            <p class="mb-2 mt-2">Transform to a custom object:</p>
+            <div class="editor-container" data-language="bash" data-code="jq '{product: .title, cost: .price}' data.json"></div>
+            <p class="mb-2 mt-2">Output:</p>
+            <div class="editor-container" data-language="json" data-code='{
+  "product": "Book",
+  "cost": 15.99
+}'></div>
+            <h3 class="text-xl font-medium mb-2">Mapping Arrays</h3>
+            <p class="mb-2">Given:</p>
+            <div class="editor-container" data-language="json" data-code='[
+  {"name": "Alice", "score": 85},
+  {"name": "Bob", "score": 92}
+]'></div>
+            <p class="mb-2 mt-2">Add 10 to each score:</p>
+            <div class="editor-container" data-language="bash" data-code="jq 'map(.score + 10)' data.json"></div>
+            <p class="mb-2 mt-2">Output:</p>
+            <div class="editor-container" data-language="json" data-code='[
+  {"name": "Alice", "score": 95},
+  {"name": "Bob", "score": 102}
+]'></div>
+        </section>
+
+        <!-- Chapter 4 -->
+        <section id="ch4" class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Chapter 4: Advanced Techniques</h2>
+            <h3 class="text-xl font-medium mb-2">Variables</h3>
+            <p class="mb-2">Store and reuse values:</p>
+            <div class="editor-container" data-language="bash" data-code='jq -n "($a + $b) as $sum | {sum: $sum}" --argjson a 5 --argjson b 10'></div>
+            <p class="mb-2 mt-2">Output:</p>
+            <div class="editor-container" data-language="json" data-code='{"sum": 15}'></div>
+            <h3 class="text-xl font-medium mb-2">Recursion with `..`</h3>
+            <p class="mb-2">Find all `name` fields anywhere:</p>
+            <div class="editor-container" data-language="json" data-code='{
+  "user": {"name": "Alice"},
+  "admin": {"name": "Bob"}
+}'></div>
+            <p class="mb-2 mt-2">Run:</p>
+            <div class="editor-container" data-language="bash" data-code='jq ".. | .name? // empty" data.json'></div>
+            <p class="mb-2 mt-2">Output:</p>
+            <div class="editor-container" data-language="json" data-code='"Alice"\n"Bob"'></div>
+        </section>
+
+        <!-- Chapter 5 -->
+        <section id="ch5" class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Chapter 5: Real-World Examples</h2>
+            <h3 class="text-xl font-medium mb-2">Parsing API Responses</h3>
+            <p class="mb-2">From a GitHub API-like response:</p>
+            <div class="editor-container" data-language="json" data-code='{
+  "repos": [
+    {"name": "proj1", "stars": 100},
+    {"name": "proj2", "stars": 50}
+  ]
+}'></div>
+            <p class="mb-2 mt-2">List repo names with stars > 75:</p>
+            <div class="editor-container" data-language="bash" data-code="jq '.repos[] | select(.stars > 75) | .name' data.json"></div>
+            <p class="mb-2 mt-2">Output:</p>
+            <div class="editor-container" data-language="json" data-code='"proj1"'></div>
+            <h3 class="text-xl font-medium mb-2">Aggregations</h3>
+            <p class="mb-2">Sum all prices:</p>
+            <div class="editor-container" data-language="json" data-code='[
+  {"item": "A", "price": 10},
+  {"item": "B", "price": 20}
+]'></div>
+            <p class="mb-2 mt-2">Run:</p>
+            <div class="editor-container" data-language="bash" data-code="jq 'map(.price) | add' data.json"></div>
+            <p class="mb-2 mt-2">Output:</p>
+            <div class="editor-container" data-language="json" data-code='30'></div>
+            <h3 class="text-xl font-medium mb-2">Converting JSON to CSV</h3>
+            <p class="mb-2">Convert an array of objects to CSV format. Given:</p>
+            <div class="editor-container" data-language="json" data-code='[
+  {"name": "Alice", "age": 30, "city": "New York"},
+  {"name": "Bob", "age": 25, "city": "San Francisco"}
+]'></div>
+            <p class="mb-2 mt-2">Use <code>@csv</code> to format as CSV (with headers):</p>
+            <div class="editor-container" data-language="bash" data-code='jq -r "[\&quot;name\&quot;, \&quot;age\&quot;, \&quot;city\&quot;], (.[] | [.name, .age, .city]) | @csv" data.json'></div>
+            <p class="mb-2 mt-2">Output (raw CSV):</p>
+            <div class="editor-container" data-language="csv" data-code='"name","age","city"\n"Alice",30,"New York"\n"Bob",25,"San Francisco"'></div>
+            <p class="mb-2">The <code>-r</code> flag outputs raw strings without quotes around the CSV lines. Save it to a file with <code>> data.csv</code> for spreadsheet use.</p>
+        </section>
+
+        <!-- Chapter 6 -->
+        <section id="ch6" class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Chapter 6: Scripting with jq</h2>
+            <h3 class="text-xl font-medium mb-2">Writing to Files</h3>
+            <p class="mb-2">From the users array:</p>
+            <div class="editor-container" data-language="bash" data-code="jq '.users[] | .name' data.json > names.txt"></div>
+            <p class="mb-2 mt-2">Resulting <code>names.txt</code>:</p>
+            <div class="editor-container" data-language="json" data-code='"Alice"\n"Bob"'></div>
+            <h3 class="text-xl font-medium mb-2">Chaining Commands</h3>
+            <p class="mb-2">Combine with shell tools:</p>
+            <div class="editor-container" data-language="bash" data-code="curl -s 'https://api.example.com/data' | jq '.items[] | .title'"></div>
+            <p class="mb-2 mt-2">This fetches data and extracts titles in one go.</p>
+        </section>
+
+        <!-- Conclusion -->
+        <section id="conclusion" class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4">Conclusion</h2>
+            <p>You’ve now mastered `jq` fundamentals and advanced techniques! Practice with your own JSON data, explore the <a href="https://stedolan.github.io/jq/manual/" class="text-blue-600 hover:underline">official manual</a>, and automate your workflows. Happy filtering!</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <p>MC Mastering jq</p>
+        </div>
+    </footer>
+
+    <!-- Monaco Editor Initialization Script -->
+    <script>
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.33.0/min/vs' }});
+        require(['vs/editor/editor.main'], function() {
+            const containers = document.querySelectorAll('.editor-container');
+            containers.forEach(container => {
+                const language = container.getAttribute('data-language');
+                const code = container.getAttribute('data-code');
+                monaco.editor.create(container, {
+                    value: code,
+                    language: language,
+                    readOnly: true,
+                    minimap: { enabled: false },
+                    scrollBeyondLastLine: false,
+                    automaticLayout: true,
+                    theme: 'vs-dark',
+                });
+            });
+        });
+    </script>
+</body>
+</html>
