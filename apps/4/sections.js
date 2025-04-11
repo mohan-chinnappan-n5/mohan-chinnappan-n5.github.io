@@ -132,6 +132,7 @@
  
         { text: 'SQL Query for XLSX', href: '../../sql/xlsx/xlsx.html', icon: 'desktop' },
         { text: 'PostgreSQL SQL Editor', href: '../../chrome-extensions/psql.html', icon: 'desktop' },
+        { text: 'ask_llm for PostgreSQL', href: '../../psql/llm/ask_llm_setup_macos.html', icon: 'desktop' },
  
 
 
@@ -584,8 +585,9 @@
 
          { text: 'COT Prompts', href: 'https://mohan-chinnappan-n5.github.io/dfv/dfv.html?d=https://raw.githubusercontent.com/mohan-chinnappan-n5/llm-prompts/refs/heads/main/cot.csv', icon: 'desktop' },
 
-         { text: 'Apex Analyzer using Gemma', href: 'https://mchinnappan100.github.io/pages2/apex/doc.html', icon: 'desktop' },
-
+        { text: 'Apex Analyzer using Gemma', href: 'https://mchinnappan100.github.io/pages2/apex/doc.html', icon: 'desktop' },
+        { text: 'ask_llm for PostgreSQL', href: '../../psql/llm/ask_llm_setup_macos.html', icon: 'desktop' },
+ 
 
 
 

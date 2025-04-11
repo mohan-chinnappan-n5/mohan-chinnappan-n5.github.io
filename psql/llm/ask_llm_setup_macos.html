@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ask_llm PostgreSQL Extension Setup on macOS</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <!-- Prism.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Style for the copy button */
+    .copy-btn {
+      transition: background-color 0.3s;
+    }
+    .copy-btn:hover {
+      background-color: #2563eb !important;
+    }
+    /* Adjust Prism.js code block styling */
+    pre[class*="language-"] {
+      position: relative;
+      background: #f5f2f0 !important;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      overflow-x: auto;
+      font-size: 0.875rem;
+    }
+    code[class*="language-"] {
+      background: none !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <a href="#home">ask_llm PostgreSQL Extension</a>
+      </div>
+      <div class="space-x-4">
+        <a href="#home" class="hover:text-blue-200">Home</a>
+        <a href="#overview" class="hover:text-blue-200">Overview</a>
+        <a href="#setup" class="hover:text-blue-200">Setup Steps</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">ask_llm PostgreSQL Extension Setup on macOS</h1>
+        <p class="text-xl mb-8">A step-by-step guide to building and installing the ask_llm PostgreSQL extension on macOS, enabling SQL queries to local Ollama LLM models.</p>
+        <a href="#setup" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get Started</a>
+      </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Overview</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <p class="text-gray-600">The <code>ask_llm</code> extension allows you to query local Ollama LLM models directly from PostgreSQL using SQL. With the syntax <code>SELECT ask_llm('model', 'prompt')</code>, you can integrate AI capabilities into your database workflows. This guide covers the process of setting up this extension on macOS, including installing dependencies, compiling the extension, and troubleshooting common issues.</p>
+        </div>
+        <img src="./ask_llm_1.png"  alt="">
+      </div>
+    </section>
+
+    <!-- Setup Steps Section -->
+    <section id="setup" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">Setup Steps</h2>
+        <p class="text-gray-600 mb-6">Follow these steps to build and install the ask_llm PostgreSQL extension on macOS:</p>
+        <div class="space-y-6">
+          <!-- Step 1: Install Dependencies -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Install Dependencies</h3>
+            <p class="text-gray-600 mb-4">Ensure you have Homebrew, PostgreSQL, libcurl, and cmake installed:</p>
+            <div class="relative">
+              <pre class="language-bash"><code id="code-step1">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install postgresql
+brew install curl
+brew install cmake</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-step1')">Copy</button>
+            </div>
+          </div>
+          <!-- Step 2: Install cJSON -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 2: Install cJSON</h3>
+            <p class="text-gray-600 mb-4">Download, build, and install the cJSON library:</p>
+            <div class="relative">
+              <pre class="language-bash"><code id="code-step2">curl -L https://github.com/DaveGamble/cJSON/archive/refs/tags/v1.7.18.tar.gz -o v1.7.18.tar.gz
+tar -xzf v1.7.18.tar.gz
+cd cJSON-1.7.18
+mkdir build
+cd build
+cmake ..
+make
+sudo mkdir -p /usr/local/lib
+sudo mkdir -p /usr/local/include/cjson
+sudo cp libcjson.dylib /usr/local/lib/libcjson.1.dylib
+sudo ln -sf /usr/local/lib/libcjson.1.dylib /usr/local/lib/libcjson.dylib
+sudo ln -sf /usr/local/lib/libcjson.1.dylib /usr/local/lib/libcjson.dylib.1.7.18
+sudo cp ../cJSON.h /usr/local/include/cjson/</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-step2')">Copy</button>
+            </div>
+          </div>
+          <!-- Step 3: Create the Extension Files -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 3: Create the Extension Files</h3>
+            <p class="text-gray-600 mb-4">Create the <code>ask_llm.c</code>, <code>ask_llm.control</code>, and <code>ask_llm--1.0.sql</code> files in a project directory (e.g., <code>ask_llm</code>):</p>
+            <p class="text-gray-600 mb-2"><strong>ask_llm.c</strong>:</p>
+            <div class="relative">
+              <pre class="language-c"><code id="code-ask_llm_c">#include "postgres.h"
+#include "fmgr.h"
+#include "utils/builtins.h"
+#include "utils/memutils.h"
+#include "lib/stringinfo.h"
+#include <curl/curl.h>
+#include <string.h>
+#include <cjson/cJSON.h>
+
+#ifdef PG_MODULE_MAGIC
+PG_MODULE_MAGIC;
+#endif
+
+// Structure to hold the response data from curl
+struct ResponseData {
+    char *data;
+    size_t size;
+};
+
+// Callback function to handle data received from curl
+static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp) {
+    size_t realsize = size * nmemb;
+    struct ResponseData *mem = (struct ResponseData *)userp;
+
+    char *ptr = palloc(mem->size + realsize + 1);
+    if (mem->data) {
+        memcpy(ptr, mem->data, mem->size);
+        pfree(mem->data);
+    }
+    mem->data = ptr;
+    memcpy(&(mem->data[mem->size]), contents, realsize);
+    mem->size += realsize;
+    mem->data[mem->size] = 0;
+
+    return realsize;
+}
+
+// Main function to call the Ollama API
+PG_FUNCTION_INFO_V1(ask_llm);
+Datum ask_llm(PG_FUNCTION_ARGS) {
+    text *model_text = PG_GETARG_TEXT_P(0);
+    text *prompt_text = PG_GETARG_TEXT_P(1);
+    char *model = text_to_cstring(model_text);
+    char *prompt = text_to_cstring(prompt_text);
+
+    CURL *curl;
+    CURLcode res;
+    struct ResponseData response = {0};
+    StringInfoData payload;
+    char *result = NULL;
+
+    // Initialize curl
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+    if (!curl) {
+        ereport(ERROR, (errcode(ERRCODE_EXTERNAL_ROUTINE_INVOCATION_EXCEPTION),
+                        errmsg("Failed to initialize curl")));
+    }
+
+    // Prepare the JSON payload for Ollama API
+    initStringInfo(&payload);
+    appendStringInfo(&payload, "{\"model\": \"%s\", \"prompt\": \"%s\", \"stream\": false}", model, prompt);
+
+    // Set up the curl request
+    curl_easy_setopt(curl, CURLOPT_URL, "http://localhost:11434/api/generate");
+    curl_easy_setopt(curl, CURLOPT_POST, 1L);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, payload.data);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+
+    struct curl_slist *headers = NULL;
+    headers = curl_slist_append(headers, "Content-Type: application/json");
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+    // Perform the request
+    res = curl_easy_perform(curl);
+    if (res != CURLE_OK) {
+        ereport(ERROR, (errcode(ERRCODE_EXTERNAL_ROUTINE_INVOCATION_EXCEPTION),
+                        errmsg("curl_easy_perform() failed: %s", curl_easy_strerror(res))));
+    }
+
+    // Parse the JSON response
+    cJSON *json = cJSON_Parse(response.data);
+    if (!json) {
+        ereport(ERROR, (errcode(ERRCODE_EXTERNAL_ROUTINE_INVOCATION_EXCEPTION),
+                        errmsg("Failed to parse JSON response")));
+    }
+
+    cJSON *response_field = cJSON_GetObjectItem(json, "response");
+    if (!response_field || !cJSON_IsString(response_field)) {
+        cJSON_Delete(json);
+        ereport(ERROR, (errcode(ERRCODE_EXTERNAL_ROUTINE_INVOCATION_EXCEPTION),
+                        errmsg("No 'response' field in JSON or not a string")));
+    }
+
+    result = pstrdup(cJSON_GetStringValue(response_field));
+
+    // Clean up
+    cJSON_Delete(json);
+    if (response.data) pfree(response.data);
+    curl_slist_free_all(headers);
+    curl_easy_cleanup(curl);
+    curl_global_cleanup();
+    pfree(payload.data);
+    pfree(model);
+    pfree(prompt);
+
+    // Return the result as a PostgreSQL text type
+    PG_RETURN_TEXT_P(cstring_to_text(result));
+}</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-ask_llm_c')">Copy</button>
+            </div>
+            <p class="text-gray-600 mb-2 mt-4"><strong>ask_llm.control</strong>:</p>
+            <div class="relative">
+              <pre class="language-ini"><code id="code-ask_llm_control"># ask_llm extension
+comment = 'Extension to query local Ollama LLM models from PostgreSQL'
+default_version = '1.0'
+module_pathname = '$libdir/ask_llm'
+relocatable = true</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-ask_llm_control')">Copy</button>
+            </div>
+            <p class="text-gray-600 mb-2 mt-4"><strong>ask_llm--1.0.sql</strong>:</p>
+            <div class="relative">
+              <pre class="language-sql"><code id="code-ask_llm_sql">\echo Use "CREATE EXTENSION ask_llm" to load this file. \quit
+CREATE FUNCTION ask_llm(model text, prompt text)
+RETURNS text
+AS 'ask_llm', 'ask_llm'
+LANGUAGE C
+STRICT;</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-ask_llm_sql')">Copy</button>
+            </div>
+          </div>
+          <!-- Step 4: Create the Makefile -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 4: Create the Makefile</h3>
+            <p class="text-gray-600 mb-4">Create a <code>Makefile</code> to build the extension:</p>
+            <div class="relative">
+              <pre class="language-makefile"><code id="code-makefile">EXTENSION = ask_llm
+DATA = ask_llm--1.0.sql
+MODULE_big = ask_llm
+OBJS = ask_llm.o
+
+PG_CONFIG = pg_config
+PGXS := $(shell $(PG_CONFIG) --pgxs)
+PG_CFLAGS = -I$(shell $(PG_CONFIG) --includedir-server) -I/usr/local/include
+PG_LDFLAGS = -L/usr/local/lib -lcurl -lcjson -Wl,-rpath,$(shell $(PG_CONFIG) --pkglibdir)
+
+install: install-libs
+
+install-libs:
+    @cp /usr/local/lib/libcjson.dylib.1.7.18 $(shell $(PG_CONFIG) --pkglibdir)/libcjson.1.dylib
+
+include $(PGXS)</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-makefile')">Copy</button>
+            </div>
+          </div>
+          <!-- Step 5: Build and Install the Extension -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 5: Build and Install the Extension</h3>
+            <p class="text-gray-600 mb-4">Compile and install the extension:</p>
+            <div class="relative">
+              <pre class="language-bash"><code id="code-build">make clean
+make
+sudo make install</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-build')">Copy</button>
+            </div>
+          </div>
+          <!-- Step 6: Set Up Ollama -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 6: Set Up Ollama</h3>
+            <p class="text-gray-600 mb-4">Install and run Ollama, and pull a model (e.g., <code>llama3</code>):</p>
+            <div class="relative">
+              <pre class="language-bash"><code id="code-ollama">brew install ollama
+ollama serve
+ollama pull llama3
+ollama ls</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-ollama')">Copy</button>
+            </div>
+          </div>
+          <!-- Step 7: Test the Extension -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 7: Test the Extension</h3>
+            <p class="text-gray-600 mb-4">Start PostgreSQL, load the extension, and test the function:</p>
+            <div class="relative">
+              <pre class="language-sql"><code id="code-test">brew services start postgresql
+psql -U $(whoami) -d postgres
+CREATE EXTENSION ask_llm;
+SELECT ask_llm('llama3', 'What is the capital of France?');</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-test')">Copy</button>
+            </div>
+            <p class="text-gray-600 mt-4">Expected output:</p>
+            <div class="relative">
+              <pre class="language-text"><code id="code-output">           ask_llm
+-----------------------------
+ The capital of France is Paris.</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-output')">Copy</button>
+            </div>
+          </div>
+          <!-- Step 8: Troubleshooting -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 8: Troubleshooting</h3>
+            <p class="text-gray-600 mb-4">If you encounter issues, try these steps:</p>
+            <ul class="list-disc list-inside text-gray-600">
+              <li>Check PostgreSQL logs: <code>cat /opt/homebrew/var/log/postgresql@14.log</code></li>
+              <li>Verify library dependencies: <code>otool -L /opt/homebrew/lib/postgresql@14/ask_llm.so</code></li>
+              <li>Fix missing <code>libcjson.1.dylib</code>: Create a symlink or copy the library:</li>
+            </ul>
+            <div class="relative">
+              <pre class="language-bash"><code id="code-troubleshoot">sudo ln -sf /usr/local/lib/libcjson.dylib.1.7.18 /usr/local/lib/libcjson.1.dylib
+# OR
+sudo cp /usr/local/lib/libcjson.dylib.1.7.18 /opt/homebrew/lib/postgresql@14/libcjson.1.dylib
+sudo install_name_tool -change /usr/local/lib/libcjson.1.dylib /opt/homebrew/lib/postgresql@14/libcjson.1.dylib /opt/homebrew/lib/postgresql@14/ask_llm.so</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-troubleshoot')">Copy</button>
+            </div>
+            <ul class="list-disc list-inside text-gray-600 mt-4">
+              <li>Set <code>DYLD_LIBRARY_PATH</code> if needed: <code>export DYLD_LIBRARY_PATH=/usr/local/lib:$DYLD_LIBRARY_PATH</code></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-6">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>MC - 2025 ask_llm PostgreSQL Extension</p>
+    </div>
+  </footer>
+
+  <!-- Prism.js JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-makefile.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ini.min.js"></script>
+
+  <!-- JavaScript for Copy Functionality -->
+  <script>
+    function copyCode(elementId) {
+      const codeElement = document.getElementById(elementId);
+      const text = codeElement.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Code copied to clipboard!');
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  </script>
+</body>
+</html>
