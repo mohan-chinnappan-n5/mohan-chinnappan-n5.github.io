@@ -131,7 +131,9 @@
         { text: 'Spreadsheet', href: '../../sql/2/spreadsheet.html', icon: 'desktop' },
  
         { text: 'SQL Query for XLSX', href: '../../sql/xlsx/xlsx.html', icon: 'desktop' },
+        { text: 'PostgreSQL SQL Editor', href: '../../chrome-extensions/psql.html', icon: 'desktop' },
  
+
 
         // Add more links here
       ],

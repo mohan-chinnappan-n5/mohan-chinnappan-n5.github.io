@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PostgreSQL SQL Editor - Web Tool</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <a href="#home">PostgreSQL SQL Editor</a>
+      </div>
+      <div class="space-x-4">
+        <a href="#home" class="hover:text-blue-200">Home</a>
+        <a href="#features" class="hover:text-blue-200">Features</a>
+        <a href="#demo" class="hover:text-blue-200">Demo</a>
+        <a href="#how-to-use" class="hover:text-blue-200">How to Use</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">PostgreSQL SQL Editor Web Tool</h1>
+        <p class="text-xl mb-8">A modern PostgreSQL SQL editor with a sleek interface, featuring real-time query execution, table and column autocompletion, paginated result display, CSV export, and customizable server settings, all powered by an extensible backend.</p>
+        <a href="#" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get Started</a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Feature 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">✨</div>
+            <h3 class="text-xl font-semibold mb-2">Real-Time Query Execution</h3>
+            <p class="text-gray-600">Run SQL queries instantly and view results in a responsive, paginated table with CSV export capabilities.</p>
+          </div>
+          <!-- Feature 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">🔍</div>
+            <h3 class="text-xl font-semibold mb-2">Table & Column Autocompletion</h3>
+            <p class="text-gray-600">Select tables from a dropdown and get intelligent autocompletion for SQL keywords and table-specific columns.</p>
+          </div>
+          <!-- Feature 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">⚙️</div>
+            <h3 class="text-xl font-semibold mb-2">Customizable Backend</h3>
+            <p class="text-gray-600">Configure the server URL and extend functionality with a Node.js backend supporting PostgreSQL.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Demo Section -->
+<section id="demo" class="bg-gray-200 py-16">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">See It in Action</h2>
+    <div class="flex justify-center">
+      <a href="https://www.youtube.com/watch?v=Fl_c0vKZW7M" target="_blank" class="relative rounded-lg shadow-lg w-[640px] h-96 block">
+        <img src="https://img.youtube.com/vi/Fl_c0vKZW7M/maxresdefault.jpg" alt="Demo Video Thumbnail" class="w-full h-full object-cover rounded-lg">
+        <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-20 h-20 text-red-600 opacity-90 hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+    <!-- How to Use Section -->
+    <section id="how-to-use" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">How to Use</h2>
+        <p class="text-gray-600 mb-6">Follow these steps to set up and use the PostgreSQL SQL Editor:</p>
+        <div class="space-y-6">
+          <!-- Step 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Set Up the Backend Server</h3>
+            <p class="text-gray-600 mb-4">Clone the repository and install dependencies for the Node.js backend:</p>
+            <pre class="bg-gray-100 p-4 rounded-md text-sm overflow-x-auto">
+curl -O https://raw.githubusercontent.com/mohan-chinnappan-n5/backend-servers/refs/heads/main/server.js
+npm install
+            </pre>
+            <p class="text-gray-600 mt-4">Configure your PostgreSQL connection in <code>config.json</code> or a <code>.env</code> file, then start the server:</p>
+            <pre class="bg-gray-100 p-4 rounded-md text-sm overflow-x-auto">
+node server.js 3000
+            </pre>
+          </div>
+          <!-- Step 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 2: Access the Editor</h3>
+            <p class="text-gray-600 mb-4">Open <code>index.html</code> in a browser, set the server URL in the Settings modal (e.g., <code>http://localhost:3000/</code>), and start writing queries:</p>
+            <pre class="bg-gray-100 p-4 rounded-md text-sm overflow-x-auto">
+SELECT * FROM employees
+            </pre>
+            <p class="text-gray-600 mt-4">Use the table dropdown for autocompletion and export results as CSV.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-6">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>MC - 2025 PostgreSQL SQL Editor</p>
+    </div>
+  </footer>
+</body>
+</html>
