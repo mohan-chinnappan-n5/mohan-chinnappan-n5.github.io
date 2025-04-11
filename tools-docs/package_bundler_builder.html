@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Package Bundler Builder Setup Guide</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <!-- Prism.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Style for the copy button */
+    .copy-btn {
+      transition: background-color 0.3s;
+    }
+    .copy-btn:hover {
+      background-color: #2563eb !important;
+    }
+    /* Adjust Prism.js code block styling */
+    pre[class*="language-"] {
+      position: relative;
+      background: #f5f2f0 !important;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      overflow-x: auto;
+      font-size: 0.875rem;
+    }
+    code[class*="language-"] {
+      background: none !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <a href="#home">Package Bundler Builder</a>
+      </div>
+      <div class="space-x-4">
+        <a href="#home" class="hover:text-blue-200">Home</a>
+        <a href="#overview" class="hover:text-blue-200">Overview</a>
+        <a href="#setup" class="hover:text-blue-200">Setup Steps</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">Package Bundler Builder Setup Guide</h1>
+        <p class="text-xl mb-8">A step-by-step guide to setting up and running the Package Bundler Builder application on your local machine.</p>
+        <a href="#setup" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get Started</a>
+      </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Overview</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <p class="text-gray-600">The <strong>Package Bundler Builder</strong> is a tool designed to help developers bundle and manage packages efficiently. This guide walks you through the process of downloading, setting up, and running the application on your local machine using a Python-based local server. Once set up, you can access the application at <code>http://localhost:9000/app.html</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Setup Steps Section -->
+    <section id="setup" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">Setup Steps</h2>
+        <p class="text-gray-600 mb-6">Follow these steps to set up and run the Package Bundler Builder application:</p>
+        <div class="space-y-6">
+          <!-- Step 1: Download the Package -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Download the Package</h3>
+            <p class="text-gray-600 mb-4">Download the <code>pkg_bundler.zip</code> file from the GitHub repository:</p>
+            <div class="relative">
+              <pre class="language-bash"><code id="code-step1">curl -L https://github.com/mohan-chinnappan-n5/package_bundler_builder/raw/main/pkg_bundler.zip -o pkg_bundler.zip</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-step1')">Copy</button>
+            </div>
+            <p class="text-gray-600 mt-4">Alternatively, you can download it directly from the <a href="https://github.com/mohan-chinnappan-n5/package_bundler_builder/blob/main/pkg_bundler.zip" class="text-blue-600 hover:underline">GitHub repository</a>.</p>
+          </div>
+          <!-- Step 2: Unzip the File -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 2: Unzip the File</h3>
+            <p class="text-gray-600 mb-4">Extract the contents of the <code>pkg_bundler.zip</code> file:</p>
+            <div class="relative">
+              <pre class="language-bash"><code id="code-step2">unzip pkg_bundler.zip</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-step2')">Copy</button>
+            </div>
+          </div>
+          <!-- Step 3: Start the Local Server -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 3: Start the Local Server</h3>
+            <p class="text-gray-600 mb-4">Navigate to the extracted directory and start the local server using the provided script:</p>
+            <div class="relative">
+              <pre class="language-bash"><code id="code-step3">bash start_py_server.sh</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-step3')">Copy</button>
+            </div>
+            <p class="text-gray-600 mt-4">Ensure you have Python installed, as the script likely uses Python’s built-in HTTP server. You can check your Python version with:</p>
+            <div class="relative">
+              <pre class="language-bash"><code id="code-python-check">python3 --version</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-python-check')">Copy</button>
+            </div>
+            <p class="text-gray-600 mt-4">If Python is not installed, you can install it using Homebrew on macOS:</p>
+            <div class="relative">
+              <pre class="language-bash"><code id="code-python-install">brew install python</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-python-install')">Copy</button>
+            </div>
+          </div>
+          <!-- Step 4: Access the Application -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 4: Access the Application</h3>
+            <p class="text-gray-600 mb-4">Open your web browser and navigate to the following URL to access the Package Bundler Builder:</p>
+            <div class="relative">
+              <pre class="language-text"><code id="code-step4">http://localhost:9000/app.html</code></pre>
+              <button class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onclick="copyCode('code-step4')">Copy</button>
+            </div>
+            <p class="text-gray-600 mt-4">You should now see the Package Bundler Builder application running in your browser.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-6">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>MC - Package Bundler Builder</p>
+    </div>
+  </footer>
+
+  <!-- Prism.js JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+  <!-- JavaScript for Copy Functionality -->
+  <script>
+    function copyCode(elementId) {
+      const codeElement = document.getElementById(elementId);
+      const text = codeElement.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Code copied to clipboard!');
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  </script>
+</body>
+</html>

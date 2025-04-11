@@ -242,7 +242,10 @@
         { text: 'Merger for package.xml - Kovai', href: '../../sf/merger2/index.html', icon: 'desktop' },
 
         { text: 'BuildGen - Turing', href: '../../build2/build.html', icon: 'desktop' },
+
         { text: 'Package Bundle Builder - Turing', href: '../../sf/pkg-bundle/app.html', icon: 'desktop' },
+        { text: 'Package Bundle Builder - Install Doc', href: '../../tools-docs/package_bundler_builder.html', icon: 'desktop' },
+     
         { text: 'Merger for package.xml - Kovai', href: '../../sf/merger2/index.html', icon: 'desktop' },
         { text: 'Backup - Turing', href: '../../backup/bkp.html', icon: 'desktop' },
         { text: 'DevOps Tools', href: '../../devops/slides/devops-tools.html', icon: 'desktop' },
