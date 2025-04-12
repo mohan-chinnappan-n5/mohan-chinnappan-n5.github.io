@@ -471,6 +471,9 @@
 
         { text: 'Chrome Extension: XLIFF translate using local LLM', href: '../../chrome-extensions/xliff.html', icon: 'desktop' },
         { text: 'Chrome Extension: Web Vitals', href: '../../chrome-extensions/webvitals.html', icon: 'desktop' },
+ 
+	{ text: 'Chrome Extension: SF Utils with Change Tracking', href: '../../chrome-extensions/sf-utils.html', icon: 'desktop' },
+
 
 
 

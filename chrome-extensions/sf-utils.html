@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SF Utils - Chrome Extension</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <style>
+    /* Ensure the body has enough height for scrolling */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    /* Smooth scrolling for anchor links */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <a href="#home">SF Utils</a>
+      </div>
+      <div class="space-x-4">
+        <a href="#home" class="hover:text-blue-200">Home</a>
+        <a href="#features" class="hover:text-blue-200">Features</a>
+        <a href="#demo" class="hover:text-blue-200">Demo</a>
+        <a href="#how-to-use" class="hover:text-blue-200">How to Use</a>
+        <a href="https://chromewebstore.google.com/detail/sf-utils/<<YOUR_EXTENSION_ID>>" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-400">Install Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">SF Utils Chrome Extension</h1>
+        <p class="text-xl mb-8">A powerful tool for Salesforce developers to execute SOQL queries, track metadata changes, run anonymous Apex, and make REST API calls with ease.</p>
+        <a href="https://chromewebstore.google.com/detail/sf-utils/<<YOUR_EXTENSION_ID>>" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get Started</a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Feature 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">🔍</div>
+            <h3 class="text-xl font-semibold mb-2">SOQL Query Execution</h3>
+            <p class="text-gray-600">Run SOQL queries with autocomplete suggestions and view results in interactive DataTables with CSV export.</p>
+          </div>
+          <!-- Feature 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">📦</div>
+            <h3 class="text-xl font-semibold mb-2">Change Tracking</h3>
+            <p class="text-gray-600">Track metadata changes using the Tooling API and generate package.xml files for deployment.</p>
+          </div>
+          <!-- Feature 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">💻</div>
+            <h3 class="text-xl font-semibold mb-2">Anonymous Apex Execution</h3>
+            <p class="text-gray-600">Execute anonymous Apex code directly from the extension and view the results in JSON format.</p>
+          </div>
+          <!-- Feature 4 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">🌐</div>
+            <h3 class="text-xl font-semibold mb-2">REST API Calls</h3>
+            <p class="text-gray-600">Make REST API calls to Salesforce endpoints and view responses in a structured format.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section -->
+
+    <section id="demo" class="bg-gray-200 py-16">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">See It in Action</h2>
+    <div class="flex justify-center">
+      <a href="https://www.youtube.com/watch?v=Pl4vKY-9qss" target="_blank" class="relative rounded-lg shadow-lg w-[640px] h-96 block">
+        <img src="https://img.youtube.com/vi/Pl4vKY-9qss/maxresdefault.jpg" alt="Demo Video Thumbnail" class="w-full h-full object-cover rounded-lg">
+        <div class="absolute inset-0 flex items-center justify-center">
+          <svg class="w-20 h-20 text-red-600 opacity-90 hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+    <!-- How to Use Section -->
+    <section id="how-to-use" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">How to Use</h2>
+        <p class="text-gray-600 mb-6">Follow these steps to get started with the SF Utils Chrome Extension:</p>
+        <div class="space-y-6">
+          <!-- Step 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Install the Extension</h3>
+            <p class="text-gray-600 mb-4">Install the SF Utils Chrome Extension from the Chrome Web Store:</p>
+            <a href="https://chromewebstore.google.com/detail/sf-utils/<<YOUR_EXTENSION_ID>>" class="text-blue-500 hover:underline">Install SF Utils</a>
+          </div>
+          <!-- Step 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 2: Log in to Salesforce</h3>
+            <p class="text-gray-600 mb-4">Open the extension while logged into a Salesforce org in Classic mode.</p>
+          </div>
+          <!-- Step 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 3: Run a SOQL Query</h3>
+            <p class="text-gray-600 mb-4">Navigate to the "SOQL Query" tab, select a predefined query or enter your own, and click "Execute Query" to view the results in a DataTable.</p>
+          </div>
+          <!-- Step 4 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 4: Track Metadata Changes</h3>
+	    <p class="text-gray-600 mb-4">Go to the "Change Tracking" tab, click "Fetch Changes" to retrieve metadata changes, select the changes you want, and generate a `package.xml` file. <b>This will work for Sandboxes and Scratch orgs where Change Tracking is enabled. Not on Production! </b></p>
+	    <pre>Then:</pre>
+	      <pre class="bg-gray-300 p-2 rounded-md text-sm">sf force mdapi convert -x package.xml</pre>
+          <hr>
+          <pre class="bg-gray-300 p-2 rounded-md text-sm">Commit the changes we got into git via Pull Request to trigger the pipeline</pre>
+          </div>
+          <!-- Step 5 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 5: Execute Apex or Make REST Calls</h3>
+            <p class="text-gray-600 mb-4">Use the "Anonymous Apex Code" tab to run Apex code, or the "REST" tab to make API calls to Salesforce endpoints.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-6">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>Made with ❤️ in <a href="https://en.wikipedia.org/wiki/New_Hampshire" class="text-blue-200 hover:underline">New Hampshire</a> by <a href="https://mohan-chinnappan-n.github.io/about/cv.html" class="text-blue-200 hover:underline">mc</a></p>
+    </div>
+  </footer>
+</body>
+</html>
