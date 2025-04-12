@@ -291,6 +291,9 @@
 
         { text: 'EPT Report Tool', href: 'https://mchinnappan100.github.io/pages2/ept/ept-report.html', icon: 'desktop' },
 
+        { text: 'Traceroute in go lang', href: '../../go/traceroute.html', icon: 'desktop' },
+
+
 
 
 
