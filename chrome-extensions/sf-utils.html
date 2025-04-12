@@ -34,7 +34,7 @@
         <a href="#features" class="hover:text-blue-200">Features</a>
         <a href="#demo" class="hover:text-blue-200">Demo</a>
         <a href="#how-to-use" class="hover:text-blue-200">How to Use</a>
-        <a href="https://chromewebstore.google.com/detail/sf-utils/<<YOUR_EXTENSION_ID>>" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-400">Install Now</a>
+        <a href="https://chromewebstore.google.com/detail/salesforce-soql-query-and/ioelfaahincgpebnkogkabggcnhagpdl" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-400">Install Now</a>
       </div>
     </div>
   </nav>
@@ -46,7 +46,7 @@
       <div class="max-w-6xl mx-auto px-4 text-center">
         <h1 class="text-5xl font-bold mb-4">SF Utils Chrome Extension</h1>
         <p class="text-xl mb-8">A powerful tool for Salesforce developers to execute SOQL queries, track metadata changes, run anonymous Apex, and make REST API calls with ease.</p>
-        <a href="https://chromewebstore.google.com/detail/sf-utils/<<YOUR_EXTENSION_ID>>" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get Started</a>
+        <a href="https://chromewebstore.google.com/detail/salesforce-soql-query-and/ioelfaahincgpebnkogkabggcnhagpdl" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get Started</a>
       </div>
     </section>
 
@@ -110,7 +110,7 @@
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Install the Extension</h3>
             <p class="text-gray-600 mb-4">Install the SF Utils Chrome Extension from the Chrome Web Store:</p>
-            <a href="https://chromewebstore.google.com/detail/sf-utils/<<YOUR_EXTENSION_ID>>" class="text-blue-500 hover:underline">Install SF Utils</a>
+            <a href="https://chromewebstore.google.com/detail/salesforce-soql-query-and/ioelfaahincgpebnkogkabggcnhagpdl" class="text-blue-500 hover:underline">Install SF Utils</a>
           </div>
           <!-- Step 2 -->
           <div class="bg-white p-6 rounded-lg shadow-md">
@@ -126,9 +126,16 @@
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 4: Track Metadata Changes</h3>
 	    <p class="text-gray-600 mb-4">Go to the "Change Tracking" tab, click "Fetch Changes" to retrieve metadata changes, select the changes you want, and generate a `package.xml` file. <b>This will work for Sandboxes and Scratch orgs where Change Tracking is enabled. Not on Production! </b></p>
-	    <pre>Then:</pre>
-	      <pre class="bg-gray-300 p-2 rounded-md text-sm">sf force mdapi convert -x package.xml</pre>
-          <hr>
+	    <pre>Then run this command in your sfdx project:</pre>
+	       <pre class="bg-gray-300 p-2 rounded-md text-sm"> sf project retrieve start -x package.xml  -o username</pre>
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample Session Screens</h4>
+  	      <img src='img/sf-utils-00.png'>
+	      <img src='img/sf-utils-01.png'>
+	
+
+	      <img src='img/sf-utils-1.png'>
+	      <img src='img/sf-utils-2.png'>
+          <br>
           <pre class="bg-gray-300 p-2 rounded-md text-sm">Commit the changes we got into git via Pull Request to trigger the pipeline</pre>
           </div>
           <!-- Step 5 -->
