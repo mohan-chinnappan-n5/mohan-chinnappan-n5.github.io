@@ -61,7 +61,7 @@ img {
     <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
       <div class="max-w-6xl mx-auto px-4 text-center">
         <h1 class="text-5xl font-bold mb-4">SF Utils (Node.js)</h1>
-        <p class="text-xl mb-8">A command-line tool for Salesforce developers to execute SOQL queries, track metadata changes, run anonymous Apex, and make REST API calls with ease.</p>
+        <p class="text-xl mb-8">A command-line tool for Salesforce developers to execute SOQL queries, track metadata changes, run anonymous Apex, make REST API calls and BulkAPI 2.0 calls with ease.</p>
         <a href="https://github.com/mohan-chinnappan-n5/sf-utils-node" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get Started</a>
       </div>
     </section>
@@ -96,6 +96,13 @@ img {
             <p class="text-gray-600">Make GET, POST, PATCH, and DELETE REST API calls to Salesforce endpoints with JSON and CSV export options.</p>
           </div>
         </div>
+          <!-- Feature 4 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <div class="text-blue-600 text-4xl mb-4">🌐</div>
+          <h3 class="text-xl font-semibold mb-2">BulkAPI 2.0 Calls</h3>
+          <p class="text-gray-600">Make INSERT, DELETE, UPDATE and UPSERT operations using BulkAPI 2.0</p>
+        </div>
+      </div>
       </div>
     </section>
 
@@ -190,6 +197,54 @@ img {
             <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample Apex Run Session Screen</h4>
             <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-apex-1.png' alt="Apex Execution Screen">
           </div>
+
+          <!-- Step 6 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 5: Using BulkAPI 2.0 </h3>
+            <p class="text-gray-600 mb-4">Select option 5 from the menu</p>
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample  Session Screens</h4>
+            <h4><b>INSERT</b></h4>
+            <hr>
+            <pre>
+cat data2.csv 
+Name,Industry
+Zenith Corp,Technology
+Micro Inc,Finance
+              
+            </pre>
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/bulk2-insert-1.png'  alt="BulkAPI 2.0 Insert Screen 1">
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/bulk2-insert-2.png'  alt="BulkAPI 2.0 Insert Screen 2">
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/bulk2-insert-query.png'  alt="BulkAPI 2.0 Insert Query">
+<hr>
+<h4><b>DELETE</b></h4>
+<hr>
+<pre>
+cat delete3.csv 
+Id
+001DL00002XRYPWYA5
+  
+                
+              </pre>
+              <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/bulk2-delete-1.png'  alt="BulkAPI 2.0 delete Screen 1">
+              <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/bulk2-delete-2.png'  alt="BulkAPI 2.0 delete Screen 2">
+              <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/bulk2-delete-query.png'  alt="BulkAPI 2.0 delete Query">
+
+  <h4><b>UPSERT</b></h4>
+  <hr>
+  <pre>
+  cat update.csv 
+  Id,Name
+  001DL00002XRYPVYA5,Zenith2 Corp
+    
+                  
+                </pre>
+                <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/bulk2-update-1.png'  alt="BulkAPI 2.0 update Screen 1">
+                <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/bulk2-update-2.png'  alt="BulkAPI 2.0 update Screen 2">
+                <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/bulk2-update-query.png'  alt="BulkAPI 2.0 update Query">
+    
+        
+          </div>
+
         </div>
       </div>
     </section>
