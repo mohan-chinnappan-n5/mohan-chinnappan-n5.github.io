@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SF Utils - Node.js Application</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/mc_favIcon.ico">
   <style>
     body {
       min-height: 100vh;
@@ -18,6 +18,24 @@
     html {
       scroll-behavior: smooth;
     }
+
+img {
+  /* Border properties */
+  border: 5px solid #ccc; /* Adjust thickness and color as needed */
+  border-radius: 8px; /* Optional: Add rounded corners */
+
+  /* Shadow properties */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Adjust horizontal offset, vertical offset, blur radius, and color/opacity */
+
+  /* Optional: Add some margin around the images */
+  margin: 10px;
+
+  /* Optional: Ensure images don't get too large and maintain aspect ratio */
+  max-width: 100%;
+  height: auto;
+  display: block; /* Prevents extra space below inline images */
+}
+    
   </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -114,58 +132,63 @@
           <!-- Step 2 -->
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 2: Install Dependencies</h3>
-            <p class="text-gray-600 mb-4">Install the required Node.js dependencies using npm:</p>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">npm install jsforce axios csv-writer chalk@4.1.2 punycode</pre>
+            <p class="text-gray-600 mb-4">Make sure have <b><a href='https://nodejs.org/en/download'>nodejs</a></b> installed in your machine. Install the required Node.js dependencies using npm:</p>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">npm install </pre>
           </div>
           <!-- Step 3 -->
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 3: Authenticate with Salesforce</h3>
-            <p class="text-gray-600 mb-4">Ensure you have the Salesforce CLI installed and authenticated with your Salesforce org. Run the script and provide your Salesforce username when prompted (the last username will be remembered as a default):</p>
+            <p class="text-gray-600 mb-4">Ensure you have the Salesforce CLI installed and authenticated (<i><b>sf force auth web login [-r https://test.salesforce.com]</b> </i>) with your Salesforce org. Run the script and provide your Salesforce username when prompted (the last username will be remembered as a default):</p>
             <pre class="bg-gray-300 p-2 rounded-md text-sm">node index.js</pre>
             <p class="text-gray-600 mb-4">You'll be prompted to enter your Salesforce username:</p>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter your Salesforce username (default: user@example.org): </pre>
-            <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample Authentication Screen</h4>
-            <img src='img/sfutils-auth.png' alt="Authentication Screen">
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-auth.png'  alt="Authentication Screen">
           </div>
           <!-- Step 4 -->
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 4: Run a SOQL Query</h3>
             <p class="text-gray-600 mb-4">Select option 1 from the menu, enter your SOQL query, and choose to export the results to CSV if desired.</p>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Select an option (1-5): 1</pre>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter your SOQL query (e.g., SELECT Id, Name FROM Account LIMIT 10): SELECT Id, Name FROM Account LIMIT 5</pre>
             <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample Query Session Screens</h4>
-            <img src='img/sfutils-q-1.png' alt="SOQL Query Screen 1">
-            <img src='img/sfutils-q-2.png' alt="SOQL Query Screen 2">
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-q-1.png'  alt="SOQL Query Screen 1">
           </div>
           <!-- Step 5 -->
           <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 5: Track Metadata Changes</h3>
             <p class="text-gray-600 mb-4">Select option 4 from the menu to track metadata changes, fetch changes, and generate a `package.xml` file. <b>This will work for Sandboxes and Scratch orgs where Change Tracking is enabled. Not on Production!</b></p>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Select an option (1-5): 4</pre>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter the date to track changes since (YYYY-MM-DD, e.g., 2025-04-01), or press Enter for all changes: 2025-04-01</pre>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">Then run this command in your SFDX project:</pre>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">sf project retrieve start -x package.xml -o username</pre>
             <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample Session Screens</h4>
-            <img src='img/sfutils-track-1.png' alt="Change Tracking Screen 1">
-            <img src='img/sfutils-track-2.png' alt="Change Tracking Screen 2">
-            <br>
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-track-1.png'  alt="Change Tracking Screen 1">
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-track-2.png'  alt="Change Tracking Screen 2">
+            <h3>package.xml</h3>
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/packagexml-1.png'  alt="Change Tracking Screen 3">
+
+            <h3>In your SFDX Project:</h3>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">sf project retrieve start -x package.xml -o username</pre>
+            <hr>
             <pre class="bg-gray-300 p-2 rounded-md text-sm">Commit the changes we got into git via Pull Request to trigger the pipeline</pre>
           </div>
           <!-- Step 6 -->
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 6: Execute Apex or Make REST Calls</h3>
-            <p class="text-gray-600 mb-4">Use option 2 to run anonymous Apex code, or option 3 to make REST API calls (GET, POST, PATCH, DELETE) with JSON and CSV export options.</p>
-            <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample REST Session Screens</h4>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Select an option (1-5): 3</pre>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Yellow] Select HTTP method:</pre>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter the method number (1-4): 1</pre>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter the REST API URL (e.g., /services/data/v59.0/sobjects/Account/describe): /services/data/v60.0/wave/recipes</pre>
-            <img src='img/sfutils-rest-1.png' alt="REST API Screen 1">
-            <img src='img/sfutils-rest-2.png' alt="REST API Screen 2">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 6: Make REST Calls</h3>
+
+            <h4>POST</h4>
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-rest-1.png'  alt="REST API Screen 1 POST">
+            <h4>Query</h4>
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-rest-2.png'  alt="REST API Screen 2 Query">
+            
+            <h4>PATCH</h4>
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-rest-3.png' alt="REST API Screen 3 - PATCH">
+            <h4>Query</h4>
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-rest-4.png' alt="REST API Screen 3 - Query2">
+           
+            <h4>DELETE</h4>
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-rest-5.png' alt="REST API Screen 3 - DELETE">
+          
+            <h4>Query</h4>
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-rest-7.png' alt="REST API Screen 3 - Query3">
+           
+
+
             <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample Apex Run Session Screen</h4>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Select an option (1-5): 2</pre>
-            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter your anonymous Apex code (end with Ctrl+D on a new line):</pre>
-            <img src='img/sfutils-apex-1.png' alt="Apex Execution Screen">
+            <img src='https://raw.githubusercontent.com/mohan-chinnappan-n5/demos-git/main/sfutils/sfutils-apex-1.png' alt="Apex Execution Screen">
           </div>
         </div>
       </div>
