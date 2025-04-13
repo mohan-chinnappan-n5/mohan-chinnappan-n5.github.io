@@ -278,6 +278,8 @@ const data = {
           { title: "எத்தன சந்தோசம்!" , youtubeId: "2-d37i5rcrI" },
           { title: "தென்னை முதல் காபி வரை 24 ஏக்கரில் அற்புதமான உணவுக்காடு" , youtubeId: "BK_pEo4-NJc" },
 
+          { title: "பணத்தை சேர்த்துட்டுதான் விவசாயம் செய்ய வந்தோம்" , youtub: "wZj5TrjbbIU" },
+
 
 
 

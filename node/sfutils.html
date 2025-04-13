@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SF Utils - Node.js Application</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <a href="#home">SF Utils (Node.js)</a>
+      </div>
+      <div class="space-x-4">
+        <a href="#home" class="hover:text-blue-200">Home</a>
+        <a href="#features" class="hover:text-blue-200">Features</a>
+        <a href="#demo" class="hover:text-blue-200">Demo</a>
+        <a href="#how-to-use" class="hover:text-blue-200">How to Use</a>
+        <a href="https://github.com/mohan-chinnappan-n5/sf-utils-node" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-400">View on GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">SF Utils (Node.js)</h1>
+        <p class="text-xl mb-8">A command-line tool for Salesforce developers to execute SOQL queries, track metadata changes, run anonymous Apex, and make REST API calls with ease.</p>
+        <a href="https://github.com/mohan-chinnappan-n5/sf-utils-node" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get Started</a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Feature 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">🔍</div>
+            <h3 class="text-xl font-semibold mb-2">SOQL Query Execution</h3>
+            <p class="text-gray-600">Execute SOQL queries with pagination support and export results to CSV for further analysis.</p>
+          </div>
+          <!-- Feature 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">📦</div>
+            <h3 class="text-xl font-semibold mb-2">Change Tracking</h3>
+            <p class="text-gray-600">Track metadata changes using the Tooling API and generate package.xml files for deployment.</p>
+          </div>
+          <!-- Feature 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">💻</div>
+            <h3 class="text-xl font-semibold mb-2">Anonymous Apex Execution</h3>
+            <p class="text-gray-600">Run anonymous Apex code directly from the CLI and view the results in JSON format.</p>
+          </div>
+          <!-- Feature 4 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">🌐</div>
+            <h3 class="text-xl font-semibold mb-2">REST API Calls</h3>
+            <p class="text-gray-600">Make GET, POST, PATCH, and DELETE REST API calls to Salesforce endpoints with JSON and CSV export options.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="bg-gray-200 py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">See It in Action</h2>
+        <div class="flex justify-center">
+          <a href="https://www.youtube.com/watch?v=FCheL5nkOTM" target="_blank" class="relative rounded-lg shadow-lg w-[640px] h-96 block">
+            <img src="https://img.youtube.com/vi/FCheL5nkOTM/maxresdefault.jpg" alt="Demo Video Thumbnail" class="w-full h-full object-cover rounded-lg">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <svg class="w-20 h-20 text-red-600 opacity-90 hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section id="how-to-use" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">How to Use</h2>
+        <p class="text-gray-600 mb-6">Follow these steps to get started with the SF Utils Node.js application:</p>
+        <div class="space-y-6">
+          <!-- Step 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Clone the Repository</h3>
+            <p class="text-gray-600 mb-4">Clone the SF Utils Node.js repository from GitHub and navigate to the project directory:</p>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">git clone https://github.com/mohan-chinnappan-n5/sf-utils-node.git</pre>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">cd sf-utils-node</pre>
+          </div>
+          <!-- Step 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 2: Install Dependencies</h3>
+            <p class="text-gray-600 mb-4">Install the required Node.js dependencies using npm:</p>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">npm install jsforce axios csv-writer chalk@4.1.2 punycode</pre>
+          </div>
+          <!-- Step 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 3: Authenticate with Salesforce</h3>
+            <p class="text-gray-600 mb-4">Ensure you have the Salesforce CLI installed and authenticated with your Salesforce org. Run the script and provide your Salesforce username when prompted (the last username will be remembered as a default):</p>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">node index.js</pre>
+            <p class="text-gray-600 mb-4">You'll be prompted to enter your Salesforce username:</p>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter your Salesforce username (default: user@example.org): </pre>
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample Authentication Screen</h4>
+            <img src='img/sfutils-auth.png' alt="Authentication Screen">
+          </div>
+          <!-- Step 4 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 4: Run a SOQL Query</h3>
+            <p class="text-gray-600 mb-4">Select option 1 from the menu, enter your SOQL query, and choose to export the results to CSV if desired.</p>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Select an option (1-5): 1</pre>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter your SOQL query (e.g., SELECT Id, Name FROM Account LIMIT 10): SELECT Id, Name FROM Account LIMIT 5</pre>
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample Query Session Screens</h4>
+            <img src='img/sfutils-q-1.png' alt="SOQL Query Screen 1">
+            <img src='img/sfutils-q-2.png' alt="SOQL Query Screen 2">
+          </div>
+          <!-- Step 5 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 5: Track Metadata Changes</h3>
+            <p class="text-gray-600 mb-4">Select option 4 from the menu to track metadata changes, fetch changes, and generate a `package.xml` file. <b>This will work for Sandboxes and Scratch orgs where Change Tracking is enabled. Not on Production!</b></p>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Select an option (1-5): 4</pre>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter the date to track changes since (YYYY-MM-DD, e.g., 2025-04-01), or press Enter for all changes: 2025-04-01</pre>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">Then run this command in your SFDX project:</pre>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">sf project retrieve start -x package.xml -o username</pre>
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample Session Screens</h4>
+            <img src='img/sfutils-track-1.png' alt="Change Tracking Screen 1">
+            <img src='img/sfutils-track-2.png' alt="Change Tracking Screen 2">
+            <br>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">Commit the changes we got into git via Pull Request to trigger the pipeline</pre>
+          </div>
+          <!-- Step 6 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 6: Execute Apex or Make REST Calls</h3>
+            <p class="text-gray-600 mb-4">Use option 2 to run anonymous Apex code, or option 3 to make REST API calls (GET, POST, PATCH, DELETE) with JSON and CSV export options.</p>
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample REST Session Screens</h4>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Select an option (1-5): 3</pre>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Yellow] Select HTTP method:</pre>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter the method number (1-4): 1</pre>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter the REST API URL (e.g., /services/data/v59.0/sobjects/Account/describe): /services/data/v60.0/wave/recipes</pre>
+            <img src='img/sfutils-rest-1.png' alt="REST API Screen 1">
+            <img src='img/sfutils-rest-2.png' alt="REST API Screen 2">
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">Sample Apex Run Session Screen</h4>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Select an option (1-5): 2</pre>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm">[Green] Enter your anonymous Apex code (end with Ctrl+D on a new line):</pre>
+            <img src='img/sfutils-apex-1.png' alt="Apex Execution Screen">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-6">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>Made with ❤️ in <a href="https://en.wikipedia.org/wiki/New_Hampshire" class="text-blue-200 hover:underline">New Hampshire</a> by <a href="https://mohan-chinnappan-n.github.io/about/cv.html" class="text-blue-200 hover:underline">mc</a></p>
+    </div>
+  </footer>
+</body>
+</html>

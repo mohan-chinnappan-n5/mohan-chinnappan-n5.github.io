@@ -264,6 +264,9 @@
 	{ text: 'Admin Changes Implementor App', href: '../../admin-changes/index.html', icon: 'desktop' },
         { text: 'Territory Management Visualizer  ', href: 'https://mohantm.streamlit.app', icon: 'desktop' },
 
+        { text: 'SF Utils (nodejs)  ', href: '../../node/sfutils.html', icon: 'desktop' },
+
+
 
         // Add more links here
       ],
