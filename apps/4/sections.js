@@ -267,6 +267,9 @@
         { text: 'SF Utils (nodejs)  ', href: '../../node/sfutils.html', icon: 'desktop' },
         { text: 'SFU CLI  ', href: '../../node/sfu.html', icon: 'desktop' },
 
+	{ text: 'PRs to package.xml tool', href: 'https://mchinnappan100.github.io/pages2/tools/prs-to-pkg.html', icon: 'desktop' },
+
+
 
 
 
