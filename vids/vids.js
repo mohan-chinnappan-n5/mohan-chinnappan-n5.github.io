@@ -279,6 +279,13 @@ const data = {
           { title: "தென்னை முதல் காபி வரை 24 ஏக்கரில் அற்புதமான உணவுக்காடு" , youtubeId: "BK_pEo4-NJc" },
 
           { title: "பணத்தை சேர்த்துட்டுதான் விவசாயம் செய்ய வந்தோம்" , youtub: "wZj5TrjbbIU" },
+          { title: "லாபம் கொழிக்கும் மிளகு உற்பத்தி | Pepper Cultivation | Balusamy Pepper Garden" , youtub: "W9cURUtztyM" },
+          { title: "மிளகு முதல் காபி வரை | 10 ஏக்கரில் பணப்பயிர் | புதுக்கோட்டையை கேரளா போல மாற்றிய மனிதர்!" , youtub: "bv-lNBBw5jc" },
+
+          { title: "ஆடு வளர்ப்பு TO கறி விற்பனை | 50 கோடி ரூபாய் டேர்ன் ஓவர் டார்கெட் | Navaladi Farm " , youtub: "PYhuvVxZTVY" },
+
+
+
 
 
 

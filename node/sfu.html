@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SFU CLI - Salesforce Utility</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <!-- Prism.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    img {
+      border: 5px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+      margin: 10px;
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    .copy-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <a href="#home">SFU CLI</a>
+      </div>
+      <div class="space-x-4">
+        <a href="#home" class="hover:text-blue-200">Home</a>
+        <a href="#features" class="hover:text-blue-200">Features</a>
+        <a href="#demo" class="hover:text-blue-200">Demo</a>
+        <a href="#how-to-use" class="hover:text-blue-200">How to Use</a>
+        <a href="https://github.com/mohan-chinnappan-n5/sf-utils-node.git" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-400">View on GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">SFU CLI</h1>
+        <p class="text-xl mb-8">A powerful command-line tool for Salesforce developers to execute SOQL queries, make REST and Bulk API calls, track metadata changes, and run anonymous Apex with ease.</p>
+        <a href="https://github.com/mohan-chinnappan-n5/sf-utils-node.git" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Get Started</a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">🔍</div>
+            <h3 class="text-xl font-semibold mb-2">SOQL Query Execution</h3>
+            <p class="text-gray-600">Run SOQL queries with Standard or Tooling API, export results to CSV, and generate Explain Plans for query optimization.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">🌐</div>
+            <h3 class="text-xl font-semibold mb-2">REST API Calls</h3>
+            <p class="text-gray-600">Perform GET, POST, PATCH, and DELETE operations on Salesforce REST endpoints with JSON and CSV output.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">📦</div>
+            <h3 class="text-xl font-semibold mb-2">Bulk API 2.0 Operations</h3>
+            <p class="text-gray-600">Execute Insert, Update, Upsert, and Delete operations using Bulk API 2.0 with CSV input and detailed job status.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">📊</div>
+            <h3 class="text-xl font-semibold mb-2">Metadata Change Tracking</h3>
+            <p class="text-gray-600">Track SourceMember changes via Tooling API and export results to CSV for deployment analysis.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">💻</div>
+            <h3 class="text-xl font-semibold mb-2">Anonymous Apex Execution</h3>
+            <p class="text-gray-600">Run anonymous Apex code from strings or files and view results in JSON format.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">⚙️</div>
+            <h3 class="text-xl font-semibold mb-2">Flexible Authentication</h3>
+            <p class="text-gray-600">Authenticate using Salesforce CLI credentials with username persistence for seamless workflows.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="bg-gray-200 py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">See It in Action</h2>
+        <p class="text-gray-600 text-center mb-8">Below are sample commands and outputs demonstrating the power of SFU CLI.</p>
+        <div class="space-y-8">
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">SOQL Query with Explain Plan</h3>
+            <pre class="bg-gray-300 p-4 rounded-md text-sm"><code class="language-bash">./sfu query -q "SELECT Id, Name FROM Account LIMIT 10" -p -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+            <p class="text-gray-600 mt-2">Output:</p>
+            <pre class="bg-gray-300 p-4 rounded-md text-sm"><code class="language-json">
+Instance URL: https://your-org.my.salesforce.com
+API Version: 60.0
+Successfully connected to Salesforce!
+Running Explain Plan...
+=== Explain Plan Results ===
+Plan 1:
+{
+  "Cardinality": 10,
+  "Fields": ["Id", "Name"],
+  "LeadingOperationType": "TableScan",
+  "RelativeCost": 0.1,
+  "SObject": "Account",
+  "Notes": []
+}
+=== Query Results (JSON) ===
+[
+  {"Id": "001DL00000Test1", "Name": "Test Account"},
+  ...
+]
+Query execution time: 150.00 ms
+Results exported to query_results.csv
+            </code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">REST API Call</h3>
+            <pre class="bg-gray-300 p-4 rounded-md text-sm"><code class="language-bash">./sfu rest -m GET -r /services/data/v60.0/sobjects/Account/describe -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+            <p class="text-gray-600 mt-2">Output:</p>
+            <pre class="bg-gray-300 p-4 rounded-md text-sm"><code class="language-json">
+Instance URL: https://your-org.my.salesforce.com
+API Version: 60.0
+Successfully connected to Salesforce!
+=== REST API Response (JSON) ===
+{
+  "name": "Account",
+  "fields": [
+    {"name": "Id", "type": "id", ...},
+    {"name": "Name", "type": "string", ...},
+    ...
+  ],
+  ...
+}
+Response exported to rest_api_response.json
+            </code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Bulk API Insert</h3>
+            <pre class="bg-gray-300 p-4 rounded-md text-sm"><code class="language-bash">./sfu bulk -s Account -o Insert -d data2.csv -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+            <p class="text-gray-600 mt-2">Input file (<code>data2.csv</code>):</p>
+            <pre class="bg-gray-300 p-4 rounded-md text-sm"><code class="language-csv">
+Name,Industry
+Zenith Corp,Technology
+Micro Inc,Finance
+            </code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+            <p class="text-gray-600 mt-2">Output:</p>
+            <pre class="bg-gray-300 p-4 rounded-md text-sm"><code class="language-json">
+Instance URL: https://your-org.my.salesforce.com
+API Version: 60.0
+Successfully connected to Salesforce!
+Creating job...
+=== Final Job Status ===
+{
+  "id": "750DL00000C9BpSYAV",
+  "state": "JobComplete",
+  "numberRecordsProcessed": 2,
+  "numberRecordsFailed": 0,
+  "totalProcessingTime": 5000
+}
+Successful results exported to bulk_api_successful_results.csv
+            </code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Track Metadata Changes</h3>
+            <pre class="bg-gray-300 p-4 rounded-md text-sm"><code class="language-bash">./sfu track -d 2025-04-01 -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+            <p class="text-gray-600 mt-2">Output:</p>
+            <pre class="bg-gray-300 p-4 rounded-md text-sm"><code class="language-json">
+Instance URL: https://your-org.my.salesforce.com
+API Version: 60.0
+Successfully connected to Salesforce!
+=== Tracked Changes ===
+[
+  {
+    "MemberName": "MyApexClass",
+    "MemberType": "ApexClass",
+    "LastModifiedDate": "2025-04-02T10:00:00Z",
+    "LastModifiedByName": "user@example.org"
+  },
+  ...
+]
+Results exported to tracked_changes.csv
+            </code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section id="how-to-use" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">How to Use</h2>
+        <p class="text-gray-600 mb-6">Follow these steps to set up and use the SFU CLI for your Salesforce development tasks.</p>
+        <div class="space-y-6">
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Clone the Repository</h3>
+            <p class="text-gray-600 mb-4">Clone the SFU CLI repository from GitHub and navigate to the project directory:</p>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">git clone https://github.com/mohan-chinnappan-n5/sf-utils-node.git</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">cd sf-utils-node/2</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 2: Install Dependencies</h3>
+            <p class="text-gray-600 mb-4">Ensure you have <a href="https://nodejs.org/en/download" class="text-blue-600 hover:underline">Node.js</a> installed. Then, install the required dependencies:</p>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">
+npm install
+chmod +x sfu.js
+ln sfu.js sfu
+    </code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 3: Authenticate with Salesforce</h3>
+            <p class="text-gray-600 mb-4">Ensure you have the Salesforce CLI installed and authenticated with your org using:</p>
+            <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">sf force auth web login [-r https://test.salesforce.com]</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+            <p class="text-gray-600 mb-4">The SFU CLI uses these credentials and stores the last-used username in <code>last_username.txt</code> for convenience.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 4: Run Commands</h3>
+            <p class="text-gray-600 mb-4">Use the following commands to interact with your Salesforce org. All commands require the <code>-u <username></code> option unless <code>last_username.txt</code> is set.</p>
+            <div class="space-y-4">
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">SOQL Query</h4>
+                <p class="text-gray-600 mb-2">Execute a SOQL query and optionally generate an Explain Plan or use Tooling API.</p>
+                <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">./sfu query -q "SELECT Id, Name FROM Account LIMIT 10" -p -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+                <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">sfu query -f query.soql -t -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+                <p class="text-gray-600 mt-2">Options:</p>
+                <ul class="list-disc list-inside text-gray-600">
+                  <li><code>-q, --query <query></code>: SOQL query string.</li>
+                  <li><code>-f, --file <file></code>: Path to a .soql file.</li>
+                  <li><code>-t, --tooling</code>: Use Tooling API.</li>
+                  <li><code>-p, --plan</code>: Generate Explain Plan (Standard API only).</li>
+                </ul>
+                <p class="text-gray-600 mt-2">Output: JSON results, execution time, and <code>query_results.csv</code>.</p>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">REST API</h4>
+                <p class="text-gray-600 mb-2">Make REST API calls to Salesforce endpoints.</p>
+                <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">./sfu rest -m GET -r /services/data/v60.0/sobjects/Account/describe -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+                <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">./sfu rest -m POST -r /services/data/v60.0/sobjects/Account -p payload.json -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+                <p class="text-gray-600 mt-2">Options:</p>
+                <ul class="list-disc list-inside text-gray-600">
+                  <li><code>-m, --method <method></code>: HTTP method (GET, POST, PATCH, DELETE).</li>
+                  <li><code>-r, --resource <resource></code>: Relative REST API URL.</li>
+                  <li><code>-p, --payload <file></code>: JSON payload file for POST/PATCH.</li>
+                </ul>
+                <p class="text-gray-600 mt-2">Output: JSON response in <code>rest_api_response.json</code>, CSV for GET if applicable.</p>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">Bulk API 2.0</h4>
+                <p class="text-gray-600 mb-2">Perform bulk operations with CSV input.</p>
+                <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">./sfu bulk -s Account -o Insert -d data2.csv -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+                <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">./sfu bulk -s Account -o Upsert -d data.csv -e ExternalId__c -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+                <p class="text-gray-600 mt-2">Options:</p>
+                <ul class="list-disc list-inside text-gray-600">
+                  <li><code>-s, --sobject <object></code>: Salesforce object (e.g., Account).</li>
+                  <li><code>-o, --operation <operation></code>: Insert, Update, Upsert, Delete.</li>
+                  <li><code>-d, --data <file></code>: CSV data file.</li>
+                  <li><code>-e, --external-id <field></code>: External ID for Upsert.</li>
+                </ul>
+                <p class="text-gray-600 mt-2">Output: Job status, <code>bulk_api_successful_results.csv</code>, and <code>bulk_api_failed_results.csv</code> if applicable.</p>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">Track Metadata Changes</h4>
+                <p class="text-gray-600 mb-2">Track SourceMember changes using Tooling API (works in sandboxes/scratch orgs with change tracking enabled).</p>
+                <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">./sfu track -d 2025-04-01 -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+                <p class="text-gray-600 mt-2">Options:</p>
+                <ul class="list-disc list-inside text-gray-600">
+                  <li><code>-d, --date <date></code>: Track changes since YYYY-MM-DD.</li>
+                  <li><code>-u, --user <user></code>: Filter by username (optional).</li>
+                </ul>
+                <p class="text-gray-600 mt-2">Output: JSON results and <code>tracked_changes.csv</code>.</p>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">Anonymous Apex</h4>
+                <p class="text-gray-600 mb-2">Run anonymous Apex code.</p>
+                <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">./sfu apex -q "System.debug('Hello');" -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+                <pre class="bg-gray-300 p-2 rounded-md text-sm"><code class="language-bash">./sfu apex -f code.apex -u user@example.org</code><button class="copy-button bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600" onclick="copyToClipboard(this)">Copy</button></pre>
+                <p class="text-gray-600 mt-2">Options:</p>
+                <ul class="list-disc list-inside text-gray-600">
+                  <li><code>-q, --code <code></code>: Apex code string.</li>
+                  <li><code>-f, --file <file></code>: Path to Apex file.</li>
+                </ul>
+                <p class="text-gray-600 mt-2">Output: JSON results.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-6">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>Made with ❤️ in <a href="https://en.wikipedia.org/wiki/New_Hampshire" class="text-blue-200 hover:underline">New Hampshire</a> by <a href="https://mohan-chinnappan-n.github.io/about/cv.html" class="text-blue-200 hover:underline">mc</a></p>
+    </div>
+  </footer>
+
+  <!-- Prism.js JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csv.min.js"></script>
+  <!-- Copy to Clipboard Script -->
+  <script>
+    function copyToClipboard(button) {
+      const codeElement = button.previousElementSibling;
+      const text = codeElement.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        button.textContent = 'Copied!';
+        setTimeout(() => {
+          button.textContent = 'Copy';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  </script>
+</body>
+</html>

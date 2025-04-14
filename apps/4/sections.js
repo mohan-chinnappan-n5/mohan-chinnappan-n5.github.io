@@ -265,6 +265,8 @@
         { text: 'Territory Management Visualizer  ', href: 'https://mohantm.streamlit.app', icon: 'desktop' },
 
         { text: 'SF Utils (nodejs)  ', href: '../../node/sfutils.html', icon: 'desktop' },
+        { text: 'SFU CLI  ', href: '../../node/sfu.html', icon: 'desktop' },
+
 
 
 
