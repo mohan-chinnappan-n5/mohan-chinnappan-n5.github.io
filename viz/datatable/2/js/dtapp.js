@@ -52,10 +52,17 @@ const prepareData = (input) => {
     if (!Array.isArray(data) || data.length === 0) {
       throw new Error("Data must be a non-empty array of objects.");
     }
+    // Only flatten nested objects if necessary
     data = data.map((item) => {
+      if (typeof item !== "object" || item === null) {
+        throw new Error("Each item must be an object.");
+      }
       let flattenedItem = {};
       for (let key in item) {
-        flattenedItem[key] = typeof item[key] === "object" && item[key] !== null ? JSON.stringify(item[key]) : item[key];
+        // Only stringify if the value is a nested object or array (excluding null)
+        flattenedItem[key] = typeof item[key] === "object" && item[key] !== null && !(item[key] instanceof Date)
+          ? JSON.stringify(item[key])
+          : item[key];
       }
       return flattenedItem;
     });
@@ -70,6 +77,7 @@ const prepareData = (input) => {
     if (thsEle) thsEle.innerHTML = ths;
     return { data, fieldsData };
   } catch (e) {
+    console.error("prepareData error:", e, "Input:", input);
     throw new Error(`Invalid data format: ${e.message}`);
   }
 };
@@ -196,7 +204,7 @@ function initializeApp() {
     try {
       input = atob(params.get("d"));
       JSON.parse(input); // Validate JSON
-      if (editor) editor.setValue(JSON.stringify(input));
+      if (editor) editor.setValue(input);
     } catch (e) {
       console.error("Error decoding or parsing query param 'd':", e);
       alert("Invalid data in query parameter 'd'.");
@@ -366,11 +374,6 @@ function initializeApp() {
   }
 
   if (resetBtn) {
-    drawChart(currentData, chartTypeSelect?.value || "bar", currentFieldTypes, xAxisSelect.value, yAxisSelect.value);
-    getEle("vizBar")?.focus();
-  }
-
-  if (resetBtn) {
     resetBtn.addEventListener("click", () => {
       if (xAxisSelect) xAxisSelect.value = "";
       if (yAxisSelect) yAxisSelect.value = "";
@@ -381,7 +384,10 @@ function initializeApp() {
       if (getEle("vizBar")) getEle("vizBar").innerHTML = "";
       if (fileNameDisplay) fileNameDisplay.textContent = "";
       if (fileUpload) fileUpload.value = "";
-      if (editor) editor.setValue(input);
+      if (editor) {
+        editor.setValue(input);
+        monaco.editor.setModelLanguage(editor.getModel(), "json");
+      }
     });
   }
 
