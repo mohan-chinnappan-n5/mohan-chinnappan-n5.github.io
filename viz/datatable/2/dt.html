@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SF-LAND Data Viewer</title>
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.css">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <!-- DataTables JS -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/datatables.min.js"></script>
+  <!-- D3 and Vega -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.6.1/d3.min.js" integrity="sha512-MefNfAGJ/pEy89xLOFs3V6pYPs6AmUhXJrRlydI/9wZuGrqxmrdQ80zKHUcyadAcpH67teDZcBeS6oMJLPtTqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    #dt_wrapper .dt-buttons {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    #dt_wrapper .dt-button {
+      @apply bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600;
+    }
+    #vizBar {
+      @apply border rounded-lg shadow-md p-4 bg-white;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex">
+          <div class="flex-shrink-0 flex items-center">
+            <a href="#" class="text-2xl font-bold">SF-LAND Data Viewer</a>
+          </div>
+        </div>
+        <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+          <a href="#home" class="hover:text-blue-200">Home</a>
+          <a href="https://github.com/mohan-chinnappan-n5" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-400">GitHub</a>
+        </div>
+        <div class="-mr-2 flex items-center sm:hidden">
+          <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-200 hover:bg-blue-700 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-toggle">
+            <span class="sr-only">Open main menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="sm:hidden hidden" id="mobile-menu">
+      <div class="pt-2 pb-3 space-y-1">
+        <a href="#home" class="block pl-3 pr-4 py-2 text-base font-medium hover:text-blue-200">Home</a>
+        <a href="https://github.com/mohan-chinnappan-n5" class="block pl-3 pr-4 py-2 text-base font-medium bg-blue-500 mx-3 rounded hover:bg-blue-400">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="home" class="py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Data Viewer</h3>
+        <div class="mb-4">
+          <label for="file-upload" class="block text-sm font-medium text-gray-700 mb-1">Upload JSON or CSV:</label>
+          <div class="flex items-center gap-4">
+            <input type="file" id="file-upload" accept=".json,.csv" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" aria-label="Upload JSON or CSV file">
+            <span id="file-name" class="text-sm text-gray-600"></span>
+          </div>
+        </div>
+        <div class="mb-4">
+          <button id="render-data" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Render Data</button>
+        </div>
+        <div class="mb-4">
+          <label for="query" class="block text-sm font-medium text-gray-700 mb-1">Data Input:</label>
+          <textarea id="query" class="w-full p-3 bg-gray-900 text-white rounded-lg focus:outline-none" rows="4" aria-label="Data input"></textarea>
+        </div>
+        <div class="flex flex-wrap gap-4 mb-4">
+          <div>
+            <label for="x-axis-select" class="block text-sm font-medium text-gray-700">X-axis:</label>
+            <select id="x-axis-select" class="mt-1 block p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500" aria-label="Select X-axis"></select>
+          </div>
+          <div>
+            <label for="y-axis-select" class="block text-sm font-medium text-gray-700">Y-axis:</label>
+            <select id="y-axis-select" class="mt-1 block p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500" aria-label="Select Y-axis"></select>
+          </div>
+          <div>
+            <label for="chart-type-select" class="block text-sm font-medium text-gray-700">Chart Type:</label>
+            <select id="chart-type-select" class="mt-1 block p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500" aria-label="Select chart type">
+              <option value="bar">Bar</option>
+              <option value="line">Line</option>
+              <option value="point">Scatter</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-4 mb-4">
+          <button id="draw" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Draw Chart</button>
+          <button id="reset" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Reset Chart</button>
+          <button id="share" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Share Link</button>
+          <button id="export-image" class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Copy Chart Image</button>
+        </div>
+        <hr class="my-4">
+        <table id="dt" class="display w-full">
+          <thead>
+            <tr id="header"></tr>
+          </thead>
+        </table>
+        <div id="vizBar" class="mt-6" tabindex="-1"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>Made with ❤️ in <a href="https://en.wikipedia.org/wiki/New_Hampshire" class="text-blue-200 hover:underline">New Hampshire</a> by <a href="https://mohan-chinnappan-n.github.io/about/cv.html" class="text-blue-200 hover:underline">mc</a></p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/dtapp.js"></script>
+</body>
+</html>
