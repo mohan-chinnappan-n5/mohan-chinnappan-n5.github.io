@@ -85,6 +85,9 @@
       links: [
         { text: 'Data Catalog', href: '../../dfv/catalog.html', icon: 'desktop' },
         { text: 'DataTable', href: '../../viz/datatable/dt.html', icon: 'desktop' },
+        { text: 'DataTable V2', href: '../../viz/datatable/2/dt.html', icon: 'desktop' },
+
+
         { text: 'CSV Editor', href: '../../csveditor/index.html', icon: 'desktop' },
         { text: 'Data Viz - Kalam', href: '../../kalam/viz/app.html', icon: 'desktop' },
         { text: 'Data Viz - Turing', href: '../../dviz/', icon: 'desktop' },

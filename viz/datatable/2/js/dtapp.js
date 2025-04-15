@@ -12,7 +12,7 @@ const drawBtn = getEle("draw");
 const resetBtn = getEle("reset");
 const shareBtn = getEle("share");
 const exportImageBtn = getEle("export-image");
-const queryEle = getEle("query");
+const queryEditorContainer = getEle("query-editor");
 const fileUpload = getEle("file-upload");
 const fileNameDisplay = getEle("file-name");
 const thsEle = getEle("header");
@@ -25,6 +25,25 @@ let currentData, currentFieldTypes;
 let input = `[{"name": "peach", "qty": 200, "quality": "good"}, {"name":"mango", "qty":700, "quality": "good"}, {"name":"mango", "qty":300, "quality": "good"}]`;
 let xAggregate = null;
 let yAggregate = null;
+let editor = null;
+
+// Initialize Monaco Editor
+require(["vs/editor/editor.main"], () => {
+  editor = monaco.editor.create(queryEditorContainer, {
+    value: input,
+    language: "json",
+    theme: "vs-dark",
+    automaticLayout: true,
+    minimap: { enabled: false },
+    scrollBeyondLastLine: false,
+    tabSize: 2,
+    formatOnPaste: true,
+    formatOnType: true,
+  });
+
+  // Run initialization logic after editor is ready
+  initializeApp();
+});
 
 // Function Definitions
 const prepareData = (input) => {
@@ -45,7 +64,7 @@ const prepareData = (input) => {
     let ths = "";
     if (thsEle) thsEle.innerHTML = "";
     for (const col of columns) {
-      fieldsData.push({ data: col, title: col }); // Include title for DataTable
+      fieldsData.push({ data: col, title: col });
       ths += `<th>${col}</th>`;
     }
     if (thsEle) thsEle.innerHTML = ths;
@@ -77,9 +96,9 @@ const renderDataTable = (input) => {
           destroy: true,
           data: data,
           columns: fieldsData,
-          dom: "Bfrtip", // Simplified DOM layout, buttons at top
+          dom: "Bfrtip",
           buttons: ["copy", "csv", "excel", "pdf", "print"],
-          deferRender: true, // Improve performance for large datasets
+          deferRender: true,
         });
 
         dt.columns.adjust().draw();
@@ -169,216 +188,240 @@ function drawChart(data, type, fieldTypes, x, y) {
 }
 
 // Initialization Logic
-if (queryEle) queryEle.value = input;
+function initializeApp() {
+  // Query parameters
+  let params = new URL(document.location).searchParams;
 
-// Query parameters
-let params = new URL(document.location).searchParams;
-
-if (params.get("d") !== null) {
-  try {
-    input = atob(params.get("d"));
-    JSON.parse(input); // Validate JSON
-    if (queryEle) queryEle.value = input;
-  } catch (e) {
-    console.error("Error decoding or parsing query param 'd':", e);
-    alert("Invalid data in query parameter 'd'.");
+  if (params.get("d") !== null) {
+    try {
+      input = atob(params.get("d"));
+      JSON.parse(input); // Validate JSON
+      if (editor) editor.setValue(JSON.stringify(input));
+    } catch (e) {
+      console.error("Error decoding or parsing query param 'd':", e);
+      alert("Invalid data in query parameter 'd'.");
+    }
   }
-}
 
-// Handle clipboard data
-let c = params.get("c");
-let isJson = params.get("json") !== null;
+  // Handle clipboard data
+  let c = params.get("c");
+  let isJson = params.get("json") !== null;
 
-if ((c !== null || isJson) && navigator.clipboard) {
-  navigator.clipboard.readText().then((clipText) => {
-    if (clipText) {
-      try {
-        if (c !== null) {
-          // Assume CSV for ?c
-          const parsedCsv = d3.csvParse(clipText.trim());
-          if (!parsedCsv.length) throw new Error("Empty or invalid CSV data.");
-          input = JSON.stringify(parsedCsv);
-        } else {
-          // Assume JSON for ?json
-          JSON.parse(clipText); // Validate JSON
-          input = clipText;
+  if ((c !== null || isJson) && navigator.clipboard) {
+    navigator.clipboard.readText().then((clipText) => {
+      if (clipText) {
+        try {
+          if (c !== null) {
+            // Assume CSV for ?c
+            const parsedCsv = d3.csvParse(clipText.trim());
+            if (!parsedCsv.length) throw new Error("Empty or invalid CSV data.");
+            input = JSON.stringify(parsedCsv);
+            if (editor) {
+              editor.setValue(input);
+              monaco.editor.setModelLanguage(editor.getModel(), "json");
+            }
+          } else {
+            // Assume JSON for ?json
+            JSON.parse(clipText); // Validate JSON
+            input = clipText;
+            if (editor) {
+              editor.setValue(input);
+              monaco.editor.setModelLanguage(editor.getModel(), "json");
+            }
+          }
+          renderDataTable(input);
+        } catch (e) {
+          console.error("Error processing clipboard data:", e);
+          alert(`Error processing clipboard data: ${e.message}`);
         }
-        if (queryEle) queryEle.value = input;
-        renderDataTable(input);
-      } catch (e) {
-        console.error("Error processing clipboard data:", e);
-        alert(`Error processing clipboard data: ${e.message}`);
+      } else {
+        alert("Clipboard is empty.");
       }
-    } else {
-      alert("Clipboard is empty.");
-    }
-  }).catch((e) => {
-    console.error("Clipboard read error:", e);
-    alert("Failed to read clipboard data.");
-  });
-} else {
-  // Render default or ?d data
-  renderDataTable(input);
-}
+    }).catch((e) => {
+      console.error("Clipboard read error:", e);
+      alert("Failed to read clipboard data.");
+    });
+  } else {
+    // Render default or ?d data
+    renderDataTable(input);
+  }
 
-if (params.get("w") !== null) width = parseInt(params.get("w")) || 400;
-if (params.get("h") !== null) height = parseInt(params.get("h")) || 400;
-if (params.get("t") !== null && chartTypeSelect) {
-  type = params.get("t");
-  chartTypeSelect.value = type;
-}
+  if (params.get("w") !== null) width = parseInt(params.get("w")) || 400;
+  if (params.get("h") !== null) height = parseInt(params.get("h")) || 400;
+  if (params.get("t") !== null && chartTypeSelect) {
+    type = params.get("t");
+    chartTypeSelect.value = type;
+  }
 
-xAggregate = params.get("xa") || null;
-yAggregate = params.get("ya") || null;
+  xAggregate = params.get("xa") || null;
+  yAggregate = params.get("ya") || null;
 
-// Event Listeners
-if (xAxisSelect) {
-  xAxisSelect.addEventListener("change", () => localStorage.setItem("XValue", xAxisSelect.value));
-}
-if (yAxisSelect) {
-  yAxisSelect.addEventListener("change", () => localStorage.setItem("YValue", yAxisSelect.value));
-}
-if (chartTypeSelect) {
-  chartTypeSelect.addEventListener("change", () => {
-    type = chartTypeSelect.value;
-    if (xAxisSelect.value && yAxisSelect.value && currentData) {
-      drawChart(currentData, type, currentFieldTypes, xAxisSelect.value, yAxisSelect.value);
-    }
-  });
-}
+  // Event Listeners
+  if (xAxisSelect) {
+    xAxisSelect.addEventListener("change", () => localStorage.setItem("XValue", xAxisSelect.value));
+  }
+  if (yAxisSelect) {
+    yAxisSelect.addEventListener("change", () => localStorage.setItem("YValue", yAxisSelect.value));
+  }
+  if (chartTypeSelect) {
+    chartTypeSelect.addEventListener("change", () => {
+      type = chartTypeSelect.value;
+      if (xAxisSelect.value && yAxisSelect.value && currentData) {
+        drawChart(currentData, type, currentFieldTypes, xAxisSelect.value, yAxisSelect.value);
+      }
+    });
+  }
 
-if (fileUpload) {
-  fileUpload.addEventListener("change", (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+  if (fileUpload) {
+    fileUpload.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
 
-    if (fileNameDisplay) fileNameDisplay.textContent = `Selected: ${file.name}`;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        let data;
-        if (file.name.endsWith(".json")) {
-          data = JSON.parse(e.target.result);
-          if (!Array.isArray(data) || data.length === 0) throw new Error("JSON must be a non-empty array of objects.");
-          input = JSON.stringify(data);
-        } else if (file.name.endsWith(".csv")) {
-          data = d3.csvParse(e.target.result);
-          if (!data.length) throw new Error("CSV file is empty.");
-          input = JSON.stringify(data);
-        } else {
-          throw new Error("Unsupported file format. Please upload JSON or CSV.");
+      if (fileNameDisplay) fileNameDisplay.textContent = `Selected: ${file.name}`;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          let data;
+          if (file.name.endsWith(".json")) {
+            data = JSON.parse(e.target.result);
+            if (!Array.isArray(data) || data.length === 0) throw new Error("JSON must be a non-empty array of objects.");
+            input = JSON.stringify(data);
+            if (editor) {
+              editor.setValue(input);
+              monaco.editor.setModelLanguage(editor.getModel(), "json");
+            }
+          } else if (file.name.endsWith(".csv")) {
+            data = d3.csvParse(e.target.result);
+            if (!data.length) throw new Error("CSV file is empty.");
+            input = JSON.stringify(data);
+            if (editor) {
+              editor.setValue(input);
+              monaco.editor.setModelLanguage(editor.getModel(), "json");
+            }
+          } else {
+            throw new Error("Unsupported file format. Please upload JSON or CSV.");
+          }
+          renderDataTable(input);
+        } catch (error) {
+          alert(`Error processing file: ${error.message}`);
+          if (fileNameDisplay) fileNameDisplay.textContent = "";
+          if (fileUpload) fileUpload.value = "";
         }
-        if (queryEle) queryEle.value = input;
-        renderDataTable(input);
-      } catch (error) {
-        alert(`Error processing file: ${error.message}`);
+      };
+      reader.onerror = () => {
+        alert("Error reading file.");
         if (fileNameDisplay) fileNameDisplay.textContent = "";
         if (fileUpload) fileUpload.value = "";
-      }
-    };
-    reader.onerror = () => {
-      alert("Error reading file.");
-      if (fileNameDisplay) fileNameDisplay.textContent = "";
-      if (fileUpload) fileUpload.value = "";
-    };
-    reader.readAsText(file);
-  });
-}
+      };
+      reader.readAsText(file);
+    });
+  }
 
-if (renderDataBtn) {
-  renderDataBtn.addEventListener("click", () => {
-    const content = queryEle?.value.trim();
-    if (!content) {
-      alert("Data input is empty.");
-      return;
-    }
-    try {
-      // Try parsing as JSON
+  if (renderDataBtn) {
+    renderDataBtn.addEventListener("click", () => {
+      const content = editor?.getValue().trim();
+      if (!content) {
+        alert("Data input is empty.");
+        return;
+      }
       try {
-        const parsedJson = JSON.parse(content);
-        if (Array.isArray(parsedJson) && parsedJson.length > 0 && typeof parsedJson[0] === "object") {
-          input = JSON.stringify(parsedJson);
+        // Try parsing as JSON
+        try {
+          const parsedJson = JSON.parse(content);
+          if (Array.isArray(parsedJson) && parsedJson.length > 0 && typeof parsedJson[0] === "object") {
+            input = JSON.stringify(parsedJson);
+            monaco.editor.setModelLanguage(editor.getModel(), "json");
+            renderDataTable(input);
+            return;
+          }
+        } catch (e) {
+          // Not valid JSON, try CSV
+        }
+
+        // Try parsing as CSV
+        const parsedCsv = d3.csvParse(content);
+        if (parsedCsv.length > 0) {
+          input = JSON.stringify(parsedCsv);
+          if (editor) {
+            editor.setValue(input);
+            monaco.editor.setModelLanguage(editor.getModel(), "json");
+          }
           renderDataTable(input);
           return;
         }
+
+        throw new Error("Invalid data format. Please provide valid JSON or CSV.");
       } catch (e) {
-        // Not valid JSON, try CSV
+        console.error("Error rendering editor data:", e);
+        alert(`Error rendering data: ${e.message}`);
       }
+    });
+  }
 
-      // Try parsing as CSV
-      const parsedCsv = d3.csvParse(content);
-      if (parsedCsv.length > 0) {
-        input = JSON.stringify(parsedCsv);
-        renderDataTable(input);
-        return;
-      }
+  if (drawBtn) {
+    drawBtn.addEventListener("click", () => {
+      drawChart(currentData, chartTypeSelect?.value || "bar", currentFieldTypes, xAxisSelect.value, yAxisSelect.value);
+      getEle("vizBar")?.focus();
+    });
+  }
 
-      throw new Error("Invalid data format. Please provide valid JSON or CSV.");
-    } catch (e) {
-      console.error("Error rendering textarea data:", e);
-      alert(`Error rendering data: ${e.message}`);
-    }
-  });
-}
-
-if (drawBtn) {
-  drawBtn.addEventListener("click", () => {
+  if (resetBtn) {
     drawChart(currentData, chartTypeSelect?.value || "bar", currentFieldTypes, xAxisSelect.value, yAxisSelect.value);
     getEle("vizBar")?.focus();
-  });
-}
+  }
 
-if (resetBtn) {
-  resetBtn.addEventListener("click", () => {
-    if (xAxisSelect) xAxisSelect.value = "";
-    if (yAxisSelect) yAxisSelect.value = "";
-    if (chartTypeSelect) chartTypeSelect.value = "bar";
-    localStorage.removeItem("XValue");
-    localStorage.removeItem("YValue");
-    type = "bar";
-    if (getEle("vizBar")) getEle("vizBar").innerHTML = "";
-    if (fileNameDisplay) fileNameDisplay.textContent = "";
-    if (fileUpload) fileUpload.value = "";
-  });
-}
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      if (xAxisSelect) xAxisSelect.value = "";
+      if (yAxisSelect) yAxisSelect.value = "";
+      if (chartTypeSelect) chartTypeSelect.value = "bar";
+      localStorage.removeItem("XValue");
+      localStorage.removeItem("YValue");
+      type = "bar";
+      if (getEle("vizBar")) getEle("vizBar").innerHTML = "";
+      if (fileNameDisplay) fileNameDisplay.textContent = "";
+      if (fileUpload) fileUpload.value = "";
+      if (editor) editor.setValue(input);
+    });
+  }
 
-if (shareBtn) {
-  shareBtn.addEventListener("click", () => {
-    const params = new URLSearchParams();
-    params.set("d", btoa(input));
-    params.set("w", width);
-    params.set("h", height);
-    params.set("t", chartTypeSelect?.value || "bar");
-    if (xAggregate) params.set("xa", xAggregate);
-    if (yAggregate) params.set("ya", yAggregate);
-    const url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
-    navigator.clipboard.writeText(url).then(() => {
-      alert("Link copied to clipboard!");
-    }).catch(() => alert("Failed to copy link."));
-  });
-}
+  if (shareBtn) {
+    shareBtn.addEventListener("click", () => {
+      const params = new URLSearchParams();
+      params.set("d", btoa(input));
+      params.set("w", width);
+      params.set("h", height);
+      params.set("t", chartTypeSelect?.value || "bar");
+      if (xAggregate) params.set("xa", xAggregate);
+      if (yAggregate) params.set("ya", yAggregate);
+      const url = `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+      navigator.clipboard.writeText(url).then(() => {
+        alert("Link copied to clipboard!");
+      }).catch(() => alert("Failed to copy link."));
+    });
+  }
 
-if (exportImageBtn) {
-  exportImageBtn.addEventListener("click", () => {
-    if (xAxisSelect.value && yAxisSelect.value) {
-      vegaEmbed("#vizBar", getChartSpec(currentData, chartTypeSelect?.value || "bar", currentFieldTypes, xAxisSelect.value, yAxisSelect.value)).then((result) => {
-        result.view.toImageURL("png").then((url) => {
-          const link = document.createElement("a");
-          link.href = url;
-          link.download = "chart.png";
-          link.click();
-        }).catch(() => alert("Failed to export chart image."));
-      });
-    } else {
-      alert("Please select X and Y axes to export chart.");
-    }
-  });
-}
+  if (exportImageBtn) {
+    exportImageBtn.addEventListener("click", () => {
+      if (xAxisSelect.value && yAxisSelect.value) {
+        vegaEmbed("#vizBar", getChartSpec(currentData, chartTypeSelect?.value || "bar", currentFieldTypes, xAxisSelect.value, yAxisSelect.value)).then((result) => {
+          result.view.toImageURL("png").then((url) => {
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "chart.png";
+            link.click();
+          }).catch(() => alert("Failed to export chart image."));
+        });
+      } else {
+        alert("Please select X and Y axes to export chart.");
+      }
+    });
+  }
 
-// Mobile menu toggle
-if (getEle("mobile-menu-toggle")) {
-  getEle("mobile-menu-toggle").addEventListener("click", () => {
-    const mobileMenu = getEle("mobile-menu");
-    if (mobileMenu) mobileMenu.classList.toggle("hidden");
-  });
+  if (getEle("mobile-menu-toggle")) {
+    getEle("mobile-menu-toggle").addEventListener("click", () => {
+      const mobileMenu = getEle("mobile-menu");
+      if (mobileMenu) mobileMenu.classList.toggle("hidden");
+    });
+  }
 }
