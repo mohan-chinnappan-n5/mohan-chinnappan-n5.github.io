@@ -253,6 +253,19 @@ const data = {
       },
 
       {
+        name: "Great Farming",
+        videos: [
+          { title: "How Thai Farmers Harvest Millions of Tons of Fresh Coconut Every Year" , youtubeId: "R8VOlS9rhQ0" },
+          { title: "How Millions of Banana Harvested & Processed | Banana Chips Factory " ,  youtubeId: "If9U6ME3ycQ" },
+          { title: "Why Cashew Nuts Are So Expensive | So Expensive | Business Insider" ,  youtubeId: "CXTZVKYYyig" },
+          { title: "How Mexico Grows Limes On Orange Trees To Supply The US | Big Business | Business Insider " ,  youtubeId: "4wGVWQyLE94" },
+
+        ],
+      },
+
+
+
+      {
         name: "Farming in Tamil",
         videos: [
 
@@ -294,6 +307,8 @@ const data = {
 
 
           { title: "4 ஏக்கரில் Timber wood" , youtubeId: "gqVrNUNOERM" },
+          { title: "1 கிலோ நெல்லிக்காய் 55 ரூபாயா, ஏக்கருக்கு 10 லட்சம் எடுக்க முடியுமா?" , youtubeId: "bQ85Mp2qF8M" },
+
 
 
 
