@@ -1,387 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SVG Editor</title>
- <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
-  <!-- Tailwind CSS CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" crossorigin="anonymous">
-  <!-- Monaco Editor CSS -->
-  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs/editor/editor.main.min.css">
-  <!-- Split.js CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/split.js@1.6.5/dist/split.min.css">
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-    }
-    main {
-         flex: 1 1 auto;
-         display: flex;
-         flex-direction: column;
-         width: 100%;
-         min-height: 0; /* Allow main to shrink if needed */
-    }
-    #split-container {
-      display: flex;
-       flex: 1 1 auto; /* Take full available space */
-   width: 100vw; /* Full viewport width */
-   height: 100%; /* Full height of parent */
-   max-width: 100%; /* Prevent overflow */
-   box-sizing: border-box;
-      }
-    #editor-pane, #preview-pane {
-      height: 100%;
-      overflow: auto;
-    }
-    #editor-pane {
-      min-width: 300px;
-    }
-    #preview-pane {
-      min-width: 300px;
-      background-color: #f9fafb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    #monaco-editor {
-      height: 300px;
-      width: 100%;
-    }
-    .gutter {
-      background-color: rgb(25, 0, 255); /* Bright color for debugging */
-      min-width: 8px; /* Prevent collapse */
-      min-height: 8px;
-      cursor: col-resize;
-    }
-    .gutter.gutter-horizontal {
-      width: 8px;
-    }
-    .gutter.gutter-vertical {
-      height: 8px;
-      cursor: row-resize;
-    }
-    #svg-preview {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-    }
-    @media (max-width: 768px) {
-      #split-container {
-        flex-direction: column;
-      }
-      #editor-pane, #preview-pane {
-        min-height: 300px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Editor - Turing</title>
+    <script src="https://mohan-chinnappan-n5.github.io/pkg/js/lib/autocomplete.min.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n5.github.io/pkg/css/lib/autocomplete.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"
+        integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://mohan-chinnappan-n.github.io/sfdc/gs/js/split.js"></script>
+    <link rel="stylesheet" href="https://mohan-chinnappan-n.github.io/sfdc/gs/css/split.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.24.0/min/vs/loader.js"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/editor/img/favicon.ico" />
+    <style>
+        textarea {
+            font-family: Monaco, Arial;
+            font-size: 13px;
+            background-color: black;
+            color: azure;
+            border-radius: 10px;
+        }
+
+        ul.list-group.list-group-striped li:nth-of-type(odd) {
+            background: #efefef;
+        }
+
+        ul.list-group.list-group-striped li:nth-of-type(even) {
+            background: white;
+        }
+
+        ul.list-group.list-group-hover li:hover {
+            background: linen;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans">
-  <!-- Sticky Navbar -->
-  <nav class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
-        <div class="flex items-center">
-          <a href="#" class="text-2xl font-bold">SVG Editor</a>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">&nbsp; SVG Editor - Turing</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <div id="dropArea" style="border: 2px dashed #ccc; padding: 2px; text-align: center;">
+                        <input class='btn btn-dark' type="file" accept=".svg" id="jsonFileInput">
+                        <span style="color: wheat;">Drag & drop a SVG file</span>
+                        <input type="text" autocomplete="off" id="autoCompleteMtype">
+                        <button class="btn btn-success" id="save">Download</button>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="hidden sm:flex sm:items-center sm:space-x-4">
-          <a href="#home" class="hover:text-blue-200">Home</a>
-          <a href="https://github.com" class="bg-blue-500 px-4 py-2 rounded hover:bg-blue-400">GitHub</a>
-        </div>
-        <div class="sm:hidden flex items-center">
-          <button id="mobile-menu-toggle" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-200 hover:bg-blue-700 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
-      </div>
+    </nav>
+    <div class="split split-horizontal" id="code">
+        <div id="editor" style="height: 600px;"></div>
+        <h5 style="border-bottom:1px solid #99ccff;">References and Examples</h5>
+        <ul class="list-group list-group-hover list-group-striped">
+            <li class="list-group-item">
+                <a target="new" href="https://developer.mozilla.org/en-US/docs/Web/SVG">MDN</a>
+            </li>
+            <li class="list-group-item">
+                <a target="new" href="edit.html?u=https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/svg/loginEvent.svg">loginEvent.svg</a>
+            </li>
+            <li class="list-group-item">
+                <a target="new" href="edit.html?u=https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/svg/lightningUriEvent.svg">lightningUriEvent.svg</a>
+            </li>
+            <li class="list-group-item">
+                <a target="new" href="edit.html?u=https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/svg/simple.svg">simple.svg</a>
+            </li>
+        </ul>
     </div>
-    <div class="sm:hidden hidden" id="mobile-menu">
-      <div class="pt-2 pb-3 space-y-1">
-        <a href="#home" class="block pl-3 pr-4 py-2 text-base font-medium hover:text-blue-200">Home</a>
-        <a href="https://github.com" class="block pl-3 pr-4 py-2 text-base font-medium bg-blue-500 mx-3 rounded hover:bg-blue-400">GitHub</a>
-      </div>
+    <div class="split split-horizontal" id="content">
+        <div id="rendering"></div>
+
+    
     </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main id="home" class="py-4">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white rounded-lg shadow-lg p-6">
-        <h3 class="text-2xl font-bold text-gray-800 mb-4">SVG Editor</h3>
-        <div class="mb-4">
-          <label for="file-upload" class="block text-sm font-medium text-gray-700 mb-1">Upload SVG File:</label>
-          <div class="flex items-center gap-4">
-            <input type="file" id="file-upload" accept=".svg" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" aria-label="Upload SVG file">
-            <span id="file-name" class="text-sm text-gray-600"></span>
-          </div>
-        </div>
-        <div class="mb-4">
-          <button id="render-svg" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mr-2">Render SVG</button>
-          <button id="download-svg" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Download SVG</button>
-        </div>
-        <div id="split-container" class="border rounded-lg">
-          <div id="editor-pane">
-            <div id="monaco-editor" aria-label="SVG code editor"></div>
-          </div>
-          <div id="preview-pane">
-            <div id="svg-preview"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-blue-600 text-white py-4">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p>Made with ❤️ by <a href="https://github.com" class="text-blue-200 hover:underline">Your Name</a></p>
-    </div>
-  </footer>
-
-  <!-- Dependencies -->
-  <!-- Split.js -->
-  <script src="https://unpkg.com/split.js@1.6.5/dist/split.min.js"></script>
-  <!-- Monaco Editor JS -->
-  <script>var require = { paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs' } };</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs/loader.min.js"></script>
-
-  <script>
-    // Initialize Monaco Editor with SVG autocomplete
-    let editor;
-    const defaultSvg = `<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
-  <rect x="10" y="10" width="100" height="100" fill="blue" stroke="black" stroke-width="2"/>
-  <circle cx="150" cy="150" r="40" fill="red"/>
-</svg>`;
-
-    require(['vs/editor/editor.main'], () => {
-      // Define SVG language configuration
-      monaco.languages.register({ id: 'svg' });
-      monaco.languages.setMonarchTokensProvider('svg', {
-        tokenizer: {
-          root: [
-            [/<\?[^?]+\?>/, 'prepro'],
-            [/<!--[\\s\\S]*?-->/, 'comment'],
-            [/</, { token: 'tag', next: '@tag' }],
-            [/[^<]+/, 'content']
-          ],
-          tag: [
-            [/\/?[a-zA-Z][a-zA-Z0-9\-]*/, { token: 'tag.tag-name', next: '@attributes' }],
-            [/>/, { token: 'tag', next: '@pop' }]
-          ],
-          attributes: [
-            [/[a-zA-Z\-]+/, 'attribute.name'],
-            [/=/, 'delimiter'],
-            [/"[^"]*"/, 'attribute.value'],
-            [/'[^']*'/, 'attribute.value'],
-            [/\s+/, ''],
-            [/>/, { token: 'tag', next: '@pop' }],
-            [/\/>/, { token: 'tag', next: '@pop' }]
-          ]
-        }
-      });
-
-      // SVG autocomplete provider
-      monaco.languages.registerCompletionItemProvider('svg', {
-        provideCompletionItems: (model, position) => {
-          const word = model.getWordUntilPosition(position);
-          const range = {
-            startLineNumber: position.lineNumber,
-            endLineNumber: position.lineNumber,
-            startColumn: word.startColumn,
-            endColumn: word.endColumn
-          };
-          return {
-            suggestions: [
-              {
-                label: 'svg',
-                kind: monaco.languages.CompletionItemKind.Tag,
-                insertText: '<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">\n  $1\n</svg>',
-                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-                documentation: 'SVG root element',
-                range
-              },
-              {
-                label: 'rect',
-                kind: monaco.languages.CompletionItemKind.Tag,
-                insertText: '<rect x="${1:10}" y="${2:10}" width="${3:100}" height="${4:100}" fill="${5:none}" stroke="${6:black}" stroke-width="${7:1}"/>',
-                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-                documentation: 'Rectangle element',
-                range
-              },
-              {
-                label: 'circle',
-                kind: monaco.languages.CompletionItemKind.Tag,
-                insertText: '<circle cx="${1:100}" cy="${2:100}" r="${3:50}" fill="${4:none}" stroke="${5:black}" stroke-width="${6:1}"/>',
-                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-                documentation: 'Circle element',
-                range
-              },
-              {
-                label: 'path',
-                kind: monaco.languages.CompletionItemKind.Tag,
-                insertText: '<path d="${1:M 10 10 L 100 100}" fill="${2:none}" stroke="${3:black}" stroke-width="${4:1}"/>',
-                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-                documentation: 'Path element',
-                range
-              },
-              {
-                label: 'fill',
-                kind: monaco.languages.CompletionItemKind.Property,
-                insertText: 'fill="${1:none}"',
-                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-                documentation: 'Fill color for shapes',
-                range
-              },
-              {
-                label: 'stroke',
-                kind: monaco.languages.CompletionItemKind.Property,
-                insertText: 'stroke="${1:black}"',
-                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-                documentation: 'Stroke color for shapes',
-                range
-              },
-              {
-                label: 'stroke-width',
-                kind: monaco.languages.CompletionItemKind.Property,
-                insertText: 'stroke-width="${1:1}"',
-                insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
-                documentation: 'Stroke width for shapes',
-                range
-              }
-            ]
-          };
-        }
-      });
-
-      // Initialize Monaco Editor
-      editor = monaco.editor.create(document.getElementById('monaco-editor'), {
-        value: defaultSvg,
-        language: 'svg',
-        theme: 'vs-dark',
-        automaticLayout: true,
-        minimap: { enabled: false },
-        scrollBeyondLastLine: false,
-        tabSize: 2,
-        formatOnPaste: true,
-        formatOnType: true
-      });
-
-      // Render initial SVG
-      renderSvg();
-
-      // Auto-render on editor change
-      editor.onDidChangeModelContent(() => {
-        renderSvg();
-      });
-    });
-
-    // Initialize Split.js after DOM is loaded
-    document.addEventListener('DOMContentLoaded', () => {
-      if (typeof Split === 'undefined') {
-        console.error('Split.js is not loaded');
-        return;
-      }
-      const editorPane = document.getElementById('editor-pane');
-      const previewPane = document.getElementById('preview-pane');
-      if (!editorPane || !previewPane) {
-        console.error('Split.js: editor-pane or preview-pane not found');
-        return;
-      }
-      console.log('Initializing Split.js'); // Debug
-      requestAnimationFrame(() => {
-        Split(['#editor-pane', '#preview-pane'], {
-          sizes: [50, 50],
-          minSize: [300, 300],
-          gutterStyle: () => ({ 'background-color': 'gray' }), // Match CSS
-          direction: window.innerWidth <= 768 ? 'vertical' : 'horizontal'
-        });
-        // Debug: Check if gutter is created
-        const gutter = document.querySelector('.gutter');
-        if (gutter) {
-          console.log('Split.js: Gutter created', gutter);
-        } else {
-          console.error('Split.js: Gutter not created');
-        }
-      });
-    });
-
-    // Render SVG function
-    function renderSvg() {
-      if (!editor) {
-        console.error('Editor not initialized');
-        return;
-      }
-      const svgContent = editor.getValue().trim();
-      console.log('SVG Content:', svgContent); // Debug
-      const preview = document.getElementById('svg-preview');
-      try {
-        preview.innerHTML = svgContent;
-        const svgElement = preview.querySelector('svg');
-        if (svgElement) {
-          if (!svgElement.hasAttribute('viewBox')) {
-            let width =  500;
-            let height = 1200
-            svgElement.setAttribute('viewBox', `0 0 ${width} ${height}`);
-          }
-        } else {
-          throw new Error('No valid SVG element found');
-        }
-      } catch (e) {
-        preview.innerHTML = '<p class="text-red-500">Invalid SVG: ' + e.message + '</p>';
-      }
-    }
-
-    // Event Listeners
-    document.getElementById('file-upload').addEventListener('change', (event) => {
-      const file = event.target.files[0];
-      if (!file) return;
-      document.getElementById('file-name').textContent = `Selected: ${file.name}`;
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        try {
-          const content = e.target.result;
-          editor.setValue(content);
-          renderSvg();
-        } catch (error) {
-          alert(`Error loading SVG: ${error.message}`);
-          document.getElementById('file-name').textContent = '';
-          document.getElementById('file-upload').value = '';
-        }
-      };
-      reader.onerror = () => {
-        alert('Error reading file');
-        document.getElementById('file-name').textContent = '';
-        document.getElementById('file-upload').value = '';
-      };
-      reader.readAsText(file);
-    });
-
-    document.getElementById('render-svg').addEventListener('click', () => {
-      console.log('Render SVG button clicked'); // Debug
-      renderSvg();
-    });
-
-    document.getElementById('download-svg').addEventListener('click', () => {
-      const svgContent = editor.getValue().trim();
-      const blob = new Blob([svgContent], { type: 'image/svg+xml' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'edited.svg';
-      link.click();
-      URL.revokeObjectURL(url);
-    });
-
-    document.getElementById('mobile-menu-toggle').addEventListener('click', () => {
-      const mobileMenu = document.getElementById('mobile-menu');
-      mobileMenu.classList.toggle('hidden');
-    });
-  </script>
+    <script type="module"  src="js/edit.js?v=5"></script>
+ 
 </body>
+
 </html>

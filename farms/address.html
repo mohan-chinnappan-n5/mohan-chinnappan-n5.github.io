@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Address Manager</title>
+   <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" crossorigin="anonymous">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1 0 auto;
+      overflow-y: auto;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    #address-table th {
+      cursor: pointer;
+    }
+    #address-table th:hover {
+      background-color: #e5e7eb;
+    }
+    #address-table tbody tr {
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    #address-table tbody tr:hover {
+      background-color: #f3f4f6;
+    }
+    #address-table tbody tr.selected {
+      background-color: #dbeafe;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="#" class="text-2xl font-bold">Address Manager</a>
+        </div>
+        <div class="hidden sm:flex sm:items-center sm:space-x-4">
+          <a href="#" class="hover:text-blue-200">Home</a>
+        </div>
+        <div class="sm:hidden flex items-center">
+          <button id="mobile-menu-toggle" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-200 hover:bg-blue-700 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="sm:hidden hidden" id="mobile-menu">
+      <div class="pt-2 pb-3 space-y-1">
+        <a href="#" class="block pl-3 pr-4 py-2 text-base font-medium hover:text-blue-200">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="home" class="py-4">
+    <div class="w-full h-full">
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Address Manager</h3>
+
+        <!-- Load JSON -->
+        <div class="mb-4">
+          <label for="json-input" class="block text-sm font-medium text-gray-700 mb-1">Load Addresses (JSON):</label>
+          <textarea id="json-input" rows="4" class="w-full p-2 border rounded-md" placeholder='[{"name":"John Doe","street":"123 Main St","city":"New York","zip":"10001","phone":"555-123-4567"}]'></textarea>
+          <button id="load-json" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Load JSON</button>
+        </div>
+
+        <!-- Load JSON File -->
+        <div class="mb-4">
+          <label for="json-file" class="block text-sm font-medium text-gray-700 mb-1">Upload JSON File:</label>
+          <input type="file" id="json-file" accept=".json" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" aria-label="Upload JSON file">
+        </div>
+
+        <!-- Update Address -->
+        <div class="mb-4">
+          <h4 class="text-lg font-semibold text-gray-700 mb-2">Update Address</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input id="update-index" type="number" placeholder="Index to Update" class="p-2 border rounded-md" min="0">
+            <input id="update-name" type="text" placeholder="Name" class="p-2 border rounded-md">
+            <input id="update-street" type="text" placeholder="Street" class="p-2 border rounded-md">
+            <input id="update-city" type="text" placeholder="City" class="p-2 border rounded-md">
+            <input id="update-zip" type="text" placeholder="ZIP" class="p-2 border rounded-md">
+            <input id="update-phone" type="text" placeholder="Phone" class="p-2 border rounded-md">
+            <button id="update-address" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 sm:col-span-2">Update Address</button>
+          </div>
+        </div>
+
+        <!-- Download Buttons -->
+        <div class="mb-4">
+          <button id="download-json" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mr-2">Download JSON</button>
+          <button id="download-csv" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Download CSV</button>
+        </div>
+
+        <!-- Search and Table -->
+        <div class="mb-4">
+          <input id="search-input" type="text" placeholder="Search addresses..." class="w-full p-2 border rounded-md mb-2">
+          <table id="address-table" class="w-full border-collapse border">
+            <thead>
+              <tr class="bg-gray-200">
+                <th class="border p-2">Name</th>
+                <th class="border p-2">Street</th>
+                <th class="border p-2">City</th>
+                <th class="border p-2">ZIP</th>
+                <th class="border p-2">Phone</th>
+              </tr>
+            </thead>
+            <tbody id="address-table-body"></tbody>
+          </table>
+          <!-- Pagination -->
+          <div class="mt-4 flex justify-between items-center">
+            <button id="prev-page" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400" disabled>Previous</button>
+            <span id="page-info" class="text-gray-700">Page 1</span>
+            <button id="next-page" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400" disabled>Next</button>
+          </div>
+        </div>
+
+        <!-- Selected Address Card -->
+        <div id="address-card" class="hidden mt-4 p-6 bg-blue-50 rounded-lg shadow-md border border-blue-200">
+          <h4 class="text-lg font-semibold text-blue-800 mb-2">Selected Address</h4>
+          <div class="space-y-2">
+            <p><span class="font-medium text-gray-700">Name:</span> <span id="card-name" class="text-gray-900"></span></p>
+            <p><span class="font-medium text-gray-700">Street:</span> <span id="card-street" class="text-gray-900"></span></p>
+            <p><span class="font-medium text-gray-700">City:</span> <span id="card-city" class="text-gray-900"></span></p>
+            <p><span class="font-medium text-gray-700">ZIP:</span> <span id="card-zip" class="text-gray-900"></span></p>
+            <p><span class="font-medium text-gray-700">Phone:</span> <span id="card-phone" class="text-gray-900"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-4 flex-shrink-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>Made with ❤️ by <a href="https://mohan-chinnappan-n.github.io/about/cv.html" class="text-blue-200 hover:underline">MC</a></p>
+    </div>
+  </footer>
+
+  <script>
+    let addresses = [];
+    let filteredAddresses = [];
+    let currentPage = 1;
+    const rowsPerPage = 5;
+    let selectedIndex = -1; // Track the selected address index
+
+    // Load addresses from localStorage on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedAddresses = localStorage.getItem('addresses');
+      if (storedAddresses) {
+        addresses = JSON.parse(storedAddresses);
+        filteredAddresses = [...addresses];
+        renderTable();
+      }
+
+      // Check for URL parameter ?a
+      const urlParams = new URLSearchParams(window.location.search);
+      const jsonUrl = urlParams.get('a');
+      if (jsonUrl) {
+        fetch(jsonUrl)
+          .then(response => response.json())
+          .then(data => {
+            addresses = data;
+            filteredAddresses = [...addresses];
+            localStorage.setItem('addresses', JSON.stringify(addresses));
+            renderTable();
+          })
+          .catch(error => console.error('Error loading JSON from URL:', error));
+      }
+    });
+
+    // Load JSON from textarea
+    document.getElementById('load-json').addEventListener('click', () => {
+      try {
+        const jsonInput = document.getElementById('json-input').value;
+        addresses = JSON.parse(jsonInput);
+        filteredAddresses = [...addresses];
+        selectedIndex = -1; // Reset selection
+        localStorage.setItem('addresses', JSON.stringify(addresses));
+        renderTable();
+        document.getElementById('json-input').value = '';
+      } catch (error) {
+        alert('Invalid JSON format: ' + error.message);
+      }
+    });
+
+    // Load JSON from file
+    document.getElementById('json-file').addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const content = e.target.result;
+          addresses = JSON.parse(content);
+          filteredAddresses = [...addresses];
+          selectedIndex = -1; // Reset selection
+          localStorage.setItem('addresses', JSON.stringify(addresses));
+          renderTable();
+        } catch (error) {
+          alert(`Error loading JSON file: ${error.message}`);
+          document.getElementById('json-file').value = '';
+        }
+      };
+      reader.onerror = () => {
+        alert('Error reading file');
+        document.getElementById('json-file').value = '';
+      };
+      reader.readAsText(file);
+    });
+
+    // Update address
+    document.getElementById('update-address').addEventListener('click', () => {
+      const index = parseInt(document.getElementById('update-index').value);
+      if (isNaN(index) || index < 0 || index >= addresses.length) {
+        alert('Invalid index');
+        return;
+      }
+      const updatedAddress = {
+        name: document.getElementById('update-name').value || addresses[index].name,
+        street: document.getElementById('update-street').value || addresses[index].street,
+        city: document.getElementById('update-city').value || addresses[index].city,
+        zip: document.getElementById('update-zip').value || addresses[index].zip,
+        phone: document.getElementById('update-phone').value || addresses[index].phone
+      };
+      addresses[index] = updatedAddress;
+      filteredAddresses = [...addresses];
+      localStorage.setItem('addresses', JSON.stringify(addresses));
+      renderTable();
+      // Clear form
+      document.getElementById('update-index').value = '';
+      document.getElementById('update-name').value = '';
+      document.getElementById('update-street').value = '';
+      document.getElementById('update-city').value = '';
+      document.getElementById('update-zip').value = '';
+      document.getElementById('update-phone').value = '';
+      // Update card if the updated address is selected
+      if (selectedIndex === index) {
+        showAddressCard(index);
+      }
+    });
+
+    // Search functionality
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      filteredAddresses = addresses.filter(address =>
+        Object.values(address).some(value =>
+          value.toLowerCase().includes(searchTerm)
+        )
+      );
+      currentPage = 1;
+      selectedIndex = -1; // Reset selection
+      renderTable();
+    });
+
+    // Sort functionality
+    document.querySelectorAll('#address-table th').forEach(header => {
+      header.addEventListener('click', () => {
+        const key = header.textContent.toLowerCase();
+        const isAscending = header.dataset.order !== 'asc';
+        header.dataset.order = isAscending ? 'asc' : 'desc';
+        filteredAddresses.sort((a, b) => {
+          const valueA = a[key].toLowerCase();
+          const valueB = b[key].toLowerCase();
+          return isAscending ? (valueA > valueB ? 1 : -1) : (valueA < valueB ? 1 : -1);
+        });
+        selectedIndex = -1; // Reset selection
+        renderTable();
+      });
+    });
+
+    // Pagination
+    document.getElementById('prev-page').addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        selectedIndex = -1; // Reset selection
+        renderTable();
+      }
+    });
+
+    document.getElementById('next-page').addEventListener('click', () => {
+      if (currentPage < Math.ceil(filteredAddresses.length / rowsPerPage)) {
+        currentPage++;
+        selectedIndex = -1; // Reset selection
+        renderTable();
+      }
+    });
+
+    // Render table
+    function renderTable() {
+      const tbody = document.getElementById('address-table-body');
+      tbody.innerHTML = '';
+      const start = (currentPage - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      const paginatedAddresses = filteredAddresses.slice(start, end);
+
+      paginatedAddresses.forEach((address, index) => {
+        const globalIndex = start + index;
+        const row = document.createElement('tr');
+        row.dataset.index = globalIndex; // Store the global index
+        row.className = globalIndex === selectedIndex ? 'selected' : '';
+        row.innerHTML = `
+          <td class="border p-2">${address.name}</td>
+          <td class="border p-2">${address.street}</td>
+          <td class="border p-2">${address.city}</td>
+          <td class="border p-2">${address.zip}</td>
+          <td class="border p-2">${address.phone || ''}</td>
+        `;
+        row.addEventListener('click', () => {
+          selectedIndex = globalIndex;
+          renderTable(); // Re-render to update selected class
+          showAddressCard(globalIndex);
+        });
+        tbody.appendChild(row);
+      });
+
+      // Update pagination
+      document.getElementById('page-info').textContent = `Page ${currentPage} of ${Math.ceil(filteredAddresses.length / rowsPerPage) || 1}`;
+      document.getElementById('prev-page').disabled = currentPage === 1;
+      document.getElementById('next-page').disabled = currentPage === Math.ceil(filteredAddresses.length / rowsPerPage) || filteredAddresses.length === 0;
+
+      // Hide card if no address is selected
+      if (selectedIndex === -1) {
+        document.getElementById('address-card').classList.add('hidden');
+      }
+    }
+
+    // Show address card
+    function showAddressCard(index) {
+      const address = filteredAddresses[index];
+      if (!address) return;
+      document.getElementById('card-name').textContent = address.name;
+      document.getElementById('card-street').textContent = address.street;
+      document.getElementById('card-city').textContent = address.city;
+      document.getElementById('card-zip').textContent = address.zip;
+      document.getElementById('card-phone').textContent = address.phone || '';
+      document.getElementById('address-card').classList.remove('hidden');
+    }
+
+    // Download JSON
+    document.getElementById('download-json').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(addresses, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'addresses.json';
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Download CSV
+    document.getElementById('download-csv').addEventListener('click', () => {
+      const csv = [
+        'Name,Street,City,ZIP,Phone',
+        ...addresses.map(address =>
+          `"${address.name}","${address.street}","${address.city}","${address.zip}","${address.phone || ''}"`
+        )
+      ].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'addresses.csv';
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Mobile Menu Toggle
+    document.getElementById('mobile-menu-toggle').addEventListener('click', () => {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

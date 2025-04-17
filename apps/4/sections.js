@@ -215,6 +215,8 @@
 
 	{ text: 'Daily Book Balancing', href: '../../book-keeping/book-keeping.html', icon: 'desktop' },
 	{ text: 'github Url convertor', href: '../../github/urlc.html', icon: 'desktop' },
+	{ text: 'Address Manager', href: '../../farms/address.html', icon: 'desktop' },
+
 
 
 
@@ -345,6 +347,8 @@
       title: 'Diagram Apps',
       links: [
         { text: 'SVG Editor', href: '../../svg/edit.html?u=https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/svg/simple.svg', icon: 'desktop' },
+        { text: 'SVG Editor V2', href: '../../svg/edit2.html', icon: 'desktop' },
+ 
         { text: 'UML Seq Diagram', href: 'https://mohan-chinnappan-n2.github.io/2019/viz/seq/seq.html', icon: 'desktop' },
         { text: 'Diagram Editor Playground', href: '../../2021/dwg/pg/dwg.html#', icon: 'desktop' },
         { text: 'Draw Tool', href: '../../draw/excalidraw/index.html', icon: 'desktop' },
