@@ -117,6 +117,15 @@ require(['vs/editor/editor.main'], function () {
         theme: 'vs-dark',
         value: simpleSVG,
         automaticLayout: true,
+        lineNumbers: true,
+        lineNumbersMinChars: 3,
+        minimap: {
+            enabled: false,
+        },
+        formatOnPaste: true,
+        formatOnType: true 
+        
+      
     });
 
 
