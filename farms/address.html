@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Address Manager</title>
-  <!-- Tailwind CSS CDN -->
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" crossorigin="anonymous">
   <!-- Monaco Editor CSS -->
   <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs/editor/editor.main.min.css">
@@ -129,8 +130,8 @@
         <div class="mb-4">
           <h4 class="text-lg font-semibold text-gray-700 mb-2">Update Address</h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input id="update-index" type="number" placeholder="Index to Update" class="p-2 border rounded-md" min="0">
-            <input id="update-name" type="text" placeholder="Name" class="p-2 border rounded-md">
+            <input id="update-name-search" type="text" placeholder="Name to Update" class="p-2 border rounded-md">
+            <input id="update-name" type="text" placeholder="New Name" class="p-2 border rounded-md">
             <input id="update-street" type="text" placeholder="Street" class="p-2 border rounded-md">
             <input id="update-city" type="text" placeholder="City" class="p-2 border rounded-md">
             <input id="update-zip" type="text" placeholder="ZIP" class="p-2 border rounded-md">
@@ -208,7 +209,7 @@
   <!-- Footer -->
   <footer class="bg-blue-600 text-white py-4 flex-shrink-0">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p>Made with ❤️ by <a href="https://github.com" class="text-blue-200 hover:underline">Your Name</a></p>
+      <p>Made with ❤️ by <a href="https://mohan-chinnappan-n.github.io/about/cv.html" class="text-blue-200 hover:underline">mc</a></p>
     </div>
   </footer>
 
@@ -253,7 +254,7 @@
       if (storedAddresses) {
         addresses = JSON.parse(storedAddresses);
         filteredAddresses = [...addresses];
-        jsonEditor.setValue(JSON.stringify(addresses, null, 2)); // Populate Monaco Editor
+        jsonEditor.setValue(JSON.stringify(addresses, null, 2));
         renderTable();
       }
 
@@ -267,7 +268,7 @@
             addresses = data;
             filteredAddresses = [...addresses];
             localStorage.setItem('addresses', JSON.stringify(addresses));
-            jsonEditor.setValue(JSON.stringify(addresses, null, 2)); // Populate Monaco Editor
+            jsonEditor.setValue(JSON.stringify(addresses, null, 2));
             renderTable();
           })
           .catch(error => console.error('Error loading JSON from URL:', error));
@@ -283,7 +284,7 @@
         selectedIndex = -1;
         localStorage.setItem('addresses', JSON.stringify(addresses));
         renderTable();
-        jsonEditor.setValue(''); // Clear editor
+        jsonEditor.setValue('');
       } catch (error) {
         alert('Invalid JSON format: ' + error.message);
       }
@@ -301,7 +302,7 @@
           filteredAddresses = [...addresses];
           selectedIndex = -1;
           localStorage.setItem('addresses', JSON.stringify(addresses));
-          jsonEditor.setValue(JSON.stringify(addresses, null, 2)); // Populate Monaco Editor
+          jsonEditor.setValue(JSON.stringify(addresses, null, 2));
           renderTable();
         } catch (error) {
           alert(`Error loading JSON file: ${error.message}`);
@@ -315,13 +316,21 @@
       reader.readAsText(file);
     });
 
-    // Update address
+    // Update address by name
     document.getElementById('update-address').addEventListener('click', () => {
-      const index = parseInt(document.getElementById('update-index').value);
-      if (isNaN(index) || index < 0 || index >= addresses.length) {
-        alert('Invalid index');
+      const nameToUpdate = document.getElementById('update-name-search').value.trim();
+      if (!nameToUpdate) {
+        alert('Please enter a name to update');
         return;
       }
+
+      // Find the first address with the matching name
+      const index = addresses.findIndex(address => address.name.toLowerCase() === nameToUpdate.toLowerCase());
+      if (index === -1) {
+        alert('No address found with the name: ' + nameToUpdate);
+        return;
+      }
+
       const updatedAddress = {
         name: document.getElementById('update-name').value || addresses[index].name,
         street: document.getElementById('update-street').value || addresses[index].street,
@@ -329,18 +338,21 @@
         zip: document.getElementById('update-zip').value || addresses[index].zip,
         phone: document.getElementById('update-phone').value || addresses[index].phone
       };
+
       addresses[index] = updatedAddress;
       filteredAddresses = [...addresses];
       localStorage.setItem('addresses', JSON.stringify(addresses));
-      jsonEditor.setValue(JSON.stringify(addresses, null, 2)); // Update Monaco Editor
+      jsonEditor.setValue(JSON.stringify(addresses, null, 2));
       renderTable();
+
       // Clear form
-      document.getElementById('update-index').value = '';
+      document.getElementById('update-name-search').value = '';
       document.getElementById('update-name').value = '';
       document.getElementById('update-street').value = '';
       document.getElementById('update-city').value = '';
       document.getElementById('update-zip').value = '';
       document.getElementById('update-phone').value = '';
+
       // Update card if the updated address is selected
       if (selectedIndex === index) {
         showAddressCard(index);
