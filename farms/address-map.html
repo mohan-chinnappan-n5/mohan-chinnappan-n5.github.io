@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Address Manager</title>
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" crossorigin="anonymous">
+  <!-- Monaco Editor CSS -->
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs/editor/editor.main.min.css">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"  crossorigin="anonymous">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1 0 auto;
+      overflow-y: auto;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    #address-table th {
+      cursor: pointer;
+    }
+    #address-table th:hover {
+      background-color: #e5e7eb;
+    }
+    #address-table tbody tr {
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    #address-table tbody tr:hover {
+      background-color: #f3f4f6;
+    }
+    #address-table tbody tr.selected {
+      background-color: #dbeafe;
+      font-weight: 500;
+    }
+    #json-editor {
+      height: 150px;
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+    }
+    #address-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    #address-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    #map {
+      height: 200px;
+      width: 100%;
+      border-radius: 0.5rem;
+      margin-top: 1rem;
+    }
+    /* Print stylesheet */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #address-card, #address-card * {
+        visibility: visible;
+      }
+      #address-card {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        transform: none;
+        box-shadow: none;
+        margin: 0;
+        border: 1px solid #e5e7eb;
+      }
+      #address-card .print-button {
+        display: none;
+      }
+      #map {
+        display: none; /* Hide map when printing */
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="#" class="text-2xl font-bold">Address Manager</a>
+        </div>
+        <div class="hidden sm:flex sm:items-center sm:space-x-4">
+          <a href="#" class="hover:text-blue-200">Home</a>
+        </div>
+        <div class="sm:hidden flex items-center">
+          <button id="mobile-menu-toggle" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-200 hover:bg-blue-700 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="sm:hidden hidden" id="mobile-menu">
+      <div class="pt-2 pb-3 space-y-1">
+        <a href="#" class="block pl-3 pr-4 py-2 text-base font-medium hover:text-blue-200">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="home" class="py-4">
+    <div class="w-full h-full">
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-2xl font-bold text-gray-800 mb-4">Address Manager</h3>
+
+        <!-- Load JSON with Monaco Editor -->
+        <div class="mb-4">
+          <label for="json-editor" class="block text-sm font-medium text-gray-700 mb-1">Load Addresses (JSON):</label>
+          <div id="json-editor" aria-label="JSON editor"></div>
+          <button id="load-json" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Load JSON</button>
+        </div>
+
+        <!-- Load JSON File -->
+        <div class="mb-4">
+          <label for="json-file" class="block text-sm font-medium text-gray-700 mb-1">Upload JSON File:</label>
+          <input type="file" id="json-file" accept=".json" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" aria-label="Upload JSON file">
+        </div>
+
+        <!-- Update Address -->
+        <div class="mb-4">
+          <h4 class="text-lg font-semibold text-gray-700 mb-2">Update Address</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input id="update-name-search" type="text" placeholder="Name to Update" class="p-2 border rounded-md">
+            <input id="update-name" type="text" placeholder="New Name" class="p-2 border rounded-md">
+            <input id="update-street" type="text" placeholder="Street" class="p-2 border rounded-md">
+            <input id="update-city" type="text" placeholder="City" class="p-2 border rounded-md">
+            <input id="update-zip" type="text" placeholder="ZIP" class="p-2 border rounded-md">
+            <input id="update-phone" type="text" placeholder="Phone" class="p-2 border rounded-md">
+            <button id="update-address" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 sm:col-span-2">Update Address</button>
+          </div>
+        </div>
+
+        <!-- Download Buttons -->
+        <div class="mb-4">
+          <button id="download-json" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mr-2">Download JSON</button>
+          <button id="download-csv" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Download CSV</button>
+        </div>
+
+        <!-- Search and Table -->
+        <div class="mb-4">
+          <input id="search-input" type="text" placeholder="Search addresses..." class="w-full p-2 border rounded-md mb-2">
+          <table id="address-table" class="w-full border-collapse border">
+            <thead>
+              <tr class="bg-gray-200">
+                <th class="border p-2">Name</th>
+                <th class="border p-2">Street</th>
+                <th class="border p-2">City</th>
+                <th class="border p-2">ZIP</th>
+                <th class="border p-2">Phone</th>
+              </tr>
+            </thead>
+            <tbody id="address-table-body"></tbody>
+          </table>
+          <!-- Pagination -->
+          <div class="mt-4 flex justify-between items-center">
+            <button id="prev-page" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400" disabled>Previous</button>
+            <span id="page-info" class="text-gray-700">Page 1</span>
+            <button id="next-page" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:bg-gray-400" disabled>Next</button>
+          </div>
+        </div>
+
+        <!-- Modernized Address Card with Map -->
+        <div id="address-card" class="hidden mt-4 p-6 bg-white rounded-xl shadow-lg border border-gray-100 bg-gradient-to-br from-blue-50 to-indigo-50">
+          <div class="flex justify-between items-center mb-4">
+            <h4 class="text-xl font-bold text-indigo-800 flex items-center">
+              <i class="fas fa-address-card mr-2 text-indigo-600"></i> Selected Address
+            </h4>
+            <button id="print-card" class="print-button bg-indigo-600 text-white px-3 py-1 rounded-full hover:bg-indigo-700 flex items-center text-sm">
+              <i class="fas fa-print mr-1"></i> Print
+            </button>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <i class="fas fa-user mr-3 text-indigo-500"></i>
+              <p><span class="font-medium text-gray-700">Name:</span> <span id="card-name" class="text-gray-900"></span></p>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-road mr-3 text-indigo-500"></i>
+              <p><span class="font-medium text-gray-700">Street:</span> <span id="card-street" class="text-gray-900"></span></p>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-city mr-3 text-indigo-500"></i>
+              <p><span class="font-medium text-gray-700">City:</span> <span id="card-city" class="text-gray-900"></span></p>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-map-pin mr-3 text-indigo-500"></i>
+              <p><span class="font-medium text-gray-700">ZIP:</span> <span id="card-zip" class="text-gray-900"></span></p>
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-phone mr-3 text-indigo-500"></i>
+              <p><span class="font-medium text-gray-700">Phone:</span> <span id="card-phone" class="text-gray-900"></span></p>
+            </div>
+          </div>
+          <!-- Map Container -->
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-4 flex-shrink-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p>Made with ❤️ by <a href="https://github.com" class="text-blue-200 hover:underline">Your Name</a></p>
+    </div>
+  </footer>
+
+  <!-- Monaco Editor JS -->
+  <script>var require = { paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs' } };</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0/min/vs/loader.min.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+
+  <script>
+    let addresses = [];
+    let filteredAddresses = [];
+    let currentPage = 1;
+    const rowsPerPage = 5;
+    let selectedIndex = -1;
+    let jsonEditor;
+    let map; // Leaflet map instance
+    let marker; // Leaflet marker instance
+
+    // Initialize Monaco Editor
+    require(['vs/editor/editor.main'], () => {
+      jsonEditor = monaco.editor.create(document.getElementById('json-editor'), {
+        value: JSON.stringify([
+          {
+            name: "John Doe",
+            street: "123 Main St",
+            city: "New York",
+            zip: "10001",
+            phone: "555-123-4567"
+          }
+        ], null, 2),
+        language: 'json',
+        theme: 'vs-dark',
+        automaticLayout: true,
+        minimap: { enabled: false },
+        scrollBeyondLastLine: false,
+        tabSize: 2,
+        formatOnPaste: true,
+        formatOnType: true
+      });
+    });
+
+    // Load addresses from localStorage on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedAddresses = localStorage.getItem('addresses');
+      if (storedAddresses) {
+        addresses = JSON.parse(storedAddresses);
+        filteredAddresses = [...addresses];
+        jsonEditor.setValue(JSON.stringify(addresses, null, 2));
+        renderTable();
+      }
+
+      // Check for URL parameter ?a
+      const urlParams = new URLSearchParams(window.location.search);
+      const jsonUrl = urlParams.get('a');
+      if (jsonUrl) {
+        fetch(jsonUrl)
+          .then(response => response.json())
+          .then(data => {
+            addresses = data;
+            filteredAddresses = [...addresses];
+            localStorage.setItem('addresses', JSON.stringify(addresses));
+            jsonEditor.setValue(JSON.stringify(addresses, null, 2));
+            renderTable();
+          })
+          .catch(error => console.error('Error loading JSON from URL:', error));
+      }
+
+      // Initialize Leaflet map
+      map = L.map('map').setView([51.505, -0.09], 13); // Default location (London)
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+    });
+
+    // Load JSON from Monaco Editor
+    document.getElementById('load-json').addEventListener('click', () => {
+      try {
+        const jsonContent = jsonEditor.getValue();
+        addresses = JSON.parse(jsonContent);
+        filteredAddresses = [...addresses];
+        selectedIndex = -1;
+        localStorage.setItem('addresses', JSON.stringify(addresses));
+        renderTable();
+        jsonEditor.setValue('');
+      } catch (error) {
+        alert('Invalid JSON format: ' + error.message);
+      }
+    });
+
+    // Load JSON from file
+    document.getElementById('json-file').addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const content = e.target.result;
+          addresses = JSON.parse(content);
+          filteredAddresses = [...addresses];
+          selectedIndex = -1;
+          localStorage.setItem('addresses', JSON.stringify(addresses));
+          jsonEditor.setValue(JSON.stringify(addresses, null, 2));
+          renderTable();
+        } catch (error) {
+          alert(`Error loading JSON file: ${error.message}`);
+          document.getElementById('json-file').value = '';
+        }
+      };
+      reader.onerror = () => {
+        alert('Error reading file');
+        document.getElementById('json-file').value = '';
+      };
+      reader.readAsText(file);
+    });
+
+    // Update address by name
+    document.getElementById('update-address').addEventListener('click', () => {
+      const nameToUpdate = document.getElementById('update-name-search').value.trim();
+      if (!nameToUpdate) {
+        alert('Please enter a name to update');
+        return;
+      }
+
+      const index = addresses.findIndex(address => address.name.toLowerCase() === nameToUpdate.toLowerCase());
+      if (index === -1) {
+        alert('No address found with the name: ' + nameToUpdate);
+        return;
+      }
+
+      const updatedAddress = {
+        name: document.getElementById('update-name').value || addresses[index].name,
+        street: document.getElementById('update-street').value || addresses[index].street,
+        city: document.getElementById('update-city').value || addresses[index].city,
+        zip: document.getElementById('update-zip').value || addresses[index].zip,
+        phone: document.getElementById('update-phone').value || addresses[index].phone
+      };
+
+      addresses[index] = updatedAddress;
+      filteredAddresses = [...addresses];
+      localStorage.setItem('addresses', JSON.stringify(addresses));
+      jsonEditor.setValue(JSON.stringify(addresses, null, 2));
+      renderTable();
+
+      document.getElementById('update-name-search').value = '';
+      document.getElementById('update-name').value = '';
+      document.getElementById('update-street').value = '';
+      document.getElementById('update-city').value = '';
+      document.getElementById('update-zip').value = '';
+      document.getElementById('update-phone').value = '';
+
+      if (selectedIndex === index) {
+        showAddressCard(index);
+      }
+    });
+
+    // Search functionality
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      filteredAddresses = addresses.filter(address =>
+        Object.values(address).some(value =>
+          value.toLowerCase().includes(searchTerm)
+        )
+      );
+      currentPage = 1;
+      selectedIndex = -1;
+      renderTable();
+    });
+
+    // Sort functionality
+    document.querySelectorAll('#address-table th').forEach(header => {
+      header.addEventListener('click', () => {
+        const key = header.textContent.toLowerCase();
+        const isAscending = header.dataset.order !== 'asc';
+        header.dataset.order = isAscending ? 'asc' : 'desc';
+        filteredAddresses.sort((a, b) => {
+          const valueA = a[key].toLowerCase();
+          const valueB = b[key].toLowerCase();
+          return isAscending ? (valueA > valueB ? 1 : -1) : (valueA < valueB ? 1 : -1);
+        });
+        selectedIndex = -1;
+        renderTable();
+      });
+    });
+
+    // Pagination
+    document.getElementById('prev-page').addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        selectedIndex = -1;
+        renderTable();
+      }
+    });
+
+    document.getElementById('next-page').addEventListener('click', () => {
+      if (currentPage < Math.ceil(filteredAddresses.length / rowsPerPage)) {
+        currentPage++;
+        selectedIndex = -1;
+        renderTable();
+      }
+    });
+
+    // Render table
+    function renderTable() {
+      const tbody = document.getElementById('address-table-body');
+      tbody.innerHTML = '';
+      const start = (currentPage - 1) * rowsPerPage;
+      const end = start + rowsPerPage;
+      const paginatedAddresses = filteredAddresses.slice(start, end);
+
+      paginatedAddresses.forEach((address, index) => {
+        const globalIndex = start + index;
+        const row = document.createElement('tr');
+        row.dataset.index = globalIndex;
+        row.className = globalIndex === selectedIndex ? 'selected' : '';
+        row.innerHTML = `
+          <td class="border p-2">${address.name}</td>
+          <td class="border p-2">${address.street}</td>
+          <td class="border p-2">${address.city}</td>
+          <td class="border p-2">${address.zip}</td>
+          <td class="border p-2">${address.phone || ''}</td>
+        `;
+        row.addEventListener('click', () => {
+          selectedIndex = globalIndex;
+          renderTable();
+          showAddressCard(globalIndex);
+        });
+        tbody.appendChild(row);
+      });
+
+      document.getElementById('page-info').textContent = `Page ${currentPage} of ${Math.ceil(filteredAddresses.length / rowsPerPage) || 1}`;
+      document.getElementById('prev-page').disabled = currentPage === 1;
+      document.getElementById('next-page').disabled = currentPage === Math.ceil(filteredAddresses.length / rowsPerPage) || filteredAddresses.length === 0;
+
+      if (selectedIndex === -1) {
+        document.getElementById('address-card').classList.add('hidden');
+      }
+    }
+
+    // Show address card and update map
+    async function showAddressCard(index) {
+      const address = filteredAddresses[index];
+      if (!address) return;
+
+      document.getElementById('card-name').textContent = address.name;
+      document.getElementById('card-street').textContent = address.street;
+      document.getElementById('card-city').textContent = address.city;
+      document.getElementById('card-zip').textContent = address.zip;
+      document.getElementById('card-phone').textContent = address.phone || '';
+      document.getElementById('address-card').classList.remove('hidden');
+
+      // Geocode the address using Nominatim
+      const query = `${address.street}, ${address.city}, ${address.zip}`;
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
+
+      try {
+        const response = await fetch(url, {
+          headers: {
+            'User-Agent': 'AddressManagerApp/1.0 (contact: your-email@example.com)' // Nominatim requires a user agent
+          }
+        });
+        const data = await response.json();
+
+        if (data && data.length > 0) {
+          const lat = parseFloat(data[0].lat);
+          const lon = parseFloat(data[0].lon);
+
+          // Update map position
+          map.setView([lat, lon], 15);
+
+          // Update or add marker
+          if (marker) {
+            marker.setLatLng([lat, lon]);
+          } else {
+            marker = L.marker([lat, lon]).addTo(map)
+              .bindPopup(`${address.name}<br>${query}`);
+          }
+        } else {
+          console.warn('Geocoding failed: No results found for the address.');
+          map.setView([51.505, -0.09], 13); // Fallback to default location
+          if (marker) {
+            marker.remove();
+            marker = null;
+          }
+        }
+      } catch (error) {
+        console.error('Error geocoding address:', error);
+        map.setView([51.505, -0.09], 13); // Fallback to default location
+        if (marker) {
+          marker.remove();
+          marker = null;
+        }
+      }
+    }
+
+    // Print address card
+    document.getElementById('print-card').addEventListener('click', () => {
+      window.print();
+    });
+
+    // Download JSON
+    document.getElementById('download-json').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(addresses, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'addresses.json';
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Download CSV
+    document.getElementById('download-csv').addEventListener('click', () => {
+      const csv = [
+        'Name,Street,City,ZIP,Phone',
+        ...addresses.map(address =>
+          `"${address.name}","${address.street}","${address.city}","${address.zip}","${address.phone || ''}"`
+        )
+      ].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'addresses.csv';
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // Mobile Menu Toggle
+    document.getElementById('mobile-menu-toggle').addEventListener('click', () => {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

@@ -408,15 +408,29 @@ const data = {
           { title: "A Stranger in Town - How to elect right govt.?" , youtubeId: "N-OFOAH88k0" },
           { title: "The Farmers Daughter - Hardwork will win!" , youtubeId: "zprVVMuJlTk" },
           { title: "It is a Wonderful Life " , youtubeId: "uAERYfeiYBc" },
+        ],
+      },
 
-
-
-
-
+     {
+        name: "Raspberry",
+        videos: [
+          { title: "Raspberry Pi 5: Getting Started" , youtubeId: "UtLyX72-688" },
+          { title: "Every Developer Needs a Raspberry Pi" , youtubeId: "Vp4glSVPT8o" },
+          { title: "You Should Hack Your Roomba" , youtubeId: "mTpkV7xZln0" },
 
 
         ],
       },
+
+     {
+        name: "AWS",
+        videos: [
+          { title: "Easily Deploy Full Stack Node.js Apps on AWS EC2 | Step-by-Step Tutorial" , youtubeId: "nQdyiK7-VlQ" },
+        ],
+      },
+
+
+
 
       {
         name: "CS and AI",
