@@ -528,6 +528,9 @@
         { text: 'PostgreSQL SQL Editor', href: 'https://chromewebstore.google.com/detail/postgresql-sql-editor/klgghlapilhfmdneodlbfmppieiebcjo', icon: 'desktop' },
         { text: 'RAG using Posgresql and ollama', href: '../../pg/rag/rag.html', icon: 'desktop' },
         { text: 'Doc for : RAG using Posgresql and ollama', href: '../../pg/rag/doc.html', icon: 'desktop' },
+       
+	 { text: 'RAG using Posgresql, Salesforce and ollama', href: '../../pg/rag/2/rag.html', icon: 'desktop' },
+        
         { text: 'ask_llm for PostgreSQL', href: '../../psql/llm/ask_llm_setup_macos.html', icon: 'desktop' },
  
 
