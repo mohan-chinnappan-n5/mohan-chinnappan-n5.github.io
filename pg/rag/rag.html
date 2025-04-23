@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Search App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+    rel="icon"
+    type="image/x-icon"
+    href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico"
+  />
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100">
+    <!-- Sticky Navbar -->
+    <nav class="bg-blue-600 text-white p-4 sticky top-0 shadow-md z-10">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">RAG Search App</h1>
+            <div>
+                <a href="/" class="px-4 hover:text-gray-200">Home</a>
+                <a href="#upload" class="px-4 hover:text-gray-200">Upload</a>
+                <a href="#search" class="px-4 hover:text-gray-200">Search</a>
+                <a href="./app.py" class="px-4 hover:text-gray-200">Server Code</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 flex-grow">
+        <!-- Upload Section -->
+        <section id="upload" class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Upload Document or URL</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <form id="uploadForm" enctype="multipart/form-data" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700">Upload PDF</label>
+                        <input type="file" id="file" name="file" accept=".pdf" class="mt-1 block w-full border-gray-300 rounded-md">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">Or Enter URL</label>
+                        <input type="text" id="url" name="url" placeholder="https://example.com" class="mt-1 block w-full border-gray-300 rounded-md p-2">
+                    </div>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center">
+                        <span>Process</span>
+                        <svg id="uploadSpinner" class="animate-spin h-5 w-5 ml-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8h-8z"></path>
+                        </svg>
+                    </button>
+                </form>
+                <p id="uploadMessage" class="mt-4 text-green-600 hidden"></p>
+                <p id="uploadTime" class="mt-2 text-gray-600 hidden"></p>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section id="search">
+            <h2 class="text-2xl font-semibold mb-4">Search Document</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <form id="searchForm" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700">Query</label>
+                        <input type="text" id="query" name="query" placeholder="Ask a question..." class="mt-1 block w-full border-gray-300 rounded-md p-2">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700">LLM Model</label>
+                        <select id="llm_model" name="llm_model" class="mt-1 block w-full border-gray-300 rounded-md p-2">
+                            <option value="">Loading models...</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center">
+                        <span>Search</span>
+                        <svg id="searchSpinner" class="animate-spin h-5 w-5 ml-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8h-8z"></path>
+                        </svg>
+                    </button>
+                </form>
+                <div id="results" class="mt-4">
+                    <h3 class="text-lg font-semibold">Answer:</h3>
+                    <p id="answer" class="text-gray-700"></p>
+                    <h3 class="text-lg font-semibold mt-4">Context:</h3>
+                    <p id="context" class="text-gray-600"></p>
+                    <p id="searchTime" class="mt-2 text-gray-600 hidden"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto text-center">
+            <p>MC RAG Search App. Powered by pgvector and Ollama.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Form Handling -->
+    <script>
+        // Base URL for the Flask server
+        const BASE_URL = 'http://localhost:5000';
+
+        // Show/hide spinner and disable button
+        function toggleSpinner(formId, spinnerId, button, show) {
+            const spinner = document.getElementById(spinnerId);
+            spinner.classList.toggle('hidden', !show);
+            button.disabled = show;
+        }
+
+        // Fetch and populate LLM models
+        async function loadModels() {
+            try {
+                const response = await fetch(`${BASE_URL}/models`);
+                const models = await response.json();
+                const select = document.getElementById('llm_model');
+                if (models.error || !Array.isArray(models) || models.length === 0) {
+                    select.innerHTML = '<option value="">No models available</option>';
+                    return;
+                }
+                select.innerHTML = ''; // Clear existing options
+                models.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model;
+                    option.textContent = model;
+                    select.appendChild(option);
+                });
+                // Set default model (optional)
+                if (models.includes('llama3.2')) {
+                    select.value = 'llama3.2';
+                }
+            } catch (error) {
+                console.error('Error fetching models:', error);
+                document.getElementById('llm_model').innerHTML = '<option value="">Error loading models</option>';
+            }
+        }
+
+        // Load models on page load
+        loadModels();
+
+        // Handle Upload Form
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+            const fileInput = document.getElementById('file');
+            const urlInput = document.getElementById('url');
+            const message = document.getElementById('uploadMessage');
+            const timeDisplay = document.getElementById('uploadTime');
+            const button = e.target.querySelector('button');
+
+            if (fileInput.files.length > 0) {
+                formData.append('file', fileInput.files[0]);
+            } else if (urlInput.value) {
+                formData.append('url', urlInput.value);
+            } else {
+                message.textContent = 'Please provide a PDF or URL.';
+                message.classList.remove('hidden', 'text-green-600');
+                message.classList.add('text-red-600');
+                return;
+            }
+
+            toggleSpinner('uploadForm', 'uploadSpinner', button, true);
+            try {
+                const response = await fetch(`${BASE_URL}/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                message.textContent = result.message || result.error;
+                message.classList.remove('hidden');
+                message.classList.toggle('text-green-600', !result.error);
+                message.classList.toggle('text-red-600', !!result.error);
+                timeDisplay.textContent = `Time taken: ${result.time_taken}`;
+                timeDisplay.classList.remove('hidden');
+            } catch (error) {
+                message.textContent = 'Error processing document.';
+                message.classList.remove('hidden');
+                message.classList.add('text-red-600');
+                timeDisplay.textContent = 'Time taken: Unknown';
+                timeDisplay.classList.remove('hidden');
+            } finally {
+                toggleSpinner('uploadForm', 'uploadSpinner', button, false);
+            }
+        });
+
+        // Handle Search Form
+        document.getElementById('searchForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const query = document.getElementById('query').value;
+            const llmModel = document.getElementById('llm_model').value;
+            const formData = new FormData();
+            formData.append('query', query);
+            formData.append('llm_model', llmModel);
+            const answer = document.getElementById('answer');
+            const context = document.getElementById('context');
+            const timeDisplay = document.getElementById('searchTime');
+            const button = e.target.querySelector('button');
+
+            toggleSpinner('searchForm', 'searchSpinner', button, true);
+            try {
+                const response = await fetch(`${BASE_URL}/search`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                if (result.error) {
+                    answer.textContent = result.error;
+                    context.textContent = '';
+                    timeDisplay.textContent = `Time taken: ${result.time_taken}`;
+                } else {
+                    answer.textContent = result.answer;
+                    context.textContent = result.context;
+                    timeDisplay.textContent = `Time taken: ${result.time_taken}`;
+                }
+                timeDisplay.classList.remove('hidden');
+            } catch (error) {
+                answer.textContent = 'Error fetching results.';
+                context.textContent = '';
+                timeDisplay.textContent = 'Time taken: Unknown';
+                timeDisplay.classList.remove('hidden');
+            } finally {
+                toggleSpinner('searchForm', 'searchSpinner', button, false);
+            }
+        });
+    </script>
+</body>
+</html>

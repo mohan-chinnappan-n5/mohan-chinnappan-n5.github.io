@@ -491,6 +491,8 @@
         { text: 'Chrome Extension: Web Vitals', href: '../../chrome-extensions/webvitals.html', icon: 'desktop' },
  
 	{ text: 'Chrome Extension: SF Utils with Change Tracking', href: '../../chrome-extensions/sf-utils.html', icon: 'desktop' },
+	{ text: 'PostgreSQL SQL Editor', href: 'https://chromewebstore.google.com/detail/postgresql-sql-editor/klgghlapilhfmdneodlbfmppieiebcjo', icon: 'desktop' },
+
 
 
 
@@ -518,6 +520,23 @@
       ],
 
     },
+
+
+    Postgresql: {
+      title: 'Postgresql',
+      links: [
+        { text: 'PostgreSQL SQL Editor', href: 'https://chromewebstore.google.com/detail/postgresql-sql-editor/klgghlapilhfmdneodlbfmppieiebcjo', icon: 'desktop' },
+        { text: 'RAG using Posgresql and ollama', href: '../../pg/rag/rag.html', icon: 'desktop' },
+        { text: 'ask_llm for PostgreSQL', href: '../../psql/llm/ask_llm_setup_macos.html', icon: 'desktop' },
+ 
+
+        // Add more links here
+      ],
+
+    },
+
+
+
 
     InfographicApps: {
       title: 'Infographic Apps',

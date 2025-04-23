@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG Search App</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+  <!-- Prism.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <style>
+    /* Ensure the body has enough height for scrolling */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    /* Smooth scrolling for anchor links */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Style for code blocks */
+    pre[class*="language-"] {
+      position: relative;
+      margin: 0.5rem 0;
+      border-radius: 0.5rem;
+      overflow: auto;
+      padding: 1rem;
+    }
+    /* Copy button styling */
+    .copy-button {
+      position: relative;
+      top: 0.5rem;
+      right: 0.5rem;
+      background-color: #2563eb;
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      z-index: 100;
+      font-size: 0.875rem;
+    }
+    .copy-button:hover {
+      background-color: #1e40af;
+    }
+    .copy-button.copied {
+      background-color: #16a34a;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <!-- Sticky Navbar -->
+  <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold">
+        <a href="#home">RAG Search App</a>
+      </div>
+      <div class="space-x-4">
+        <a href="#home" class="hover:text-blue-200">Home</a>
+        <a href="#features" class="hover:text-blue-200">Features</a>
+        <a href="#demo" class="hover:text-blue-200">Demo</a>
+        <a href="#setup" class="hover:text-blue-200">Setup</a>
+        <a href="#how-to-use" class="hover:text-blue-200">How to Use</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20">
+      <div class="max-w-6xl mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">RAG Search App</h1>
+        <p class="text-xl mb-8">A powerful Retrieval-Augmented Generation (RAG) application for processing PDFs or URLs and answering queries using local LLMs with pgvector and Ollama.</p>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Features</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <!-- Feature 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">📄</div>
+            <h3 class="text-xl font-semibold mb-2">Document Processing</h3>
+            <p class="text-gray-600">Upload PDFs or provide URLs to extract text, chunk it, and store embeddings in PostgreSQL with pgvector.</p>
+          </div>
+          <!-- Feature 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">🔍</div>
+            <h3 class="text-xl font-semibold mb-2">RAG Search</h3>
+            <p class="text-gray-600">Query documents using Retrieval-Augmented Generation with local LLMs, retrieving relevant context and generating answers.</p>
+          </div>
+          <!-- Feature 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">🤖</div>
+            <h3 class="text-xl font-semibold mb-2">Dynamic LLM Selection</h3>
+            <p class="text-gray-600">Choose from locally available Ollama models (e.g., Gemma, TinyLlama) for query answering.</p>
+          </div>
+          <!-- Feature 4 -->
+          <div class="bg-white p-6 rounded-lg shadow-md text-center">
+            <div class="text-blue-600 text-4xl mb-4">⏱️</div>
+            <h3 class="text-xl font-semibold mb-2">Performance Metrics</h3>
+            <p class="text-gray-600">View processing and query response times with a user-friendly interface and loading spinners.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="bg-gray-200 py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">See It in Action</h2>
+        <img src="./rag-pg-screen-1.png" alt="">
+        <br>
+        <div class="flex justify-center">
+          <iframe width="600" height="400" src="https://www.youtube.com/embed/2Bo7ebpmYbg?si=KFwKnVQa8CPeo2f0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>  
+        </div>
+      </div>
+    </section>
+
+    <!-- Setup Section -->
+    <section id="setup" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">Setup Instructions</h2>
+        <p class="text-gray-600 mb-6">Follow these steps to set up the RAG Search App locally. The backend server code is available at <a href="https://mohan-chinnappan-n5.github.io/pg/rag/app.py" class="text-blue-500 hover:underline">mohan-chinnappan-n5.github.io/pg/rag/app.py</a>.</p>
+        <div class="space-y-6">
+          <!-- Step 1: Clone Repository -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Get Server Code</h3>
+            <pre><code class="language-bash">curl -O https://mohan-chinnappan-n5.github.io/pg/rag/app.py </code></pre>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+          </div>
+          <!-- Step 2: Install Dependencies -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 2: Install Python Dependencies</h3>
+            <p class="text-gray-600 mb-4">Install the required Python packages using pip:</p>
+            <pre><code class="language-bash">pip install flask flask-cors psycopg2-binary pgvector PyPDF2 requests beautifulsoup4 numpy ollama</code></pre>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+          </div>
+          <!-- Step 3: Set Up PostgreSQL and pgvector -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 3: Set Up PostgreSQL and pgvector</h3>
+            <p class="text-gray-600 mb-4">Install and configure PostgreSQL with the pgvector extension. Choose the instructions for your operating system:</p>
+            <h4 class="text-lg font-semibold text-gray-800 mb-2">For macOS</h4>
+            <ol class="list-decimal list-inside text-gray-600 space-y-2">
+              <li>Install Homebrew (if not already installed):
+                <pre><code class="language-bash">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              </li>
+              <li>Install PostgreSQL using Homebrew:
+                <pre><code class="language-bash">brew install postgresql@15</code></pre>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              </li>
+              <li>Start the PostgreSQL service:
+                <pre><code class="language-bash">brew services start postgresql@15</code></pre>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              </li>
+              <li>Create a database (e.g., <code>postgres</code>):
+                <pre><code class="language-bash">createdb postgres</code></pre>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              </li>
+              <li>Install the pgvector extension:
+                <ol class="list-disc list-inside ml-4">
+                  <li>Clone and build pgvector:
+                    <pre><code class="language-bash">git clone https://github.com/pgvector/pgvector.git
+cd pgvector
+make
+sudo make install</code></pre>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                  </li>
+                  <li>Connect to the database:
+                    <pre><code class="language-bash">psql -d postgres</code></pre>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                  </li>
+                  <li>Enable the vector extension:
+                    <pre><code class="language-sql">CREATE EXTENSION vector;</code></pre>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                  </li>
+                  <li>Verify the extension is installed:
+                    <pre><code class="language-sql">\dx</code></pre>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <p class="text-gray-600 mt-2">Look for <code>vector</code> in the output.</p>
+                  </li>
+                </ol>
+              </li>
+            </ol>
+            <h4 class="text-lg font-semibold text-gray-800 mb-2 mt-4">For Ubuntu</h4>
+            <ol class="list-decimal list-inside text-gray-600 space-y-2">
+              <li>Install PostgreSQL (version 12 or later recommended):
+                <pre><code class="language-bash">sudo apt update
+sudo apt install postgresql postgresql-contrib</code></pre>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              </li>
+              <li>Start the PostgreSQL service:
+                <pre><code class="language-bash">sudo service postgresql start</code></pre>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              </li>
+              <li>Create a database (e.g., <code>postgres</code>):
+                <pre><code class="language-bash">sudo -u postgres psql -c "CREATE DATABASE postgres;"</code></pre>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              </li>
+              <li>Install the pgvector extension:
+                <ol class="list-disc list-inside ml-4">
+                  <li>Clone and build pgvector:
+                    <pre><code class="language-bash">git clone https://github.com/pgvector/pgvector.git
+cd pgvector
+make
+sudo make install</code></pre>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                  </li>
+                  <li>Connect to the database:
+                    <pre><code class="language-bash">psql -U postgres -d postgres</code></pre>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                  </li>
+                  <li>Enable the vector extension:
+                    <pre><code class="language-sql">CREATE EXTENSION vector;</code></pre>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                  </li>
+                  <li>Verify the extension is installed:
+                    <pre><code class="language-sql">\dx</code></pre>
+                    <button class="copy-button" onclick="copyCode(this)">Copy</button>
+                    <p class="text-gray-600 mt-2">Look for <code>vector metallurgy://vector` in the output.</p>
+                  </li>
+                </ol>
+              </li>
+              <li>Update the database connection details in <code>app.py</code> (e.g., <code>dbname</code>, <code>user</code>, <code>password</code>):
+                <pre><code class="language-python">conn = psycopg2.connect(
+    dbname="postgres",
+    user="postgres",
+    password="your_password",
+    host="localhost",
+    port="5432"
+)</code></pre>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              </li>
+            </ol>
+            <p class="text-gray-600 mt-2">Alternatively, use a Docker image with pgvector pre-installed (works on both macOS and Ubuntu):
+              <pre><code class="language-bash">docker run -d --name postgres -p 5432:5432 pgvector/pgvector:0.8.0-pg15</code></pre>
+              <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            </p>
+          </div>
+          <!-- Step 4: Set Up Ollama -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 4: Set Up Ollama</h3>
+            <p class="text-gray-600 mb-4">Install Ollama and pull required models:</p>
+            <ol class="list-decimal list-inside text-gray-600 space-y-2">
+              <li>Install Ollama following the instructions at <a href="https://ollama.ai" class="text-blue-500 hover:underline">ollama.ai</a>.</li>
+              <li>Pull models (e.g., Gemma, TinyLlama, and nomic-embed-text):
+                <pre><code class="language-bash">ollama pull gemma3
+ollama pull deepseek-r1:1.5b
+ollama pull tinyllama
+ollama pull nomic-embed-text</code></pre>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              </li>
+              <li>Start the Ollama server:
+                <pre><code class="language-bash">ollama serve</code></pre>
+                <button class="copy-button" onclick="copyCode(this)">Copy</button>
+              </li>
+            </ol>
+          </div>
+          <!-- Step 5: Run the Backend -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 5: Run the Backend</h3>
+            <p class="text-gray-600 mb-4">Start the Flask server using the backend code at <a href="https://mohan-chinnappan-n5.github.io/pg/rag/app.py" class="text-blue-500 hover:underline">app.py</a>:</p>
+            <pre><code class="language-bash">python app.py</code></pre>
+            <button class="copy-button" onclick="copyCode(this)">Copy</button>
+            <p class="text-gray-600 mt-2">The server runs on <code>http://localhost:5000</code>.</p>
+          </div>
+        
+        </div>
+      </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section id="how-to-use" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">How to Use</h2>
+        <p class="text-gray-600 mb-6">Follow these steps to use the RAG Search App:</p>
+        <div class="space-y-6">
+          <!-- Step 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 1: Access the App</h3>
+            <p class="text-gray-600 mb-4">Open the app in your browser at <a href='https://mohan-chinnappan-n5.github.io/pg/rag/rag.html'>RAG App</a>
+            </p>
+          </div>
+          <!-- Step 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 2: Upload a Document or URL</h3>
+            <p class="text-gray-600 mb-4">In the "Upload Document or URL" section, upload a PDF file or enter a URL (e.g., <code>https://www.paulgraham.com/google.html</code>). Click "Process" to extract text and store embeddings in PostgreSQL.</p>
+            <p class="text-gray-600 mb-4">A spinner will appear during processing, and the time taken will be displayed (e.g., "Time taken: 2.34 seconds").</p>
+          </div>
+          <!-- Step 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">🔹 Step 3: Search the Document</h3>
+            <p class="text-gray-600 mb-4">In the "Search Document" section, enter a query (e.g., "what is mentioned about google?") and select an LLM model from the dropdown (populated dynamically from Ollama, e.g., <code>gemma3:latest</code>). Click "Search" to retrieve answers.</p>
+            <p class="text-gray-600 mb-4">A spinner will show during the query, and the response will include the answer, context, and time taken.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-6">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p>Made with ❤️ in <a href="https://en.wikipedia.org/wiki/New_Hampshire" class="text-blue-200 hover:underline">New Hampshire</a> by <a href="https://mohan-chinnappan-n.github.io/about/cv.html" class="text-blue-200 hover:underline">mc</a></p>
+    </div>
+  </footer>
+
+  <!-- Prism.js and Copy Button Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script>
+    function copyCode(button) {
+      const codeElement = button.previousElementSibling.querySelector('code');
+      if (!codeElement) {
+        console.error('No code element found for button:', button);
+        button.textContent = 'Error';
+        return;
+      }
+      const code = codeElement.textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        setTimeout(() => {
+          button.textContent = 'Copy';
+          button.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy:', err);
+        button.textContent = 'Error';
+      });
+    }
+  </script>
+</body>
+</html>
