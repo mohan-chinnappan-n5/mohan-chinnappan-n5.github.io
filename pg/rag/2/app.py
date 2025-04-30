@@ -22,7 +22,7 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:9000"}})
 conn = psycopg2.connect(
     dbname="postgres",
     user="postgres",
-    password="your_password",
+    password="postgres",
     host="localhost",
     port="5432"
 )
