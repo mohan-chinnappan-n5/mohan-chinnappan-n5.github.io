@@ -520,6 +520,8 @@
         { text: 'sf-land - Salesforce Development Tools', href: 'https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-land', icon: 'desktop' },
         { text: 'Salesforce Specific Tools for Github', href: 'https://marketplace.visualstudio.com/items?itemName=mohanc5.mcghutils', icon: 'desktop' },
     { text: 'Salesforce Code Scanner', href: 'https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-scanner', icon: 'desktop' },
+{ text: 'Package.xml Generator', href: 'https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.package-xml-generator', icon: 'desktop' },
+
 
 
 
