@@ -274,6 +274,12 @@
 
 	{ text: 'PRs to package.xml tool', href: 'https://mchinnappan100.github.io/pages2/tools/prs-to-pkg.html', icon: 'desktop' },
 
+        { text: 'Profile/Permset Viewer  ', href: 'https://mchinnappan100.github.io//pages2/permsets/viewer/view.html', icon: 'desktop' },
+
+        { text: 'Profile/Permset Editor  ', href: 'https://mchinnappan100.github.io//pages2/permsets/2/editor.html', icon: 'desktop' },
+
+        { text: 'Code Scanner with PMD', href: 'https://mchinnappan100.github.io/pages2/code-scanners/scanner.html', icon: 'desktop' },
+
 
 
 

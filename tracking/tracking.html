@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Tracking Viewer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs/loader.min.js"></script>
+    <style>
+        #editor-container {
+            height: calc(100vh - 100px); /* Adjust for header and footer */
+        }
+        #tracking-info {
+            height: calc(100vh - 100px); /* Adjust for header and footer */
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col">
+    <header class="bg-purple-600 text-white py-4 sticky top-0 z-10">
+        <div class="container mx-auto px-4">
+            <h1 class="text-xl font-semibold">Package Tracking Viewer</h1>
+        </div>
+    </header>
+
+    <div class="flex flex-grow container mx-auto p-4">
+        <div class="w-1/2 pr-4">
+            <h2 class="text-lg font-semibold mb-2">JSON Data</h2>
+            <input type="file" id="file-upload" class="mb-4">
+            <div id="editor-container" class="rounded-md shadow-md overflow-hidden"></div>
+        </div>
+        <div class="w-1/2 pl-4">
+            <h2 class="text-lg font-semibold mb-2">Tracking Details</h2>
+            <div id="tracking-info" class="bg-white rounded-md shadow-md p-4">
+                <p class="text-gray-500">Upload a JSON file to view tracking information.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-200 text-gray-600 py-2 text-center sticky bottom-0 z-10">
+        <p>MC -  Package Tracker</p>
+    </footer>
+
+    <script>
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.1/min/vs' }});
+
+        require(['vs/editor/editor.main'], function () {
+            let editor;
+            const trackingInfoDiv = document.getElementById('tracking-info');
+            const fileUpload = document.getElementById('file-upload');
+
+            editor = monaco.editor.create(document.getElementById('editor-container'), {
+                value: `{ "info":  "Upload a JSON file or edit here"}`,
+                language: 'json',
+                theme: 'vs-dark',
+                automaticLayout: true,
+                minimap: { enabled: false },
+		  
+            });
+
+            editor.onDidChangeModelContent(debounce(function (event) {
+                const jsonContent = editor.getValue();
+                try {
+                    const trackingData = JSON.parse(jsonContent);
+                    renderTrackingInfo(trackingData);
+                } catch (error) {
+                    trackingInfoDiv.innerHTML = '<p class="text-red-500">Invalid JSON.</p>';
+                    console.error("Error parsing JSON:", error);
+                }
+            }, 500)); // Debounce changes for 500ms
+
+            fileUpload.addEventListener('change', function(event) {
+                const file = event.target.files?.[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const jsonContent = e.target.result;
+                        editor.setValue(jsonContent);
+                        try {
+                            const trackingData = JSON.parse(jsonContent);
+                            renderTrackingInfo(trackingData);
+                        } catch (error) {
+                            trackingInfoDiv.innerHTML = '<p class="text-red-500">Invalid JSON file.</p>';
+                            console.error("Error parsing JSON:", error);
+                        }
+                    };
+                    reader.readAsText(file);
+                } else {
+                    editor.setValue('// Upload a JSON file or edit here');
+                    trackingInfoDiv.innerHTML = '<p class="text-gray-500">Upload a JSON file to view tracking information.</p>';
+                }
+            });
+
+            function debounce(func, delay) {
+                let timeoutId;
+                return function(...args) {
+                    clearTimeout(timeoutId);
+                    timeoutId = setTimeout(() => {
+                        func.apply(this, args);
+                    }, delay);
+                };
+            }
+
+            function renderTrackingInfo(data) {
+                trackingInfoDiv.innerHTML = '';
+                if (!data) {
+                    trackingInfoDiv.innerHTML = '<p class="text-gray-500">No tracking data available.</p>';
+                    return;
+                }
+
+                const renderItem = (label, value) => {
+                    if (value) {
+                        return `<div class="mb-2">
+                                    <strong class="text-purple-700">${label}:</strong> <span class="text-gray-700">${value}</span>
+                                </div>`;
+                    }
+                    return '';
+                };
+
+                const renderStatus = (status, details, isFirst, isLast) => {
+                    let colorClass = 'bg-gray-300 text-gray-700';
+                    if (status && status.toLowerCase().includes('delivery')) {
+                        colorClass = 'bg-green-200 text-green-700';
+                    } else if (status && status.toLowerCase().includes('transit')) {
+                        colorClass = 'bg-blue-200 text-blue-700';
+                    } else if (status && status.toLowerCase().includes('exception')) {
+                        colorClass = 'bg-red-200 text-red-700';
+                    }
+
+                    let detailsHtml = '';
+                    if (details && details.location && details.timestamp) {
+                        detailsHtml = `<p class="text-sm text-gray-600">${details.timestamp} - ${details.location}</p>`;
+                    } else if (details && details.message) {
+                        detailsHtml = `<p class="text-sm text-gray-600">${details.message}</p>`;
+                    }
+
+                    const verticalLineClass = `absolute left-2 w-0.5 bg-purple-400 ${isFirst ? 'top-6' : ''} ${isLast ? 'bottom-6' : ''}`;
+                    const verticalLineFullHeightClass = `absolute left-2 w-0.5 bg-purple-400 top-6 bottom-6`;
+
+                    return `<div class="relative pl-8 mb-4">
+                                <div class="absolute top-0 left-0 w-4 h-4 rounded-full ${colorClass} flex items-center justify-center">
+                                    <svg class="w-2 h-2 fill-current text-white" viewBox="0 0 16 16">
+                                        <circle cx="8" cy="8" r="6" />
+                                    </svg>
+                                </div>
+                                <div class="${data.statusUpdates && data.statusUpdates.length > 1 ? (isFirst && isLast ? '' : (isFirst ? 'bottom-0' : (isLast ? 'top-0' : ''))) : ''}">
+                                    <div class="${data.statusUpdates && data.statusUpdates.length > 1 ? verticalLineClass : ''}" style="height: ${data.statusUpdates && data.statusUpdates.length > 1 ? 'calc(100% + 1rem)' : '2rem'};"></div>
+                                </div>
+                                <h3 class="font-semibold text-purple-800">${status || 'Status Unavailable'}</h3>
+                                ${detailsHtml}
+                            </div>`;
+                };
+
+                if (data.from) {
+                    trackingInfoDiv.innerHTML += `<div class="mb-6 p-4 rounded-md shadow-sm border border-gray-200">
+                                                    <h4 class="text-md font-semibold text-gray-800 mb-2">From</h4>
+                                                    ${renderItem('Location', data.from)}
+                                                </div>`;
+                }
+
+                if (data.to) {
+                    trackingInfoDiv.innerHTML += `<div class="mb-6 p-4 rounded-md shadow-sm border border-gray-200">
+                                                    <h4 class="text-md font-semibold text-gray-800 mb-2">To</h4>
+                                                    ${renderItem('Location', data.to)}
+                                                </div>`;
+                }
+
+                if (data.statusUpdates && Array.isArray(data.statusUpdates)) {
+                    trackingInfoDiv.innerHTML += `<h4 class="text-lg font-semibold text-gray-800 mb-3">Tracking History</h4>`;
+                    data.statusUpdates.forEach((update, index) => {
+                        const isFirst = index === 0;
+                        const isLast = index === data.statusUpdates.length - 1;
+                        trackingInfoDiv.innerHTML += renderStatus(update.status, { timestamp: update.timestamp, location: update.location }, isFirst, isLast);
+                    });
+                } else if (data.currentStatus) {
+                    trackingInfoDiv.innerHTML += `<h4 class="text-lg font-semibold text-gray-800 mb-3">Current Status</h4>`;
+                    trackingInfoDiv.innerHTML += renderStatus(data.currentStatus, data.currentStatusDetails, true, true);
+                } else {
+                    trackingInfoDiv.innerHTML += '<p class="text-gray-500">No tracking status information available.</p>';
+                }
+
+                if (data.onTheWay) {
+                    trackingInfoDiv.innerHTML += `<div class="mt-6 p-4 rounded-md shadow-sm border border-gray-200">
+                                                    <h4 class="text-md font-semibold text-gray-800 mb-2">On The Way</h4>
+                                                    ${renderItem('Location', data.onTheWay.location)}
+                                                    ${renderItem('Date/Time', data.onTheWay.datetime)}
+                                                    ${data.onTheWay.details ? `<p class="text-sm text-blue-500">${data.onTheWay.details}</p>` : ''}
+                                                </div>`;
+                }
+
+                if (data.outForDelivery) {
+                    trackingInfoDiv.innerHTML += `<div class="mt-6 p-4 rounded-md shadow-sm border border-gray-200">
+                                                    <h4 class="text-md font-semibold text-gray-800 mb-2">Out For Delivery</h4>
+                                                </div>`;
+                }
+
+                if (data.packageReceived) {
+                    trackingInfoDiv.innerHTML += `<div class="mt-6 p-4 rounded-md shadow-sm border border-gray-200 bg-purple-100 text-purple-800">
+                                                    <h4 class="text-md font-semibold mb-2">We Have Your Package</h4>
+                                                </div>`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
