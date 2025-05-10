@@ -519,6 +519,8 @@
         { text: 'VSCode Apex PMD', href: 'https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.apex-pmd-code-scanner', icon: 'desktop' },
         { text: 'sf-land - Salesforce Development Tools', href: 'https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-land', icon: 'desktop' },
         { text: 'Salesforce Specific Tools for Github', href: 'https://marketplace.visualstudio.com/items?itemName=mohanc5.mcghutils', icon: 'desktop' },
+    { text: 'Salesforce Code Scanner', href: 'https://marketplace.visualstudio.com/items?itemName=mohanChinnappan.sf-scanner', icon: 'desktop' },
+
 
 
 
