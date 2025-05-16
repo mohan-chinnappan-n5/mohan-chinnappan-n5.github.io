@@ -1290,7 +1290,18 @@ export class Types {
         };
       },
       copyAllFiles: true,
-    }
+    },
+
+    AuthProvider: {
+      folderName: "authProviders",
+      getFileAttributes: (member) => {
+        return {
+          folderName: `authProviders`,
+          fileNames: [`${member}.authprovider-meta.xml`],
+
+        };
+      },
+    },
 
 
     
