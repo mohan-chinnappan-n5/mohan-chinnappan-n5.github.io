@@ -1,0 +1,48 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Fruits", "x": 400, "y": 200 },
+    
+    { "id": "citrus", "label": "Citrus", "x": 200, "y": 100 },
+    { "id": "berries", "label": "Berries", "x": 400, "y": 100 },
+    { "id": "tropical", "label": "Tropical", "x": 600, "y": 100 },
+    { "id": "stone", "label": "Stone Fruits", "x": 800, "y": 100 },
+    
+    { "id": "orange", "label": "Orange", "x": 150, "y": 50 },
+    { "id": "lemon", "label": "Lemon", "x": 200, "y": 50 },
+    { "id": "lime", "label": "Lime", "x": 250, "y": 50 },
+    
+    { "id": "strawberry", "label": "Strawberry", "x": 350, "y": 50 },
+    { "id": "blueberry", "label": "Blueberry", "x": 400, "y": 50 },
+    { "id": "raspberry", "label": "Raspberry", "x": 450, "y": 50 },
+    
+    { "id": "mango", "label": "Mango", "x": 550, "y": 50 },
+    { "id": "banana", "label": "Banana", "x": 600, "y": 50 },
+    { "id": "pineapple", "label": "Pineapple", "x": 650, "y": 50 },
+    
+    { "id": "peach", "label": "Peach", "x": 750, "y": 50 },
+    { "id": "plum", "label": "Plum", "x": 800, "y": 50 },
+    { "id": "cherry", "label": "Cherry", "x": 850, "y": 50 }
+  ],
+  "relationships": [
+    { "parent": "Fruits", "child": "Citrus" },
+    { "parent": "Fruits", "child": "Berries" },
+    { "parent": "Fruits", "child": "Tropical" },
+    { "parent": "Fruits", "child": "Stone Fruits" },
+    
+    { "parent": "Citrus", "child": "Orange" },
+    { "parent": "Citrus", "child": "Lemon" },
+    { "parent": "Citrus", "child": "Lime" },
+    
+    { "parent": "Berries", "child": "Strawberry" },
+    { "parent": "Berries", "child": "Blueberry" },
+    { "parent": "Berries", "child": "Raspberry" },
+    
+    { "parent": "Tropical", "child": "Mango" },
+    { "parent": "Tropical", "child": "Banana" },
+    { "parent": "Tropical", "child": "Pineapple" },
+    
+    { "parent": "Stone Fruits", "child": "Peach" },
+    { "parent": "Stone Fruits", "child": "Plum" },
+    { "parent": "Stone Fruits", "child": "Cherry" }
+  ]
+}

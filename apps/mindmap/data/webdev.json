@@ -1,0 +1,21 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Web Development", "x": 400, "y": 200 },
+    { "id": "frontend", "label": "Frontend", "x": 200, "y": 100 },
+    { "id": "backend", "label": "Backend", "x": 600, "y": 100 },
+    { "id": "html", "label": "HTML", "x": 100, "y": 50 },
+    { "id": "css", "label": "CSS", "x": 200, "y": 50 },
+    { "id": "js", "label": "JavaScript", "x": 300, "y": 50 },
+    { "id": "nodejs", "label": "Node.js", "x": 500, "y": 50 },
+    { "id": "database", "label": "Database", "x": 700, "y": 50 }
+  ],
+  "relationships": [
+    { "parent": "root", "child": "frontend" },
+    { "parent": "root", "child": "backend" },
+    { "parent": "frontend", "child": "html" },
+    { "parent": "frontend", "child": "css" },
+    { "parent": "frontend", "child": "js" },
+    { "parent": "backend", "child": "nodejs" },
+    { "parent": "backend", "child": "database" }
+  ]
+}

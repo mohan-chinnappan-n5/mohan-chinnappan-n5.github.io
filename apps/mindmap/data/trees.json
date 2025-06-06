@@ -1,0 +1,50 @@
+{
+  "nodes": [
+    { "id": "root", "label": "Trees", "x": 400, "y": 80 },
+
+    { "id": "deciduous", "label": "Deciduous", "x": 150, "y": 200, "branchColor": "#f093fb" },
+    { "id": "coniferous", "label": "Coniferous", "x": 400, "y": 200, "branchColor": "#2ecc71" },
+    { "id": "tropical", "label": "Tropical", "x": 650, "y": 200, "branchColor": "#f39c12" },
+
+    { "id": "oak", "label": "Oak", "x": 50, "y": 320, "branchColor": "#f093fb" },
+    { "id": "maple", "label": "Maple", "x": 150, "y": 320, "branchColor": "#f093fb" },
+    { "id": "birch", "label": "Birch", "x": 250, "y": 320, "branchColor": "#f093fb" },
+    { "id": "elm", "label": "Elm", "x": 100, "y": 400, "branchColor": "#f093fb" },
+    { "id": "beech", "label": "Beech", "x": 200, "y": 400, "branchColor": "#f093fb" },
+
+    { "id": "pine", "label": "Pine", "x": 300, "y": 320, "branchColor": "#2ecc71" },
+    { "id": "fir", "label": "Fir", "x": 400, "y": 320, "branchColor": "#2ecc71" },
+    { "id": "spruce", "label": "Spruce", "x": 500, "y": 320, "branchColor": "#2ecc71" },
+    { "id": "cedar", "label": "Cedar", "x": 350, "y": 400, "branchColor": "#2ecc71" },
+    { "id": "cypress", "label": "Cypress", "x": 450, "y": 400, "branchColor": "#2ecc71" },
+
+    { "id": "mango", "label": "Mango", "x": 600, "y": 320, "branchColor": "#f39c12" },
+    { "id": "banana", "label": "Banana", "x": 700, "y": 320, "branchColor": "#f39c12" },
+    { "id": "coconut", "label": "Coconut", "x": 800, "y": 320, "branchColor": "#f39c12" },
+    { "id": "papaya", "label": "Papaya", "x": 650, "y": 400, "branchColor": "#f39c12" },
+    { "id": "breadfruit", "label": "Breadfruit", "x": 750, "y": 400, "branchColor": "#f39c12" }
+  ],
+  "relationships": [
+    { "parent": "Trees", "child": "Deciduous" },
+    { "parent": "Trees", "child": "Coniferous" },
+    { "parent": "Trees", "child": "Tropical" },
+
+    { "parent": "Deciduous", "child": "Oak" },
+    { "parent": "Deciduous", "child": "Maple" },
+    { "parent": "Deciduous", "child": "Birch" },
+    { "parent": "Deciduous", "child": "Elm" },
+    { "parent": "Deciduous", "child": "Beech" },
+
+    { "parent": "Coniferous", "child": "Pine" },
+    { "parent": "Coniferous", "child": "Fir" },
+    { "parent": "Coniferous", "child": "Spruce" },
+    { "parent": "Coniferous", "child": "Cedar" },
+    { "parent": "Coniferous", "child": "Cypress" },
+
+    { "parent": "Tropical", "child": "Mango" },
+    { "parent": "Tropical", "child": "Banana" },
+    { "parent": "Tropical", "child": "Coconut" },
+    { "parent": "Tropical", "child": "Papaya" },
+    { "parent": "Tropical", "child": "Breadfruit" }
+  ]
+}
