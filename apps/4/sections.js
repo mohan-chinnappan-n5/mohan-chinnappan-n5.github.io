@@ -3,6 +3,8 @@
       title: 'Books, Blogs and Notes',
       links: [
         { text: 'Salesforce Development Notes', href: '../../sfbooks/sfdevnotes/index.html', icon: 'book' },
+        { text: 'Salesforce Development Best Practices', href: 'https://mchinnappan100.github.io/pages2/bp/dev_bp.html', icon: 'book' },
+
         { text: 'Web Performance Notes', href: '../../books/web-perf/performance-api.html', icon: 'book' },
         { text: 'Salesforce Edge Notes', href: 'https://mohan-chinnappan-n2.github.io/2020/network/edge/edge.html', icon: 'book' },
         { text: 'Lightning Performance Notes', href: 'https://mohan-chinnappan-n2.github.io/2019/lex/perf.html', icon: 'book' },
@@ -201,7 +203,8 @@
         { text: 'Clock', href: '../..//utils/clock/clockapp.html', icon: 'desktop' },
         { text: 'World Clock', href: '../../games/clock/wclock.html', icon: 'desktop' },
 	{ text: 'Flight Tracker', href: '../../flights/tracking/ftrack.html', icon: 'desktop' },
-        { text: 'Calendar', href: '../..//utils/cal/cal.html', icon: 'desktop' },
+        { text: 'Calendar App', href: '../..//utils/cal/cal.html', icon: 'desktop' },
+        { text: 'Calendar App 2', href: 'https://mchinnappan100.github.io/pages2/cal/cal.html', icon: 'desktop' },
   
         { text: 'Scientific Calculator', href: '../../calc/c.html', icon: 'desktop' },
 
@@ -212,21 +215,16 @@
         { text: 'Iframes viewer', href: '../../frames/iframes.html?data=frames.json', icon: 'desktop' },
         { text: 'Weather App', href: '../../weather/weatherApp.html?c=Nashua NH', icon: 'desktop' },
         { text: 'Weather App 2', href: '../../weather/2/weather.html?c=Nashua,NH,US', icon: 'desktop' },
+       { text: 'Weather App 3', href: 'https://mchinnappan100.github.io/pages2/bp/apps/weather.html', icon: 'desktop' },
 
 	{ text: 'Daily Book Balancing', href: '../../book-keeping/book-keeping.html', icon: 'desktop' },
 	{ text: 'github Url convertor', href: '../../github/urlc.html', icon: 'desktop' },
 	{ text: 'Address Manager', href: '../../farms/address.html', icon: 'desktop' },
+  { text: 'MC Notes (like macOS Notes)', href: 'https://mchinnappan100.github.io/pages2/apps/notes/mcnotes.html', icon: 'desktop' },
+ { text: 'Staff Perf Eval App', href: 'https://mchinnappan100.github.io/pages2/apps/perf/perf.html', icon: 'desktop' },
+ 
 
-
-
-
-
-
-
-
-
-
-
+  
 
 
 
@@ -260,6 +258,9 @@
         { text: 'Salesforce Environment Editor - Kovai', href: 'https://mohanc.streamlit.app/', icon: 'desktop' },
         { text: 'Pipeline YAML Generator', href: '../../yaml-gen/index.html', icon: 'desktop' },
         { text: 'Package Generator for SourceMember', href: 'https://mohanpkg.streamlit.app', icon: 'desktop' },
+        
+        { text: 'Package Generator CLI', href: 'https://mchinnappan100.github.io/pages2/pkg-gen/pkg-gen.html', icon: 'desktop' },
+
 
         { text: 'REST API Data Fetcher', href: 'https://mohanrest.streamlit.app', icon: 'desktop' },
         { text: 'SF RESTY', href: 'https://mcresty.streamlit.app/', icon: 'desktop' },
@@ -279,6 +280,8 @@
         { text: 'Profile/Permset Editor  ', href: 'https://mchinnappan100.github.io//pages2/permsets/2/editor.html', icon: 'desktop' },
 
         { text: 'Code Scanner with PMD', href: 'https://mchinnappan100.github.io/pages2/code-scanners/scanner.html', icon: 'desktop' },
+        { text: 'git sizer', href: 'https://mchinnappan100.github.io/pages2/apps/git-tools/sizer/sizer.html', icon: 'desktop' },
+
 
 
 
@@ -331,6 +334,15 @@
       ],
     },
 
+     SSO: {
+      title: 'SSO Docs',
+      links: [
+        { text: 'OIDC with Google', href: 'https://mchinnappan100.github.io/pages2/oidc/google/google.html', icon: 'desktop' },
+        { text: 'OIDC with Okta', href: 'https://mchinnappan100.github.io/pages2/oidc/okta/okta.html', icon: 'desktop' },
+        // Add more links here
+      ],
+    },
+
     CRMAApps: {
       title: 'CRMA Apps',
       links: [
@@ -349,6 +361,15 @@
       ],
 
     },
+
+      ModelContextProtocol: {
+      title: 'ModelContextProtocol (MCP)',
+      links: [
+        { text: 'MCP docs', href: 'https://mchinnappan100.github.io/pages2/mcp/server.html', icon: 'desktop' },
+        // Add more links here
+      ],
+
+    },
       DiagramApps: {
       title: 'Diagram Apps',
       links: [
@@ -363,6 +384,10 @@
 
        { text: 'SVG2PNG', href: '../../image/svg2png/svg2png.html', icon: 'desktop' },
        { text: 'Mermaid Editor', href: '../../graphs/mmd.html', icon: 'desktop' },
+       { text: 'MC Diagram  Editor', href: 'https://mchinnappan100.github.io/pages2/apps/dig/dig.html', icon: 'desktop' },
+
+        { text: 'Mind Map App', href: 'https://mchinnappan100.github.io/pages2/apps/mindmap/mindmap2.html', icon: 'desktop' },
+
         
 
         // Add more links here
