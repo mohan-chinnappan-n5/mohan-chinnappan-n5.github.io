@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamil Alphabet Learning</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://mohan-chinnappan-n5.github.io/dfv/img/mc_favIcon.ico">
+
+  <style>
+    .sticky-header { @apply sticky top-0 z-50 bg-white shadow-md; }
+    .sticky-footer { @apply sticky bottom-0 z-50 bg-white shadow-md; }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Header -->
+  <header class="sticky-header p-4 text-center text-3xl font-bold text-red-700">
+    தமிழ் எழுத்துக்கள் (Tamil Letters)
+  </header>
+
+  <!-- Tabs -->
+  <div class="flex justify-center mt-4 space-x-4">
+    <button onclick="showTab('uyir')" class="bg-blue-500 text-white px-4 py-2 rounded">உயிர் எழுத்துக்கள்</button>
+    <button onclick="showTab('mei')" class="bg-green-500 text-white px-4 py-2 rounded">மெய் எழுத்துக்கள்</button>
+    <button onclick="showTab('uyirmei')" class="bg-purple-500 text-white px-4 py-2 rounded">உயிர்மெய் எழுத்துக்கள்</button>
+    <button onclick="showTab('numbers')" class="bg-yellow-500 text-white px-4 py-2 rounded">எண்கள்</button>
+  </div>
+
+  <!-- Content Tabs -->
+  <main class="p-6">
+    <!-- Uyir Letters -->
+    <section id="uyir" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"></section>
+
+    <!-- Mei Letters -->
+    <section id="mei" class="hidden grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"></section>
+
+    <!-- Uyirmei Letters -->
+    <section id="uyirmei" class="hidden grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"></section>
+
+    <!-- Tamil Numbers -->
+    <section id="numbers" class="hidden grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"></section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="sticky-footer p-4 text-center text-gray-600">
+  MC Tamil Learning App
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+  const uyirLetters = [
+    { letter: "அ", word: "அம்சம்", img: "📘" },
+    { letter: "ஆ", word: "ஆடு", img: "🐐" },
+    { letter: "இ", word: "இலை", img: "🍃" },
+    { letter: "ஈ", word: "ஈச்சம்", img: "🌴" },
+    { letter: "உ", word: "உரை", img: "📄" },
+    { letter: "ஊ", word: "ஊர்", img: "🏡" },
+    { letter: "எ", word: "எலி", img: "🐭" },
+    { letter: "ஏ", word: "ஏணி", img: "🪜" },
+    { letter: "ஐ", word: "ஐந்து", img: "5️⃣" },
+    { letter: "ஒ", word: "ஒட்டகம்", img: "🐫" },
+    { letter: "ஓ", word: "ஓரம்", img: "🌊" },
+    { letter: "ஔ", word: "ஔடதம்", img: "💊" }
+  ];
+
+  const meiLetters = [
+    { letter: "க", word: "கல்", img: "🪨" },
+    { letter: "ங", word: "ஙனா", img: "👶" },
+    { letter: "ச", word: "சங்கு", img: "🐚" },
+    { letter: "ஞ", word: "ஞாயிறு", img: "☀️" },
+    { letter: "ட", word: "டமாரம்", img: "🥁" },
+    { letter: "ண", word: "ணாளம்", img: "📅" },
+    { letter: "த", word: "தடி", img: "🪵" },
+    { letter: "ந", word: "நரி", img: "🦊" },
+    { letter: "ப", word: "பல்", img: "🦷" },
+    { letter: "ம", word: "மழை", img: "🌧️" },
+    { letter: "ய", word: "யானை", img: "🐘" },
+    { letter: "ர", word: "ரதம்", img: "🚗" },
+    { letter: "ல", word: "லீலை", img: "🎭" },
+    { letter: "வ", word: "வாணம்", img: "🌌" },
+    { letter: "ழ", word: "ழக்கம்", img: "📜" },
+    { letter: "ள", word: "ளசை", img: "🎨" },
+    { letter: "ற", word: "றை", img: "🛏️" },
+    { letter: "ன", word: "னவன்", img: "👦" }
+  ];
+
+  const uyirmeiLetters = [
+    { letter: "கா", word: "காக்கா", img: "🐦" },
+    { letter: "சி", word: "சிங்கம்", img: "🦁" },
+    { letter: "நு", word: "நுரை", img: "🫧" },
+    { letter: "பே", word: "பேருந்து", img: "🚌" },
+    { letter: "மி", word: "மின்வண்டி", img: "🚋" },
+    { letter: "லா", word: "லாடம்", img: "🎠" }
+  ];
+
+  const tamilNumbers = [
+    { number: "௦", word: "பூஜ்யம்", img: "0️⃣" },
+    { number: "௧", word: "ஒன்று", img: "1️⃣" },
+    { number: "௨", word: "இரண்டு", img: "2️⃣" },
+    { number: "௩", word: "மூன்று", img: "3️⃣" },
+    { number: "௪", word: "நான்கு", img: "4️⃣" },
+    { number: "௫", word: "ஐந்து", img: "5️⃣" },
+    { number: "௬", word: "ஆறு", img: "6️⃣" },
+    { number: "௭", word: "ஏழு", img: "7️⃣" },
+    { number: "௮", word: "எட்டு", img: "8️⃣" },
+    { number: "௯", word: "ஒன்பது", img: "9️⃣" },
+    { number: "௰", word: "பத்து", img: "🔟" },
+    { number: "௱", word: "நூறு", img: "💯" },
+    { number: "௲", word: "ஆயிரம்", img: "1️⃣0️⃣0️⃣0️⃣" } // Changed to show 1000
+  ];
+
+  const uyirContainer = document.getElementById('uyir');
+  const meiContainer = document.getElementById('mei');
+  const uyirmeiContainer = document.getElementById('uyirmei');
+  const numbersContainer = document.getElementById('numbers');
+
+  function speak(text) {
+    window.speechSynthesis.cancel(); // Stop any ongoing speech
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ta-IN';
+
+    // Fallback: If ta-IN is not available, use default
+    const voices = window.speechSynthesis.getVoices();
+    const tamilVoice = voices.find(v => v.lang === 'ta-IN');
+    if (tamilVoice) {
+      utterance.voice = tamilVoice;
+    }
+
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function createAudioButton(text) {
+    const btn = document.createElement('button');
+    btn.className = "ml-2 text-xl text-blue-600 hover:text-blue-900 align-middle";
+    btn.title = "உச்சரிப்பு கேளுங்கள் / Listen Pronunciation";
+    btn.innerHTML = "🔊";
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      speak(text);
+    };
+    return btn;
+  }
+
+  function showTab(tabId) {
+    uyirContainer.classList.add('hidden');
+    meiContainer.classList.add('hidden');
+    uyirmeiContainer.classList.add('hidden');
+    numbersContainer.classList.add('hidden');
+    document.getElementById(tabId).classList.remove('hidden');
+  }
+
+  function createCard(letter, word, img) {
+    const div = document.createElement('div');
+    div.className = "bg-white rounded-xl shadow-lg p-6 text-center text-6xl cursor-pointer hover:bg-blue-50";
+    div.innerHTML = `
+      <div>${letter}</div>
+      <div class="text-2xl mt-2 text-gray-700">${word}</div>
+      <div class="text-4xl mt-2">${img}</div>
+    `;
+    div.onclick = () => speak(letter + ' ' + word);
+
+    // Add audio button for letter
+    const letterDiv = div.querySelector('div');
+    letterDiv.appendChild(createAudioButton(letter));
+
+    // Add audio button for word
+    const wordDiv = div.querySelectorAll('div')[1];
+    wordDiv.appendChild(createAudioButton(word));
+
+    return div;
+  }
+
+  function createNumberCard(number, word, img) {
+    const div = document.createElement('div');
+    div.className = "bg-white rounded-xl shadow-lg p-6 text-center text-6xl cursor-pointer hover:bg-yellow-50";
+    div.innerHTML = `
+      <div>${number}</div>
+      <div class="text-2xl mt-2 text-gray-700">${word}</div>
+      <div class="text-4xl mt-2">${img}</div>
+    `;
+    div.onclick = () => speak(number + ' ' + word);
+
+    // Add audio button for number
+    const numberDiv = div.querySelector('div');
+    numberDiv.appendChild(createAudioButton(number));
+
+    // Add audio button for word
+    const wordDiv = div.querySelectorAll('div')[1];
+    wordDiv.appendChild(createAudioButton(word));
+
+    return div;
+  }
+
+  uyirLetters.forEach(item => uyirContainer.appendChild(createCard(item.letter, item.word, item.img)));
+  meiLetters.forEach(item => meiContainer.appendChild(createCard(item.letter, item.word, item.img)));
+  uyirmeiLetters.forEach(item => uyirmeiContainer.appendChild(createCard(item.letter, item.word, item.img)));
+  tamilNumbers.forEach(item => numbersContainer.appendChild(createNumberCard(item.number, item.word, item.img)));
+  </script>
+</body>
+</html>
