@@ -82,6 +82,15 @@
       ],
     },
 
+    Langs: {
+      title: 'Human  Languages',
+      links: [
+        { text: 'Learning Tamil Letters', href: '../../langs/tamil/tamil.html', icon: 'desktop' },
+      ],
+    },
+
+
+
     DataApps: {
       title: 'Data Apps',
       links: [
@@ -784,6 +793,7 @@ Slideshow: {
       links: [
         { text: 'AI generated Images', href: '../../slideshow/ss.html?data=holiday.json', icon: 'desktop' },
         { text: 'Slides Presenter', href: '../../slides/2/slides.html?s=slides.md', icon: 'desktop' },
+        { text: 'Slides App', href: 'https://mchinnappan100.github.io/pages2/apps/slides/slides.html', icon: 'desktop' },
  
         // Add more links here
       ],
