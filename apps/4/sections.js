@@ -323,6 +323,9 @@
         { text: 'EPT Report Tool', href: 'https://mchinnappan100.github.io/pages2/ept/ept-report.html', icon: 'desktop' },
 
         { text: 'Traceroute in go lang', href: '../../go/traceroute.html', icon: 'desktop' },
+        { text: 'Whitepaper on Traceroute', href: 'https://mchinnappan100.github.io/pages2/network/traceroute.html', icon: 'desktop' },
+        { text: 'Whitepaper on Network Router', href: 'https://mchinnappan100.github.io/pages2/network/nw.html', icon: 'desktop' },
+
 
 
 
@@ -343,6 +346,17 @@
       ],
     },
 
+    Clouds: {
+      title: 'Salesforce Clouds',
+      links: [
+        { text: 'Communication Cloud', href: 'https://mchinnappan100.github.io/pages2/clouds/comms/comms.html', icon: 'desktop' },
+        { text: 'Notes on Communication Cloud', href: 'https://github.com/mchinnappan100/communications-cloud/blob/main/commcloud.md', icon: 'desktop' },
+        { text: 'Revenue Cloud', href: 'https://mchinnappan100.github.io/pages2/clouds/revenue/revenue.html', icon: 'desktop' },
+        // Add more links here
+      ],
+    },
+
+
      SSO: {
       title: 'SSO Docs',
       links: [
@@ -351,6 +365,19 @@
         // Add more links here
       ],
     },
+
+     PM: {
+      title: 'Project Management',
+      links: [
+        { text: 'Maple Project Management Suite', href: 'https://mchinnappan100.github.io/pages2/pm/4/pm.html', icon: 'desktop' },
+        { text: 'Workflow Editor', href: 'https://mchinnappan100.github.io/pages2/pm/4/wfe.html', icon: 'desktop' },
+        { text: 'Whitepaper on Agile', href: 'https://mchinnappan100.github.io/pages2/agile/agile.html', icon: 'desktop' },
+
+
+        // Add more links here
+      ],
+    },
+
 
     CRMAApps: {
       title: 'CRMA Apps',
@@ -384,6 +411,7 @@
       links: [
         { text: 'SVG Editor', href: '../../svg/edit.html?u=https://raw.githubusercontent.com/mohan-chinnappan-n/project-docs/main/svg/simple.svg', icon: 'desktop' },
         { text: 'SVG Editor V2', href: '../../svg/edit2.html', icon: 'desktop' },
+        { text: 'SVG Editor V3', href: 'https://mchinnappan100.github.io/pages2/apps/svg/svg.html', icon: 'desktop' },
  
         { text: 'UML Seq Diagram', href: 'https://mohan-chinnappan-n2.github.io/2019/viz/seq/seq.html', icon: 'desktop' },
         { text: 'Diagram Editor Playground', href: '../../2021/dwg/pg/dwg.html#', icon: 'desktop' },
@@ -425,6 +453,19 @@
       links: [
         { text: 'Salesforce GraphQL Client', href: '../../graphql/index.html', icon: 'desktop' },
         { text: 'Salesforce GraphQL Client-2', href: 'https://mcgraphql.streamlit.app', icon: 'desktop' },
+ 
+        // Add more links here
+      ],
+
+    },
+
+
+    PSTools: {
+      title: 'Permset and PSG Apps',
+      links: [
+        { text: 'PSG tool', href: 'https://mchinnappan100.github.io/pages2/sf-utils/psg/psg-tools.html', icon: 'desktop' },
+        { text: 'Permset Assign tool', href: 'https://mchinnappan100.github.io/pages2/sf-utils/ps/ps_assign.html', icon: 'desktop' },
+        { text: 'Permset Creation tool', href: 'https://mchinnappan100.github.io/pages2/sf-utils/ps/create_and_apply_permset.html', icon: 'desktop' },
  
         // Add more links here
       ],
