@@ -145,6 +145,9 @@
         { text: 'Spreadsheet', href: '../../sql/2/spreadsheet.html', icon: 'desktop' },
  
         { text: 'SQL Query for XLSX', href: '../../sql/xlsx/xlsx.html', icon: 'desktop' },
+        { text: 'Maple Spreadsheet Pro', href: 'https://mchinnappan100.github.io/pages2/spreadsheet/sh.html', icon: 'desktop' },
+
+
         { text: 'PostgreSQL SQL Editor', href: '../../chrome-extensions/psql.html', icon: 'desktop' },
         { text: 'ask_llm for PostgreSQL', href: '../../psql/llm/ask_llm_setup_macos.html', icon: 'desktop' },
  
@@ -416,6 +419,9 @@
         { text: 'UML Seq Diagram', href: 'https://mohan-chinnappan-n2.github.io/2019/viz/seq/seq.html', icon: 'desktop' },
         { text: 'Diagram Editor Playground', href: '../../2021/dwg/pg/dwg.html#', icon: 'desktop' },
         { text: 'Draw Tool', href: '../../draw/excalidraw/index.html', icon: 'desktop' },
+        { text: 'MC Whiteborad', href: 'https://mchinnappan100.github.io/pages2/apps/wb/2/wb2.html', icon: 'desktop' },
+
+
         { text: 'DrawIO', href: 'https://mohan-chinnappan-n.github.io/drawio/src/main/webapp/index.html', icon: 'desktop' },
         { text: 'GraphViz', href: 'https://mohan-chinnappan-n.github.io/viz/viz.html', icon: 'desktop' },
 
