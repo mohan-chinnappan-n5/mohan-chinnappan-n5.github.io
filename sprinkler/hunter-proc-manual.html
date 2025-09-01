@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hunter Pro‑C — Complete User Manual (Turn Off Program B)</title>
+  <style>
+    /* Minimal, readable styling suitable for printing */
+    :root{--brand:#146eb4;--accent:#34a853;--muted:#6b7280}
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial;line-height:1.5;color:#111}
+    .wrap{max-width:980px;margin:28px auto;padding:24px}
+    header{display:flex;align-items:center;gap:16px}
+    .logo{width:64px;height:64px;border-radius:8px;background:linear-gradient(180deg,var(--brand),#60a5fa);box-shadow:0 6px 18px rgba(16,24,40,.06)}
+    h1{margin:0;font-size:28px}
+    .meta{color:var(--muted);margin-top:6px}
+    nav{margin-top:18px;margin-bottom:18px}
+    nav a{display:inline-block;margin-right:12px;color:var(--brand);text-decoration:none}
+    section{margin-top:18px}
+    h2{font-size:20px;margin-bottom:8px}
+    h3{font-size:16px;margin-bottom:6px}
+    ul{margin-top:6px}
+    .card{border:1px solid #e6eef7;padding:16px;border-radius:10px;background:#fbfdff}
+    .kbd{display:inline-block;padding:4px 8px;border-radius:6px;border:1px solid #dbeafe;background:#eef8ff;font-weight:600}
+    table{width:100%;border-collapse:collapse;margin-top:10px}
+    th,td{padding:8px;border:1px solid #eef2f7;text-align:left}
+    footer{color:var(--muted);margin-top:28px;font-size:13px}
+    .toc{background:#fff; padding:12px;border-radius:8px;border:1px solid #eef2f7}
+    .warn{background:#fff4e5;border-left:4px solid #f59e0b;padding:10px;border-radius:6px}
+    pre{background:#0b1220;color:#e6f0ff;padding:12px;border-radius:6px;overflow:auto}
+    @media print{body{color:#000} .logo{display:none}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>Hunter Pro‑C — Complete User Manual</h1>
+        <div class="meta">Purpose: How to stop, disable, and fully manage <strong>Program B</strong> on the Pro‑C controller. Includes wiring notes, troubleshooting, and examples.</div>
+      </div>
+    </header>
+
+    <nav class="toc card">
+      <strong>Table of contents</strong>
+      <ol>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#safety">Safety & Precautions</a></li>
+        <li><a href="#panel">Controller Panel & Controls</a></li>
+        <li><a href="#quick">Quick Start — 60‑second method</a></li>
+        <li><a href="#methods">Complete Methods to Disable Program B</a>
+          <ol>
+            <li><a href="#method1">Method 1 — Clear Start Times (Recommended)</a></li>
+            <li><a href="#method2">Method 2 — Disable Water Days</a></li>
+            <li><a href="#method3">Method 3 — Reset Program B</a></li>
+            <li><a href="#method4">Method 4 — Advanced: Use Sensor or Master Valve Settings</a></li>
+          </ol>
+        </li>
+        <li><a href="#examples">Practical Examples</a></li>
+        <li><a href="#wiring">Wiring, Zones & Fuses</a></li>
+        <li><a href="#maintenance">Maintenance & Battery</a></li>
+        <li><a href="#troubleshoot">Troubleshooting</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#ref">Reference Cheat‑Sheets</a></li>
+      </ol>
+    </nav>
+
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>The Hunter Pro‑C is a reliable modular irrigation controller used for residential and commercial systems. It supports multiple programs (A, B, C), each with independent start times, run times, and watering days. This manual focuses on safely turning off Program B without affecting Program A or C.</p>
+    </section>
+
+    <section id="safety">
+      <h2>Safety & Precautions</h2>
+      <ul>
+        <li>Always turn the dial to <span class="kbd">Run</span> or remove power before handling wiring.</li>
+        <li>Do not perform electrical wiring unless you are comfortable with low-voltage (24 VAC) systems. If unsure, contact a licensed irrigation technician or electrician.</li>
+        <li>Factory resets will erase all programs. Use them only if intended.</li>
+      </ul>
+    </section>
+
+    <section id="panel">
+      <h2>Controller Panel & Controls</h2>
+      <p><strong>Common buttons and dial positions:</strong></p>
+      <ul>
+        <li><span class="kbd">PRG</span> — Cycle Program A → B → C</li>
+        <li><span class="kbd">Start Times</span> (dial) — Set program start times</li>
+        <li><span class="kbd">Water Days</span> (dial) — Select watering days</li>
+        <li><span class="kbd">Run</span> — Normal operating position</li>
+        <li><span class="kbd">+</span>/<span class="kbd">–</span> — Increase / decrease values</li>
+        <li>Station zone selection and run time settings (usually labeled <em>Run Time</em> or <em>Station</em>)</li>
+      </ul>
+
+      <p class="card"><strong>Tip:</strong> The display shows which program letter (A/B/C) is active. Always confirm you are on Program B before changing settings.</p>
+    </section>
+
+    <section id="quick">
+      <h2>Quick Start — 60‑second method</h2>
+      <div class="card">
+        <ol>
+          <li>Turn the dial to <span class="kbd">Start Times</span>.</li>
+          <li>Press <span class="kbd">PRG</span> until the display shows <strong>B</strong>.</li>
+          <li>Use <span class="kbd">–</span> to change each start time to <strong>OFF</strong> (repeat for all start slots).</li>
+          <li>Return dial to <span class="kbd">Run</span>. Program B will not run.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="methods">
+      <h2>Complete Methods to Disable Program B</h2>
+
+      <h3 id="method1">Method 1 — Clear Start Times (Recommended)</h3>
+      <ol>
+        <li>Turn dial to <span class="kbd">Start Times</span>.</li>
+        <li>Press <span class="kbd">PRG</span> until <strong>B</strong> is displayed.</li>
+        <li>For each start slot (1–4): select the start time and press <span class="kbd">–</span> until the display shows <strong>OFF</strong>.</li>
+        <li>Verify all start times read <strong>OFF</strong>.</li>
+        <li>Return dial to <span class="kbd">Run</span>. Confirm no scheduled runs from Program B occur.</li>
+      </ol>
+      <p class="card"><strong>Why recommended:</strong> With no start times, the program cannot trigger, regardless of station run times or day settings.</p>
+
+      <h3 id="method2">Method 2 — Disable Water Days</h3>
+      <ol>
+        <li>Turn dial to <span class="kbd">Water Days</span>.</li>
+        <li>Press <span class="kbd">PRG</span> until <strong>B</strong> is displayed.</li>
+        <li>Use <span class="kbd">+</span>/<span class="kbd">–</span> to deselect every day (so no days are highlighted).</li>
+        <li>Return dial to <span class="kbd">Run</span>.</li>
+      </ol>
+      <p class="warn">Caveat: If someone later re-enables a day but start times remain, Program B can run again. Combine with Method 1 for safety.</p>
+
+      <h3 id="method3">Method 3 — Reset/Erase Program B</h3>
+      <ol>
+        <li>Press and hold <span class="kbd">PRG</span> while the controller shows Program B — some revisions clear values for that program.</li>
+        <li>Check both <span class="kbd">Start Times</span> and <span class="kbd">Water Days</span> to ensure they are cleared.</li>
+      </ol>
+      <p class="warn">Do not perform a full factory reset of the controller unless you intend to erase all programs (A, B, and C).</p>
+
+      <h3 id="method4">Method 4 — Advanced: Use Sensor / Master Valve Settings</h3>
+      <p>As an advanced override, you can assign a rain sensor or master valve to disable a program. This is useful for temporary pauses (like contractor work):</p>
+      <ol>
+        <li>Identify the controller menu for <em>Sensor</em> or <em>Master Valve</em>.</li>
+        <li>Set the controller to require sensor to be active for Program B (depends on firmware).</li>
+        <li>Activate the sensor (or set it to "triggered") to temporarily prevent Program B from running.</li>
+      </ol>
+      <p class="card">Note: Menu names vary; consult the model-specific manual if your Pro‑C firmware differs.</p>
+    </section>
+
+    <section id="examples">
+      <h2>Practical Examples & Use Cases</h2>
+      <h3>Example 1 — I only want Program A to run</h3>
+      <ol>
+        <li>Clear all start times in Program B and C (Method 1).</li>
+        <li>Confirm Program A has the desired start time(s) and run times per station.</li>
+      </ol>
+
+      <h3>Example 2 — Seasonal Pause for Program B (e.g., Winter)</h3>
+      <ol>
+        <li>Set all water days for Program B to <strong>OFF</strong> (Method 2).</li>
+        <li>Optionally annotate the controller with a sticker noting the pause start/end dates.</li>
+      </ol>
+
+      <h3>Example 3 — Temporary contractor pause</h3>
+      <ol>
+        <li>Use a physical jumper on the sensor terminals or set sensor to triggered to stop all programs, or clear B start times for a targeted pause.</li>
+      </ol>
+    </section>
+
+    <section id="wiring">
+      <h2>Wiring, Zones & Fuses</h2>
+      <p>The Pro‑C uses low‑voltage 24 VAC from a transformer to power valves. Typical terminal layout:</p>
+      <table>
+        <thead>
+          <tr><th>Terminal</th><th>Function</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>24VAC / TRANS</td><td>Transformer input (24 VAC)</td></tr>
+          <tr><td>COM</td><td>Common for valve solenoids</td></tr>
+          <tr><td>1,2,3... (station terminals)</td><td>Valve outputs for irrigation zones</td></tr>
+          <tr><td>MV / Pump</td><td>Master valve or pump start relay</td></tr>
+          <tr><td>Sensor</td><td>Rain sensor input (optional)</td></tr>
+        </tbody>
+      </table>
+
+      <p><strong>Wiring tips:</strong></p>
+      <ul>
+        <li>Turn off power to the transformer before connecting or disconnecting valve wires.</li>
+        <li>Label wires at both ends for easier identification.</li>
+        <li>Use watertight connectors inside valve boxes for outdoor terminals.</li>
+      </ul>
+    </section>
+
+    <section id="maintenance">
+      <h2>Maintenance & Battery</h2>
+      <ul>
+        <li>Many Pro‑C units have a battery/back‑up for timekeeping. Replace batteries yearly to avoid schedule loss during power outages.</li>
+        <li>Inspect wiring and terminal screws annually for corrosion.</li>
+        <li>Clean controller enclosure to avoid dirt and moisture buildup.</li>
+      </ul>
+    </section>
+
+    <section id="troubleshoot">
+      <h2>Troubleshooting</h2>
+      <h3>Problem: Program B still runs after I cleared start times</h3>
+      <ul>
+        <li>Check Program A and C — they may also have start times that run the same zones.</li>
+        <li>Verify you actually saved the <span class="kbd">OFF</span> value for each start slot (some revisions require pressing another button to confirm).</li>
+        <li>Confirm the dial is in <span class="kbd">Run</span> and not in a manual watering mode.</li>
+      </ul>
+
+      <h3>Problem: Zones run unexpectedly</h3>
+      <ul>
+        <li>Check if a manual start (rain sensor override) is active.</li>
+        <li>Confirm that wiring for zone valves is correct and that no external relay is activating them.</li>
+      </ul>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <h3>Can I permanently delete Program B?</h3>
+      <p>You cannot remove the B program slot, but you can clear its values so it does nothing. Keep documentation (sticker) on the controller to remind others.</p>
+
+      <h3>Will clearing Program B affect Program A?</h3>
+      <p>No — programs are independent. Clearing B has no effect on A or C.</p>
+
+      <h3>How do I backup my controller settings?</h3>
+      <p>Older Pro‑C models don’t support digital backups. Document settings manually: program start times, run times per station, and watering days. Some smart controllers paired with apps allow cloud backups (not applicable to standalone Pro‑C without module).</p>
+    </section>
+
+    <section id="ref">
+      <h2>Reference Cheat‑Sheets</h2>
+      <details>
+        <summary>Clear all Program B start times — quick cheat</summary>
+        <ol>
+          <li>Dial → <span class="kbd">Start Times</span></li>
+          <li><span class="kbd">PRG</span> → B</li>
+          <li>Set Start 1–4 → <strong>OFF</strong></li>
+          <li>Dial → <span class="kbd">Run</span></li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>Disable Program B watering days</summary>
+        <ol>
+          <li>Dial → <span class="kbd">Water Days</span></li>
+          <li><span class="kbd">PRG</span> → B</li>
+          <li>Turn off every day</li>
+          <li>Dial → <span class="kbd">Run</span></li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>Reset Program B</summary>
+        <ol>
+          <li>On Program B: press-and-hold <span class="kbd">PRG</span> (model dependent)</li>
+          <li>Verify values are cleared</li>
+        </ol>
+      </details>
+    </section>
+
+    <footer>
+      <p>Last updated: <time datetime="2025-09-01">September 1, 2025</time>. This manual is an independent guide and is not endorsed by Hunter Industries. For model‑specific diagrams or firmware differences, consult the official Hunter Pro‑C installation manual.</p>
+    </footer>
+  </div>
+</body>
+</html>

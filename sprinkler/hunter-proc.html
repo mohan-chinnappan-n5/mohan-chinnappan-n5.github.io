@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hunter Pro‑C — Turn Off Program B (Quick Manual)</title>
+  <style>
+    :root{
+      --bg:#0f172a; /* slate-900 */
+      --panel:#111827; /* gray-900 */
+      --muted:#94a3b8; /* slate-400 */
+      --text:#e5e7eb; /* gray-200 */
+      --brand:#60a5fa; /* blue-400 */
+      --accent:#34d399; /* emerald-400 */
+      --warn:#f59e0b; /* amber-500 */
+      --danger:#f87171; /* red-400 */
+      --ring: rgba(96,165,250,.35);
+    }
+    html,body{height:100%}
+    body{
+      margin:0; font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% -10%, #1f2937 0%, transparent 60%),
+                  radial-gradient(1000px 500px at 120% 10%, #1e293b 0%, transparent 60%),
+                  var(--bg);
+      color:var(--text);
+    }
+    .container{max-width:980px;margin:0 auto;padding:24px}
+    header{
+      position:sticky;top:0;backdrop-filter: blur(8px);
+      background: linear-gradient(180deg, rgba(15,23,42,.95), rgba(15,23,42,.7));
+      border-bottom:1px solid rgba(148,163,184,.15);
+      z-index: 5;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--brand),#7dd3fc);box-shadow:0 6px 18px rgba(96,165,250,.35)}
+    h1{font-size: clamp(1.4rem, 1.1rem + 1.4vw, 2.2rem);margin:0}
+    .subtitle{color:var(--muted);margin-top:4px}
+    nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    nav a{color:var(--text);text-decoration:none;padding:8px 12px;border:1px solid rgba(148,163,184,.2);border-radius:10px}
+    nav a:hover{border-color: var(--brand);box-shadow:0 0 0 3px var(--ring)}
+
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:center;margin:24px 0}
+    .card{background:linear-gradient(180deg, rgba(17,24,39,.9), rgba(15,23,42,.95));
+      border:1px solid rgba(148,163,184,.15);border-radius:16px;padding:20px;box-shadow:0 12px 40px rgba(2,6,23,.4)}
+    .callout{border-left:4px solid var(--accent);padding-left:16px}
+
+    h2{margin-top:28px;font-size: clamp(1.2rem, 1rem + .8vw, 1.7rem)}
+    h3{margin-top:22px}
+
+    .kbd{display:inline-block;padding:2px 8px;border-radius:8px;border:1px solid rgba(148,163,184,.35);background:#0b1220;color:#e2e8f0;font-weight:600}
+    .step{display:flex;align-items:flex-start;gap:14px;margin:12px 0;padding:14px;border-radius:14px;border:1px dashed rgba(148,163,184,.2)}
+    .badge{flex:0 0 28px;height:28px;border-radius:999px;background:var(--brand);color:#00111f;display:grid;place-items:center;font-weight:800}
+    .muted{color:var(--muted)}
+
+    details{border:1px solid rgba(148,163,184,.2);border-radius:12px;padding:12px;margin:12px 0}
+    details[open]{box-shadow:0 0 0 3px var(--ring)}
+    summary{cursor:pointer;font-weight:650}
+
+    .grid{display:grid;gap:16px}
+    .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.cols-2{grid-template-columns:1fr}}
+
+    .tip{border-left:4px solid var(--brand);padding:10px 14px;background:rgba(96,165,250,.08);border-radius:12px}
+    .warn{border-left:4px solid var(--warn);padding:10px 14px;background:rgba(245,158,11,.08);border-radius:12px}
+    .danger{border-left:4px solid var(--danger);padding:10px 14px;background:rgba(248,113,113,.1);border-radius:12px}
+
+    footer{margin:40px 0;color:var(--muted);font-size:.9rem}
+
+    /* Print-friendly quick strip */
+    @media print{
+      body{background:#fff;color:#111}
+      header, .hero .img, nav{display:none}
+      .card{box-shadow:none;border:1px solid #ddd}
+      a{color:#000}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Hunter Pro‑C — Turn Off <span style="color:var(--accent)">Program B</span></h1>
+          <div class="subtitle">A quick, friendly manual for stopping an unwanted schedule</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#quick-start">Quick Start</a>
+        <a href="#option1">Option 1: Clear Start Times</a>
+        <a href="#option2">Option 2: Disable Water Days</a>
+        <a href="#option3">Option 3: Reset Program B</a>
+        <a href="#faq">FAQ & Troubleshooting</a>
+        <a href="#ref">Reference</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="card callout">
+        <h2 id="quick-start">Quick Start (60‑second method)</h2>
+        <p>Programs <strong>A, B, C</strong> are separate schedules. If <strong>all start times</strong> in Program B are set to <strong>OFF</strong>, Program B will never run — even if run times and days are set.</p>
+        <ol>
+          <li>Turn the dial to <span class="kbd">Start Times</span>.</li>
+          <li>Press <span class="kbd">PRG</span> until you see <strong>B</strong> on the display.</li>
+          <li>Use <span class="kbd">–</span> to change each start time to <strong>OFF</strong>. Repeat for all 4 start slots.</li>
+          <li>Return the dial to <span class="kbd">Run</span>.</li>
+        </ol>
+        <p class="muted">That’s it. No start time = no watering for Program B.</p>
+      </div>
+      <div class="img card" aria-hidden="true">
+        <h3 style="margin-top:0">Controller Buttons You’ll Use</h3>
+        <ul>
+          <li><span class="kbd">PRG</span> — cycles A → B → C</li>
+          <li><span class="kbd">+</span> / <span class="kbd">–</span> — change values</li>
+          <li>Dial positions: <span class="kbd">Start Times</span>, <span class="kbd">Water Days</span>, <span class="kbd">Run</span></li>
+        </ul>
+        <div class="tip">If you see unexpected extra watering, you probably have start times in more than one program (A and B). Clear Program B to fix it.</div>
+      </div>
+    </section>
+
+    <section id="option1">
+      <h2>Option 1 — Clear all start times for Program B <span class="muted">(recommended)</span></h2>
+      <div class="step"><div class="badge">1</div><div>Turn the dial to <span class="kbd">Start Times</span>.</div></div>
+      <div class="step"><div class="badge">2</div><div>Press <span class="kbd">PRG</span> until the screen shows program <strong>B</strong>.</div></div>
+      <div class="step"><div class="badge">3</div><div>Use <span class="kbd">+</span>/<span class="kbd">–</span> to set the first start time to <strong>OFF</strong>.</div></div>
+      <div class="step"><div class="badge">4</div><div>Press the <span class="kbd">▶</span> or next arrow (if available) to move to start time 2. Repeat until all four start times show <strong>OFF</strong>.</div></div>
+      <div class="step"><div class="badge">5</div><div>Return dial to <span class="kbd">Run</span>. Program B won’t run anymore.</div></div>
+
+      <div class="tip">Only <em>start times</em> launch a program. Run times per station and water days do nothing without at least one start time.</div>
+    </section>
+
+    <section id="option2">
+      <h2>Option 2 — Disable watering days for Program B</h2>
+      <p>This is a second way to stop Program B. With no active days, the program never runs.</p>
+      <div class="step"><div class="badge">1</div><div>Turn dial to <span class="kbd">Water Days</span>.</div></div>
+      <div class="step"><div class="badge">2</div><div>Press <span class="kbd">PRG</span> to select <strong>B</strong>.</div></div>
+      <div class="step"><div class="badge">3</div><div>Use <span class="kbd">+</span>/<span class="kbd">–</span> to set all days to <strong>OFF</strong> (or deselect every day symbol).</div></div>
+      <div class="step"><div class="badge">4</div><div>Return dial to <span class="kbd">Run</span>.</div></div>
+      <div class="warn">If someone later re‑enables any day and there’s still a start time set, Program B will run again. Option 1 is safer.</div>
+    </section>
+
+    <section id="option3">
+      <h2>Option 3 — Reset/Erase Program B (optional)</h2>
+      <p>Use if you want Program B completely cleared.</p>
+      <div class="step"><div class="badge">1</div><div>Press and hold <span class="kbd">PRG</span> while on Program B until values clear/reset.</div></div>
+      <div class="step"><div class="badge">2</div><div>Verify: <span class="kbd">Start Times</span> all show <strong>OFF</strong>, and <span class="kbd">Water Days</span> are empty.</div></div>
+      <div class="danger">Avoid factory‑resetting the entire controller unless necessary — it wipes all programs.</div>
+    </section>
+
+    <section id="faq" class="grid cols-2">
+      <div class="card">
+        <h3>Why did my yard water twice?</h3>
+        <p>You likely have start times in both Program A and Program B. Clear start times in Program B (Option 1).</p>
+      </div>
+      <div class="card">
+        <h3>How do I switch between programs?</h3>
+        <p>Press <span class="kbd">PRG</span> to cycle A → B → C. The current program letter shows on the screen.</p>
+      </div>
+      <div class="card">
+        <h3>What if I can’t find the <em>OFF</em> value?</h3>
+        <p>While on a start time, hold <span class="kbd">–</span> to scroll quickly until the display shows <strong>OFF</strong>.</p>
+      </div>
+      <div class="card">
+        <h3>Do I need to change run times per station?</h3>
+        <p>No. Run times don’t matter if there are no start times. Clearing start times is enough.</p>
+      </div>
+      <div class="card">
+        <h3>Can I use only Program A?</h3>
+        <p>Yes. Many homeowners keep everything on Program A and leave B/C empty. Use B/C only for special schedules.</p>
+      </div>
+      <div class="card">
+        <h3>My model looks slightly different</h3>
+        <p>Pro‑C panels vary by revision, but the navigation (dial → PRG → +/–) is consistent. The same steps apply.</p>
+      </div>
+    </section>
+
+    <section id="ref">
+      <h2>Reference — Button sequence cheat‑sheet</h2>
+      <details>
+        <summary>Clear all start times (Program B)</summary>
+        <ol>
+          <li>Dial → <span class="kbd">Start Times</span></li>
+          <li><span class="kbd">PRG</span> → B</li>
+          <li>Start 1: <span class="kbd">–</span> until <strong>OFF</strong></li>
+          <li>Next start → repeat for Starts 2–4</li>
+          <li>Dial → <span class="kbd">Run</span></li>
+        </ol>
+      </details>
+      <details>
+        <summary>Disable Water Days (Program B)</summary>
+        <ol>
+          <li>Dial → <span class="kbd">Water Days</span></li>
+          <li><span class="kbd">PRG</span> → B</li>
+          <li>Turn off every day</li>
+          <li>Dial → <span class="kbd">Run</span></li>
+        </ol>
+      </details>
+      <details>
+        <summary>Full Program B reset</summary>
+        <ol>
+          <li><span class="kbd">PRG</span> (hold) on B</li>
+          <li>Verify Start Times show <strong>OFF</strong></li>
+        </ol>
+      </details>
+
+      <div class="tip" style="margin-top:12px">Pro tip: Label a small sticker inside the controller door — “<em>Program B = OFF (clear start times)</em>”. Future‑you will thank you.</div>
+    </section>
+
+    <footer>
+      <p>Last updated: <time datetime="2025-09-01">September 1, 2025</time>. This guide is not affiliated with Hunter Industries.</p>
+    </footer>
+  </main>
+</body>
+</html>
